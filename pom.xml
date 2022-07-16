@@ -1225,7 +1225,7 @@
             </activation>
             <modules>
                 <module>unipop-core</module>
-<!--                <module>opengraph-model</module>-->
+                <module>opengraph-model</module>
 <!--                <module>opengraph-test</module>-->
 <!--                <module>opengraph-asg</module>-->
 <!--                <module>opengraph-core</module>-->
