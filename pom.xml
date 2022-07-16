@@ -1,0 +1,1239 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <groupId>org.opensearch.graph</groupId>
+    <artifactId>root</artifactId>
+    <packaging>pom</packaging>
+    <version>2.1.0-SNAPSHOT</version>
+
+    <name>Open Search Graph Engine project</name>
+
+    <description>
+        Open Search Graph Engine , Scalable, Non-native Graph database (Powered by Opensearch)
+    </description>
+    <url>https://opensearch.org//</url>
+
+    <licenses>
+        <license>
+            <name>The 2.0 version of the Apache License was approved by the ASF in 2004.</name>
+            <url>http://www.apache.org/licenses/LICENSE-2.0</url>
+        </license>
+    </licenses>
+
+
+    <properties>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <top.dir>${project.basedir}</top.dir>
+        <distr.dir>${project.basedir}/../../../distrib</distr.dir>
+        <version.major>1</version.major>
+        <version.minor>11</version.minor>
+
+        <maven.compiler.source>1.8</maven.compiler.source>
+        <maven.compiler.target>1.8</maven.compiler.target>
+
+        <project.inceptionYear>2016</project.inceptionYear>
+        <project.organization.name>org.opensearch</project.organization.name>
+        <license.licenseName>apache_v2</license.licenseName>
+        <!-- plugins -->
+        <maven-compiler-plugin.version>3.8.0</maven-compiler-plugin.version>
+        <maven-source-plugin.version>3.0.1</maven-source-plugin.version>
+        <maven-javadoc-plugin.version>3.2.0</maven-javadoc-plugin.version>
+        <maven-surefire-plugin.version>2.22.0</maven-surefire-plugin.version>
+        <maven-surefire-report-plugin.version>2.22.0</maven-surefire-report-plugin.version>
+        <maven-jxr-plugin.version>2.5</maven-jxr-plugin.version>
+        <maven-release-plugin.version>3.0.0-M1</maven-release-plugin.version>
+        <maven-jar-plugin.version>3.0.2</maven-jar-plugin.version>
+        <maven-checkstyle-plugin.version>2.12.1</maven-checkstyle-plugin.version>
+        <maven-assembly-plugin.version>3.1.0</maven-assembly-plugin.version>
+        <maven-shade-plugin.version>3.1.0</maven-shade-plugin.version>
+        <maven-site-plugin.version>3.7.1</maven-site-plugin.version>
+        <maven-pmd-plugin.version>3.10.0</maven-pmd-plugin.version>
+        <jacoco-maven-plugin.version>0.8.2</jacoco-maven-plugin.version>
+        <snapshot-replace-maven-plugin.version>1.0</snapshot-replace-maven-plugin.version>
+        <coveralls.maven.plugin>4.3.0</coveralls.maven.plugin>
+
+        <!-- opengraph -->
+        <opengraph.version>${project.version}</opengraph.version>
+        <!-- json ld-->
+        <json.ld>0.13.4</json.ld>
+        <!-- jackson -->
+        <jackson.version>2.13.2</jackson.version>
+        <resilience4jVersion>1.6.1</resilience4jVersion>
+
+        <!-- com.github.cnsvili.snowflake.version -->
+        <com.github.cnsvili.snowflake.version>1.0.1</com.github.cnsvili.snowflake.version>
+
+        <!-- graphviz svg graph visualization -->
+        <graphviz.version>0.18.0</graphviz.version>
+        <!-- jansi -->
+        <jansi.version>2.4.0</jansi.version>
+        <!--ahocorasick-->
+        <ahocorasick.version>0.4.0</ahocorasick.version>
+        <!-- spatial4j -->
+        <spatial4j.version>0.7</spatial4j.version>
+
+        <!-- owl -->
+        <owlapi.version>4.0.2</owlapi.version>
+
+        <!-- rdf4j -->
+        <rdf4j.version>3.6.0</rdf4j.version>
+
+        <!-- cypher -->
+        <openCypher.frontend.version>9.0.20181012</openCypher.frontend.version>
+        <openCypher.spark.version>0.2.3</openCypher.spark.version>
+
+        <!--graph ql java-->
+        <graphql.java.version>2020-01-17T02-41-10-578985f</graphql.java.version>
+
+        <!-- commons -->
+        <commons-io.version>2.5</commons-io.version>
+        <commons-configuration.version>1.10</commons-configuration.version>
+        <commons-lang3.version>3.5</commons-lang3.version>
+        <commons-math3.version>3.6.1</commons-math3.version>
+        <commons-collections4.version>4.1</commons-collections4.version>
+
+        <!-- google -->
+        <google.guava.version>21.0</google.guava.version>
+        <google.guice.version>4.1.0</google.guice.version>
+
+        <!-- caffeine -->
+        <caffeine.version>2.6.2</caffeine.version>
+
+        <!-- opensearch -->
+        <opensearch.version>1.3.0</opensearch.version>
+        <opensearch.client.version>1.3.0</opensearch.client.version>
+        <elasticsearch.client.version>6.5.4</elasticsearch.client.version>
+
+        <!-- lucene -->
+        <lucene.version>8.10.1</lucene.version>
+
+        <!-- vividsolutions -->
+        <vividsolutions.version>1.13</vividsolutions.version>
+
+        <!-- tinkerpop -->
+        <tinkerpop.version>3.2.5</tinkerpop.version>
+
+        <javax.annotation-api>1.3.2</javax.annotation-api>
+
+        <!-- com.eaio.uuid -->
+        <com.eaio.uuid.version>3.2</com.eaio.uuid.version>
+
+        <!-- opencsv / common csv  -->
+        <commons-validator>1.6</commons-validator>
+        <commons.csv.version>1.7</commons.csv.version>
+        <opencsv.version>3.8</opencsv.version>
+        <!-- date - parser       -->
+        <dateparser>1.0.6</dateparser>
+
+        <!-- javaslang -->
+        <javaslang.version>2.0.4</javaslang.version>
+
+        <!-- jooq -->
+        <jooq.version>3.13.4</jooq.version>
+        <jool.version>0.9.14</jool.version>
+
+        <!--jooby plugin -->
+        <jooby.version>1.6.9</jooby.version>
+
+        <!-- fastutil -->
+        <fastutil.version>8.1.1</fastutil.version>
+        <!-- aviator exp eval -->
+        <aviator.version>4.2.0</aviator.version>
+
+        <!-- logging -->
+        <slf4j.version>1.7.25</slf4j.version>
+        <logback.version>1.2.3</logback.version>
+        <log4j.version>2.7</log4j.version>
+        <logback-elasticsearch-appender.version>1.6</logback-elasticsearch-appender.version>
+
+        <!-- metrics -->
+        <metrics-core.version>3.1.2</metrics-core.version>
+
+        <json.io>4.10.1</json.io>
+        <!-- test -->
+        <junit.version>4.12</junit.version>
+        <easymock.version>3.2</easymock.version>
+        <rest-assured.version>3.0.1</rest-assured.version>
+        <mockito-core.version>3.12.4</mockito-core.version>
+        <assertj.version>3.6.2</assertj.version>
+        <jsonassert.version>1.4.0</jsonassert.version>
+        <hamcrest-all.version>1.3</hamcrest-all.version>
+        <hamcrest.version>1.3</hamcrest.version>
+        <hamcres-json.version>0.2</hamcres-json.version>
+        <maven-pgp-plugin.version>3.0.1</maven-pgp-plugin.version>
+        <test.containers.version>1.12.2</test.containers.version>
+
+        <!-- jmx monitoring        -->
+        <jolokia>1.6.2</jolokia>
+        <!--reflection utils-->
+        <reflection>0.9.11</reflection>
+    </properties>
+
+    <dependencyManagement>
+        <dependencies>
+            <!-- opengraph -->
+            <dependency>
+                <groupId>org.opensearch.graph</groupId>
+                <artifactId>opengraph-model</artifactId>
+                <version>${opengraph.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.opensearch.graph</groupId>
+                <artifactId>opengraph-core</artifactId>
+                <version>${opengraph.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.opensearch.graph</groupId>
+                <artifactId>opengraph-asg</artifactId>
+                <version>${opengraph.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.opensearch.graph</groupId>
+                <artifactId>opengraph-dv-epb</artifactId>
+                <version>${opengraph.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.opensearch.graph</groupId>
+                <artifactId>opengraph-dv-core</artifactId>
+                <version>${opengraph.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.opensearch.graph</groupId>
+                <artifactId>opengraph-dv-stat</artifactId>
+                <version>${opengraph.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.opensearch.graph</groupId>
+                <artifactId>opengraph-dv-gta</artifactId>
+                <version>${opengraph.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.opensearch.graph</groupId>
+                <artifactId>opengraph-dv-unipop</artifactId>
+                <version>${opengraph.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.opensearch.graph</groupId>
+                <artifactId>opengraph-dv-asg</artifactId>
+                <version>${opengraph.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.opensearch.graph</groupId>
+                <artifactId>opengraph-service</artifactId>
+                <version>${opengraph.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.opensearch.graph</groupId>
+                <artifactId>unipop-core</artifactId>
+                <version>${opengraph.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.opensearch.graph</groupId>
+                <artifactId>opengraph-geojson</artifactId>
+                <version>${opengraph.version}</version>
+            </dependency>
+
+            <!-- Dragons Deployment Assemblies   -->
+            <dependency>
+                <groupId>org.opensearch.graph</groupId>
+                <artifactId>opengraph-domain-dragons-ext</artifactId>
+                <version>${opengraph.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.opensearch.graph</groupId>
+                <artifactId>opengraph-domain-dragons-assembly</artifactId>
+                <version>${opengraph.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.opensearch.graph</groupId>
+                <artifactId>opengraph-domain-dragons-datagen</artifactId>
+                <version>${opengraph.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.opensearch.graph</groupId>
+                <artifactId>opengraph-domain-dragons-test</artifactId>
+                <version>${opengraph.version}</version>
+            </dependency>
+
+            <!-- Property Graph Deployment Assemblies   -->
+            <!-- resiliant framework support -->
+            <dependency>
+                <groupId>com.github.jsonld-java</groupId>
+                <artifactId>jsonld-java</artifactId>
+                <version>${json.ld}</version>
+            </dependency>
+            <dependency>
+                <groupId>io.github.resilience4j</groupId>
+                <artifactId>resilience4j-circuitbreaker</artifactId>
+                <version>${resilience4jVersion}</version>
+            </dependency>
+            <dependency>
+                <groupId>io.github.resilience4j</groupId>
+                <artifactId>resilience4j-ratelimiter</artifactId>
+                <version>${resilience4jVersion}</version>
+            </dependency>
+            <dependency>
+                <groupId>io.github.resilience4j</groupId>
+                <artifactId>resilience4j-retry</artifactId>
+                <version>${resilience4jVersion}</version>
+            </dependency>
+            <dependency>
+                <groupId>io.github.resilience4j</groupId>
+                <artifactId>resilience4j-bulkhead</artifactId>
+                <version>${resilience4jVersion}</version>
+            </dependency>
+            <dependency>
+                <groupId>io.github.resilience4j</groupId>
+                <artifactId>resilience4j-cache</artifactId>
+                <version>${resilience4jVersion}</version>
+            </dependency>
+            <dependency>
+                <groupId>io.github.resilience4j</groupId>
+                <artifactId>resilience4j-timelimiter</artifactId>
+                <version>${resilience4jVersion}</version>
+            </dependency>
+
+            <!-- language (DSL)     -->
+            <dependency>
+                <groupId>oracle.pgx</groupId>
+                <artifactId>pgql-lang</artifactId>
+                <version>1.3.0-SNAPSHOT</version>
+            </dependency>
+
+            <!-- jmx monitoring    -->
+            <dependency>
+                <groupId>org.jolokia</groupId>
+                <artifactId>jolokia-core</artifactId>
+                <version>${jolokia}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.jolokia</groupId>
+                <artifactId>jolokia-jvm</artifactId>
+                <classifier>agent</classifier>
+                <version>${jolokia}</version>
+            </dependency>
+
+            <!-- reflection utils -->
+            <dependency>
+                <groupId>org.reflections</groupId>
+                <artifactId>reflections</artifactId>
+                <version>${reflection}</version>
+            </dependency>
+
+            <!-- geo -->
+            <dependency>
+                <groupId>org.locationtech.jts</groupId>
+                <artifactId>jts-core</artifactId>
+                <version>1.16.0</version>
+            </dependency>
+
+            <!-- rdf4j -->
+            <dependency>
+                <groupId>org.eclipse.rdf4j</groupId>
+                <artifactId>rdf4j-model</artifactId>
+                <version>${rdf4j.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>org.eclipse.rdf4j</groupId>
+                <artifactId>rdf4j-query</artifactId>
+                <version>${rdf4j.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>org.eclipse.rdf4j</groupId>
+                <artifactId>rdf4j-queryparser-sparql</artifactId>
+                <version>${rdf4j.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>org.eclipse.rdf4j</groupId>
+                <artifactId>rdf4j-queryparser-serql</artifactId>
+                <version>${rdf4j.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>org.eclipse.rdf4j</groupId>
+                <artifactId>rdf4j</artifactId>
+                <version>${rdf4j.version}</version>
+            </dependency>
+
+            <!-- owl -->
+            <dependency>
+                <groupId>net.sourceforge.owlapi</groupId>
+                <artifactId>owlapi-api</artifactId>
+                <version>${owlapi.version}</version>
+                <exclusions>
+                    <exclusion>
+                        <groupId>org.apache.httpcomponents</groupId>
+                        <artifactId>httpclient</artifactId>
+                    </exclusion>
+                </exclusions>
+            </dependency>
+            <dependency>
+                <groupId>net.sourceforge.owlapi</groupId>
+                <artifactId>owlapi-apibinding</artifactId>
+                <version>${owlapi.version}</version>
+                <exclusions>
+                    <exclusion>
+                        <groupId>org.apache.httpcomponents</groupId>
+                        <artifactId>httpclient</artifactId>
+                    </exclusion>
+                </exclusions>
+            </dependency>
+
+            <!-- cypher -->
+            <dependency>
+                <groupId>org.opencypher</groupId>
+                <artifactId>front-end-9.0</artifactId>
+                <version>${openCypher.frontend.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>org.opencypher</groupId>
+                <artifactId>graph-ddl</artifactId>
+                <version>${openCypher.spark.version}</version>
+            </dependency>
+
+            <!-- graphql -->
+            <dependency>
+                <groupId>com.graphql-java</groupId>
+                <artifactId>graphql-java</artifactId>
+                <version>${graphql.java.version}</version>
+            </dependency>
+
+            <!-- jackson -->
+            <dependency>
+                <groupId>com.fasterxml.jackson.core</groupId>
+                <artifactId>jackson-annotations</artifactId>
+                <version>${jackson.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.fasterxml.jackson.core</groupId>
+                <artifactId>jackson-databind</artifactId>
+                <version>${jackson.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.fasterxml.jackson.core</groupId>
+                <artifactId>jackson-core</artifactId>
+                <version>${jackson.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.fasterxml.jackson.dataformat</groupId>
+                <artifactId>jackson-dataformat-csv</artifactId>
+                <version>${jackson.version}</version>
+            </dependency>
+            <!-- jackson -->
+
+            <!-- snowflake ids -->
+            <dependency>
+                <groupId>com.github.cnsvili</groupId>
+                <artifactId>snowflake</artifactId>
+                <version>${com.github.cnsvili.snowflake.version}</version>
+            </dependency>
+            <!-- snowflake ids -->
+
+            <dependency>
+                <groupId>guru.nidi</groupId>
+                <artifactId>graphviz-java</artifactId>
+                <version>${graphviz.version}</version>
+            </dependency>
+
+            <!-- jansi -->
+            <dependency>
+                <groupId>org.fusesource.jansi</groupId>
+                <artifactId>jansi</artifactId>
+                <version>${jansi.version}</version>
+            </dependency>
+            <!-- jansi -->
+
+            <!--    Aho–Corasick algorithm        -->
+            <dependency>
+                <groupId>org.ahocorasick</groupId>
+                <artifactId>ahocorasick</artifactId>
+                <version>${ahocorasick.version}</version>
+            </dependency>
+
+            <!-- spatial4j -->
+            <dependency>
+                <groupId>org.locationtech.spatial4j</groupId>
+                <artifactId>spatial4j</artifactId>
+                <version>${spatial4j.version}</version>
+            </dependency>
+            <!-- spatial4j -->
+
+            <!-- commons -->
+            <dependency>
+                <groupId>commons-io</groupId>
+                <artifactId>commons-io</artifactId>
+                <version>${commons-io.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>commons-configuration</groupId>
+                <artifactId>commons-configuration</artifactId>
+                <version>${commons-configuration.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.apache.commons</groupId>
+                <artifactId>commons-lang3</artifactId>
+                <version>${commons-lang3.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.apache.commons</groupId>
+                <artifactId>commons-collections4</artifactId>
+                <version>${commons-collections4.version}</version>
+            </dependency>
+            <!-- commons -->
+
+            <!-- google -->
+            <dependency>
+                <groupId>com.google.guava</groupId>
+                <artifactId>guava</artifactId>
+                <version>${google.guava.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.google.inject.extensions</groupId>
+                <artifactId>guice-multibindings</artifactId>
+                <version>${google.guice.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.google.inject</groupId>
+                <artifactId>guice</artifactId>
+                <version>${google.guice.version}</version>
+            </dependency>
+            <!-- google -->
+
+            <!-- caffeine -->
+            <dependency>
+                <groupId>com.github.ben-manes.caffeine</groupId>
+                <artifactId>caffeine</artifactId>
+                <version>${caffeine.version}</version>
+            </dependency>
+            <!-- caffeine -->
+
+            <!-- jooby -->
+            <dependency>
+                <groupId>org.jooby</groupId>
+                <artifactId>jooby-netty</artifactId>
+                <version>${jooby.version}</version>
+                <exclusions>
+                    <exclusion>
+                        <groupId>io.netty</groupId>
+                        <artifactId>netty-transport</artifactId>
+                    </exclusion>
+                    <exclusion>
+                        <groupId>io.netty</groupId>
+                        <artifactId>netty-common</artifactId>
+                    </exclusion>
+                    <exclusion>
+                        <groupId>io.netty</groupId>
+                        <artifactId>netty-codec</artifactId>
+                    </exclusion>
+                    <exclusion>
+                        <groupId>io.netty</groupId>
+                        <artifactId>netty-codec-http</artifactId>
+                    </exclusion>
+                    <exclusion>
+                        <groupId>io.netty</groupId>
+                        <artifactId>netty-resolver</artifactId>
+                    </exclusion>
+                    <exclusion>
+                        <groupId>io.netty</groupId>
+                        <artifactId>netty-handler</artifactId>
+                    </exclusion>
+                </exclusions>
+            </dependency>
+            <dependency>
+                <groupId>org.jooby</groupId>
+                <artifactId>jooby-micrometer</artifactId>
+                <version>${jooby.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.jooby</groupId>
+                <artifactId>jooby</artifactId>
+                <version>${jooby.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.jooby</groupId>
+                <artifactId>jooby-caffeine</artifactId>
+                <version>${jooby.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.jooby</groupId>
+                <artifactId>jooby-scanner</artifactId>
+                <version>1.1.3</version>
+            </dependency>
+            <dependency>
+                <groupId>org.jooby</groupId>
+                <artifactId>jooby-jackson</artifactId>
+                <version>${jooby.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.jooby</groupId>
+                <artifactId>jooby-quartz</artifactId>
+                <version>${jooby.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.jooby</groupId>
+                <artifactId>jooby-metrics</artifactId>
+                <version>${jooby.version}</version>
+            </dependency>
+            <!-- jooby -->
+            <dependency>
+                <groupId>org.jooby</groupId>
+                <artifactId>jooby-apitool</artifactId>
+                <version>1.6.0</version>
+            </dependency>
+            <!-- opensearch -->
+            <dependency>
+                <groupId>org.opensearch</groupId>
+                <artifactId>opensearch</artifactId>
+                <version>${opensearch.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.opensearch.plugin</groupId>
+                <artifactId>lang-painless</artifactId>
+                <version>${opensearch.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.opensearch.client</groupId>
+                <artifactId>opensearch-rest-high-level-client</artifactId>
+                <version>${opensearch.client.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.opensearch.client</groupId>
+                <artifactId>transport</artifactId>
+                <version>${opensearch.client.version}</version>
+            </dependency>
+            <!-- lucene -->
+            <dependency>
+                <groupId>org.apache.lucene</groupId>
+                <artifactId>lucene-core</artifactId>
+                <version>${lucene.version}</version>
+            </dependency>
+            <!-- lucene -->
+
+            <!-- needed for elasticsearch geo coordinates -->
+            <!-- vividsolutions -->
+            <dependency>
+                <groupId>com.vividsolutions</groupId>
+                <artifactId>jts</artifactId>
+                <version>${vividsolutions.version}</version>
+            </dependency>
+            <!-- vividsolutions -->
+
+            <!-- tinkerpop -->
+            <dependency>
+                <groupId>org.apache.tinkerpop</groupId>
+                <artifactId>gremlin-core</artifactId>
+                <version>${tinkerpop.version}</version>
+            </dependency>
+            <!-- tinkerpop -->
+
+            <!-- com.eaio.uuid -->
+            <dependency>
+                <groupId>com.eaio.uuid</groupId>
+                <artifactId>uuid</artifactId>
+                <version>${com.eaio.uuid.version}</version>
+            </dependency>
+            <!-- com.eaio.uuid -->
+
+            <!--javax annotation-->
+            <!-- enable support for  'java.lang.NoClassDefFoundError: javax/xml/bind/JAXBException'-->
+
+            <dependency>
+                <groupId>javax.annotation</groupId>
+                <artifactId>javax.annotation-api</artifactId>
+                <version>${javax.annotation-api}</version>
+            </dependency>
+
+            <!-- opencsv -->
+            <dependency>
+                <groupId>org.apache.commons</groupId>
+                <artifactId>commons-csv</artifactId>
+                <version>${commons.csv.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.opencsv</groupId>
+                <artifactId>opencsv</artifactId>
+                <version>${opencsv.version}</version>
+            </dependency>
+            <!-- opencsv -->
+            <dependency>
+                <groupId>commons-validator</groupId>
+                <artifactId>commons-validator</artifactId>
+                <version>${commons-validator}</version>
+            </dependency>
+            <!-- javaslang -->
+            <dependency>
+                <groupId>io.javaslang</groupId>
+                <artifactId>javaslang</artifactId>
+                <version>${javaslang.version}</version>
+            </dependency>
+            <!-- javaslang -->
+
+            <dependency>
+                <groupId>com.github.sisyphsu</groupId>
+                <artifactId>retree</artifactId>
+            </dependency>
+            <!-- jooq -->
+            <!-- https://mvnrepository.com/artifact/org.jooq/jooq -->
+            <dependency>
+                <groupId>org.jooq</groupId>
+                <artifactId>jooq</artifactId>
+                <version>${jooq.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.jooq</groupId>
+                <artifactId>jool</artifactId>
+                <version>${jool.version}</version>
+            </dependency>
+            <!-- jooq -->
+
+            <!-- string eval compiler -->
+            <dependency>
+                <groupId>com.googlecode.aviator</groupId>
+                <artifactId>aviator</artifactId>
+                <version>${aviator.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>it.unimi.dsi</groupId>
+                <artifactId>fastutil</artifactId>
+                <version>${fastutil.version}</version>
+            </dependency>
+
+            <!-- logging -->
+            <dependency>
+                <groupId>org.slf4j</groupId>
+                <artifactId>jcl-over-slf4j</artifactId>
+                <version>${slf4j.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>ch.qos.logback</groupId>
+                <artifactId>logback-classic</artifactId>
+                <version>${logback.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>ch.qos.logback</groupId>
+                <artifactId>logback-core</artifactId>
+                <version>${logback.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.slf4j</groupId>
+                <artifactId>slf4j-api</artifactId>
+                <version>${slf4j.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.internetitem</groupId>
+                <artifactId>logback-elasticsearch-appender</artifactId>
+                <version>${logback-elasticsearch-appender.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.apache.logging.log4j</groupId>
+                <artifactId>log4j-core</artifactId>
+                <version>${log4j.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.apache.logging.log4j</groupId>
+                <artifactId>log4j-api</artifactId>
+                <version>${log4j.version}</version>
+            </dependency>
+            <!-- logging -->
+
+            <!-- metrics -->
+            <dependency>
+                <groupId>io.dropwizard.metrics</groupId>
+                <artifactId>metrics-core</artifactId>
+                <version>${metrics-core.version}</version>
+            </dependency>
+            <!-- metrics -->
+
+            <!-- test -->
+            <dependency>
+                <groupId>org.testcontainers</groupId>
+                <artifactId>testcontainers</artifactId>
+                <version>${test.containers.version}</version>
+                <scope>test</scope>
+            </dependency>
+            <dependency>
+                <groupId>org.opensearch.graph</groupId>
+                <artifactId>opengraph-test-framework</artifactId>
+                <version>${opengraph.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.opensearch.graph</groupId>
+                <artifactId>opengraph-model</artifactId>
+                <version>${opengraph.version}</version>
+                <type>test-jar</type>
+                <scope>test</scope>
+            </dependency>
+            <dependency>
+                <groupId>org.opensearch.graph</groupId>
+                <artifactId>opengraph-dv-unipop</artifactId>
+                <version>${opengraph.version}</version>
+                <type>test-jar</type>
+                <scope>test</scope>
+            </dependency>
+            <dependency>
+                <groupId>org.opensearch.graph</groupId>
+                <artifactId>opengraph-service</artifactId>
+                <version>${opengraph.version}</version>
+                <type>test-jar</type>
+                <scope>test</scope>
+            </dependency>
+            <dependency>
+                <groupId>org.opensearch.graph</groupId>
+                <artifactId>opengraph-asg</artifactId>
+                <version>${opengraph.version}</version>
+                <type>test-jar</type>
+                <scope>test</scope>
+            </dependency>
+            <dependency>
+                <groupId>org.opensearch.graph</groupId>
+                <artifactId>opengraph-dv-core</artifactId>
+                <type>test-jar</type>
+                <version>${opengraph.version}</version>
+                <scope>test</scope>
+            </dependency>
+            <!-- opengraph -->
+
+            <dependency>
+                <groupId>junit</groupId>
+                <artifactId>junit</artifactId>
+                <version>${junit.version}</version>
+                <scope>test</scope>
+            </dependency>
+            <dependency>
+                <groupId>org.easymock</groupId>
+                <artifactId>easymock</artifactId>
+                <version>${easymock.version}</version>
+                <scope>test</scope>
+            </dependency>
+            <dependency>
+                <groupId>org.mockito</groupId>
+                <artifactId>mockito-core</artifactId>
+                <version>${mockito-core.version}</version>
+                <scope>test</scope>
+            </dependency>
+            <dependency>
+                <groupId>com.cedarsoftware</groupId>
+                <artifactId>json-io</artifactId>
+                <version>${json.io}</version>
+            </dependency>
+            <dependency>
+                <groupId>io.rest-assured</groupId>
+                <artifactId>rest-assured</artifactId>
+                <version>${rest-assured.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.assertj</groupId>
+                <artifactId>assertj-core</artifactId>
+                <version>${assertj.version}</version>
+                <scope>test</scope>
+            </dependency>
+            <dependency>
+                <groupId>org.skyscreamer</groupId>
+                <artifactId>jsonassert</artifactId>
+                <version>${jsonassert.version}</version>
+                <scope>test</scope>
+            </dependency>
+            <dependency>
+                <groupId>org.apache.commons</groupId>
+                <artifactId>commons-math3</artifactId>
+                <version>${commons-math3.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.hamcrest</groupId>
+                <artifactId>hamcrest-all</artifactId>
+                <version>${hamcrest-all.version}</version>
+                <scope>test</scope>
+            </dependency>
+            <dependency>
+                <groupId>org.hamcrest</groupId>
+                <artifactId>hamcrest-core</artifactId>
+                <version>${hamcrest.version}</version>
+                <scope>test</scope>
+            </dependency>
+            <dependency>
+                <groupId>uk.co.datumedge</groupId>
+                <artifactId>hamcrest-json</artifactId>
+                <version>${hamcres-json.version}</version>
+                <scope>test</scope>
+            </dependency>
+            <!-- test -->
+        </dependencies>
+    </dependencyManagement>
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>com.github.spotbugs</groupId>
+                <artifactId>spotbugs-maven-plugin</artifactId>
+                <version>4.1.3</version>
+                <dependencies>
+                    <!-- overwrite dependency on spotbugs if you want to specify the version of spotbugs -->
+                    <dependency>
+                        <groupId>com.github.spotbugs</groupId>
+                        <artifactId>spotbugs</artifactId>
+                        <version>4.1.4</version>
+                    </dependency>
+                </dependencies>
+            </plugin>
+
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-gpg-plugin</artifactId>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-source-plugin</artifactId>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-surefire-plugin</artifactId>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-jar-plugin</artifactId>
+            </plugin>
+            <plugin>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>cobertura-maven-plugin</artifactId>
+                <version>2.7</version>
+            </plugin>
+            <plugin>
+                <groupId>org.jacoco</groupId>
+                <artifactId>jacoco-maven-plugin</artifactId>
+            </plugin>
+            <plugin>
+                <groupId>org.eluder.coveralls</groupId>
+                <artifactId>coveralls-maven-plugin</artifactId>
+            </plugin>
+            <plugin>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>license-maven-plugin</artifactId>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-pmd-plugin</artifactId>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-site-plugin</artifactId>
+                <executions>
+                    <execution>
+                        <id>stage-site</id>
+                        <phase>site</phase>
+                        <goals>
+                            <goal>site</goal>
+                            <goal>stage</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+        </plugins>
+        <pluginManagement>
+            <plugins>
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-compiler-plugin</artifactId>
+                    <version>${maven-compiler-plugin.version}</version>
+                    <configuration>
+                        <source>${maven.compiler.source}</source>
+                        <target>${maven.compiler.target}</target>
+                        <compilerArgs>
+                            <!--                            <arg>&#45;&#45;enable-preview</arg>-->
+                        </compilerArgs>
+                    </configuration>
+                </plugin>
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-gpg-plugin</artifactId>
+                    <version>${maven-pgp-plugin.version}</version>
+                </plugin>
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-source-plugin</artifactId>
+                    <version>${maven-source-plugin.version}</version>
+                    <executions>
+                        <execution>
+                            <id>attach-sources</id>
+                            <phase>verify</phase>
+                            <goals>
+                                <goal>jar-no-fork</goal>
+                                <goal>test-jar-no-fork</goal>
+                            </goals>
+                        </execution>
+                    </executions>
+                </plugin>
+                <!--
+                                <plugin>
+                                    <groupId>org.apache.maven.plugins</groupId>
+                                    <artifactId>maven-javadoc-plugin</artifactId>
+                                    <version>${maven-javadoc-plugin.version}</version>
+                                    <executions>
+                                        <execution>
+                                            <id>attach-javadocs</id>
+                                            <goals>
+                                                <goal>jar</goal>
+                                            </goals>
+                                        </execution>
+                                    </executions>
+                                    <configuration>
+                                        <additionalOptions>-Xdoclint:none</additionalOptions>
+                                    </configuration>
+                                </plugin>
+                -->
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-surefire-plugin</artifactId>
+                    <version>${maven-surefire-plugin.version}</version>
+                    <configuration>
+                        <forkCount>1</forkCount>
+                        <threadCount>1</threadCount>
+                        <perCoreThreadCount>false</perCoreThreadCount>
+                        <rerunFailingTestsCount>0</rerunFailingTestsCount>
+                        <includes>
+                            <include>**/*.java</include>
+                        </includes>
+                        <argLine>
+                            -Xmx1536m -XX:MaxPermSize=256m -Duser.timezone=${user.timezone}
+                            -Dio.netty.tryReflectionSetAccessible=true
+                            --add-opens java.base/jdk.internal.misc=ALL-UNNAMED
+                            --add-exports java.base/jdk.internal.misc=ALL-UNNAMED
+                            --add-exports org.junit.platform.commons/org.junit.platform.commons.logging=ALL-UNNAMED
+                        </argLine>
+                    </configuration>
+                </plugin>
+                <plugin>
+                    <groupId>org.eluder.coveralls</groupId>
+                    <artifactId>coveralls-maven-plugin</artifactId>
+                    <version>${coveralls.maven.plugin}</version>
+                    <configuration>
+                        <repoToken>4rxwIVZN1Pn7Bpb0LqiTN0PpSfoZvywKS</repoToken>
+                        <jacocoReports>
+                            <jacocoReport>${project.build.directory}/jacoco-ut/jacoco.xml</jacocoReport>
+                        </jacocoReports>
+                    </configuration>
+                </plugin>
+                <plugin>
+                    <groupId>org.codehaus.mojo</groupId>
+                    <artifactId>cobertura-maven-plugin</artifactId>
+                    <version>2.7</version>
+                    <configuration>
+                        <format>xml</format>
+                        <maxmem>256m</maxmem>
+                        <!-- aggregated reports for multi-module projects -->
+                        <aggregate>true</aggregate>
+                    </configuration>
+                </plugin>
+                <plugin>
+                    <groupId>org.jacoco</groupId>
+                    <artifactId>jacoco-maven-plugin</artifactId>
+                    <version>${jacoco-maven-plugin.version}</version>
+                    <executions>
+                        <execution>
+                            <id>pre-unit-test</id>
+                            <goals>
+                                <goal>prepare-agent</goal>
+                            </goals>
+                            <configuration>
+                                <destFile>${project.build.directory}/coverage-reports/jacoco-ut.exec</destFile>
+                                <propertyName>surefireArgLine</propertyName>
+                            </configuration>
+                        </execution>
+                        <execution>
+                            <id>post-unit-test</id>
+                            <phase>test</phase>
+                            <goals>
+                                <goal>report</goal>
+                            </goals>
+                            <configuration>
+                                <!-- Sets the path to the file which contains the execution data. -->
+                                <dataFile>${project.build.directory}/coverage-reports/jacoco-ut.exec</dataFile>
+                                <!-- Sets the output directory for the code coverage report. -->
+                                <outputDirectory>${project.build.directory}/jacoco-ut</outputDirectory>
+                            </configuration>
+                        </execution>
+                    </executions>
+                </plugin>
+                <plugin>
+                    <groupId>org.codehaus.mojo</groupId>
+                    <artifactId>license-maven-plugin</artifactId>
+                    <version>1.16</version>
+                    <configuration>
+                        <verbose>false</verbose>
+                        <addSvnKeyWords>false</addSvnKeyWords>
+                        <licenseName>apache_v2</licenseName>
+                        <roots>
+                            <root>src/main/java</root>
+                        </roots>
+                        <excludes>
+                            <exclude>*.png</exclude>
+                            <exclude>*.txt</exclude>
+                            <exclude>*.json</exclude>
+                            <exclude>*.conf</exclude>
+                            <exclude>*.csv</exclude>
+                            <exclude>*.xml</exclude>
+                        </excludes>
+                    </configuration>
+                    <executions>
+                        <execution>
+                            <id>first</id>
+                            <goals>
+                                <goal>update-file-header</goal>
+                            </goals>
+                            <phase>process-sources</phase>
+                        </execution>
+                    </executions>
+                </plugin>
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-jar-plugin</artifactId>
+                    <version>${maven-jar-plugin.version}</version>
+                    <configuration>
+                        <archive>
+                            <manifest>
+                                <addDefaultSpecificationEntries>true</addDefaultSpecificationEntries>
+                                <addDefaultImplementationEntries>true</addDefaultImplementationEntries>
+                            </manifest>
+                        </archive>
+                    </configuration>
+                    <executions>
+                        <execution>
+                            <goals>
+                                <goal>test-jar</goal>
+                            </goals>
+                        </execution>
+                    </executions>
+                </plugin>
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-pmd-plugin</artifactId>
+                    <version>${maven-pmd-plugin.version}</version>
+                </plugin>
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-assembly-plugin</artifactId>
+                    <version>${maven-assembly-plugin.version}</version>
+                </plugin>
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-shade-plugin</artifactId>
+                    <version>${maven-shade-plugin.version}</version>
+                </plugin>
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-site-plugin</artifactId>
+                    <version>${maven-site-plugin.version}</version>
+                </plugin>
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-surefire-report-plugin</artifactId>
+                    <version>${maven-surefire-report-plugin.version}</version>
+                </plugin>
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-jxr-plugin</artifactId>
+                    <version>${maven-jxr-plugin.version}</version>
+                </plugin>
+                <plugin>
+                    <groupId>com.spotify</groupId>
+                    <artifactId>docker-maven-plugin</artifactId>
+                    <version>1.2.0</version>
+                </plugin>
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-release-plugin</artifactId>
+                    <version>${maven-release-plugin.version}</version>
+                </plugin>
+            </plugins>
+        </pluginManagement>
+
+    </build>
+
+    <reporting>
+        <plugins>
+             <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-surefire-report-plugin</artifactId>
+                <configuration>
+                    <aggregate>true</aggregate>
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-pmd-plugin</artifactId>
+            </plugin>
+            <plugin>
+                <groupId>org.jacoco</groupId>
+                <artifactId>jacoco-maven-plugin</artifactId>
+                <reportSets>
+                    <reportSet>
+                        <reports>
+                            <!-- select non-aggregate reports -->
+                            <report>report</report>
+                        </reports>
+                    </reportSet>
+                </reportSets>
+                <configuration>
+                    <dataFile>${project.build.directory}/coverage-reports/jacoco-ut.exec</dataFile>
+                </configuration>
+            </plugin>
+        </plugins>
+    </reporting>
+
+
+    <profiles>
+        <!-- DO NOT CHANGE THE *ORDER* IN WHICH THESE PROFILES ARE DEFINED! -->
+        <profile>
+            <id>release-sign-artifacts</id>
+            <activation>
+                <property>
+                    <name>performRelease</name>
+                    <value>true</value>
+                </property>
+            </activation>
+            <build>
+                <plugins>
+                    <plugin>
+                        <groupId>org.apache.maven.plugins</groupId>
+                        <artifactId>maven-gpg-plugin</artifactId>
+                        <executions>
+                            <execution>
+                                <id>sign-artifacts</id>
+                                <phase>verify</phase>
+                                <goals>
+                                    <goal>sign</goal>
+                                </goals>
+                            </execution>
+                        </executions>
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>
+        <profile>
+            <id>core</id>
+            <activation>
+                <activeByDefault>true</activeByDefault>
+            </activation>
+            <modules>
+                <module>unipop-core</module>
+<!--                <module>opengraph-model</module>-->
+<!--                <module>opengraph-test</module>-->
+<!--                <module>opengraph-asg</module>-->
+<!--                <module>opengraph-core</module>-->
+<!--                <module>opengraph-dv</module>-->
+<!--                <module>opengraph-service</module>-->
+<!--                <module>opengraph-geojson</module>-->
+            </modules>
+        </profile>
+
+    </profiles>
+</project>

@@ -1,5 +1,5 @@
 ### Abstract
-YANG-DB is a graph query engine. It is based on elasticsearch as the
+open-graph is a graph query engine. It is based on elasticsearch as the
 physical graph storage layer and the tinkerpop graph traversing framework.
 
 * ## Preference
@@ -29,7 +29,7 @@ it’s all about relationships.
 
 ## Highlight
 
-Yang-DB was developed with an effort to allow very large-scale data
+open-graph was developed with an effort to allow very large-scale data
 ingestion at a high rate. It was optimized to allow performance tuning for
 different use cases.
 
@@ -109,7 +109,7 @@ A catalog of types to indices mapping is maintained and the mapping of propertie
 types is also used to optimize pushdown of predicates to the DB search API itself.
 
 
-#### Project YANG-DB Links
+#### Project open-graph Links
 
 * https://github.com/YANG-DB/yang-db/
 * https://github.com/YANG-DB/yang-db/wiki

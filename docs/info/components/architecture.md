@@ -44,27 +44,27 @@ with understanding of the structure and funtional flow of the execution.
 
 ##### Core modules
 The 5 core modules:
- - fuse-model :  representing the data model elements (classes) used to query, profile, analyze, process and project the data     
- - fuse-asg :    containing the Abstract Syntax's Graph that is transformed from the query and is validated and rewritten according to rule based semantics.      
- - fuse-core  :  containing the core functionality common to all generic parts such as Query planning, Transformations, Schema provider, Drivers and more     
+ - open-graph-model :  representing the data model elements (classes) used to query, profile, analyze, process and project the data     
+ - open-graph-asg :    containing the Abstract Syntax's Graph that is transformed from the query and is validated and rewritten according to rule based semantics.      
+ - open-graph-core  :  containing the core functionality common to all generic parts such as Query planning, Transformations, Schema provider, Drivers and more     
  - unipop-core  : tinkerpop drivers adaptation for execution of graph traversal over elasticserch (forked from https://github.com/unipop-graph/unipop)     
- - fuse-services  :  containing the core services & controllers wrapping the Web / TCP endpoints and delivering deep traceability and logging      
+ - open-graph-services  :  containing the core services & controllers wrapping the Web / TCP endpoints and delivering deep traceability and logging      
 
 ##### Domain Specific modules
 These modules are the basic "plug-able" parts of the software allowing all the existing core functionality against elasticsearch - the default storage & indexing layer
 
--  **fuse-dv (Data Virtualization)**
-    - fuse-dv-asg :   the specific ASG behavior that is elasticsearch storage aware 
-    - fuse-dv-core :  the specific core behavior that is elasticsearch storage aware 
-    - fuse-dv-epb :   execution plan builder based on elasticsearch strong indexing and (statistics) counting capabilities 
-    - fuse-dv-gta :   graph traversal extender which translates the cost revised execution plan into a physical execution plan (based on tinkerpop graph traversal) 
-    - fuse-dv-unipop :  tinkerpop drivers adaptation for graph traversal over elasticserch with specific changes introduced for performance 
-    - fuse-dv-stat :  statistical calculation module enabling the usage of dynamic execution planning and modeling based on pre-calculated cardinality statistics
+-  **open-graph-dv (Data Virtualization)**
+    - open-graph-dv-asg :   the specific ASG behavior that is elasticsearch storage aware 
+    - open-graph-dv-core :  the specific core behavior that is elasticsearch storage aware 
+    - open-graph-dv-epb :   execution plan builder based on elasticsearch strong indexing and (statistics) counting capabilities 
+    - open-graph-dv-gta :   graph traversal extender which translates the cost revised execution plan into a physical execution plan (based on tinkerpop graph traversal) 
+    - open-graph-dv-unipop :  tinkerpop drivers adaptation for graph traversal over elasticserch with specific changes introduced for performance 
+    - open-graph-dv-stat :  statistical calculation module enabling the usage of dynamic execution planning and modeling based on pre-calculated cardinality statistics
 
-- **fuse-domain (different graph distributions)**
-    - fuse-domain-cyber : a cyber typed assembly project pre-build with the logical & physical schema representing the cyber domain world (see https://oasis-open.github.io/cti-documentation/stix/intro.html)
-    - fuse-domain-dragons : a fantasy based on Games Of Thrown ontology with dragons, kingdoms and more...
-    - fuse-domain-knowledge : a special RDF typed flat ontology allowing the schema seamless evolution over ontological changes
+- **open-graph-domain (different graph distributions)**
+    - open-graph-domain-cyber : a cyber typed assembly project pre-build with the logical & physical schema representing the cyber domain world (see https://oasis-open.github.io/cti-documentation/stix/intro.html)
+    - open-graph-domain-dragons : a fantasy based on Games Of Thrown ontology with dragons, kingdoms and more...
+    - open-graph-domain-knowledge : a special RDF typed flat ontology allowing the schema seamless evolution over ontological changes
  
 The usage of the dependency injection framework guice togather with jooby (a modern, performant and easy to use web framework) makes it easy to load the modules in the correct order to allow plug-able architecture.
 

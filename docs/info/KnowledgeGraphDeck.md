@@ -91,7 +91,7 @@ Such capability can save us time & money and free us from the fear of changing d
 
 Since such separation exist - it also gives us the capability to model the same physical data in two different ontologies and to be able to ask different questions on the same actual data without the need to duplicate it - all using the logical layer abstraction capability.
 
-#### Yang-DB Logical & physical models
+#### open-graph Logical & physical models
 
 As explained there are two types of models to describe our data
 - the logical schema which we call Ontology
@@ -203,7 +203,7 @@ As shown lower level store aspects are represented here and can be configured fo
 
 ### REST API
 ![swagger](https://github.com/YANG-DB/yang-db/blob/develop/docs/info/img/yangDb-swagger.png) 	 
-Yang-DB offers a rich REST API to handle all the relevant functionalities:
+open-graph offers a rich REST API to handle all the relevant functionalities:
  - Operational
  - Monitoring
  - Catalog 
