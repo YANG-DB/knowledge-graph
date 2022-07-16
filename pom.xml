@@ -1226,12 +1226,12 @@
             <modules>
                 <module>unipop-core</module>
                 <module>opengraph-model</module>
-<!--                <module>opengraph-test</module>-->
-<!--                <module>opengraph-asg</module>-->
-<!--                <module>opengraph-core</module>-->
-<!--                <module>opengraph-dv</module>-->
-<!--                <module>opengraph-service</module>-->
-<!--                <module>opengraph-geojson</module>-->
+                <module>geojson</module>
+                <!--                <module>opengraph-test</module>-->
+                <!--                <module>opengraph-asg</module>-->
+                <!--                <module>opengraph-core</module>-->
+                <!--                <module>opengraph-dv</module>-->
+                <!--                <module>opengraph-service</module>-->
             </modules>
         </profile>
 
