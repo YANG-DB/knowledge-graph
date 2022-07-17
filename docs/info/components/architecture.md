@@ -75,23 +75,22 @@ We can see here the code snippet taken from the knowledge assembly distribution 
 
 ```
     modules.activeProfile = [
-      "com.yangdb.fuse.services.modules.ServiceModule",
-      "com.yangdb.fuse.services.modules.LoggingJacksonModule",
-      "CoreDispatcherModule",
-      "GraphQLModule",
-      "SparqlModule",
-      "SqlModule",
-      "DescriptorsModule",
-      "AsgGraphQLModule",
-      "AsgCypherModule",
-      "AsgSparqlModule",
-      "com.yangdb.fuse.asg.M2AsgModule",
-      "com.yangdb.fuse.epb.plan.modules.EpbDfsCountBasedRedundantModule"
-      "AsgValidationModule",
-      "com.yangdb.fuse.gta.module.GtaModule",
-      "com.yangdb.fuse.executor.ExecutorModule",
-      "com.yangdb.fuse.executor.modules.discrete.CursorsModule",
-      "com.yangdb.fuse.assembly.knowledge.KnowledgeModule",
+      "org.opensearch.graph.services.modules.ServiceModule",
+      "org.opensearch.graph.services.modules.LoggingJacksonModule",
+      "org.opensearch.graph.dispatcher.modules.CoreDispatcherModule",
+      "org.opensearch.graph.dispatcher.query.graphql.GraphQLModule",
+      "org.opensearch.graph.dispatcher.query.rdf.SparqlModule",
+      "org.opensearch.graph.dispatcher.query.sql.SqlModule",
+      "org.opensearch.graph.dispatcher.modules.DescriptorsModule",
+      "org.opensearch.graph.asg.translator.graphql.AsgGraphQLModule",
+      "org.opensearch.graph.asg.translator.cypher.AsgCypherModule",
+      "org.opensearch.graph.asg.M2AsgModule",
+      "org.opensearch.graph.epb.plan.modules.EpbDfsCountBasedRedundantModule"
+      "org.opensearch.graph.asgAsgValidationModule",
+      "org.opensearch.graph.gta.module.GtaModule",
+      "org.opensearch.graph.executor.ExecutorModule",
+      "org.opensearch.graph.executor.modules.discrete.CursorsModule",
+      "org.opensearch.graph.assembly.knowledge.KnowledgeModule",
     ]
 ```
 
