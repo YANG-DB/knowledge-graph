@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <parent>
+        <artifactId>root</artifactId>
+        <groupId>org.opensearch.graph</groupId>
+        <version>2.1.0-SNAPSHOT</version>
+    </parent>
+
+    <modelVersion>4.0.0</modelVersion>
+
+    <artifactId>opengraph-asg</artifactId>
+
+    <properties>
+        <top.dir>${project.basedir}/..</top.dir>
+        <checkstyle.skip>true</checkstyle.skip>
+        <build.timestamp>${maven.build.timestamp}</build.timestamp>
+    </properties>
+
+    <dependencies>
+
+        <dependency>
+            <groupId>org.scala-lang</groupId>
+            <artifactId>scala-library</artifactId>
+            <version>2.11.12</version>
+        </dependency>
+
+        <dependency>
+            <groupId>com.bpodgursky</groupId>
+            <artifactId>jbool_expressions</artifactId>
+            <version>1.13</version>
+        </dependency>
+
+        <!-- runtime -->
+        <dependency>
+            <groupId>com.googlecode.aviator</groupId>
+            <artifactId>aviator</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>com.graphql-java</groupId>
+            <artifactId>graphql-java</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>org.opencypher</groupId>
+            <artifactId>front-end-9.0</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.opensearch.graph</groupId>
+            <artifactId>opengraph-model</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.opensearch.graph</groupId>
+            <artifactId>opengraph-core</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.jooby</groupId>
+            <artifactId>jooby</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.google.inject</groupId>
+            <artifactId>guice</artifactId>
+        </dependency>
+        <!-- runtime -->
+
+        <!-- test -->
+        <dependency>
+            <groupId>org.opensearch.graph</groupId>
+            <artifactId>opengraph-model</artifactId>
+            <type>test-jar</type>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+            <scope>test</scope>
+        </dependency>
+        <!-- test -->
+    </dependencies>
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-source-plugin</artifactId>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-surefire-plugin</artifactId>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-jar-plugin</artifactId>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-checkstyle-plugin</artifactId>
+            </plugin>
+        </plugins>
+
+        <resources>
+            <resource>
+                <directory>src/main/resources</directory>
+                <excludes>
+                    <exclude>version/*.properties</exclude>
+                </excludes>
+            </resource>
+        </resources>
+    </build>
+
+</project>

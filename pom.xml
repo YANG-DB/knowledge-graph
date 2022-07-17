@@ -230,7 +230,7 @@
             </dependency>
             <dependency>
                 <groupId>org.opensearch.graph</groupId>
-                <artifactId>opengraph-geojson</artifactId>
+                <artifactId>geojson</artifactId>
                 <version>${opengraph.version}</version>
             </dependency>
 
@@ -1227,9 +1227,9 @@
                 <module>unipop-core</module>
                 <module>opengraph-model</module>
                 <module>geojson</module>
+                <module>opengraph-core</module>
+                <module>opengraph-asg</module>
                 <!--                <module>opengraph-test</module>-->
-                <!--                <module>opengraph-asg</module>-->
-                <!--                <module>opengraph-core</module>-->
                 <!--                <module>opengraph-dv</module>-->
                 <!--                <module>opengraph-service</module>-->
             </modules>
