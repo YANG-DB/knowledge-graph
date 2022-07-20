@@ -1,0 +1,170 @@
+# GraphQL from graph at:
+scalar URL
+
+enum STORES {
+    S3
+    OPEN_SEARCH
+    PROMETHEUS
+    RDBMS
+    MONGO
+}
+enum ColumnType {
+    NUMBER
+    FLOAT
+    STRING
+    DOCUMENT
+    BLOB
+    JSON
+    GEO
+}
+
+type S3Store implements Datastore  {
+    id: ID!
+    name: String!
+    description: String
+    uri: URL
+    authentication: Authentication!
+    type: STORES!
+    stores:[DatastoreContent]!
+    bucket: String
+}
+
+type RdbmsStore implements Datastore  {
+    id: ID!
+    name: String!
+    description: String
+    uri: URL
+    authentication: Authentication!
+    type: STORES!
+    stores:[DatastoreContent]!
+    jdbc: String
+    db: String
+    schema: String
+}
+
+type MongoStore implements Datastore  {
+    id: ID!
+    name: String!
+    description: String
+    uri: URL
+    authentication: Authentication!
+    type: STORES!
+    stores:[DatastoreContent]!
+    schema: String
+    replicaSet: String
+    connectTimeoutMS: Int
+}
+
+type PrometheusStore implements Datastore  {
+    id: ID!
+    name: String!
+    description: String
+    uri: URL
+    authentication: Authentication!
+    type: STORES!
+    stores:[DatastoreContent]!
+
+}
+
+type OpensearchStore implements Datastore  {
+    clusterName: String
+    id: ID!
+    name: String!
+    description: String
+    uri: URL
+    authentication: Authentication!
+    type: STORES!
+    stores:[DatastoreContent]!
+}
+
+type Authentication{
+    user: String
+    type: String
+    key: String
+}
+
+interface Datastore{
+    id: ID!
+    name: String!
+    description: String
+    uri: URL
+    authentication: Authentication!
+    type: STORES!
+    stores:[DatastoreContent]!
+}
+
+type DatastoreContent{
+    name: String
+    tables: [Content]
+}
+
+interface Content{
+    name: String!
+    aliases: [String]
+}
+
+type TableContent implements Content {
+    name: String!
+    aliases: [String]
+    columns: [TableColumn]!
+}
+
+type TableColumn {
+    name: String!
+    nullable: Boolean
+    type: ColumnType!
+}
+
+type IndexContent implements Content  {
+    name: String!
+    aliases: [String]
+    indexType: String!
+    indexedColumns: [IndexColumns]
+}
+
+type IndexColumns {
+    name: String!
+    nullable: Boolean
+    type: ColumnType!
+    indexType: [IndexColumnType]!
+}
+
+enum IndexType {
+    PRIMARY
+    SECONDARY
+    CLUSTERED
+}
+
+enum IndexColumnType {
+    BITMAP
+    BTREE
+    REVERSE
+    HASH
+    FILTERED
+    FUNCTION
+    SPATIAL
+}
+
+type ViewContent implements Content  {
+    name: String!
+    aliases: [String]
+    viewQuery: String
+    viewType: String
+}
+
+union contentFields = IndexColumns | TableColumn
+
+schema {
+    query: Query
+}
+
+input StoreContentInput {
+    storeName: String!
+    contentName: String
+}
+
+type Query {
+    stores(name : String) : [Datastore]
+    storeContent(store: StoreContentInput) : [DatastoreContent]
+    contentFields(store: StoreContentInput, fieldName : String): [contentFields]
+}
