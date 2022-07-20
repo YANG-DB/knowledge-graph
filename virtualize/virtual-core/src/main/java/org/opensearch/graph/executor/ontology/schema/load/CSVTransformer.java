@@ -27,7 +27,7 @@ import com.typesafe.config.Config;
 import org.opensearch.graph.dispatcher.driver.IdGeneratorDriver;
 import org.opensearch.graph.dispatcher.ontology.IndexProviderFactory;
 import org.opensearch.graph.dispatcher.ontology.OntologyProvider;
-import org.opensearch.graph.executor.opensearch.ElasticIndexProviderMappingFactory;
+import org.opensearch.graph.executor.opensearch.EngineIndexProviderMappingFactory;
 import org.opensearch.graph.executor.ontology.DataTransformer;
 import org.opensearch.graph.executor.ontology.schema.RawSchema;
 import org.opensearch.graph.model.Range;
@@ -148,8 +148,8 @@ public class CSVTransformer implements DataTransformer<DataTransformerContext, C
             String id = String.format("%s.%s", joiner.toString(), direction);
             //put classifiers
             element.put(relType.idFieldName(), id);
-            element.put(ElasticIndexProviderMappingFactory.TYPE, relation.getType());
-            element.put(ElasticIndexProviderMappingFactory.DIRECTION, direction);
+            element.put(EngineIndexProviderMappingFactory.TYPE, relation.getType());
+            element.put(EngineIndexProviderMappingFactory.DIRECTION, direction);
 
             //populate fields
             populateMetadataFields(context, node, relation, element);
@@ -209,16 +209,16 @@ public class CSVTransformer implements DataTransformer<DataTransformerContext, C
                 //for each pair do:
                 relationshipType.getePairs().stream().filter(pair -> pair.geteTypeB().equalsIgnoreCase(node.get(DEST_TYPE)))
                         .forEach(pair -> {
-                            element.put(ElasticIndexProviderMappingFactory.ENTITY_A, populateSide(ElasticIndexProviderMappingFactory.ENTITY_A, context, node.get(pair.getSideAIdField()), pair.geteTypeA(), relation, node));
-                            element.put(ElasticIndexProviderMappingFactory.ENTITY_B, populateSide(ElasticIndexProviderMappingFactory.ENTITY_B, context, node.get(pair.getSideBIdField()), pair.geteTypeB(), relation, node));
+                            element.put(EngineIndexProviderMappingFactory.ENTITY_A, populateSide(EngineIndexProviderMappingFactory.ENTITY_A, context, node.get(pair.getSideAIdField()), pair.geteTypeA(), relation, node));
+                            element.put(EngineIndexProviderMappingFactory.ENTITY_B, populateSide(EngineIndexProviderMappingFactory.ENTITY_B, context, node.get(pair.getSideBIdField()), pair.geteTypeB(), relation, node));
                         });
                 break;
             case "in":
                 //for each pair do:
                 relationshipType.getePairs().stream().filter(pair -> pair.geteTypeB().equalsIgnoreCase(node.get(DEST_TYPE)))
                         .forEach(pair -> {
-                            element.put(ElasticIndexProviderMappingFactory.ENTITY_B, populateSide(ElasticIndexProviderMappingFactory.ENTITY_A, context, node.get(pair.getSideAIdField()), pair.geteTypeA(), relation, node));
-                            element.put(ElasticIndexProviderMappingFactory.ENTITY_A, populateSide(ElasticIndexProviderMappingFactory.ENTITY_B, context, node.get(pair.getSideBIdField()), pair.geteTypeB(), relation, node));
+                            element.put(EngineIndexProviderMappingFactory.ENTITY_B, populateSide(EngineIndexProviderMappingFactory.ENTITY_A, context, node.get(pair.getSideAIdField()), pair.geteTypeA(), relation, node));
+                            element.put(EngineIndexProviderMappingFactory.ENTITY_A, populateSide(EngineIndexProviderMappingFactory.ENTITY_B, context, node.get(pair.getSideBIdField()), pair.geteTypeB(), relation, node));
                         });
                 break;
         }
@@ -242,7 +242,7 @@ public class CSVTransformer implements DataTransformer<DataTransformerContext, C
                 .orElseThrow(() -> new FuseError.FuseErrorException(new FuseError("Logical Graph Transformation Error", "No matching node found with label " + sideType)));
 
         //put classifiers
-        entitySide.put(ElasticIndexProviderMappingFactory.ID, sideId);
+        entitySide.put(EngineIndexProviderMappingFactory.ID, sideId);
         entitySide.put(Utils.TYPE, entity.getType());
 
         List<Redundant> redundant = relation.getRedundant(side);

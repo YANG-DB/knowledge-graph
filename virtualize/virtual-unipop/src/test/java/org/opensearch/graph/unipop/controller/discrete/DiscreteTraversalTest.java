@@ -4,10 +4,10 @@ import com.codahale.metrics.MetricRegistry;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.google.common.collect.ImmutableSet;
 import org.opensearch.graph.model.GlobalConstants;
-import org.opensearch.graph.test.framework.index.ElasticEmbeddedNode;
-import org.opensearch.graph.test.framework.index.GlobalElasticEmbeddedNode;
+import org.opensearch.graph.test.framework.index.SearchEmbeddedNode;
+import org.opensearch.graph.test.framework.index.GlobalSearchEmbeddedNode;
 import org.opensearch.graph.test.framework.index.Mappings;
-import org.opensearch.graph.test.framework.populator.ElasticDataPopulator;
+import org.opensearch.graph.test.framework.populator.SearchEngineDataPopulator;
 import org.opensearch.graph.unipop.controller.OpensearchGraphConfiguration;
 import org.opensearch.graph.unipop.controller.common.ElementController;
 import org.opensearch.graph.unipop.controller.search.SearchOrderProvider;
@@ -53,7 +53,7 @@ import org.unipop.structure.UniGraph;
 
 import java.util.*;
 
-import static org.opensearch.graph.test.framework.index.ElasticEmbeddedNode.getClient;
+import static org.opensearch.graph.test.framework.index.SearchEmbeddedNode.getClient;
 import static org.opensearch.graph.test.framework.index.Mappings.Mapping.Property.Type.keyword;
 import static org.opensearch.graph.model.GlobalConstants.HasKeys.CONSTRAINT;
 import static org.opensearch.graph.unipop.schemaProviders.GraphEdgeSchema.Application.endA;
@@ -64,7 +64,7 @@ import static org.opensearch.graph.unipop.schemaProviders.GraphEdgeSchema.Applic
 public class DiscreteTraversalTest {
     //region Static Fields
     public static final String CLUSTER_NAME = "knowledge";
-    public static ElasticEmbeddedNode elasticEmbeddedNode;
+    public static SearchEmbeddedNode searchEmbeddedNode;
     public static OpensearchGraphConfiguration opensearchGraphConfiguration;
     public static UniGraphConfiguration uniGraphConfiguration;
     public static UniGraph graph;
@@ -78,7 +78,7 @@ public class DiscreteTraversalTest {
     //region Setup
     @BeforeClass
     public static void setup() throws Exception {
-        elasticEmbeddedNode = GlobalElasticEmbeddedNode.getInstance(CLUSTER_NAME);
+        searchEmbeddedNode = GlobalSearchEmbeddedNode.getInstance(CLUSTER_NAME);
         opensearchGraphConfiguration = new OpensearchGraphConfiguration();
         opensearchGraphConfiguration.setClusterName(CLUSTER_NAME);
         opensearchGraphConfiguration.setElasticGraphScrollSize(1000);
@@ -140,26 +140,26 @@ public class DiscreteTraversalTest {
                         .addProperty("type", new Mappings.Mapping.Property(keyword))), XContentType.JSON)
                 .execute().actionGet();
 
-        new ElasticDataPopulator(client, "dragons1", "pge", "id", true, "faction", false, () -> createDragons(0, 5)).populate();
-        new ElasticDataPopulator(client, "dragons2", "pge", "id", true, "faction", false, () -> createDragons(5, 10)).populate();
-        new ElasticDataPopulator(client, "coins1", "pge", "id", true, "faction", true, () -> createCoins(0, 5, 3)).populate();
-        new ElasticDataPopulator(client, "coins2", "pge", "id", true, "faction", true, () -> createCoins(5, 10, 3)).populate();
+        new SearchEngineDataPopulator(client, "dragons1", "pge", "id", true, "faction", false, () -> createDragons(0, 5)).populate();
+        new SearchEngineDataPopulator(client, "dragons2", "pge", "id", true, "faction", false, () -> createDragons(5, 10)).populate();
+        new SearchEngineDataPopulator(client, "coins1", "pge", "id", true, "faction", true, () -> createCoins(0, 5, 3)).populate();
+        new SearchEngineDataPopulator(client, "coins2", "pge", "id", true, "faction", true, () -> createCoins(5, 10, 3)).populate();
 
         Iterable<Map<String, Object>> fireEventsDual1 = createFireEventsDual(0, 5, 10, 3);
         Iterable<Map<String, Object>> fireEventsDual2 = createFireEventsDual(5, 10, 10, 3);
-        new ElasticDataPopulator(client, "dragons1", "pge", "id", true, "entityAId", false,
+        new SearchEngineDataPopulator(client, "dragons1", "pge", "id", true, "entityAId", false,
                 () -> Stream.ofAll(fireEventsDual1)
                         .appendAll(fireEventsDual2)
                         .filter(fireEvent -> Integer.parseInt(((String) fireEvent.get("entityAId")).substring(1)) < 5))
                 .populate();
-        new ElasticDataPopulator(client, "dragons2", "pge", "id", true, "entityAId", false,
+        new SearchEngineDataPopulator(client, "dragons2", "pge", "id", true, "entityAId", false,
                 () -> Stream.ofAll(fireEventsDual1)
                         .appendAll(fireEventsDual2)
                         .filter(fireEvent -> Integer.parseInt(((String) fireEvent.get("entityAId")).substring(1)) >= 5))
                 .populate();
 
-        new ElasticDataPopulator(client, "fire1", "pge", "id", true, null, false, () -> createFireEventsSingular(0, 5, 10, 3)).populate();
-        new ElasticDataPopulator(client, "fire2", "pge", "id", true, null, false, () -> createFireEventsSingular(5, 10, 10, 3)).populate();
+        new SearchEngineDataPopulator(client, "fire1", "pge", "id", true, null, false, () -> createFireEventsSingular(0, 5, 10, 3)).populate();
+        new SearchEngineDataPopulator(client, "fire2", "pge", "id", true, null, false, () -> createFireEventsSingular(5, 10, 10, 3)).populate();
 
         client.admin().indices().refresh(
                 new RefreshRequest("dragons1", "dragons2", "coins1", "coins2", "fire1", "fire2")).actionGet();

@@ -8,8 +8,8 @@ import org.opensearch.graph.executor.opensearch.OpensearchIndexProviderMappingFa
 import org.opensearch.graph.executor.ontology.schema.*;
 import org.opensearch.graph.model.ontology.Ontology;
 import org.opensearch.graph.model.schema.IndexProvider;
-import org.opensearch.graph.test.framework.index.ElasticEmbeddedNode;
-import org.opensearch.graph.test.framework.index.GlobalElasticEmbeddedNode;
+import org.opensearch.graph.test.framework.index.SearchEmbeddedNode;
+import org.opensearch.graph.test.framework.index.GlobalSearchEmbeddedNode;
 import org.opensearch.graph.unipop.schemaProviders.GraphElementSchemaProvider;
 import org.opensearch.graph.unipop.schemaProviders.indexPartitions.IndexPartitions;
 import org.opensearch.graph.test.BaseSuiteMarker;
@@ -29,7 +29,7 @@ import java.util.stream.Collectors;
 import java.util.stream.StreamSupport;
 
 import static org.opensearch.graph.executor.ontology.schema.IndexProviderRawSchema.getIndexPartitions;
-import static org.opensearch.graph.test.framework.index.ElasticEmbeddedNode.FUSE_TEST_ELASTIC;
+import static org.opensearch.graph.test.framework.index.SearchEmbeddedNode.FUSE_TEST_ELASTIC;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.when;
 
@@ -44,7 +44,7 @@ import static org.mockito.Mockito.when;
         OpensearchIndexProviderMappingFactoryIT.class
 })
 public class TestSuiteIndexProviderSuite implements BaseSuiteMarker {
-    private static ElasticEmbeddedNode elasticEmbeddedNode;
+    private static SearchEmbeddedNode searchEmbeddedNode;
 
     public static ObjectMapper mapper = new ObjectMapper();
     public static Config config;
@@ -59,7 +59,7 @@ public class TestSuiteIndexProviderSuite implements BaseSuiteMarker {
     public static Client client;
 
     public static void setUpInternal() throws Exception {
-        client = ElasticEmbeddedNode.getClient();
+        client = SearchEmbeddedNode.getClient();
         InputStream providerNestedStream = Thread.currentThread().getContextClassLoader().getResourceAsStream("schema/DragonsIndexProviderNested.conf");
         InputStream providerEmbeddedStream = Thread.currentThread().getContextClassLoader().getResourceAsStream("schema/DragonsIndexProviderEmbedded.conf");
         InputStream providerSingleIndexStream = Thread.currentThread().getContextClassLoader().getResourceAsStream("schema/DragonsSingleIndexProvider.conf");
@@ -202,14 +202,14 @@ public class TestSuiteIndexProviderSuite implements BaseSuiteMarker {
 
     private static void init(boolean embedded) throws Exception {
         //first verify no instance is running already
-        Optional<org.opensearch.client.core.MainResponse> info = GlobalElasticEmbeddedNode.isRunningLocally();
+        Optional<org.opensearch.client.core.MainResponse> info = GlobalSearchEmbeddedNode.isRunningLocally();
         // Start embedded ES
         if (embedded && !info.isPresent()) {
             info = Optional.of(getDefaultInfo());
-            elasticEmbeddedNode = GlobalElasticEmbeddedNode.getInstance(info.get().getNodeName());
+            searchEmbeddedNode = GlobalSearchEmbeddedNode.getInstance(info.get().getNodeName());
         }
         //use existing running ES
-        client = ElasticEmbeddedNode.getClient(info.orElseGet(TestSuiteIndexProviderSuite::getDefaultInfo));
+        client = SearchEmbeddedNode.getClient(info.orElseGet(TestSuiteIndexProviderSuite::getDefaultInfo));
     }
 
     private static org.opensearch.client.core.MainResponse getDefaultInfo() {
@@ -218,7 +218,7 @@ public class TestSuiteIndexProviderSuite implements BaseSuiteMarker {
 
     @AfterClass
     public static void tearDown() throws Exception {
-        GlobalElasticEmbeddedNode.close();
+        GlobalSearchEmbeddedNode.close();
     }
 
 

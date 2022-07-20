@@ -30,7 +30,7 @@ import org.opensearch.graph.dispatcher.ontology.IndexProviderFactory;
 import org.opensearch.graph.dispatcher.ontology.OntologyProvider;
 import org.opensearch.graph.executor.ontology.DataTransformer;
 import org.opensearch.graph.executor.ontology.schema.RawSchema;
-import org.opensearch.graph.executor.opensearch.ElasticIndexProviderMappingFactory;
+import org.opensearch.graph.executor.opensearch.EngineIndexProviderMappingFactory;
 import org.opensearch.graph.model.Range;
 import org.opensearch.graph.model.logical.LogicalEdge;
 import org.opensearch.graph.model.logical.LogicalGraphModel;
@@ -107,9 +107,9 @@ public class EntityTransformer implements DataTransformer<DataTransformerContext
                     .orElseThrow(() -> new FuseError.FuseErrorException(new FuseError("Logical Graph Transformation Error", "No matching edge found with label " + edge.label())));
             //put classifiers
             String id = String.format("%s.%s", edge.getId(), direction);
-            element.put(ElasticIndexProviderMappingFactory.ID, id);
-            element.put(ElasticIndexProviderMappingFactory.TYPE, relation.getType());
-            element.put(ElasticIndexProviderMappingFactory.DIRECTION, direction);
+            element.put(EngineIndexProviderMappingFactory.ID, id);
+            element.put(EngineIndexProviderMappingFactory.TYPE, relation.getType());
+            element.put(EngineIndexProviderMappingFactory.DIRECTION, direction);
 
             //populate metadata
             populateMetadataFields(mapper, indexProvider, accessor, context, edge, element);
@@ -193,8 +193,8 @@ public class EntityTransformer implements DataTransformer<DataTransformerContext
     }
 
     static void translateEntity(ObjectMapper mapper, IndexProvider indexProvider, Ontology.Accessor accessor, DataTransformerContext<LogicalGraphModel> context, LogicalNode node, ObjectNode element, Entity entity) {
-        element.put(ElasticIndexProviderMappingFactory.ID, node.getId());
-        element.put(ElasticIndexProviderMappingFactory.TYPE, entity.getType());
+        element.put(EngineIndexProviderMappingFactory.ID, node.getId());
+        element.put(EngineIndexProviderMappingFactory.TYPE, entity.getType());
 
         //populate metadata
         populateMetadataFields(mapper, indexProvider, accessor, context, node, element);
@@ -243,7 +243,7 @@ public class EntityTransformer implements DataTransformer<DataTransformerContext
     public static void populateFields(ObjectMapper mapper, IndexProvider indexProvider, Ontology.Accessor accessor, DataTransformerContext<LogicalGraphModel> context, LogicalNode node, Entity entity, ObjectNode element) {
         //todo check the structure of the index
         switch (entity.getMapping()) {
-            case ElasticIndexProviderMappingFactory.CHILD:
+            case EngineIndexProviderMappingFactory.CHILD:
             case Utils.INDEX:
                 //populate properties
                 node.fields().entrySet()
@@ -268,14 +268,14 @@ public class EntityTransformer implements DataTransformer<DataTransformerContext
         //populate redundant fields A
         switch (direction) {
             case "out":
-                element.put(ElasticIndexProviderMappingFactory.ENTITY_A, populateSide(ElasticIndexProviderMappingFactory.ENTITY_A, context, edge.getSource(), relation));
+                element.put(EngineIndexProviderMappingFactory.ENTITY_A, populateSide(EngineIndexProviderMappingFactory.ENTITY_A, context, edge.getSource(), relation));
                 //populate redundant fields B
-                element.put(ElasticIndexProviderMappingFactory.ENTITY_B, populateSide(ElasticIndexProviderMappingFactory.ENTITY_B, context, edge.getTarget(), relation));
+                element.put(EngineIndexProviderMappingFactory.ENTITY_B, populateSide(EngineIndexProviderMappingFactory.ENTITY_B, context, edge.getTarget(), relation));
                 break;
             case "in":
-                element.put(ElasticIndexProviderMappingFactory.ENTITY_B, populateSide(ElasticIndexProviderMappingFactory.ENTITY_A, context, edge.getSource(), relation));
+                element.put(EngineIndexProviderMappingFactory.ENTITY_B, populateSide(EngineIndexProviderMappingFactory.ENTITY_A, context, edge.getSource(), relation));
                 //populate redundant fields B
-                element.put(ElasticIndexProviderMappingFactory.ENTITY_A, populateSide(ElasticIndexProviderMappingFactory.ENTITY_B, context, edge.getTarget(), relation));
+                element.put(EngineIndexProviderMappingFactory.ENTITY_A, populateSide(EngineIndexProviderMappingFactory.ENTITY_B, context, edge.getTarget(), relation));
                 break;
         }
 
@@ -317,8 +317,8 @@ public class EntityTransformer implements DataTransformer<DataTransformerContext
                 .orElseThrow(() -> new FuseError.FuseErrorException(new FuseError("Logical Graph Transformation Error", "No matching node found with label " + source.get().label())));
 
         //put classifiers
-        entitySide.put(ElasticIndexProviderMappingFactory.ID, source.get().getId());
-        entitySide.put(ElasticIndexProviderMappingFactory.TYPE, entity.getType());
+        entitySide.put(EngineIndexProviderMappingFactory.ID, source.get().getId());
+        entitySide.put(EngineIndexProviderMappingFactory.TYPE, entity.getType());
 
         List<Redundant> redundant = relation.getRedundant(side);
         redundant.forEach(r -> populateRedundantField(r, source.get(), entitySide));

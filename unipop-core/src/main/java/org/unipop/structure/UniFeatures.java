@@ -28,9 +28,9 @@ import org.apache.tinkerpop.gremlin.structure.util.StringFactory;
 
 public class UniFeatures implements Graph.Features {
 
-    ElasticVertexFeatures elasticVertexFeatures = new ElasticVertexFeatures();
-    ElasticEdgeFeatures elasticEdgeFeatures = new ElasticEdgeFeatures();
-    ElasticGraphFeatures elasticGraphFeatures = new ElasticGraphFeatures();
+    EngineVertexFeatures engineVertexFeatures = new EngineVertexFeatures();
+    EngineEdgeFeatures engineEdgeFeatures = new EngineEdgeFeatures();
+    EngineGraphFeatures engineGraphFeatures = new EngineGraphFeatures();
 
     @Override
     public String toString() {
@@ -39,25 +39,25 @@ public class UniFeatures implements Graph.Features {
 
     @Override
     public VertexFeatures vertex() {
-        return elasticVertexFeatures;
+        return engineVertexFeatures;
     }
 
     @Override
     public EdgeFeatures edge() {
-        return elasticEdgeFeatures;
+        return engineEdgeFeatures;
     }
 
     @Override
     public GraphFeatures graph() {
-        return elasticGraphFeatures;
+        return engineGraphFeatures;
     }
 
-    private class ElasticGraphFeatures implements GraphFeatures {
-        ElasticVariableFeatures elasticVariableFeatures = new ElasticVariableFeatures();
+    private class EngineGraphFeatures implements GraphFeatures {
+        EngineVariableFeatures engineVariableFeatures = new EngineVariableFeatures();
 
         @Override
         public VariableFeatures variables() {
-            return elasticVariableFeatures;
+            return engineVariableFeatures;
         }
 
         @Override
@@ -76,7 +76,7 @@ public class UniFeatures implements Graph.Features {
         }
     }
 
-    private class ElasticVariableFeatures implements VariableFeatures {
+    private class EngineVariableFeatures implements VariableFeatures {
         @Override
         public boolean supportsVariables() {
             return false;
@@ -173,7 +173,7 @@ public class UniFeatures implements Graph.Features {
         }
     }
 
-    private class ElasticEdgeFeatures implements EdgeFeatures {
+    private class EngineEdgeFeatures implements EdgeFeatures {
         @Override
         public boolean supportsNumericIds() {
             return false;
@@ -200,8 +200,8 @@ public class UniFeatures implements Graph.Features {
         }
     }
 
-    private class ElasticVertexFeatures implements VertexFeatures {
-        ElasticVertexPropertyFeatures elasticVertexPropertyFeatures = new ElasticVertexPropertyFeatures();
+    private class EngineVertexFeatures implements VertexFeatures {
+        EngineVertexPropertyFeatures engineVertexPropertyFeatures = new EngineVertexPropertyFeatures();
 
         @Override
         public boolean supportsMultiProperties() {
@@ -235,7 +235,7 @@ public class UniFeatures implements Graph.Features {
 
         @Override
         public VertexPropertyFeatures properties() {
-            return elasticVertexPropertyFeatures;
+            return engineVertexPropertyFeatures;
         }
 
         @Override
@@ -244,7 +244,7 @@ public class UniFeatures implements Graph.Features {
         }
     }
 
-    private class ElasticVertexPropertyFeatures implements VertexPropertyFeatures {
+    private class EngineVertexPropertyFeatures implements VertexPropertyFeatures {
         @Override
         public boolean supportsUserSuppliedIds() {
             return false;

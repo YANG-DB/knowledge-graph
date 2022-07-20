@@ -87,7 +87,7 @@ public class SnifferGraphClient implements GraphClient {
     private Client client;
     private LoadingCache<String, GraphClient>  fuseClients;
     private Map<String,Map> nodeStats;
-    private ElasticGraphConfiguration configuration;
+    private EngineGraphConfiguration configuration;
 
     private final int fusePort;
     private final String fuseProtocol;
@@ -359,8 +359,8 @@ public class SnifferGraphClient implements GraphClient {
         }
     }
 
-    private ElasticGraphConfiguration createElasticGraphConfiguration(Config conf) {
-        ElasticGraphConfiguration configuration = new ElasticGraphConfiguration();
+    private EngineGraphConfiguration createElasticGraphConfiguration(Config conf) {
+        EngineGraphConfiguration configuration = new EngineGraphConfiguration();
         configuration.setClusterHosts(Stream.ofAll(getStringList(conf, "opensearch.hosts")).toJavaArray(String.class));
         configuration.setClusterPort(conf.getInt("opensearch.port"));
         configuration.setClusterName(conf.getString("opensearch.cluster_name"));
@@ -371,7 +371,7 @@ public class SnifferGraphClient implements GraphClient {
         return configuration;
     }
 
-    private static Client getClient(ElasticGraphConfiguration configuration) {
+    private static Client getClient(EngineGraphConfiguration configuration) {
         Settings settings = Settings.builder()
                 .put("cluster.name", configuration.getClusterName())
                 .put("client.transport.ignore_cluster_name", configuration.isClientTransportIgnoreClusterName())
@@ -387,7 +387,7 @@ public class SnifferGraphClient implements GraphClient {
         return client;
     }
 
-    private class ElasticGraphConfiguration {
+    private class EngineGraphConfiguration {
         private List<String> clusterHosts;
         private int clusterPort;
         private String clusterName;

@@ -20,15 +20,15 @@ package org.opensearch.graph.test;
  * #L%
  */
 
-import org.opensearch.graph.test.framework.index.ElasticEmbeddedNode;
-import org.opensearch.graph.test.framework.index.GlobalElasticEmbeddedNode;
+import org.opensearch.graph.test.framework.index.SearchEmbeddedNode;
+import org.opensearch.graph.test.framework.index.GlobalSearchEmbeddedNode;
 import org.opensearch.client.transport.*;
 
 public abstract class TestSetupBase {
-    protected ElasticEmbeddedNode instance;
+    protected SearchEmbeddedNode instance;
 
     public void init() throws Exception {
-        instance = GlobalElasticEmbeddedNode.getInstance();
+        instance = GlobalSearchEmbeddedNode.getInstance();
         loadData(instance.getClient());
     }
 

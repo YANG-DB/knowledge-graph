@@ -26,7 +26,7 @@ public class OpensearchIndexProviderMappingFactoryIT extends BaseModuleInjection
 
     @Test
     public void testGenerateNestedMapping() {
-        ElasticIndexProviderMappingFactory mappingFactory = new ElasticIndexProviderMappingFactory(TestSuiteIndexProviderSuite.client, TestSuiteIndexProviderSuite.nestedSchema, TestSuiteIndexProviderSuite.ontology, TestSuiteIndexProviderSuite.nestedProvider);
+        EngineIndexProviderMappingFactory mappingFactory = new EngineIndexProviderMappingFactory(TestSuiteIndexProviderSuite.client, TestSuiteIndexProviderSuite.nestedSchema, TestSuiteIndexProviderSuite.ontology, TestSuiteIndexProviderSuite.nestedProvider);
         List<Tuple2<String, Boolean>> list = mappingFactory.generateMappings();
         Assert.assertEquals(list.size(),14);
         HashSet<String> indices = Sets.newHashSet("projection","fire","freeze","own","subjectof","dragon","kingdom","people","horse","guild","know","registeredin","originatedin","memberof");
@@ -158,7 +158,7 @@ public class OpensearchIndexProviderMappingFactoryIT extends BaseModuleInjection
 
     @Test
     public void testGenerateEmbeddedMapping() {
-        ElasticIndexProviderMappingFactory mappingFactory = new ElasticIndexProviderMappingFactory(TestSuiteIndexProviderSuite.client, TestSuiteIndexProviderSuite.embeddedSchema, TestSuiteIndexProviderSuite.ontology, TestSuiteIndexProviderSuite.embeddedProvider);
+        EngineIndexProviderMappingFactory mappingFactory = new EngineIndexProviderMappingFactory(TestSuiteIndexProviderSuite.client, TestSuiteIndexProviderSuite.embeddedSchema, TestSuiteIndexProviderSuite.ontology, TestSuiteIndexProviderSuite.embeddedProvider);
         List<Tuple2<String, Boolean>> list = mappingFactory.generateMappings();
         Assert.assertEquals(list.size(),14);
         HashSet<String> indices = Sets.newHashSet("projection","fire","freeze","own","subjectof","dragon","kingdom","people","horse","guild","know","registeredin","originatedin","memberof");
@@ -291,7 +291,7 @@ public class OpensearchIndexProviderMappingFactoryIT extends BaseModuleInjection
 
     @Test
     public void testGenerateSingleMapping() {
-        ElasticIndexProviderMappingFactory mappingFactory = new ElasticIndexProviderMappingFactory(TestSuiteIndexProviderSuite.client, TestSuiteIndexProviderSuite.singleIndexSchema, TestSuiteIndexProviderSuite.ontology, TestSuiteIndexProviderSuite.singleIndexProvider);
+        EngineIndexProviderMappingFactory mappingFactory = new EngineIndexProviderMappingFactory(TestSuiteIndexProviderSuite.client, TestSuiteIndexProviderSuite.singleIndexSchema, TestSuiteIndexProviderSuite.ontology, TestSuiteIndexProviderSuite.singleIndexProvider);
         List<Tuple2<String, Boolean>> list = mappingFactory.generateMappings();
         Assert.assertEquals(list.size(),2);
         List<String> indices = Arrays.asList("ontology","projection");
@@ -325,7 +325,7 @@ public class OpensearchIndexProviderMappingFactoryIT extends BaseModuleInjection
     @Test
     public void createNestedIndicesTest() {
         RawSchema schema = TestSuiteIndexProviderSuite.nestedSchema;
-        ElasticIndexProviderMappingFactory mappingFactory = new ElasticIndexProviderMappingFactory(TestSuiteIndexProviderSuite.client, schema, TestSuiteIndexProviderSuite.ontology, TestSuiteIndexProviderSuite.nestedProvider);
+        EngineIndexProviderMappingFactory mappingFactory = new EngineIndexProviderMappingFactory(TestSuiteIndexProviderSuite.client, schema, TestSuiteIndexProviderSuite.ontology, TestSuiteIndexProviderSuite.nestedProvider);
         List<Tuple2<String, Boolean>> list = mappingFactory.generateMappings();
         Assert.assertEquals(list.size(),14);
         HashSet<String> labels = Sets.newHashSet("projection","fire","freeze","own","subjectof","dragon","kingdom","people","horse","guild","know","registeredin","originatedin","memberof");
@@ -433,7 +433,7 @@ public class OpensearchIndexProviderMappingFactoryIT extends BaseModuleInjection
     @Test
     public void createEmbeddedIndicesTest() {
         RawSchema schema = TestSuiteIndexProviderSuite.embeddedSchema;
-        ElasticIndexProviderMappingFactory mappingFactory = new ElasticIndexProviderMappingFactory(TestSuiteIndexProviderSuite.client, schema, TestSuiteIndexProviderSuite.ontology, TestSuiteIndexProviderSuite.embeddedProvider);
+        EngineIndexProviderMappingFactory mappingFactory = new EngineIndexProviderMappingFactory(TestSuiteIndexProviderSuite.client, schema, TestSuiteIndexProviderSuite.ontology, TestSuiteIndexProviderSuite.embeddedProvider);
         List<Tuple2<String, Boolean>> list = mappingFactory.generateMappings();
         Assert.assertEquals(list.size(),14);
         HashSet<String> labels = Sets.newHashSet("projection","fire","freeze","own","subjectof","dragon","kingdom","people","horse","guild","know","registeredin","originatedin","memberof");
@@ -535,7 +535,7 @@ public class OpensearchIndexProviderMappingFactoryIT extends BaseModuleInjection
     @Ignore("Todo - fix template pattern naming on ElasticIndexProviderMappingFactory(lines:152,178) ")
     public void createSingleIndicesTest() {
         RawSchema schema = TestSuiteIndexProviderSuite.singleIndexSchema;
-        ElasticIndexProviderMappingFactory mappingFactory = new ElasticIndexProviderMappingFactory(TestSuiteIndexProviderSuite.client, schema, TestSuiteIndexProviderSuite.ontology, TestSuiteIndexProviderSuite.singleIndexProvider);
+        EngineIndexProviderMappingFactory mappingFactory = new EngineIndexProviderMappingFactory(TestSuiteIndexProviderSuite.client, schema, TestSuiteIndexProviderSuite.ontology, TestSuiteIndexProviderSuite.singleIndexProvider);
         List<Tuple2<String, Boolean>> list = mappingFactory.generateMappings();
         Assert.assertEquals(list.size(),1);
         HashSet<String> labels = Sets.newHashSet("ontology");

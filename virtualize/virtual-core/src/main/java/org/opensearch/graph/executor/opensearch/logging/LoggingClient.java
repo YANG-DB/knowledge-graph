@@ -215,7 +215,7 @@ public class LoggingClient implements Client {
         int operationId = this.operationId++;
 
         try {
-            new LogMessage.Impl(this.logger, trace, "#{} start search", sequence, LogType.of(start), search, ElapsedFrom.now(), NetworkElasticElapsed.start())
+            new LogMessage.Impl(this.logger, trace, "#{} start search", sequence, LogType.of(start), search, ElapsedFrom.now(), NetworkEngineElapsed.start())
                     .with(operationId).log();
             new LogMessage.Impl(this.verboseLogger, trace, "#{} {}", sequence, LogType.of(log), search, ElapsedFrom.now())
                     .with(operationId, searchRequest.toString()).log();
@@ -224,15 +224,15 @@ public class LoggingClient implements Client {
             return new LoggingActionFuture<>(future,
                     (response -> new LogMessage.Impl(this.logger, trace, "#{} finish search", sequence, LogType.of(success), search,
                             ElapsedFrom.now(),
-                            ElasticElapsed.of(response.getTook().duration()), ElasticElapsed.add(response.getTook().duration()),
-                            ElasticResults.totalHitsWriter(response.getHits().getTotalHits().value),
-                            ElasticResults.hitsWriter(response.getHits().getHits().length),
-                            ElasticResults.shardsWrite(response.getTotalShards()),
-                            ElasticResults.scrollIdWriter(response.getScrollId()),
-                            NetworkElasticElapsed.stop(), NetworkElasticElapsed.stopTotal())
+                            EngineElapsed.of(response.getTook().duration()), EngineElapsed.add(response.getTook().duration()),
+                            EngineResults.totalHitsWriter(response.getHits().getTotalHits().value),
+                            EngineResults.hitsWriter(response.getHits().getHits().length),
+                            EngineResults.shardsWrite(response.getTotalShards()),
+                            EngineResults.scrollIdWriter(response.getScrollId()),
+                            NetworkEngineElapsed.stop(), NetworkEngineElapsed.stopTotal())
                             .with(operationId)),
                     (ex -> new LogMessage.Impl(this.logger, error, "#{} failed search", sequence, LogType.of(failure), search,
-                            ElapsedFrom.now(), NetworkElasticElapsed.stop())
+                            ElapsedFrom.now(), NetworkEngineElapsed.stop())
                             .with(operationId, ex)),
                     timerContext,
                     this.metricRegistry.meter(name(this.logger.getName(), search.toString(), "success")),
@@ -253,7 +253,7 @@ public class LoggingClient implements Client {
         int operationId = this.operationId++;
 
         try {
-            new LogMessage.Impl(this.logger, trace, "#{} start search", sequence, LogType.of(start), search, ElapsedFrom.now(), NetworkElasticElapsed.start())
+            new LogMessage.Impl(this.logger, trace, "#{} start search", sequence, LogType.of(start), search, ElapsedFrom.now(), NetworkEngineElapsed.start())
                     .with(operationId).log();
             new LogMessage.Impl(this.verboseLogger, trace, "#{} {}", sequence, LogType.of(log), search, ElapsedFrom.now())
                     .with(operationId, searchRequest.toString()).log();
@@ -264,16 +264,16 @@ public class LoggingClient implements Client {
                             actionListener,
                             (response -> new LogMessage.Impl(this.logger, trace, "#{} finish search", sequence, LogType.of(success), search,
                                     ElapsedFrom.now(),
-                                    ElasticElapsed.of(response.getTook().duration()), ElasticElapsed.add(response.getTook().duration()),
-                                    NetworkElasticElapsed.stop(), NetworkElasticElapsed.stopTotal(),
-                                    ElasticResults.totalHitsWriter(response.getHits().getTotalHits().value),
-                                    ElasticResults.hitsWriter(response.getHits().getHits().length),
-                                    ElasticResults.shardsWrite(response.getTotalShards()),
-                                    ElasticResults.scrollIdWriter(response.getScrollId())
+                                    EngineElapsed.of(response.getTook().duration()), EngineElapsed.add(response.getTook().duration()),
+                                    NetworkEngineElapsed.stop(), NetworkEngineElapsed.stopTotal(),
+                                    EngineResults.totalHitsWriter(response.getHits().getTotalHits().value),
+                                    EngineResults.hitsWriter(response.getHits().getHits().length),
+                                    EngineResults.shardsWrite(response.getTotalShards()),
+                                    EngineResults.scrollIdWriter(response.getScrollId())
                             )
                                     .with(operationId)),
                             (ex -> new LogMessage.Impl(this.logger, error, "#{} failed search", sequence, LogType.of(failure), search,
-                                    ElapsedFrom.now(), NetworkElasticElapsed.stop())
+                                    ElapsedFrom.now(), NetworkEngineElapsed.stop())
                                     .with(operationId, ex)),
                             (ex -> new LogMessage.Impl(this.logger, error, "#{} failed search actionListener", sequence, LogType.of(failure), search,
                                     ElapsedFrom.now())
@@ -298,21 +298,21 @@ public class LoggingClient implements Client {
                 this,
                 SearchAction.INSTANCE,
                 (searchRequestBuilder -> new LogMessage.Impl(this.logger, trace, "#{} start search", sequence, LogType.of(start), search,
-                        ElapsedFrom.now(), NetworkElasticElapsed.start())
+                        ElapsedFrom.now(), NetworkEngineElapsed.start())
                         .with(operationId)),
                 (searchRequestBuilder -> new LogMessage.Impl(this.verboseLogger, trace, "#{} {}", sequence, LogType.of(log), search,
                         ElapsedFrom.deferredNow()).with(operationId, searchRequestBuilder.toString())),
                 (response -> new LogMessage.Impl(this.logger, trace, "#{} finish search", sequence, LogType.of(success), search,
                         ElapsedFrom.now(),
-                        ElasticElapsed.of(response.getTook().duration()), ElasticElapsed.add(response.getTook().duration()),
-                        ElasticResults.totalHitsWriter(response.getHits().getTotalHits().value),
-                        ElasticResults.hitsWriter(response.getHits().getHits().length),
-                        ElasticResults.shardsWrite(response.getTotalShards()),
-                        ElasticResults.scrollIdWriter(response.getScrollId()),
-                        NetworkElasticElapsed.stop(), NetworkElasticElapsed.stopTotal())
+                        EngineElapsed.of(response.getTook().duration()), EngineElapsed.add(response.getTook().duration()),
+                        EngineResults.totalHitsWriter(response.getHits().getTotalHits().value),
+                        EngineResults.hitsWriter(response.getHits().getHits().length),
+                        EngineResults.shardsWrite(response.getTotalShards()),
+                        EngineResults.scrollIdWriter(response.getScrollId()),
+                        NetworkEngineElapsed.stop(), NetworkEngineElapsed.stopTotal())
                         .with(operationId)),
                 (ex -> new LogMessage.Impl(this.logger, error, "#{} failed search", sequence, LogType.of(failure), search,
-                        ElapsedFrom.now(), NetworkElasticElapsed.stop())
+                        ElapsedFrom.now(), NetworkEngineElapsed.stop())
                         .with(operationId, ex)),
                 this.metricRegistry.timer(name(this.logger.getName(), search.toString())),
                 this.metricRegistry.meter(name(this.logger.getName(), search.toString(), "success")),
@@ -327,7 +327,7 @@ public class LoggingClient implements Client {
         int operationId = this.operationId++;
 
         try {
-            new LogMessage.Impl(this.logger, trace, "#{} start searchScroll", sequence, LogType.of(start), searchScroll, ElapsedFrom.now(), NetworkElasticElapsed.start())
+            new LogMessage.Impl(this.logger, trace, "#{} start searchScroll", sequence, LogType.of(start), searchScroll, ElapsedFrom.now(), NetworkEngineElapsed.start())
                     .with(operationId).log();
             new LogMessage.Impl(this.verboseLogger, trace, "#{} {}", sequence, LogType.of(log), searchScroll, ElapsedFrom.now())
                     .with(operationId, searchScrollRequest.toString()).log();
@@ -336,15 +336,15 @@ public class LoggingClient implements Client {
             return new LoggingActionFuture<>(future,
                     (response -> new LogMessage.Impl(this.logger, trace, "#{} finish searchScroll", sequence, LogType.of(success), searchScroll,
                             ElapsedFrom.now(),
-                            ElasticElapsed.of(response.getTook().duration()), ElasticElapsed.add(response.getTook().duration()),
-                            ElasticResults.totalHitsWriter(response.getHits().getTotalHits().value),
-                            ElasticResults.hitsWriter(response.getHits().getHits().length),
-                            ElasticResults.shardsWrite(response.getTotalShards()),
-                            ElasticResults.scrollIdWriter(response.getScrollId()),
-                            NetworkElasticElapsed.stop(), NetworkElasticElapsed.stopTotal())
+                            EngineElapsed.of(response.getTook().duration()), EngineElapsed.add(response.getTook().duration()),
+                            EngineResults.totalHitsWriter(response.getHits().getTotalHits().value),
+                            EngineResults.hitsWriter(response.getHits().getHits().length),
+                            EngineResults.shardsWrite(response.getTotalShards()),
+                            EngineResults.scrollIdWriter(response.getScrollId()),
+                            NetworkEngineElapsed.stop(), NetworkEngineElapsed.stopTotal())
                             .with(operationId)),
                     (ex -> new LogMessage.Impl(this.logger, error, "#{} failed searchScroll", sequence, LogType.of(failure), searchScroll,
-                            ElapsedFrom.now(), NetworkElasticElapsed.stop())
+                            ElapsedFrom.now(), NetworkEngineElapsed.stop())
                             .with(operationId, ex)),
                     timerContext,
                     this.metricRegistry.meter(name(this.logger.getName(), searchScroll.toString(), "success")),
@@ -365,7 +365,7 @@ public class LoggingClient implements Client {
         int operationId = this.operationId++;
 
         try {
-            new LogMessage.Impl(this.logger, trace, "#{} start searchScroll", sequence, LogType.of(start), searchScroll, ElapsedFrom.now(), NetworkElasticElapsed.start()).with(operationId).log();
+            new LogMessage.Impl(this.logger, trace, "#{} start searchScroll", sequence, LogType.of(start), searchScroll, ElapsedFrom.now(), NetworkEngineElapsed.start()).with(operationId).log();
             new LogMessage.Impl(this.verboseLogger, trace, "#{} {}", sequence, LogType.of(log), searchScroll, ElapsedFrom.now())
                     .with(operationId, searchScrollRequest.toString()).log();
 
@@ -375,15 +375,15 @@ public class LoggingClient implements Client {
                             actionListener,
                             (response -> new LogMessage.Impl(this.logger, trace, "#{} finish searchScroll", sequence, LogType.of(success), searchScroll,
                                     ElapsedFrom.now(),
-                                    ElasticElapsed.of(response.getTook().duration()), ElasticElapsed.add(response.getTook().duration()),
-                                    ElasticResults.totalHitsWriter(response.getHits().getTotalHits().value),
-                                    ElasticResults.hitsWriter(response.getHits().getHits().length),
-                                    ElasticResults.shardsWrite(response.getTotalShards()),
-                                    ElasticResults.scrollIdWriter(response.getScrollId()),
-                                    NetworkElasticElapsed.stop(), NetworkElasticElapsed.stopTotal())
+                                    EngineElapsed.of(response.getTook().duration()), EngineElapsed.add(response.getTook().duration()),
+                                    EngineResults.totalHitsWriter(response.getHits().getTotalHits().value),
+                                    EngineResults.hitsWriter(response.getHits().getHits().length),
+                                    EngineResults.shardsWrite(response.getTotalShards()),
+                                    EngineResults.scrollIdWriter(response.getScrollId()),
+                                    NetworkEngineElapsed.stop(), NetworkEngineElapsed.stopTotal())
                                     .with(operationId)),
                             (ex -> new LogMessage.Impl(this.logger, error, "#{} failed searchScroll", sequence, LogType.of(failure), searchScroll,
-                                    ElapsedFrom.deferredNow(), NetworkElasticElapsed.stop())
+                                    ElapsedFrom.deferredNow(), NetworkEngineElapsed.stop())
                                     .with(operationId, ex)),
                             (ex -> new LogMessage.Impl(this.logger, error, "#{} failed searchScroll actionListener", sequence, LogType.of(failure), searchScroll,
                                     ElapsedFrom.now())
@@ -409,22 +409,22 @@ public class LoggingClient implements Client {
                 SearchScrollAction.INSTANCE,
                 scrollId,
                 (searchScrollRequestBuilder -> new LogMessage.Impl(this.logger, trace, "#{} start searchScroll", sequence, LogType.of(start), searchScroll,
-                        ElapsedFrom.now(), NetworkElasticElapsed.start())
+                        ElapsedFrom.now(), NetworkEngineElapsed.start())
                         .with(operationId)),
                 (searchScrollRequestBuilder -> new LogMessage.Impl(this.verboseLogger, trace, "#{} {}", sequence, LogType.of(log), searchScroll,
                         ElapsedFrom.now())
                         .with(operationId, searchScrollRequestBuilder.toString())),
                 (response -> new LogMessage.Impl(this.logger, trace, "#{} finish searchScroll", sequence, LogType.of(success), searchScroll,
                         ElapsedFrom.now(),
-                        ElasticElapsed.of(response.getTook().duration()), ElasticElapsed.add(response.getTook().duration()),
-                        ElasticResults.totalHitsWriter(response.getHits().getTotalHits().value),
-                        ElasticResults.hitsWriter(response.getHits().getHits().length),
-                        ElasticResults.shardsWrite(response.getTotalShards()),
-                        ElasticResults.scrollIdWriter(response.getScrollId()),
-                        NetworkElasticElapsed.stop(), NetworkElasticElapsed.stopTotal())
+                        EngineElapsed.of(response.getTook().duration()), EngineElapsed.add(response.getTook().duration()),
+                        EngineResults.totalHitsWriter(response.getHits().getTotalHits().value),
+                        EngineResults.hitsWriter(response.getHits().getHits().length),
+                        EngineResults.shardsWrite(response.getTotalShards()),
+                        EngineResults.scrollIdWriter(response.getScrollId()),
+                        NetworkEngineElapsed.stop(), NetworkEngineElapsed.stopTotal())
                         .with(operationId)),
                 (ex -> new LogMessage.Impl(this.logger, error, "#{} failed searchScroll", sequence, LogType.of(failure), searchScroll,
-                        ElapsedFrom.now(), NetworkElasticElapsed.stop())
+                        ElapsedFrom.now(), NetworkEngineElapsed.stop())
                         .with(operationId, ex)),
                 this.metricRegistry.timer(name(this.logger.getName(), searchScroll.toString())),
                 this.metricRegistry.meter(name(this.logger.getName(), searchScroll.toString(), "success")),
