@@ -2,7 +2,7 @@ package org.opensearch.graph.model.results;
 
 /*-
  * #%L
- * fuse-dv-core
+ * virtual-core
  * %%
  * Copyright (C) 2016 - 2022 org.opensearch
  * %%

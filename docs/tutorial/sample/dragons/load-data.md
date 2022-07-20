@@ -11,7 +11,7 @@ on his own
 ### Data Generator Tool
 To activate the data generation tool we can call the next main class 
     
-    com.yangdb.fuse.generator.DataGenerator
+    org.opensearch.graph.generator.DataGenerator
 
 Using the IntelliJ IDE one can run the prepared run-configuration :
 ![data generator](img/data-generator-run-config.png)

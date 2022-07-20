@@ -6,6 +6,9 @@
     <artifactId>root</artifactId>
     <packaging>pom</packaging>
     <version>2.1.0-SNAPSHOT</version>
+    <modules>
+        <module>virtualize</module>
+    </modules>
 
     <name>Open Search Graph Engine project</name>
 
@@ -190,32 +193,27 @@
             </dependency>
             <dependency>
                 <groupId>org.opensearch.graph</groupId>
-                <artifactId>opengraph-dv-epb</artifactId>
+                <artifactId>virtual-epb</artifactId>
                 <version>${opengraph.version}</version>
             </dependency>
             <dependency>
                 <groupId>org.opensearch.graph</groupId>
-                <artifactId>opengraph-dv-core</artifactId>
+                <artifactId>virtual-core</artifactId>
                 <version>${opengraph.version}</version>
             </dependency>
             <dependency>
                 <groupId>org.opensearch.graph</groupId>
-                <artifactId>opengraph-dv-stat</artifactId>
+                <artifactId>virtual-gta</artifactId>
                 <version>${opengraph.version}</version>
             </dependency>
             <dependency>
                 <groupId>org.opensearch.graph</groupId>
-                <artifactId>opengraph-dv-gta</artifactId>
+                <artifactId>virtual-unipop</artifactId>
                 <version>${opengraph.version}</version>
             </dependency>
             <dependency>
                 <groupId>org.opensearch.graph</groupId>
-                <artifactId>opengraph-dv-unipop</artifactId>
-                <version>${opengraph.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>org.opensearch.graph</groupId>
-                <artifactId>opengraph-dv-asg</artifactId>
+                <artifactId>virtual-asg</artifactId>
                 <version>${opengraph.version}</version>
             </dependency>
             <dependency>
@@ -233,26 +231,9 @@
                 <artifactId>geojson</artifactId>
                 <version>${opengraph.version}</version>
             </dependency>
-
-            <!-- Dragons Deployment Assemblies   -->
-            <dependency>
+         <dependency>
                 <groupId>org.opensearch.graph</groupId>
-                <artifactId>opengraph-domain-dragons-ext</artifactId>
-                <version>${opengraph.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>org.opensearch.graph</groupId>
-                <artifactId>opengraph-domain-dragons-assembly</artifactId>
-                <version>${opengraph.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>org.opensearch.graph</groupId>
-                <artifactId>opengraph-domain-dragons-datagen</artifactId>
-                <version>${opengraph.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>org.opensearch.graph</groupId>
-                <artifactId>opengraph-domain-dragons-test</artifactId>
+                <artifactId>test-framework</artifactId>
                 <version>${opengraph.version}</version>
             </dependency>
 
@@ -1189,7 +1170,6 @@
         </plugins>
     </reporting>
 
-
     <profiles>
         <!-- DO NOT CHANGE THE *ORDER* IN WHICH THESE PROFILES ARE DEFINED! -->
         <profile>
@@ -1229,6 +1209,7 @@
                 <module>geojson</module>
                 <module>opengraph-core</module>
                 <module>opengraph-asg</module>
+                <module>test-framework</module>
                 <!--                <module>opengraph-test</module>-->
                 <!--                <module>opengraph-dv</module>-->
                 <!--                <module>opengraph-service</module>-->

@@ -2,7 +2,7 @@ package org.opensearch.graph.model.schema;
 
 /*-
  * #%L
- * fuse-dv-core
+ * virtual-core
  * %%
  * Copyright (C) 2016 - 2020 The YangDb Graph Database Project
  * %%

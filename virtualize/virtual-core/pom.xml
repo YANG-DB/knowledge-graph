@@ -1,0 +1,146 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <parent>
+        <artifactId>virtualize</artifactId>
+        <groupId>org.opensearch.graph</groupId>
+        <version>2.1.0-SNAPSHOT</version>
+    </parent>
+    <modelVersion>4.0.0</modelVersion>
+
+    <artifactId>virtual-core</artifactId>
+
+    <properties>
+        <top.dir>${project.basedir}/..</top.dir>
+        <checkstyle.skip>true</checkstyle.skip>
+        <build.timestamp>${maven.build.timestamp}</build.timestamp>
+    </properties>
+
+    <dependencies>
+        <!-- runtime -->
+        <dependency>
+            <groupId>org.opensearch.graph</groupId>
+            <artifactId>opengraph-model</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.opensearch.graph</groupId>
+            <artifactId>opengraph-core</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.jooby</groupId>
+            <artifactId>jooby</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.opensearch.graph</groupId>
+            <artifactId>virtual-unipop</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.google.inject</groupId>
+            <artifactId>guice</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.tinkerpop</groupId>
+            <artifactId>gremlin-core</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.opensearch.client</groupId>
+            <artifactId>transport</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.opensearch</groupId>
+            <artifactId>opensearch</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.opencsv</groupId>
+            <artifactId>opencsv</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.commons</groupId>
+            <artifactId>commons-csv</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.commons</groupId>
+            <artifactId>commons-collections4</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>commons-validator</groupId>
+            <artifactId>commons-validator</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.opencypher</groupId>
+            <artifactId>graph-ddl</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>io.github.resilience4j</groupId>
+            <artifactId>resilience4j-retry</artifactId>
+        </dependency>
+
+        <!-- runtime -->
+
+        <!-- test -->
+        <dependency>
+            <groupId>org.opensearch.graph</groupId>
+            <artifactId>test-framework</artifactId>
+            <scope>test</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>org.apache.logging.log4j</groupId>
+            <artifactId>log4j-core</artifactId>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+            <scope>test</scope>
+        </dependency>
+        <!-- test -->
+    </dependencies>
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-source-plugin</artifactId>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-surefire-plugin</artifactId>
+                <configuration>
+                    <forkCount>1</forkCount>
+                    <threadCount>1</threadCount>
+                    <perCoreThreadCount>false</perCoreThreadCount>
+                    <rerunFailingTestsCount>0</rerunFailingTestsCount>
+                    <includes>
+                        <include>**/*Suite.java</include>
+                        <include>**/*Test.java</include>
+                    </includes>
+                    <parallel>methods</parallel>
+                    <argLine>-Xmx1536m -XX:MaxPermSize=256m -Duser.timezone=${user.timezone}</argLine>
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-jar-plugin</artifactId>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-checkstyle-plugin</artifactId>
+            </plugin>
+        </plugins>
+
+        <resources>
+            <resource>
+                <directory>src/main/resources</directory>
+                <excludes>
+                    <exclude>version/*.properties</exclude>
+                </excludes>
+            </resource>
+        </resources>
+    </build>
+
+</project>

@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <parent>
+        <artifactId>root</artifactId>
+        <groupId>org.opensearch.graph</groupId>
+        <version>2.1.0-SNAPSHOT</version>
+    </parent>
+    <modelVersion>4.0.0</modelVersion>
+
+    <artifactId>virtualize</artifactId>
+    <packaging>pom</packaging>
+    <properties>
+        <checkstyle.skip>true</checkstyle.skip>
+    </properties>
+
+    <modules>
+        <module>virtual-unipop</module>
+        <module>virtual-core</module>
+        <module>virtual-asg</module>
+        <!--        <module>fuse-dv-gta</module>-->
+        <!--        <module>fuse-dv-epb</module>-->
+        <!--        <module>fuse-dv-unipop</module>-->
+        <!--        <module>fuse-dv-stat</module>-->
+    </modules>
+
+</project>
