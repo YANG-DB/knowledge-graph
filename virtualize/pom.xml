@@ -21,9 +21,7 @@
         <module>virtual-core</module>
         <module>virtual-asg</module>
         <module>virtual-epb</module>
-        <!--        <module>fuse-dv-gta</module>-->
-        <!--        <module>fuse-dv-unipop</module>-->
-        <!--        <module>fuse-dv-stat</module>-->
+        <module>virtual-traversal</module>
     </modules>
 
 </project>

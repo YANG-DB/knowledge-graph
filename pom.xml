@@ -229,6 +229,11 @@
                 <artifactId>virtual-asg</artifactId>
                 <version>${opengraph.version}</version>
             </dependency>
+         <dependency>
+                <groupId>org.opensearch.graph</groupId>
+                <artifactId>virtual-traversal</artifactId>
+                <version>${opengraph.version}</version>
+            </dependency>
 
 
             <!-- Property Graph Deployment Assemblies   -->
@@ -754,6 +759,13 @@
             <dependency>
                 <groupId>org.opensearch.graph</groupId>
                 <artifactId>opengraph-service</artifactId>
+                <version>${opengraph.version}</version>
+                <type>test-jar</type>
+                <scope>test</scope>
+            </dependency>
+            <dependency>
+                <groupId>org.opensearch.graph</groupId>
+                <artifactId>virtual-unipop</artifactId>
                 <version>${opengraph.version}</version>
                 <type>test-jar</type>
                 <scope>test</scope>
