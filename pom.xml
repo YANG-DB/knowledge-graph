@@ -6,9 +6,6 @@
     <artifactId>root</artifactId>
     <packaging>pom</packaging>
     <version>2.1.0-SNAPSHOT</version>
-    <modules>
-        <module>virtualize</module>
-    </modules>
 
     <name>Open Search Graph Engine project</name>
 
@@ -1210,6 +1207,8 @@
                 <module>opengraph-core</module>
                 <module>opengraph-asg</module>
                 <module>test-framework</module>
+                <module>virtualize</module>
+
                 <!--                <module>opengraph-test</module>-->
                 <!--                <module>opengraph-dv</module>-->
                 <!--                <module>opengraph-service</module>-->
