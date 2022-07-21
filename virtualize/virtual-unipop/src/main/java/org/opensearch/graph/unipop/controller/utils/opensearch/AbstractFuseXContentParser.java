@@ -65,14 +65,14 @@ public abstract class AbstractFuseXContentParser implements XContentParser {
 
     @Override
     public boolean booleanValue() throws IOException {
-        boolean booleanValue;
-        String rawValue = null;
+        boolean booleanValue = false;
+        String rawValue;
 
         Token token = currentToken();
         if (token == Token.VALUE_NUMBER) {
             interpretedAsLenient = true;
             booleanValue = intValue() != 0;
-            rawValue = String.valueOf(intValue());
+            String.valueOf(intValue());
         } else if (token == Token.VALUE_STRING) {
             rawValue = new String(textCharacters(), textOffset(), textLength());
             interpretedAsLenient = Booleans.isBoolean(rawValue) == false;

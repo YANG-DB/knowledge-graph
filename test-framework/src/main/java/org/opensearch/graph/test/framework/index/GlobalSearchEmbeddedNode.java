@@ -53,7 +53,7 @@ public class GlobalSearchEmbeddedNode {
         synchronized (SearchEmbeddedNode.class) {
             if (instance == null) {
                 instance = new SearchEmbeddedNode(setting, "target/es", 9200, 9300, nodeName);
-                System.out.println("Starting embedded Elasticsearch Node " + nodeName);
+                System.out.println("Starting embedded Search engine Node " + nodeName);
             } else if (!GlobalSearchEmbeddedNode.nodeName.equals(nodeName)) {
                 close();
                 instance = new SearchEmbeddedNode(setting, "target/es", 9200, 9300, nodeName);
@@ -68,7 +68,7 @@ public class GlobalSearchEmbeddedNode {
         synchronized (SearchEmbeddedNode.class) {
             if (instance == null) {
                 instance = new SearchEmbeddedNode(Settings.EMPTY, "target/es", 9200, 9300, nodeName);
-                System.out.println("Starting embedded Elasticsearch Node " + nodeName);
+                System.out.println("Starting embedded Search engine Node " + nodeName);
             } else if (!GlobalSearchEmbeddedNode.nodeName.equals(nodeName)) {
                 close();
                 instance = new SearchEmbeddedNode(Settings.EMPTY, "target/es", 9200, 9300, nodeName);
