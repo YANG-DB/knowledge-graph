@@ -14,9 +14,6 @@ import org.apache.tinkerpop.gremlin.structure.Element;
 import org.apache.tinkerpop.gremlin.structure.T;
 import org.apache.tinkerpop.gremlin.structure.Vertex;
 
-/**
- * Created by Elad on 4/30/2017.
- */
 public class FilterBulkSearchAppender implements SearchAppender<VertexControllerContext> {
     //region SearchAppender Implementation
     @Override

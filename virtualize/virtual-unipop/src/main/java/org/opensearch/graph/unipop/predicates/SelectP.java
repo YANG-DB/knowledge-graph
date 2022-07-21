@@ -5,9 +5,6 @@ import org.apache.tinkerpop.gremlin.process.traversal.P;
 
 import java.util.function.BiPredicate;
 
-/**
- * Created by Roman on 24/05/2017.
- */
 public enum SelectP implements BiPredicate {
     raw {
         @Override

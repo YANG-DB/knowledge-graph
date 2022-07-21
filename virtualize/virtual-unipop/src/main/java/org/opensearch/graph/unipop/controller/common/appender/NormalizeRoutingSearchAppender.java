@@ -4,9 +4,6 @@ package org.opensearch.graph.unipop.controller.common.appender;
 import org.opensearch.graph.unipop.controller.common.context.ElementControllerContext;
 import org.opensearch.graph.unipop.controller.search.SearchBuilder;
 
-/**
- * Created by roman.margolis on 25/09/2017.
- */
 public class NormalizeRoutingSearchAppender implements SearchAppender<ElementControllerContext> {
     //region Constructors
     public NormalizeRoutingSearchAppender(int maxNumValues) {

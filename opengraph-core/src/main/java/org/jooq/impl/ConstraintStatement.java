@@ -11,9 +11,6 @@ import java.util.List;
 import java.util.Objects;
 import java.util.stream.Collectors;
 
-/**
- * jooq accessable wrapper for parsing DDL queries fragments
- */
 public class ConstraintStatement implements Constraint {
     private Field<?>[] foreignKey;
     private Field<?>[] primaryKey;

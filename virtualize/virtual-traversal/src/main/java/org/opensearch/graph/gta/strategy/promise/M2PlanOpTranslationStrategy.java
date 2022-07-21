@@ -15,9 +15,6 @@ import org.opensearch.graph.model.execution.plan.entity.EntityJoinOp;
 import javaslang.collection.Stream;
 import org.apache.tinkerpop.gremlin.process.traversal.dsl.graph.GraphTraversal;
 
-/**
- * Created by Roman on 11/05/2017.
- */
 public class M2PlanOpTranslationStrategy extends CompositePlanOpTranslationStrategy {
     //region Constructors
     public M2PlanOpTranslationStrategy() {

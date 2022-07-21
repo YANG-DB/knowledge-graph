@@ -10,9 +10,6 @@ import org.unipop.structure.UniGraph;
 
 import java.util.Map;
 
-/**
- * Created by roman on 11/16/2015.
- */
 public class PromiseEdge extends UniEdge{
 
     //region Constructor

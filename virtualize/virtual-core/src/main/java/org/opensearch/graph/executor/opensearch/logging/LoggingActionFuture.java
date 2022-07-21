@@ -20,9 +20,6 @@ import java.util.function.Function;
 
 import static com.codahale.metrics.MetricRegistry.name;
 
-/**
- * Created by roman.margolis on 02/01/2018.
- */
 public class LoggingActionFuture<T> implements ListenableActionFuture<T> {
     //region Constructors
     public LoggingActionFuture(

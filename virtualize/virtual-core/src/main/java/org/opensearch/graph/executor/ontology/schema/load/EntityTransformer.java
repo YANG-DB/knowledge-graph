@@ -35,9 +35,6 @@ import java.util.stream.Collectors;
 
 import static org.opensearch.graph.executor.ontology.schema.load.DataLoaderUtils.parseValue;
 
-/**
- * translator that takes the specific ontology with the actual schema and translates the logical graph model into a set of (schematic according to real mapping) elastic documents
- */
 public class EntityTransformer implements DataTransformer<DataTransformerContext<LogicalGraphModel>, LogicalGraphModel> {
 
 

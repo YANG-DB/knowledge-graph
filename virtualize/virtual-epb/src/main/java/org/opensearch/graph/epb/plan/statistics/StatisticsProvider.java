@@ -8,9 +8,6 @@ import org.opensearch.graph.model.query.entity.EEntityBase;
 import org.opensearch.graph.model.query.properties.EPropGroup;
 import org.opensearch.graph.model.query.properties.RelPropGroup;
 
-/**
- * Created by moti on 31/03/2017.
- */
 public interface StatisticsProvider {
     /**
      *

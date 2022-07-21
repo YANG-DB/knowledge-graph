@@ -7,9 +7,6 @@ import org.eclipse.rdf4j.query.algebra.TupleExpr;
 
 import java.util.List;
 
-/**
- * base class for all binary operators
- */
 public abstract class BinaryPatternTranslatorStrategy implements SparqlElementTranslatorStrategy {
     private List<SparqlElementTranslatorStrategy> translatorStrategies;
 

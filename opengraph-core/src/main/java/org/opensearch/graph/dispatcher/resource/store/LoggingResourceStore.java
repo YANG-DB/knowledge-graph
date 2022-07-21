@@ -17,9 +17,6 @@ import java.util.Collection;
 import java.util.Optional;
 import java.util.function.Predicate;
 
-/**
- * Created by roman.margolis on 29/11/2017.
- */
 public class LoggingResourceStore implements ResourceStore {
     public static final String injectionName = "LoggingResourceStore.inner";
 

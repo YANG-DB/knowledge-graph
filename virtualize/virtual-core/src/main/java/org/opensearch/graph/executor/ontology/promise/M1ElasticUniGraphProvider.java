@@ -28,9 +28,6 @@ import org.unipop.structure.UniGraph;
 
 import java.util.Set;
 
-/**
- * Created by Roman on 06/04/2017.
- */
 public class M1ElasticUniGraphProvider implements UniGraphProvider {
     //region Constructors
 

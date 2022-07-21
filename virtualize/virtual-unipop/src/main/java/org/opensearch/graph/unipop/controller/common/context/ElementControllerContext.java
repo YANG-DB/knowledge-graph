@@ -10,9 +10,6 @@ import org.unipop.structure.UniGraph;
 
 import java.util.Optional;
 
-/**
- * Created by roman.margolis on 13/09/2017.
- */
 public interface ElementControllerContext extends ConstraintContext, SchemaProviderContext, ElementContext,StepContext, GraphContext, LimitContext, SelectContext {
     class Impl implements ElementControllerContext {
         //region Constructors

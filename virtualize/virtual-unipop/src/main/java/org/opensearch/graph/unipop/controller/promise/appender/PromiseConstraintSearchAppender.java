@@ -29,9 +29,6 @@ import java.util.Set;
 
 import static org.opensearch.graph.unipop.controller.common.appender.EdgeUtils.getLabel;
 
-/**
- * Created by Elad on 4/26/2017.
- */
 public class PromiseConstraintSearchAppender implements SearchAppender<CompositeControllerContext> {
     //region ElementControllerContext Implementation
     @Override

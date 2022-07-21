@@ -19,13 +19,6 @@ import java.util.zip.ZipOutputStream;
 public abstract class FileUtils {
     private static final String suffix = ".splitPart";
 
-    /**
-     * zip file
-     *
-     * @param source
-     * @param target
-     * @throws IOException
-     */
     public static void zip(File source, String target) throws IOException {
         FileOutputStream fos = new FileOutputStream(target);
         ZipOutputStream zipOut = new ZipOutputStream(fos);

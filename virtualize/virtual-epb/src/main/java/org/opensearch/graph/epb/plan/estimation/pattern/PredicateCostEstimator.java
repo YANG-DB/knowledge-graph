@@ -8,9 +8,6 @@ import org.opensearch.graph.model.execution.plan.PlanWithCost;
 
 import java.util.function.Predicate;
 
-/**
- * Created by lior.perry on 2/19/2018.
- */
 public class PredicateCostEstimator<P, C, TContext> implements CostEstimator<P, C, TContext> {
     public final static String planPredicateParameter = "PredicateCostEstimator.@planPredicate";
     public final static String trueCostEstimatorParameter = "PredicateCostEstimator.@trueCostEstimator";

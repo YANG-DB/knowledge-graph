@@ -8,9 +8,6 @@ import org.opensearch.graph.model.execution.plan.composite.Plan;
 
 import java.util.Collections;
 
-/**
- * Created by Roman on 04/05/2017.
- */
 public class M1PlanValidator extends CompositePlanValidator<Plan, AsgQuery> {
 
     //region Constructors

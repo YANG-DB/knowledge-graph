@@ -15,9 +15,6 @@ import javaslang.collection.Stream;
 
 import java.util.List;
 
-/**
- * Created by benishue on 19-Apr-17.
- */
 public class HQuantPropertiesGroupingAsgStrategy implements AsgStrategy {
     // Horizontal Quantifier with Bs below
     @Override

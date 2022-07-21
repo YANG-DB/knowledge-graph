@@ -14,9 +14,6 @@ import org.unipop.structure.UniGraph;
 import java.util.List;
 import java.util.Optional;
 
-/**
- * Created by Elad on 4/30/2017.
- */
 public class PromiseVertexFilterControllerContext extends VertexControllerContext.Impl {
     //region Constructors
     public PromiseVertexFilterControllerContext(UniGraph graph,

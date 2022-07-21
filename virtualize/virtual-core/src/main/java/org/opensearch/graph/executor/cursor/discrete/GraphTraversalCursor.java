@@ -17,9 +17,6 @@ import java.util.*;
 
 import static org.opensearch.graph.executor.cursor.discrete.CalculatedFieldsUtil.findCalculaedFields;
 
-/**
- * Created by roman.margolis on 02/10/2017.
- */
 public class GraphTraversalCursor extends BaseCursor {
     //region Factory
     public static class Factory implements CursorFactory {

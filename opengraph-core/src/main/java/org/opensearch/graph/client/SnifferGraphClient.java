@@ -42,20 +42,6 @@ import java.util.concurrent.TimeUnit;
 
 import static com.typesafe.config.ConfigFactory.defaultApplication;
 
-/**
- * Fuse Cluster aware client which samples the opensearch 'fuse_node_info' index which holds the cluster
- * status for all fuse nodes
- *
- * This client expects application.conf file in the classpath containing the next configurations:
- *
- * fuse.port = 8888
- * fuse.protocol = http
- * fuse.base.uri = /fuse
- *
- * opensearch.hosts = [ "127.0.0.1" ]
- * opensearch.port = 9300
- * opensearch.cluster_name = clusterName
- */
 public class SnifferGraphClient implements GraphClient {
     public static final String SYSTEM = "fuse_node_info";
     public static final String ID = "id";

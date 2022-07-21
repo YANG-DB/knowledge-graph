@@ -7,9 +7,6 @@ import org.opensearch.graph.model.query.entity.EConcrete;
 import org.opensearch.graph.model.query.entity.ETyped;
 import org.opensearch.graph.model.query.entity.EUntyped;
 
-/**
- * Created by roman.margolis on 15/03/2018.
- */
 public class EntityOpDescriptor implements Descriptor<EntityOp> {
     @Override
     public String describe(EntityOp item) {

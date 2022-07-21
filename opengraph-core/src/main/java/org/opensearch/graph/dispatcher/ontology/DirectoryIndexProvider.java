@@ -19,9 +19,6 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Optional;
 
-/**
- * Created by roman.margolis on 02/10/2017.
- */
 public class DirectoryIndexProvider implements IndexProviderFactory {
     //region Constructors
     public DirectoryIndexProvider(String dirName) throws URISyntaxException {

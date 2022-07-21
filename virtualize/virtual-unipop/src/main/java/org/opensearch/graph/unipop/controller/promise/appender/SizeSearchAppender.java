@@ -6,9 +6,6 @@ import org.opensearch.graph.unipop.controller.common.appender.SearchAppender;
 import org.opensearch.graph.unipop.controller.common.context.LimitContext;
 import org.opensearch.graph.unipop.controller.search.SearchBuilder;
 
-/**
- * Created by Roman on 13/04/2017.
- */
 public class SizeSearchAppender implements SearchAppender<LimitContext> {
     //region Constructors
     public SizeSearchAppender(OpensearchGraphConfiguration configuration) {

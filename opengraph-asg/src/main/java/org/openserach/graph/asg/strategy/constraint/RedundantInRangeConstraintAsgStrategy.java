@@ -17,9 +17,6 @@ import java.util.List;
 
 import static org.opensearch.graph.model.query.properties.constraint.ConstraintOp.ignorableConstraints;
 
-/**
- * This strategy check an inRage constraint for multiple values and finds the boundries [min,max] of all
- */
 public class RedundantInRangeConstraintAsgStrategy implements AsgStrategy {
     //region AsgStrategy Implementation
     @Override

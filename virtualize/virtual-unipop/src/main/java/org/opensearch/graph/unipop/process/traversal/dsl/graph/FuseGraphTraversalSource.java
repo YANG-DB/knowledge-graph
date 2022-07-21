@@ -13,9 +13,6 @@ import org.apache.tinkerpop.gremlin.structure.Vertex;
 
 import java.util.Arrays;
 
-/**
- * Created by Roman on 1/29/2018.
- */
 public class FuseGraphTraversalSource extends GraphTraversalSource {
     //region Constructors
     public FuseGraphTraversalSource(Graph graph, TraversalStrategies traversalStrategies) {

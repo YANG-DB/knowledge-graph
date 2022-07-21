@@ -6,9 +6,6 @@ package org.opensearch.graph.dispatcher.logging;
 import ch.qos.logback.classic.pattern.ClassicConverter;
 import ch.qos.logback.classic.spi.ILoggingEvent;
 
-/**
- * Created by roman.margolis on 30/01/2018.
- */
 public class Elapsed {
     public static LogMessage.MDCWriter of(long startEpoch) {
         return new LogMessage.MDCWriter.KeyValue(Converter.key, Long.toString(startEpoch));

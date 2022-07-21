@@ -16,10 +16,6 @@ import java.util.List;
 import static org.opensearch.graph.model.asgQuery.AsgQueryUtil.nextDescendants;
 import static org.opensearch.graph.model.validation.ValidationResult.OK;
 
-/**
- * check that the content of the relPattern is valid in terms of range and that the
- * pattern that appears after the relPattern itself has a single exit point so that the
- */
 public class AsgRelPatternValidatorStrategy implements AsgValidatorStrategy {
 
     public static final String ERROR_2 = "Property type mismatch parent Relation ";

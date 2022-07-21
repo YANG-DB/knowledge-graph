@@ -8,9 +8,6 @@ import java.util.Hashtable;
 import java.util.Stack;
 import java.util.Vector;
 
-/**
- * Created by moti on 6/21/2017.
- */
 public class NDC {
 
     // The synchronized keyword is not used in this class. This may seem

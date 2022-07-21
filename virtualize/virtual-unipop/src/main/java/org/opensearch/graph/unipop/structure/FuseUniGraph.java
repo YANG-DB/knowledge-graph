@@ -8,9 +8,6 @@ import org.unipop.process.strategyregistrar.StrategyProvider;
 import org.unipop.query.controller.ControllerManagerFactory;
 import org.unipop.structure.UniGraph;
 
-/**
- * Created by roman.margolis on 12/02/2018.
- */
 public class FuseUniGraph extends UniGraph {
     //region Constructors
     public FuseUniGraph(Configuration configuration, ControllerManagerFactory controllerManagerFactory, StrategyProvider strategyProvider) throws Exception {

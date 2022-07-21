@@ -20,9 +20,6 @@ import static org.opensearch.graph.model.asgQuery.AsgQueryUtil.getEprops;
 import static org.opensearch.graph.model.asgQuery.AsgQueryUtil.getRelProps;
 import static org.opensearch.graph.model.query.properties.constraint.ConstraintOp.*;
 
-/**
- * Created by benishue on 09-May-17.
- */
 public class ConstraintTypeTransformationAsgStrategy implements AsgStrategy {
     //region Constructors
     public ConstraintTypeTransformationAsgStrategy() {

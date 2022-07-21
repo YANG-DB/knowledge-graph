@@ -16,9 +16,6 @@ import org.apache.tinkerpop.gremlin.structure.T;
 
 import java.util.*;
 
-/**
- * Created by lior.perry on 27/03/2017.
- */
 
 // This appender will add getIndices getTo the search builder based on the elements IndexPartitions only.
 public class IndexSearchAppender implements SearchAppender<ElementControllerContext> {

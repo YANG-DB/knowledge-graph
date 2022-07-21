@@ -8,9 +8,6 @@ import com.google.inject.Inject;
 import com.google.inject.name.Named;
 import org.slf4j.Logger;
 
-/**
- * Created by roman.margolis on 07/01/2018.
- */
 public class LoggingCursorFactory implements CursorFactory {
     public static final String cursorFactoryParameter = "LoggingCursorFactory.@cursorFactory";
     public static final String loggerParameter = "LoggingCursorFactory.@logger";

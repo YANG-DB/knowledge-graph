@@ -8,9 +8,6 @@ import org.apache.tinkerpop.gremlin.process.traversal.traverser.TraverserRequire
 
 import java.util.Set;
 
-/**
- * Created by Roman on 1/29/2018.
- */
 public class ThinPathTraverserGenerator implements TraverserGenerator {
     //region Constructors
     public ThinPathTraverserGenerator() {

@@ -32,9 +32,6 @@ import static org.opensearch.graph.model.GlobalConstants.ID;
 import static org.opensearch.graph.model.GlobalConstants.ProjectionConfigs.TAG;
 import static org.opensearch.graph.model.GlobalConstants.TYPE;
 
-/**
- * transforms a single assignment (row) into a projection document (containing list of nodes and within each node a list of first hop edges)
- */
 public class ProjectionTransformer implements DataTransformer<DataTransformerContext<List<ProjectionAssignment>>, AssignmentsQueryResult<Entity, Relationship>> {
     private static ObjectMapper mapper = new ObjectMapper();
     private final Ontology.Accessor accessor;

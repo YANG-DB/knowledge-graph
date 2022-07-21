@@ -14,9 +14,6 @@ import org.opensearch.graph.model.asgQuery.AsgQuery;
 import org.opensearch.graph.model.query.Query;
 import org.jooby.Env;
 
-/**
- * Created by lior.perry on 22/02/2017.
- */
 public class AsgModule extends ModuleBase {
     @Override
     public void configureInner(Env env, Config conf, Binder binder) throws Throwable {

@@ -12,9 +12,6 @@ import org.opensearch.graph.unipop.process.traversal.dsl.graph.__;
 import org.apache.tinkerpop.gremlin.process.traversal.dsl.graph.GraphTraversal;
 import org.opensearch.graph.gta.strategy.PlanOpTranslationStrategy;
 
-/**
- * Created by moti on 3/7/2017.
- */
 public class ChainedPlanOpTraversalTranslator implements PlanTraversalTranslator {
     //region Constructors
     @Inject

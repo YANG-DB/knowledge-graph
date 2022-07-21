@@ -17,9 +17,6 @@ import javaslang.Tuple2;
 
 import java.util.*;
 
-/**
- * Created by moti on 2/27/2017.
- */
 public class AllDirectionsPlanExtensionStrategy implements PlanExtensionStrategy<Plan, AsgQuery> {
     public AllDirectionsPlanExtensionStrategy() {}
 

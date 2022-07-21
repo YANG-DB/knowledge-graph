@@ -8,9 +8,6 @@ import org.apache.tinkerpop.gremlin.structure.Direction;
 
 import java.util.*;
 
-/**
- * Created by benishue on 22-Mar-17.
- */
 public class OntologySchemaProvider implements GraphElementSchemaProvider {
 
     //region Constructor

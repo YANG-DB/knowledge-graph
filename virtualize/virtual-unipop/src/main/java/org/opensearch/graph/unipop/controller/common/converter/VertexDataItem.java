@@ -7,9 +7,6 @@ import org.apache.tinkerpop.gremlin.structure.Vertex;
 
 import java.util.Map;
 
-/**
- * Created by roman.margolis on 14/03/2018.
- */
 public class VertexDataItem implements DataItem {
     //region Constructors
     public VertexDataItem(Vertex vertex) {

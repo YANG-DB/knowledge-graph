@@ -10,9 +10,6 @@ import java.util.*;
 import static org.opensearch.graph.model.Utils.asObject;
 import static org.opensearch.graph.model.Utils.readJsonFile;
 
-/**
- * Created by lior.perry on 3/16/2017.
- */
 public class SimpleOntologyProvider implements OntologyProvider {
     public static final String DRAGONS = "Dragons";
     public static final String ONTOLOGY = "ontology";

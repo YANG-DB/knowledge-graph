@@ -25,9 +25,6 @@ import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.util.Optional;
 
-/**
- * Created by Roman on 12/15/2017.
- */
 public abstract class PageDriverBase implements PageDriver {
 
     //todo replace with proper writers injected via IOC

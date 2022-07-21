@@ -13,9 +13,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 
-/**
- * selection projection query element
- */
 public class ProjectionPatternTranslatorStrategy extends UnaryPatternTranslatorStrategy{
 
     public ProjectionPatternTranslatorStrategy(List<SparqlElementTranslatorStrategy> translatorStrategies) {

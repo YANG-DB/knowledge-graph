@@ -9,9 +9,6 @@ import org.opensearch.graph.model.execution.plan.composite.Plan;
 import org.opensearch.graph.model.execution.plan.costs.PlanDetailedCost;
 import javaslang.collection.Stream;
 
-/**
- * Created by moti on 21/05/2017.
- */
 public class CheapestPlanSelector implements PlanSelector<PlanWithCost<Plan, PlanDetailedCost>, AsgQuery> {
     @Override
     public Iterable<PlanWithCost<Plan, PlanDetailedCost>> select(AsgQuery query, Iterable<PlanWithCost<Plan, PlanDetailedCost>> plans) {

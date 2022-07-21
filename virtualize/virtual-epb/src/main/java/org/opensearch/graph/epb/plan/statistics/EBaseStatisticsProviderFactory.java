@@ -5,9 +5,6 @@ import com.google.inject.Inject;
 import org.opensearch.graph.executor.ontology.GraphElementSchemaProviderFactory;
 import org.opensearch.graph.model.ontology.Ontology;
 
-/**
- * Created by Roman on 25/05/2017.
- */
 public class EBaseStatisticsProviderFactory implements StatisticsProviderFactory {
     //region Constructor
     @Inject

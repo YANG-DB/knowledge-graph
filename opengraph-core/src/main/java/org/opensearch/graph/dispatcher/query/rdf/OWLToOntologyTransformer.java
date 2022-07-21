@@ -25,9 +25,6 @@ import java.util.stream.Collectors;
 import static org.opensearch.graph.model.ontology.DirectiveType.DirectiveClasses.*;
 import static org.opensearch.graph.model.ontology.DirectiveType.DirectiveClasses.RESOURCE;
 
-/**
- * transform OWL RDF ontology schema to YangDB ontology support
- */
 public class OWLToOntologyTransformer implements OntologyTransformerIfc<List<String>, Ontology> {
     private OWLOntologyManager manager;
     private OWLOntologyLoaderConfiguration config;

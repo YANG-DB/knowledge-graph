@@ -13,9 +13,6 @@ import org.opensearch.graph.model.execution.plan.entity.EntityJoinOp;
 import java.util.Arrays;
 import java.util.Optional;
 
-/**
- * Created by Roman on 29/06/2017.
- */
 public class EntityJoinPattern extends Pattern {
     //region Constructors
     public EntityJoinPattern(EntityJoinOp entityJoinOp) {

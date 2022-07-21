@@ -9,9 +9,6 @@ import java.util.*;
 import java.util.function.BiConsumer;
 import java.util.stream.Stream;
 
-/**
- * Created by Roman on 1/26/2018.
- */
 public class ThinPath implements Path {
     //region Constructors
     public ThinPath(StringOrdinalDictionary stringOrdinalDictionary) {

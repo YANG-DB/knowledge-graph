@@ -34,9 +34,6 @@ import java.util.Optional;
 
 import static org.opensearch.graph.unipop.controller.utils.SearchAppenderUtil.wrap;
 
-/**
- * Created by lior.perry on 16/03/2017.
- */
 public class PromiseVertexController extends VertexControllerBase {
 
     //region Constructors

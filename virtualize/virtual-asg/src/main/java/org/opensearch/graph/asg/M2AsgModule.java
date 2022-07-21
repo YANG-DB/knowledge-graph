@@ -9,9 +9,6 @@ import org.openserach.graph.asg.AsgModule;
 import org.openserach.graph.asg.strategy.AsgStrategyRegistrar;
 import org.openserach.graph.asg.translator.BasicJsonQueryTransformerFactory;
 
-/**
- * Created by roman.margolis on 05/02/2018.
- */
 public class M2AsgModule extends AsgModule {
     //region ModuleBase Implementation
     @Override

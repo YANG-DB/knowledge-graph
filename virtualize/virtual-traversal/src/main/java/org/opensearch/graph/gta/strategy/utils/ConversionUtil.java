@@ -12,9 +12,6 @@ import org.unipop.process.predicate.Text;
 
 import java.util.List;
 
-/**
- * Created by Roman on 10/05/2017.
- */
 public class ConversionUtil {
     public static <V> P<V> convertConstraint(Constraint constraint){
         List<Object> range = null;

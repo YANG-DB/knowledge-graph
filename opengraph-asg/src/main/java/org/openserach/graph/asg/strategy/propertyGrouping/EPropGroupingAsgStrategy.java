@@ -19,9 +19,6 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Optional;
 
-/**
- * Created by benishue on 19-Apr-17.
- */
 public class EPropGroupingAsgStrategy implements AsgStrategy {
     /*
     region AsgStrategy Implementation

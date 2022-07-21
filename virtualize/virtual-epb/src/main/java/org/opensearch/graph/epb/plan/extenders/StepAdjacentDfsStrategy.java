@@ -25,9 +25,6 @@ import java.util.Optional;
 
 import static org.opensearch.graph.epb.plan.extenders.SimpleExtenderUtils.getNextDescendantUnmarkedOfType;
 
-/**
- * Created by Roman on 23/04/2017.
- */
 public class StepAdjacentDfsStrategy implements PlanExtensionStrategy<Plan, AsgQuery> {
     //region PlanExtensionStrategy Implementation
     @Override

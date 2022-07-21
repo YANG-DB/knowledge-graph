@@ -48,9 +48,6 @@ import static org.opensearch.graph.model.transport.CreateQueryRequestMetadata.Qu
 import static org.opensearch.graph.model.transport.CreateQueryRequestMetadata.*;
 import static java.util.Collections.EMPTY_LIST;
 
-/**
- * Created by Roman on 12/15/2017.
- */
 public abstract class QueryDriverBase implements QueryDriver {
     //region Constructors
     @Inject

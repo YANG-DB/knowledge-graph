@@ -23,12 +23,6 @@ public class AsgSparQLTransformer implements QueryTransformer<QueryInfo<String>,
         this.translator = translator;
     }
 
-    /**
-     * transform Spqrql to V1 query
-     *
-     * @param query
-     * @return
-     */
     public AsgQuery transform(QueryInfo<String> query) {
         return translator.translate(query);
     }

@@ -13,9 +13,6 @@ import org.slf4j.LoggerFactory;
 
 import static com.google.inject.name.Names.named;
 
-/**
- * Created by Roman on 23/05/2017.
- */
 public class GtaModule extends ModuleBase {
     //region ModuleBase Implementation
     @Override

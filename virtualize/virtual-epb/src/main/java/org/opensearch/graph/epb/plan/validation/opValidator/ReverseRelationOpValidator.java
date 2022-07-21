@@ -16,9 +16,6 @@ import org.opensearch.graph.model.query.entity.EEntityBase;
 
 import java.util.*;
 
-/**
- * Created by Roman on 30/04/2017.
- */
 public class ReverseRelationOpValidator implements ChainedPlanValidator.PlanOpValidator {
     //region ChainedPlanValidator.PlanOpValidator Implementation
     @Override

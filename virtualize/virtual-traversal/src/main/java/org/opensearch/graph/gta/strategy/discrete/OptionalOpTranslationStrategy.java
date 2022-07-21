@@ -14,9 +14,6 @@ import org.opensearch.graph.model.execution.plan.costs.PlanDetailedCost;
 import javaslang.collection.Stream;
 import org.apache.tinkerpop.gremlin.process.traversal.dsl.graph.GraphTraversal;
 
-/**
- * Created by roman.margolis on 20/11/2017.
- */
 public class OptionalOpTranslationStrategy extends PlanOpTranslationStrategyBase {
     //region Constructors
     public OptionalOpTranslationStrategy(PlanOpTranslationStrategy planOpTranslationStrategy) {

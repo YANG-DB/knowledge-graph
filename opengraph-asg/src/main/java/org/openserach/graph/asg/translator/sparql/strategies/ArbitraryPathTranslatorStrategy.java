@@ -6,10 +6,6 @@ import org.eclipse.rdf4j.query.algebra.*;
 
 import java.util.List;
 
-/**
- * Arbitraty path (determine min-max hopes) query element
- * Todo - implement
- */
 public class ArbitraryPathTranslatorStrategy extends UnaryPatternTranslatorStrategy{
 
     public ArbitraryPathTranslatorStrategy(List<SparqlElementTranslatorStrategy> translatorStrategies) {

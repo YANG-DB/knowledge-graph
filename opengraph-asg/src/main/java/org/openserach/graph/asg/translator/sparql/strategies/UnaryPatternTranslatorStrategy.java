@@ -7,9 +7,6 @@ import org.eclipse.rdf4j.query.algebra.UnaryTupleOperator;
 
 import java.util.List;
 
-/**
- * base class for all unary operators
- */
 public abstract class UnaryPatternTranslatorStrategy implements SparqlElementTranslatorStrategy{
     private List<SparqlElementTranslatorStrategy> translatorStrategies;
 

@@ -4,9 +4,6 @@ package org.opensearch.graph.unipop.process.traversal.traverser;
 import java.util.HashMap;
 import java.util.Map;
 
-/**
- * Created by Roman on 1/27/2018.
- */
 public class HashStringOrdinalDictionary implements StringOrdinalDictionary {
     //region Constructors
     public HashStringOrdinalDictionary() {

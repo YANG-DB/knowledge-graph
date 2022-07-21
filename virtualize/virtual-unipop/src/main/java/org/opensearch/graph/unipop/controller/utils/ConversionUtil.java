@@ -7,9 +7,6 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.TimeZone;
 
-/**
- * Created by Roman on 17/05/2017.
- */
 public class ConversionUtil {
     public static SimpleDateFormat sdf;
     static  {

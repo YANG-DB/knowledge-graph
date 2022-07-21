@@ -39,9 +39,6 @@ import java.util.Optional;
 import static org.opensearch.graph.model.asgQuery.AsgCompositeQuery.hasInnerQuery;
 import static org.unipop.process.Profiler.PROFILER;
 
-/**
- * Created by lior.perry on 20/02/2017.
- */
 public class StandardCursorDriver extends CursorDriverBase {
     private final Client client;
     private final GraphElementSchemaProviderFactory schemaProvider;

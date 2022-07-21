@@ -13,9 +13,6 @@ public interface IndexPartitions {
 
     Iterable<Partition> getPartitions();
 
-    /**
-     * collect all indices names from index partitions
-     */
     default Iterable<String> getIndices() {
         return StreamSupport.stream(getPartitions().spliterator(), false)
                 .flatMap(p -> StreamSupport.stream(p.getIndices().spliterator(), false))

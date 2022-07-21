@@ -38,9 +38,6 @@ import java.util.function.Predicate;
 
 import static com.google.inject.name.Names.named;
 
-/**
- * Created by Roman on 3/14/2018.
- */
 public class EpbDfsCountBasedRedundantModule  extends BaseEpbModule {
     //region Private Methods
     @Override

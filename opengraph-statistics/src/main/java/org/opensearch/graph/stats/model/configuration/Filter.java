@@ -1,9 +1,6 @@
 package org.opensearch.graph.stats.model.configuration;
 
 
-/**
- * Created by benishue on 29-May-17.
- */
 public class Filter {
 
     //region Ctrs

@@ -3,9 +3,6 @@ package org.opensearch.graph.stats.model.result;
 
 import org.opensearch.graph.stats.model.enums.DataType;
 
-/**
- * Created by benishue on 03-May-17.
- */
 public class StatRangeResult<T> extends StatResultBase {
 
     //region Ctors

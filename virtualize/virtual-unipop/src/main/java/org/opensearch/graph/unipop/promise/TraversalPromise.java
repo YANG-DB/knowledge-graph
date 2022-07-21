@@ -3,9 +3,6 @@ package org.opensearch.graph.unipop.promise;
 
 import org.apache.tinkerpop.gremlin.process.traversal.Traversal;
 
-/**
- * Created by lior.perry on 07/03/2017.
- */
 public class TraversalPromise implements Promise{
     //region Constructor
     public TraversalPromise(Object id, Traversal traversal) {

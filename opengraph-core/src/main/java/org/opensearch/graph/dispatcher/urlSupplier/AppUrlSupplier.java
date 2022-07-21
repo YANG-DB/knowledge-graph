@@ -3,9 +3,6 @@ package org.opensearch.graph.dispatcher.urlSupplier;
 
 
 
-/**
- * Created by lior.perry on 08/03/2017.
- */
 public interface AppUrlSupplier {
     String resourceUrl(String queryId);
     String resourceUrl(String queryId, String cursorId);

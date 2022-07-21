@@ -3,9 +3,6 @@ package org.opensearch.graph.dispatcher.urlSupplier;
 
 
 
-/**
- * Created by lior.perry on 08/03/2017.
- */
 public class DefaultAppUrlSupplier implements AppUrlSupplier {
     //region Constructors
     public DefaultAppUrlSupplier(String baseUrl) {

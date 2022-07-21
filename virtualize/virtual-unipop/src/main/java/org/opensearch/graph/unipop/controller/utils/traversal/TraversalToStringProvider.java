@@ -5,9 +5,6 @@ import javaslang.collection.Stream;
 import org.apache.tinkerpop.gremlin.process.traversal.Traversal;
 import org.apache.tinkerpop.gremlin.process.traversal.step.filter.*;
 
-/**
- * Created by Roman on 15/05/2017.
- */
 public class TraversalToStringProvider implements TraversalValueProvider<String> {
     //region TraversalIdProvider
     @Override

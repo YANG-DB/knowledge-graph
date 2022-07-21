@@ -19,9 +19,6 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
 
-/**
- * Created by roman.margolis on 26/11/2017.
- */
 public class OptionalInitialExtensionStrategy implements PlanExtensionStrategy<Plan,AsgQuery> {
     //region PlanExtensionStrategy Implementation
     @Override

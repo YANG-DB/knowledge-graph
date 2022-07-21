@@ -23,9 +23,6 @@ import org.opensearch.client.Client;
 
 import java.util.List;
 
-/**
- * Init / Drop Graph Indices over E/S
- */
 public class DefaultGraphInitiator implements GraphInitiator {
     private final Client client;
     private final RawSchema schema;

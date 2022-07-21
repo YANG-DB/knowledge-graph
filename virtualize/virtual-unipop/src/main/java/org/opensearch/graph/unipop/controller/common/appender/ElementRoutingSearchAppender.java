@@ -18,9 +18,6 @@ import java.util.Collections;
 import java.util.Optional;
 import java.util.Set;
 
-/**
- * Created by roman.margolis on 18/09/2017.
- */
 public class ElementRoutingSearchAppender implements SearchAppender<CompositeControllerContext> {
     //region SearchAppender Implementation
     @Override

@@ -9,9 +9,6 @@ import org.opensearch.graph.model.query.entity.EEntityBase;
 import org.opensearch.graph.model.query.properties.EPropGroup;
 import org.opensearch.graph.model.query.properties.RelPropGroup;
 
-/**
- * Created by lior.perry on 3/6/2018.
- */
 public final class NoStatsProvider implements StatisticsProviderFactory{
     @Override
     public StatisticsProvider get(Ontology ontology) {

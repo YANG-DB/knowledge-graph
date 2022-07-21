@@ -10,9 +10,6 @@ import org.opensearch.graph.model.execution.plan.composite.Plan;
 
 import java.util.Optional;
 
-/**
- * Created by Roman on 21/05/2017.
- */
 public class M1PlanExtensionStrategy extends CompositePlanExtensionStrategy<Plan, AsgQuery> {
     //region Constructors
     @Inject

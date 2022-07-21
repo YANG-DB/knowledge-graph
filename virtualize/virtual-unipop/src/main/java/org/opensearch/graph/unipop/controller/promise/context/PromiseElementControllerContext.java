@@ -16,9 +16,6 @@ import org.unipop.structure.UniGraph;
 import java.util.ArrayList;
 import java.util.Optional;
 
-/**
- * Created by lior.perry on 27/03/2017.
- */
 public class PromiseElementControllerContext extends ElementControllerContext.Impl {
 
     //region Constructors

@@ -9,9 +9,6 @@ import org.apache.tinkerpop.gremlin.process.traversal.step.filter.HasStep;
 import java.util.HashSet;
 import java.util.Set;
 
-/**
- * Created by Elad on 5/23/2017.
- */
 public class TraversalPredicateByKeyProvider {
 
     public Set<P> getPredicateByKey(Traversal traversal, String key) {

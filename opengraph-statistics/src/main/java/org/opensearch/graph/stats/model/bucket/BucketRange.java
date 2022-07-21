@@ -1,9 +1,6 @@
 package org.opensearch.graph.stats.model.bucket;
 
 
-/**
- * Created by benishue on 30-Apr-17.
- */
 public class BucketRange<T> extends Bucket {
 
     //region Ctrs

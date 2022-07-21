@@ -36,9 +36,6 @@ import java.util.Optional;
 
 import static org.opensearch.graph.model.GlobalConstants.HasKeys.CONSTRAINT;
 
-/**
- * Created by Roman on 09/05/2017.
- */
 public class RelationFilterOpTranslationStrategy extends PlanOpTranslationStrategyBase {
     //region Constructors
     public RelationFilterOpTranslationStrategy() {

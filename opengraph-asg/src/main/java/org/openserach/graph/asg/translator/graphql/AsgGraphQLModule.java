@@ -14,9 +14,6 @@ import org.jooby.Env;
 import static com.google.inject.name.Names.named;
 import static org.openserach.graph.asg.translator.graphql.AsgGraphQLTransformer.transformerName;
 
-/**
- * Created by lior.perry on 22/02/2017.
- */
 public class AsgGraphQLModule extends ModuleBase {
 
     @Override

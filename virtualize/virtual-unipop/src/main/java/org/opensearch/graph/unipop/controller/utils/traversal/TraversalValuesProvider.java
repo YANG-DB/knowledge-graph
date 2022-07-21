@@ -9,9 +9,6 @@ import org.apache.tinkerpop.gremlin.process.traversal.step.util.HasContainer;
 import java.util.HashSet;
 import java.util.Set;
 
-/**
- * Created by benishue on 27-Mar-17.
- */
 public class TraversalValuesProvider implements TraversalValueProvider<Set<String>> {
     //region TraversalValueProvider Implementation
     @Override

@@ -17,9 +17,6 @@ import java.util.List;
 import java.util.Optional;
 
 
-/**
- * Created by moti on 2/21/2017.
- */
 public class BottomUpPlanSearcher<P extends IPlan, C extends Cost, Q extends IQuery> implements PlanSearcher<P, C, Q> {
     public static final String globalPruneStrategyParameter = "BottomUpPlanSearcher.@globalPruneStrategy";
     public static final String localPruneStrategyParameter = "BottomUpPlanSearcher.@localPruneStrategy";

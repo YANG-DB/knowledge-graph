@@ -7,9 +7,6 @@ import org.opensearch.graph.model.ontology.Ontology;
 import org.opensearch.graph.unipop.schemaProviders.GraphElementSchemaProvider;
 import org.opensearch.graph.unipop.schemaProviders.OntologySchemaProvider;
 
-/**
- * Created by Roman on 25/05/2017.
- */
 public class OntologyGraphElementSchemaProviderFactory implements GraphElementSchemaProviderFactory {
     public static final String schemaProviderFactoryParameter = "OntologyGraphElementSchemaProviderFactory.@schemaProviderFactory";
 

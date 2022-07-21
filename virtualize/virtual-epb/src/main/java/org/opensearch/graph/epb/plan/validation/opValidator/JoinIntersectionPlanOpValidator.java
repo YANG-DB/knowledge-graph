@@ -17,9 +17,6 @@ import java.util.List;
 import java.util.Optional;
 import java.util.Set;
 
-/**
- * Created by benishue on 7/5/2017.
- */
 public class JoinIntersectionPlanOpValidator implements ChainedPlanValidator.PlanOpValidator {
     private Trace<String> trace = Trace.build(JoinIntersectionPlanOpValidator.class.getSimpleName());
 

@@ -24,9 +24,6 @@ import javaslang.collection.Stream;
 
 import java.util.*;
 
-/**
- * Created by roman.margolis on 23/11/2017.
- */
 public class OptionalOpExtensionStrategy extends CompositePlanExtensionStrategy<Plan,AsgQuery> {
     //region Constructors
     @SafeVarargs

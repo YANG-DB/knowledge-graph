@@ -9,9 +9,6 @@ import javaslang.collection.Stream;
 
 import java.util.List;
 
-/**
- * Created by Roman on 24/04/2017.
- */
 public class CompositePlanOpValidator implements ChainedPlanValidator.PlanOpValidator {
     public enum Mode {
         one,

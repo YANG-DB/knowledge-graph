@@ -16,9 +16,6 @@ import javaslang.collection.Stream;
 import java.util.HashMap;
 import java.util.Map;
 
-/**
- * Created by benishue on 27-Feb-17.
- */
 public class AsgQuerySupplier implements Supplier<AsgQuery> {
 
     //region Constructor

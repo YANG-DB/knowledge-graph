@@ -24,9 +24,6 @@ import java.util.stream.Stream;
 import static org.opensearch.graph.model.asgQuery.AsgQueryUtil.getEprops;
 import static org.opensearch.graph.model.asgQuery.AsgQueryUtil.getRelProps;
 
-/**
- * Created by liorp on 12/15/2017.
- */
 public class QueryToCompositeAsgTransformer extends QueryToAsgTransformer {
     private OntologyProvider ontologyProvider;
 

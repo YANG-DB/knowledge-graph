@@ -16,9 +16,6 @@ import org.opensearch.graph.model.execution.plan.costs.PlanDetailedCost;
 import org.apache.tinkerpop.gremlin.process.traversal.dsl.graph.GraphTraversal;
 import org.slf4j.Logger;
 
-/**
- * Created by roman.margolis on 29/11/2017.
- */
 public class LoggingPlanTraversalTranslator implements PlanTraversalTranslator {
     public static final String planTraversalTranslatorParameter = "LoggingPlanTraversalTranslator.@planTraversalTranslator";
     public static final String loggerParameter = "LoggingPlanTraversalTranslator.@logger";

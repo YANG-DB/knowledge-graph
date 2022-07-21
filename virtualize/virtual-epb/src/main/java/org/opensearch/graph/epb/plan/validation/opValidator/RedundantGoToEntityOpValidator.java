@@ -13,9 +13,6 @@ import org.opensearch.graph.model.execution.plan.entity.GoToEntityOp;
 import java.util.HashSet;
 import java.util.Set;
 
-/**
- * Created by Roman on 30/04/2017.
- */
 public class RedundantGoToEntityOpValidator implements ChainedPlanValidator.PlanOpValidator {
     //region Constructors
     public RedundantGoToEntityOpValidator() {

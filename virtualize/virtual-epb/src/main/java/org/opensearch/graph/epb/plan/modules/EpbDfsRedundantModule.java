@@ -7,9 +7,6 @@ import org.opensearch.graph.model.asgQuery.AsgQuery;
 import org.opensearch.graph.model.execution.plan.composite.Plan;
 import com.typesafe.config.Config;
 
-/**
- * Created by Roman on 22/05/2017.
- */
 public class EpbDfsRedundantModule extends BaseEpbModule {
     //region Private Methods
     @Override

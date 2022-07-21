@@ -21,9 +21,6 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
 
-/**
- * Created by Roman on 23/04/2017.
- */
 public class StepDescendantsAdjacentStrategy implements PlanExtensionStrategy<Plan, AsgQuery> {
 
     //region PlanExtensionStrategy Implementation

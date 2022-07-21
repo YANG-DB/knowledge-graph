@@ -11,9 +11,6 @@ import javaslang.collection.Stream;
 
 import java.util.Collection;
 
-/**
- * Created by Roman on 12/06/2017.
- */
 public class FilterIndexSearchAppender implements SearchAppender<VertexControllerContext> {
     //region SearchAppender Implementation
     @Override

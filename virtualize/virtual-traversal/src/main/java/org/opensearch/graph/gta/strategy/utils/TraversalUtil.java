@@ -11,9 +11,6 @@ import java.util.Optional;
 import java.util.function.Function;
 import java.util.function.Predicate;
 
-/**
- * Created by Roman on 29/05/2017.
- */
 public class TraversalUtil {
     //region Public Static Methods
     public static <S extends Step> Optional<S> first(Traversal<?, ?> traversal, Predicate<Step> predicate) {

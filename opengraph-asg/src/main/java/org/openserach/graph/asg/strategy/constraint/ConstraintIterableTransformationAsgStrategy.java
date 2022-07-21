@@ -24,9 +24,6 @@ import java.util.Set;
 import static org.opensearch.graph.model.asgQuery.AsgQueryUtil.getEprops;
 import static org.opensearch.graph.model.asgQuery.AsgQueryUtil.getRelProps;
 
-/**
- * Created by benishue on 11-May-17.
- */
 public class ConstraintIterableTransformationAsgStrategy implements AsgStrategy {
     //region Constructors
     public ConstraintIterableTransformationAsgStrategy() {

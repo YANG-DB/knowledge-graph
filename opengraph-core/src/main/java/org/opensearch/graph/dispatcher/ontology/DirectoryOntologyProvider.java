@@ -17,9 +17,6 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.*;
 
-/**
- * Created by roman.margolis on 02/10/2017.
- */
 public class DirectoryOntologyProvider implements OntologyProvider {
     private final ObjectMapper mapper = new ObjectMapper();
     private String dirName;

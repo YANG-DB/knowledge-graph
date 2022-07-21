@@ -19,9 +19,6 @@ import java.util.List;
 import java.util.Optional;
 import java.util.function.Predicate;
 
-/**
- * Created by moti on 2/27/2017.
- */
 public class InitialPlanGeneratorExtensionStrategy implements PlanExtensionStrategy<Plan, AsgQuery> {
     public InitialPlanGeneratorExtensionStrategy() {
         this.planPredicate = plan -> true;

@@ -12,9 +12,6 @@ import org.opensearch.graph.model.execution.plan.relation.RelationOp;
 import java.util.HashSet;
 import java.util.Set;
 
-/**
- * Created by Roman on 30/04/2017.
- */
 public class NoRedundantRelationOpValidator implements ChainedPlanValidator.PlanOpValidator{
     //region Constructors
     public NoRedundantRelationOpValidator() {

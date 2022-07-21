@@ -11,9 +11,6 @@ import org.unipop.structure.UniGraph;
 
 import java.util.Iterator;
 
-/**
- * Created by lior.perry on 4/2/2017.
- */ //region PromiseElementEdgeController Implementation
 public class PromiseElementEdgeController implements SearchQuery.SearchController {
     public PromiseElementEdgeController(Client client, OpensearchGraphConfiguration configuration, UniGraph graph, GraphElementSchemaProvider schemaProvider, MetricRegistry metricRegistry) {}
 

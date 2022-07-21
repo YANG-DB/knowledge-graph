@@ -14,16 +14,6 @@ import static org.opensearch.graph.model.query.Rel.Direction.R;
 
 
 public abstract class GraphApiUtils {
-    /**
-     * generate findPath graph query between two concrete vertices id's
-     *
-     * @param ontology
-     * @param sourceId
-     * @param targetId
-     * @param relationType
-     * @param maxHops
-     * @return
-     */
     public static Query findPath(String ontology, String sourceEntity, String sourceId, String targetEntity, String targetId, String relationType, int maxHops) {
         if (StringUtils.isEmpty(sourceId) && StringUtils.isEmpty(targetId) && StringUtils.isEmpty(targetEntity)) {
             return findPathQuery(ontology, sourceEntity, relationType, maxHops);

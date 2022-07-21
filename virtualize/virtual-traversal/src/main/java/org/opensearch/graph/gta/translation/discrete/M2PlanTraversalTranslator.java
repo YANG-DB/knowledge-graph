@@ -9,9 +9,6 @@ import org.opensearch.graph.model.execution.plan.composite.Plan;
 import org.opensearch.graph.model.execution.plan.costs.PlanDetailedCost;
 import org.apache.tinkerpop.gremlin.process.traversal.dsl.graph.GraphTraversal;
 
-/**
- * Created by Roman on 28/06/2017.
- */
 public class M2PlanTraversalTranslator extends ChainedPlanOpTraversalTranslator {
     //region Constructors
     public M2PlanTraversalTranslator() {

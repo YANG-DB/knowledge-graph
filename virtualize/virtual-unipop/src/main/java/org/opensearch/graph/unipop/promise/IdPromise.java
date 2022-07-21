@@ -5,9 +5,6 @@ import org.apache.tinkerpop.gremlin.process.traversal.Traversal;
 
 import java.util.Optional;
 
-/**
- * Created by lior.perry on 07/03/2017.
- */
 public class IdPromise implements Promise {
     //region Constructor
     public IdPromise(Object id) {

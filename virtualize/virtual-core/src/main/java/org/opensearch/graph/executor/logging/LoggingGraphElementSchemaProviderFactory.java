@@ -9,9 +9,6 @@ import org.opensearch.graph.unipop.schemaProviders.GraphElementSchemaProvider;
 import org.opensearch.graph.unipop.schemaProviders.logging.LoggingGraphElementSchemaProvider;
 import org.slf4j.Logger;
 
-/**
- * Created by roman.margolis on 20/02/2018.
- */
 public class LoggingGraphElementSchemaProviderFactory implements GraphElementSchemaProviderFactory {
     public static final String schemaProviderFactoryParameter = "LoggingGraphElementSchemaProviderFactory.@schemaProviderFactory";
     public static final String warnLoggerParameter = "LoggingGraphElementSchemaProviderFactory.@warnLogger";

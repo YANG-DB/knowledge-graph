@@ -26,9 +26,6 @@ import org.jooby.Env;
 
 import static com.google.inject.name.Names.named;
 
-/**
- *
- */
 public class EpbModuleM2CountBased extends BaseEpbModule {
     //region ModuleBase Implementation
 

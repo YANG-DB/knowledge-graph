@@ -1,9 +1,6 @@
 package org.opensearch.graph.unipop.promise;
 
 
-/**
- * Created by lior.perry on 07/03/2017.
- */
 public interface Promise {
     Object getId();
 

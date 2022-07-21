@@ -26,9 +26,6 @@ import java.util.Set;
 
 import static org.opensearch.graph.unipop.schemaProviders.GraphElementPropertySchema.IndexingSchema.Type.exact;
 
-/**
- * Created by roman.margolis on 08/02/2018.
- */
 public class ExactConstraintTransformationAsgStrategy implements AsgStrategy {
     //region Constructors
     public ExactConstraintTransformationAsgStrategy(

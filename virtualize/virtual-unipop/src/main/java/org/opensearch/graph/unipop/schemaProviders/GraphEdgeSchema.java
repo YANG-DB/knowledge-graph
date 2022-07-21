@@ -13,9 +13,6 @@ import org.apache.tinkerpop.gremlin.structure.T;
 
 import java.util.*;
 
-/**
- * Created by roman on 1/16/2015.
- */
 public interface GraphEdgeSchema extends GraphElementSchema {
     enum Application {
         start,

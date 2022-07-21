@@ -13,9 +13,6 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
-/**
- * Todo - Work in progress ...
- */
 public class M1SparqlAsgStrategyRegistrar implements SparqlAsgStrategyRegistrar {
 
     //region Constructors

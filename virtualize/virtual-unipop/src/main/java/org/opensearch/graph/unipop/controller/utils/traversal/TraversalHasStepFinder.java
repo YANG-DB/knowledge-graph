@@ -8,9 +8,6 @@ import java.util.HashSet;
 import java.util.Set;
 import java.util.function.Predicate;
 
-/**
- * Created by Roman on 9/17/2017.
- */
 public class TraversalHasStepFinder implements TraversalValueProvider<Iterable<HasStep>> {
     //region Constructors
     public TraversalHasStepFinder(Predicate<HasStep<?>> hasStepPredicate) {

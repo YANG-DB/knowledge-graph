@@ -28,9 +28,6 @@ import javaslang.collection.Stream;
 
 import java.util.*;
 
-/**
- * Created by moti on 2/28/2017.
- */
 public interface SimpleExtenderUtils {
     static Map<Integer, AsgEBase> flattenQuery(AsgQuery query) {
         Map<Integer, AsgEBase> elements = new HashMap<>();

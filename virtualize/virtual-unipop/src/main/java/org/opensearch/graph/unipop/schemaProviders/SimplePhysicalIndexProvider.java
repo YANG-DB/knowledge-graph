@@ -7,9 +7,6 @@ import org.opensearch.graph.unipop.structure.ElementType;
 
 import java.util.Collections;
 
-/**
- * Created by Roman on 06/04/2017.
- */
 public class SimplePhysicalIndexProvider implements PhysicalIndexProvider {
     //region Constructors
     public SimplePhysicalIndexProvider(String vertexIndexName, String edgeIndexName) {

@@ -16,9 +16,6 @@ import java.util.Optional;
 import static org.opensearch.graph.unipop.schemaProviders.GraphElementPropertySchema.IndexingSchema.Type.exact;
 import static org.opensearch.graph.unipop.schemaProviders.GraphElementPropertySchema.IndexingSchema.Type.ngrams;
 
-/**
- * Created by roman.margolis on 07/03/2018.
- */
 public class LikeUtil {
     public static Iterable<EProp> applyWildcardRules(EProp eProp, GraphElementPropertySchema propertySchema) {
         Optional<GraphElementPropertySchema.ExactIndexingSchema> exactIndexingSchema = propertySchema.getIndexingSchema(exact);

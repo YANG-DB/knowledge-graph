@@ -5,9 +5,6 @@ import org.openserach.graph.asg.translator.sparql.strategies.SparqlStrategyConte
 import org.opensearch.graph.model.asgQuery.AsgQuery;
 import org.eclipse.rdf4j.query.algebra.ValueExpr;
 
-/**
- * Todo - Work in progress ...
- */
 public interface ExpressionStrategies {
     void apply(ValueExpr expression,AsgQuery query, SparqlStrategyContext context);
 

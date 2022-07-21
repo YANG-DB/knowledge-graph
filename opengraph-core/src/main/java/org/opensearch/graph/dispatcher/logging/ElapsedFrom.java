@@ -7,9 +7,6 @@ import ch.qos.logback.classic.pattern.ClassicConverter;
 import ch.qos.logback.classic.spi.ILoggingEvent;
 import org.slf4j.MDC;
 
-/**
- * Created by roman.margolis on 30/01/2018.
- */
 public class ElapsedFrom {
     public static LogMessage.MDCWriter of(long fromEpoch) {
         return new MDCWriter(fromEpoch);

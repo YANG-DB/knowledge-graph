@@ -8,9 +8,6 @@ import org.opensearch.graph.dispatcher.epb.CostEstimator;
 import org.opensearch.graph.model.descriptors.Descriptor;
 import org.opensearch.graph.model.execution.plan.PlanWithCost;
 
-/**
- * Created by roman.margolis on 15/03/2018.
- */
 public class CachedCostEstimator<P, C, TContext> implements CostEstimator<P, C, TContext> {
     public static final String costEstimatorParameter = "CachedCostEstimator.@costEstimator";
     public static final String cacheParameter = "CachedCostEstimator.@cache";

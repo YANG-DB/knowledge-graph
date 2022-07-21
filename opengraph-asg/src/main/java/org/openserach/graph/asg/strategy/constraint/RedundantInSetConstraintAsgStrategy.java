@@ -16,9 +16,6 @@ import java.util.List;
 
 import static org.opensearch.graph.model.query.properties.constraint.ConstraintOp.ignorableConstraints;
 
-/**
- * This strategy replaces an inSet constraint with a single value to an equivalent eq constraint with a single value
- */
 public class RedundantInSetConstraintAsgStrategy implements AsgStrategy {
     //region AsgStrategy Implementation
     @Override

@@ -41,9 +41,6 @@ import static com.codahale.metrics.MetricRegistry.name;
 import static org.opensearch.graph.dispatcher.logging.LogMessage.Level.*;
 import static org.opensearch.graph.dispatcher.logging.LogType.*;
 
-/**
- * Created by roman.margolis on 28/12/2017.
- */
 public class LoggingClient implements Client {
     public static final String clientParameter = "LoggingClient.@client";
     public static final String loggerParameter = "LoggingClient.@logger";

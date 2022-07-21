@@ -5,9 +5,6 @@ import com.codahale.metrics.MetricRegistry;
 
 import static org.opensearch.graph.dispatcher.provision.ScrollProvisioning.SCROLLS_REGISTRY;
 
-/**
- * add provisioning capability for query cursor runtime
- */
 public interface CursorRuntimeProvision {
     int getActiveScrolls();
 

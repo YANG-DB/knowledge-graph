@@ -6,9 +6,6 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * Created by benishue on 30-Apr-17.
- */
 public class Type {
 
     //region Ctrs

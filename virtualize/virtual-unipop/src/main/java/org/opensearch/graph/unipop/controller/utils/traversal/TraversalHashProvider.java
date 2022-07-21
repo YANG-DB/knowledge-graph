@@ -8,9 +8,6 @@ import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.util.Optional;
 
-/**
- * Created by Roman on 15/05/2017.
- */
 public class TraversalHashProvider implements TraversalValueProvider<String> {
     //region Constructor
     public TraversalHashProvider(TraversalValueProvider<String> innerIdProvider, String hashAlgorithm) throws NoSuchAlgorithmException {

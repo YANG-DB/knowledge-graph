@@ -16,9 +16,6 @@ import javaslang.collection.Stream;
 
 import java.util.List;
 
-/**
- * Created by benishue on 19-Apr-17.
- */
 public class RelPropGroupingAsgStrategy implements AsgStrategy {
     // Rel with RelProps e.g., Q190, Q10 on V1
     // AsgStrategy Implementation

@@ -21,9 +21,6 @@ import javaslang.collection.Stream;
 import java.util.*;
 import java.util.stream.Collectors;
 
-/**
- * Created by lior.perry on 4/26/2017.
- */
 public class EBaseStatisticsProvider implements StatisticsProvider {
     private GraphElementSchemaProvider graphElementSchemaProvider;
     private Ontology.Accessor ont;

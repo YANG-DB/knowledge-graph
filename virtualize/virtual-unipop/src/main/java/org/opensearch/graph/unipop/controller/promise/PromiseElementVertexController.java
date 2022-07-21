@@ -43,9 +43,6 @@ import java.util.function.BiPredicate;
 
 import static org.opensearch.graph.unipop.controller.utils.SearchAppenderUtil.wrap;
 
-/**
- * Created by lior.perry on 4/2/2017.
- */
 public class PromiseElementVertexController implements SearchQuery.SearchController {
 
     //region Constructors

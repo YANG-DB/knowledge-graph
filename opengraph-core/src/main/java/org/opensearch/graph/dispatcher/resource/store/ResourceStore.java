@@ -12,9 +12,6 @@ import java.util.Collection;
 import java.util.Optional;
 import java.util.function.Predicate;
 
-/**
- * Created by lior.perry on 06/03/2017.
- */
 public interface ResourceStore extends Predicate<CreateQueryRequest.StorageType> {
     Collection<QueryResource> getQueryResources();
     Collection<QueryResource> getQueryResources(Predicate<String> predicate);

@@ -43,9 +43,6 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
 
-/**
- * Created by Roman on 09/05/2017.
- */
 public class EntityFilterOpTranslationStrategy extends PlanOpTranslationStrategyBase {
     //region Constructors
     public EntityFilterOpTranslationStrategy(EntityTranslationOptions options) {

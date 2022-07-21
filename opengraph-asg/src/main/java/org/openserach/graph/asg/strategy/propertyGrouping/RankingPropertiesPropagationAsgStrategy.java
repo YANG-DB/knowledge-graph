@@ -14,9 +14,6 @@ import javaslang.collection.Stream;
 
 import java.util.List;
 
-/*
- * propagating ranking properties upwards (wrapped containers with RankingProp Interface)
- */
 public class RankingPropertiesPropagationAsgStrategy implements AsgStrategy {
 
     @Override

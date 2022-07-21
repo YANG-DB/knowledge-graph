@@ -15,9 +15,6 @@ import org.opensearch.graph.dispatcher.ontology.OntologyProvider;
 
 import java.util.Arrays;
 
-/**
- * Created by Roman on 5/8/2017.
- */
 public class M1AsgStrategyRegistrar implements AsgStrategyRegistrar {
     //region Constructors
     @Inject

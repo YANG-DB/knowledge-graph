@@ -4,9 +4,6 @@ package org.opensearch.graph.unipop.controller.common.appender;
 import org.opensearch.graph.unipop.controller.search.SearchBuilder;
 import javaslang.collection.Stream;
 
-/**
- * Created by lior.perry on 28/03/2017.
- */
 public class CompositeSearchAppender<TContext> implements SearchAppender<TContext> {
     public enum Mode {
         first,

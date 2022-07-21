@@ -31,9 +31,6 @@ import java.util.List;
 import java.util.Optional;
 import java.util.concurrent.atomic.AtomicInteger;
 
-/**
- * Created by moti on 5/14/2017.
- */
 public class RedundantSelectionFilterPlanExtensionStrategy implements PlanExtensionStrategy<Plan, AsgQuery> {
     //region Constructors
     @Inject

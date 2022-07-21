@@ -7,9 +7,6 @@ import org.opensearch.graph.model.execution.plan.PlanWithCost;
 import java.util.Collections;
 import java.util.Iterator;
 
-/**
- * Created by Roman on 8/20/2018.
- */
 public class FirstPlanPruneStrategy<P, C> implements PlanPruneStrategy<PlanWithCost<P, C>> {
     //region PlanPruneStrategy Implementation
     @Override

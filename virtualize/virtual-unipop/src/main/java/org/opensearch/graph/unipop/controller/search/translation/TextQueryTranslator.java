@@ -9,9 +9,6 @@ import org.unipop.process.predicate.Text;
 
 import java.util.List;
 
-/**
- * Created by Roman on 18/05/2017.
- */
 public class TextQueryTranslator implements PredicateQueryTranslator {
     //region PredicateQueryTranslator Implementation
     @Override

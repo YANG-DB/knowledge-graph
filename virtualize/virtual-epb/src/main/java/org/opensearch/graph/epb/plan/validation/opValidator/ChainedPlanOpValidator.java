@@ -7,9 +7,6 @@ import org.opensearch.graph.model.asgQuery.AsgQuery;
 import org.opensearch.graph.model.execution.plan.PlanOp;
 import org.opensearch.graph.model.execution.plan.composite.CompositePlanOp;
 
-/**
- * Created by Roman on 11/26/2017.
- */
 public class ChainedPlanOpValidator implements ChainedPlanValidator.PlanOpValidator {
     //region Constructors
     public ChainedPlanOpValidator(ChainedPlanValidator.PlanOpValidator planOpValidator) {

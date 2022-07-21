@@ -11,9 +11,6 @@ import java.util.function.Function;
 
 import static org.opensearch.graph.model.transport.CreateQueryRequestMetadata.QueryLanguage.cypher;
 
-/**
- * Created by liorp on 12/15/2017.
- */
 public class AsgCypherTransformer implements QueryTransformer<QueryInfo<String>, AsgQuery>, Function<QueryInfo<String>,Boolean> {
     public static final String transformerName = "AsgCypherTransformer.@transformer";
     //region Constructors

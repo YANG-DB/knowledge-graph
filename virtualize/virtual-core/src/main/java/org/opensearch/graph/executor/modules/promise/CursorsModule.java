@@ -10,9 +10,6 @@ import org.opensearch.graph.model.transport.cursor.CreatePathsCursorRequest;
 import com.typesafe.config.Config;
 import org.jooby.Env;
 
-/**
- * Created by Roman on 7/7/2018.
- */
 public class CursorsModule extends ModuleBase {
     //region ModuleBase Implementation
     @Override

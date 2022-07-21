@@ -10,9 +10,6 @@ import java.util.Collections;
 import java.util.Map;
 import java.util.Optional;
 
-/**
- * Created by moti on 4/27/2017.
- */
 public interface GraphElementPropertySchema {
     String getName();
     String getType();

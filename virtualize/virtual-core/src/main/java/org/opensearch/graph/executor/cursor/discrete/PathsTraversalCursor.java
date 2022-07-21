@@ -27,9 +27,6 @@ import java.util.*;
 
 import static org.opensearch.graph.model.results.AssignmentsQueryResult.Builder.instance;
 
-/**
- * Created by roman.margolis on 02/10/2017.
- */
 public class PathsTraversalCursor extends BaseCursor {
 
     public static final String RAW = "raw";

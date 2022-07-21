@@ -6,9 +6,6 @@ import org.jooq.*;
 import java.util.List;
 import java.util.stream.Collectors;
 
-/**
- * jooq accessable wrapper for parsing DDL queries fragments
- */
 
 public final class CreateTableStatement {
     private List<Field<?>> fields;

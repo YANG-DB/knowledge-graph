@@ -11,9 +11,6 @@ import org.opensearch.graph.model.descriptors.Descriptor;
 import org.opensearch.graph.model.execution.plan.PlanWithCost;
 import org.slf4j.Logger;
 
-/**
- * Created by roman.margolis on 28/11/2017.
- */
 public class LoggingPlanSearcher<P, C, Q> implements PlanSearcher<P, C, Q> {
     public static final String planSearcherParameter = "LoggingPlanSearcher.@descriptor";
     public static final String descriptorParameter = "LoggingPlanSearcher.@planSearcher";

@@ -72,11 +72,6 @@ public class AsgMappingStrategy implements AsgStrategy {
         List<AsgEBase<EBase>> elements = AsgQueryUtil.elements(query, asgEBase -> (asgEBase.geteBase() instanceof Rel)
                 && relationshipType.getSource().contains(((Rel) asgEBase.geteBase()).getrType()));
 
-        /*     - replace each with mapping.target.relType according to source.field to target.field mapping instruction
-         *          - switch (typeOf(target.field))
-         *              case: string - copy the source
-         *              case: enum - set enum.value(source)
-         */
         Tuple2<Ontology.Accessor.NodeType, String> fieldType = targetAccessor.matchNameToType(relationshipType.getTargetField())
                 .orElseThrow(() -> new FuseError.FuseErrorException(new FuseError("No target Ontology field found ", "No target Ontology field found for " + relationshipType.getTargetField())));
 

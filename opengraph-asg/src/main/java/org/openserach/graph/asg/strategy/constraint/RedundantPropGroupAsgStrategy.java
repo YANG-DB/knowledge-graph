@@ -14,17 +14,6 @@ import org.opensearch.graph.model.query.properties.RelPropGroup;
 import org.opensearch.graph.model.query.quant.QuantType;
 import javaslang.collection.Stream;
 
-/**
- * This strategy simplifies property groups by building equivalent less complex, less nested groups.
- * The strategy searches recursively for 'simple' groups, where a 'simple' group is defined to be a group that has either
- * a single property or a single child group. Any 'simple' group is changed by setting it's quant type to be 'All'
- * (because 'All' and 'Some' are equivalent in a group where there's only 1 property or child group, and 'All' is preferable
- * to 'Some' because currently 'Some' quants will cost more in other aspects of the fuse engine.
- *
- * Further more, if a group is simple and it has a child group, the child groups props and groups are added to the current group
- * the groups quant type is set to be the child groups quant type and the child group itself is discarded.
- * This phase makes nested group structures less complex when they are redundant.
- */
 public class RedundantPropGroupAsgStrategy implements AsgStrategy {
     //region ConstraintTransformationAsgStrategyBase Implementation
     @Override

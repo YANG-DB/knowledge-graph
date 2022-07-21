@@ -18,9 +18,6 @@ import java.util.Set;
 
 import static org.opensearch.graph.unipop.controller.common.appender.EdgeUtils.getLabel;
 
-/**
- * Created by roman.margolis on 22/01/2018.
- */
 public class DualEdgeDirectionSearchAppender extends SearchQueryAppenderBase<VertexControllerContext> {
     //region SearchQueryAppenderBase Implementation
     @Override

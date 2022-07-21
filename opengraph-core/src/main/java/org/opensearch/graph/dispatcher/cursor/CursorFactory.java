@@ -15,9 +15,6 @@ import java.lang.reflect.InvocationTargetException;
 import java.util.Optional;
 import java.util.Set;
 
-/**
- * Created by Roman on 02/04/2017.
- */
 public interface CursorFactory {
 
     String CURSOR_TYPE = "CursorType";

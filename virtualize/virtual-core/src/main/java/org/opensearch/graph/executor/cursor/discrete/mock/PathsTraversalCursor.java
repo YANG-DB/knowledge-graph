@@ -12,9 +12,6 @@ import java.io.File;
 import java.io.IOException;
 import java.nio.file.Paths;
 
-/**
- * Created by roman.margolis on 08/11/2017.
- */
 public class PathsTraversalCursor extends BaseCursor {
     //region Factory
     public static class Factory implements CursorFactory {

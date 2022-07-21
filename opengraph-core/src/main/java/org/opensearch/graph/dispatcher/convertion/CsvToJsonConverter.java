@@ -12,9 +12,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 
-/**
- * csv to json translators
- */
 public abstract class CsvToJsonConverter {
     /**
      * transform a csv file into json

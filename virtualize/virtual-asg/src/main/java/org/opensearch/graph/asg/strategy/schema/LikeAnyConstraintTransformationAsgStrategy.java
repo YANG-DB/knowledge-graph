@@ -31,9 +31,6 @@ import java.util.*;
 
 import static org.opensearch.graph.unipop.schemaProviders.GraphElementPropertySchema.IndexingSchema.Type.ngrams;
 
-/**
- * Created by roman.margolis on 07/03/2018.
- */
 public class LikeAnyConstraintTransformationAsgStrategy implements AsgStrategy, AsgElementStrategy<EPropGroup> {
     //region Constructors
     public LikeAnyConstraintTransformationAsgStrategy(OntologyProvider ontologyProvider, GraphElementSchemaProviderFactory schemaProviderFactory) {

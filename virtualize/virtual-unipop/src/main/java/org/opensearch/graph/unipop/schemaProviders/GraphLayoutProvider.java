@@ -3,9 +3,6 @@ package org.opensearch.graph.unipop.schemaProviders;
 
 import java.util.Optional;
 
-/**
- * Created by moti on 5/17/2017.
- */
 public interface GraphLayoutProvider {
     class NoneRedundant implements GraphLayoutProvider {
         public static GraphLayoutProvider getInstance() {

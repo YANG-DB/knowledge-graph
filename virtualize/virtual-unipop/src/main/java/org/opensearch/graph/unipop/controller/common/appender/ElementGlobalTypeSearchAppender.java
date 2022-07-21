@@ -6,9 +6,6 @@ import org.opensearch.graph.unipop.controller.promise.appender.SearchQueryAppend
 import org.opensearch.graph.unipop.controller.search.AggregationBuilder;
 import org.opensearch.graph.unipop.controller.search.QueryBuilder;
 
-/**
- * Created by lior.perry on 27/03/2017.
- */
 @Deprecated
 public class ElementGlobalTypeSearchAppender extends SearchQueryAppenderBase<ElementControllerContext> {
     //region SearchQueryAppenderBase Implementation

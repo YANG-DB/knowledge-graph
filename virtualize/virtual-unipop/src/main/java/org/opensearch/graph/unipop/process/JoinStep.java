@@ -13,9 +13,6 @@ import java.util.*;
 import java.util.function.BiFunction;
 import java.util.function.Supplier;
 
-/**
- * Created by Roman on 7/2/2017.
- */
 public class JoinStep<S, E extends Element> extends AbstractStep<S, E> implements TraversalParent, ByModulating {
     //region Constructors
     public JoinStep(Traversal.Admin traversal) {

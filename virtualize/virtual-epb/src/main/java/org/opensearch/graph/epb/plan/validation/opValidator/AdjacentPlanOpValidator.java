@@ -23,9 +23,6 @@ import javaslang.collection.Stream;
 import java.util.List;
 import java.util.Optional;
 
-/**
- * Created by Roman on 25/04/2017.
- */
 public class AdjacentPlanOpValidator implements ChainedPlanValidator.PlanOpValidator {
     //region ChainedPlanValidator.PlanOpValidator Implementation
     @Override

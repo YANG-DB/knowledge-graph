@@ -80,14 +80,6 @@ public class CSVTransformer implements DataTransformer<DataTransformerContext, C
         return context;
     }
 
-    /**
-     * transform single entity-row into document
-     *
-     * @param context
-     * @param entityType
-     * @param node
-     * @return
-     */
     private DocumentBuilder translate(DataTransformerContext context, EntityType entityType, Map<String, String> node) {
         try {
             ObjectNode element = mapper.createObjectNode();

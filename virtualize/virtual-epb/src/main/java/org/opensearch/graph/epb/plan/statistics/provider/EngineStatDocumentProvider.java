@@ -18,9 +18,6 @@ import java.util.Map;
 
 import static org.opensearch.graph.dispatcher.provision.ScrollProvisioning.NoOpScrollProvisioning.INSTANCE;
 
-/**
- * Created by Roman on 21/06/2017.
- */
 public class EngineStatDocumentProvider implements StatDataProvider {
     //region Constructors
     @Inject

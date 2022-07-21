@@ -15,9 +15,6 @@ import javaslang.collection.Stream;
 import java.util.HashMap;
 import java.util.Map;
 
-/**
- * Created by Roman on 12/15/2017.
- */
 public class QueryToAsgTransformer implements QueryTransformer<Query, AsgQuery> {
     //region Constructors
     @Inject

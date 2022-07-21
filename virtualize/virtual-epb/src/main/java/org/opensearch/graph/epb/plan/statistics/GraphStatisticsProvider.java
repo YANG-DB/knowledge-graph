@@ -10,9 +10,6 @@ import org.opensearch.graph.unipop.schemaProviders.GraphVertexSchema;
 
 import java.util.List;
 
-/**
- * Created by lior.perry on 4/27/2017.
- */
 public interface GraphStatisticsProvider {
     Statistics.SummaryStatistics getVertexCardinality(GraphVertexSchema graphVertexSchema);
     Statistics.SummaryStatistics getVertexCardinality(GraphVertexSchema graphVertexSchema, List<String> relevantIndices);

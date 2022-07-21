@@ -11,9 +11,6 @@ import java.util.*;
 
 import static org.opensearch.graph.unipop.schemaProviders.GraphEdgeSchema.Application.endB;
 
-/**
- * Created by roman on 1/16/2015.
- */
 public interface GraphElementSchemaProvider {
     Iterable<GraphVertexSchema> getVertexSchemas(String label);
 

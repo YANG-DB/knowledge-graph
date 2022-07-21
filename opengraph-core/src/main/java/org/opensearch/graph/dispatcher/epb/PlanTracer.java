@@ -14,9 +14,6 @@ import javaslang.collection.Stream;
 
 import java.util.*;
 
-/**
- * Created by Roman on 12/16/2017.
- */
 public class PlanTracer {
 
     //region Wrapper

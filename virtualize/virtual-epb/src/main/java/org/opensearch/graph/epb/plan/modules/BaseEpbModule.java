@@ -28,9 +28,6 @@ import org.slf4j.LoggerFactory;
 
 import static com.google.inject.name.Names.named;
 
-/**
- * Created by lior.perry on 2/18/2018.
- */
 public abstract class BaseEpbModule extends ModuleBase {
     @Override
     public void configureInner(Env env, Config conf, Binder binder) throws Throwable {

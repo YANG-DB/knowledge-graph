@@ -6,9 +6,6 @@ import org.opensearch.graph.unipop.controller.search.QueryBuilder;
 import org.apache.tinkerpop.gremlin.process.traversal.P;
 import org.apache.tinkerpop.gremlin.process.traversal.util.AndP;
 
-/**
- * Created by Roman on 18/05/2017.
- */
 public class AndPQueryTranslator extends CompositeQueryTranslator {
     //region Constructors
     public AndPQueryTranslator(PredicateQueryTranslator...translators) {

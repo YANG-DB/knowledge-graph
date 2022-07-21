@@ -22,9 +22,6 @@ import org.apache.tinkerpop.gremlin.process.traversal.step.map.VertexStep;
 
 import java.util.Optional;
 
-/**
- * Created by Roman on 28/05/2017.
- */
 public class EntitySelectionTranslationStrategy extends PlanOpTranslationStrategyBase {
     //region Constructors
     public EntitySelectionTranslationStrategy() {

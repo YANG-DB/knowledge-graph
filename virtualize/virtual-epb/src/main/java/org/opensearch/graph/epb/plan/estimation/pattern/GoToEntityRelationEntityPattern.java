@@ -7,9 +7,6 @@ import org.opensearch.graph.model.execution.plan.entity.GoToEntityOp;
 import org.opensearch.graph.model.execution.plan.relation.RelationFilterOp;
 import org.opensearch.graph.model.execution.plan.relation.RelationOp;
 
-/**
- * Created by Roman on 29/06/2017.
- */
 public class GoToEntityRelationEntityPattern extends EntityRelationEntityPattern {
     //region Constructors
     public GoToEntityRelationEntityPattern(GoToEntityOp startGoTo, EntityOp start, EntityFilterOp startFilter, RelationOp rel, RelationFilterOp relFilter, EntityOp end, EntityFilterOp endFilter) {

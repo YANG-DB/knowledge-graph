@@ -21,9 +21,6 @@ import java.util.Optional;
 import java.util.function.Function;
 import java.util.function.Predicate;
 
-/**
- * Created by Roman on 15/05/2017.
- */
 public class PlanUtil {
     //region Public Methods
     public static boolean isFirst(CompositePlanOp compositePlanOp, PlanOp planOp) {

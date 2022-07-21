@@ -8,9 +8,6 @@ import org.opensearch.graph.model.validation.ValidationResult;
 
 import java.util.Arrays;
 
-/**
- *
- */
 public class M2PlanValidator extends CompositePlanValidator<Plan,AsgQuery> {
 
     //region Constructors

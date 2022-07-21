@@ -18,10 +18,6 @@ import static org.opensearch.graph.executor.ontology.schema.load.DataLoaderUtils
 import static org.opensearch.graph.executor.ontology.schema.load.DataLoaderUtils.getZipType;
 import static org.opensearch.graph.model.results.LoadResponse.LoadResponseImpl;
 
-/**
- * Loader for CSV Data Model to E/S
- * - load with file
- */
 public class IndexProviderBasedCSVLoader implements CSVDataLoader {
     private static Map<String, Range.StatefulRange> ranges = new HashMap<>();
 

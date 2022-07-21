@@ -8,9 +8,6 @@ import org.opensearch.search.aggregations.bucket.terms.StringTerms;
 import java.util.*;
 import java.util.stream.Collectors;
 
-/**
- *
- */
 public class SearchAggDataItem implements DataItem {
     //region Constructors
     public SearchAggDataItem(String key, MultiBucketsAggregation.Bucket searchHit) {

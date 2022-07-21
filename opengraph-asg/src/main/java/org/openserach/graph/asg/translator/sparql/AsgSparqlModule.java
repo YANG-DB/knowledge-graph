@@ -14,9 +14,6 @@ import org.openserach.graph.asg.strategy.SparqlAsgStrategyRegistrar;
 
 import static com.google.inject.name.Names.named;
 
-/**
- * Created by lior.perry on 22/02/2017.
- */
 public class AsgSparqlModule extends ModuleBase {
     @Override
     public void configureInner(Env env, Config conf, Binder binder) throws Throwable {

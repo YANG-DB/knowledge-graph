@@ -9,9 +9,6 @@ import org.opensearch.graph.model.ontology.OntologyFinalizer;
 import java.io.IOException;
 import java.util.*;
 
-/**
- * Created by lior.perry on 3/16/2017.
- */
 public class InMemoryOntologyProvider implements OntologyProvider {
     public static final String ONTOLOGY = GlobalConstants.ONTOLOGY;
 

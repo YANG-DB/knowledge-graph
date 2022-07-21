@@ -8,9 +8,6 @@ import com.fasterxml.jackson.annotation.JsonTypeInfo;
 import org.opensearch.graph.stats.model.enums.DataType;
 import org.opensearch.graph.stats.model.enums.HistogramType;
 
-/**
- * Created by benishue on 30-Apr-17.
- */
 
 @JsonTypeInfo(use = JsonTypeInfo.Id.NAME, include = JsonTypeInfo.As.PROPERTY, property = "histogramType")
 @JsonSubTypes({

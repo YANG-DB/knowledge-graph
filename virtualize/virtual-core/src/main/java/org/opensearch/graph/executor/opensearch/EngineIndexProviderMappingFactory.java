@@ -23,10 +23,6 @@ import java.util.stream.StreamSupport;
 import static org.opensearch.graph.model.GlobalConstants.ProjectionConfigs.*;
 import static java.util.Collections.singletonMap;
 
-/**
- * generate elastic mapping template according to ontology and index provider schema
- * generate the indices according to the index provider partitions
- */
 public class EngineIndexProviderMappingFactory implements OntologyIndexGenerator {
 
     public static final String ID = "id";

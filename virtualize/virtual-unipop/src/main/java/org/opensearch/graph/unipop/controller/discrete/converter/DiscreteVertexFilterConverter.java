@@ -20,9 +20,6 @@ import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
 
-/**
- * Created by Roman on 11/15/2017.
- */
 public class DiscreteVertexFilterConverter implements ElementConverter<SearchHit, Edge> {
     //region Constructor
     public DiscreteVertexFilterConverter(VertexControllerContext context,Profiler profiler) {

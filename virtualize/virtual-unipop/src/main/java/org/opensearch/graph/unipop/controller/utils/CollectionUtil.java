@@ -6,9 +6,6 @@ import javaslang.collection.Stream;
 import java.util.Collections;
 import java.util.List;
 
-/**
- * Created by lior.perry on 19/03/2017.
- */
 public class CollectionUtil {
     public static <T> List<T> listFromObjectValue(Object value) {
         if (value == null) {

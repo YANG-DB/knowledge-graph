@@ -26,9 +26,6 @@ import org.opensearch.common.Strings;
 
 import static org.opensearch.graph.model.execution.plan.descriptors.QueryDescriptor.describe;
 
-/**
- *  verify all steps have an eTag identifier - create on if none exist (will be proficient for profiling)
- */
 public class DefaultETagAsgStrategy implements AsgStrategy {
     //region Constructors
     public DefaultETagAsgStrategy(OntologyProvider ontologyProvider) {

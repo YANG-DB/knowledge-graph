@@ -11,9 +11,6 @@ import java.io.File;
 import java.io.IOException;
 import java.util.Map;
 
-/**
- * Created by moti on 3/12/2017.
- */
 public class FileCsvDataProvider implements GenericDataProvider {
     private String filePath;
     private CsvSchema csvSchema;

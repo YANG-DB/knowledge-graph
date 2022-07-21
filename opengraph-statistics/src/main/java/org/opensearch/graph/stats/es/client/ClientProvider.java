@@ -10,9 +10,6 @@ import org.opensearch.transport.client.PreBuiltTransportClient;
 import java.net.InetAddress;
 import java.net.UnknownHostException;
 
-/**
- * Created by benishue on 03-May-17.
- */
 public class ClientProvider {
 
     private ClientProvider() {

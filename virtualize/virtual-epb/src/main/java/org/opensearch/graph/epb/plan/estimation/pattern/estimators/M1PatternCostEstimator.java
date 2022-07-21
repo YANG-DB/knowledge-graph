@@ -15,9 +15,6 @@ import org.opensearch.graph.model.execution.plan.costs.PlanDetailedCost;
 import java.util.HashMap;
 import java.util.Map;
 
-/**
- * Created by moti on 29/05/2017.
- */
 public class M1PatternCostEstimator extends CompositePatternCostEstimator<Plan, CountEstimatesCost, IncrementalEstimationContext<Plan, PlanDetailedCost, AsgQuery>> {
     //region Static
     private static Map<Class<? extends Pattern>,

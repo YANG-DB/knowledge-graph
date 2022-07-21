@@ -8,9 +8,6 @@ import ch.qos.logback.classic.spi.ILoggingEvent;
 
 import java.util.StringJoiner;
 
-/**
- * Created by roman.margolis on 31/01/2018.
- */
 public class RequestIdByScope {
     //region Static
     public static RequestIdByScope.MDCWriter of(String requestScope) {

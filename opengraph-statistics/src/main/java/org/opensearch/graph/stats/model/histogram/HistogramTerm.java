@@ -8,9 +8,6 @@ import org.opensearch.graph.stats.model.enums.HistogramType;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * Created by benishue on 22-May-17.
- */
 public class HistogramTerm extends Histogram {
 
     //region Ctrs

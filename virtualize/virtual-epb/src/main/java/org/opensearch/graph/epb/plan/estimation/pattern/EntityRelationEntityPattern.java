@@ -6,9 +6,6 @@ import org.opensearch.graph.model.execution.plan.entity.EntityOp;
 import org.opensearch.graph.model.execution.plan.relation.RelationFilterOp;
 import org.opensearch.graph.model.execution.plan.relation.RelationOp;
 
-/**
- * Created by Roman on 29/06/2017.
- */
 public class EntityRelationEntityPattern extends Pattern {
     //region Constructors
     public EntityRelationEntityPattern(

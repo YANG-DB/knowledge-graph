@@ -41,9 +41,6 @@ import java.util.Optional;
 
 import static org.opensearch.graph.gta.strategy.utils.TraversalUtil.last;
 
-/**
- * Created by Roman on 09/05/2017.
- */
 public class EntityFilterOpTranslationStrategy extends PlanOpTranslationStrategyBase {
     //region Constructors
     public EntityFilterOpTranslationStrategy(EntityTranslationOptions options) {

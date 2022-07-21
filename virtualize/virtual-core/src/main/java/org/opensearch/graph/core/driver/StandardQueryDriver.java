@@ -23,9 +23,6 @@ import org.opensearch.graph.model.transport.CreateQueryRequest;
 
 import static org.opensearch.graph.model.transport.CreateQueryRequestMetadata.QueryType.concrete;
 
-/**
- * Created by lior.perry on 20/02/2017.
- */
 public class StandardQueryDriver extends QueryDriverBase {
     //region Constructors
     @Inject

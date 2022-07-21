@@ -7,9 +7,6 @@ import javaslang.collection.Stream;
 
 import java.util.List;
 
-/**
- * Created by roman.margolis on 28/12/2017.
- */
 public class MustFetchSourceSearchAppender implements SearchAppender<ElementControllerContext> {
     //region Constructors
     public MustFetchSourceSearchAppender(String...mustFetchFields) {

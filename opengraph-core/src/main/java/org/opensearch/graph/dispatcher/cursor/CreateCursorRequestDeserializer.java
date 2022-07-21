@@ -17,9 +17,6 @@ import javaslang.collection.Stream;
 import java.io.IOException;
 import java.util.Map;
 
-/**
- * Created by Roman on 7/7/2018.
- */
 public class CreateCursorRequestDeserializer extends StdDeserializer<CreateCursorRequest> {
     //region Constructors
     @Inject

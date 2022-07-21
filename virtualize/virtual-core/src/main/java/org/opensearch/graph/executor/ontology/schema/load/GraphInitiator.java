@@ -5,14 +5,6 @@ import java.io.IOException;
 
 public interface GraphInitiator {
 
-    /**
-     * create the indexTemplates
-     * create the vertices and edges indices according to schema
-     *
-     * @return
-     * @throws IOException
-     * @param ontology
-     */
     long init(String ontology) ;
 
     /**

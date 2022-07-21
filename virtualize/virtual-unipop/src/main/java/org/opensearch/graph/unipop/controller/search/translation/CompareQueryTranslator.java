@@ -6,9 +6,6 @@ import org.opensearch.graph.unipop.controller.search.QueryBuilder;
 import org.apache.tinkerpop.gremlin.process.traversal.Compare;
 import org.apache.tinkerpop.gremlin.process.traversal.P;
 
-/**
- * Created by Roman on 18/05/2017.
- */
 public class CompareQueryTranslator implements PredicateQueryTranslator {
     //region Constructors
     public CompareQueryTranslator() {

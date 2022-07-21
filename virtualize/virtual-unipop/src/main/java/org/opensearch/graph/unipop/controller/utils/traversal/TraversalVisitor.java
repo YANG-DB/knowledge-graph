@@ -10,9 +10,6 @@ import org.apache.tinkerpop.gremlin.process.traversal.step.filter.*;
 
 import java.util.List;
 
-/**
- * Created by benishue on 27-Mar-17.
- */
 public class TraversalVisitor<TReturn> {
     //Public Methods
     public TReturn visit(Traversal traversal) {

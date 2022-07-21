@@ -26,9 +26,6 @@ import org.apache.tinkerpop.gremlin.process.traversal.dsl.graph.GraphTraversal;
 
 import java.util.Optional;
 
-/**
- *
- */
 public class AggregationFilterOpTranslationStrategy extends PlanOpTranslationStrategyBase {
     //region Constructors
     public AggregationFilterOpTranslationStrategy( EntityTranslationOptions entityTranslationOptions) {

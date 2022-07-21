@@ -18,9 +18,6 @@ import org.apache.tinkerpop.gremlin.process.traversal.step.filter.HasStep;
 
 import java.util.Optional;
 
-/**
- * Created by roman.margolis on 14/11/2017.
- */
 public class RelationSelectionTranslationStrategy extends PlanOpTranslationStrategyBase {
     //region Constructors
     public RelationSelectionTranslationStrategy() {

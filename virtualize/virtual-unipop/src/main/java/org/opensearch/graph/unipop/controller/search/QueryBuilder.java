@@ -33,9 +33,6 @@ import java.util.function.Predicate;
 
 import static org.opensearch.script.ScriptType.INLINE;
 
-/**
- * Created by lior.perry on 20/03/2017.
- */
 public class QueryBuilder {
     public enum Op {
         query,

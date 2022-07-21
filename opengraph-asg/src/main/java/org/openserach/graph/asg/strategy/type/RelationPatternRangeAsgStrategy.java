@@ -32,16 +32,6 @@ import java.util.stream.LongStream;
 
 import static java.util.stream.Stream.concat;
 
-/**
- * expand given relation range pattern into an Or quant with all premutations of requested path length
- * Example:
- * (:E)-[:R | 1..3]->(:E) would be transformed into:
- * <p>
- * (:E)-Quant[OR]
- * -[:R]->(:E)
- * -[:R]->(:E)-[:R]->(:E)
- * -[:R]->(:E)-[:R]->(:E)-[:R]->(:E)
- */
 public class RelationPatternRangeAsgStrategy implements AsgStrategy {
 
     @Override

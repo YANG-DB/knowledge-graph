@@ -25,9 +25,6 @@ import java.util.regex.Matcher;
 import static org.opensearch.graph.epb.plan.estimation.pattern.Pattern.*;
 import static org.opensearch.graph.epb.plan.estimation.pattern.RegexPatternCostEstimator.PatternPart.*;
 
-/**
- * Created by moti on 01/04/2017.
- */
 public class RegexPatternCostEstimator implements CostEstimator<Plan, PlanDetailedCost, IncrementalEstimationContext<Plan, PlanDetailedCost, AsgQuery>> {
     //region Static
     private static Map<Pattern, java.util.regex.Pattern> compiledPatterns;

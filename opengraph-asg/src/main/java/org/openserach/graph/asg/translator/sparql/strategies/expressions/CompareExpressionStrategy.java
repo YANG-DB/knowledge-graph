@@ -17,11 +17,6 @@ import org.eclipse.rdf4j.query.algebra.helpers.VarNameCollector;
 
 import java.util.Optional;
 
-/**
- * assuming the compare strategy works as follows;
- * - lhe (left hand expression) is a var
- * - rhe (right hand expression) is a val
- */
 public class CompareExpressionStrategy implements ExpressionStrategies {
 
     @Override

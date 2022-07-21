@@ -17,9 +17,6 @@ import java.util.*;
 import static org.opensearch.graph.model.asgQuery.AsgQueryUtil.getEprops;
 import static org.opensearch.graph.model.asgQuery.AsgQueryUtil.getRelProps;
 
-/**
- * transforms all e.value string expressions to lower case
- */
 public class ConstraintExpLowercaseTransformationAsgStrategy implements AsgStrategy {
     //region Constructors
     public ConstraintExpLowercaseTransformationAsgStrategy(Collection<String> fields) {

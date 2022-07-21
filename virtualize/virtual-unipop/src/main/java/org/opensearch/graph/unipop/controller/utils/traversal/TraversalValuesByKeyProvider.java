@@ -8,9 +8,6 @@ import org.apache.tinkerpop.gremlin.process.traversal.step.filter.HasStep;
 import java.util.HashSet;
 import java.util.Set;
 
-/**
- * Created by benishue on 27-Mar-17.
- */
 public class TraversalValuesByKeyProvider implements TraversalValueByKeyProvider<Set<String>> {
 
     @Override

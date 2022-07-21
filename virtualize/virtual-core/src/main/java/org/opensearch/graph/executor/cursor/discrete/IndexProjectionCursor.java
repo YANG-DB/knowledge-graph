@@ -26,9 +26,6 @@ import static org.opensearch.graph.model.GlobalConstants.ProjectionConfigs.PROJE
 import static org.opensearch.graph.model.results.AssignmentsQueryResult.Builder.instance;
 import static org.opensearch.graph.model.results.LoadResponse.buildAssignment;
 
-/**
- * this cursor will create a new Index which is the query result projection and populate this index with the query results as the arrive
- */
 public class IndexProjectionCursor extends PathsTraversalCursor {
 
     public static class Factory implements CursorFactory {

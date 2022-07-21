@@ -9,9 +9,6 @@ import org.opensearch.graph.model.execution.plan.composite.Plan;
 import org.opensearch.graph.model.execution.plan.costs.CountEstimatesCost;
 import org.opensearch.graph.model.execution.plan.costs.PlanDetailedCost;
 
-/**
- * Created by moti on 29/05/2017.
- */
 public class EntityJoinRelationEntityPatternCostEstimator implements PatternCostEstimator<Plan, CountEstimatesCost, IncrementalEstimationContext<Plan, PlanDetailedCost, AsgQuery>> {
     //region Constructors
     public EntityJoinRelationEntityPatternCostEstimator(

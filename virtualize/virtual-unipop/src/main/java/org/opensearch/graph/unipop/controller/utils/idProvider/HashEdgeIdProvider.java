@@ -9,9 +9,6 @@ import org.apache.tinkerpop.gremlin.structure.Vertex;
 import java.util.Map;
 import java.util.Optional;
 
-/**
- * Created by Roman on 15/05/2017.
- */
 public class HashEdgeIdProvider implements EdgeIdProvider<String> {
     //region Constructors
     public HashEdgeIdProvider(Optional<TraversalConstraint> constraint) throws Exception {

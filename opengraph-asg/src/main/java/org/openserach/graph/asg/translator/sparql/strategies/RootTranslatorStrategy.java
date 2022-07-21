@@ -10,9 +10,6 @@ import org.eclipse.rdf4j.query.parser.ParsedQuery;
 import java.util.List;
 
 
-/**
- * Main entry point for the AST transformations
- */
 public class RootTranslatorStrategy implements SparqlTranslatorStrategy{
     private final List<SparqlElementTranslatorStrategy> translatorStrategies;
     private final List<ExpressionStrategies> whereExpressionStrategies;

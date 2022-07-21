@@ -5,9 +5,6 @@ import org.apache.tinkerpop.gremlin.structure.Vertex;
 
 import java.util.Map;
 
-/**
- * Created by roman.margolis on 16/11/2017.
- */
 public class SimpleEdgeIdProvider implements EdgeIdProvider<String> {
     //region EdgeIdProvider Implementation
     @Override

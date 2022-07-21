@@ -18,9 +18,6 @@ import java.util.*;
 
 import static org.opensearch.graph.model.results.AssignmentsQueryResult.Builder.instance;
 
-/**
- * Created by roman.margolis on 11/03/2018.
- */
 public class GraphHierarchyTraversalCursor extends BaseCursor {
     //region Factory
     public static class Factory implements CursorFactory {

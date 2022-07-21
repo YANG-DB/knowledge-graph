@@ -4,9 +4,6 @@ package org.opensearch.graph.unipop.process.traversal.dsl.graph;
 import org.apache.tinkerpop.gremlin.process.traversal.dsl.graph.GraphTraversal;
 import org.apache.tinkerpop.gremlin.process.traversal.util.DefaultTraversalStrategies;
 
-/**
- * Created by Roman on 1/29/2018.
- */
 public class __ {
     protected __() {
     }

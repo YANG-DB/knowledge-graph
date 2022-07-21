@@ -25,10 +25,6 @@ import java.util.stream.Collectors;
 import static org.opensearch.graph.model.GlobalConstants._ALL;
 
 
-/**
- * for each relation with "*" rel-type (that is Any) replace that 'Any' relation with all 'acceptable'
- * types that match the sideB of the relation - (if sideB is untyped than use as is)
- */
 public class UntypedRelationInferTypeAsgStrategy implements AsgStrategy {
 
     @Override

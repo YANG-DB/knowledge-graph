@@ -8,9 +8,6 @@ import java.io.File;
 import java.io.IOException;
 import java.util.Map;
 
-/**
- * Created by moti on 09/04/2017.
- */
 public class MappingFileConfigurer extends MappingEngineConfigurer {
     //region Constructors
     public MappingFileConfigurer(String indexName, String mappingsFile) throws IOException {

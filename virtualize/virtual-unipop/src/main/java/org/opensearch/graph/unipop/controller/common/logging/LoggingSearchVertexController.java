@@ -16,9 +16,6 @@ import java.util.Iterator;
 import static com.codahale.metrics.MetricRegistry.name;
 import static org.opensearch.graph.dispatcher.logging.LogMessage.Level.trace;
 
-/**
- * Created by Roman on 12/14/2017.
- */
 public class LoggingSearchVertexController implements SearchVertexQuery.SearchVertexController {
     //region Constructors
     public LoggingSearchVertexController(

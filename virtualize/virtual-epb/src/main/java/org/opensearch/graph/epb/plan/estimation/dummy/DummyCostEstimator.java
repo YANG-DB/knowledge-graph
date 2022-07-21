@@ -4,9 +4,6 @@ package org.opensearch.graph.epb.plan.estimation.dummy;
 import org.opensearch.graph.dispatcher.epb.CostEstimator;
 import org.opensearch.graph.model.execution.plan.PlanWithCost;
 
-/**
- * Created by moti on 3/28/2017.
- */
 public class DummyCostEstimator<P, C, TContext> implements CostEstimator<P, C, TContext> {
     public DummyCostEstimator(C dummyCost) {
         this.dummyCost = dummyCost;

@@ -11,9 +11,6 @@ import org.apache.tinkerpop.gremlin.process.traversal.dsl.graph.GraphTraversal;
 
 import java.util.Optional;
 
-/**
- * Created by lior.perry on 21/02/2017.
- */
 public interface CursorDriver {
     /**
      * create cursor resource

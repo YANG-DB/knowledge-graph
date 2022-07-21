@@ -5,9 +5,6 @@ import org.opensearch.graph.model.execution.plan.PlanWithCost;
 
 import java.util.Optional;
 
-/**
- * Created by Roman on 7/1/2017.
- */
 public class IncrementalEstimationContext<P, C, Q> {
     //region Constructors
     public IncrementalEstimationContext(Optional<PlanWithCost<P, C>> previousCost, Q query) {

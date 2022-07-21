@@ -8,41 +8,6 @@ import org.unipop.process.predicate.CountFilterP;
 
 import java.util.Collections;
 
-/**
- *
- * Example of a terms count query with range filter on amount of terms
- * {
- *   "size": 0,
- *   "query": {
- *     "bool": {
- *       "filter": [
- *         {
- *           "term": {
- *             "direction": "out"
- *           }
- *         }
- *       ]
- *     }
- *   },
- *   "aggs": {
- *     "edges": {
- *       "entityA.id": {
- *         "field": "entityA.id"
- *       },
- *       "aggs": {
- *         "range_bucket_filter": {
- *           "bucket_selector": {
- *             "buckets_path": {
- *               "edgeCount": "_count"
- *             },
- *             "script": "def a=params.edgeCount; a > 405 && a < 567"
- *           }
- *         }
- *       }
- *     }
- *   }
- * }
- */
 public class CountFilterQueryTranslator implements PredicateQueryTranslator {
     //region PredicateQueryTranslator Implementation
     @Override

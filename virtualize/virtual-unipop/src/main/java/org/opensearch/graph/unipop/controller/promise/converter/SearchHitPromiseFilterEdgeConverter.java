@@ -14,9 +14,6 @@ import java.util.Arrays;
 import java.util.Map;
 import java.util.Optional;
 
-/**
- * Created by Elad on 4/30/2017.
- */
 public class SearchHitPromiseFilterEdgeConverter implements ElementConverter<SearchHit, Edge> {
 
     //region Constructor

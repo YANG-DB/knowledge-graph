@@ -16,9 +16,6 @@ import org.opensearch.graph.model.transport.cursor.LogicalGraphCursorRequest;
 
 import java.util.Map;
 
-/**
- * Created by lior.perry on 08/03/2017.
- */
 public class StandardPageDriver extends PageDriverBase {
     //region Constructors
     @Inject

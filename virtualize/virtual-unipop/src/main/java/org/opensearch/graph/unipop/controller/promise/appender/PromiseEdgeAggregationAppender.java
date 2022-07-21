@@ -6,9 +6,6 @@ import org.opensearch.graph.unipop.controller.common.context.ElementControllerCo
 import org.opensearch.graph.model.GlobalConstants;
 import org.opensearch.graph.unipop.controller.search.SearchBuilder;
 
-/**
- * Created by Elad on 4/26/2017.
- */
 public class PromiseEdgeAggregationAppender implements SearchAppender<ElementControllerContext> {
     @Override
     public boolean append(SearchBuilder searchBuilder, ElementControllerContext context) {

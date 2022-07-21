@@ -10,9 +10,6 @@ import org.opensearch.common.settings.Settings;
 
 import java.util.Optional;
 
-/**
- * Created by roman.margolis on 01/01/2018.
- */
 public class GlobalSearchEmbeddedNode {
     private static SearchEmbeddedNode instance;
     private static String nodeName;

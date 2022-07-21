@@ -32,11 +32,6 @@ import java.util.*;
 import static org.opensearch.graph.executor.ontology.schema.load.DataLoaderUtils.extractFile;
 import static org.opensearch.graph.model.results.LoadResponse.LoadResponseImpl;
 
-/**
- * Loader for Graph Data Model to E/S
- *  - load directly with Json structure
- *  - load with file
- */
 public class IndexProviderBasedGraphLoader implements GraphDataLoader<String, FuseError> {
     private static final SimpleDateFormat sdf = new SimpleDateFormat(GlobalConstants.DEFAULT_DATE_FORMAT);
     public static final int NUM_IDS = 1000;

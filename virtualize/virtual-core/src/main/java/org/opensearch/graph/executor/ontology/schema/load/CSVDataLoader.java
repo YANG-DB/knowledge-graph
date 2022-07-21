@@ -9,14 +9,6 @@ import java.io.IOException;
 
 public interface CSVDataLoader {
 
-    /**
-     * does:
-     *  - unzip file
-     *  - split to multiple small files
-     *  - for each file (in parallel)
-     *      - convert into bulk set
-     *      - commit to repository
-     */
     LoadResponse<String, FuseError> load(String type, String label, File data, GraphDataLoader.Directive directive) throws IOException;
 
     /**

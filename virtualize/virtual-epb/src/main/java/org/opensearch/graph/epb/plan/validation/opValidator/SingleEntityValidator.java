@@ -8,9 +8,6 @@ import org.opensearch.graph.model.execution.plan.entity.EntityOp;
 import org.opensearch.graph.model.query.entity.EEntityBase;
 import org.opensearch.graph.model.validation.ValidationResult;
 
-/**
- * Validates a single entity op is always accompanied with an EProp
- */
 public class SingleEntityValidator implements ChainedPlanValidator.PlanOpValidator {
     @Override
     public void reset() {

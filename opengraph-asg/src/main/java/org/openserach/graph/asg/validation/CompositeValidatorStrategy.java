@@ -11,9 +11,6 @@ import javaslang.collection.Stream;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * Created by roman.margolis on 02/10/2017.
- */
 public class CompositeValidatorStrategy implements AsgValidatorStrategy {
     //region Constructors
     public CompositeValidatorStrategy(AsgValidatorStrategy...strategies) {

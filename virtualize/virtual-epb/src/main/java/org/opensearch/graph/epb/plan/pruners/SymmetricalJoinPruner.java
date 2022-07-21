@@ -12,9 +12,6 @@ import javaslang.collection.Stream;
 
 import java.util.*;
 
-/**
- * Removes symmetrical join plans. This pruner assumes that all plans which have a join as their
- */
 public class SymmetricalJoinPruner implements PlanPruneStrategy<PlanWithCost<Plan, PlanDetailedCost>> {
     @Override
     public Iterable<PlanWithCost<Plan, PlanDetailedCost>> prunePlans(Iterable<PlanWithCost<Plan, PlanDetailedCost>> plans) {

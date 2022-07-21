@@ -23,9 +23,6 @@ import org.openserach.graph.asg.strategy.type.UntypedRelationInferTypeAsgStrateg
 
 import java.util.Arrays;
 
-/**
- * Created by roman.margolis on 07/02/2018.
- */
 public class M2AsgStrategyRegistrar  implements AsgStrategyRegistrar {
     //region Constructors
     @Inject

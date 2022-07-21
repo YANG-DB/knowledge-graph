@@ -14,9 +14,6 @@ import java.io.Closeable;
 import java.io.IOException;
 import java.util.function.Function;
 
-/**
- * Created by roman.margolis on 14/12/2017.
- */
 public class LoggingSearchScrollRequestBuilder extends SearchScrollRequestBuilder {
     //region Constructors
     public LoggingSearchScrollRequestBuilder(

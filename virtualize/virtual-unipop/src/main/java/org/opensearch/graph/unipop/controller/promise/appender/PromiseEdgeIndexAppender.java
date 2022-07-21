@@ -22,9 +22,6 @@ import java.text.SimpleDateFormat;
 import java.util.List;
 import java.util.Set;
 
-/**
- * Created by Elad on 4/26/2017.
- */
 public class PromiseEdgeIndexAppender implements SearchAppender<VertexControllerContext> {
 
     @Override

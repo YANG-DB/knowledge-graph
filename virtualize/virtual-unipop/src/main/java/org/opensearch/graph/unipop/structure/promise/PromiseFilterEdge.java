@@ -8,9 +8,6 @@ import org.apache.tinkerpop.gremlin.structure.Vertex;
 import org.unipop.structure.UniEdge;
 import org.unipop.structure.UniGraph;
 
-/**
- * Created by Roman on 5/9/2017.
- */
 public class PromiseFilterEdge extends UniEdge {
 
     //region Constructor

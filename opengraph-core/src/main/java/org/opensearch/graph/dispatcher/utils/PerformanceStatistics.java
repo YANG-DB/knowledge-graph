@@ -14,9 +14,6 @@ import java.lang.reflect.Method;
 
 import static com.codahale.metrics.MetricRegistry.name;
 
-/**
- * Created by lior.perry on 6/18/2017.
- */
 public class PerformanceStatistics implements MethodInterceptor {
     private Provider<MetricRegistry> metricRegistry;
 

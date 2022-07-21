@@ -32,14 +32,6 @@ import static java.lang.Double.parseDouble;
 public interface DataLoaderUtils {
     DateParser parser = DateParser.newBuilder().build();
 
-    /**
-     * init E/S indices templates
-     *
-     * @param client
-     * @param schema
-     * @return
-     * @throws IOException
-     */
     static long init(Client client, RawSchema schema) {
         try {
             String workingDir = System.getProperty("user.dir");

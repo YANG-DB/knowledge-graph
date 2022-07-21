@@ -16,9 +16,6 @@ import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
-/**
- * Created by Roman on 12/15/2017.
- */
 public class AsgQueryValidator implements QueryValidator<AsgQuery> {
     //region Constructors
     @Inject

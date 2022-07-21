@@ -27,9 +27,6 @@ import static graphql.Scalars.*;
 import static graphql.schema.GraphQLSchema.newSchema;
 import static graphql.schema.GraphQLTypeReference.typeRef;
 
-/**
- * API that will transform a GraphQL schema into YangDb ontology schema
- */
 public class GraphQLToOntologyTransformer implements OntologyTransformerIfc<String, Ontology>, GraphQLSchemaUtils {
     //where input object
     public static final String QUERY = "Query";

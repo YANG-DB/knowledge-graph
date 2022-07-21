@@ -11,9 +11,6 @@ import org.opensearch.graph.model.execution.plan.entity.EntityJoinOp;
 import org.opensearch.graph.model.validation.ValidationResult;
 import javaslang.collection.Stream;
 
-/**
- * Validates join op branches with internal validators
- */
 public class JoinOpCompositeValidator implements ChainedPlanValidator.PlanOpValidator{
     private PlanValidator<Plan, AsgQuery> leftValidator;
     private PlanValidator<Plan, AsgQuery> rightValidator;

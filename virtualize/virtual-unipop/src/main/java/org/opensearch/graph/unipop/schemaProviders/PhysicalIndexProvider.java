@@ -6,9 +6,6 @@ import org.opensearch.graph.unipop.structure.*;
 import org.opensearch.graph.unipop.structure.ElementType;
 
 
-/**
- * Created by benishue on 23-Mar-17.
- */
 public interface PhysicalIndexProvider {
     class Constant implements PhysicalIndexProvider {
         //region Constructors

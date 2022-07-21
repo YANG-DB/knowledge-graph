@@ -17,12 +17,6 @@ import java.util.List;
 
 import static org.opensearch.graph.model.query.properties.constraint.ConstraintOp.ignorableConstraints;
 
-/**
- * search for "like" / "likeAny" constraint within a EpropGroup that has "*" expression in it (in the list of expressions within likeAny)
- * if one found =>
- *                 if the parent EpropGroup is 'All' remove only the found Eprop
- *                 if the parent EpropGroup is 'Some' remove all the other Eprops and EpropGroups in that parent
- */
 public class RedundantLikeConstraintAsgStrategy implements AsgStrategy {
     //region ConstraintTransformationAsgStrategyBase Implementation
     @Override

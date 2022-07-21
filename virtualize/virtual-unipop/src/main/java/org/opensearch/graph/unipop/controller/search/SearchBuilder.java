@@ -11,9 +11,6 @@ import java.util.Collection;
 import java.util.HashSet;
 import java.util.Set;
 
-/**
- * Created by lior.perry on 26/03/2017.
- */
 public class SearchBuilder {
     //region Constructor
     public SearchBuilder() {

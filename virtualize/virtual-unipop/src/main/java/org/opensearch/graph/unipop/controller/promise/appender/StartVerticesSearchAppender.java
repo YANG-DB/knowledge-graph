@@ -15,9 +15,6 @@ import org.apache.tinkerpop.gremlin.process.traversal.dsl.graph.__;
 import org.apache.tinkerpop.gremlin.structure.Element;
 import org.apache.tinkerpop.gremlin.structure.Vertex;
 
-/**
- * Created by Elad on 4/26/2017.
- */
 public class StartVerticesSearchAppender implements SearchAppender<VertexControllerContext> {
 
     @Override

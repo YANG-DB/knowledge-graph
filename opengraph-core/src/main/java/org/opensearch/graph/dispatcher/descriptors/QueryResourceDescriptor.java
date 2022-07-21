@@ -6,9 +6,6 @@ package org.opensearch.graph.dispatcher.descriptors;
 import org.opensearch.graph.dispatcher.resource.QueryResource;
 import org.opensearch.graph.model.descriptors.Descriptor;
 
-/**
- * Created by roman.margolis on 29/11/2017.
- */
 public class QueryResourceDescriptor implements Descriptor<QueryResource> {
     //region Descriptor Implementation
     @Override

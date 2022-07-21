@@ -17,9 +17,6 @@ import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
 
-/**
- * Created by roman.margolis on 12/09/2017.
- */
 public class DiscreteVertexConverter<E extends Element> implements ElementConverter<SearchHit, E> {
     //region Constructors
     public DiscreteVertexConverter(ElementControllerContext context,Profiler profiler) {

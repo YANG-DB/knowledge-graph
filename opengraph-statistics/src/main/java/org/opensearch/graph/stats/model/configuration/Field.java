@@ -7,9 +7,6 @@ import org.opensearch.graph.stats.model.histogram.Histogram;
 
 import java.util.List;
 
-/**
- * Created by benishue on 30-Apr-17.
- */
 @JsonInclude(JsonInclude.Include.NON_EMPTY)
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class Field {

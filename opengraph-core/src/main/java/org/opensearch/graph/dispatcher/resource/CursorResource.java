@@ -14,9 +14,6 @@ import java.util.Map;
 import java.util.Optional;
 import java.util.concurrent.atomic.AtomicInteger;
 
-/**
- * Created by lior.perry on 06/03/2017.
- */
 public class CursorResource implements CursorRuntimeProvision {
     //region Constructors
     public CursorResource(String cursorId, Cursor cursor, QueryProfileInfo profileInfo, CreateCursorRequest cursorRequest) {

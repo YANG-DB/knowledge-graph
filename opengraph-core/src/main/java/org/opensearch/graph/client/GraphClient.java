@@ -53,13 +53,6 @@ public interface GraphClient {
 
     Object getId(String name, int numIds) throws IOException;
 
-    /**
-     * upsert graph data file (logical graph model) according to technical id
-     * @param ontology
-     * @param resource
-     * @return
-     * @throws IOException
-     */
     ResultResourceInfo upsertGraphData(String ontology, URL resource) throws IOException;
 
     /**

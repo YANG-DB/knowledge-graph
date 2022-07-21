@@ -27,9 +27,6 @@ import org.apache.tinkerpop.gremlin.structure.T;
 import java.util.List;
 import java.util.Optional;
 
-/**
- * Created by Roman on 10/05/2017.
- */
 public class EntityOpTranslationStrategy extends PlanOpTranslationStrategyBase {
     //region Constructors
     public EntityOpTranslationStrategy(EntityTranslationOptions options) {

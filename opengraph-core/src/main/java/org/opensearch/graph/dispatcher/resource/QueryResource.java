@@ -18,9 +18,6 @@ import java.util.Map;
 import java.util.Optional;
 import java.util.concurrent.atomic.AtomicInteger;
 
-/**
- * Created by lior.perry on 06/03/2017.
- */
 public class QueryResource {
     //region Constructors
     public QueryResource(CreateQueryRequest request, Query query, AsgQuery asgQuery, QueryMetadata queryMetadata, PlanWithCost<Plan, PlanDetailedCost> executionPlan) {

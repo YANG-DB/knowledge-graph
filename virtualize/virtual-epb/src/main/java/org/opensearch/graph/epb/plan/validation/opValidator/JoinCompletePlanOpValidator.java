@@ -10,9 +10,6 @@ import org.opensearch.graph.model.execution.plan.entity.EntityJoinOp;
 import org.opensearch.graph.model.validation.ValidationResult;
 
 
-/**
- * Created by benishue on 7/4/2017.
- */
 public class JoinCompletePlanOpValidator implements ChainedPlanValidator.PlanOpValidator {
     //region Private Methods
     private boolean validateIfOnlyJoin = false;

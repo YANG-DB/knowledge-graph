@@ -14,9 +14,6 @@ import org.unipop.structure.UniGraph;
 import java.util.List;
 import java.util.Optional;
 
-/**
- * Created by roman.margolis on 15/11/2017.
- */
 public class DiscreteVertexFilterControllerContext  extends VertexControllerContext.Impl {
     //region Constructors
     public DiscreteVertexFilterControllerContext(

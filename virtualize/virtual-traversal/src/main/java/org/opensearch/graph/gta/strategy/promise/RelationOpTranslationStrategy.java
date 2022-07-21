@@ -21,17 +21,6 @@ import org.apache.tinkerpop.gremlin.structure.T;
 
 import java.util.Optional;
 
-/**
- * Created by benishue on 08-Mar-17.
- *
- *
- *
- * relOp = outE('promise').has('constraint', P.eq(Constraint.by(__.and(
- *                  __.has('label', P.eq(<Ontology(<rel.rType>)>)),
- *                  __.has('direction', P.eq(TinkerPop.direction(<Rel.dir>)))))))
- *                  .as(source(<EEntityBase.Etag>)-->target(<EEntityBase.Etag></EEntityBase.Etag>))  // A-->B
- *
- */
 public class RelationOpTranslationStrategy extends PlanOpTranslationStrategyBase {
     //region Constructors
     public RelationOpTranslationStrategy() {

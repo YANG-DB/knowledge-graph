@@ -22,13 +22,6 @@ import static org.opensearch.graph.model.asgQuery.AsgQueryUtil.getRelProps;
 import static org.opensearch.graph.model.query.properties.constraint.ConstraintOp.like;
 import static org.opensearch.graph.model.query.properties.constraint.ConstraintOp.likeAny;
 
-/**
- * checks all constraints with op = like / like_any and adds to all expression's special chars '\\' is not present
- * this strategy must be the last since there are prior strategies that transforms like to eq (performance optimization)
- * therefore we don't want to change the expression when it is not going to be a "wildcard" search
- * we also need to do the expression altering only on string type properties so we need to wait for
- * the ConstraintTypeTransformationStrategy to be applied first
- */
 public class ConstraintExpCharEscapeTransformationAsgStrategy implements AsgStrategy {
     //region AsgStrategy Implementation
     @Override

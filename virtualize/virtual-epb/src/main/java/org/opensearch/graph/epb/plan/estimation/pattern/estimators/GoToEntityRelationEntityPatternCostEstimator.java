@@ -12,9 +12,6 @@ import org.opensearch.graph.model.execution.plan.costs.PlanDetailedCost;
 
 import java.util.Stack;
 
-/**
- * Created by moti on 29/05/2017.
- */
 public class GoToEntityRelationEntityPatternCostEstimator implements PatternCostEstimator<Plan, CountEstimatesCost, IncrementalEstimationContext<Plan, PlanDetailedCost, AsgQuery>> {
     //region Constructors
     public GoToEntityRelationEntityPatternCostEstimator(

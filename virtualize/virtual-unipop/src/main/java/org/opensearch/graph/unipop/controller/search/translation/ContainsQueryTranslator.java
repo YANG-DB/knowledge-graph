@@ -7,9 +7,6 @@ import org.opensearch.graph.unipop.controller.utils.CollectionUtil;
 import org.apache.tinkerpop.gremlin.process.traversal.Contains;
 import org.apache.tinkerpop.gremlin.process.traversal.P;
 
-/**
- * Created by Roman on 18/05/2017.
- */
 public class ContainsQueryTranslator implements PredicateQueryTranslator {
     //region PredicateQueryTranslator Implementation
     @Override

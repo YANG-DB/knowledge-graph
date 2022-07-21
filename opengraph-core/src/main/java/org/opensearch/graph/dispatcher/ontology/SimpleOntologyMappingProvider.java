@@ -9,9 +9,6 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Optional;
 
-/**
- * Created by lior.perry on 3/16/2017.
- */
 public class SimpleOntologyMappingProvider implements OntologyMappingProvider {
 
     private Map<String, MappingOntologies> ontologyMap;

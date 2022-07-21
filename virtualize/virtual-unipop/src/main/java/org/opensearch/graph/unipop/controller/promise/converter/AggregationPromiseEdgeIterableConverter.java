@@ -16,9 +16,6 @@ import org.unipop.structure.UniGraph;
 
 import java.util.*;
 
-/**
- * Created by roman on 11/17/2015.
- */
 public class AggregationPromiseEdgeIterableConverter implements ElementConverter<Map<String, Aggregation>, Iterator<Edge>> {
     //region Constructor
     public AggregationPromiseEdgeIterableConverter(

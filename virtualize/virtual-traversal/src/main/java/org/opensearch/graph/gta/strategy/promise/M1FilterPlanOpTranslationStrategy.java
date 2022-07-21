@@ -5,9 +5,6 @@ import org.opensearch.graph.gta.strategy.common.CompositePlanOpTranslationStrate
 import org.opensearch.graph.gta.strategy.common.EntityTranslationOptions;
 import org.opensearch.graph.gta.strategy.common.GoToEntityOpTranslationStrategy;
 
-/**
- * Created by Roman on 14/05/2017.
- */
 public class M1FilterPlanOpTranslationStrategy extends CompositePlanOpTranslationStrategy {
     //region Constructors
     public M1FilterPlanOpTranslationStrategy() {

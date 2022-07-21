@@ -12,9 +12,6 @@ import org.jooby.Env;
 
 import java.util.List;
 
-/**
- * Created by roman.margolis on 20/03/2018.
- */
 public class DefaultIdGenModule extends ModuleBase {
     @Override
     protected void configureInner(Env env, Config config, Binder binder) {

@@ -1,9 +1,6 @@
 package org.opensearch.graph.stats.model.result;
 
 
-/**
- * Created by benishue on 03-May-17.
- */
 public class StatResultExtended{
 
     // todo maybe for the future

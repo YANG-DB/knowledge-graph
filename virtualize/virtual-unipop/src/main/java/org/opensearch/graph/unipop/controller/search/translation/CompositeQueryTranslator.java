@@ -8,9 +8,6 @@ import org.apache.tinkerpop.gremlin.process.traversal.P;
 
 import java.util.List;
 
-/**
- * Created by Roman on 18/05/2017.
- */
 public class CompositeQueryTranslator implements PredicateQueryTranslator {
     //region Constructors
     public CompositeQueryTranslator(PredicateQueryTranslator...translators) {

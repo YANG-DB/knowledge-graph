@@ -3,9 +3,6 @@ package org.opensearch.graph.executor.utils;
 
 import org.opensearch.graph.model.query.Rel;
 
-/**
- * Created by Roman on 10/05/2017.
- */
 public class ConversionUtil {
     public static String convertDirectionGraphic(Rel.Direction dir) {
         switch (dir) {

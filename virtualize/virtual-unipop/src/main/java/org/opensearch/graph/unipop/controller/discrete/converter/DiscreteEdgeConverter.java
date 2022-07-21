@@ -26,9 +26,6 @@ import java.util.*;
 
 import static org.opensearch.graph.unipop.controller.common.appender.EdgeUtils.getLabel;
 
-/**
- * Created by roman.margolis on 14/09/2017.
- */
 public class DiscreteEdgeConverter<E extends Element> implements ElementConverter<DataItem, E> {
     //region Constructors
     public DiscreteEdgeConverter(VertexControllerContext context, Profiler profiler) {

@@ -13,9 +13,6 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Set;
 
-/**
- * Created by Roman on 14/05/2017.
- */
 public class EntityTranslationUtil {
     public static List<String> getValidEntityNames(Ontology.Accessor ont, EEntityBase entity) {
         if (entity instanceof EConcrete) {

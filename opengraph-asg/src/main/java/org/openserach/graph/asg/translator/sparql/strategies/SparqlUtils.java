@@ -16,14 +16,6 @@ import static org.opensearch.graph.model.asgQuery.AsgQueryUtil.max;
 
 public interface SparqlUtils {
 
-    /**
-     * create or get relevant quant element on query
-     * @param byTag
-     * @param query
-     * @param context
-     * @param parentQuantType
-     * @return
-     */
     static AsgEBase<? extends EBase> quant(AsgEBase<? extends EBase> byTag,
                                            AsgQuery query, SparqlStrategyContext context,
                                            QuantType parentQuantType) {

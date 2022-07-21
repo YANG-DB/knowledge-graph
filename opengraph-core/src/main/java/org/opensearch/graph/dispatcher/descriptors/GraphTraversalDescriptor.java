@@ -6,9 +6,6 @@ package org.opensearch.graph.dispatcher.descriptors;
 import org.opensearch.graph.model.descriptors.Descriptor;
 import org.apache.tinkerpop.gremlin.process.traversal.dsl.graph.GraphTraversal;
 
-/**
- * Created by roman.margolis on 29/11/2017.
- */
 public class GraphTraversalDescriptor implements Descriptor<GraphTraversal<?, ?>> {
     @Override
     public String describe(GraphTraversal<?, ?> item) {

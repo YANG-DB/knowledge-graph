@@ -35,12 +35,6 @@ public class InnerQueryCursor implements Cursor {
 
     //region Cursor Implementation
 
-    /**
-     * drain all possible results
-     *
-     * @param numResults
-     * @return
-     */
     @Override
     public QueryResultBase getNextResults(int numResults) {
         AssignmentsQueryResult all = new AssignmentsQueryResult(new ArrayList<>());

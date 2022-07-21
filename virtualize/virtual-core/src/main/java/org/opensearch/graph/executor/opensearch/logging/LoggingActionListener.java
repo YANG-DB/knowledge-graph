@@ -10,9 +10,6 @@ import java.io.IOException;
 import java.util.Optional;
 import java.util.function.Function;
 
-/**
- * Created by roman.margolis on 14/12/2017.
- */
 public class LoggingActionListener<TResponse> implements ActionListener<TResponse> {
     //region Constructors
     public LoggingActionListener(

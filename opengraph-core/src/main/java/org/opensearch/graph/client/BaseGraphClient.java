@@ -38,9 +38,6 @@ import static org.opensearch.graph.client.GraphClient.*;
 import static org.opensearch.graph.model.transport.CreateQueryRequestMetadata.*;
 import static io.restassured.RestAssured.given;
 
-/**
- * Created by Roman on 11/05/2017.
- */
 public class BaseGraphClient implements GraphClient {
     //region Constructor
     public BaseGraphClient(String fuseUrl) throws IOException {

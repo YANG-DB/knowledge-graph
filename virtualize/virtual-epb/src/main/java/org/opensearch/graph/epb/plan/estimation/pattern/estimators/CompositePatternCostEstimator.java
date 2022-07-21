@@ -6,9 +6,6 @@ import org.opensearch.graph.epb.plan.estimation.pattern.Pattern;
 import java.util.HashMap;
 import java.util.Map;
 
-/**
- * Created by moti on 29/05/2017.
- */
 public class CompositePatternCostEstimator<P, C, TContext> implements PatternCostEstimator<P, C, TContext> {
     //region Constructors
     public CompositePatternCostEstimator(Map<Class<? extends Pattern>, PatternCostEstimator<P, C, TContext>> estimators) {

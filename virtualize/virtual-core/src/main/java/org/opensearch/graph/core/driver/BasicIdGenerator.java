@@ -29,9 +29,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.function.Supplier;
 
-/**
- * Created by roman.margolis on 20/03/2018.
- */
 public class BasicIdGenerator implements IdGeneratorDriver<Range> {
     public static final String indexNameParameter = "BasicIdGenerator.@indexName";
     public static final String IDSEQUENCE = "idsequence";

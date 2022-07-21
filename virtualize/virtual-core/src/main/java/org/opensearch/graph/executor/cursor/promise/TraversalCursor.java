@@ -31,9 +31,6 @@ import java.util.Optional;
 
 import static org.opensearch.graph.model.results.AssignmentsQueryResult.Builder.instance;
 
-/**
- * Created by lior.perry on 3/20/2017.
- */
 public class TraversalCursor extends BaseCursor {
     //region Factory
     public static class Factory implements CursorFactory {

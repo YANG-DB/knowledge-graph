@@ -11,9 +11,6 @@ import java.util.Collections;
 import java.util.Map;
 import java.util.Optional;
 
-/**
- * Created by roman on 1/16/2015.
- */
 public interface GraphElementSchema {
     Class getSchemaElementType();
 

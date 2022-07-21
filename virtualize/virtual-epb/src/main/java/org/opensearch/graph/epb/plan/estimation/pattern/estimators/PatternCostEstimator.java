@@ -6,9 +6,6 @@ import org.opensearch.graph.model.execution.plan.PlanWithCost;
 
 import java.util.*;
 
-/**
- * Created by lior.perry on 4/24/2017.
- */
 public interface PatternCostEstimator<P1, C1, TContext> {
     interface EmptyResult<P3, C3> extends Result<P3, C3> {
         static <P2, C2> Result<P2, C2> get() {

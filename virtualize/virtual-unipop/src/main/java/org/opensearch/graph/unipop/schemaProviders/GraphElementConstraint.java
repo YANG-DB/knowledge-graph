@@ -3,9 +3,6 @@ package org.opensearch.graph.unipop.schemaProviders;
 
 import org.apache.tinkerpop.gremlin.process.traversal.Traversal;
 
-/**
- * Created by roman.margolis on 10/10/2017.
- */
 public interface GraphElementConstraint {
     Traversal getTraversalConstraint();
 

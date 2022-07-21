@@ -5,9 +5,6 @@ import org.opensearch.graph.model.validation.ValidationResult;
 import org.opensearch.graph.dispatcher.epb.PlanValidator;
 import javaslang.collection.Stream;
 
-/**
- * Created by Roman on 30/04/2017.
- */
 public class CompositePlanValidator<P, Q> implements PlanValidator<P, Q> {
     public enum Mode {
         one,

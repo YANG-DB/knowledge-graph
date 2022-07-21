@@ -30,9 +30,6 @@ import java.util.List;
 import java.util.Optional;
 
 
-/**
- * Created by roman.margolis on 05/02/2018.
- */
 public class LikeConstraintTransformationAsgStrategy implements AsgStrategy, AsgElementStrategy<EPropGroup> {
     //region Constructors
     public LikeConstraintTransformationAsgStrategy(OntologyProvider ontologyProvider, GraphElementSchemaProviderFactory schemaProviderFactory) {

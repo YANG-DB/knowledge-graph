@@ -11,9 +11,6 @@ import org.unipop.structure.UniGraph;
 
 import java.util.Optional;
 
-/**
- * Created by roman.margolis on 12/09/2017.
- */
 public class DiscreteElementControllerContext extends ElementControllerContext.Impl {
     public DiscreteElementControllerContext(UniGraph graph, StepDescriptor stepDescriptor, ElementType elementType, GraphElementSchemaProvider schemaProvider, Optional<TraversalConstraint> constraint, Iterable<HasContainer> selectPHasContainers, int limit) {
         super(graph, stepDescriptor,elementType, schemaProvider, constraint, selectPHasContainers, limit);

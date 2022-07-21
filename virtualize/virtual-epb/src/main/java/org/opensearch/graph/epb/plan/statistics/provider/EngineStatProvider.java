@@ -11,9 +11,6 @@ import org.opensearch.search.SearchHit;
 
 import java.util.*;
 
-/**
- * Created by benishue on 24-May-17.
- */
 public class EngineStatProvider {
     //region Static
     private final String COUNT_FIELD_NAME;

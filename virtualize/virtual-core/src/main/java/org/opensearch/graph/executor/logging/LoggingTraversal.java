@@ -13,9 +13,6 @@ import static org.opensearch.graph.dispatcher.logging.LogMessage.Level.trace;
 import static org.opensearch.graph.dispatcher.logging.LogType.*;
 import static org.unipop.process.Profiler.PROFILER;
 
-/**
- * Created by roman.margolis on 07/01/2018.
- */
 public class LoggingTraversal<S, E> implements Traversal<S, E> {
     //region Constructors
     public LoggingTraversal(

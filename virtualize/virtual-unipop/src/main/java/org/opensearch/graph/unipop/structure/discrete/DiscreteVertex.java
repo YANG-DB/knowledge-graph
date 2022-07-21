@@ -10,9 +10,6 @@ import org.unipop.structure.UniVertexProperty;
 
 import java.util.*;
 
-/**
- * Created by roman.margolis on 12/09/2017.
- */
 public class DiscreteVertex extends UniVertex {
     //region Constructor
     public DiscreteVertex(Object id, String label, UniGraph graph, Map<String, Object> properties) {

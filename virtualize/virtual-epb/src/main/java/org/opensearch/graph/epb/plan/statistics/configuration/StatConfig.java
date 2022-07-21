@@ -10,9 +10,6 @@ import java.io.IOException;
 import java.util.List;
 import java.util.Optional;
 
-/**
- * Created by benishue on 24-May-17.
- */
 public class StatConfig {
 
     //region Ctrs

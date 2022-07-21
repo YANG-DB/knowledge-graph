@@ -31,9 +31,6 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
 
-/**
- * Created by Roman on 09/05/2017.
- */
 public class RelationFilterOpTranslationStrategy extends PlanOpTranslationStrategyBase {
     //region Constructors
     public RelationFilterOpTranslationStrategy() {

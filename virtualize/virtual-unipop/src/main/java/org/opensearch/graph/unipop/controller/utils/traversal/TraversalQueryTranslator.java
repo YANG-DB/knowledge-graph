@@ -18,9 +18,6 @@ import org.unipop.process.predicate.ExistsP;
 import java.util.List;
 import java.util.function.Supplier;
 
-/**
- * Created by lior.perry on 27/03/2017.
- */
 public class TraversalQueryTranslator extends TraversalVisitor<Boolean>{
     //region Constructor
     public TraversalQueryTranslator(

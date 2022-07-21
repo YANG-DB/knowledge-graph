@@ -24,9 +24,6 @@ import java.text.SimpleDateFormat;
 import java.util.Optional;
 import java.util.TimeZone;
 
-/**
- * documents bulk loading utilities
- */
 public class LoadUtils {
     private static final Logger logger = LoggerFactory.getLogger(LoadUtils.class);
 

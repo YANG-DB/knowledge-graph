@@ -37,9 +37,6 @@ import org.jooby.Env;
 import java.util.HashMap;
 import java.util.Map;
 
-/**
- * Created by roman.margolis on 29/11/2017.
- */
 public class DescriptorsModule extends ModuleBase {
     //region ModuleBase Implementation
     @Override

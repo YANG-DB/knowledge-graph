@@ -17,9 +17,6 @@ import java.util.Optional;
 import java.util.function.Predicate;
 import java.util.stream.Collectors;
 
-/**
- * Created by lior.perry on 06/03/2017.
- */
 public class InMemoryResourceStore implements ResourceStore {
     //region Constructors
     public InMemoryResourceStore() {

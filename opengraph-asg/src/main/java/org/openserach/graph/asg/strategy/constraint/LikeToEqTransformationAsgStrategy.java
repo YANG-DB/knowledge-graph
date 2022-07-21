@@ -11,9 +11,6 @@ import org.opensearch.graph.model.query.properties.EPropGroup;
 import org.opensearch.graph.model.query.properties.constraint.ConstraintOp;
 import javaslang.collection.Stream;
 
-/**
- * search for "like" constraint within a EpropGroup that does not have "*" in it, and replace with "eq"
- */
 public class LikeToEqTransformationAsgStrategy implements AsgStrategy {
     //region AsgStrategy Implementation
     @Override

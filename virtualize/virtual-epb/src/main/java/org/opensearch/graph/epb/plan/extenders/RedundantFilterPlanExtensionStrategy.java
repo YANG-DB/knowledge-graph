@@ -30,9 +30,6 @@ import javaslang.collection.Stream;
 import java.util.*;
 import java.util.concurrent.atomic.AtomicInteger;
 
-/**
- * Created by moti on 5/14/2017.
- */
 public class RedundantFilterPlanExtensionStrategy implements PlanExtensionStrategy<Plan, AsgQuery> {
     //region Constructors
     @Inject

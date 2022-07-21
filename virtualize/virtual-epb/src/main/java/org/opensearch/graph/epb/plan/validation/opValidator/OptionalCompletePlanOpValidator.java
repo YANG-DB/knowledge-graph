@@ -26,9 +26,6 @@ import javaslang.collection.Stream;
 
 import java.util.Set;
 
-/**
- * Created by roman.margolis on 26/11/2017.
- */
 public class OptionalCompletePlanOpValidator implements ChainedPlanValidator.PlanOpValidator {
     //region PlanOpValidator Implementation
     @Override

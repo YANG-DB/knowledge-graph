@@ -224,10 +224,6 @@ public class GraphElementSchemaProviderJsonFactory implements GraphElementSchema
 
     }
 
-    /**
-     * todo  -verify is we need to examine each side of the pair as an Entity type of  both as relationship type
-     * @param pairList
-     */
     private void validateSchema(List<EPair> pairList) {
         pairList.forEach(pair -> {
             if ( !(accessor.$element(pair.geteTypeA()).isPresent()) || !(accessor.$element(pair.geteTypeB()).isPresent()))

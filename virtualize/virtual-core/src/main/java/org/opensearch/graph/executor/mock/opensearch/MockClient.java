@@ -30,9 +30,6 @@ import org.opensearch.threadpool.ThreadPool;
 
 import java.util.Map;
 
-/**
- * Created by roman.margolis on 08/11/2017.
- */
 public class MockClient implements Client {
 
     @Override

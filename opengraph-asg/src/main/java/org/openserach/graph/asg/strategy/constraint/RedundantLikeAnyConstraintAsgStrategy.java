@@ -16,9 +16,6 @@ import java.util.List;
 
 import static org.opensearch.graph.model.query.properties.constraint.ConstraintOp.ignorableConstraints;
 
-/**
- * This strategy replaces a likeAny constraint with a single value to an equivalent like constraint with a single value
- */
 public class RedundantLikeAnyConstraintAsgStrategy implements AsgStrategy {
     //region AsgStrategy Implementation
     @Override

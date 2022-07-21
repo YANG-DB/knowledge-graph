@@ -21,9 +21,6 @@ import java.util.List;
 import java.util.Optional;
 import java.util.Set;
 
-/**
- * Created by roman.margolis on 24/09/2017.
- */
 public class ElementIndexSearchAppender implements SearchAppender<ElementControllerContext> {
     //region SearchAppender Implementation
     @Override

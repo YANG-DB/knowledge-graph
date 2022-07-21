@@ -8,9 +8,6 @@ import org.apache.commons.collections4.CollectionUtils;
 
 import java.util.*;
 
-/**
- * Created by roman.margolis on 01/03/2018.
- */
 public class CachedRawSchema implements RawSchema {
     public static final String rawSchemaParameter = "CachedRawSchema.@rawSchema";
     public static final String systemIndicesParameter = "CachedRawSchema.@systemIndices";

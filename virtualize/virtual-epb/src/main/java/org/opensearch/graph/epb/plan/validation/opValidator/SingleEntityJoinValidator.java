@@ -14,9 +14,6 @@ import java.util.List;
 
 import static java.util.stream.Collectors.toList;
 
-/**
- * Validates a complete join operation that neither of its branches has a single entity (useless join)
- */
 public class SingleEntityJoinValidator implements ChainedPlanValidator.PlanOpValidator {
     @Override
     public void reset() {

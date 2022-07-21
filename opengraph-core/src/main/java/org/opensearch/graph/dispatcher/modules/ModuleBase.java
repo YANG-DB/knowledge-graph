@@ -10,9 +10,6 @@ import org.jooby.Jooby;
 
 import java.util.List;
 
-/**
- * Created by Roman on 20/04/2017.
- */
 public abstract class ModuleBase implements Jooby.Module {
     //region Module Implementation
     @Override

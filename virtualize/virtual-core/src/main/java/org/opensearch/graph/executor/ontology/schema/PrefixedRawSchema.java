@@ -9,9 +9,6 @@ import javaslang.collection.Stream;
 
 import java.util.List;
 
-/**
- * Created by roman.margolis on 01/03/2018.
- */
 public class PrefixedRawSchema implements RawSchema {
     //region Static
     public static final String rawSchemaParameter = "PrefixedRawSchema.@rawSchema";

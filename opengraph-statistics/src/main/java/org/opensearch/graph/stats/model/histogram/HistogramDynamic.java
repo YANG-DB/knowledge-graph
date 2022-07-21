@@ -4,9 +4,6 @@ package org.opensearch.graph.stats.model.histogram;
 import org.opensearch.graph.stats.model.enums.DataType;
 import org.opensearch.graph.stats.model.enums.HistogramType;
 
-/**
- * Created by benishue on 30-Apr-17.
- */
 public class HistogramDynamic extends Histogram {
 
     //region Ctrs

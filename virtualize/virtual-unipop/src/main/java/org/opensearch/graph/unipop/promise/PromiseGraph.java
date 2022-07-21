@@ -10,9 +10,6 @@ import org.apache.tinkerpop.gremlin.structure.Vertex;
 
 import java.util.Iterator;
 
-/**
- * Created by benishue on 08-Mar-17.
- */
 public class PromiseGraph implements Graph {
     @Override
     public Vertex addVertex(Object... keyValues) {

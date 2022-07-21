@@ -8,9 +8,6 @@ import java.util.Collection;
 import java.util.Collections;
 import java.util.Optional;
 
-/**
- * mapping ontologies provider
- */
 public interface OntologyMappingProvider {
     Optional<MappingOntologies> get(String id);
 

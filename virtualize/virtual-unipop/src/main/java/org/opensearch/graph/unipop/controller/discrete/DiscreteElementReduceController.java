@@ -41,9 +41,6 @@ import java.util.Optional;
 
 import static org.opensearch.graph.unipop.controller.utils.SearchAppenderUtil.wrap;
 
-/**
- * Created by Roman on 3/14/2018.
- */
 public class DiscreteElementReduceController implements ReduceQuery.SearchController {
     //region Constructors
     public DiscreteElementReduceController(

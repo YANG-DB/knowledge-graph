@@ -32,9 +32,6 @@ import java.util.function.Function;
 
 import static org.opensearch.graph.model.query.properties.constraint.Constraint.of;
 
-/**
- * Todo - Work in progress ...
- */
 public class NodePatternTranslatorStrategy implements SparqlElementTranslatorStrategy {
 
     public static final String THING = "http://www.w3.org/2002/07/owl#Thing";

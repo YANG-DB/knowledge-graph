@@ -16,9 +16,6 @@ import org.opensearch.transport.client.PreBuiltTransportClient;
 import java.net.InetAddress;
 import java.net.UnknownHostException;
 
-/**
- * Created by roman.margolis on 04/01/2018.
- */
 public class ClientProvider implements Provider<Client> {
     public static final String createMockParameter = "ClientProvider.@createMock";
 

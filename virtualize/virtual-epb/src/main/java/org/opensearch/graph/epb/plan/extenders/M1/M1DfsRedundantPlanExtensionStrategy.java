@@ -10,9 +10,6 @@ import org.opensearch.graph.model.asgQuery.AsgQuery;
 import org.opensearch.graph.model.execution.plan.composite.Plan;
 import javaslang.collection.Stream;
 
-/**
- * Created by Roman on 22/05/2017.
- */
 public class M1DfsRedundantPlanExtensionStrategy extends CompositePlanExtensionStrategy<Plan, AsgQuery> {
     //region Constructors
     @Inject

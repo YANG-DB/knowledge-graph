@@ -13,15 +13,6 @@ import java.util.stream.Collectors;
 
 public class CalculatedFieldsUtil {
 
-    /**
-     * find calculated eProps under groups which are direct Descendant of a given Entity enum
-     * We assume the calculated property is within the first level of the Property group since ASG strategy will flatten any
-     * inner hierarchy groups
-     *
-     * @param query
-     * @param eTag
-     * @return
-     */
     public static List<CalculatedEProp> findCalculaedFields(AsgQuery query, String eTag) {
         final List<AsgEBase<EPropGroup>> groups = AsgQueryUtil.nextDescendants(AsgQueryUtil.getByTag(query.getStart(), eTag).get(), EPropGroup.class);
         if (groups.isEmpty())

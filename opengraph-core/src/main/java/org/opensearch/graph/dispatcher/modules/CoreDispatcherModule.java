@@ -16,11 +16,6 @@ import java.net.InetAddress;
 import java.net.URISyntaxException;
 import java.net.UnknownHostException;
 
-/**
- * Created by lior.perry on 15/02/2017.
- * <p>
- * This module is called by the fuse-service scanner class loader
- */
 public class CoreDispatcherModule extends ModuleBase {
 
     @Override

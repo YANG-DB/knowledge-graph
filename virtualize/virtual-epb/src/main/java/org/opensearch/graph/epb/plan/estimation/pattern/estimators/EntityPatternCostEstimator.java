@@ -16,9 +16,6 @@ import org.opensearch.graph.model.execution.plan.entity.EntityFilterOp;
 import org.opensearch.graph.model.execution.plan.entity.EntityOp;
 import org.opensearch.graph.model.resourceInfo.FuseError;
 
-/**
- * Created by moti on 29/05/2017.
- */
 public class EntityPatternCostEstimator implements PatternCostEstimator<Plan, CountEstimatesCost, IncrementalEstimationContext<Plan, PlanDetailedCost, AsgQuery>> {
     //region Constructors
     public EntityPatternCostEstimator(StatisticsProviderFactory statisticsProviderFactory, OntologyProvider ontologyProvider) {

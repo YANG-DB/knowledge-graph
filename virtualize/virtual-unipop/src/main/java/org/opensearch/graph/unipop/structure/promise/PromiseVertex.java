@@ -12,9 +12,6 @@ import java.util.Collections;
 import java.util.Map;
 import java.util.Optional;
 
-/**
- * Created by lior.perry on 19/03/2017.
- */
 public class PromiseVertex extends UniVertex {
     //region Constructor
     public PromiseVertex(Promise promise, Optional<Constraint> constraint, UniGraph graph) {

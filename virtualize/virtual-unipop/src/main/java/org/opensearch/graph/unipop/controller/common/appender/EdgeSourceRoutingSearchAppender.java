@@ -16,9 +16,6 @@ import java.util.Set;
 
 import static org.opensearch.graph.unipop.controller.common.appender.EdgeUtils.getLabel;
 
-/**
- * Created by roman.margolis on 03/01/2018.
- */
 public class EdgeSourceRoutingSearchAppender  implements SearchAppender<VertexControllerContext> {
     //region SearchAppender Implementation
     @Override

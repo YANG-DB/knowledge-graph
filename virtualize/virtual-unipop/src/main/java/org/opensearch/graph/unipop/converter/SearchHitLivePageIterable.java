@@ -12,9 +12,6 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.NoSuchElementException;
 
-/**
- * Created by lior on 1/28/2019.
- */
 public class SearchHitLivePageIterable implements Iterable<SearchHit> {
     //region Constructor
     public SearchHitLivePageIterable(

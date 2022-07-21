@@ -19,9 +19,6 @@ import javaslang.collection.Stream;
 import java.util.Collections;
 import java.util.Optional;
 
-/**
- * Created by Roman on 12/15/2017.
- */
 public abstract class CursorDriverBase implements CursorDriver {
     public static final String CONTEXT = "context";
     //region Constructors

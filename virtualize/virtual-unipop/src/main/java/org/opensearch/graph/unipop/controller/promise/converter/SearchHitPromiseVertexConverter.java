@@ -12,9 +12,6 @@ import org.unipop.structure.UniGraph;
 import java.util.Collections;
 import java.util.Optional;
 
-/**
- * Created by roman on 11/17/2015.
- */
 public class SearchHitPromiseVertexConverter implements ElementConverter<SearchHit, Element> {
     //region Constructor
     public SearchHitPromiseVertexConverter(UniGraph graph) {

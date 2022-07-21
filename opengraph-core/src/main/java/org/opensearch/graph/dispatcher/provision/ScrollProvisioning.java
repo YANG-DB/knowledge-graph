@@ -9,9 +9,6 @@ import org.slf4j.LoggerFactory;
 import java.util.Collection;
 import java.util.Collections;
 
-/**
- * scroll provisioning API for a traversal
- */
 public interface ScrollProvisioning {
 
     String SCROLLS_REGISTRY = "Scrolls_Registry";

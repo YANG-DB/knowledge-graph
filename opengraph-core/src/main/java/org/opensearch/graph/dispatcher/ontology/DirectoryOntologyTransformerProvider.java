@@ -15,9 +15,6 @@ import java.net.URISyntaxException;
 import java.nio.file.Paths;
 import java.util.*;
 
-/**
- * Created by roman.margolis on 02/10/2017.
- */
 public class DirectoryOntologyTransformerProvider implements OntologyTransformerProvider {
     //region Constructors
     public DirectoryOntologyTransformerProvider(String dirName) throws URISyntaxException {

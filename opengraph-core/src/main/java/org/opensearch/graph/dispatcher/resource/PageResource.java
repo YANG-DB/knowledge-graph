@@ -5,9 +5,6 @@ package org.opensearch.graph.dispatcher.resource;
 
 import java.util.Date;
 
-/**
- * Created by lior.perry on 09/03/2017.
- */
 public class PageResource<T> {
 
     //region Constructors

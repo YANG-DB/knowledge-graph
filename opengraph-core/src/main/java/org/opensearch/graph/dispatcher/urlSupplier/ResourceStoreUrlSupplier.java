@@ -3,9 +3,6 @@ package org.opensearch.graph.dispatcher.urlSupplier;
 
 
 
-/**
- * Created by lior.perry on 08/03/2017.
- */
 public class ResourceStoreUrlSupplier extends ResourceUrlSupplier {
     public enum Store {
         Query,

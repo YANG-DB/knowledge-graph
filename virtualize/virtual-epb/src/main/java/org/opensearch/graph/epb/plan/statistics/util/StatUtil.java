@@ -8,9 +8,6 @@ import java.io.UnsupportedEncodingException;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 
-/**
- * Created by benishue on 24-May-17.
- */
 public class StatUtil {
 
     private static final Logger logger = LoggerFactory.getLogger(StatUtil.class);

@@ -10,9 +10,6 @@ import org.opensearch.graph.model.execution.plan.costs.PlanDetailedCost;
 import javaslang.collection.Stream;
 import org.apache.tinkerpop.gremlin.process.traversal.dsl.graph.GraphTraversal;
 
-/**
- * Created by Roman on 10/05/2017.
- */
 public class CompositePlanOpTranslationStrategy implements PlanOpTranslationStrategy {
     //region Constructors
     public CompositePlanOpTranslationStrategy(PlanOpTranslationStrategy...strategies) {

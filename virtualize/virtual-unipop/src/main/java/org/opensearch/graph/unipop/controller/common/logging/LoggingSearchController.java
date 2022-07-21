@@ -15,9 +15,6 @@ import java.util.Iterator;
 
 import static org.opensearch.graph.dispatcher.logging.LogMessage.Level.trace;
 
-/**
- * Created by Roman on 12/14/2017.
- */
 public class LoggingSearchController implements SearchQuery.SearchController {
     //region Constructors
     public LoggingSearchController(

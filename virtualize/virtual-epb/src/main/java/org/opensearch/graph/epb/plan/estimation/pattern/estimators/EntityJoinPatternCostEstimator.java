@@ -17,12 +17,6 @@ import org.opensearch.graph.model.execution.plan.entity.EntityOp;
 
 import java.util.Optional;
 
-/**
- * Estimates the cost of a join pattern.
- * There are two main cases:
- *  1. A new join op
- *  2. An existing join op that has been extended
- */
 public class EntityJoinPatternCostEstimator implements PatternCostEstimator<Plan, CountEstimatesCost, IncrementalEstimationContext<Plan, PlanDetailedCost, AsgQuery>> {
 
     //TODO: decompose method to two separate methods each handing a join scenario (new join, and ongoing join)

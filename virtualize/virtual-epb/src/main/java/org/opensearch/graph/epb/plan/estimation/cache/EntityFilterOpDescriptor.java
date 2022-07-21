@@ -10,9 +10,6 @@ import javaslang.collection.Stream;
 
 import java.util.List;
 
-/**
- * Created by roman.margolis on 15/03/2018.
- */
 public class EntityFilterOpDescriptor implements Descriptor<EntityFilterOp> {
     //region Descriptor Implementation
     @Override

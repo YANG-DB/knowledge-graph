@@ -135,11 +135,6 @@ public class AsgNamedParametersStrategy implements AsgStrategy {
         return isSingleElementOp(expr.getOp());
     }
 
-    /**
-     *
-     * @param params
-     * @param eProp
-     */
     protected void manageOptionalUnaryParameterizedConstraint(List<NamedParameter> params, EProp eProp) {
         NamedParameter namedParameter = ((OptionalUnaryParameterizedConstraint) eProp.getCon()).getParameter();
         String name = namedParameter.getName();

@@ -8,9 +8,6 @@ import org.opensearch.graph.model.execution.plan.composite.descriptors.IterableP
 import org.opensearch.graph.model.execution.plan.entity.EntityJoinOp;
 import org.opensearch.graph.model.validation.ValidationResult;
 
-/**
- * Validates join ops by checking nesting levels
- */
 public class JoinOpDepthValidator implements ChainedPlanValidator.PlanOpValidator {
     public JoinOpDepthValidator(int maxDepth) {
         this.maxDepth = maxDepth;

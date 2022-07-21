@@ -4,9 +4,6 @@ package org.opensearch.graph.unipop.schemaProviders;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonInclude;
 
-/**
- * Created by roman.margolis on 13/12/2017.
- */
 public interface GraphVirtualVertexSchema extends GraphVertexSchema {
     @JsonInclude(JsonInclude.Include.NON_EMPTY)
     @JsonIgnoreProperties(ignoreUnknown = true)

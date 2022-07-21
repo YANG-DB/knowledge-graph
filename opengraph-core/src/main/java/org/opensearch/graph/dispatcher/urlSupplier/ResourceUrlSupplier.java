@@ -5,9 +5,6 @@ package org.opensearch.graph.dispatcher.urlSupplier;
 
 import java.util.Optional;
 
-/**
- * Created by lior.perry on 08/03/2017.
- */
 public class ResourceUrlSupplier extends UrlSupplierBase {
     //region Constructors
     public ResourceUrlSupplier(String baseUrl) {

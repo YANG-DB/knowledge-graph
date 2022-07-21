@@ -4,9 +4,6 @@ package org.opensearch.graph.unipop.promise;
 import org.apache.tinkerpop.gremlin.process.traversal.Traversal;
 import org.apache.tinkerpop.gremlin.process.traversal.dsl.graph.__;
 
-/**
- * Created by lior.perry on 07/03/2017.
- */
 public class TraversalConstraint extends TraversalPromise implements Constraint {
     //region Static
     public static TraversalConstraint EMPTY = new TraversalConstraint(__.start());

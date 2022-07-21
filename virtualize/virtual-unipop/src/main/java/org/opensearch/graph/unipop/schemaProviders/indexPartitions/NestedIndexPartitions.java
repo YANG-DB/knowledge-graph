@@ -6,9 +6,6 @@ import javaslang.collection.Stream;
 import java.util.Collections;
 import java.util.Optional;
 
-/**
- * Created by Roman on 11/05/2017.
- */
 public class NestedIndexPartitions implements IndexPartitions {
     //region Constructors
     public NestedIndexPartitions(String...indices) {

@@ -4,9 +4,6 @@ package org.opensearch.graph.stats.configuration;
 import org.apache.commons.configuration.Configuration;
 import org.apache.commons.configuration.PropertiesConfiguration;
 
-/**
- * Created by benishue on 30-Apr-17.
- */
 public class StatConfiguration {
 
     private Configuration configuration;

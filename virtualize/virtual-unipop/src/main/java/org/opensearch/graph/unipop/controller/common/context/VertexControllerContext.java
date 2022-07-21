@@ -18,9 +18,6 @@ import java.util.Optional;
 import java.util.stream.Collectors;
 import java.util.stream.StreamSupport;
 
-/**
- * Created by roman.margolis on 13/09/2017.
- */
 public interface VertexControllerContext extends BulkContext, DirectionContext, ElementControllerContext {
     @JsonInclude(JsonInclude.Include.NON_EMPTY)
     @JsonIgnoreProperties(ignoreUnknown = true)

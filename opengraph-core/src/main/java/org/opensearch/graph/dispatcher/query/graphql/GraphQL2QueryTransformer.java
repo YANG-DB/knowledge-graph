@@ -36,11 +36,6 @@ public class GraphQL2QueryTransformer implements QueryTransformer<QueryInfo<Stri
         return transform(schemaUtils,ontology.get(),query.getQuery());
     }
 
-    /**
-     * translate graphQL query to V1 Query
-     * @param query
-     * @return
-     */
     public static Query transform(GraphQLSchemaUtils schemaUtils,Ontology ontology, String query) {
         Query.Builder instance = Query.Builder.instance();
         GraphQLSchema schema = createSchema(schemaUtils,ontology,instance);

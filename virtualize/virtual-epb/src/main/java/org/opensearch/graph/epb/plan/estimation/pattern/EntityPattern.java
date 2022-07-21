@@ -4,9 +4,6 @@ package org.opensearch.graph.epb.plan.estimation.pattern;
 import org.opensearch.graph.model.execution.plan.entity.EntityFilterOp;
 import org.opensearch.graph.model.execution.plan.entity.EntityOp;
 
-/**
- * Created by Roman on 29/06/2017.
- */
 public class EntityPattern extends Pattern {
     //region Constructors
     public EntityPattern(EntityOp start, EntityFilterOp startFilter) {

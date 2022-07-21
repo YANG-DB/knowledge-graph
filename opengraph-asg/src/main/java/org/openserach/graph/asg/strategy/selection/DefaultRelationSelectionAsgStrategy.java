@@ -21,10 +21,6 @@ import java.util.List;
 import java.util.Optional;
 import java.util.Set;
 
-/**
- *
- * Go over all RelPropGroups - if no projection was requested - go over all existing entity's props and add them as default
- */
 public class DefaultRelationSelectionAsgStrategy implements AsgStrategy {
     //region Constructors
     public DefaultRelationSelectionAsgStrategy(OntologyProvider ontologyProvider) {

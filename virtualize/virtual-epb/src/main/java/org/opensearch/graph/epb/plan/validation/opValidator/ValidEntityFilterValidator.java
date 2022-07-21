@@ -23,9 +23,6 @@ import java.util.function.Predicate;
 
 import static java.util.stream.Stream.of;
 
-/**
- * Validates a single entity op is always accompanied with an EProp
- */
 public class ValidEntityFilterValidator implements ChainedPlanValidator.PlanOpValidator {
     @Override
     public void reset() {

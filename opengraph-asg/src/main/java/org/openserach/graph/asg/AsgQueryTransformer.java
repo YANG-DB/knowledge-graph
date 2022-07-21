@@ -16,9 +16,6 @@ import javaslang.collection.Stream;
 
 import java.util.Optional;
 
-/**
- * Created by Roman on 12/15/2017.
- */
 public class AsgQueryTransformer implements QueryTransformer<AsgQuery, AsgQuery> {
     //region Constructors
     @Inject

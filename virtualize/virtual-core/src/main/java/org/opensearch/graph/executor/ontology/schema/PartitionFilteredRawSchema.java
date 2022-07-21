@@ -10,9 +10,6 @@ import org.opensearch.client.Client;
 
 import java.util.List;
 
-/**
- * Created by roman.margolis on 01/03/2018.
- */
 public class PartitionFilteredRawSchema implements RawSchema {
     public static final String rawSchemaParameter = "PartitionFilteredRawSchema.@rawSchema";
 

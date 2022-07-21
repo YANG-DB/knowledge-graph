@@ -37,9 +37,6 @@ import org.opensearch.search.aggregations.metrics.ExtendedStatsAggregationBuilde
 import java.util.*;
 
 
-/**
- * Created by benishue on 01-May-17.
- */
 public class SearchStatsUtil {
 
     private static final String AGG_EXTENDED_STATS = "extended_stats";

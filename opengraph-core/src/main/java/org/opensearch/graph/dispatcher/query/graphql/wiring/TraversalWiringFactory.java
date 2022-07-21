@@ -29,11 +29,6 @@ import java.util.function.Consumer;
 import java.util.stream.Collectors;
 
 
-/**
- * A wiring factory that will echo back the objects defined.  That is if you have a field called
- * "name" of type String, it will echo back the value "name".  This is ONLY useful for mocking out a
- * schema that do don't want to actually execute properly.
- */
 @Internal
 public class TraversalWiringFactory implements WiringFactory {
 

@@ -11,9 +11,6 @@ import org.apache.tinkerpop.gremlin.process.traversal.dsl.graph.GraphTraversal;
 
 import java.util.function.Predicate;
 
-/**
- * Created by Roman on 24/05/2017.
- */
 public abstract class PlanOpTranslationStrategyBase implements PlanOpTranslationStrategy {
     //region Constructors
     @SafeVarargs

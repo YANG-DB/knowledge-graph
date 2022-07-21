@@ -12,9 +12,6 @@ import java.util.Collections;
 import java.util.HashSet;
 import java.util.Set;
 
-/**
- * Created by Roman on 04/07/2017.
- */
 public final class ForceRequirementsStrategy extends AbstractTraversalStrategy<TraversalStrategy.DecorationStrategy> implements TraversalStrategy.DecorationStrategy {
 
     private final Set<TraverserRequirement> requirements = new HashSet<>();

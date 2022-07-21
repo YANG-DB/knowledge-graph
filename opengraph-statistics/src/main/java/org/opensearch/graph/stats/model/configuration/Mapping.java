@@ -4,9 +4,6 @@ package org.opensearch.graph.stats.model.configuration;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * Created by benishue on 30-Apr-17.
- */
 public class Mapping {
 
     //region Ctrs

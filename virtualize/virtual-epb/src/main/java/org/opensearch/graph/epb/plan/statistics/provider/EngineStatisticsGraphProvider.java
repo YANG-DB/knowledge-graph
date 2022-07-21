@@ -19,9 +19,6 @@ import org.apache.tinkerpop.gremlin.structure.T;
 import java.util.*;
 import java.util.stream.Collectors;
 
-/**
- * Created by benishue on 22-May-17.
- */
 public class EngineStatisticsGraphProvider implements GraphStatisticsProvider {
     //region Static
     //todo move it getTo a global enum across modules

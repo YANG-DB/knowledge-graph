@@ -25,9 +25,6 @@ import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.util.*;
 
-/**
- * Created by benishue on 30-Apr-17.
- */
 public class StatUtil {
 
     private static final Logger logger = LoggerFactory.getLogger(StatUtil.class);

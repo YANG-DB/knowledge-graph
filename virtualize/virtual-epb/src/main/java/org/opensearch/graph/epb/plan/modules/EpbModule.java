@@ -32,9 +32,6 @@ import org.jooby.Env;
 
 import static com.google.inject.name.Names.named;
 
-/**
- * Created by lior.perry on 22/02/2017.
- */
 public class EpbModule extends BaseEpbModule {
 
     @Override

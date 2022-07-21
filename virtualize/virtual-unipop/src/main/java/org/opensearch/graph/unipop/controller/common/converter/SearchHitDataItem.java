@@ -5,9 +5,6 @@ import org.opensearch.search.SearchHit;
 
 import java.util.Map;
 
-/**
- * Created by roman.margolis on 14/03/2018.
- */
 public class SearchHitDataItem implements DataItem {
     //region Constructors
     public SearchHitDataItem(SearchHit searchHit) {

@@ -7,9 +7,6 @@ import org.apache.tinkerpop.gremlin.process.traversal.P;
 import org.unipop.process.predicate.ExistsP;
 import org.unipop.process.predicate.NotExistsP;
 
-/**
- * Created by Roman on 18/05/2017.
- */
 public class ExistsQueryTranslator implements PredicateQueryTranslator {
     //region PredicateQueryTranslator Implementation
     @Override

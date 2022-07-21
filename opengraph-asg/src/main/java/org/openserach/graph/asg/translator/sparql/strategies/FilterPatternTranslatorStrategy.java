@@ -9,9 +9,6 @@ import org.eclipse.rdf4j.query.algebra.ValueExpr;
 
 import java.util.List;
 
-/**
- * Filter element containing condition and args
- */
 public class FilterPatternTranslatorStrategy extends UnaryPatternTranslatorStrategy{
 
     private final List<ExpressionStrategies> whereExpressionStrategies;

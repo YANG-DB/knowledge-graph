@@ -23,9 +23,6 @@ import java.util.Collections;
 
 import static org.unipop.process.Profiler.PROFILER;
 
-/**
- * Created by Roman on 3/14/2018.
- */
 public class CountCostEstimator implements CostEstimatorDriver<Plan, PlanDetailedCost, IncrementalEstimationContext<Plan, PlanDetailedCost, AsgQuery>,GraphTraversal<?, ?>> {
     //region Constructors
     @Inject

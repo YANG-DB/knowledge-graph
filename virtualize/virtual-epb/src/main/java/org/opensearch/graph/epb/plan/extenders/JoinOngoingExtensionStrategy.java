@@ -10,10 +10,6 @@ import javaslang.collection.Stream;
 
 import java.util.*;
 
-/**
- * Created by moti on 7/3/2017.
- * Extends join ops that are the last op in the plan
- */
 public class JoinOngoingExtensionStrategy implements PlanExtensionStrategy<Plan, AsgQuery> {
     private PlanExtensionStrategy<Plan, AsgQuery> innerExpander;
 

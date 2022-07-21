@@ -13,9 +13,6 @@ import org.unipop.structure.UniGraph;
 import java.util.Collections;
 import java.util.Optional;
 
-/**
- * Created by roman.margolis on 15/11/2017.
- */
 public interface CompositeControllerContext extends VertexControllerContext{
     Optional<ElementControllerContext> getElementControllerContext();
     Optional<VertexControllerContext> getVertexControllerContext();

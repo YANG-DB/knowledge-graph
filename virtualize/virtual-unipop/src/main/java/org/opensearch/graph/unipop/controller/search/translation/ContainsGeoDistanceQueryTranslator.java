@@ -11,9 +11,6 @@ import org.opensearch.common.geo.GeoPoint;
 import java.util.Arrays;
 import java.util.List;
 
-/**
- * Created by Roman on 18/05/2017.
- */
 public class ContainsGeoDistanceQueryTranslator implements PredicateQueryTranslator {
     public static final String GEO_DISTANCE = "geo_distance";
     private String[] geoFields;

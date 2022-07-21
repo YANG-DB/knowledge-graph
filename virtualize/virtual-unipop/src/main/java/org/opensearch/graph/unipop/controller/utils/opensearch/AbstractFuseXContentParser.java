@@ -76,7 +76,6 @@ public abstract class AbstractFuseXContentParser implements XContentParser {
         } else if (token == Token.VALUE_STRING) {
             rawValue = new String(textCharacters(), textOffset(), textLength());
             interpretedAsLenient = Booleans.isBoolean(rawValue) == false;
-            booleanValue = Booleans.parseBoolean(rawValue, false /* irrelevant */);
         } else {
             booleanValue = doBooleanValue();
         }

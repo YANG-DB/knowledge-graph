@@ -20,9 +20,6 @@ import java.util.*;
 
 import static org.opensearch.graph.model.asgQuery.AsgQuery.Builder.ePropGroup;
 
-/**
- * Created by moti on 6/1/2017.
- */
 public abstract class Pattern {
     public PlanWithCost<Plan, PlanDetailedCost> buildNewPlan(PatternCostEstimator.Result<Plan, CountEstimatesCost> result,
                                                              Optional<PlanWithCost<Plan, PlanDetailedCost>> previousCost){

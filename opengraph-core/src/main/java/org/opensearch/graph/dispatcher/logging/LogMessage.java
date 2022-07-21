@@ -7,9 +7,6 @@ import javaslang.collection.Stream;
 import org.slf4j.Logger;
 import org.slf4j.MDC;
 
-/**
- * Created by roman.margolis on 14/12/2017.
- */
 public interface LogMessage {
     Noop noop = new Noop();
 

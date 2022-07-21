@@ -5,9 +5,6 @@ import javaslang.collection.Stream;
 
 import java.util.Collections;
 
-/**
- * Created by roman.margolis on 14/09/2017.
- */
 public class CompositeElementConverter<TElementSource, TElementDest> implements ElementConverter<TElementSource, TElementDest> {
     //region Constructors
     @SafeVarargs

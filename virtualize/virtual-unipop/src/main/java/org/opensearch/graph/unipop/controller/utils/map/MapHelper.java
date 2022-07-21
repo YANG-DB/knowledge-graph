@@ -5,9 +5,6 @@ import javaslang.collection.Stream;
 
 import java.util.*;
 
-/**
- * Created by roman.margolis on 19/10/2017.
- */
 public class MapHelper {
     //region Public Static Methods
     static public <T> Optional<T> value(Map<String, Object> map, String key) {

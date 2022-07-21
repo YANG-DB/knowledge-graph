@@ -1,14 +1,10 @@
 package org.opensearch.graph.model.execution.plan.entity;
 
-
 /*-
- *
- * EntityGroupByOp.java - opengraph-model - yangdb - 2,016
- * org.codehaus.mojo-license-maven-plugin-1.16
- * $Id$
- * $HeadURL$
+ * #%L
+ * opengraph-model
  * %%
- * Copyright (C) 2016 - 2019 yangdb   ------ www.yangdb.org ------
+ * Copyright (C) 2016 - 2022 org.opensearch
  * %%
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -21,8 +17,10 @@ package org.opensearch.graph.model.execution.plan.entity;
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- *
+ * #L%
  */
+
+
 
 import org.opensearch.graph.model.asgQuery.AsgEBase;
 import org.opensearch.graph.model.execution.plan.AsgEBasePlanOp;

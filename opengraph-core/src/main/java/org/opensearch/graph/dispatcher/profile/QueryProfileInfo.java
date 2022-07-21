@@ -9,9 +9,6 @@ import org.apache.tinkerpop.gremlin.process.traversal.util.Metrics;
 import java.util.List;
 import java.util.stream.Collectors;
 
-/**
- * profiling info for query debug & investigation
- */
 public interface QueryProfileInfo {
 
     Metrics measurements();

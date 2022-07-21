@@ -14,9 +14,6 @@ import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
 
-/**
- * Created by Roman on 1/29/2018.
- */
 public class FuseGraphTraversal<S, E> extends DefaultTraversal<S, E> implements GraphTraversal.Admin<S, E> {
     //region Constructors
     public FuseGraphTraversal() {

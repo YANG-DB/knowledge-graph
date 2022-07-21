@@ -9,9 +9,6 @@ import org.opensearch.graph.model.resourceInfo.FuseError;
 import org.opensearch.graph.model.results.QueryResultBase;
 import org.slf4j.Logger;
 
-/**
- * Created by roman.margolis on 07/01/2018.
- */
 public class LoggingCursor implements Cursor {
 
     public static final String CURSOR = "cursor";

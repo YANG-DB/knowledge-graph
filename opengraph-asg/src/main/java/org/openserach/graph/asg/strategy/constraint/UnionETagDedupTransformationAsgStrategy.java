@@ -18,9 +18,6 @@ import org.opensearch.graph.model.query.quant.QuantType;
 import java.util.List;
 import java.util.Map;
 
-/**
- * search for or (union) type quants and dedup etags names
- */
 public class UnionETagDedupTransformationAsgStrategy implements AsgStrategy {
     //region AsgStrategy Implementation
     @Override

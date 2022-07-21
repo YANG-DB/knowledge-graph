@@ -11,9 +11,6 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Optional;
 
-/**
- * Created by moti on 2/27/2017.
- */
 public class CompositePlanExtensionStrategy<P extends IPlan, Q extends IQuery> implements PlanExtensionStrategy<P , Q> {
     //region Constructors
     @Inject

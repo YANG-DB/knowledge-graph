@@ -11,9 +11,6 @@ import org.opensearch.common.geo.GeoPoint;
 import java.util.Arrays;
 import java.util.List;
 
-/**
- * Created by Roman on 18/05/2017.
- */
 public class ContainsGeoBoundsQueryTranslator implements PredicateQueryTranslator {
     public static final String GEO_BOUNDS = "geo_bounds";
     private String[] geoFields;

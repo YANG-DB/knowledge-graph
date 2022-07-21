@@ -17,9 +17,6 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Optional;
 
-/**
- * Created by roman.margolis on 02/10/2017.
- */
 public class DirectoryOntologyMappingProvider implements OntologyMappingProvider {
     //region Constructors
     public DirectoryOntologyMappingProvider(String dirName) throws URISyntaxException {
