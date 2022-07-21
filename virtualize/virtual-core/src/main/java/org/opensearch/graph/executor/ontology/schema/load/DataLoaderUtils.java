@@ -1,6 +1,7 @@
 package org.opensearch.graph.executor.ontology.schema.load;
 
 
+
 import org.opensearch.graph.executor.ontology.schema.RawSchema;
 import org.opensearch.graph.model.date.DateParser;
 import org.opensearch.graph.model.resourceInfo.FuseError;

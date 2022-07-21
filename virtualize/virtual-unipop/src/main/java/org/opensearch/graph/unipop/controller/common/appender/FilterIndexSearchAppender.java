@@ -1,6 +1,7 @@
 package org.opensearch.graph.unipop.controller.common.appender;
 
 
+
 import org.opensearch.graph.model.GlobalConstants;
 import org.opensearch.graph.unipop.controller.common.context.VertexControllerContext;
 import org.opensearch.graph.unipop.controller.search.SearchBuilder;

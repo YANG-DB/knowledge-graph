@@ -2,6 +2,7 @@ package org.opensearch.graph.dispatcher.ontology;
 
 
 
+
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.opensearch.graph.model.ontology.Ontology;
 import org.opensearch.graph.model.ontology.OntologyFinalizer;

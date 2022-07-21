@@ -4,6 +4,7 @@ package org.openserach.graph.asg.util;
 
 
 
+
 import org.opensearch.graph.model.GlobalConstants;
 import org.opensearch.graph.model.ontology.Property;
 

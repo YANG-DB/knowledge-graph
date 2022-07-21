@@ -1,6 +1,7 @@
 package org.opensearch.graph.unipop.controller.promise.converter;
 
 
+
 import org.opensearch.graph.unipop.controller.common.converter.ElementConverter;
 import org.opensearch.graph.unipop.promise.Promise;
 import org.opensearch.graph.unipop.structure.promise.PromiseVertex;

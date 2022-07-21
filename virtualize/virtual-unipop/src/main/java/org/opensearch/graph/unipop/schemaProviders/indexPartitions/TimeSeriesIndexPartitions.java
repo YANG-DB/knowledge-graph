@@ -1,6 +1,7 @@
 package org.opensearch.graph.unipop.schemaProviders.indexPartitions;
 
 
+
 import java.util.Date;
 
 public interface TimeSeriesIndexPartitions extends IndexPartitions {

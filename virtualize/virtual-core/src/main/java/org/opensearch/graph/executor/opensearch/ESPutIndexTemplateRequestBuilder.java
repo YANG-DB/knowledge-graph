@@ -2,6 +2,7 @@
 package org.opensearch.graph.executor.opensearch;
 
 
+
 import org.opensearch.action.ActionFuture;
 import org.opensearch.action.admin.indices.template.put.PutIndexTemplateAction;
 import org.opensearch.action.admin.indices.template.put.PutIndexTemplateRequest;

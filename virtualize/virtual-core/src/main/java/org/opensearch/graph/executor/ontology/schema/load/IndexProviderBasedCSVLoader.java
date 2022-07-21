@@ -1,6 +1,7 @@
 package org.opensearch.graph.executor.ontology.schema.load;
 
 
+
 import com.google.inject.Inject;
 import org.opensearch.graph.executor.ontology.schema.RawSchema;
 import org.opensearch.graph.model.Range;

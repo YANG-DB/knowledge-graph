@@ -1,6 +1,7 @@
 package org.opensearch.graph.executor.ontology.schema.load;
 
 
+
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.google.inject.Inject;
 import com.typesafe.config.Config;

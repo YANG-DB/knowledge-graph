@@ -1,6 +1,7 @@
 package org.opensearch.graph.unipop.predicates;
 
 
+
 import org.apache.tinkerpop.gremlin.process.traversal.P;
 
 import java.util.function.BiPredicate;

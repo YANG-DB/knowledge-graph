@@ -1,6 +1,7 @@
 package org.opensearch.graph.epb.plan.validation.opValidator;
 
 
+
 import org.opensearch.graph.model.execution.plan.entity.EntityJoinOp;
 import org.opensearch.graph.model.validation.ValidationResult;
 import org.opensearch.graph.epb.plan.validation.ChainedPlanValidator;

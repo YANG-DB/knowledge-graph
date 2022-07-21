@@ -1,6 +1,7 @@
 package org.opensearch.graph.unipop.promise;
 
 
+
 public interface Promise {
     Object getId();
 

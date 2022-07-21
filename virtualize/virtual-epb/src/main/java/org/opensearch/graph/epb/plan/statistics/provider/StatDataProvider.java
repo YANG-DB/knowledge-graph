@@ -1,6 +1,7 @@
 package org.opensearch.graph.epb.plan.statistics.provider;
 
 
+
 import java.util.Map;
 
 public interface StatDataProvider {

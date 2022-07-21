@@ -1,6 +1,7 @@
 package org.opensearch.graph.dispatcher.query.rdf;
 
 
+
 import com.google.common.collect.Sets;
 import org.opensearch.graph.dispatcher.ontology.OntologyTransformerIfc;
 import org.opensearch.graph.model.ontology.EntityType;

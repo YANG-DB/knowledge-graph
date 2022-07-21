@@ -1,6 +1,7 @@
 package org.opensearch.graph.executor.ontology.schema;
 
 
+
 import org.opensearch.graph.executor.resource.PersistentResourceStore;
 
 import java.util.Arrays;

@@ -1,6 +1,7 @@
 package org.opensearch.graph.epb.plan.pruners;
 
 
+
 import org.opensearch.graph.dispatcher.epb.PlanPruneStrategy;
 import org.opensearch.graph.model.execution.plan.IPlan;
 import javaslang.collection.Stream;

@@ -1,6 +1,7 @@
 package org.opensearch.graph.unipop.structure;
 
 
+
 import org.opensearch.graph.unipop.process.traversal.dsl.graph.FuseGraphTraversalSource;
 import org.apache.commons.configuration.Configuration;
 import org.apache.tinkerpop.gremlin.process.traversal.dsl.graph.GraphTraversalSource;

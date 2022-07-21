@@ -1,6 +1,7 @@
 package org.opensearch.graph.executor.ontology.schema;
 
 
+
 import com.google.common.collect.ImmutableList;
 import com.typesafe.config.Config;
 import org.opensearch.graph.model.resourceInfo.FuseError;

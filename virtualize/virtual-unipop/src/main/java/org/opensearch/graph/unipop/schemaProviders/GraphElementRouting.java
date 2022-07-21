@@ -1,6 +1,7 @@
 package org.opensearch.graph.unipop.schemaProviders;
 
 
+
 public interface GraphElementRouting {
     GraphElementPropertySchema getRoutingProperty();
 

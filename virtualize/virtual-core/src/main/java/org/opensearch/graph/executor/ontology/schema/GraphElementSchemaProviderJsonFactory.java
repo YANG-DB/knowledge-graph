@@ -1,6 +1,7 @@
 package org.opensearch.graph.executor.ontology.schema;
 
 
+
 import com.google.inject.Inject;
 import com.typesafe.config.Config;
 import org.opensearch.graph.dispatcher.ontology.IndexProviderFactory;

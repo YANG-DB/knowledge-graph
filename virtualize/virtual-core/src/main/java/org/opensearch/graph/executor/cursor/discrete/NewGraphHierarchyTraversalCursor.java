@@ -1,6 +1,7 @@
 package org.opensearch.graph.executor.cursor.discrete;
 
 
+
 import org.opensearch.graph.dispatcher.cursor.Cursor;
 import org.opensearch.graph.dispatcher.cursor.CursorFactory;
 import org.opensearch.graph.dispatcher.utils.PlanUtil;

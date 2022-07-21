@@ -1,6 +1,7 @@
 package org.opensearch.graph.gta.strategy.utils;
 
 
+
 import org.opensearch.graph.model.query.Rel;
 import org.opensearch.graph.model.query.properties.constraint.Constraint;
 import org.opensearch.graph.unipop.controller.utils.CollectionUtil;

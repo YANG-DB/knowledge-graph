@@ -1,6 +1,7 @@
 package org.opensearch.graph.executor.ontology.schema.load;
 
 
+
 import org.opensearch.graph.model.logical.LogicalGraphModel;
 import org.opensearch.graph.model.results.LoadResponse;
 

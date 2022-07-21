@@ -3,6 +3,7 @@ package org.opensearch.graph.dispatcher.cursor;
 
 
 
+
 import org.opensearch.graph.model.transport.cursor.CreateCursorRequest;
 
 public class CursorMetadata<T> {

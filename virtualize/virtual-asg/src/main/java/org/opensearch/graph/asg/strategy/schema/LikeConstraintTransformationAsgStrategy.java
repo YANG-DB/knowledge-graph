@@ -1,6 +1,7 @@
 package org.opensearch.graph.asg.strategy.schema;
 
 
+
 import org.opensearch.graph.asg.strategy.schema.utils.LikeUtil;
 import org.opensearch.graph.dispatcher.ontology.OntologyProvider;
 import org.opensearch.graph.model.asgQuery.AsgQueryUtil;

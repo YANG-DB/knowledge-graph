@@ -1,6 +1,7 @@
 package org.opensearch.graph.executor.ontology.schema.load;
 
 
+
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.opensearch.graph.executor.ontology.schema.PartitionResolver;
 import org.opensearch.graph.model.GlobalConstants;

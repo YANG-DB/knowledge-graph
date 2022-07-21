@@ -1,6 +1,7 @@
 package org.opensearch.graph.unipop.controller.common.appender;
 
 
+
 import org.opensearch.graph.unipop.controller.common.context.VertexControllerContext;
 import org.opensearch.graph.unipop.controller.promise.appender.SearchQueryAppenderBase;
 import org.opensearch.graph.unipop.controller.search.AggregationBuilder;

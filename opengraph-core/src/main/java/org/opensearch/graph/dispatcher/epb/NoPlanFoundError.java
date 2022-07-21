@@ -3,6 +3,7 @@ package org.opensearch.graph.dispatcher.epb;
 
 
 
+
 public class NoPlanFoundError extends RuntimeException {
     public NoPlanFoundError() {}
 

@@ -1,6 +1,7 @@
 package org.opensearch.graph.gta.translation.discrete;
 
 
+
 import org.opensearch.graph.gta.strategy.discrete.M1PlanOpTranslationStrategy;
 import org.opensearch.graph.gta.translation.ChainedPlanOpTraversalTranslator;
 import org.opensearch.graph.dispatcher.gta.TranslationContext;

@@ -1,6 +1,7 @@
 package org.opensearch.graph.executor.opensearch;
 
 
+
 import com.google.inject.Inject;
 import org.opensearch.graph.executor.opensearch.logging.LoggingClient;
 import org.opensearch.graph.model.transport.ExecutionScope;

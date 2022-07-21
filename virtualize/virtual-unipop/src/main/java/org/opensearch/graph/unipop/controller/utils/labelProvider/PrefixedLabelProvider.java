@@ -1,6 +1,7 @@
 package org.opensearch.graph.unipop.controller.utils.labelProvider;
 
 
+
 public class PrefixedLabelProvider implements LabelProvider<String> {
     //region Constructors
     public PrefixedLabelProvider(String splitString) {

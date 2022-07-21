@@ -1,6 +1,7 @@
 package org.opensearch.graph.asg.strategy.schema.utils;
 
 
+
 import org.opensearch.graph.model.query.properties.EProp;
 import org.opensearch.graph.model.query.properties.SchematicEProp;
 import org.opensearch.graph.model.query.properties.constraint.Constraint;

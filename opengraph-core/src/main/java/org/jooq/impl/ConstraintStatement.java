@@ -1,6 +1,7 @@
 package org.jooq.impl;
 
 
+
 import org.jooq.Constraint;
 import org.jooq.Field;
 import org.jooq.Name;

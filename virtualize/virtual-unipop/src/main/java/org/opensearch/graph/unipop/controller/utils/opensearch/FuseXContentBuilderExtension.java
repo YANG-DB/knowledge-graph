@@ -1,6 +1,7 @@
 package org.opensearch.graph.unipop.controller.utils.opensearch;
 
 
+
 import org.opensearch.graph.model.query.properties.constraint.Constraint;
 import org.opensearch.graph.model.query.properties.constraint.NamedParameter;
 import org.opensearch.common.xcontent.XContentBuilder;

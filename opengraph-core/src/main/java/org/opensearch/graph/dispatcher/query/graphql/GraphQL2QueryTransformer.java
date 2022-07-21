@@ -1,6 +1,7 @@
 package org.opensearch.graph.dispatcher.query.graphql;
 
 
+
 import com.google.inject.Inject;
 import org.opensearch.graph.dispatcher.ontology.OntologyProvider;
 import org.opensearch.graph.dispatcher.query.QueryTransformer;

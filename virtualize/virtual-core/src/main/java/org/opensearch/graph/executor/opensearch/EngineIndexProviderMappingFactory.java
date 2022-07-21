@@ -1,6 +1,7 @@
 package org.opensearch.graph.executor.opensearch;
 
 
+
 import com.google.inject.Inject;
 import org.opensearch.graph.executor.ontology.schema.OntologyIndexGenerator;
 import org.opensearch.graph.executor.ontology.schema.RawSchema;

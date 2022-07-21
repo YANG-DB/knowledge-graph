@@ -1,6 +1,7 @@
 package org.opensearch.graph.gta.strategy.promise;
 
 
+
 import org.opensearch.graph.dispatcher.utils.PlanUtil;
 import org.opensearch.graph.gta.strategy.PlanOpTranslationStrategyBase;
 import org.opensearch.graph.gta.strategy.utils.ConversionUtil;

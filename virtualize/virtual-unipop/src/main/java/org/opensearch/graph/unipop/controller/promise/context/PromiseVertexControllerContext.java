@@ -1,6 +1,7 @@
 package org.opensearch.graph.unipop.controller.promise.context;
 
 
+
 import org.opensearch.graph.unipop.controller.common.context.VertexControllerContext;
 import org.opensearch.graph.unipop.promise.TraversalConstraint;
 import org.opensearch.graph.unipop.schemaProviders.GraphElementSchemaProvider;

@@ -1,6 +1,7 @@
 package org.opensearch.graph.unipop.controller.common.appender;
 
 
+
 import org.opensearch.graph.unipop.controller.search.SearchBuilder;
 import javaslang.collection.Stream;
 

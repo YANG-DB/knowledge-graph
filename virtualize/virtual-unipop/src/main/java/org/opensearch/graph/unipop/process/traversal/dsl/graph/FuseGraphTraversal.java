@@ -1,6 +1,7 @@
 package org.opensearch.graph.unipop.process.traversal.dsl.graph;
 
 
+
 import org.opensearch.graph.unipop.process.traversal.traverser.ThinPathTraverserGeneratorFactory;
 import org.apache.tinkerpop.gremlin.process.traversal.Traversal;
 import org.apache.tinkerpop.gremlin.process.traversal.TraverserGenerator;

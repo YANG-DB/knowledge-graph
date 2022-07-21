@@ -3,6 +3,7 @@ package org.opensearch.graph.dispatcher.urlSupplier;
 
 
 
+
 public class ResourceStoreUrlSupplier extends ResourceUrlSupplier {
     public enum Store {
         Query,

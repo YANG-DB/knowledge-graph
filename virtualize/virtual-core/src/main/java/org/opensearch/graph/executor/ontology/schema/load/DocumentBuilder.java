@@ -1,6 +1,7 @@
 package org.opensearch.graph.executor.ontology.schema.load;
 
 
+
 import com.fasterxml.jackson.databind.node.ObjectNode;
 import org.opensearch.graph.model.ontology.Property;
 import org.opensearch.graph.model.resourceInfo.FuseError;

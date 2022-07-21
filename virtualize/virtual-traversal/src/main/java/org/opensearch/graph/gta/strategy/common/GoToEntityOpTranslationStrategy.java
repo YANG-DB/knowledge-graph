@@ -1,6 +1,7 @@
 package org.opensearch.graph.gta.strategy.common;
 
 
+
 import org.opensearch.graph.gta.strategy.PlanOpTranslationStrategyBase;
 import org.opensearch.graph.dispatcher.gta.TranslationContext;
 import org.opensearch.graph.model.execution.plan.entity.GoToEntityOp;

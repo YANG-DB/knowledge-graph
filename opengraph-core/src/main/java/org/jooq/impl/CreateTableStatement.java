@@ -1,6 +1,7 @@
 package org.jooq.impl;
 
 
+
 import org.jooq.*;
 
 import java.util.List;

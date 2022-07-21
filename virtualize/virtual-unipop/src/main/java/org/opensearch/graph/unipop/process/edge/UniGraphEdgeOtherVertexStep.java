@@ -1,6 +1,7 @@
 package org.opensearch.graph.unipop.process.edge;
 
 
+
 import org.apache.tinkerpop.gremlin.process.traversal.Traversal;
 import org.apache.tinkerpop.gremlin.process.traversal.Traverser;
 import org.apache.tinkerpop.gremlin.process.traversal.step.map.MapStep;
