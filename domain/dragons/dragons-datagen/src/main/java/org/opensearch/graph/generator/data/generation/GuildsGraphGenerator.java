@@ -1,0 +1,165 @@
+package org.opensearch.graph.generator.data.generation;
+
+
+
+
+import org.opensearch.graph.generator.configuration.GuildConfiguration;
+import org.opensearch.graph.generator.configuration.PersonConfiguration;
+import org.opensearch.graph.generator.data.generation.entity.GuildGenerator;
+import org.opensearch.graph.generator.model.entity.EntityBase;
+import org.opensearch.graph.generator.model.entity.Guild;
+import org.opensearch.graph.generator.model.enums.EntityType;
+import org.opensearch.graph.generator.model.enums.RelationType;
+import org.opensearch.graph.generator.model.relation.MemberOf;
+import org.opensearch.graph.generator.model.relation.RelationBase;
+import org.opensearch.graph.generator.util.CsvUtil;
+import org.opensearch.graph.generator.util.RandomUtil;
+import javaslang.collection.Stream;
+import org.apache.commons.configuration.Configuration;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+import java.io.File;
+import java.util.*;
+import java.util.stream.Collectors;
+import java.util.stream.IntStream;
+
+import static org.opensearch.graph.generator.data.generation.graph.GraphGeneratorBase.BUFFER;
+
+/**
+ * Created by benishue on 05/06/2017.
+ */
+public class GuildsGraphGenerator {
+
+    public static final String[] GUILDS_HEADER = {"id", "name", "description", "iconId", "url", "establishDate"};
+    public static final String[] PERSON_TO_GUILD_HEADER = {"id", "entityA.id", "entityA.type", "entityB.id", "entityB.type", "startDate", "endDate"};
+    private final Logger logger = LoggerFactory.getLogger(GuildsGraphGenerator.class);
+    //Not all of the population is member of guild
+    private final double NOT_ASSIGNED_TO_GUILD_RATIO = 0.025;
+    //The shape parameter in  Exponential distribution
+    private final double LAMBDA_EXP_DIST = 0.5;
+
+    public GuildsGraphGenerator(final Configuration configuration) {
+        this.guildConf = new GuildConfiguration(configuration);
+        this.personConf = new PersonConfiguration(configuration);
+    }
+
+    public List<String> generateGuildsGraph() {
+        List<Guild> guilds = generateGuilds();
+        return Stream.ofAll(guilds).map(EntityBase::getId).toJavaList();
+    }
+
+    public List<Guild> generateGuilds() {
+        List<Guild> guildsList = new ArrayList<>();
+        List<String[]> guildsRecords = new ArrayList<>();
+        guildsRecords.add(0, GUILDS_HEADER);
+        try {
+            GuildGenerator generator = new GuildGenerator(guildConf);
+            int guildsSize = guildConf.getNumberOfNodes();
+            String[] guildsNames = guildConf.getGuilds();
+
+            for (int i = 0; i < guildsSize; i++) {
+                Guild guild = generator.generate();
+                guild.setName(guildsNames[i]);
+                guild.setId(Integer.toString(i));
+                guildsList.add(guild);
+                guildsRecords.add(guild.getRecord());
+            }
+            //Write graph
+            CsvUtil.appendResults(guildsRecords, guildConf.getEntitiesFilePath());
+
+        } catch (Exception e) {
+            logger.error(e.toString(), e);
+        }
+        return guildsList;
+    }
+
+    /**
+     * @param guildsIdList
+     * @param personsIdList
+     * @return Map <Guild Id, List of Persons Ids>
+     */
+    public Map<String, List<String>> attachPersonsToGuilds(List<String> guildsIdList,
+                                                           List<String> personsIdList) {
+        Map<String, List<String>> guildToPersonsSet = new HashMap<>();
+
+        int maxGuildMembership = personConf.getMaxGuildMembership();
+        int membersPopulationSize = Math.toIntExact(Math.round(personsIdList.size() * (1 - NOT_ASSIGNED_TO_GUILD_RATIO)));
+        //One person can be belong to several guilds <Guild Id, List of persons Ids>
+
+        //We are creating an Exp distribution of guild size summed up to the guilds number
+        double[] expDistArray = RandomUtil.getExpDistArray(guildsIdList.size(), 1.0 - NOT_ASSIGNED_TO_GUILD_RATIO, LAMBDA_EXP_DIST);
+        List<Double> guildsMembersDist = Arrays.stream(expDistArray).boxed().collect(Collectors.toList());
+
+        List<String> shuffledPersonsIds = IntStream.rangeClosed(0, membersPopulationSize)
+                .mapToObj(Integer::toString).collect(Collectors.toList());
+        //Adding the same persons to several guilds - without changing the ratio of each guild
+        for (int k = 0; k < maxGuildMembership; k++) {
+            int startIndex = 0;
+            for (int i = 0; i < guildsMembersDist.size(); i++) {
+                String guildId = guildsIdList.get(i);
+                int guildMembersSize = Math.toIntExact(Math.round(guildsMembersDist.get(i) * membersPopulationSize));
+                for (int j = startIndex; j < membersPopulationSize; j++) {
+                    String personId = shuffledPersonsIds.get(j);
+
+                    if (guildToPersonsSet.size() % BUFFER == 0)
+                        logger.info("Collecting to generate ... " + BUFFER + " elements");
+
+                    if (guildToPersonsSet.get(guildId) == null) {
+                        guildToPersonsSet.put(guildId, new ArrayList<>(Arrays.asList(personId)));
+                    } else {
+                        List<String> personsInGuild = guildToPersonsSet.get(guildId);
+                        if (!personsInGuild.contains(personId)) { //avoiding duplicate members in a Guild
+                            guildToPersonsSet.get(guildId).add(personId);
+                        }
+                    }
+                    if (j == startIndex + guildMembersSize)
+                        break;
+                }
+                startIndex += guildMembersSize + 1;
+            }
+            Collections.shuffle(shuffledPersonsIds);
+        }
+        printPersonsToGuild(guildToPersonsSet, EntityType.GUILD);
+        return guildToPersonsSet;
+    }
+
+    private void printPersonsToGuild(Map<String, List<String>> personsToGuild, EntityType entityType) {
+        List<String[]> p2gRecords = new ArrayList<>();
+        p2gRecords.add(0, PERSON_TO_GUILD_HEADER);
+
+        for (Map.Entry<String, List<String>> p2g : personsToGuild.entrySet()) {
+            String guildId = p2g.getKey();
+            List<String> personsIds = p2g.getValue();
+            for (String personId : personsIds) {
+                String edgeId = guildId + "_" + personId;
+                Date since = RandomUtil.randomDate(guildConf.getStartDateOfStory(), guildConf.getEndDateOfStory());
+                Date till = RandomUtil.randomDate(since, guildConf.getEndDateOfStory());
+                RelationBase personMemberOfGuildsRel = new MemberOf(edgeId, guildId, personId, since, till);
+                p2gRecords.add(personMemberOfGuildsRel.getRecord());
+                if (p2gRecords.size() % BUFFER == 0)
+                    logger.info("Collecting to generate ... " + BUFFER + " elements");
+
+            }
+        }
+        //Write graph
+        String memberOfRelationsFile = String.format("%s_%s_%s.csv",
+                guildConf.getRelationsFilePath().replace(".csv", ""),
+                RelationType.MEMBER_OF,
+                entityType);
+        CsvUtil.appendResults(p2gRecords, memberOfRelationsFile);
+    }
+
+    //region Fields
+    private final GuildConfiguration guildConf;
+    private final PersonConfiguration personConf;
+
+    /**
+     * cleanup intermediate files
+     */
+    public void Cleanup() {
+        new File(guildConf.getRelationsFilePath()).delete();
+    }
+    //endregion
+
+}

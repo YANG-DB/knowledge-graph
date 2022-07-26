@@ -2,6 +2,8 @@ package org.opensearch.graph.model;
 
 
 
+
+
 public class GlobalConstants {
     public static final boolean INCLUDE_AGGREGATION = false;
 

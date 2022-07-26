@@ -3,6 +3,8 @@ package org.opensearch.graph.model.ontology;
 
 
 
+
+
 public class DirectiveType {
     private DirectiveClasses type;
 

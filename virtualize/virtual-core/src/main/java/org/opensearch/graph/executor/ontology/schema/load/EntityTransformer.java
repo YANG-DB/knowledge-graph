@@ -2,6 +2,8 @@ package org.opensearch.graph.executor.ontology.schema.load;
 
 
 
+
+
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.node.ArrayNode;
 import com.fasterxml.jackson.databind.node.ObjectNode;
@@ -18,7 +20,7 @@ import org.opensearch.graph.model.logical.LogicalEdge;
 import org.opensearch.graph.model.logical.LogicalGraphModel;
 import org.opensearch.graph.model.logical.LogicalNode;
 import org.opensearch.graph.model.ontology.Ontology;
-import org.opensearch.graph.model.resourceInfo.FuseError;
+import org.opensearch.graph.model.resourceInfo.GraphError;
 import org.opensearch.graph.model.schema.Entity;
 import org.opensearch.graph.model.schema.IndexProvider;
 import org.opensearch.graph.model.schema.Redundant;
@@ -50,7 +52,7 @@ public class EntityTransformer implements DataTransformer<DataTransformerContext
     public EntityTransformer(Config config, OntologyProvider ontology, IndexProviderFactory indexProvider, RawSchema schema, IdGeneratorDriver<Range> idGenerator, Client client) {
         String assembly = config.getString("assembly");
         this.accessor = new Ontology.Accessor(ontology.get(assembly).orElseThrow(
-                () -> new FuseError.FuseErrorException(new FuseError("No Ontology present for assembly", "No Ontology present for assembly" + assembly))));
+                () -> new GraphError.GraphErrorException(new GraphError("No Ontology present for assembly", "No Ontology present for assembly" + assembly))));
         //if no index provider found with assembly name - generate default one accoring to ontology and simple Static Index Partitioning strategy
         this.indexProvider = indexProvider.get(assembly).orElseGet(() -> IndexProvider.Builder.generate(accessor.get()));
         this.schema = schema;
@@ -83,7 +85,7 @@ public class EntityTransformer implements DataTransformer<DataTransformerContext
         try {
             ObjectNode element = mapper.createObjectNode();
             Relation relation = indexProvider.getRelation(edge.label())
-                    .orElseThrow(() -> new FuseError.FuseErrorException(new FuseError("Logical Graph Transformation Error", "No matching edge found with label " + edge.label())));
+                    .orElseThrow(() -> new GraphError.GraphErrorException(new GraphError("Logical Graph Transformation Error", "No matching edge found with label " + edge.label())));
             //put classifiers
             String id = String.format("%s.%s", edge.getId(), direction);
             element.put(EngineIndexProviderMappingFactory.ID, id);
@@ -104,7 +106,7 @@ public class EntityTransformer implements DataTransformer<DataTransformerContext
                 partition = Optional.of(new Tuple2<>(field, parseValue(accessor.property$(field).getType(), edge.getProperty(field), Utils.sdf).toString()));
 
             return new DocumentBuilder(element, id, relation.getType(), Optional.empty(), partition);
-        } catch (FuseError.FuseErrorException e) {
+        } catch (GraphError.GraphErrorException e) {
             return new DocumentBuilder(e.getError());
         }
     }
@@ -121,12 +123,12 @@ public class EntityTransformer implements DataTransformer<DataTransformerContext
         try {
             ObjectNode element = mapper.createObjectNode();
             Entity entity = indexProvider.getEntity(node.label())
-                    .orElseThrow(() -> new FuseError.FuseErrorException(new FuseError("Logical Graph Transformation Error", "No matching node found with label " + node.label())));
+                    .orElseThrow(() -> new GraphError.GraphErrorException(new GraphError("Logical Graph Transformation Error", "No matching node found with label " + node.label())));
             //translate entity
             translateEntity(mapper, indexProvider, accessor, context, node, element, entity);
 
             return new DocumentBuilder(element, node.getId(), entity.getType(), Optional.empty());
-        } catch (FuseError.FuseErrorException e) {
+        } catch (GraphError.GraphErrorException e) {
             return new DocumentBuilder(e.getError());
         }
     }
@@ -288,12 +290,12 @@ public class EntityTransformer implements DataTransformer<DataTransformerContext
         ObjectNode entitySide = mapper.createObjectNode();
         Optional<LogicalNode> source = nodeById(context, sideId);
         if (!source.isPresent()) {
-            throw new FuseError.FuseErrorException(new FuseError("Logical Graph Transformation Error", "No matching node found with sideId " + sideId));
+            throw new GraphError.GraphErrorException(new GraphError("Logical Graph Transformation Error", "No matching node found with sideId " + sideId));
         }
 
         //get type (label) of the side node
         Entity entity = indexProvider.getEntity(source.get().label())
-                .orElseThrow(() -> new FuseError.FuseErrorException(new FuseError("Logical Graph Transformation Error", "No matching node found with label " + source.get().label())));
+                .orElseThrow(() -> new GraphError.GraphErrorException(new GraphError("Logical Graph Transformation Error", "No matching node found with label " + source.get().label())));
 
         //put classifiers
         entitySide.put(EngineIndexProviderMappingFactory.ID, source.get().getId());

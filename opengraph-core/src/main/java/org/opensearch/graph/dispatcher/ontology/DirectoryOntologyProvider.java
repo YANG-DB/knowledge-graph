@@ -3,10 +3,12 @@ package org.opensearch.graph.dispatcher.ontology;
 
 
 
+
+
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.opensearch.graph.model.ontology.Ontology;
 import org.opensearch.graph.model.ontology.OntologyFinalizer;
-import org.opensearch.graph.model.resourceInfo.FuseError;
+import org.opensearch.graph.model.resourceInfo.GraphError;
 import javaslang.Tuple2;
 import javaslang.collection.Stream;
 import org.apache.commons.io.FilenameUtils;
@@ -75,7 +77,7 @@ public class DirectoryOntologyProvider implements OntologyProvider {
             try {
                 Files.write(path, mapper.writeValueAsBytes(ontology));
             } catch (IOException e) {
-                throw new FuseError.FuseErrorException("Failed writing file for new Ontology ["+ontology.getOnt()+"] ",e.getCause());
+                throw new GraphError.GraphErrorException("Failed writing file for new Ontology ["+ontology.getOnt()+"] ",e.getCause());
             }
         }
 

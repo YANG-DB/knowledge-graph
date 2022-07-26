@@ -4,6 +4,8 @@ package org.opensearch.graph.model.schema;
 
 
 
+
+
 import com.fasterxml.jackson.annotation.*;
 import com.google.common.collect.ImmutableList;
 import org.opensearch.graph.model.ontology.Ontology;

@@ -2,6 +2,8 @@ package org.opensearch.graph.model.logical;
 
 
 
+
+
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonInclude;
 

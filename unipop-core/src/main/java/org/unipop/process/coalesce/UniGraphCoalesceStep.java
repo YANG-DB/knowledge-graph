@@ -5,6 +5,8 @@ package org.unipop.process.coalesce;
 
 
 
+
+
 import com.google.common.collect.Lists;
 import org.apache.tinkerpop.gremlin.process.traversal.Traversal;
 import org.apache.tinkerpop.gremlin.process.traversal.Traverser;

@@ -2,6 +2,8 @@ package org.opensearch.graph.test.framework.index;
 
 
 
+
+
 import org.opensearch.client.Client;
 import org.opensearch.client.core.MainResponse;
 import org.opensearch.client.transport.TransportClient;
@@ -24,7 +26,7 @@ import java.util.*;
 
 
 public class SearchEmbeddedNode implements AutoCloseable {
-    public static final String FUSE_TEST_ELASTIC = "fuse.test_elastic";
+    public static final String GRAPH_TEST_OPENSEARCH = "graph.test_opensearch";
 
     static {
         //see https://github.com/testcontainers/testcontainers-java/issues/1009 issue with netty & E/S
@@ -52,7 +54,7 @@ public class SearchEmbeddedNode implements AutoCloseable {
     private static int numberOfShards;
     public Node node;
 
-    static String nodeName = FUSE_TEST_ELASTIC;
+    static String nodeName = GRAPH_TEST_OPENSEARCH;
 
     static int httpPort = 9200;
     static int httpTransportPort = 9300;
@@ -70,11 +72,11 @@ public class SearchEmbeddedNode implements AutoCloseable {
     }
 
     SearchEmbeddedNode() throws Exception {
-        this(Settings.EMPTY, "target/es", 9200, 9300, "fuse.test_elastic");
+        this(Settings.EMPTY, "target/es", 9200, 9300, "graph.test_opensearch");
     }
 
     SearchEmbeddedNode(Settings settings, EngineIndexConfigurer... configurers) throws Exception {
-        this(settings, "target/es", 9200, 9300, "fuse.test_elastic", configurers);
+        this(settings, "target/es", 9200, 9300, "graph.test_opensearch", configurers);
     }
 
     SearchEmbeddedNode(Settings settings, String esWorkingDir, int httpPort, int httpTransportPort, String nodeName, EngineIndexConfigurer... configurers) throws Exception {

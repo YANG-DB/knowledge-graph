@@ -1,6 +1,8 @@
 package org.opensearch.graph.services.modules;
 
 
+
+
 /*-
  *
  * fuse-service
@@ -81,7 +83,7 @@ public class ServiceModule extends ModuleBase {
     @Override
     protected void configureInner(Env env, Config config, Binder binder) throws Throwable {
         // bind common components
-        long defaultTimeout = config.hasPath("fuse.cursor.timeout") ? config.getLong("fuse.cursor.timeout") : 60 * 1000 * 3;
+        long defaultTimeout = config.hasPath("opengraph.timeout") ? config.getLong("opengraph.timeout") : 60 * 1000 * 3;
         binder.bindConstant().annotatedWith(Names.named(ExecutionScope.clientParameter)).to(defaultTimeout);
         binder.bind(RequestIdSupplier.class)
                 .annotatedWith(named(CachedRequestIdSupplier.RequestIdSupplierParameter))
@@ -179,8 +181,8 @@ public class ServiceModule extends ModuleBase {
         binder.install(new PrivateModule() {
             @Override
             protected void configure() {
-                String clazz = env.config().hasPath("fuse.node_status_reporter") ?
-                        env.config().getString("fuse.node_status_reporter") :
+                String clazz = env.config().hasPath("opengraph.node_status_reporter") ?
+                        env.config().getString("opengraph.node_status_reporter") :
                         InMemNodeStatusResource.class.getName();
                 try {
                     this.bind(NodeStatusResource.class)

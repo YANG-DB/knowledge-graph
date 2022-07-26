@@ -1,6 +1,8 @@
 package org.opensearch.graph.services.appRegistrars;
 
 
+
+
 import org.opensearch.graph.dispatcher.urlSupplier.AppUrlSupplier;
 import org.opensearch.graph.services.controllers.DashboardController;
 import org.jooby.Jooby;

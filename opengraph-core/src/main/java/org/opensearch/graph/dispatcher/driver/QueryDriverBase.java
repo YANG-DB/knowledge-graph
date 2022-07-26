@@ -2,6 +2,8 @@ package org.opensearch.graph.dispatcher.driver;
 
 
 
+
+
 import com.google.inject.Inject;
 import org.opensearch.graph.dispatcher.query.JsonQueryTransformerFactory;
 import org.opensearch.graph.dispatcher.query.QueryTransformer;
@@ -93,7 +95,7 @@ public abstract class QueryDriverBase implements QueryDriver {
             return Optional.of(resourceInfo.get());
         } catch (Throwable e) {
             return Optional.of(new QueryResourceInfo().error(
-                    new FuseError(Query.class.getSimpleName(), "failed building the cursor request " + cursorType)));
+                    new GraphError(Query.class.getSimpleName(), "failed building the cursor request " + cursorType)));
         } finally {
             //remove stateless query
 //            delete(id);
@@ -117,7 +119,7 @@ public abstract class QueryDriverBase implements QueryDriver {
             return Optional.of(resourceInfo.get());
         } catch (Throwable e) {
             return Optional.of(new QueryResourceInfo().error(
-                    new FuseError(Query.class.getSimpleName(), "failed building the cursor request " + cursorType)));
+                    new GraphError(Query.class.getSimpleName(), "failed building the cursor request " + cursorType)));
 
         } finally {
             //remove stateless query
@@ -181,7 +183,7 @@ public abstract class QueryDriverBase implements QueryDriver {
             return Optional.of(resourceInfo.get());
         } catch (Throwable e) {
             return Optional.of(new QueryResourceInfo().error(
-                    new FuseError(Query.class.getSimpleName(), "failed building the cursor request " + cursorType)));
+                    new GraphError(Query.class.getSimpleName(), "failed building the cursor request " + cursorType)));
         } finally {
             //remove stateless query
 //            delete(id);
@@ -227,7 +229,7 @@ public abstract class QueryDriverBase implements QueryDriver {
             return Optional.of(resourceInfo.get());
         } catch (Throwable e) {
             return Optional.of(new QueryResourceInfo().error(
-                    new FuseError(Query.class.getSimpleName(), "failed building the findPath query request ")));
+                    new GraphError(Query.class.getSimpleName(), "failed building the findPath query request ")));
         } finally {
             //remove stateless query
 //            delete(id);
@@ -253,7 +255,7 @@ public abstract class QueryDriverBase implements QueryDriver {
             return Optional.of(resourceInfo.get());
         } catch (Throwable e) {
             return Optional.of(new QueryResourceInfo().error(
-                    new FuseError(Query.class.getSimpleName(), "failed building the findPath query request ")));
+                    new GraphError(Query.class.getSimpleName(), "failed building the findPath query request ")));
         } finally {
             //remove stateless query
 //            delete(id);
@@ -279,7 +281,7 @@ public abstract class QueryDriverBase implements QueryDriver {
             return Optional.of(resourceInfo.get());
         } catch (Throwable e) {
             return Optional.of(new QueryResourceInfo().error(
-                    new FuseError(Query.class.getSimpleName(), "failed building the findPath query request ")));
+                    new GraphError(Query.class.getSimpleName(), "failed building the findPath query request ")));
         } finally {
             //remove stateless query
 //            delete(id);
@@ -290,7 +292,7 @@ public abstract class QueryDriverBase implements QueryDriver {
     public Optional<Object> profile(String queryId) {
         if (!resourceStore.getQueryResource(queryId).isPresent())
             return Optional.of(new QueryResourceInfo().error(
-                    new FuseError(Query.class.getSimpleName(),
+                    new GraphError(Query.class.getSimpleName(),
                             "Query with id[" + queryId + "] not found in store")));
         //get query resource
         QueryResource queryResource = resourceStore.getQueryResource(queryId).get();
@@ -318,7 +320,7 @@ public abstract class QueryDriverBase implements QueryDriver {
         try {
             if (!resourceStore.getQueryResource(queryId).isPresent())
                 return Optional.of(new QueryResourceInfo().error(
-                        new FuseError(Query.class.getSimpleName(),
+                        new GraphError(Query.class.getSimpleName(),
                                 "Query with id[" + queryId + "] not found in store")));
 
             QueryResource queryResource = resourceStore.getQueryResource(queryId).get();
@@ -326,7 +328,7 @@ public abstract class QueryDriverBase implements QueryDriver {
             final Optional<PageResourceInfo> info = pageDriver.create(queryId, cursorID, pageSize);
             if (!info.isPresent())
                 return Optional.of(new QueryResourceInfo().error(
-                        new FuseError(Query.class.getSimpleName(), "failed fetching next page for query " + queryId)));
+                        new GraphError(Query.class.getSimpleName(), "failed fetching next page for query " + queryId)));
 
             final PageResourceInfo pageResourceInfo = info.get();
 
@@ -337,7 +339,7 @@ public abstract class QueryDriverBase implements QueryDriver {
             return pageDriver.getData(queryId, cursorID, pageResourceInfo.getResourceId());
         } catch (Exception err) {
             return Optional.of(new QueryResourceInfo().error(
-                    new FuseError(Query.class.getSimpleName(),
+                    new GraphError(Query.class.getSimpleName(),
                             err.getMessage())));
         }
     }
@@ -359,7 +361,7 @@ public abstract class QueryDriverBase implements QueryDriver {
 
             if (!validationResult.valid()) {
                 return Optional.of(new QueryResourceInfo().error(
-                        new FuseError(Query.class.getSimpleName(),
+                        new GraphError(Query.class.getSimpleName(),
                                 validationResult.getValidator() + ":"
                                         + Arrays.toString(Stream.ofAll(validationResult.errors()).toJavaArray(String.class)))));
             }
@@ -378,7 +380,7 @@ public abstract class QueryDriverBase implements QueryDriver {
                     .withInnerQueryResources(getQueryResourceInfos(innerQuery)));
         } catch (Exception err) {
             return Optional.of(new QueryResourceInfo().error(
-                    new FuseError(Query.class.getSimpleName(),err)));
+                    new GraphError(Query.class.getSimpleName(),err)));
         }
     }
 
@@ -467,7 +469,7 @@ public abstract class QueryDriverBase implements QueryDriver {
             ValidationResult validationResult = validateAsgQuery(asgQuery);
             if (!validationResult.valid()) {
                 return Optional.of(new QueryResourceInfo().error(
-                        new FuseError(Query.class.getSimpleName(),
+                        new GraphError(Query.class.getSimpleName(),
                                 validationResult.getValidator() + ":" + Arrays.toString(Stream.ofAll(validationResult.errors()).toJavaArray(String.class)))));
             }
 
@@ -498,11 +500,11 @@ public abstract class QueryDriverBase implements QueryDriver {
                     metadata.getId(),
                     urlSupplier.cursorStoreUrl(metadata.getId()))
                     .withInnerQueryResources(getQueryResourceInfos(innerQuery)));
-        } catch (FuseError.FuseErrorException err) {
+        } catch (GraphError.GraphErrorException err) {
             return Optional.of(new QueryResourceInfo().error(err.getError()));
         } catch (Exception err) {
             return Optional.of(new QueryResourceInfo().error(
-                    new FuseError(Query.class.getSimpleName(),err)));
+                    new GraphError(Query.class.getSimpleName(),err)));
         }
     }
 
@@ -533,7 +535,7 @@ public abstract class QueryDriverBase implements QueryDriver {
             return getQueryResourceInfo(request, queryResourceInfo);
         } catch (Exception err) {
             return Optional.of(new QueryResourceInfo().error(
-                    new FuseError(Query.class.getSimpleName(), err)));
+                    new GraphError(Query.class.getSimpleName(), err)));
 
         }
     }
@@ -546,7 +548,7 @@ public abstract class QueryDriverBase implements QueryDriver {
             return getQueryResourceInfo(request, queryResourceInfo);
         } catch (Exception err) {
             return Optional.of(new QueryResourceInfo().error(
-                    new FuseError(Query.class.getSimpleName(),
+                    new GraphError(Query.class.getSimpleName(),
                             err)));
 
         }
@@ -559,7 +561,7 @@ public abstract class QueryDriverBase implements QueryDriver {
                 return Optional.of(new QueryResourceInfo().error(queryResourceInfo.get().getError()));
             }
             return Optional.of(new QueryResourceInfo().error(
-                    new FuseError(Query.class.getSimpleName(), "Failed creating cursor resource from given request: \n" + request.toString())));
+                    new GraphError(Query.class.getSimpleName(), "Failed creating cursor resource from given request: \n" + request.toString())));
         }
 
         if (request.getCreateCursorRequest() == null) {
@@ -569,7 +571,7 @@ public abstract class QueryDriverBase implements QueryDriver {
         Optional<CursorResourceInfo> cursorResourceInfo = this.cursorDriver.create(queryResourceInfo.get().getResourceId(), request.getCreateCursorRequest());
         if (!cursorResourceInfo.isPresent()) {
             return Optional.of(new QueryResourceInfo().error(
-                    new FuseError(Query.class.getSimpleName(), "Failed creating cursor resource from given request: \n" + request.toString())));
+                    new GraphError(Query.class.getSimpleName(), "Failed creating cursor resource from given request: \n" + request.toString())));
         }
 
         if (request.getCreateCursorRequest().getCreatePageRequest() == null) {
@@ -595,7 +597,7 @@ public abstract class QueryDriverBase implements QueryDriver {
                             cursorResourceInfo.get().getPageStoreUrl(),
                             cursorResourceInfo.get()
                     ).error(
-                            new FuseError(Query.class.getSimpleName(),
+                            new GraphError(Query.class.getSimpleName(),
                                     "Failed creating page resource from given request: \n" + request.toString())));
         }
 
@@ -613,7 +615,7 @@ public abstract class QueryDriverBase implements QueryDriver {
                             queryResourceInfo.get().getResourceId(),
                             cursorResourceInfo.get().getPageStoreUrl(),
                             cursorResourceInfo.get()
-                    ).error(new FuseError(Query.class.getSimpleName(), "Failed fetching page data from given request: \n" + request.toString())));
+                    ).error(new GraphError(Query.class.getSimpleName(), "Failed fetching page data from given request: \n" + request.toString())));
         }
         //populate data on page
         pageResourceInfo.get().setData(pageDataResponse.get());
@@ -672,7 +674,7 @@ public abstract class QueryDriverBase implements QueryDriver {
         try {
             if (!resourceStore.getQueryResource(callRequest.getQuery().getName()).isPresent())
                 return Optional.of(new QueryResourceInfo().error(
-                        new FuseError(Query.class.getSimpleName(),
+                        new GraphError(Query.class.getSimpleName(),
                                 "Query with id[" + callRequest.getQuery().getName() + "] not found in store")));
 
             QueryResource queryResource = resourceStore.getQueryResource(callRequest.getQuery().getName()).get();
@@ -706,7 +708,7 @@ public abstract class QueryDriverBase implements QueryDriver {
             return info;
         } catch (Exception err) {
             return Optional.of(new QueryResourceInfo().error(
-                    new FuseError(Query.class.getSimpleName(),err)));
+                    new GraphError(Query.class.getSimpleName(),err)));
         }
     }
 
@@ -814,17 +816,17 @@ public abstract class QueryDriverBase implements QueryDriver {
         AsgQuery asgQuery = transform(query);
         if (!validateAsgQuery(asgQuery).valid())
             return Optional.of(new PlanWithCost.ErrorPlanWithCost(
-                    new FuseError("PlanValidationError", validateAsgQuery(asgQuery).toString())));
+                    new GraphError("PlanValidationError", validateAsgQuery(asgQuery).toString())));
 
         AsgQuery rewrite = rewrite(asgQuery);
         if (!validateAsgQuery(rewrite).valid())
             return Optional.of(new PlanWithCost.ErrorPlanWithCost(
-                    new FuseError("PlanValidationError", validateAsgQuery(rewrite).toString())));
+                    new GraphError("PlanValidationError", validateAsgQuery(rewrite).toString())));
 
         try {
             return Optional.of(planWithCost(QueryMetadata.random("plan", true), rewrite));
         } catch (Exception e) {
-            return Optional.of(new PlanWithCost.ErrorPlanWithCost(new FuseError("NoValidPlanFound", e)));
+            return Optional.of(new PlanWithCost.ErrorPlanWithCost(new GraphError("NoValidPlanFound", e)));
         }
     }
 

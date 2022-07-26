@@ -4,6 +4,8 @@ package org.opensearch.graph.dispatcher.driver;
 
 
 
+
+
 import com.codahale.metrics.MetricRegistry;
 import com.google.inject.Inject;
 import org.opensearch.graph.dispatcher.resource.CursorResource;
@@ -12,7 +14,7 @@ import org.opensearch.graph.dispatcher.resource.store.ResourceStore;
 import org.opensearch.graph.dispatcher.urlSupplier.AppUrlSupplier;
 import org.opensearch.graph.model.query.Query;
 import org.opensearch.graph.model.resourceInfo.CursorResourceInfo;
-import org.opensearch.graph.model.resourceInfo.FuseError;
+import org.opensearch.graph.model.resourceInfo.GraphError;
 import org.opensearch.graph.model.resourceInfo.StoreResourceInfo;
 import org.opensearch.graph.model.transport.cursor.CreateCursorRequest;
 import javaslang.collection.Stream;
@@ -38,7 +40,7 @@ public abstract class CursorDriverBase implements CursorDriver {
         Optional<QueryResource> queryResource = this.resourceStore.getQueryResource(queryId);
         if (!queryResource.isPresent()) {
                 return Optional.of(new CursorResourceInfo().error(
-                        new FuseError(Query.class.getSimpleName(), "failed fetching next page for query " + queryId)));
+                        new GraphError(Query.class.getSimpleName(), "failed fetching next page for query " + queryId)));
         }
         //outer query cursor id
         String cursorId = queryResource.get().getNextCursorId();

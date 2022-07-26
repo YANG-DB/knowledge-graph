@@ -29,7 +29,7 @@ import java.util.stream.Collectors;
 import java.util.stream.StreamSupport;
 
 import static org.opensearch.graph.executor.ontology.schema.IndexProviderRawSchema.getIndexPartitions;
-import static org.opensearch.graph.test.framework.index.SearchEmbeddedNode.FUSE_TEST_ELASTIC;
+import static org.opensearch.graph.test.framework.index.SearchEmbeddedNode.GRAPH_TEST_OPENSEARCH;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.when;
 
@@ -213,7 +213,7 @@ public class TestSuiteIndexProviderSuite implements BaseSuiteMarker {
     }
 
     private static org.opensearch.client.core.MainResponse getDefaultInfo() {
-        return new org.opensearch.client.core.MainResponse(FUSE_TEST_ELASTIC, null, ClusterName.DEFAULT.toString(),null);
+        return new org.opensearch.client.core.MainResponse(GRAPH_TEST_OPENSEARCH, null, ClusterName.DEFAULT.toString(),null);
     }
 
     @AfterClass

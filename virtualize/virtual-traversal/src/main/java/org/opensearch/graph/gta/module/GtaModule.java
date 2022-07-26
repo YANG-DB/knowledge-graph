@@ -2,6 +2,8 @@ package org.opensearch.graph.gta.module;
 
 
 
+
+
 import com.google.inject.Binder;
 import com.google.inject.PrivateModule;
 import org.opensearch.graph.dispatcher.gta.LoggingPlanTraversalTranslator;
@@ -50,7 +52,7 @@ public class GtaModule extends ModuleBase {
     }
 
     private Class<? extends PlanTraversalTranslator> getPlanTraversalTranslatorClass(Config conf) throws ClassNotFoundException {
-        return (Class<? extends  PlanTraversalTranslator>)Class.forName(conf.getString("fuse.plan_traversal_translator_class"));
+        return (Class<? extends  PlanTraversalTranslator>)Class.forName(conf.getString("opengraph.plan_traversal_translator_class"));
     }
     //endregion
 }

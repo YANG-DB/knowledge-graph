@@ -64,7 +64,7 @@ in the bin folder under the installation location.
 **OpenGraph is a graph execution engine on top of elasticsearch, it has a REST API interface that allows interacting with it.**
 
 Running OpenGraph from its installation folder (after un-tar the downloaded artifact) is simple, it is done via the
-start-fuse-service.sh script in the installation folder.
+start-service.sh script in the installation folder.
 
 #### Configuration for OpenGraph
 

@@ -2,6 +2,8 @@ package org.opensearch.graph.executor;
 
 
 
+
+
 import com.google.inject.Binder;
 import com.google.inject.PrivateModule;
 import com.google.inject.internal.SingletonScope;
@@ -346,10 +348,6 @@ public class ExecutorModule extends ModuleBase {
 
     protected Class<? extends UniGraphProvider> getUniGraphProviderClass(Config conf) throws ClassNotFoundException {
         return (Class<? extends UniGraphProvider>) Class.forName(conf.getString(conf.getString("assembly") + ".unigraph_provider"));
-    }
-
-    protected Class<? extends CursorFactory> getCursorFactoryClass(Config conf) throws ClassNotFoundException {
-        return (Class<? extends CursorFactory>) Class.forName(conf.getString(conf.getString("assembly") + ".cursor_factory"));
     }
 
     private int getInt(Config conf, String key, int defaults) {

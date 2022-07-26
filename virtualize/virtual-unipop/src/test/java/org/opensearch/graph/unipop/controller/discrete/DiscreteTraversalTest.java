@@ -13,11 +13,11 @@ import org.opensearch.graph.unipop.controller.common.ElementController;
 import org.opensearch.graph.unipop.controller.search.SearchOrderProvider;
 import org.opensearch.graph.unipop.controller.search.SearchOrderProviderFactory;
 import org.opensearch.graph.unipop.predicates.SelectP;
-import org.opensearch.graph.unipop.process.traversal.dsl.graph.FuseGraphTraversalSource;
+import org.opensearch.graph.unipop.process.traversal.dsl.graph.SearchGraphTraversalSource;
 import org.opensearch.graph.unipop.promise.Constraint;
 import org.opensearch.graph.unipop.schemaProviders.*;
 import org.opensearch.graph.unipop.schemaProviders.indexPartitions.IndexPartitions;
-import org.opensearch.graph.unipop.structure.FuseUniGraph;
+import org.opensearch.graph.unipop.structure.SearchUniGraph;
 import javaslang.collection.Stream;
 import org.apache.tinkerpop.gremlin.process.traversal.P;
 import org.apache.tinkerpop.gremlin.process.traversal.TraversalStrategies;
@@ -94,7 +94,7 @@ public class DiscreteTraversalTest {
         MetricRegistry registry = new MetricRegistry();
 
         client = getClient(CLUSTER_NAME, 9300);
-        graph = new FuseUniGraph(
+        graph = new SearchUniGraph(
                 uniGraphConfiguration,
                 uniGraph -> new ControllerManager() {
                     @Override
@@ -172,7 +172,7 @@ public class DiscreteTraversalTest {
 
     @Before
     public void before() {
-        g = (FuseGraphTraversalSource) graph.traversal();
+        g = (SearchGraphTraversalSource) graph.traversal();
     }
     //endregion
 
@@ -1350,7 +1350,7 @@ public class DiscreteTraversalTest {
     //endregion
 
     //region Fields
-    private FuseGraphTraversalSource g;
+    private SearchGraphTraversalSource g;
     //endregion
 
     public static class NewStandardStrategyProvider implements StrategyProvider {

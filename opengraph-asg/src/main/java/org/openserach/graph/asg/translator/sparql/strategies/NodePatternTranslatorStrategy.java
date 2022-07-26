@@ -2,6 +2,8 @@ package org.openserach.graph.asg.translator.sparql.strategies;
 
 
 
+
+
 import org.opensearch.graph.model.asgQuery.AsgEBase;
 import org.opensearch.graph.model.asgQuery.AsgQuery;
 import org.opensearch.graph.model.asgQuery.AsgQueryUtil;
@@ -22,7 +24,7 @@ import org.opensearch.graph.model.query.properties.constraint.ConstraintOp;
 import org.opensearch.graph.model.query.properties.projection.IdentityProjection;
 import org.opensearch.graph.model.query.quant.QuantBase;
 import org.opensearch.graph.model.query.quant.QuantType;
-import org.opensearch.graph.model.resourceInfo.FuseError;
+import org.opensearch.graph.model.resourceInfo.GraphError;
 import javaslang.Tuple2;
 import org.eclipse.rdf4j.model.Value;
 import org.eclipse.rdf4j.query.algebra.*;
@@ -151,7 +153,7 @@ public class NodePatternTranslatorStrategy implements SparqlElementTranslatorStr
             }
             if (!result.isPresent())
                 //todo - warning no appropriate ontology type was found for the predicate ...
-                throw new FuseError.FuseErrorException(new FuseError("Schema query mismatch", "No predicate found for " + value + " in ontology  " + context.getOntology().name()));
+                throw new GraphError.GraphErrorException(new GraphError("Schema query mismatch", "No predicate found for " + value + " in ontology  " + context.getOntology().name()));
 
         }
         return result;

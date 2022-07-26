@@ -3,6 +3,8 @@ package org.opensearch.graph.model.query.quant;
 
 
 
+
+
 /**
  * Created by Roman on 24/04/2017.
  */

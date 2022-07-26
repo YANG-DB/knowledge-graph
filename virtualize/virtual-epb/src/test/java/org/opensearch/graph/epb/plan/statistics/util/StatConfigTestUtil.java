@@ -26,7 +26,7 @@ public class StatConfigTestUtil {
     private static final String STAT_FIELD_STRING_UPPER_NAME = "upper_bound_string";
 
     public static StatConfig getStatConfig (StatContainer statContainer) {
-        return new StatConfig("fuse.test_elastic",
+        return new StatConfig("graph.test_opensearch",
                 Collections.singletonList("localhost"),
                 9300,
                 STAT_INDEX_NAME,

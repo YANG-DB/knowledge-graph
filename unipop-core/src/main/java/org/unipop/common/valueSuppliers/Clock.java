@@ -7,6 +7,8 @@ package org.unipop.common.valueSuppliers;
 
 
 
+
+
 public interface Clock {
     long getTime();
 

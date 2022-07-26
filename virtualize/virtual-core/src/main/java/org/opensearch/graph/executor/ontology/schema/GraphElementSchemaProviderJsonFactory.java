@@ -2,6 +2,8 @@ package org.opensearch.graph.executor.ontology.schema;
 
 
 
+
+
 import com.google.inject.Inject;
 import com.typesafe.config.Config;
 import org.opensearch.graph.dispatcher.ontology.IndexProviderFactory;
@@ -13,7 +15,7 @@ import org.opensearch.graph.model.ontology.EPair;
 import org.opensearch.graph.model.ontology.EntityType;
 import org.opensearch.graph.model.ontology.Ontology;
 import org.opensearch.graph.model.ontology.RelationshipType;
-import org.opensearch.graph.model.resourceInfo.FuseError;
+import org.opensearch.graph.model.resourceInfo.GraphError;
 import org.opensearch.graph.model.schema.*;
 import org.opensearch.graph.unipop.schemaProviders.*;
 import org.opensearch.graph.unipop.schemaProviders.indexPartitions.IndexPartitions;
@@ -55,7 +57,7 @@ public class GraphElementSchemaProviderJsonFactory implements GraphElementSchema
         String assembly = config.getString("assembly");
 
         this.accessor = new Ontology.Accessor(ontologyProvider.get(assembly).orElseThrow(() ->
-                new FuseError.FuseErrorException(new FuseError("No Ontology present for assembly", "No Ontology present for assembly" + assembly))));
+                new GraphError.GraphErrorException(new GraphError("No Ontology present for assembly", "No Ontology present for assembly" + assembly))));
 
         //if no index provider found with assembly name - generate default one accoring to ontology and simple Static Index Partitioning strategy
         this.indexProvider = indexProvider.get(assembly).orElseGet(() ->
@@ -170,7 +172,7 @@ public class GraphElementSchemaProviderJsonFactory implements GraphElementSchema
         Optional<List<EPair>> pairs = getEdgeSchemaOntologyPairs(v);
 
         if (!pairs.isPresent())
-            throw new FuseError.FuseErrorException(new FuseError("Schema generation exception", "No edges pairs are found for given relation name " + v));
+            throw new GraphError.GraphErrorException(new GraphError("Schema generation exception", "No edges pairs are found for given relation name " + v));
 
         List<EPair> pairList = pairs.get();
         validateSchema(pairList);
@@ -228,7 +230,7 @@ public class GraphElementSchemaProviderJsonFactory implements GraphElementSchema
     private void validateSchema(List<EPair> pairList) {
         pairList.forEach(pair -> {
             if ( !(accessor.$element(pair.geteTypeA()).isPresent()) || !(accessor.$element(pair.geteTypeB()).isPresent()))
-                throw new FuseError.FuseErrorException(new FuseError("Schema generation exception", " Pair containing " + pair.toString() + " was not matched against the current ontology"));
+                throw new GraphError.GraphErrorException(new GraphError("Schema generation exception", " Pair containing " + pair.toString() + " was not matched against the current ontology"));
         });
     }
 
@@ -258,11 +260,11 @@ public class GraphElementSchemaProviderJsonFactory implements GraphElementSchema
         List<GraphRedundantPropertySchema> redundantPropertySchemas = new ArrayList<>();
         //verify ontology
         accessor.$element(entityType)
-                    .orElseThrow(() -> new FuseError.FuseErrorException(new FuseError("Schema generation exception","No Element in Ontology "+entityType)))
+                    .orElseThrow(() -> new GraphError.GraphErrorException(new GraphError("Schema generation exception","No Element in Ontology "+entityType)))
                 .getIdField()
                   .forEach(field -> {
                     if (!accessor.$element(entityType).get().fields().contains(field))
-                        throw new FuseError.FuseErrorException(new FuseError("Schema generation exception", " Element " + entityType + " not containing " + ID + " metadata property "));
+                        throw new GraphError.GraphErrorException(new GraphError("Schema generation exception", " Element " + entityType + " not containing " + ID + " metadata property "));
         });
         validateRedundant(entityType, entitySide, rel.getRedundant());
         redundantPropertySchemas.add(new GraphRedundantPropertySchema.Impl(ID, String.format("%s.%s", entitySide, ID), "string"));
@@ -282,7 +284,7 @@ public class GraphElementSchemaProviderJsonFactory implements GraphElementSchema
                 .filter(r -> r.getSide().contains(entitySide))
                 .forEach(r -> {
                     if (!accessor.entity(entityType).get().fields().contains(r.getName()))
-                        throw new FuseError.FuseErrorException(new FuseError("Schema generation exception", " Entity " + entityType + " not containing " + r.getName() + " property (as redundant ) "));
+                        throw new GraphError.GraphErrorException(new GraphError("Schema generation exception", " Entity " + entityType + " not containing " + r.getName() + " property (as redundant ) "));
                 });
     }
 

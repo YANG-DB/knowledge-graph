@@ -2,6 +2,8 @@ package org.openserach.graph.asg.translator.sparql;
 
 
 
+
+
 import com.google.inject.Inject;
 import org.openserach.graph.asg.strategy.SparqlAsgStrategyRegistrar;
 import org.openserach.graph.asg.translator.AsgTranslator;
@@ -11,7 +13,7 @@ import org.opensearch.graph.dispatcher.ontology.OntologyProvider;
 import org.opensearch.graph.model.asgQuery.AsgQuery;
 import org.opensearch.graph.model.ontology.Ontology;
 import org.opensearch.graph.model.query.QueryInfo;
-import org.opensearch.graph.model.resourceInfo.FuseError;
+import org.opensearch.graph.model.resourceInfo.GraphError;
 import org.eclipse.rdf4j.query.parser.ParsedQuery;
 import org.eclipse.rdf4j.query.parser.sparql.SPARQLParser;
 import org.semanticweb.owlapi.model.IRI;
@@ -29,7 +31,7 @@ public class SparqlTranslator implements AsgTranslator<QueryInfo<String>, AsgQue
     @Override
     public AsgQuery translate(QueryInfo<String> source) {
         Ontology ontology = provider.get(source.getOntology())
-                .orElseThrow(() -> new FuseError.FuseErrorException(new FuseError("No Ontology present for Id ", "No Ontology present for id[" + source.getOntology()+"]")));
+                .orElseThrow(() -> new GraphError.GraphErrorException(new GraphError("No Ontology present for Id ", "No Ontology present for id[" + source.getOntology()+"]")));
 
         final AsgQuery query = AsgQuery.Builder.start("sparql_", source.getOntology()).build();
 

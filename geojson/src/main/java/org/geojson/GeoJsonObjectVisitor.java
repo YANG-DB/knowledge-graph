@@ -2,6 +2,8 @@ package org.geojson;
 
 
 
+
+
 public interface GeoJsonObjectVisitor<T> {
 
 	T visit(GeometryCollection geoJsonObject);

@@ -3,6 +3,8 @@ package org.openserach.graph.asg.strategy.mapping;
 
 
 
+
+
 import org.openserach.graph.asg.strategy.AsgStrategy;
 import org.opensearch.graph.dispatcher.ontology.OntologyMappingProvider;
 import org.opensearch.graph.dispatcher.ontology.OntologyProvider;
@@ -22,7 +24,7 @@ import org.opensearch.graph.model.query.properties.EPropGroup;
 import org.opensearch.graph.model.query.properties.RelProp;
 import org.opensearch.graph.model.query.properties.RelPropGroup;
 import org.opensearch.graph.model.query.properties.constraint.Constraint;
-import org.opensearch.graph.model.resourceInfo.FuseError;
+import org.opensearch.graph.model.resourceInfo.GraphError;
 import javaslang.Tuple2;
 
 import java.util.List;
@@ -49,7 +51,7 @@ public class AsgMappingStrategy implements AsgStrategy {
         Optional<Ontology> targetOntology = ontologyProvider.get(mappingOntologies.getTargetOntology());
 
         if (!sourceOntology.isPresent())
-            throw new FuseError.FuseErrorException(new FuseError("No Ontology found ", "No Ontology found for " + mappingOntologies.getSourceOntology()));
+            throw new GraphError.GraphErrorException(new GraphError("No Ontology found ", "No Ontology found for " + mappingOntologies.getSourceOntology()));
 
         if (!targetOntology.isPresent())
             return;
@@ -74,7 +76,7 @@ public class AsgMappingStrategy implements AsgStrategy {
                 && relationshipType.getSource().contains(((Rel) asgEBase.geteBase()).getrType()));
 
         Tuple2<Ontology.Accessor.NodeType, String> fieldType = targetAccessor.matchNameToType(relationshipType.getTargetField())
-                .orElseThrow(() -> new FuseError.FuseErrorException(new FuseError("No target Ontology field found ", "No target Ontology field found for " + relationshipType.getTargetField())));
+                .orElseThrow(() -> new GraphError.GraphErrorException(new GraphError("No target Ontology field found ", "No target Ontology field found for " + relationshipType.getTargetField())));
 
         switch (fieldType._1) {
             case ENTITY:
@@ -116,7 +118,7 @@ public class AsgMappingStrategy implements AsgStrategy {
          *              case: enum - set enum.value(source)
          */
         Tuple2<Ontology.Accessor.NodeType, String> fieldType = targetAccessor.matchNameToType(entityType.getTargetField())
-                .orElseThrow(() -> new FuseError.FuseErrorException(new FuseError("No target Ontology field found ", "No target Ontology field found for " + entityType.getTargetField())));
+                .orElseThrow(() -> new GraphError.GraphErrorException(new GraphError("No target Ontology field found ", "No target Ontology field found for " + entityType.getTargetField())));
 
         switch (fieldType._1) {
             case ENTITY:
@@ -214,7 +216,7 @@ public class AsgMappingStrategy implements AsgStrategy {
         if (targetAccessor.enumeratedType(property.getType()).isPresent()) {
             //if target type is enum - use the source value for enum.valueOf for target constraint
             Value value = targetAccessor.enumeratedType$(property.getType()).valueOf(type)
-                    .orElseThrow(() -> new FuseError.FuseErrorException(new FuseError("No target Ontology Enumerated value found", "No target Ontology Enumerated value found for " + type)));
+                    .orElseThrow(() -> new GraphError.GraphErrorException(new GraphError("No target Ontology Enumerated value found", "No target Ontology Enumerated value found for " + type)));
             //set enum index value as constraint
             return new Constraint(eq, value.getVal());
         } else {

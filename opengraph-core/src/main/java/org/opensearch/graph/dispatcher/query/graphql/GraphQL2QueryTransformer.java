@@ -2,6 +2,8 @@ package org.opensearch.graph.dispatcher.query.graphql;
 
 
 
+
+
 import com.google.inject.Inject;
 import org.opensearch.graph.dispatcher.ontology.OntologyProvider;
 import org.opensearch.graph.dispatcher.query.QueryTransformer;
@@ -9,7 +11,7 @@ import org.opensearch.graph.dispatcher.query.graphql.wiring.TraversalWiringFacto
 import org.opensearch.graph.model.ontology.Ontology;
 import org.opensearch.graph.model.query.Query;
 import org.opensearch.graph.model.query.QueryInfo;
-import org.opensearch.graph.model.resourceInfo.FuseError;
+import org.opensearch.graph.model.resourceInfo.GraphError;
 import graphql.ExecutionResult;
 import graphql.GraphQL;
 import graphql.schema.GraphQLSchema;
@@ -32,7 +34,7 @@ public class GraphQL2QueryTransformer implements QueryTransformer<QueryInfo<Stri
     public Query transform(QueryInfo<String> query) {
         Optional<Ontology> ontology =  ontologyProvider.get(query.getOntology());
         if(!ontology.isPresent())
-            throw new FuseError.FuseErrorException(new FuseError("No ontology was found","Ontology not found "+query.getOntology()));
+            throw new GraphError.GraphErrorException(new GraphError("No ontology was found","Ontology not found "+query.getOntology()));
 
         return transform(schemaUtils,ontology.get(),query.getQuery());
     }

@@ -1,7 +1,9 @@
 package org.opensearch.graph.services.controllers;
 
 
-import org.opensearch.graph.model.resourceInfo.FuseResourceInfo;
+
+
+import org.opensearch.graph.model.resourceInfo.GraphResourceInfo;
 import org.opensearch.graph.model.transport.ContentResponse;
 
 /**
@@ -13,5 +15,5 @@ public interface ApiDescriptionController
      * get general info
      * @return
      */
-    ContentResponse<FuseResourceInfo> getInfo();
+    ContentResponse<GraphResourceInfo> getInfo();
 }

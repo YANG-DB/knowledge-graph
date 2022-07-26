@@ -2,6 +2,8 @@ package org.opensearch.graph.stats.model.result;
 
 
 
+
+
 public class StatResultExtended{
 
     // todo maybe for the future

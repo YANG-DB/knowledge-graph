@@ -3,13 +3,15 @@ package org.opensearch.graph.dispatcher.modules;
 
 
 
+
+
 import com.google.inject.Binder;
 import com.typesafe.config.Config;
 import com.typesafe.config.ConfigException;
 import org.opensearch.graph.dispatcher.ontology.*;
 import org.opensearch.graph.dispatcher.urlSupplier.AppUrlSupplier;
 import org.opensearch.graph.dispatcher.urlSupplier.DefaultAppUrlSupplier;
-import org.opensearch.graph.model.resourceInfo.FuseError;
+import org.opensearch.graph.model.resourceInfo.GraphError;
 import org.jooby.Env;
 
 import java.lang.reflect.InvocationTargetException;
@@ -51,12 +53,12 @@ public class CoreDispatcherModule extends ModuleBase {
      */
     private OntologyProvider getOntologyProvider(Config conf) throws ClassNotFoundException, NoSuchMethodException, IllegalAccessException, InvocationTargetException, InstantiationException {
         try {
-            return new DirectoryOntologyProvider(conf.getString("fuse.ontology_provider_dir"));
+            return new DirectoryOntologyProvider(conf.getString("opengraph.ontology_provider_dir"));
         } catch (ConfigException e1) {
             try {
                 return (OntologyProvider) Class.forName(conf.getString("fuse.ontology_provider")).getConstructor().newInstance();
             } catch (ConfigException e2) {
-                throw new FuseError.FuseErrorException(new FuseError("No appropriate config value for { ontology_provider_dir | ontology_provider } found ",
+                throw new GraphError.GraphErrorException(new GraphError("No appropriate config value for { ontology_provider_dir | ontology_provider } found ",
                         "No appropriate config value for { ontology_provider_dir | ontology_mapping_provider } found "));
             }
         }
@@ -76,7 +78,7 @@ public class CoreDispatcherModule extends ModuleBase {
      */
     private OntologyMappingProvider getOntologyMappingProvider(Config conf) throws ClassNotFoundException, NoSuchMethodException, IllegalAccessException, InvocationTargetException, InstantiationException {
         try {
-            String ontology_provider_dir = conf.getString("fuse.ontology_provider_dir");
+            String ontology_provider_dir = conf.getString("opengraph.ontology_provider_dir");
             return new DirectoryOntologyMappingProvider(ontology_provider_dir);
         } catch (ConfigException e1) {
             try {
@@ -97,7 +99,7 @@ public class CoreDispatcherModule extends ModuleBase {
 
     private OntologyTransformerProvider getTransformerProvider(Config conf) throws ClassNotFoundException, NoSuchMethodException, IllegalAccessException, InvocationTargetException, InstantiationException {
         try {
-            return new DirectoryOntologyTransformerProvider(conf.getString("fuse.ontology_provider_dir"));
+            return new DirectoryOntologyTransformerProvider(conf.getString("opengraph.ontology_provider_dir"));
         } catch (ConfigException e) {
             try {
                 return (OntologyTransformerProvider) Class.forName(conf.getString("fuse.ontology_transformation_provider")).getConstructor().newInstance();

@@ -2,6 +2,8 @@ package org.opensearch.graph.executor.cursor.discrete;
 
 
 
+
+
 import org.opensearch.graph.dispatcher.cursor.Cursor;
 import org.opensearch.graph.dispatcher.cursor.CursorFactory;
 import org.opensearch.graph.executor.cursor.TraversalCursorContext;
@@ -11,7 +13,7 @@ import org.opensearch.graph.executor.ontology.schema.load.*;
 import org.opensearch.graph.model.ontology.Ontology;
 import org.opensearch.graph.model.projection.ProjectionAssignment;
 import org.opensearch.graph.model.query.Query;
-import org.opensearch.graph.model.resourceInfo.FuseError;
+import org.opensearch.graph.model.resourceInfo.GraphError;
 import org.opensearch.graph.model.results.AssignmentsProjectionResult;
 import org.opensearch.graph.model.results.AssignmentsQueryResult;
 import org.opensearch.graph.model.results.LoadResponse;
@@ -119,7 +121,7 @@ public class IndexProjectionCursor extends PathsTraversalCursor {
         }
 
         DataTransformerContext<List<ProjectionAssignment>> context = transformer.transform(result, GraphDataLoader.Directive.INSERT);
-        LoadResponse<String, FuseError> load = load(this.context.getClient(), context);
+        LoadResponse<String, GraphError> load = load(this.context.getClient(), context);
         //report back the projection results
         projectionResult.setAssignments(Collections.singletonList(buildAssignment(load)));
         return projectionResult;
@@ -131,7 +133,7 @@ public class IndexProjectionCursor extends PathsTraversalCursor {
      * @param context
      * @return
      */
-    private LoadResponse<String, FuseError> load(Client client, DataTransformerContext context) {
+    private LoadResponse<String, GraphError> load(Client client, DataTransformerContext context) {
         //load bulk requests
         Tuple2<Response, BulkRequestBuilder> tuple = LoadUtils.load(resolver, client, context);
         //submit bulk request

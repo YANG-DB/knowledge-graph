@@ -73,7 +73,7 @@ public class EngineStatProviderTest {
 
 
     // The name of the Elastic cluster
-    private static final String DATA_CLUSTER_NAME = "fuse.test_elastic";
+    private static final String DATA_CLUSTER_NAME = "graph.test_opensearch";
 
     // A list of hostnames for of the nodes in the cluster
     private static final String[] DATA_HOSTS = new String[]{"localhost"};
@@ -82,7 +82,7 @@ public class EngineStatProviderTest {
     private static final int DATA_TRANSPORT_PORT = 9300;
 
     // The name of the statistics cluster
-    private static final String STAT_CLUSTER_NAME = "fuse.test_elastic";
+    private static final String STAT_CLUSTER_NAME = "graph.test_opensearch";
 
     //A list of hostnames for of the nodes in the statistics cluster
     private static final String[] STAT_HOSTS = new String[]{"localhost"};

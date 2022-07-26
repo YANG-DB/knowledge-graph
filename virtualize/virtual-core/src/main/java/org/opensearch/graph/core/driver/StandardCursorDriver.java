@@ -2,6 +2,8 @@ package org.opensearch.graph.core.driver;
 
 
 
+
+
 import com.codahale.metrics.MetricRegistry;
 import com.google.inject.Inject;
 import org.opensearch.graph.dispatcher.cursor.Cursor;
@@ -25,7 +27,7 @@ import org.opensearch.graph.model.execution.plan.PlanWithCost;
 import org.opensearch.graph.model.execution.plan.composite.Plan;
 import org.opensearch.graph.model.execution.plan.costs.PlanDetailedCost;
 import org.opensearch.graph.model.ontology.Ontology;
-import org.opensearch.graph.model.resourceInfo.FuseError;
+import org.opensearch.graph.model.resourceInfo.GraphError;
 import org.opensearch.graph.model.transport.cursor.CreateCursorRequest;
 import org.opensearch.graph.model.transport.cursor.CreateInnerQueryCursorRequest;
 import javaslang.collection.Stream;
@@ -74,7 +76,7 @@ public class StandardCursorDriver extends CursorDriverBase {
         PlanWithCost<Plan, PlanDetailedCost> executionPlan = queryResource.getExecutionPlan();
         //get the ontology name from the asg query since a transformation between ontologies might have occurred - see AsgMappingStrategy
         Ontology ontology = this.ontologyProvider.get(queryResource.getAsgQuery().getOnt())
-                .orElseThrow(() -> new FuseError.FuseErrorException(new FuseError("No target Ontology field found ", "No target Ontology field found for " + queryResource.getAsgQuery().getOnt())));
+                .orElseThrow(() -> new GraphError.GraphErrorException(new GraphError("No target Ontology field found ", "No target Ontology field found for " + queryResource.getAsgQuery().getOnt())));
 
         GraphTraversal<?, ?> traversal = createTraversal(executionPlan, ontology);
 
@@ -142,7 +144,7 @@ public class StandardCursorDriver extends CursorDriverBase {
     @Override
     public Optional<GraphTraversal> traversal(PlanWithCost plan, String ontology) {
         return Optional.of(createTraversal(plan, this.ontologyProvider.get(ontology)
-                .orElseThrow(() -> new FuseError.FuseErrorException(new FuseError("No target Ontology field found ", "No target Ontology found for " + ontology)))));
+                .orElseThrow(() -> new GraphError.GraphErrorException(new GraphError("No target Ontology field found ", "No target Ontology found for " + ontology)))));
     }
 
     //endregion

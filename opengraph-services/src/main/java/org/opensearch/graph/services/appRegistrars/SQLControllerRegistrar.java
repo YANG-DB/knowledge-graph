@@ -1,6 +1,8 @@
 package org.opensearch.graph.services.appRegistrars;
 
 
+
+
 import org.opensearch.graph.dispatcher.urlSupplier.AppUrlSupplier;
 import org.opensearch.graph.logging.Route;
 import org.opensearch.graph.model.ontology.Ontology;

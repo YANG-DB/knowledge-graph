@@ -2,6 +2,8 @@ package org.opensearch.graph.model.schema;
 
 
 
+
+
 import java.util.List;
 
 public interface BaseTypeElement<T> {

@@ -2,6 +2,8 @@ package org.opensearch.graph.model.logical;
 
 
 
+
+
 import java.util.Map;
 
 public interface Edge  {

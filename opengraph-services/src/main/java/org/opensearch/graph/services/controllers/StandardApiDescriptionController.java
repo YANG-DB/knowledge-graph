@@ -1,9 +1,11 @@
 package org.opensearch.graph.services.controllers;
 
 
+
+
 import com.google.inject.Inject;
 import org.opensearch.graph.dispatcher.urlSupplier.AppUrlSupplier;
-import org.opensearch.graph.model.resourceInfo.FuseResourceInfo;
+import org.opensearch.graph.model.resourceInfo.GraphResourceInfo;
 import org.opensearch.graph.model.transport.ContentResponse;
 
 import java.util.Optional;
@@ -23,9 +25,9 @@ public class StandardApiDescriptionController implements ApiDescriptionControlle
 
     //region ApiDescriptionController Implementation
     @Override
-    public ContentResponse<FuseResourceInfo> getInfo() {
-        return ContentResponse.Builder.<FuseResourceInfo>builder(OK, NOT_FOUND)
-                .data(Optional.of(new FuseResourceInfo(
+    public ContentResponse<GraphResourceInfo> getInfo() {
+        return ContentResponse.Builder.<GraphResourceInfo>builder(OK, NOT_FOUND)
+                .data(Optional.of(new GraphResourceInfo(
                         "/fuse",
                         "/fuse/internal",
                         "/fuse/health",

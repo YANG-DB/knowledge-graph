@@ -1224,6 +1224,7 @@
                 <module>test-framework</module>
                 <module>virtualize</module>
                 <module>opengraph-services</module>
+                <module>domain</module>
             </modules>
         </profile>
 

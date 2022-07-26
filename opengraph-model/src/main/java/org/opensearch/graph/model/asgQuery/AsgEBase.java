@@ -3,6 +3,8 @@ package org.opensearch.graph.model.asgQuery;
 
 
 
+
+
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import org.opensearch.graph.model.Next;

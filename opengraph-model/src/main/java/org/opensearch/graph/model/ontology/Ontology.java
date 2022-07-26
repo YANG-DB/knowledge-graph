@@ -4,9 +4,11 @@ package org.opensearch.graph.model.ontology;
 
 
 
+
+
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonInclude;
-import org.opensearch.graph.model.resourceInfo.FuseError;
+import org.opensearch.graph.model.resourceInfo.GraphError;
 import javaslang.Tuple;
 import javaslang.Tuple2;
 import javaslang.collection.Stream;
@@ -358,12 +360,12 @@ public class Ontology {
 
         public DirectiveType $directive$(String name) {
             return this.ontology.directives.stream().filter(d -> d.getName().equals(name)).findFirst()
-                    .orElseThrow(() -> new FuseError.FuseErrorException(new FuseError("No Ontology $directive$ for value ", "No Ontology $directive$ for value[" + name + "]")));
+                    .orElseThrow(() -> new GraphError.GraphErrorException(new GraphError("No Ontology $directive$ for value ", "No Ontology $directive$ for value[" + name + "]")));
         }
 
         public EntityType $entity$(String eType) {
             return $entity(eType)
-                    .orElseThrow(() -> new FuseError.FuseErrorException(new FuseError("No Ontology entity for value ", "No Ontology entity for value[" + eType + "]")));
+                    .orElseThrow(() -> new GraphError.GraphErrorException(new GraphError("No Ontology entity for value ", "No Ontology entity for value[" + eType + "]")));
         }
 
         public Optional<EntityType> entity(String entityName) {
@@ -372,7 +374,7 @@ public class Ontology {
 
         public EntityType entity$(String entityName) {
             return entity(entityName)
-                    .orElseThrow(() -> new FuseError.FuseErrorException(new FuseError("No Ontology entityType for value ", "No Ontology entityType for value[" + entityName + "]")));
+                    .orElseThrow(() -> new GraphError.GraphErrorException(new GraphError("No Ontology entityType for value ", "No Ontology entityType for value[" + entityName + "]")));
         }
 
         public Optional<String> eType(String entityName) {
@@ -382,7 +384,7 @@ public class Ontology {
 
         public String eType$(String entityName) {
             return eType(entityName)
-                    .orElseThrow(() -> new FuseError.FuseErrorException(new FuseError("No Ontology entityType for value ", "No Ontology entityType for value[" + entityName + "]")));
+                    .orElseThrow(() -> new GraphError.GraphErrorException(new GraphError("No Ontology entityType for value ", "No Ontology entityType for value[" + entityName + "]")));
         }
 
         public Optional<RelationshipType> $relation(String rType) {
@@ -391,7 +393,7 @@ public class Ontology {
 
         public RelationshipType $relation$(String rType) {
             return $relation(rType)
-                    .orElseThrow(() -> new FuseError.FuseErrorException(new FuseError("No Ontology Relation for value ", "No Ontology Relation for value[" + rType + "]")));
+                    .orElseThrow(() -> new GraphError.GraphErrorException(new GraphError("No Ontology Relation for value ", "No Ontology Relation for value[" + rType + "]")));
         }
 
         public Optional<RelationshipType> relation(String relationName) {
@@ -400,7 +402,7 @@ public class Ontology {
 
         public RelationshipType relation$(String relationName) {
             return relation(relationName)
-                    .orElseThrow(() -> new FuseError.FuseErrorException(new FuseError("No Ontology relationName for value ", "No Ontology relationName for value[" + relationName + "]")));
+                    .orElseThrow(() -> new GraphError.GraphErrorException(new GraphError("No Ontology relationName for value ", "No Ontology relationName for value[" + relationName + "]")));
         }
 
         public Optional<String> rType(String relationName) {
@@ -410,7 +412,7 @@ public class Ontology {
 
         public String rType$(String relationName) {
             return rType(relationName)
-                    .orElseThrow(() -> new FuseError.FuseErrorException(new FuseError("No Ontology relationName for value ", "No Ontology relationName for value[" + relationName + "]")));
+                    .orElseThrow(() -> new GraphError.GraphErrorException(new GraphError("No Ontology relationName for value ", "No Ontology relationName for value[" + relationName + "]")));
         }
 
         public Optional<Property> $property(String pType) {
@@ -433,7 +435,7 @@ public class Ontology {
 
         public Property property$(String propertyName) {
             return property(propertyName)
-                    .orElseThrow(() -> new FuseError.FuseErrorException(new FuseError("No Ontology propertyName for value ", "No Ontology propertyName for value[" + propertyName + "]")));
+                    .orElseThrow(() -> new GraphError.GraphErrorException(new GraphError("No Ontology propertyName for value ", "No Ontology propertyName for value[" + propertyName + "]")));
         }
 
         public Optional<String> pType(String propertyName) {
@@ -443,7 +445,7 @@ public class Ontology {
 
         public String pType$(String propertyName) {
             return pType(propertyName)
-                    .orElseThrow(() -> new FuseError.FuseErrorException(new FuseError("No Ontology propertyName for value ", "No Ontology propertyName for value[" + propertyName + "]")));
+                    .orElseThrow(() -> new GraphError.GraphErrorException(new GraphError("No Ontology propertyName for value ", "No Ontology propertyName for value[" + propertyName + "]")));
         }
 
         public Iterable<String> pTypes() {

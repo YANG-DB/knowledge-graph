@@ -2,6 +2,8 @@ package org.opensearch.graph.gta.strategy.utils;
 
 
 
+
+
 import org.opensearch.graph.model.ontology.EntityType;
 import org.opensearch.graph.model.ontology.Ontology;
 import org.opensearch.graph.model.query.entity.EConcrete;

@@ -3,6 +3,8 @@ package org.opensearch.graph.model.transport;
 
 
 
+
+
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 import org.opensearch.graph.model.results.TextContent;

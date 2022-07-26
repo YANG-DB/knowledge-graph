@@ -2,6 +2,8 @@ package org.opensearch.graph.executor.ontology.schema.load;
 
 
 
+
+
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 import com.google.inject.Inject;
@@ -16,7 +18,7 @@ import org.opensearch.graph.model.Range;
 import org.opensearch.graph.model.ontology.EntityType;
 import org.opensearch.graph.model.ontology.Ontology;
 import org.opensearch.graph.model.ontology.RelationshipType;
-import org.opensearch.graph.model.resourceInfo.FuseError;
+import org.opensearch.graph.model.resourceInfo.GraphError;
 import org.opensearch.graph.model.schema.Entity;
 import org.opensearch.graph.model.schema.IndexProvider;
 import org.opensearch.graph.model.schema.Redundant;
@@ -45,7 +47,7 @@ public class CSVTransformer implements DataTransformer<DataTransformerContext, C
     public CSVTransformer(Config config, OntologyProvider ontology, IndexProviderFactory indexProvider, RawSchema schema, IdGeneratorDriver<Range> idGenerator, Client client) {
         String assembly = config.getString("assembly");
         this.accessor = new Ontology.Accessor(ontology.get(assembly).orElseThrow(
-                () -> new FuseError.FuseErrorException(new FuseError("No Ontology present for assembly", "No Ontology present for assembly" + assembly))));
+                () -> new GraphError.GraphErrorException(new GraphError("No Ontology present for assembly", "No Ontology present for assembly" + assembly))));
 
         //if no index provider found with assembly name - generate default one accoring to ontology and simple Static Index Partitioning strategy
         this.indexProvider = indexProvider.get(assembly).orElseGet(() -> IndexProvider.Builder.generate(accessor.get()));
@@ -76,7 +78,7 @@ public class CSVTransformer implements DataTransformer<DataTransformerContext, C
                 dataRecords.forEach(r -> context.withRelation(translate(context, relType, r.toMap(), "out")));
             }
         } catch (IOException e) {
-            throw new FuseError.FuseErrorException("Error while building graph Element from csv row ", e);
+            throw new GraphError.GraphErrorException("Error while building graph Element from csv row ", e);
         }
         return context;
     }
@@ -85,7 +87,7 @@ public class CSVTransformer implements DataTransformer<DataTransformerContext, C
         try {
             ObjectNode element = mapper.createObjectNode();
             Entity entity = indexProvider.getEntity(entityType.geteType())
-                    .orElseThrow(() -> new FuseError.FuseErrorException(new FuseError("CSV Transformation Error", "No matching node found with label " + entityType.geteType())));
+                    .orElseThrow(() -> new GraphError.GraphErrorException(new GraphError("CSV Transformation Error", "No matching node found with label " + entityType.geteType())));
             //put id (take according to ontology id field mapping or generate UUID of none found)
             StringJoiner joiner = new StringJoiner(".");
             entityType.getIdField().forEach(field -> joiner.add(node.getOrDefault(field, UUID.randomUUID().toString())));
@@ -97,7 +99,7 @@ public class CSVTransformer implements DataTransformer<DataTransformerContext, C
             populateMetadataFields(context, node, entity, element);
             populatePropertyFields(context, node, entity, element);
             return new DocumentBuilder(element, joiner.toString(), entity.getType(), Optional.empty());
-        } catch (FuseError.FuseErrorException e) {
+        } catch (GraphError.GraphErrorException e) {
             return new DocumentBuilder(e.getError());
         }
     }
@@ -114,7 +116,7 @@ public class CSVTransformer implements DataTransformer<DataTransformerContext, C
         try {
             ObjectNode element = mapper.createObjectNode();
             Relation relation = indexProvider.getRelation(relType.getrType())
-                    .orElseThrow(() -> new FuseError.FuseErrorException(new FuseError("CSV Transformation Error", "No matching node found with label " + relType.getrType())));
+                    .orElseThrow(() -> new GraphError.GraphErrorException(new GraphError("CSV Transformation Error", "No matching node found with label " + relType.getrType())));
             //put id (take according to ontology id field mapping or generate UUID of none found)
             StringJoiner joiner = new StringJoiner(".");
             relType.getIdField().forEach(field -> joiner.add(node.getOrDefault(field, UUID.randomUUID().toString())));
@@ -139,7 +141,7 @@ public class CSVTransformer implements DataTransformer<DataTransformerContext, C
                 partition = Optional.of(new Tuple2<>(field, DataLoaderUtils.parseValue(accessor.property$(field).getType(), node.get(field), Utils.sdf).toString()));
 
             return new DocumentBuilder(element, id, relation.getType(), Optional.empty(), partition);
-        } catch (FuseError.FuseErrorException e) {
+        } catch (GraphError.GraphErrorException e) {
             return new DocumentBuilder(e.getError());
         }
     }
@@ -213,7 +215,7 @@ public class CSVTransformer implements DataTransformer<DataTransformerContext, C
 
         //get type (label) of the side node
         Entity entity = indexProvider.getEntity(sideType)
-                .orElseThrow(() -> new FuseError.FuseErrorException(new FuseError("Logical Graph Transformation Error", "No matching node found with label " + sideType)));
+                .orElseThrow(() -> new GraphError.GraphErrorException(new GraphError("Logical Graph Transformation Error", "No matching node found with label " + sideType)));
 
         //put classifiers
         entitySide.put(EngineIndexProviderMappingFactory.ID, sideId);

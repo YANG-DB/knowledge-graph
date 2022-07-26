@@ -2,6 +2,8 @@ package org.opensearch.graph.model.resourceInfo;
 
 
 
+
+
 public class ResultResourceInfo<T> extends ResourceInfoBase {
 
     public ResultResourceInfo(String resourceUrl, String resourceId, T result) {
@@ -9,7 +11,7 @@ public class ResultResourceInfo<T> extends ResourceInfoBase {
         this.result = result;
     }
 
-    public ResultResourceInfo(String resourceUrl, String resourceId, FuseError error) {
+    public ResultResourceInfo(String resourceUrl, String resourceId, GraphError error) {
         super(resourceUrl, resourceId);
         this.error = error;
     }
@@ -18,7 +20,7 @@ public class ResultResourceInfo<T> extends ResourceInfoBase {
         return result;
     }
 
-    public FuseError getError() {
+    public GraphError getError() {
         return error;
     }
 
@@ -26,7 +28,7 @@ public class ResultResourceInfo<T> extends ResourceInfoBase {
         return error!=null;
     }
 
-    private FuseError error;
+    private GraphError error;
     private T result;
 
 }

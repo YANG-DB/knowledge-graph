@@ -2,6 +2,8 @@ package org.opensearch.graph.model.schema;
 
 
 
+
+
 public enum MappingIndexType {
     //static index
     STATIC,

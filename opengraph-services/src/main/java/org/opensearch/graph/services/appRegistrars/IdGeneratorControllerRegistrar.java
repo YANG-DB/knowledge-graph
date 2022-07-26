@@ -1,6 +1,8 @@
 package org.opensearch.graph.services.appRegistrars;
 
 
+
+
 import com.google.inject.TypeLiteral;
 import org.opensearch.graph.dispatcher.urlSupplier.AppUrlSupplier;
 import org.opensearch.graph.model.Range;

@@ -1,12 +1,11 @@
 package org.opensearch.graph.services.appRegistrars;
 
 
+
+
 import com.fasterxml.jackson.databind.ObjectMapper;
-import org.opensearch.graph.model.resourceInfo.CursorResourceInfo;
-import org.opensearch.graph.model.resourceInfo.FuseError;
-import org.opensearch.graph.model.resourceInfo.PageResourceInfo;
+import org.opensearch.graph.model.resourceInfo.GraphError;
 import org.opensearch.graph.model.resourceInfo.QueryResourceInfo;
-import org.opensearch.graph.model.results.CsvQueryResult;
 import org.opensearch.graph.model.results.TextContent;
 import org.opensearch.graph.model.transport.ContentResponse;
 import org.jooby.*;
@@ -16,9 +15,6 @@ import java.io.FileWriter;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.time.Instant;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
 
 public class RegistrarsUtils {
 
@@ -39,7 +35,7 @@ public class RegistrarsUtils {
      * @throws Throwable
      */
     public static void with(Request req, Response res, ContentResponse<Object> response) throws Throwable {
-        if (response.getData() instanceof FuseError) {
+        if (response.getData() instanceof GraphError) {
             //return error (log)
             res.status(Status.SERVER_ERROR);
             res.type(MediaType.json);

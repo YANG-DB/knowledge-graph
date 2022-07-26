@@ -4,6 +4,8 @@ package org.opensearch.graph.model.ontology;
 
 
 
+
+
 import com.fasterxml.jackson.annotation.JsonInclude;
 
 import java.util.Objects;

@@ -2,16 +2,18 @@ package org.opensearch.graph.model.results;
 
 
 
+
+
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonInclude;
-import org.opensearch.graph.model.resourceInfo.FuseError;
+import org.opensearch.graph.model.resourceInfo.GraphError;
 
 @JsonInclude(JsonInclude.Include.NON_EMPTY)
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class AssignmentsErrorQueryResult extends AssignmentsQueryResult {
-    private FuseError error;
+    private GraphError error;
 
-    public AssignmentsErrorQueryResult(FuseError error) {
+    public AssignmentsErrorQueryResult(GraphError error) {
         this.error = error;
     }
 
@@ -20,7 +22,7 @@ public class AssignmentsErrorQueryResult extends AssignmentsQueryResult {
         return -1;
     }
 
-    public FuseError error() {
+    public GraphError error() {
         return error;
     }
 

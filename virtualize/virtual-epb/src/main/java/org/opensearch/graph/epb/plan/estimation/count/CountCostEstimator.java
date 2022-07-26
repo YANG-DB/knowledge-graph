@@ -2,8 +2,9 @@ package org.opensearch.graph.epb.plan.estimation.count;
 
 
 
+
+
 import com.google.inject.Inject;
-import org.opensearch.graph.dispatcher.epb.CostEstimator;
 import org.opensearch.graph.dispatcher.epb.CostEstimatorDriver;
 import org.opensearch.graph.dispatcher.gta.PlanTraversalTranslator;
 import org.opensearch.graph.dispatcher.gta.TranslationContext;
@@ -16,7 +17,7 @@ import org.opensearch.graph.model.execution.plan.composite.Plan;
 import org.opensearch.graph.model.execution.plan.costs.DoubleCost;
 import org.opensearch.graph.model.execution.plan.costs.PlanDetailedCost;
 import org.opensearch.graph.model.ontology.Ontology;
-import org.opensearch.graph.model.resourceInfo.FuseError;
+import org.opensearch.graph.model.resourceInfo.GraphError;
 import org.apache.tinkerpop.gremlin.process.traversal.dsl.graph.GraphTraversal;
 import org.unipop.process.Profiler;
 
@@ -43,7 +44,7 @@ public class CountCostEstimator implements CostEstimatorDriver<Plan, PlanDetaile
     public PlanWithCost<Plan, PlanDetailedCost> estimate(Plan plan, IncrementalEstimationContext<Plan, PlanDetailedCost, AsgQuery> estimationContext) {
         String ont = estimationContext.getQuery().getOnt();
         Ontology ontology = this.ontologyProvider.get(ont)
-                .orElseThrow(() -> new FuseError.FuseErrorException(new FuseError("No target Ontology field found ", "No target Ontology found for " + ont)));
+                .orElseThrow(() -> new GraphError.GraphErrorException(new GraphError("No target Ontology field found ", "No target Ontology found for " + ont)));
 
         GraphTraversal<?, ?> traversal = null;
         try {

@@ -17,9 +17,9 @@ import org.opensearch.graph.model.ontology.Ontology;
 import org.opensearch.graph.model.ontology.RelationshipType;
 import org.opensearch.graph.model.query.properties.EProp;
 import org.opensearch.graph.model.query.properties.RelProp;
-import org.opensearch.graph.unipop.process.traversal.dsl.graph.FuseGraphTraversalSource;
+import org.opensearch.graph.unipop.process.traversal.dsl.graph.SearchGraphTraversalSource;
 import org.opensearch.graph.unipop.process.traversal.dsl.graph.__;
-import org.opensearch.graph.unipop.structure.FuseUniGraph;
+import org.opensearch.graph.unipop.structure.SearchUniGraph;
 import org.apache.tinkerpop.gremlin.process.traversal.dsl.graph.GraphTraversal;
 import org.apache.tinkerpop.gremlin.process.traversal.util.DefaultTraversalStrategies;
 import org.apache.tinkerpop.gremlin.structure.T;
@@ -78,7 +78,7 @@ public class UnionOpTranslationStrategyTest {
         TranslationContext context = Mockito.mock(TranslationContext.class);
         when(context.getOnt()).thenReturn(new Ontology.Accessor(ontology));
         when(context.getGraphTraversalSource()).thenReturn(
-                new FuseGraphTraversalSource(new FuseUniGraph(null, graph -> new ControllerManager() {
+                new SearchGraphTraversalSource(new SearchUniGraph(null, graph -> new ControllerManager() {
                     @Override
                     public Set<UniQueryController> getControllers() {
                         return Collections.emptySet();
@@ -125,7 +125,7 @@ public class UnionOpTranslationStrategyTest {
         TranslationContext context = Mockito.mock(TranslationContext.class);
         when(context.getOnt()).thenReturn(new Ontology.Accessor(ontology));
         when(context.getGraphTraversalSource()).thenReturn(
-                new FuseGraphTraversalSource(new FuseUniGraph(null, graph -> new ControllerManager() {
+                new SearchGraphTraversalSource(new SearchUniGraph(null, graph -> new ControllerManager() {
                     @Override
                     public Set<UniQueryController> getControllers() {
                         return Collections.emptySet();
@@ -181,7 +181,7 @@ public class UnionOpTranslationStrategyTest {
         TranslationContext context = Mockito.mock(TranslationContext.class);
         when(context.getOnt()).thenReturn(new Ontology.Accessor(ontology));
         when(context.getGraphTraversalSource()).thenReturn(
-                new FuseGraphTraversalSource(new FuseUniGraph(null, graph -> new ControllerManager() {
+                new SearchGraphTraversalSource(new SearchUniGraph(null, graph -> new ControllerManager() {
                     @Override
                     public Set<UniQueryController> getControllers() {
                         return Collections.emptySet();

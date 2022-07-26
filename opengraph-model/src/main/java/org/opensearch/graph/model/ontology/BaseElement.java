@@ -2,6 +2,8 @@ package org.opensearch.graph.model.ontology;
 
 
 
+
+
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.opensearch.graph.model.GlobalConstants;
 

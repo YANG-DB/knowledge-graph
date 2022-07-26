@@ -5,6 +5,8 @@ package org.unipop.schema.element;
 
 
 
+
+
 import org.apache.tinkerpop.gremlin.structure.Element;
 import org.unipop.query.predicates.PredicatesHolder;
 import org.unipop.structure.UniGraph;

@@ -4,6 +4,8 @@ package org.opensearch.graph.client;
 
 
 
+
+
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.module.SimpleModule;
@@ -41,8 +43,8 @@ import static io.restassured.RestAssured.given;
 
 public class BaseGraphClient implements GraphClient {
     //region Constructor
-    public BaseGraphClient(String fuseUrl) throws IOException {
-        this.fuseUrl = fuseUrl;
+    public BaseGraphClient(String graphUrl) throws IOException {
+        this.graphUrl = graphUrl;
         this.objectMapper = new ObjectMapper();
 
         SimpleModule module = new SimpleModule();
@@ -56,13 +58,13 @@ public class BaseGraphClient implements GraphClient {
 
     //region Public Methods
     @Override
-    public FuseResourceInfo getFuseInfo() throws IOException {
-        return this.objectMapper.readValue(unwrap(getRequest(this.fuseUrl)), FuseResourceInfo.class);
+    public GraphResourceInfo getInfo() throws IOException {
+        return this.objectMapper.readValue(unwrap(getRequest(this.graphUrl)), GraphResourceInfo.class);
     }
 
     @Override
     public Object getId(String name, int numIds) throws IOException {
-        return this.objectMapper.readValue(unwrap(getRequest(this.fuseUrl + "/idgen/" + name + "?numIds=" + numIds)), Map.class);
+        return this.objectMapper.readValue(unwrap(getRequest(this.graphUrl + "/idgen/" + name + "?numIds=" + numIds)), Map.class);
     }
 
     private <T> ResultResourceInfo loadGraphData(String ontology, String resourceURl, T root) throws IOException {
@@ -73,58 +75,58 @@ public class BaseGraphClient implements GraphClient {
 
     @Override
     public ResultResourceInfo upsertGraphData(String ontology, URL resource) throws IOException {
-        return loadGraphData(ontology,String.format("%s/load/ontology/%s/graph/load?directive=%s", this.fuseUrl, ontology,"UPSERT"),
+        return loadGraphData(ontology,String.format("%s/load/ontology/%s/graph/load?directive=%s", this.graphUrl, ontology,"UPSERT"),
                 objectMapper.readValue(resource,LogicalGraphModel.class));
     }
 
     @Override
     public ResultResourceInfo loadGraphData(String ontology, LogicalGraphModel model) throws IOException {
-        String resourceUrl = String.format("%s/load/ontology/%s/graph/load?directive=%s", this.fuseUrl, ontology, "INSERT");
+        String resourceUrl = String.format("%s/load/ontology/%s/graph/load?directive=%s", this.graphUrl, ontology, "INSERT");
         return new ResultResourceInfo<>(resourceUrl, ontology, unwrap(postRequest(resourceUrl,model)));
     }
 
     @Override
     public ResultResourceInfo loadGraphData(String ontology, URL resource) throws IOException {
-        return loadGraphData(ontology,String.format("%s/load/ontology/%s/graph/load?directive=%s", this.fuseUrl, ontology,"INSERT"),
+        return loadGraphData(ontology,String.format("%s/load/ontology/%s/graph/load?directive=%s", this.graphUrl, ontology,"INSERT"),
                 objectMapper.readValue(resource,LogicalGraphModel.class));
     }
 
     @Override
     public ResultResourceInfo uploadGraphFile(String ontology, URL resourceFile) throws URISyntaxException {
-        return uploadFile(ontology, resourceFile, String.format("%s/load/ontology/%s/graph/upload?directive=%s", this.fuseUrl, ontology,"INSERT"));
+        return uploadFile(ontology, resourceFile, String.format("%s/load/ontology/%s/graph/upload?directive=%s", this.graphUrl, ontology,"INSERT"));
     }
 
     @Override
     public ResultResourceInfo upsertGraphFile(String ontology, URL resourceFile) throws IOException, URISyntaxException {
-        return uploadFile(ontology, resourceFile, String.format("%s/load/ontology/%s/graph/upload?directive=%s", this.fuseUrl, ontology,"UPSERT"));
+        return uploadFile(ontology, resourceFile, String.format("%s/load/ontology/%s/graph/upload?directive=%s", this.graphUrl, ontology,"UPSERT"));
     }
 
 
     @Override
     public ResultResourceInfo upsertCsvData(String ontology, String type, String label, URL resource) throws IOException, URISyntaxException {
-        return uploadFile(ontology, resource, String.format("%s/load/ontology/%s/csv/upload?directive=%s&type=%s&label=%s", this.fuseUrl, ontology,"UPSERT",type,label));
+        return uploadFile(ontology, resource, String.format("%s/load/ontology/%s/csv/upload?directive=%s&type=%s&label=%s", this.graphUrl, ontology,"UPSERT",type,label));
     }
 
     @Override
     public ResultResourceInfo loadCsvData(String ontology, String type, String label, String model) throws IOException {
-        String resourceUrl = String.format("%s/load/ontology/%s/csv/load?directive=%s&type=%s&label=%s", this.fuseUrl, ontology, "INSERT",type,label);
+        String resourceUrl = String.format("%s/load/ontology/%s/csv/load?directive=%s&type=%s&label=%s", this.graphUrl, ontology, "INSERT",type,label);
         return new ResultResourceInfo<>(resourceUrl, ontology, unwrap(postRequest(resourceUrl,model)));
     }
 
     @Override
     public ResultResourceInfo loadCsvData(String ontology, String type, String label, URL resource) throws IOException {
-        return loadGraphData(ontology,String.format("%s/load/ontology/%s/csv/load?directive=%s&type=%s&label=%s", this.fuseUrl, ontology,"INSERT",type,label),
+        return loadGraphData(ontology,String.format("%s/load/ontology/%s/csv/load?directive=%s&type=%s&label=%s", this.graphUrl, ontology,"INSERT",type,label),
                 objectMapper.readValue(resource,String.class));
     }
 
     @Override
     public ResultResourceInfo uploadCsvFile(String ontology, String type, String label, URL resource) throws IOException, URISyntaxException {
-        return uploadFile(ontology, resource, String.format("%s/load/ontology/%s/csv/upload?directive=%s&type=%s&label=%s", this.fuseUrl, ontology,"UPSERT",type,label));
+        return uploadFile(ontology, resource, String.format("%s/load/ontology/%s/csv/upload?directive=%s&type=%s&label=%s", this.graphUrl, ontology,"UPSERT",type,label));
     }
 
     @Override
     public ResultResourceInfo upsertCsvFile(String ontology, String type, String label, URL resource) throws IOException, URISyntaxException {
-        return uploadFile(ontology, resource, String.format("%s/load/ontology/%s/csv/upload?directive=%s&type=%s&label=%s", this.fuseUrl, ontology,"INSERT",type,label));
+        return uploadFile(ontology, resource, String.format("%s/load/ontology/%s/csv/upload?directive=%s&type=%s&label=%s", this.graphUrl, ontology,"INSERT",type,label));
     }
 
     private ResultResourceInfo uploadFile(String ontology, URL resourceFile, String resourceURl) throws URISyntaxException {
@@ -216,16 +218,16 @@ public class BaseGraphClient implements GraphClient {
 
     @Override
     public String initIndices(String ontology) {
-        return getRequest(String.format("%s/load/ontology/%s/init",this.fuseUrl, ontology));
+        return getRequest(String.format("%s/load/ontology/%s/init",this.graphUrl, ontology));
     }
 
     @Override
     public String dropIndices(String ontology) {
-        return getRequest(String.format("%s/load/ontology/%s/drop",this.fuseUrl, ontology));
+        return getRequest(String.format("%s/load/ontology/%s/drop",this.graphUrl, ontology));
     }
 
     private Map<String, Class<? extends CreateCursorRequest>> getCursorBindings() throws IOException {
-        Map<String, String> cursorBindingStrings = unwrap(getRequest(this.fuseUrl + "/internal/cursorBindings"), Map.class);
+        Map<String, String> cursorBindingStrings = unwrap(getRequest(this.graphUrl + "/internal/cursorBindings"), Map.class);
 
         return Stream.ofAll(cursorBindingStrings.entrySet())
                 .toJavaMap(entry -> {
@@ -313,13 +315,13 @@ public class BaseGraphClient implements GraphClient {
     }
 
     @Override
-    public Long getFuseSnowflakeId() throws IOException {
-        return this.objectMapper.readValue(unwrap(getRequest(this.fuseUrl+"/internal/snowflakeId")), Long.class);
+    public Long getSnowflakeId() throws IOException {
+        return this.objectMapper.readValue(unwrap(getRequest(this.graphUrl +"/internal/snowflakeId")), Long.class);
     }
 
     @Override
-    public String getFuseUrl() {
-        return fuseUrl;
+    public String getGraphUrl() {
+        return graphUrl;
     }
 
     //endregion
@@ -349,7 +351,7 @@ public class BaseGraphClient implements GraphClient {
     //endregion
 
     //region Fields
-    private String fuseUrl;
+    private String graphUrl;
 
     private ObjectMapper objectMapper;
     //endregion

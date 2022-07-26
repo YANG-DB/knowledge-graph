@@ -1,10 +1,12 @@
 package org.opensearch.graph.services.controllers;
 
 
+
+
 import org.opensearch.graph.executor.ontology.schema.load.GraphDataLoader;
 import org.opensearch.graph.model.results.LoadResponse;
 import org.opensearch.graph.model.logical.LogicalGraphModel;
-import org.opensearch.graph.model.resourceInfo.FuseError;
+import org.opensearch.graph.model.resourceInfo.GraphError;
 import org.opensearch.graph.model.transport.ContentResponse;
 
 import java.io.File;
@@ -27,7 +29,7 @@ public interface DataLoaderController {
      * @param directive
      * @return
      */
-    ContentResponse<LoadResponse<String, FuseError>> loadGraph(String ontology, LogicalGraphModel data, GraphDataLoader.Directive directive);
+    ContentResponse<LoadResponse<String, GraphError>> loadGraph(String ontology, LogicalGraphModel data, GraphDataLoader.Directive directive);
 
     /**
      *
@@ -36,18 +38,7 @@ public interface DataLoaderController {
      * @param directive
      * @return
      */
-    ContentResponse<LoadResponse<String, FuseError>> loadGraph(String ontology, File data, GraphDataLoader.Directive directive);
-
-    /**
-     *
-     * @param ontology
-     * @param type
-     * @param label
-     * @param data
-     * @param directive
-     * @return
-     */
-    ContentResponse<LoadResponse<String, FuseError>> loadCsv(String ontology, String type, String label, String data, GraphDataLoader.Directive directive);
+    ContentResponse<LoadResponse<String, GraphError>> loadGraph(String ontology, File data, GraphDataLoader.Directive directive);
 
     /**
      *
@@ -58,5 +49,16 @@ public interface DataLoaderController {
      * @param directive
      * @return
      */
-    ContentResponse<LoadResponse<String, FuseError>> loadCsv(String ontology, String type, String label, File data, GraphDataLoader.Directive directive);
+    ContentResponse<LoadResponse<String, GraphError>> loadCsv(String ontology, String type, String label, String data, GraphDataLoader.Directive directive);
+
+    /**
+     *
+     * @param ontology
+     * @param type
+     * @param label
+     * @param data
+     * @param directive
+     * @return
+     */
+    ContentResponse<LoadResponse<String, GraphError>> loadCsv(String ontology, String type, String label, File data, GraphDataLoader.Directive directive);
 }

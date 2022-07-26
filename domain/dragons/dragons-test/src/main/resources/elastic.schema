@@ -1,0 +1,8 @@
+{
+    "index:" [
+    {
+     "name":"",
+     "getPartitions":"",
+     "types":["know","member","member"]
+    }]
+}

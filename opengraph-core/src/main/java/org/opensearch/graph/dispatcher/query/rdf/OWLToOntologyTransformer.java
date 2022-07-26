@@ -2,11 +2,13 @@ package org.opensearch.graph.dispatcher.query.rdf;
 
 
 
+
+
 import com.google.common.collect.Sets;
 import org.opensearch.graph.dispatcher.ontology.OntologyTransformerIfc;
 import org.opensearch.graph.model.ontology.EntityType;
 import org.opensearch.graph.model.ontology.*;
-import org.opensearch.graph.model.resourceInfo.FuseError;
+import org.opensearch.graph.model.resourceInfo.GraphError;
 import org.apache.commons.lang.NotImplementedException;
 import org.semanticweb.owlapi.apibinding.OWLManager;
 import org.semanticweb.owlapi.io.StringDocumentSource;
@@ -102,7 +104,7 @@ public class OWLToOntologyTransformer implements OntologyTransformerIfc<List<Str
                 return null;
             }).filter(Objects::nonNull).collect(Collectors.toSet());
         } catch (Exception err) {
-            throw new FuseError.FuseErrorException(new FuseError(err.getMessage(), err));
+            throw new GraphError.GraphErrorException(new GraphError(err.getMessage(), err));
         }
         return builder;
     }

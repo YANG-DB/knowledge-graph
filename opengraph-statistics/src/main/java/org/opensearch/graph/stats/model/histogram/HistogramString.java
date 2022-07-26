@@ -2,6 +2,8 @@ package org.opensearch.graph.stats.model.histogram;
 
 
 
+
+
 import org.opensearch.graph.stats.model.enums.HistogramType;
 
 public class HistogramString extends Histogram {

@@ -1,6 +1,8 @@
 package org.opensearch.graph.services.embedded;
 
 
+
+
 import org.opensearch.graph.unipop.controller.OpensearchGraphConfiguration;
 
 import org.opensearch.client.transport.TransportClient;
@@ -28,7 +30,7 @@ public class SearchEngineEmbeddedNode implements AutoCloseable {
 
     public static final String TARGET_ES = "target/es";
     public static final int HTTP_PORT = 9200;
-    public static final String FUSE_TEST_ELASTIC = "fuse.test_elastic";
+    public static final String GRAPH_TEST_ELASTIC = "graph.test_opensearch";
 
     //region PluginConfigurableNode Implementation
     private static class PluginConfigurableNode extends Node {
@@ -66,11 +68,11 @@ public class SearchEngineEmbeddedNode implements AutoCloseable {
     }
 
     public SearchEngineEmbeddedNode() throws Exception {
-        this(TARGET_ES, HTTP_PORT, 9300, FUSE_TEST_ELASTIC, true);
+        this(TARGET_ES, HTTP_PORT, 9300, GRAPH_TEST_ELASTIC, true);
     }
 
     public SearchEngineEmbeddedNode(SearchIndexConfigurer... configurers) throws Exception {
-        this(TARGET_ES, HTTP_PORT, 9300, FUSE_TEST_ELASTIC, true, configurers);
+        this(TARGET_ES, HTTP_PORT, 9300, GRAPH_TEST_ELASTIC, true, configurers);
     }
 
     public SearchEngineEmbeddedNode(String esWorkingDir, int httpPort, int httpTransportPort, String nodeName, boolean deleteOnLoad, SearchIndexConfigurer... configurers) throws Exception {

@@ -1,11 +1,13 @@
 package org.opensearch.graph.services.controllers.languages.sql;
 
 
+
+
 import com.google.inject.Inject;
 import org.opensearch.graph.dispatcher.ontology.OntologyProvider;
 import org.opensearch.graph.dispatcher.query.sql.DDLToOntologyTransformer;
 import org.opensearch.graph.model.ontology.Ontology;
-import org.opensearch.graph.model.resourceInfo.FuseError;
+import org.opensearch.graph.model.resourceInfo.GraphError;
 import org.opensearch.graph.model.transport.ContentResponse;
 import org.opensearch.graph.model.transport.ContentResponse.Builder;
 import org.opensearch.graph.services.controllers.SchemaTranslatorController;
@@ -41,8 +43,8 @@ public class StandardSqlController implements SchemaTranslatorController {
     public ContentResponse<String> transform(String ontologyId) {
         return Builder.<String>builder(OK, NOT_FOUND)
                 .data(Optional.of(this.transformer.translate(provider.get(ontologyId)
-                        .orElseThrow(() -> new FuseError.FuseErrorException(
-                                new FuseError("Ontology Not Found", String.format("Ontology %s is not found in repository", ontologyId)))))
+                        .orElseThrow(() -> new GraphError.GraphErrorException(
+                                new GraphError("Ontology Not Found", String.format("Ontology %s is not found in repository", ontologyId)))))
                         .stream().reduce("", String::concat)))
                 .compose();
     }

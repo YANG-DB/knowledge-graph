@@ -6,6 +6,8 @@ package org.unipop.schema.property.type;
 
 
 
+
+
 import org.apache.tinkerpop.gremlin.process.traversal.P;
 
 import java.util.function.BiPredicate;

@@ -3,6 +3,8 @@ package org.opensearch.graph.model.query;
 
 
 
+
+
 import org.opensearch.graph.model.transport.CreateQueryRequestMetadata;
 
 import java.util.UUID;

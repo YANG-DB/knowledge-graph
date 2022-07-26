@@ -2,9 +2,11 @@ package org.opensearch.graph.executor.ontology.schema;
 
 
 
+
+
 import com.google.common.collect.ImmutableList;
 import com.typesafe.config.Config;
-import org.opensearch.graph.model.resourceInfo.FuseError;
+import org.opensearch.graph.model.resourceInfo.GraphError;
 import org.opensearch.graph.model.schema.*;
 import org.jooq.Parser;
 import org.jooq.Queries;
@@ -39,14 +41,14 @@ public class DDLToIndexProviderTranslator implements IndexProviderTranslator<Lis
         return indexProvider;
     }
 
-    private void parseTable(String table, IndexProvider indexProvider) throws FuseError.FuseErrorException {
+    private void parseTable(String table, IndexProvider indexProvider) throws GraphError.GraphErrorException {
         try {
             Queries queries = parser.parse(table);
             Arrays.stream(queries.queries())
                     .filter(q -> q.getClass().getSimpleName().endsWith("CreateTableImpl"))
                     .forEach(q -> parse(q, indexProvider));
         } catch (Throwable t) {
-            throw new FuseError.FuseErrorException("Error Parsing DDL file " + table, t);
+            throw new GraphError.GraphErrorException("Error Parsing DDL file " + table, t);
         }
     }
 

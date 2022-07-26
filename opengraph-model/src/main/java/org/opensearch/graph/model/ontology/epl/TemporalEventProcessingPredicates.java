@@ -2,6 +2,8 @@ package org.opensearch.graph.model.ontology.epl;
 
 
 
+
+
 import com.fasterxml.jackson.annotation.JsonInclude;
 import org.opensearch.graph.model.query.properties.constraint.Constraint;
 import org.opensearch.graph.model.query.quant.Quant1;

@@ -2,12 +2,14 @@ package org.opensearch.graph.executor.opensearch;
 
 
 
+
+
 import com.google.inject.Inject;
 import org.opensearch.graph.executor.ontology.schema.OntologyIndexGenerator;
 import org.opensearch.graph.executor.ontology.schema.RawSchema;
 import org.opensearch.graph.model.GlobalConstants;
 import org.opensearch.graph.model.ontology.*;
-import org.opensearch.graph.model.resourceInfo.FuseError;
+import org.opensearch.graph.model.resourceInfo.GraphError;
 import org.opensearch.graph.model.schema.*;
 import javaslang.Tuple2;
 import org.opensearch.ResourceAlreadyExistsException;
@@ -73,7 +75,7 @@ public class EngineIndexProviderMappingFactory implements OntologyIndexGenerator
             } catch (ResourceAlreadyExistsException e) {
                 responses.add(new Tuple2<>(false, e.getIndex().getName()));
             } catch (Throwable t) {
-                throw new FuseError.FuseErrorException("Error Generating Indices for E/S ", t);
+                throw new GraphError.GraphErrorException("Error Generating Indices for E/S ", t);
             }
         });
         return responses;
@@ -101,7 +103,7 @@ public class EngineIndexProviderMappingFactory implements OntologyIndexGenerator
             return responses.stream().map(r -> new Tuple2<>(r._1, r._2.isAcknowledged()))
                     .collect(Collectors.toList());
         } catch (Throwable t) {
-            throw new FuseError.FuseErrorException("Error Generating Mapping for E/S ", t);
+            throw new GraphError.GraphErrorException("Error Generating Mapping for E/S ", t);
         }
     }
 
@@ -135,7 +137,7 @@ public class EngineIndexProviderMappingFactory implements OntologyIndexGenerator
     private Collection<ESPutIndexTemplateRequestBuilder> mapRelations(Ontology.Accessor ontology, Client client, Map<String, ESPutIndexTemplateRequestBuilder> requests) {
         ontology.relations().forEach(r -> {
             String mapping = indexProvider.getRelation(r.getName()).orElseThrow(
-                    () -> new FuseError.FuseErrorException(new FuseError("Mapping generation exception", "No entity with name " + r + " found in ontology")))
+                    () -> new GraphError.GraphErrorException(new GraphError("Mapping generation exception", "No entity with name " + r + " found in ontology")))
                     .getPartition();
 
             Relation relation = indexProvider.getRelation(r.getName()).get();
@@ -305,7 +307,7 @@ public class EngineIndexProviderMappingFactory implements OntologyIndexGenerator
         StreamSupport.stream(ontology.entities().spliterator(), false)
                 .forEach(e -> {
                     String mapping = indexProvider.getEntity(e.getName()).orElseThrow(
-                            () -> new FuseError.FuseErrorException(new FuseError("Mapping generation exception", "No entity with name " + e + " found in ontology")))
+                            () -> new GraphError.GraphErrorException(new GraphError("Mapping generation exception", "No entity with name " + e + " found in ontology")))
                             .getPartition();
 
                     Entity entity = indexProvider.getEntity(e.getName()).get();
@@ -426,7 +428,7 @@ public class EngineIndexProviderMappingFactory implements OntologyIndexGenerator
     public Map<String, Object> generateEntityMapping(Ontology.Accessor ontology, EntityType entityType, Entity ent, String label) {
         Optional<EntityType> entity = ontology.entity(entityType.getName());
         if (!entity.isPresent())
-            throw new FuseError.FuseErrorException(new FuseError("Mapping generation exception", "No entity with name " + label + " found in ontology"));
+            throw new GraphError.GraphErrorException(new GraphError("Mapping generation exception", "No entity with name " + label + " found in ontology"));
 
         Map<String, Object> jsonMap = new HashMap<>();
         //populate index fields
@@ -445,7 +447,7 @@ public class EngineIndexProviderMappingFactory implements OntologyIndexGenerator
     public Map<String, Object> generateRelationMapping(Ontology.Accessor ontology, RelationshipType relationshipType, Relation rel, String label) {
         Optional<RelationshipType> relation = ontology.relation(relationshipType.getName());
         if (!relation.isPresent())
-            throw new FuseError.FuseErrorException(new FuseError("Mapping generation exception", "No relation    with name " + label + " found in ontology"));
+            throw new GraphError.GraphErrorException(new GraphError("Mapping generation exception", "No relation    with name " + label + " found in ontology"));
 
         Map<String, Object> jsonMap = new HashMap<>();
 
@@ -481,7 +483,7 @@ public class EngineIndexProviderMappingFactory implements OntologyIndexGenerator
     private void generateNestedRelationMapping(Ontology.Accessor ontology, Map<String, Object> parent, BaseTypeElement<? extends BaseTypeElement> nest) {
         Optional<RelationshipType> relation = ontology.relation(nest.getType());
         if (!relation.isPresent())
-            throw new FuseError.FuseErrorException(new FuseError("Mapping generation exception", "No relation with name " + nest.getType() + " found in ontology"));
+            throw new GraphError.GraphErrorException(new GraphError("Mapping generation exception", "No relation with name " + nest.getType() + " found in ontology"));
 
         Map<String, Object> mapping = new HashMap<>();
         Map<String, Object> properties = new HashMap<>();
@@ -498,7 +500,7 @@ public class EngineIndexProviderMappingFactory implements OntologyIndexGenerator
         populateProperty(ontology, nest, properties, relation.get());
         //assuming single value exists (this is the field name)
         if (nest.getProps().getValues().isEmpty())
-            throw new FuseError.FuseErrorException(new FuseError("Mapping generation exception", "Nested Rel with name " + nest.getType() + " has no property value in mapping file"));
+            throw new GraphError.GraphErrorException(new GraphError("Mapping generation exception", "Nested Rel with name " + nest.getType() + " has no property value in mapping file"));
 
         //inner child nested population
         nest.getNested().forEach(inner -> generateNestedRelationMapping(ontology, properties, inner));
@@ -512,7 +514,7 @@ public class EngineIndexProviderMappingFactory implements OntologyIndexGenerator
     private Map<String, Object> generateNestedEntityMapping(Ontology.Accessor ontology, Map<String, Object> parent, BaseTypeElement<? extends BaseTypeElement> nest) {
         Optional<EntityType> entity = ontology.entity(nest.getType());
         if (!entity.isPresent())
-            throw new FuseError.FuseErrorException(new FuseError("Mapping generation exception", "No entity with name " + nest.getType() + " found in ontology"));
+            throw new GraphError.GraphErrorException(new GraphError("Mapping generation exception", "No entity with name " + nest.getType() + " found in ontology"));
 
         Map<String, Object> mapping = new HashMap<>();
         Map<String, Object> properties = new HashMap<>();
@@ -529,7 +531,7 @@ public class EngineIndexProviderMappingFactory implements OntologyIndexGenerator
         populateProperty(ontology, nest, properties, entity.get());
         //assuming single value exists (this is the field name)
         if (nest.getProps().getValues().isEmpty())
-            throw new FuseError.FuseErrorException(new FuseError("Mapping generation exception", "Nested entity with name " + nest.getType() + " has no property value in mapping file"));
+            throw new GraphError.GraphErrorException(new GraphError("Mapping generation exception", "Nested entity with name " + nest.getType() + " has no property value in mapping file"));
 
         //add mapping only if properties size > 0
         if (properties.size() > 0) {
@@ -622,7 +624,7 @@ public class EngineIndexProviderMappingFactory implements OntologyIndexGenerator
     public Settings generateSettings(Ontology.Accessor ontology, EntityType entityType, Entity entity, String label) {
         ontology.entity(entityType.getName()).get().getIdField().forEach(idField -> {
             if (!ontology.entity(entityType.getName()).get().fields().contains(idField))
-                throw new FuseError.FuseErrorException(new FuseError("Entity Schema generation exception", " Entity " + label + " not containing id metadata property "));
+                throw new GraphError.GraphErrorException(new GraphError("Entity Schema generation exception", " Entity " + label + " not containing id metadata property "));
         });
         // TODO: 05/12/2019  - use index provider to correctly build index settings
         return builder(ontology, entity);
@@ -636,7 +638,7 @@ public class EngineIndexProviderMappingFactory implements OntologyIndexGenerator
     public Settings generateSettings(Ontology.Accessor ontology, RelationshipType relationType, Relation rel, String label) {
         ontology.relation(relationType.getName()).get().getIdField().forEach(idField -> {
             if (!ontology.relation(relationType.getName()).get().fields().contains(idField))
-                throw new FuseError.FuseErrorException(new FuseError("Relation Schema generation exception", " Relationship " + label + " not containing id metadata property "));
+                throw new GraphError.GraphErrorException(new GraphError("Relation Schema generation exception", " Relationship " + label + " not containing id metadata property "));
         });
         return builder(ontology, rel);
     }

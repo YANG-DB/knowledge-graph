@@ -2,12 +2,14 @@ package org.opensearch.graph.core.driver;
 
 
 
+
+
 import com.google.inject.Inject;
 import com.google.inject.name.Named;
 import org.opensearch.graph.dispatcher.driver.IdGeneratorDriver;
 import org.opensearch.graph.executor.ExecutorModule;
 import org.opensearch.graph.model.Range;
-import org.opensearch.graph.model.resourceInfo.FuseError;
+import org.opensearch.graph.model.resourceInfo.GraphError;
 import org.opensearch.graph.model.transport.Status;
 import io.github.resilience4j.retry.Retry;
 import io.github.resilience4j.retry.RetryConfig;
@@ -103,7 +105,7 @@ public class BasicIdGenerator implements IdGeneratorDriver<Range> {
                 generateIndex();
                 addFirstSequenceId(genName);
             } catch (Throwable t) {
-                throw new FuseError.FuseErrorException("Error while attempting to get Snowflake ID ...", t);
+                throw new GraphError.GraphErrorException("Error while attempting to get Snowflake ID ...", t);
             }
         }
         //activate retry

@@ -2,6 +2,8 @@ package org.opensearch.graph.unipop.schemaProviders;
 
 
 
+
+
 import org.apache.tinkerpop.gremlin.process.traversal.Traversal;
 
 public interface GraphElementConstraint {

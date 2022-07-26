@@ -2,6 +2,8 @@ package org.opensearch.graph.stats.model.configuration;
 
 
 
+
+
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import org.opensearch.graph.stats.model.histogram.Histogram;

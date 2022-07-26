@@ -1,6 +1,8 @@
 package org.opensearch.graph.services.appRegistrars;
 
 
+
+
 import org.opensearch.graph.dispatcher.urlSupplier.AppUrlSupplier;
 import org.opensearch.graph.model.results.TextContent;
 import org.opensearch.graph.model.transport.ExternalMetadata;
@@ -42,8 +44,8 @@ public class BeforeAfterAppRegistrar implements AppRegistrar {
     }
 
     private void bindExternalMetadataSupplier(Request request) {
-        Optional<String> id = request.header(FUSE_EXTERNAL_ID_HEADER).toOptional();
-        Optional<String> operation = request.header(FUSE_EXTERNAL_OPERATION_HEADER).toOptional();
+        Optional<String> id = request.header(GRAPH_EXTERNAL_ID_HEADER).toOptional();
+        Optional<String> operation = request.header(GRAPH_EXTERNAL_OPERATION_HEADER).toOptional();
 
         if (id.isPresent() || operation.isPresent()) {
             request.set(RequestExternalMetadataSupplier.class,
@@ -53,16 +55,16 @@ public class BeforeAfterAppRegistrar implements AppRegistrar {
     }
 
     private void addExternalMetadataResponseHeaders(Request request, Response response) {
-        Optional<String> id = request.header(FUSE_EXTERNAL_ID_HEADER).toOptional();
-        Optional<String> operation = request.header(FUSE_EXTERNAL_OPERATION_HEADER).toOptional();
+        Optional<String> id = request.header(GRAPH_EXTERNAL_ID_HEADER).toOptional();
+        Optional<String> operation = request.header(GRAPH_EXTERNAL_OPERATION_HEADER).toOptional();
 
-        id.ifPresent(id1 -> response.header(FUSE_EXTERNAL_ID_HEADER, id1));
-        operation.ifPresent(operation1 -> response.header(FUSE_EXTERNAL_OPERATION_HEADER, operation1));
+        id.ifPresent(id1 -> response.header(GRAPH_EXTERNAL_ID_HEADER, id1));
+        operation.ifPresent(operation1 -> response.header(GRAPH_EXTERNAL_OPERATION_HEADER, operation1));
     }
     //endregion
 
     //region Fields
-    private static final String FUSE_EXTERNAL_ID_HEADER = "fuse-external-id";
-    private static final String FUSE_EXTERNAL_OPERATION_HEADER = "fuse-external-operation";
+    private static final String GRAPH_EXTERNAL_ID_HEADER = "graph-external-id";
+    private static final String GRAPH_EXTERNAL_OPERATION_HEADER = "graph-external-operation";
     //endregion
 }

@@ -4,8 +4,10 @@ package org.opensearch.graph.dispatcher.ontology;
 
 
 
+
+
 import com.fasterxml.jackson.databind.ObjectMapper;
-import org.opensearch.graph.model.resourceInfo.FuseError;
+import org.opensearch.graph.model.resourceInfo.GraphError;
 import org.opensearch.graph.model.schema.IndexProvider;
 import javaslang.Tuple2;
 import javaslang.collection.Stream;
@@ -39,7 +41,7 @@ public class DirectoryIndexProvider implements IndexProviderFactory {
                         try {
                             return mapper.readValue(file, IndexProvider.class);
                         } catch (IOException e) {
-                            throw new FuseError.FuseErrorException( "Error reading index provider ",e,new FuseError("Error reading index provider ",file.getName()));
+                            throw new GraphError.GraphErrorException( "Error reading index provider ",e,new GraphError("Error reading index provider ",file.getName()));
                         }
                     }).toJavaMap(provider -> new Tuple2<>(provider.getOntology(), provider));
         }

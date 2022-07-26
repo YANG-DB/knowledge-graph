@@ -1,6 +1,8 @@
 package org.opensearch.graph.services;
 
 
+
+
 /*-
  *
  * fuse-service
@@ -98,7 +100,7 @@ public class GraphApp extends Jooby {
         new HomeAppRegistrar().register(this, localUrlSupplier);
         new HealthAppRegistrar().register(this, localUrlSupplier);
 
-        //dynamically load AppControllerRegistrar that comply with com.yangdb.fuse.services package and derive from AppControllerRegistrarBase
+        //dynamically load AppControllerRegistrar that comply with org.opensearch.graph.services package and derive from AppControllerRegistrarBase
         additionalRegistrars(this, localUrlSupplier);
 
         //callbacks
@@ -108,7 +110,7 @@ public class GraphApp extends Jooby {
     }
 
     /**
-     * dynamically load AppControllerRegistrar that comply with com.yangdb.fuse.services package and derive from AppControllerRegistrarBase
+     * dynamically load AppControllerRegistrar that comply with org.opensearch.graph.services package and derive from AppControllerRegistrarBase
      *
      * @param graphApp
      * @param localUrlSupplier

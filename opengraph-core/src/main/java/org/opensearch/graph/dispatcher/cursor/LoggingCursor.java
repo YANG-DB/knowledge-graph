@@ -4,9 +4,11 @@ package org.opensearch.graph.dispatcher.cursor;
 
 
 
+
+
 import com.codahale.metrics.MetricRegistry;
 import org.opensearch.graph.dispatcher.logging.*;
-import org.opensearch.graph.model.resourceInfo.FuseError;
+import org.opensearch.graph.model.resourceInfo.GraphError;
 import org.opensearch.graph.model.results.QueryResultBase;
 import org.slf4j.Logger;
 
@@ -37,7 +39,7 @@ public class LoggingCursor implements Cursor {
             thrownException = true;
             new LogMessage.Impl(this.logger, LogMessage.Level.error, "failed getNextResults", sequence, LogType.of(LogType.failure), getNextResults, ElapsedFrom.now())
                     .with(ex).log();
-            throw new FuseError.FuseErrorException(new FuseError("Cursor Error",ex));
+            throw new GraphError.GraphErrorException(new GraphError("Cursor Error",ex));
         } finally {
             metricRegistry.counter(CURSOR_COUNT).dec(1);
             if (!thrownException) {
@@ -68,7 +70,7 @@ public class LoggingCursor implements Cursor {
             thrownException = true;
             new LogMessage.Impl(this.logger, LogMessage.Level.error, "failed cleanResources", sequence, LogType.of(LogType.failure), cleanResources, ElapsedFrom.now())
                     .with(ex).log();
-            throw new FuseError.FuseErrorException(new FuseError("Cursor Error",ex));
+            throw new GraphError.GraphErrorException(new GraphError("Cursor Error",ex));
         } finally {
             if (!thrownException) {
                 new LogMessage.Impl(this.logger, LogMessage.Level.trace, "finish cleanResources", sequence, LogType.of(LogType.success), cleanResources, ElapsedFrom.now()).log();

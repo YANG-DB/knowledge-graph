@@ -2,6 +2,8 @@ package org.opensearch.graph.epb.plan.estimation.pattern.estimators;
 
 
 
+
+
 import org.opensearch.graph.dispatcher.ontology.OntologyProvider;
 import org.opensearch.graph.epb.plan.estimation.CostEstimationConfig;
 import org.opensearch.graph.epb.plan.estimation.pattern.EntityRelationEntityPattern;
@@ -22,7 +24,7 @@ import org.opensearch.graph.model.execution.plan.relation.RelationFilterOp;
 import org.opensearch.graph.model.execution.plan.relation.RelationOp;
 import org.opensearch.graph.model.ontology.OntologyFinalizer;
 import org.opensearch.graph.model.query.properties.*;
-import org.opensearch.graph.model.resourceInfo.FuseError;
+import org.opensearch.graph.model.resourceInfo.GraphError;
 
 import java.util.LinkedList;
 import java.util.List;
@@ -157,7 +159,7 @@ public class EntityRelationEntityPatternCostEstimator implements PatternCostEsti
         }
 
         StatisticsProvider statisticsProvider = this.statisticsProviderFactory.get(this.ontologyProvider.get(context.getQuery().getOnt())
-                .orElseThrow(() -> new FuseError.FuseErrorException(new FuseError("No target Ontology field found ", "No target Ontology found for " + context.getQuery().getOnt()))));
+                .orElseThrow(() -> new GraphError.GraphErrorException(new GraphError("No target Ontology field found ", "No target Ontology found for " + context.getQuery().getOnt()))));
         return calculateFullStep(config, statisticsProvider, context.getPreviousCost().get(), (EntityRelationEntityPattern) pattern);
     }
     //endregion

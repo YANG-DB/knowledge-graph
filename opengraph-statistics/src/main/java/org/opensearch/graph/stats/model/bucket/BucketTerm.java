@@ -2,6 +2,8 @@ package org.opensearch.graph.stats.model.bucket;
 
 
 
+
+
 public class BucketTerm<T> extends Bucket {
 
     public BucketTerm() {

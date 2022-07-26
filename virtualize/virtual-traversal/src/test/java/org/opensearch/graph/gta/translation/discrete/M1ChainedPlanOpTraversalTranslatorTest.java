@@ -23,7 +23,7 @@ import org.opensearch.graph.model.query.quant.QuantType;
 import org.opensearch.graph.model.GlobalConstants;
 import org.opensearch.graph.unipop.promise.Constraint;
 import org.opensearch.graph.unipop.promise.PromiseGraph;
-import org.opensearch.graph.unipop.structure.FuseUniGraph;
+import org.opensearch.graph.unipop.structure.SearchUniGraph;
 import org.apache.tinkerpop.gremlin.process.traversal.Traversal;
 import org.opensearch.graph.unipop.process.traversal.dsl.graph.__;
 import org.apache.tinkerpop.gremlin.process.traversal.util.DefaultTraversalStrategies;
@@ -56,7 +56,7 @@ public class M1ChainedPlanOpTraversalTranslatorTest {
     @Before
     public void setUp() throws Exception {
         translator = new ChainedPlanOpTraversalTranslator(new M1PlanOpTranslationStrategy());
-        UniGraph uniGraph = new FuseUniGraph(null, graph -> new ControllerManager() {
+        UniGraph uniGraph = new SearchUniGraph(null, graph -> new ControllerManager() {
             @Override
             public Set<UniQueryController> getControllers() {
                 return Collections.emptySet();

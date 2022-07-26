@@ -2,6 +2,8 @@ package org.opensearch.graph.stats.model.result;
 
 
 
+
+
 import org.opensearch.graph.stats.model.enums.DataType;
 
 public abstract class StatResultBase {

@@ -2,6 +2,8 @@ package org.opensearch.graph.model.query;
 
 
 
+
+
 import java.util.Set;
 
 public interface Untyped {

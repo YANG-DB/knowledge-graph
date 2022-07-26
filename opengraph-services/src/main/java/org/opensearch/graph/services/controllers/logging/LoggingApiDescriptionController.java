@@ -1,13 +1,15 @@
 package org.opensearch.graph.services.controllers.logging;
 
 
+
+
 import com.codahale.metrics.MetricRegistry;
 import com.google.inject.Inject;
 import com.google.inject.name.Named;
 import org.opensearch.graph.dispatcher.logging.*;
 import org.opensearch.graph.services.suppliers.RequestExternalMetadataSupplier;
 import org.opensearch.graph.services.suppliers.RequestIdSupplier;
-import org.opensearch.graph.model.resourceInfo.FuseResourceInfo;
+import org.opensearch.graph.model.resourceInfo.GraphResourceInfo;
 import org.opensearch.graph.model.transport.ContentResponse;
 import org.opensearch.graph.services.controllers.ApiDescriptionController;
 import org.slf4j.Logger;
@@ -38,8 +40,8 @@ public class LoggingApiDescriptionController extends LoggingControllerBase<ApiDe
 
     //region ApiDescriptionController Implementation
     @Override
-    public ContentResponse<FuseResourceInfo> getInfo() {
-        return new LoggingSyncMethodDecorator<ContentResponse<FuseResourceInfo>>(
+    public ContentResponse<GraphResourceInfo> getInfo() {
+        return new LoggingSyncMethodDecorator<ContentResponse<GraphResourceInfo>>(
                 this.logger,
                 this.metricRegistry,
                 getInfo,

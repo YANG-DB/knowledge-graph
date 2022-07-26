@@ -3,9 +3,11 @@ package org.opensearch.graph.model.execution.plan.descriptors;
 
 
 
+
+
 import org.opensearch.graph.model.descriptors.GraphDescriptor;
 import org.opensearch.graph.model.ontology.*;
-import org.opensearch.graph.model.resourceInfo.FuseError;
+import org.opensearch.graph.model.resourceInfo.GraphError;
 
 public class OntologyDescriptor implements GraphDescriptor<Ontology> {
 
@@ -109,7 +111,7 @@ public class OntologyDescriptor implements GraphDescriptor<Ontology> {
 
     private static Property getProp(Ontology.Accessor ontology, String propName) {
         return ontology.properties().stream().filter(p -> p.getName().equals(propName)).findFirst()
-                .orElseThrow(() -> new FuseError.FuseErrorException("Ontology missing the next property ", "No property found named " + propName));
+                .orElseThrow(() -> new GraphError.GraphErrorException("Ontology missing the next property ", "No property found named " + propName));
     }
 
     private static void removeRedundentArrow(StringBuilder builder) {

@@ -2,6 +2,8 @@ package org.geojson;
 
 
 
+
+
 import com.fasterxml.jackson.annotation.JsonInclude;
 
 import java.util.HashMap;

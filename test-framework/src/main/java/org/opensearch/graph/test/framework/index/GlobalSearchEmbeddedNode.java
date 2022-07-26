@@ -2,6 +2,8 @@ package org.opensearch.graph.test.framework.index;
 
 
 
+
+
 import org.apache.http.HttpHost;
 import org.opensearch.client.RequestOptions;
 import org.opensearch.client.RestClient;
@@ -27,7 +29,7 @@ public class GlobalSearchEmbeddedNode {
     }
 
     public static SearchEmbeddedNode getInstance() throws Exception {
-        return getInstance("fuse.test_elastic");
+        return getInstance("graph.test_opensearch");
     }
 
     public static SearchEmbeddedNode getInstance(Settings setting) throws Exception {

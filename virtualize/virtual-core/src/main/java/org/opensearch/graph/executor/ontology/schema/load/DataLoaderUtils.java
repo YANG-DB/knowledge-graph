@@ -2,9 +2,11 @@ package org.opensearch.graph.executor.ontology.schema.load;
 
 
 
+
+
 import org.opensearch.graph.executor.ontology.schema.RawSchema;
 import org.opensearch.graph.model.date.DateParser;
-import org.opensearch.graph.model.resourceInfo.FuseError;
+import org.opensearch.graph.model.resourceInfo.GraphError;
 import javaslang.collection.Stream;
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.io.FilenameUtils;
@@ -61,7 +63,7 @@ public interface DataLoaderUtils {
 
             return Stream.ofAll(allIndices).count(s -> !s.isEmpty());
         } catch (Throwable t) {
-            throw new FuseError.FuseErrorException("INIT() - Create Indices error ", t);
+            throw new GraphError.GraphErrorException("INIT() - Create Indices error ", t);
 
         }
     }

@@ -3,6 +3,8 @@ package org.opensearch.graph.model.resourceInfo;
 
 
 
+
+
 import com.fasterxml.jackson.annotation.JsonInclude;
 import org.opensearch.graph.model.transport.CreateQueryRequestMetadata.QueryType;
 import javaslang.collection.Stream;
@@ -70,7 +72,7 @@ public class QueryResourceInfo extends ResourceInfoBase {
         return elasticQueryUrl;
     }
 
-    public FuseError getError() {
+    public GraphError getError() {
         return error;
     }
 
@@ -95,7 +97,7 @@ public class QueryResourceInfo extends ResourceInfoBase {
 
 //endregion
 
-    public QueryResourceInfo error(FuseError error) {
+    public QueryResourceInfo error(GraphError error) {
         QueryResourceInfo clone = new QueryResourceInfo(
                 QueryType.concrete,
                 this.getResourceUrl(),
@@ -115,7 +117,7 @@ public class QueryResourceInfo extends ResourceInfoBase {
     private String elasticQueryUrl;
     private QueryType type;
 
-    private FuseError error;
+    private GraphError error;
 
     private List<QueryResourceInfo> innerUrlResourceInfos;
     private List<CursorResourceInfo> cursorResourceInfos;

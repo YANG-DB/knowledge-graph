@@ -3,6 +3,8 @@ package org.opensearch.graph.model.query.properties;
 
 
 
+
+
 import org.opensearch.graph.model.query.quant.QuantType;
 
 /**

@@ -3,6 +3,8 @@ package org.opensearch.graph.model.resourceInfo;
 
 
 
+
+
 /**
  * Created by lior.perry on 09/03/2017.
  */

@@ -4,6 +4,8 @@ package org.opensearch.graph.model.query.entity;
 
 
 
+
+
 import com.fasterxml.jackson.annotation.JsonInclude;
 import org.opensearch.graph.model.Next;
 import org.opensearch.graph.model.Tagged;

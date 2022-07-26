@@ -4,6 +4,8 @@ package org.opensearch.graph.client;
 
 
 
+
+
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.github.benmanes.caffeine.cache.Caffeine;
 import com.github.benmanes.caffeine.cache.LoadingCache;
@@ -44,7 +46,7 @@ import java.util.concurrent.TimeUnit;
 import static com.typesafe.config.ConfigFactory.defaultApplication;
 
 public class SnifferGraphClient implements GraphClient {
-    public static final String SYSTEM = "fuse_node_info";
+    public static final String SYSTEM = "graph_node_info";
     public static final String ID = "id";
     public static final String DATA = "data";
     public static final String UPDATE_TIME = "updateTime";
@@ -53,23 +55,23 @@ public class SnifferGraphClient implements GraphClient {
     private final ScheduledExecutorService scheduler = Executors.newScheduledThreadPool(1);
 
     private Client client;
-    private LoadingCache<String, GraphClient>  fuseClients;
+    private LoadingCache<String, GraphClient>  GraphClients;
     private Map<String,Map> nodeStats;
     private EngineGraphConfiguration configuration;
 
-    private final int fusePort;
-    private final String fuseProtocol;
-    private final String fuseBaseUri;
+    private final int graphPort;
+    private final String graphProtocol;
+    private final String graphBaseUri;
 
     public SnifferGraphClient() {
 
         final Config conf = defaultApplication();
-        fusePort = conf.getInt("fuse.port");
-        fuseProtocol = conf.getString("fuse.protocol");
-        fuseBaseUri = conf.getString("fuse.base.uri");
+        graphPort = conf.getInt("opengraph.port");
+        graphProtocol = conf.getString("opengraph.protocol");
+        graphBaseUri = conf.getString("opengraph.base.uri");
 
         nodeStats = new HashMap<>();
-        fuseClients = Caffeine.newBuilder()
+        GraphClients = Caffeine.newBuilder()
                 .expireAfterWrite(10, TimeUnit.MINUTES)
                 .build(key -> this);
 
@@ -78,7 +80,7 @@ public class SnifferGraphClient implements GraphClient {
         //first time init the cluster map state
         loadClusterState();
 
-        //sniff fuse cluster state from elastic fuse_node_info index
+        //sniff fuse cluster state from elastic graph_node_info index
         scheduler.scheduleAtFixedRate(() -> loadClusterState(), 5,10,TimeUnit.SECONDS);
     }
 
@@ -97,7 +99,7 @@ public class SnifferGraphClient implements GraphClient {
     private void updateNodeStatus(String id, Map<String, Object> source) {
         try {
             this.nodeStats.put(id,source);
-            this.fuseClients.put(id,new BaseGraphClient(new URL(fuseProtocol,id,fusePort,fuseBaseUri).toString()));
+            this.GraphClients.put(id,new BaseGraphClient(new URL(graphProtocol,id, graphPort, graphBaseUri).toString()));
             //todo remove non reporting nodes from client pool
         } catch (IOException e) {
             throw new RuntimeException(e);
@@ -106,17 +108,17 @@ public class SnifferGraphClient implements GraphClient {
 
     private GraphClient selectNode() {
         //todo select best appropriate node according to least busy (with respect to living fuse nodes)
-        return fuseClients.asMap().values().iterator().next();
+        return GraphClients.asMap().values().iterator().next();
     }
 
     private GraphClient selectNode(String url) {
         //todo select best appropriate node according to least busy & relevant to given url (with respect to living fuse nodes)
-        return fuseClients.asMap().values().iterator().next();
+        return GraphClients.asMap().values().iterator().next();
     }
 
     @Override
-    public FuseResourceInfo getFuseInfo() throws IOException {
-        return selectNode().getFuseInfo();
+    public GraphResourceInfo getInfo() throws IOException {
+        return selectNode().getInfo();
     }
 
     @Override
@@ -296,13 +298,13 @@ public class SnifferGraphClient implements GraphClient {
     }
 
     @Override
-    public Long getFuseSnowflakeId() throws IOException {
-        return selectNode().getFuseSnowflakeId();
+    public Long getSnowflakeId() throws IOException {
+        return selectNode().getSnowflakeId();
     }
 
     @Override
-    public String getFuseUrl() {
-        return selectNode().getFuseUrl();
+    public String getGraphUrl() {
+        return selectNode().getGraphUrl();
     }
 
 

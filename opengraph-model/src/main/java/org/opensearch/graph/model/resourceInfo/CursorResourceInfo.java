@@ -3,6 +3,8 @@ package org.opensearch.graph.model.resourceInfo;
 
 
 
+
+
 import com.fasterxml.jackson.annotation.JsonInclude;
 import org.opensearch.graph.model.profile.QueryProfileStepInfoData;
 import org.opensearch.graph.model.transport.cursor.CreateCursorRequest;
@@ -85,11 +87,11 @@ public class CursorResourceInfo extends ResourceInfoBase {
         this.pageResourceInfos = pageResourceInfos;
     }
 
-    public FuseError getError() {
+    public GraphError getError() {
         return error;
     }
 
-    public CursorResourceInfo error(FuseError error) {
+    public CursorResourceInfo error(GraphError error) {
         CursorResourceInfo clone  = new CursorResourceInfo(
                 this.getResourceUrl(),
                 this.getResourceId(),
@@ -105,7 +107,7 @@ public class CursorResourceInfo extends ResourceInfoBase {
     //endregion
 
     //region Fields
-    private FuseError error;
+    private GraphError error;
     private CreateCursorRequest cursorRequest;
     private String pageStoreUrl;
     private List<QueryProfileStepInfoData> profileInfo;

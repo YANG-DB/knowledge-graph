@@ -2,6 +2,8 @@ package org.opensearch.graph.model.ontology;
 
 
 
+
+
 import org.semanticweb.owlapi.model.IRI;
 
 import java.util.Arrays;

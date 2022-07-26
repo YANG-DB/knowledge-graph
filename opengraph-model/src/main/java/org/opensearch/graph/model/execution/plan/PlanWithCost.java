@@ -3,10 +3,12 @@ package org.opensearch.graph.model.execution.plan;
 
 
 
+
+
 import org.opensearch.graph.model.descriptors.ToStringDescriptor;
 import org.opensearch.graph.model.execution.plan.composite.Plan;
 import org.opensearch.graph.model.execution.plan.descriptors.PlanWithCostDescriptor;
-import org.opensearch.graph.model.resourceInfo.FuseError;
+import org.opensearch.graph.model.resourceInfo.GraphError;
 
 import java.util.Collections;
 
@@ -19,9 +21,9 @@ public class PlanWithCost<P, C> implements IPlan {
 
 
     public final static class ErrorPlanWithCost extends PlanWithCost {
-        private FuseError error;
+        private GraphError error;
 
-        public ErrorPlanWithCost(FuseError error) {
+        public ErrorPlanWithCost(GraphError error) {
             super(new Plan(Collections.emptyList()),null);
             this.error = error;
         }

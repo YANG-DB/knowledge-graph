@@ -2,6 +2,8 @@ package org.opensearch.graph.unipop.controller.utils.opensearch;
 
 
 
+
+
 import org.opensearch.OpenSearchParseException;
 import org.opensearch.common.bytes.BytesReference;
 import org.opensearch.common.collect.Tuple;
@@ -37,7 +39,7 @@ public class SearchHitUtils {
                 input = bytes.streamInput();
             }
             contentType = xContentType != null ? xContentType : XContentFactory.xContentType(input);
-            return new Tuple<>(Objects.requireNonNull(contentType), convertToMap(FuseJsonXContent.fuseJsonXContent, input, ordered));
+            return new Tuple<>(Objects.requireNonNull(contentType), convertToMap(GraphJsonXContent.GRAPH_JSON_X_CONTENT, input, ordered));
         } catch (IOException e) {
             throw new OpenSearchParseException("Failed to parse content to map", e);
         }

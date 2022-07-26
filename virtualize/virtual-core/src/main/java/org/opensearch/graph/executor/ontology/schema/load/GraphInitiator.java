@@ -2,6 +2,8 @@ package org.opensearch.graph.executor.ontology.schema.load;
 
 
 
+
+
 import java.io.IOException;
 
 public interface GraphInitiator {

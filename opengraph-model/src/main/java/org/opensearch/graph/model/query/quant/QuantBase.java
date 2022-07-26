@@ -4,6 +4,8 @@ package org.opensearch.graph.model.query.quant;
 
 
 
+
+
 import com.fasterxml.jackson.annotation.JsonInclude;
 import org.opensearch.graph.model.Container;
 import org.opensearch.graph.model.query.EBase;

@@ -2,6 +2,8 @@ package org.opensearch.graph.executor.ontology.schema;
 
 
 
+
+
 import com.google.common.collect.Lists;
 import org.opensearch.graph.unipop.schemaProviders.indexPartitions.IndexPartitions;
 import org.opensearch.graph.unipop.schemaProviders.indexPartitions.StaticIndexPartitions;

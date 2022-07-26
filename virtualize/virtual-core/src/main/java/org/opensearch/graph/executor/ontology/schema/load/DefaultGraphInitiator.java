@@ -2,6 +2,8 @@ package org.opensearch.graph.executor.ontology.schema.load;
 
 
 
+
+
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.google.inject.Inject;
 import com.typesafe.config.Config;
@@ -12,7 +14,7 @@ import org.opensearch.graph.executor.ontology.schema.GraphElementSchemaProviderJ
 import org.opensearch.graph.executor.ontology.schema.IndexProviderRawSchema;
 import org.opensearch.graph.executor.ontology.schema.RawSchema;
 import org.opensearch.graph.model.ontology.Ontology;
-import org.opensearch.graph.model.resourceInfo.FuseError;
+import org.opensearch.graph.model.resourceInfo.GraphError;
 import org.opensearch.graph.model.schema.IndexProvider;
 import org.opensearch.graph.unipop.schemaProviders.GraphElementSchemaProvider;
 import javaslang.Tuple2;
@@ -44,7 +46,7 @@ public class DefaultGraphInitiator implements GraphInitiator {
         this.client = client;
         this.schema = schema;
         Ontology ont = ontologyProvider.get(assembly)
-                .orElseThrow(() -> new FuseError.FuseErrorException(new FuseError("No Ontology present for assembly", "No Ontology present for assembly" + assembly)));
+                .orElseThrow(() -> new GraphError.GraphErrorException(new GraphError("No Ontology present for assembly", "No Ontology present for assembly" + assembly)));
 
         //if no index provider found with assembly name - generate default one accoring to ontology and simple Static Index Partitioning strategy
         this.indexProvider = indexProviderFactory.get(assembly).orElseGet(() -> IndexProvider.Builder.generate(ont));
@@ -66,7 +68,7 @@ public class DefaultGraphInitiator implements GraphInitiator {
 
     public long drop(String ontology) {
         Ontology ont = ontologyProvider.get(ontology)
-                .orElseThrow(() -> new FuseError.FuseErrorException(new FuseError("No Ontology present for name",
+                .orElseThrow(() -> new GraphError.GraphErrorException(new GraphError("No Ontology present for name",
                         "No Ontology present for name" + ontology)));
 
         GraphElementSchemaProvider schemaProvider = new GraphElementSchemaProviderJsonFactory(indexProviderFactory, ont).get(ont);
@@ -86,18 +88,18 @@ public class DefaultGraphInitiator implements GraphInitiator {
             IndexProvider indexProvider = objectMapper.readValue(schemaProvider, IndexProvider.class);
             mappingFactory.indexProvider(indexProvider)
                     .ontology(ontologyProvider.get(ontology)
-                            .orElseThrow(() -> new FuseError.FuseErrorException(new FuseError("No Ontology present for assembly", "No Ontology present for assembly" + ontology))));
+                            .orElseThrow(() -> new GraphError.GraphErrorException(new GraphError("No Ontology present for assembly", "No Ontology present for assembly" + ontology))));
             List<Tuple2<String, Boolean>> results = mappingFactory.generateMappings();
             return results.stream().filter(t -> t._2).count();
         } catch (Throwable t) {
-            throw new FuseError.FuseErrorException("Create templates error " + ontology + " with schema " + schemaProvider, t);
+            throw new GraphError.GraphErrorException("Create templates error " + ontology + " with schema " + schemaProvider, t);
         }
     }
 
     @Override
     public long createTemplate(String ontology) {
         Ontology ont = ontologyProvider.get(ontology)
-                .orElseThrow(() -> new FuseError.FuseErrorException(new FuseError("No Ontology present for name",
+                .orElseThrow(() -> new GraphError.GraphErrorException(new GraphError("No Ontology present for name",
                         "No Ontology present for name" + ontology)));
 
         IndexProvider provider = indexProviderFactory.get(assembly)
@@ -116,21 +118,21 @@ public class DefaultGraphInitiator implements GraphInitiator {
             IndexProvider indexProvider = objectMapper.readValue(schemaProvider, IndexProvider.class);
             mappingFactory.indexProvider(indexProvider)
                     .ontology(ontologyProvider.get(ontology)
-                            .orElseThrow(() -> new FuseError.FuseErrorException(new FuseError("No Ontology present for assembly", "No Ontology present for assembly" + ontology))));
+                            .orElseThrow(() -> new GraphError.GraphErrorException(new GraphError("No Ontology present for assembly", "No Ontology present for assembly" + ontology))));
             //first generate the index mapping
             mappingFactory.generateMappings();
             //create the indices
             List<Tuple2<Boolean, String>> indices = mappingFactory.createIndices();
             return indices.size();
         } catch (Throwable t) {
-            throw new FuseError.FuseErrorException("Create Indices error " + ontology + " with schema " + schemaProvider, t);
+            throw new GraphError.GraphErrorException("Create Indices error " + ontology + " with schema " + schemaProvider, t);
         }
     }
 
     @Override
     public long createIndices(String ontology) {
         Ontology ont = ontologyProvider.get(ontology)
-                .orElseThrow(() -> new FuseError.FuseErrorException(new FuseError("No Ontology present for name",
+                .orElseThrow(() -> new GraphError.GraphErrorException(new GraphError("No Ontology present for name",
                         "No Ontology present for name" + ontology)));
 
         IndexProvider provider = indexProviderFactory.get(assembly)
@@ -167,7 +169,7 @@ public class DefaultGraphInitiator implements GraphInitiator {
      */
     public long init(String ontology) {
         Ontology ont = ontologyProvider.get(ontology)
-                .orElseThrow(() -> new FuseError.FuseErrorException(new FuseError("No Ontology present for name",
+                .orElseThrow(() -> new GraphError.GraphErrorException(new GraphError("No Ontology present for name",
                         "No Ontology present for name" + ontology)));
 
         IndexProvider provider = indexProviderFactory.get(assembly)

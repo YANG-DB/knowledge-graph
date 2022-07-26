@@ -1,6 +1,8 @@
 package org.opensearch.graph.services.controllers;
 
 
+
+
 import com.google.inject.Inject;
 import org.opensearch.graph.dispatcher.ontology.OntologyProvider;
 import org.opensearch.graph.executor.ontology.schema.load.CSVDataLoader;
@@ -8,7 +10,7 @@ import org.opensearch.graph.executor.ontology.schema.load.GraphDataLoader;
 import org.opensearch.graph.executor.ontology.schema.load.GraphInitiator;
 import org.opensearch.graph.model.results.LoadResponse;
 import org.opensearch.graph.model.logical.LogicalGraphModel;
-import org.opensearch.graph.model.resourceInfo.FuseError;
+import org.opensearch.graph.model.resourceInfo.GraphError;
 import org.opensearch.graph.model.transport.ContentResponse;
 import org.opensearch.graph.model.transport.ContentResponse.Builder;
 
@@ -40,31 +42,31 @@ public class StandardDataLoaderController implements DataLoaderController {
     //region CatalogController Implementation
 
     @Override
-    public ContentResponse<LoadResponse<String, FuseError>> loadGraph(String ontology, LogicalGraphModel data, GraphDataLoader.Directive directive) {
+    public ContentResponse<LoadResponse<String, GraphError>> loadGraph(String ontology, LogicalGraphModel data, GraphDataLoader.Directive directive) {
         try {
-            return Builder.<LoadResponse<String, FuseError>>builder(OK, NOT_FOUND)
+            return Builder.<LoadResponse<String, GraphError>>builder(OK, NOT_FOUND)
                     .data(Optional.of(this.graphDataLoader.load(ontology, data, directive)))
                     .compose();
         } catch (IOException e) {
-            return Builder.<LoadResponse<String, FuseError>>builder(BAD_REQUEST, NOT_FOUND)
-                    .data(Optional.of(new LoadResponse<String, FuseError>() {
+            return Builder.<LoadResponse<String, GraphError>>builder(BAD_REQUEST, NOT_FOUND)
+                    .data(Optional.of(new LoadResponse<String, GraphError>() {
                         @Override
-                        public List<CommitResponse<String, FuseError>> getResponses() {
-                            return Collections.singletonList(new CommitResponse<String, FuseError>() {
+                        public List<CommitResponse<String, GraphError>> getResponses() {
+                            return Collections.singletonList(new CommitResponse<String, GraphError>() {
                                 @Override
                                 public List<String> getSuccesses() {
                                     return Collections.emptyList();
                                 }
 
                                 @Override
-                                public List<FuseError> getFailures() {
-                                    return Collections.singletonList(new FuseError(e.getMessage(), e));
+                                public List<GraphError> getFailures() {
+                                    return Collections.singletonList(new GraphError(e.getMessage(), e));
                                 }
                             });
                         }
 
                         @Override
-                        public LoadResponse response(CommitResponse<String, FuseError> response) {
+                        public LoadResponse response(CommitResponse<String, GraphError> response) {
                             return this;
                         }
                     }))
@@ -73,31 +75,31 @@ public class StandardDataLoaderController implements DataLoaderController {
     }
 
     @Override
-    public ContentResponse<LoadResponse<String, FuseError>> loadCsv(String ontology, String type, String label, String data, GraphDataLoader.Directive directive) {
+    public ContentResponse<LoadResponse<String, GraphError>> loadCsv(String ontology, String type, String label, String data, GraphDataLoader.Directive directive) {
         try {
-            return Builder.<LoadResponse<String, FuseError>>builder(OK, NOT_FOUND)
+            return Builder.<LoadResponse<String, GraphError>>builder(OK, NOT_FOUND)
                     .data(Optional.of(this.csvDataLoader.load(type,label , data, directive)))
                     .compose();
         } catch (IOException e) {
-            return Builder.<LoadResponse<String, FuseError>>builder(BAD_REQUEST, NOT_FOUND)
-                    .data(Optional.of(new LoadResponse<String, FuseError>() {
+            return Builder.<LoadResponse<String, GraphError>>builder(BAD_REQUEST, NOT_FOUND)
+                    .data(Optional.of(new LoadResponse<String, GraphError>() {
                         @Override
-                        public List<CommitResponse<String, FuseError>> getResponses() {
-                            return Collections.singletonList(new CommitResponse<String, FuseError>() {
+                        public List<CommitResponse<String, GraphError>> getResponses() {
+                            return Collections.singletonList(new CommitResponse<String, GraphError>() {
                                 @Override
                                 public List<String> getSuccesses() {
                                     return Collections.emptyList();
                                 }
 
                                 @Override
-                                public List<FuseError> getFailures() {
-                                    return Collections.singletonList(new FuseError(e.getMessage(), e));
+                                public List<GraphError> getFailures() {
+                                    return Collections.singletonList(new GraphError(e.getMessage(), e));
                                 }
                             });
                         }
 
                         @Override
-                        public LoadResponse response(CommitResponse<String, FuseError> response) {
+                        public LoadResponse response(CommitResponse<String, GraphError> response) {
                             return this;
                         }
                     }))
@@ -106,31 +108,31 @@ public class StandardDataLoaderController implements DataLoaderController {
     }
 
     @Override
-    public ContentResponse<LoadResponse<String, FuseError>> loadCsv(String ontology, String type, String label, File data, GraphDataLoader.Directive directive) {
+    public ContentResponse<LoadResponse<String, GraphError>> loadCsv(String ontology, String type, String label, File data, GraphDataLoader.Directive directive) {
         try {
-            return Builder.<LoadResponse<String, FuseError>>builder(OK, NOT_FOUND)
+            return Builder.<LoadResponse<String, GraphError>>builder(OK, NOT_FOUND)
                     .data(Optional.of(this.csvDataLoader.load(type, label, data, directive)))
                     .compose();
         } catch (IOException e) {
-            return Builder.<LoadResponse<String, FuseError>>builder(BAD_REQUEST, NOT_FOUND)
-                    .data(Optional.of(new LoadResponse<String, FuseError>() {
+            return Builder.<LoadResponse<String, GraphError>>builder(BAD_REQUEST, NOT_FOUND)
+                    .data(Optional.of(new LoadResponse<String, GraphError>() {
                         @Override
-                        public List<CommitResponse<String, FuseError>> getResponses() {
-                            return Collections.singletonList(new CommitResponse<String, FuseError>() {
+                        public List<CommitResponse<String, GraphError>> getResponses() {
+                            return Collections.singletonList(new CommitResponse<String, GraphError>() {
                                 @Override
                                 public List<String> getSuccesses() {
                                     return Collections.emptyList();
                                 }
 
                                 @Override
-                                public List<FuseError> getFailures() {
-                                    return Collections.singletonList(new FuseError(e.getMessage(), e));
+                                public List<GraphError> getFailures() {
+                                    return Collections.singletonList(new GraphError(e.getMessage(), e));
                                 }
                             });
                         }
 
                         @Override
-                        public LoadResponse response(CommitResponse<String, FuseError> response) {
+                        public LoadResponse response(CommitResponse<String, GraphError> response) {
                             return this;
                         }
                     }))
@@ -147,31 +149,31 @@ public class StandardDataLoaderController implements DataLoaderController {
      *      - convert into bulk set
      *      - commit to repository
      */
-    public ContentResponse<LoadResponse<String, FuseError>> loadGraph(String ontology, File data, GraphDataLoader.Directive directive) {
+    public ContentResponse<LoadResponse<String, GraphError>> loadGraph(String ontology, File data, GraphDataLoader.Directive directive) {
         try {
-            return Builder.<LoadResponse<String, FuseError>>builder(OK, NOT_FOUND)
+            return Builder.<LoadResponse<String, GraphError>>builder(OK, NOT_FOUND)
                     .data(Optional.of(this.graphDataLoader.load(ontology, data, directive)))
                     .compose();
         } catch (IOException e) {
-            return Builder.<LoadResponse<String, FuseError>>builder(BAD_REQUEST, NOT_FOUND)
-                    .data(Optional.of(new LoadResponse<String, FuseError>() {
+            return Builder.<LoadResponse<String, GraphError>>builder(BAD_REQUEST, NOT_FOUND)
+                    .data(Optional.of(new LoadResponse<String, GraphError>() {
                         @Override
-                        public List<CommitResponse<String, FuseError>> getResponses() {
-                            return Collections.singletonList(new CommitResponse<String, FuseError>() {
+                        public List<CommitResponse<String, GraphError>> getResponses() {
+                            return Collections.singletonList(new CommitResponse<String, GraphError>() {
                                 @Override
                                 public List<String> getSuccesses() {
                                     return Collections.emptyList();
                                 }
 
                                 @Override
-                                public List<FuseError> getFailures() {
-                                    return Collections.singletonList(new FuseError(e.getMessage(), e));
+                                public List<GraphError> getFailures() {
+                                    return Collections.singletonList(new GraphError(e.getMessage(), e));
                                 }
                             });
                         }
 
                         @Override
-                        public LoadResponse response(CommitResponse<String, FuseError> response) {
+                        public LoadResponse response(CommitResponse<String, GraphError> response) {
                             return this;
                         }
                     }))

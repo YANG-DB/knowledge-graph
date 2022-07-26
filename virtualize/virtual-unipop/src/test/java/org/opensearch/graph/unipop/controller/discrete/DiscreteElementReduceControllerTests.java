@@ -15,7 +15,7 @@ import org.opensearch.graph.unipop.predicates.SelectP;
 import org.opensearch.graph.unipop.promise.Constraint;
 import org.opensearch.graph.unipop.schemaProviders.*;
 import org.opensearch.graph.unipop.schemaProviders.indexPartitions.IndexPartitions;
-import org.opensearch.graph.unipop.structure.FuseUniGraph;
+import org.opensearch.graph.unipop.structure.SearchUniGraph;
 import javaslang.collection.Stream;
 import org.apache.tinkerpop.gremlin.process.traversal.dsl.graph.GraphTraversal;
 import org.apache.tinkerpop.gremlin.process.traversal.dsl.graph.GraphTraversalSource;
@@ -59,7 +59,7 @@ public class DiscreteElementReduceControllerTests {
         searchEmbeddedNode = GlobalSearchEmbeddedNode.getInstance();
 
         opensearchGraphConfiguration = new OpensearchGraphConfiguration();
-        opensearchGraphConfiguration.setClusterName("fuse.test_elastic");
+        opensearchGraphConfiguration.setClusterName("graph.test_opensearch");
         opensearchGraphConfiguration.setElasticGraphScrollSize(1000);
         opensearchGraphConfiguration.setElasticGraphMaxSearchSize(1000);
         opensearchGraphConfiguration.setElasticGraphDefaultSearchSize(1000);
@@ -72,7 +72,7 @@ public class DiscreteElementReduceControllerTests {
         uniGraphConfiguration.setBulkStart(1000);
         MetricRegistry metricRegistry = new MetricRegistry();
 
-        graph = new FuseUniGraph(
+        graph = new SearchUniGraph(
                 uniGraphConfiguration,
                 uniGraph -> new ControllerManager() {
                     @Override

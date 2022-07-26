@@ -2,10 +2,12 @@ package org.opensearch.graph.executor.ontology.schema.load;
 
 
 
+
+
 import com.google.inject.Inject;
 import org.opensearch.graph.executor.ontology.schema.RawSchema;
 import org.opensearch.graph.model.Range;
-import org.opensearch.graph.model.resourceInfo.FuseError;
+import org.opensearch.graph.model.resourceInfo.GraphError;
 import org.opensearch.graph.model.results.LoadResponse;
 import javaslang.Tuple2;
 import org.opensearch.action.bulk.BulkRequestBuilder;
@@ -36,7 +38,7 @@ public class IndexProviderBasedCSVLoader implements CSVDataLoader {
     }
 
     @Override
-    public LoadResponse<String, FuseError> load(String type, String label, File data, GraphDataLoader.Directive directive) throws IOException {
+    public LoadResponse<String, GraphError> load(String type, String label, File data, GraphDataLoader.Directive directive) throws IOException {
         DataTransformerContext context;
         String contentType = Files.probeContentType(data.toPath());
         if(Objects.isNull(contentType))
@@ -62,7 +64,7 @@ public class IndexProviderBasedCSVLoader implements CSVDataLoader {
     }
 
     @Override
-    public LoadResponse<String, FuseError> load(String type, String label, String payload, GraphDataLoader.Directive directive) throws IOException {
+    public LoadResponse<String, GraphError> load(String type, String label, String payload, GraphDataLoader.Directive directive) throws IOException {
         //todo
         DataTransformerContext context = transformer.transform(new CSVTransformer.CsvElement() {
             @Override
@@ -90,7 +92,7 @@ public class IndexProviderBasedCSVLoader implements CSVDataLoader {
      * @param directive
      * @return
      */
-    private LoadResponse<String, FuseError> load(DataTransformerContext context, GraphDataLoader.Directive directive) {
+    private LoadResponse<String, GraphError> load(DataTransformerContext context, GraphDataLoader.Directive directive) {
         //load bulk requests
         Tuple2<Response, BulkRequestBuilder> tuple = LoadUtils.load(schema, client, context);
         //submit bulk request

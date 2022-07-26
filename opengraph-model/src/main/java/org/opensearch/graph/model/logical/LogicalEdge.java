@@ -2,6 +2,8 @@ package org.opensearch.graph.model.logical;
 
 
 
+
+
 import com.fasterxml.jackson.annotation.*;
 import org.opensearch.graph.model.ontology.RelationshipType;
 import org.opensearch.graph.model.results.Property;

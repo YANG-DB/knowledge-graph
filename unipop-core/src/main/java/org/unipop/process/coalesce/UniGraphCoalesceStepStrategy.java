@@ -5,6 +5,8 @@ package org.unipop.process.coalesce;
 
 
 
+
+
 import org.apache.tinkerpop.gremlin.process.traversal.Traversal;
 import org.apache.tinkerpop.gremlin.process.traversal.TraversalStrategy;
 import org.apache.tinkerpop.gremlin.process.traversal.step.map.CoalesceStep;

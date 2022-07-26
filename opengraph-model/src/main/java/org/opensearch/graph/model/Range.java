@@ -4,6 +4,8 @@ package org.opensearch.graph.model;
 
 
 
+
+
 public class Range {
     //region Constructors
     public Range() {

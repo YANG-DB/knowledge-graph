@@ -2,12 +2,14 @@ package org.opensearch.graph.dispatcher.query.sql;
 
 
 
+
+
 import com.google.inject.Inject;
 import com.typesafe.config.Config;
 import org.opensearch.graph.dispatcher.ontology.OntologyTransformerIfc;
 import org.opensearch.graph.model.ontology.*;
 import org.opensearch.graph.model.ontology.Ontology.OntologyPrimitiveType;
-import org.opensearch.graph.model.resourceInfo.FuseError;
+import org.opensearch.graph.model.resourceInfo.GraphError;
 import org.jooq.*;
 import org.jooq.impl.ConstraintStatement;
 import org.jooq.impl.CreateTableStatement;
@@ -66,14 +68,14 @@ public class DDLToOntologyTransformer implements OntologyTransformerIfc<List<Str
         return Collections.emptyList();
     }
 
-    private void parseTable(String table, Ontology.OntologyBuilder builder) throws FuseError.FuseErrorException {
+    private void parseTable(String table, Ontology.OntologyBuilder builder) throws GraphError.GraphErrorException {
         try {
             Queries queries = parser.parse(table);
             Arrays.stream(queries.queries())
                     .filter(q -> q.getClass().getSimpleName().endsWith("CreateTableImpl"))
                     .forEach(q -> parse(q, builder));
         } catch (Throwable t) {
-            throw new FuseError.FuseErrorException("Error Parsing DDL file " + table, t);
+            throw new GraphError.GraphErrorException("Error Parsing DDL file " + table, t);
         }
     }
 
@@ -170,7 +172,7 @@ public class DDLToOntologyTransformer implements OntologyTransformerIfc<List<Str
                 .forEach(fk ->
                         //get field from properties and change its type to dictionary
                         builder.getProperty(fk.getForeignKey()[0].getName().toLowerCase())
-                                .orElseThrow(() -> new FuseError.FuseErrorException(new FuseError("No matching ontology property name found for  " + fk.getForeignKey()[0].getName().toLowerCase(), "No matching ontology property name found ... ")))
+                                .orElseThrow(() -> new GraphError.GraphErrorException(new GraphError("No matching ontology property name found for  " + fk.getForeignKey()[0].getName().toLowerCase(), "No matching ontology property name found ... ")))
                                 .setType(fk.get$referencesTable().getName().toLowerCase()));
     }
 

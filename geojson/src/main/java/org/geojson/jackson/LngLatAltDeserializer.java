@@ -2,6 +2,8 @@ package org.geojson.jackson;
 
 
 
+
+
 import java.io.IOException;
 
 import org.geojson.LngLatAlt;

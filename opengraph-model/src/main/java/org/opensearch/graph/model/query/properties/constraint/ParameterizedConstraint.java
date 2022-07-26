@@ -3,6 +3,8 @@ package org.opensearch.graph.model.query.properties.constraint;
 
 
 
+
+
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonSubTypes;

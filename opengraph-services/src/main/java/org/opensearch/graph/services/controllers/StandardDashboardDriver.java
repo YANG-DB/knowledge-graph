@@ -1,6 +1,8 @@
 package org.opensearch.graph.services.controllers;
 
 
+
+
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 import com.google.inject.Inject;
@@ -9,8 +11,7 @@ import org.opensearch.graph.dispatcher.ontology.OntologyProvider;
 import org.opensearch.graph.executor.ontology.GraphElementSchemaProviderFactory;
 import org.opensearch.graph.executor.resource.PersistantNodeStatusResource;
 import org.opensearch.graph.model.ontology.Ontology;
-import org.opensearch.graph.model.resourceInfo.FuseError;
-import org.opensearch.graph.unipop.schemaProviders.GraphElementSchemaProvider;
+import org.opensearch.graph.model.resourceInfo.GraphError;
 import org.opensearch.graph.unipop.schemaProviders.indexPartitions.IndexPartitions;
 import org.apache.commons.collections4.IteratorUtils;
 import org.opensearch.action.search.SearchRequestBuilder;
@@ -21,7 +22,6 @@ import org.opensearch.search.aggregations.bucket.histogram.DateHistogramAggregat
 import org.opensearch.search.aggregations.bucket.histogram.InternalDateHistogram;
 import org.opensearch.search.aggregations.bucket.terms.StringTerms;
 import org.opensearch.search.aggregations.bucket.terms.TermsAggregationBuilder;
-import org.opensearch.search.aggregations.support.ValueType;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -98,7 +98,7 @@ public class StandardDashboardDriver implements DashboardDriver {
      */
     public ObjectNode graphElementCount(String ontologyId) {
         Ontology ontology = ontologyProvider.get(ontologyId)
-                .orElseThrow(() -> new FuseError.FuseErrorException(new FuseError("No Ontology present for Id ", "No Ontology present for id[" + ontologyId + "]")));
+                .orElseThrow(() -> new GraphError.GraphErrorException(new GraphError("No Ontology present for Id ", "No Ontology present for id[" + ontologyId + "]")));
 
         ObjectNode root = objectMapper.createObjectNode();
         schemaProviderFactory.get(ontology).getVertexSchemas().forEach(vertex -> {
@@ -185,7 +185,7 @@ public class StandardDashboardDriver implements DashboardDriver {
     @Override
     public ObjectNode graphElementCreated(String ontologyId) {
         Ontology ontology = ontologyProvider.get(ontologyId)
-                .orElseThrow(() -> new FuseError.FuseErrorException(new FuseError("No Ontology present for Id ", "No Ontology present for id[" + ontologyId + "]")));
+                .orElseThrow(() -> new GraphError.GraphErrorException(new GraphError("No Ontology present for Id ", "No Ontology present for id[" + ontologyId + "]")));
 
         final SearchRequestBuilder builder = client.prepareSearch();
         builder.setSize(0);

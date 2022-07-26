@@ -3,6 +3,8 @@ package org.opensearch.graph.dispatcher.driver;
 
 
 
+
+
 import com.google.inject.Inject;
 import org.opensearch.graph.client.export.GraphWriterStrategy;
 import org.opensearch.graph.dispatcher.resource.CursorResource;
@@ -11,7 +13,7 @@ import org.opensearch.graph.dispatcher.resource.QueryResource;
 import org.opensearch.graph.dispatcher.resource.store.ResourceStore;
 import org.opensearch.graph.dispatcher.urlSupplier.AppUrlSupplier;
 import org.opensearch.graph.model.query.Query;
-import org.opensearch.graph.model.resourceInfo.FuseError;
+import org.opensearch.graph.model.resourceInfo.GraphError;
 import org.opensearch.graph.model.resourceInfo.PageResourceInfo;
 import org.opensearch.graph.model.resourceInfo.QueryResourceInfo;
 import org.opensearch.graph.model.resourceInfo.StoreResourceInfo;
@@ -168,7 +170,7 @@ public abstract class PageDriverBase implements PageDriver {
                 return Optional.of(result);
             } catch (IOException e) {
                 return Optional.of(new QueryResourceInfo().error(
-                        new FuseError(Query.class.getSimpleName(), e)));
+                        new GraphError(Query.class.getSimpleName(), e)));
             }
         }
         return Optional.empty();

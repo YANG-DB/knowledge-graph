@@ -2,6 +2,8 @@ package org.opensearch.graph.epb.plan.extenders;
 
 
 
+
+
 import com.google.inject.Inject;
 import org.opensearch.graph.dispatcher.ontology.OntologyProvider;
 import org.opensearch.graph.model.asgQuery.AsgQueryUtil;
@@ -24,7 +26,7 @@ import org.opensearch.graph.model.query.entity.ETyped;
 import org.opensearch.graph.model.query.entity.EUntyped;
 import org.opensearch.graph.model.query.properties.*;
 import org.opensearch.graph.model.query.quant.QuantType;
-import org.opensearch.graph.model.resourceInfo.FuseError;
+import org.opensearch.graph.model.resourceInfo.GraphError;
 import org.opensearch.graph.unipop.schemaProviders.*;
 import javaslang.collection.Stream;
 
@@ -49,7 +51,7 @@ public class RedundantFilterPlanExtensionStrategy implements PlanExtensionStrate
             return Collections.emptyList();
         }
         Ontology.Accessor $ont = new Ontology.Accessor(ontologyProvider.get(query.getOnt())
-                .orElseThrow(() -> new FuseError.FuseErrorException(new FuseError("No target Ontology field found ", "No target Ontology found for " + query.getOnt()))));
+                .orElseThrow(() -> new GraphError.GraphErrorException(new GraphError("No target Ontology field found ", "No target Ontology found for " + query.getOnt()))));
 
         Plan flatPlan = PlanUtil.flat(plan.get());
 

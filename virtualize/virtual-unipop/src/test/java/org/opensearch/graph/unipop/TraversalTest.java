@@ -14,7 +14,7 @@ import org.opensearch.graph.unipop.promise.Promise;
 import org.opensearch.graph.unipop.promise.TraversalConstraint;
 import org.opensearch.graph.unipop.promise.TraversalPromise;
 import org.opensearch.graph.unipop.schemaProviders.EmptyGraphElementSchemaProvider;
-import org.opensearch.graph.unipop.structure.FuseUniGraph;
+import org.opensearch.graph.unipop.structure.SearchUniGraph;
 import org.opensearch.graph.unipop.structure.promise.PromiseVertex;
 import org.apache.tinkerpop.gremlin.process.traversal.Traversal;
 import org.apache.tinkerpop.gremlin.process.traversal.dsl.graph.GraphTraversalSource;
@@ -58,7 +58,7 @@ public class TraversalTest {
     public void g_V_hasXpromise_Promise_asXabcX_byX__hasXlabel_dragonXXX() throws Exception {
         MetricRegistry registry = new MetricRegistry();
         //region ControllerManagerFactory Implementation
-        UniGraph graph = new FuseUniGraph(null, graph1 -> new ControllerManager() {
+        UniGraph graph = new SearchUniGraph(null, graph1 -> new ControllerManager() {
             @Override
             public Set<UniQueryController> getControllers() {
                 return ImmutableSet.of(
@@ -101,7 +101,7 @@ public class TraversalTest {
     public void g_V_hasXpromise_Promise_asXabcX_byX__hasXlabel_dragonXXX_hasXconstraint_Constraint_byX__hasXlabel_dragonXXX() throws Exception {
         MetricRegistry registry = new MetricRegistry();
         //region ControllerManagerFactory Implementation
-        UniGraph graph = new FuseUniGraph(null, graph1 -> new ControllerManager() {
+        UniGraph graph = new SearchUniGraph(null, graph1 -> new ControllerManager() {
             @Override
             public Set<UniQueryController> getControllers() {
                 return ImmutableSet.of(

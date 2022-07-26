@@ -2,6 +2,8 @@ package org.opensearch.graph.gta.strategy.common;
 
 
 
+
+
 import org.opensearch.graph.dispatcher.gta.PlanTraversalTranslator;
 import org.opensearch.graph.dispatcher.gta.TranslationContext;
 import org.opensearch.graph.gta.strategy.PlanOpTranslationStrategy;
@@ -12,7 +14,7 @@ import org.opensearch.graph.model.execution.plan.PlanWithCost;
 import org.opensearch.graph.model.execution.plan.composite.Plan;
 import org.opensearch.graph.model.execution.plan.composite.UnionOp;
 import org.opensearch.graph.model.execution.plan.costs.PlanDetailedCost;
-import org.opensearch.graph.unipop.process.traversal.dsl.graph.FuseGraphTraversalSource;
+import org.opensearch.graph.unipop.process.traversal.dsl.graph.SearchGraphTraversalSource;
 import javaslang.collection.Stream;
 import org.apache.tinkerpop.gremlin.process.traversal.dsl.graph.GraphTraversal;
 
@@ -40,6 +42,6 @@ public class UnionOpTranslationStrategy extends PlanOpTranslationStrategyBase {
             return planTraversalTranslator.translate(new PlanWithCost<>(unionPlan, planWithCost.getCost()), context);
         }).toJavaList();
         //traversal union translated branches
-        return ((FuseGraphTraversalSource) context.getGraphTraversalSource()).union(traversalList.toArray(new GraphTraversal[traversalList.size()]));
+        return ((SearchGraphTraversalSource) context.getGraphTraversalSource()).union(traversalList.toArray(new GraphTraversal[traversalList.size()]));
     }
 }

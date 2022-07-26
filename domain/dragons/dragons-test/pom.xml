@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <parent>
+        <artifactId>dragons</artifactId>
+        <groupId>org.opensearch.graph</groupId>
+        <version>2.1.0-SNAPSHOT</version>
+    </parent>
+
+    <artifactId>dragons-test</artifactId>
+    <modelVersion>4.0.0</modelVersion>
+
+    <properties>
+        <hamcrest-all.version>1.3</hamcrest-all.version>
+        <hamcrest.version>1.3</hamcrest.version>
+        <hamcres-json.version>0.2</hamcres-json.version>
+    </properties>
+
+    <dependencies>
+        <dependency>
+            <groupId>org.opensearch.graph</groupId>
+            <artifactId>test-framework</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.opensearch.graph</groupId>
+            <artifactId>opengraph-core</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.opensearch.graph</groupId>
+            <artifactId>opengraph-services</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>uk.co.datumedge</groupId>
+            <artifactId>hamcrest-json</artifactId>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>net.minidev</groupId>
+            <artifactId>json-smart</artifactId>
+            <version>2.3</version>
+        </dependency>
+        <!-- https://mvnrepository.com/artifact/com.jayway.jsonpath/json-path -->
+        <dependency>
+            <groupId>com.jayway.jsonpath</groupId>
+            <artifactId>json-path</artifactId>
+            <version>2.4.0</version>
+        </dependency>
+        <dependency>
+            <groupId>org.opensearch.graph</groupId>
+            <artifactId>opengraph-statistics</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.opensearch.graph</groupId>
+            <artifactId>virtual-epb</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.opensearch.graph</groupId>
+            <artifactId>dragons-ext</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>org.apache.logging.log4j</groupId>
+            <artifactId>log4j-core</artifactId>
+            <scope>test</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>org.opensearch.graph</groupId>
+            <artifactId>opengraph-services</artifactId>
+            <type>test-jar</type>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.opensearch.graph</groupId>
+            <artifactId>opengraph-statistics</artifactId>
+            <type>test-jar</type>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.opensearch.graph</groupId>
+            <artifactId>opengraph-model</artifactId>
+            <type>test-jar</type>
+            <scope>test</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+            <scope>test</scope>
+        </dependency>
+
+    </dependencies>
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-surefire-plugin</artifactId>
+                <configuration>
+                    <forkCount>1</forkCount>
+                    <threadCount>1</threadCount>
+                    <perCoreThreadCount>false</perCoreThreadCount>
+                    <rerunFailingTestsCount>0</rerunFailingTestsCount>
+                    <includes>
+                        <include>**/*Suite.java</include>
+                        <include>**/*Test.java</include>
+                    </includes>
+                    <parallel>methods</parallel>
+                    <argLine>-Xmx1536m -XX:MaxPermSize=256m -Duser.timezone=${user.timezone}</argLine>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
+</project>

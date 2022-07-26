@@ -4,12 +4,14 @@ package org.opensearch.graph.model.results;
 
 
 
+
+
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import org.opensearch.graph.model.logical.Edge;
 import org.opensearch.graph.model.logical.Vertex;
 import org.opensearch.graph.model.query.Query;
-import org.opensearch.graph.model.resourceInfo.FuseError;
+import org.opensearch.graph.model.resourceInfo.GraphError;
 import javaslang.collection.Stream;
 
 import java.util.*;
@@ -30,7 +32,7 @@ public class AssignmentsProjectionResult<E extends Vertex,R extends Edge> extend
         this.assignments = assignments;
     }
 
-    public AssignmentsProjectionResult(LoadResponse<String, FuseError> load) {
+    public AssignmentsProjectionResult(LoadResponse<String, GraphError> load) {
         this.assignments.add(LoadResponse.buildAssignment(load));
     }
 

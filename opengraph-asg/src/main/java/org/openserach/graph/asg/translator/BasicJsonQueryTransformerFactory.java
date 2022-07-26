@@ -2,6 +2,8 @@ package org.openserach.graph.asg.translator;
 
 
 
+
+
 import com.google.inject.Inject;
 import org.openserach.graph.asg.translator.cypher.AsgCypherTransformer;
 import org.openserach.graph.asg.translator.graphql.AsgGraphQLTransformer;
@@ -10,7 +12,7 @@ import org.opensearch.graph.dispatcher.query.JsonQueryTransformerFactory;
 import org.opensearch.graph.dispatcher.query.QueryTransformer;
 import org.opensearch.graph.model.asgQuery.AsgQuery;
 import org.opensearch.graph.model.query.QueryInfo;
-import org.opensearch.graph.model.resourceInfo.FuseError;
+import org.opensearch.graph.model.resourceInfo.GraphError;
 import org.opensearch.graph.model.transport.CreateQueryRequestMetadata;
 
 public class BasicJsonQueryTransformerFactory implements JsonQueryTransformerFactory {
@@ -39,7 +41,7 @@ public class BasicJsonQueryTransformerFactory implements JsonQueryTransformerFac
             case CreateQueryRequestMetadata.TYPE_GRAPHQL:
                 return graphQueryTransformer;
         }
-        throw new FuseError.FuseErrorException(new FuseError("No Query translator found","No matching json query translator found for type "+type));
+        throw new GraphError.GraphErrorException(new GraphError("No Query translator found","No matching json query translator found for type "+type));
     }
 
 

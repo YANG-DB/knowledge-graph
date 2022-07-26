@@ -3,6 +3,8 @@ package org.opensearch.graph.model.query.properties.order;
 
 
 
+
+
 public class OrderClause {
 
     public OrderClause(int order) {

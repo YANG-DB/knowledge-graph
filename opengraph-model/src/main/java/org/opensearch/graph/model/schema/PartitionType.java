@@ -2,6 +2,8 @@ package org.opensearch.graph.model.schema;
 
 
 
+
+
 public enum PartitionType {
     //a complete index
     INDEX,

@@ -2,6 +2,8 @@ package org.opensearch.graph.dispatcher.asg;
 
 
 
+
+
 import com.google.inject.Inject;
 import org.opensearch.graph.dispatcher.ontology.OntologyProvider;
 import org.opensearch.graph.model.asgQuery.*;
@@ -14,7 +16,7 @@ import org.opensearch.graph.model.query.Start;
 import org.opensearch.graph.model.query.properties.BaseProp;
 import org.opensearch.graph.model.query.properties.EProp;
 import org.opensearch.graph.model.query.properties.constraint.*;
-import org.opensearch.graph.model.resourceInfo.FuseError;
+import org.opensearch.graph.model.resourceInfo.GraphError;
 
 import java.util.Collection;
 import java.util.List;
@@ -42,7 +44,7 @@ public class QueryToCompositeAsgTransformer extends QueryToAsgTransformer {
         AsgCompositeQuery asgQuery = new AsgCompositeQuery(super.transform(query));
         Optional<Ontology> ontology = ontologyProvider.get(query.getOnt());
         apply(asgQuery, new AsgStrategyContext(new Ontology.Accessor(ontology
-                .orElseThrow(() -> new FuseError.FuseErrorException(new FuseError("No target Ontology field found ", "No target Ontology field found for " + query.getOnt()))))));
+                .orElseThrow(() -> new GraphError.GraphErrorException(new GraphError("No target Ontology field found ", "No target Ontology field found for " + query.getOnt()))))));
         return asgQuery;
     }
     //endregion

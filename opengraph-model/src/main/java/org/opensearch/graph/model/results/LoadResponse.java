@@ -2,9 +2,11 @@ package org.opensearch.graph.model.results;
 
 
 
+
+
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonInclude;
-import org.opensearch.graph.model.resourceInfo.FuseError;
+import org.opensearch.graph.model.resourceInfo.GraphError;
 
 import java.util.*;
 import java.util.concurrent.atomic.AtomicLong;
@@ -24,7 +26,7 @@ public interface LoadResponse<S, F> {
 
     List<CommitResponse<S, F>> getResponses();
 
-    LoadResponse response(LoadResponse.CommitResponse<String, FuseError> response);
+    LoadResponse response(LoadResponse.CommitResponse<String, GraphError> response);
 
     interface CommitResponse<S, F> {
         CommitResponse EMPTY = new CommitResponse() {
@@ -46,28 +48,28 @@ public interface LoadResponse<S, F> {
     }
 
     @JsonIgnoreProperties(ignoreUnknown = true)
-    class LoadResponseImpl implements LoadResponse<String, FuseError> {
+    class LoadResponseImpl implements LoadResponse<String, GraphError> {
 
 
         @JsonInclude(JsonInclude.Include.NON_NULL)
-        private List<CommitResponse<String, FuseError>> responses;
+        private List<CommitResponse<String, GraphError>> responses;
 
         public LoadResponseImpl() {
             this.responses = new ArrayList<>();
         }
 
-        public LoadResponse response(CommitResponse<String, FuseError> response) {
+        public LoadResponse response(CommitResponse<String, GraphError> response) {
             this.responses.add(response);
             return this;
         }
 
         @Override
-        public List<CommitResponse<String, FuseError>> getResponses() {
+        public List<CommitResponse<String, GraphError>> getResponses() {
             return responses;
         }
     }
 
-    static AssignmentCount buildAssignment(LoadResponse<String, FuseError> load) {
+    static AssignmentCount buildAssignment(LoadResponse<String, GraphError> load) {
         Long success = load.getResponses().stream().map(r -> r.getSuccesses().size()).count();
         Long failed = load.getResponses().stream().map(r -> r.getFailures().size()).count();
         Map<String, AtomicLong> results = new HashMap<>();

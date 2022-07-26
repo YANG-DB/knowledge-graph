@@ -2,6 +2,8 @@ package org.opensearch.graph.unipop.controller.search.translation;
 
 
 
+
+
 public class M1QueryTranslator extends CompositeQueryTranslator {
     //region Static
     public static M1QueryTranslator instance = new M1QueryTranslator();

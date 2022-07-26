@@ -4,6 +4,8 @@ package org.opensearch.graph.model.results;
 
 
 
+
+
 import com.fasterxml.jackson.annotation.JsonAnyGetter;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonInclude;

@@ -3,6 +3,8 @@ package org.opensearch.graph.model.query.properties.constraint;
 
 
 
+
+
 import com.fasterxml.jackson.annotation.*;
 
 @JsonTypeInfo(use = JsonTypeInfo.Id.NAME, include = JsonTypeInfo.As.PROPERTY, property = "type")

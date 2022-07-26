@@ -1,6 +1,8 @@
 package org.opensearch.graph.services.appRegistrars;
 
 
+
+
 /*-
  *
  * fuse-service
@@ -35,7 +37,7 @@ import org.opensearch.graph.model.execution.plan.descriptors.AsgQueryDescriptor;
 import org.opensearch.graph.model.execution.plan.descriptors.PlanWithCostDescriptor;
 import org.opensearch.graph.model.execution.plan.descriptors.QueryDescriptor;
 import org.opensearch.graph.model.query.Query;
-import org.opensearch.graph.model.resourceInfo.FuseError;
+import org.opensearch.graph.model.resourceInfo.GraphError;
 import org.opensearch.graph.model.resourceInfo.QueryResourceInfo;
 import org.opensearch.graph.model.transport.*;
 import org.opensearch.graph.model.validation.ValidationResult;
@@ -445,7 +447,7 @@ public class QueryControllerRegistrar extends AppControllerRegistrarBase<QueryCo
 
             //verify query value exists
             query.orElseThrow(
-                    () -> new FuseError.FuseErrorException(new FuseError("Request Error", "No query parameter found in request")));
+                    () -> new GraphError.GraphErrorException(new GraphError("Request Error", "No query parameter found in request")));
 
             String ontology = req.param(GlobalConstants.ONTOLOGY).value();
             req.set(ExecutionScope.class, new ExecutionScope(TIMEOUT));
@@ -470,7 +472,7 @@ public class QueryControllerRegistrar extends AppControllerRegistrarBase<QueryCo
 
             //verify query value exists
             query.orElseThrow(
-                    () -> new FuseError.FuseErrorException(new FuseError("Request Error", "No query parameter found in request")));
+                    () -> new GraphError.GraphErrorException(new GraphError("Request Error", "No query parameter found in request")));
 
             String ontology = req.param(GlobalConstants.ONTOLOGY).value();
             req.set(ExecutionScope.class, new ExecutionScope(TIMEOUT));
@@ -495,7 +497,7 @@ public class QueryControllerRegistrar extends AppControllerRegistrarBase<QueryCo
 
             //verify query value exists
             query.orElseThrow(
-                    () -> new FuseError.FuseErrorException(new FuseError("Request Error", "No query parameter found in request")));
+                    () -> new GraphError.GraphErrorException(new GraphError("Request Error", "No query parameter found in request")));
 
             String ontology = req.param(GlobalConstants.ONTOLOGY).value();
             req.set(ExecutionScope.class, new ExecutionScope(TIMEOUT));

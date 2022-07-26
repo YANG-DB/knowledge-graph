@@ -1,6 +1,8 @@
 package org.opensearch.graph.services.controllers.logging;
 
 
+
+
 import com.codahale.metrics.MetricRegistry;
 import com.google.inject.Inject;
 import com.google.inject.name.Named;
@@ -8,7 +10,7 @@ import org.opensearch.graph.dispatcher.logging.*;
 import org.opensearch.graph.executor.ontology.schema.load.GraphDataLoader;
 import org.opensearch.graph.model.results.LoadResponse;
 import org.opensearch.graph.model.logical.LogicalGraphModel;
-import org.opensearch.graph.model.resourceInfo.FuseError;
+import org.opensearch.graph.model.resourceInfo.GraphError;
 import org.opensearch.graph.model.transport.ContentResponse;
 import org.opensearch.graph.services.controllers.DataLoaderController;
 import org.opensearch.graph.services.suppliers.RequestExternalMetadataSupplier;
@@ -43,8 +45,8 @@ public class LoggingDataLoaderController extends LoggingControllerBase<DataLoade
 
     //region CatalogController Implementation
     @Override
-    public ContentResponse<LoadResponse<String, FuseError>> loadGraph(String ontology, LogicalGraphModel data, GraphDataLoader.Directive directive) {
-        return new LoggingSyncMethodDecorator<ContentResponse<LoadResponse<String, FuseError>>>(
+    public ContentResponse<LoadResponse<String, GraphError>> loadGraph(String ontology, LogicalGraphModel data, GraphDataLoader.Directive directive) {
+        return new LoggingSyncMethodDecorator<ContentResponse<LoadResponse<String, GraphError>>>(
                 this.logger,
                 this.metricRegistry,
                 load,
@@ -55,8 +57,8 @@ public class LoggingDataLoaderController extends LoggingControllerBase<DataLoade
     }
 
     @Override
-    public ContentResponse<LoadResponse<String, FuseError>> loadCsv(String ontology, String type, String label, String data, GraphDataLoader.Directive directive) {
-        return new LoggingSyncMethodDecorator<ContentResponse<LoadResponse<String, FuseError>>>(
+    public ContentResponse<LoadResponse<String, GraphError>> loadCsv(String ontology, String type, String label, String data, GraphDataLoader.Directive directive) {
+        return new LoggingSyncMethodDecorator<ContentResponse<LoadResponse<String, GraphError>>>(
                 this.logger,
                 this.metricRegistry,
                 load,
@@ -67,8 +69,8 @@ public class LoggingDataLoaderController extends LoggingControllerBase<DataLoade
     }
 
     @Override
-    public ContentResponse<LoadResponse<String, FuseError>> loadGraph(String ontology, File data, GraphDataLoader.Directive directive) {
-        return new LoggingSyncMethodDecorator<ContentResponse<LoadResponse<String, FuseError>>>(
+    public ContentResponse<LoadResponse<String, GraphError>> loadGraph(String ontology, File data, GraphDataLoader.Directive directive) {
+        return new LoggingSyncMethodDecorator<ContentResponse<LoadResponse<String, GraphError>>>(
                 this.logger,
                 this.metricRegistry,
                 load,
@@ -79,8 +81,8 @@ public class LoggingDataLoaderController extends LoggingControllerBase<DataLoade
     }
 
     @Override
-    public ContentResponse<LoadResponse<String, FuseError>> loadCsv(String ontology, String type, String label, File data, GraphDataLoader.Directive directive) {
-        return new LoggingSyncMethodDecorator<ContentResponse<LoadResponse<String, FuseError>>>(
+    public ContentResponse<LoadResponse<String, GraphError>> loadCsv(String ontology, String type, String label, File data, GraphDataLoader.Directive directive) {
+        return new LoggingSyncMethodDecorator<ContentResponse<LoadResponse<String, GraphError>>>(
                 this.logger,
                 this.metricRegistry,
                 load,

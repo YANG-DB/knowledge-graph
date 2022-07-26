@@ -4,6 +4,8 @@ package org.opensearch.graph.client;
 
 
 
+
+
 import com.cedarsoftware.util.io.JsonReader;
 import com.fasterxml.jackson.core.type.TypeReference;
 import org.opensearch.graph.model.execution.plan.composite.Plan;
@@ -50,7 +52,7 @@ public interface GraphClient {
     }
 
     //region Public Methods
-    FuseResourceInfo getFuseInfo() throws IOException;
+    GraphResourceInfo getInfo() throws IOException;
 
     Object getId(String name, int numIds) throws IOException;
 
@@ -211,9 +213,9 @@ public interface GraphClient {
 
     Plan getPlanObject(String planUrl) throws IOException;
 
-    Long getFuseSnowflakeId() throws IOException;
+    Long getSnowflakeId() throws IOException;
 
-    String getFuseUrl();
+    String getGraphUrl();
 
     String deleteQuery(QueryResourceInfo queryResourceInfo);
 

@@ -20,9 +20,9 @@ import org.opensearch.graph.model.query.properties.EProp;
 import org.opensearch.graph.model.query.properties.RelProp;
 import org.opensearch.graph.model.query.properties.RelPropGroup;
 import org.opensearch.graph.model.GlobalConstants;
-import org.opensearch.graph.unipop.process.traversal.dsl.graph.FuseGraphTraversalSource;
+import org.opensearch.graph.unipop.process.traversal.dsl.graph.SearchGraphTraversalSource;
 import org.opensearch.graph.unipop.promise.Constraint;
-import org.opensearch.graph.unipop.structure.FuseUniGraph;
+import org.opensearch.graph.unipop.structure.SearchUniGraph;
 import org.apache.tinkerpop.gremlin.process.traversal.dsl.graph.GraphTraversal;
 import org.opensearch.graph.unipop.process.traversal.dsl.graph.__;
 import org.apache.tinkerpop.gremlin.process.traversal.util.DefaultTraversalStrategies;
@@ -144,7 +144,7 @@ public class EntityOpTranslationStrategyTest {
 
         TranslationContext context = Mockito.mock(TranslationContext.class);
         when(context.getOnt()).thenReturn(new Ontology.Accessor(ontology));
-        when(context.getGraphTraversalSource()).thenReturn(new FuseGraphTraversalSource(new FuseUniGraph(null, graph -> new ControllerManager() {
+        when(context.getGraphTraversalSource()).thenReturn(new SearchGraphTraversalSource(new SearchUniGraph(null, graph -> new ControllerManager() {
             @Override
             public Set<UniQueryController> getControllers() {
                 return Collections.emptySet();
