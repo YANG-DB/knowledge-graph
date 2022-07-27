@@ -2,13 +2,13 @@
   "swagger": "2.0",
   "info": {
     "version": "1.0",
-    "title": "YangDb [Dragons-Graph DB] API"
+    "title": "Opengraph [Dragons-Graph DB] API"
   },
   "basePath": "/opengraph",
   "tags": [
     {
-      "name": "YangDb",
-      "description": "\nEverything about YangDb Graph Engine."
+      "name": "Opengraph",
+      "description": "\nEverything about Opengraph Graph Engine."
     }
   ],
   "schemes": [
