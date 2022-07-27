@@ -37,7 +37,7 @@ import java.util.List;
 /**
  * Created by lior.perry on 22/02/2017.
  * <p>
- * This module is called by the fuse-service scanner class loader
+ * This module is called by the opengraph-service scanner class loader
  */
 public class Bootstrap implements Jooby.Module {
     @Override

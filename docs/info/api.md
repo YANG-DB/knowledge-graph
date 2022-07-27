@@ -22,17 +22,17 @@ The creation of logical ontologies inside the schema model is done here.
  * Supports GraphQL Definition language using: 
 
    
-    [POST] http://localhost:8888/fuse/catalog/grqphql
+    [POST] http://localhost:8888/opengraph/catalog/grqphql
 
  * Supports OWL (Sparql) Definition language using: 
 
    
-    [POST] http://localhost:8888/fuse/catalog/sparql
+    [POST] http://localhost:8888/opengraph/catalog/sparql
 
  * Supports DQL (DDL) Definition language using: 
 
    
-    [POST] http://localhost:8888/fuse/catalog/sql
+    [POST] http://localhost:8888/opengraph/catalog/sql
 
 
 ### Query

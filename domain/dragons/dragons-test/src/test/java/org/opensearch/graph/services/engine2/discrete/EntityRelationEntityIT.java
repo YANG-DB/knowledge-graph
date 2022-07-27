@@ -44,7 +44,7 @@ public class EntityRelationEntityIT implements BaseITMarker {
     //region setup
     @BeforeClass
     public static void setup() throws Exception {
-        GraphClient = new BaseGraphClient("http://localhost:8888/fuse");
+        GraphClient = new BaseGraphClient("http://localhost:8888/opengraph");
 
         GraphResourceInfo graphResourceInfo = GraphClient.getInfo();
         $ont = new Ontology.Accessor(GraphClient.getOntology(graphResourceInfo.getCatalogStoreUrl() + "/Dragons"));

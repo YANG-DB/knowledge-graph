@@ -28,7 +28,7 @@ public class RedundantFieldTransformerTest {
         SearchEngineDataPopulator populator = new SearchEngineDataPopulator(embeddedNode.getClient(), "dragons","dragon","id", csvDataProvider);
         populator.populate();*/
 
-        Settings settings = Settings.builder().put("cluster.name", "fuse-test").build();
+        Settings settings = Settings.builder().put("cluster.name", "opengraph-test").build();
         TransportClient transportClient = new PreBuiltTransportClient(settings)
                 .addTransportAddress(new TransportAddress(InetAddress.getByName("13.81.12.209"), 9300))
                 .addTransportAddress(new TransportAddress(InetAddress.getByName("13.73.165.97"), 9300))

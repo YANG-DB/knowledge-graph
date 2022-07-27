@@ -37,7 +37,7 @@ public class DragonsNestedNoConstraintsQueryIT implements BaseITMarker {
     @BeforeClass
     public static void setup() throws Exception {
 //        Setup.setup();//todo remove remark when running IT tests
-        GraphClient = new BaseGraphClient("http://localhost:8888/fuse");
+        GraphClient = new BaseGraphClient("http://localhost:8888/opengraph");
         sdf.setTimeZone(TimeZone.getTimeZone("UTC"));
     }
 

@@ -37,9 +37,9 @@ import static org.opensearch.graph.model.OntologyTestUtils.*;
 public class RealClusterE2ET {
     @Before
     public void setup() throws IOException {
-        //GraphClient = new GraphClient("http://40.118.108.95:8888/fuse");
-        GraphClient = new BaseGraphClient("http://localhost:8888/fuse");
-        //GraphClient = new GraphClient("http://localhost:8888/fuse");
+        //GraphClient = new GraphClient("http://40.118.108.95:8888/opengraph");
+        GraphClient = new BaseGraphClient("http://localhost:8888/opengraph");
+        //GraphClient = new GraphClient("http://localhost:8888/opengraph");
         GraphResourceInfo graphResourceInfo = GraphClient.getInfo();
         $ont = new Ontology.Accessor(GraphClient.getOntology(graphResourceInfo.getCatalogStoreUrl() + "/Dragons"));
     }

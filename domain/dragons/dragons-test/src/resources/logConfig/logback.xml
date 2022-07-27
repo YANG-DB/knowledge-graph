@@ -57,7 +57,7 @@
 
   <appender name="elasticsearch" class="com.internetitem.logback.elasticsearch.ElasticsearchAppender">
     <url>http://localhost:9200/_bulk</url>
-    <index>fuse-engine-logs-%date{yyyy-MM}</index>
+    <index>engine-logs-%date{yyyy-MM}</index>
     <type>log</type>
     <errorLoggerName>es-error-logger</errorLoggerName>
     <properties>

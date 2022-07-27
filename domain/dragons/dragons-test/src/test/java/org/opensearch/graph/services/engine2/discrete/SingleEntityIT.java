@@ -39,7 +39,7 @@ public class SingleEntityIT implements BaseITMarker {
     //region setup
     @BeforeClass
     public static void setup() throws Exception {
-        GraphClient = new BaseGraphClient("http://localhost:8888/fuse");
+        GraphClient = new BaseGraphClient("http://localhost:8888/opengraph");
 
         String idField = "id";
 

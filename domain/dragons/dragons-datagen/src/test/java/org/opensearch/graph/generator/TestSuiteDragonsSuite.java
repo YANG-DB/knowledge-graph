@@ -33,14 +33,14 @@ public class TestSuiteDragonsSuite implements BaseSuiteMarker {
 
     @BeforeClass
     public static void setUp() throws Exception{
-        System.out.println("Setting up - fuse-datagen");
+        System.out.println("Setting up - opengraph-datagen");
         configuration = new DataGenConfiguration(CONFIGURATION_FILE_PATH).getInstance();
         clearDataFolder();
     }
 
     @AfterClass
     public static void tearDown() throws Exception{
-        System.out.println("Tearing down - fuse-datagen");
+        System.out.println("Tearing down - opengraph-datagen");
         clearDataFolder();
     }
 

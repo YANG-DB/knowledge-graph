@@ -48,11 +48,11 @@ public class StandardApiDescriptionController implements ApiDescriptionControlle
     public ContentResponse<GraphResourceInfo> getInfo() {
         return ContentResponse.Builder.<GraphResourceInfo>builder(OK, NOT_FOUND)
                 .data(Optional.of(new GraphResourceInfo(
-                        "/fuse",
-                        "/fuse/internal",
-                        "/fuse/health",
+                        "/opengraph",
+                        "/opengraph/internal",
+                        "/opengraph/health",
                         this.urlSupplier.queryStoreUrl(),
-                        "/fuse/search", this.urlSupplier.catalogStoreUrl())))
+                        "/opengraph/search", this.urlSupplier.catalogStoreUrl())))
                 .compose();
     }
     //endregion

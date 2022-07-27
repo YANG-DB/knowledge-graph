@@ -16,27 +16,27 @@ public class EngineManager {
     }
 
     public void init() throws Exception {
-        startFuse();
+        start();
     }
 
     public void cleanup() {
-        teardownFuse();
+        teardown();
     }
 
-    private void teardownFuse() {
+    private void teardown() {
         if (graphApp != null) {
             graphApp.stop();
         }
     }
 
-    private void startFuse() throws Exception {
+    private void start() throws Exception {
 
-        graphApp = new GraphApp(new DefaultAppUrlSupplier("/fuse"))
-                .conf(new File(Paths.get("fuse-test", "fuse-benchmarks-test", "src", "main", "resources", "conf", confFile).toString()), activeProfile);
+        graphApp = new GraphApp(new DefaultAppUrlSupplier("/opengraph"))
+                .conf(new File(Paths.get("opengraph-test", "opengraph-benchmarks-test", "src", "main", "resources", "conf", confFile).toString()), activeProfile);
 
         graphApp.start("server.join=false");
 
-        graphClient = new BaseGraphClient("http://localhost:8888/fuse");
+        graphClient = new BaseGraphClient("http://localhost:8888/opengraph");
     }
 
     public GraphApp getGraphApp() {

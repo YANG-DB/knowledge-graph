@@ -52,7 +52,7 @@ public class CoreDispatcherModule extends ModuleBase {
     //region Private Methods
     private AppUrlSupplier getAppUrlSupplier(Config conf) throws UnknownHostException {
         int applicationPort = conf.getInt("application.port");
-        String baseUrl = String.format("http://%s:%d/fuse", InetAddress.getLocalHost().getHostAddress(), applicationPort);
+        String baseUrl = String.format("http://%s:%d/opengraph", InetAddress.getLocalHost().getHostAddress(), applicationPort);
         if (conf.hasPath("appUrlSupplier.public.baseUri")) {
             baseUrl = conf.getString("appUrlSupplier.public.baseUri");
         }

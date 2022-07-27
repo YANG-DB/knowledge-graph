@@ -34,14 +34,14 @@ import java.util.List;
 
 /**
  * resources
- * http://domain/fuse/query/:id
- * http://domain/fuse/query/:id/asg
- * http://domain/fuse/query/:id/inner
- * http://domain/fuse/query/:id/v1
- * http://domain/fuse/query/:id/plan
- * http://domain/fuse/query/:id/elastic
- * http://domain/fuse/query/:id/cursor/:sequence
- * http://domain/fuse/query/:id/cursor/:sequence/result/:sequence
+ * http://domain/opengraph/query/:id
+ * http://domain/opengraph/query/:id/asg
+ * http://domain/opengraph/query/:id/inner
+ * http://domain/opengraph/query/:id/v1
+ * http://domain/opengraph/query/:id/plan
+ * http://domain/opengraph/query/:id/elastic
+ * http://domain/opengraph/query/:id/cursor/:sequence
+ * http://domain/opengraph/query/:id/cursor/:sequence/result/:sequence
  */
 public class QueryResourceInfo extends ResourceInfoBase {
 

@@ -53,7 +53,7 @@ public class CatalogControllerRegistrar extends AppControllerRegistrarBase<Catal
     @Override
     public void register(Jooby app, AppUrlSupplier appUrlSupplier) {
         /** create new ontology*/
-        app.post("/fuse/catalog/ontology"
+        app.post("/opengraph/catalog/ontology"
                 ,req -> {
                     Route.of("postPage").write();
                     Ontology ontology = req.body(Ontology.class);
@@ -63,31 +63,31 @@ public class CatalogControllerRegistrar extends AppControllerRegistrarBase<Catal
                 });
 
         /** get available ontologies*/
-        app.get("/fuse/catalog/ontology"
+        app.get("/opengraph/catalog/ontology"
                 ,req -> {
                     ContentResponse<List<Ontology>> response = this.getController(app).getOntologies();
                     return Results.with(response, response.status().getStatus());
                 });
 
         /** get the ontology by id */
-        app.get("/fuse/catalog/ontology/:id"
+        app.get("/opengraph/catalog/ontology/:id"
                 ,req -> {
                     ContentResponse response = this.getController(app).getOntology(req.param("id").value());
                     return Results.with(response, response.status().getStatus());
                 });
 
         /** get the ontology by id */
-        app.get("/fuse/catalog/ontology/:id/visualize",
+        app.get("/opengraph/catalog/ontology/:id/visualize",
                      (req,resp) -> API.dataView(app,req,resp,this));
 
         /** get available schemas **/
-        app.get("/fuse/catalog/schema"
+        app.get("/opengraph/catalog/schema"
                 ,req -> {
                     ContentResponse<List<String>> response = this.getController(app).getSchemas();
                     return Results.with(response, response.status().getStatus());
                 });
 
-        app.get("/fuse/catalog/schema/:id",
+        app.get("/opengraph/catalog/schema/:id",
                 req -> {
                     ContentResponse response = this.getController(app).getSchema(req.param("id").value());
                     return Results.with(response, response.status().getStatus());

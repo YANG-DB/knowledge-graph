@@ -15,18 +15,18 @@ public class TestRunner {
 
         testSetup.init();
 
-        EngineManager profileA_Fuse = new EngineManager("application.engine2.dev.M2.discrete.conf", profileA);
+        EngineManager profileA_Opengraph = new EngineManager("application.engine2.dev.M2.discrete.conf", profileA);
         List<Long> times = new ArrayList<>();
         List<Long> queryTimes = new ArrayList<>();
-        profileA_Fuse.init();
+        profileA_Opengraph.init();
         for(int i = 0; i< TIMES_TO_RUN; i++) {
-            testCase.run(profileA_Fuse.getGraphClient());
+            testCase.run(profileA_Opengraph.getGraphClient());
             if(i != 0) {
                 times.add(testCase.getTotalTime());
                 queryTimes.add(testCase.getPlanTime());
             }
         }
-        profileA_Fuse.cleanup();
+        profileA_Opengraph.cleanup();
 
         long profileA_assignments = testCase.getAssignments();
         long profileATimes =  Stream.ofAll(times).reduce((a, b) -> a+b) / times.size();
@@ -34,10 +34,10 @@ public class TestRunner {
 
         times.clear();
         queryTimes.clear();
-        EngineManager profileB_Fuse= new EngineManager("application.engine2.dev.M2.discrete.conf", profileB);
-        profileB_Fuse.init();
+        EngineManager profileB_Opengraph= new EngineManager("application.engine2.dev.M2.discrete.conf", profileB);
+        profileB_Opengraph.init();
         for(int i = 0;i<TIMES_TO_RUN;i++) {
-            testCase.run(profileB_Fuse.getGraphClient());
+            testCase.run(profileB_Opengraph.getGraphClient());
             if(i != 0) {
                 times.add(testCase.getTotalTime());
                 queryTimes.add(testCase.getPlanTime());
@@ -45,7 +45,7 @@ public class TestRunner {
         }
         long profileB_assignments = testCase.getAssignments();
 
-        profileB_Fuse.cleanup();
+        profileB_Opengraph.cleanup();
 
         long profileBTimes = Stream.ofAll(times).reduce((a, b) -> a + b)/ times.size();
         long profileBQueryTime = Stream.ofAll(queryTimes).reduce((a, b) -> a + b) / queryTimes.size();

@@ -5,7 +5,7 @@
     <module name="assembly" />
     <option name="PROGRAM_PARAMETERS" value="config/application.conf activeProfile config/logback.xml true" />
     <option name="VM_PARAMETERS" value="--illegal-access=permit -Dio.netty.tryReflectionSetAccessible=true" />
-    <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/distrib/catalog" />
+    <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/distrib/dragon" />
     <extension name="coverage">
       <pattern>
         <option name="PATTERN" value="org.opensearch.graph.services.*" />

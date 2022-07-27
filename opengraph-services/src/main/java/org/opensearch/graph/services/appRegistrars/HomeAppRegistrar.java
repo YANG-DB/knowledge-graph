@@ -47,7 +47,7 @@ public class HomeAppRegistrar implements AppRegistrar{
                             "<body>\n" +
                             "<h1>YangDb API</h1>\n" +
                             "<ul>\n" +
-                            "<li>Resource Url: <a href=\"/fuse\">Fuse</a></li>\n" +
+                            "<li>Resource Url: <a href=\"/opengraph\">opengraph</a></li>\n" +
                             "<li>Swagger API: <a href=\"/swagger\">Swagger</a></li>\n" +
                             "<li>Redocly API: <a href=\"/redocly/redocly\">Redocly</a></li>\n" +
                             "<li><hr></li>"+
@@ -57,10 +57,10 @@ public class HomeAppRegistrar implements AppRegistrar{
                             "<li><hr></li>"+
                             "<li>BigDesk E/S online Monitor: <a href=\"/bigdesk\">bigDesk</a></li>\n" +
                             "<li><hr></li>"+
-                            "<li>Health Url: <a href=\"/fuse/health\">healthUrl</a></li>\n" +
+                            "<li>Health Url: <a href=\"/opengraph/health\">healthUrl</a></li>\n" +
                             "<li>Statistics Url: <a href=\"/sys/metrics\">statistics</a></li>\n" +
                             "<li><hr></li>"+
-                            "<li>Query Store Url: <a href=\"/fuse/query\">queryStoreUrl</a></li>\n" +
+                            "<li>Query Store Url: <a href=\"/opengraph/query\">queryStoreUrl</a></li>\n" +
                             "</ul>\n" +
                             "<p>More at <a href=\"http://yangdb.org\">" +
                             "www.yangdb.org</a>\n" +

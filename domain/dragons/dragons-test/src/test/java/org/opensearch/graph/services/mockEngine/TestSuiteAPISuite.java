@@ -47,7 +47,7 @@ public class TestSuiteAPISuite implements BaseSuiteMarker {
         CursorFactory cursorFactory = mock(CursorFactory.class);
         when(cursorFactory.createCursor(any())).thenReturn(cursor);
 
-        app = new GraphApp(new DefaultAppUrlSupplier("/fuse"))
+        app = new GraphApp(new DefaultAppUrlSupplier("/opengraph"))
                 .conf(new File(Paths.get("src", "test", "conf", "application.mockEngine.dev.conf").toString()))
                 .injector((stage, module) -> Guice.createInjector(stage, Modules.override(module).with(new AbstractModule() {
                     @Override

@@ -67,7 +67,7 @@ public abstract class EntityRelationEntityIT implements BaseITMarker {
     }
 
     public static void setup(TransportClient client, boolean calcStats) throws Exception {
-        GraphClient = new BaseGraphClient("http://localhost:8888/fuse");
+        GraphClient = new BaseGraphClient("http://localhost:8888/opengraph");
         GraphResourceInfo graphResourceInfo = GraphClient.getInfo();
         $ont = new Ontology.Accessor(GraphClient.getOntology(graphResourceInfo.getCatalogStoreUrl() + "/Dragons"));
 

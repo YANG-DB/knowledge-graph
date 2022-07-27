@@ -42,7 +42,7 @@ public class SparqlControllerRegistrar extends AppControllerRegistrarBase<Standa
     @Override
     public void register(Jooby app, AppUrlSupplier appUrlSupplier) {
         /** create new ontology*/
-        app.post("/fuse/sparql/ontology/:id"
+        app.post("/opengraph/sparql/ontology/:id"
                 ,req -> {
                     Route.of("translateOwlSchema").write();
                     String owlSchmea = req.body(String.class);

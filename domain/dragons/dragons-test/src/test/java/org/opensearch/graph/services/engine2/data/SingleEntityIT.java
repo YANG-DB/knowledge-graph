@@ -38,7 +38,7 @@ import static org.opensearch.graph.test.framework.index.Mappings.Mapping.Propert
 public class SingleEntityIT implements BaseITMarker {
     @BeforeClass
     public static void setup() throws Exception {
-        GraphClient = new BaseGraphClient("http://localhost:8888/fuse");
+        GraphClient = new BaseGraphClient("http://localhost:8888/opengraph");
 
         String idField = "id";
 

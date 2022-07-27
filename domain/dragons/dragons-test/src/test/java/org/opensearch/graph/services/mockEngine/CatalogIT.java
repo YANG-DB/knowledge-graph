@@ -31,9 +31,9 @@ public class CatalogIT implements BaseITMarker {
         Ontology ontology = TestUtils.loadOntology("Dragons.json");
         given()
                 .contentType("application/json")
-                .header(new Header("fuse-external-id", "test"))
+                .header(new Header("opengraph-external-id", "test"))
                 .with().port(8888)
-                .get("/fuse/catalog/ontology/Dragons")
+                .get("/opengraph/catalog/ontology/Dragons")
                 .then()
                 .assertThat()
                 .body(new TestUtils.ContentMatcher(o -> {
@@ -60,9 +60,9 @@ public class CatalogIT implements BaseITMarker {
         Ontology ontology = OntologyFinalizer.finalize(TestUtils.loadOntology("Dragons.json"));
         given()
                 .contentType("application/json")
-                .header(new Header("fuse-external-id", "test"))
+                .header(new Header("opengraph-external-id", "test"))
                 .with().port(8888)
-                .get("/fuse/catalog/ontology")
+                .get("/opengraph/catalog/ontology")
                 .then()
                 .assertThat()
                 .body(new TestUtils.ContentMatcher(o -> {
@@ -87,9 +87,9 @@ public class CatalogIT implements BaseITMarker {
         Ontology ontology = OntologyFinalizer.finalize(TestUtils.loadOntology("Dragons.json"));
         given()
                 .contentType("application/json")
-                .header(new Header("fuse-external-id", "test"))
+                .header(new Header("opengraph-external-id", "test"))
                 .with().port(8888)
-                .get("/fuse/catalog/schema")
+                .get("/opengraph/catalog/schema")
                 .then()
                 .assertThat()
                 .body(new TestUtils.ContentMatcher(o -> {

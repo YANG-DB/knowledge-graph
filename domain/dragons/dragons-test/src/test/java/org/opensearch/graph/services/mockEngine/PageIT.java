@@ -40,18 +40,18 @@ public class PageIT implements BaseITMarker {
         //submit query
         given()
                 .contentType("application/json")
-                .header(new Header("fuse-external-id", "test"))
+                .header(new Header("opengraph-external-id", "test"))
                 .with().port(8888)
                 .body(request)
-                .post("/fuse/query")
+                .post("/opengraph/query")
                 .then()
                 .assertThat()
                 .body(new TestUtils.ContentMatcher(o -> {
                     try {
                         ContentResponse contentResponse = new ObjectMapper().readValue(o.toString(), ContentResponse.class);
                         Map data = (Map) contentResponse.getData();
-                        assertTrue(data.get("resourceUrl").toString().endsWith("/fuse/query/1"));
-                        assertTrue(data.get("cursorStoreUrl").toString().endsWith("/fuse/query/1/cursor"));
+                        assertTrue(data.get("resourceUrl").toString().endsWith("/opengraph/query/1"));
+                        assertTrue(data.get("cursorStoreUrl").toString().endsWith("/opengraph/query/1/cursor"));
                         return contentResponse.getData()!=null;
                     } catch (Exception e) {
                         e.printStackTrace();
@@ -67,10 +67,10 @@ public class PageIT implements BaseITMarker {
         CreateCursorRequest cursorRequest = new CreateGraphCursorRequest();
         given()
                 .contentType("application/json")
-                .header(new Header("fuse-external-id", "test"))
+                .header(new Header("opengraph-external-id", "test"))
                 .with().port(8888)
                 .body(cursorRequest)
-                .post("/fuse/query/1/cursor")
+                .post("/opengraph/query/1/cursor")
                 .then()
                 .assertThat()
                 .body(new TestUtils.ContentMatcher(o -> {
@@ -92,9 +92,9 @@ public class PageIT implements BaseITMarker {
         //get cursor resource by id
         given()
                 .contentType("application/json")
-                .header(new Header("fuse-external-id", "test"))
+                .header(new Header("opengraph-external-id", "test"))
                 .with().port(8888)
-                .get("/fuse/query/1/cursor/"+cursorId.get())
+                .get("/opengraph/query/1/cursor/"+cursorId.get())
                 .then()
                 .assertThat()
                 .body(new TestUtils.ContentMatcher(o -> {
@@ -119,10 +119,10 @@ public class PageIT implements BaseITMarker {
         AtomicReference<String> pageId = new AtomicReference<>();
         given()
                 .contentType("application/json")
-                .header(new Header("fuse-external-id", "test"))
+                .header(new Header("opengraph-external-id", "test"))
                 .with().port(8888)
                 .body(pageRequest)
-                .post("/fuse/query/1/cursor/"+cursorId.get()+"/page")
+                .post("/opengraph/query/1/cursor/"+cursorId.get()+"/page")
                 .then()
                 .assertThat()
                 .body(new TestUtils.ContentMatcher(o -> {
@@ -144,9 +144,9 @@ public class PageIT implements BaseITMarker {
         //get cursor page resource by id
         given()
                 .contentType("application/json")
-                .header(new Header("fuse-external-id", "test"))
+                .header(new Header("opengraph-external-id", "test"))
                 .with().port(8888)
-                .get("/fuse/query/1/cursor/"+cursorId.get() +"/page/"+pageId.get())
+                .get("/opengraph/query/1/cursor/"+cursorId.get() +"/page/"+pageId.get())
                 .then()
                 .assertThat()
                 .body(new TestUtils.ContentMatcher(o -> {
@@ -178,18 +178,18 @@ public class PageIT implements BaseITMarker {
         //submit query
         given()
                 .contentType("application/json")
-                .header(new Header("fuse-external-id", "test"))
+                .header(new Header("opengraph-external-id", "test"))
                 .with().port(8888)
                 .body(request)
-                .post("/fuse/query")
+                .post("/opengraph/query")
                 .then()
                 .assertThat()
                 .body(new TestUtils.ContentMatcher(o -> {
                     try {
                         ContentResponse contentResponse = new ObjectMapper().readValue(o.toString(), ContentResponse.class);
                         Map data = (Map) contentResponse.getData();
-                        assertTrue(data.get("resourceUrl").toString().endsWith("/fuse/query/1"));
-                        assertTrue(data.get("cursorStoreUrl").toString().endsWith("/fuse/query/1/cursor"));
+                        assertTrue(data.get("resourceUrl").toString().endsWith("/opengraph/query/1"));
+                        assertTrue(data.get("cursorStoreUrl").toString().endsWith("/opengraph/query/1/cursor"));
                         return contentResponse.getData()!=null;
                     } catch (Exception e) {
                         e.printStackTrace();
@@ -205,10 +205,10 @@ public class PageIT implements BaseITMarker {
         CreateCursorRequest cursorRequest = new CreateGraphCursorRequest();
         given()
                 .contentType("application/json")
-                .header(new Header("fuse-external-id", "test"))
+                .header(new Header("opengraph-external-id", "test"))
                 .with().port(8888)
                 .body(cursorRequest)
-                .post("/fuse/query/1/cursor")
+                .post("/opengraph/query/1/cursor")
                 .then()
                 .assertThat()
                 .body(new TestUtils.ContentMatcher(o -> {
@@ -230,9 +230,9 @@ public class PageIT implements BaseITMarker {
         //get cursor resource by id
         given()
                 .contentType("application/json")
-                .header(new Header("fuse-external-id", "test"))
+                .header(new Header("opengraph-external-id", "test"))
                 .with().port(8888)
-                .get("/fuse/query/1/cursor/"+cursorId.get())
+                .get("/opengraph/query/1/cursor/"+cursorId.get())
                 .then()
                 .assertThat()
                 .body(new TestUtils.ContentMatcher(o -> {
@@ -256,10 +256,10 @@ public class PageIT implements BaseITMarker {
         AtomicReference<String> pageId = new AtomicReference<>();
         given()
                 .contentType("application/json")
-                .header(new Header("fuse-external-id", "test"))
+                .header(new Header("opengraph-external-id", "test"))
                 .with().port(8888)
                 .body(pageRequest)
-                .post("/fuse/query/1/cursor/"+cursorId.get()+"/page")
+                .post("/opengraph/query/1/cursor/"+cursorId.get()+"/page")
                 .then()
                 .assertThat()
                 .body(new TestUtils.ContentMatcher(o -> {
@@ -282,9 +282,9 @@ public class PageIT implements BaseITMarker {
         //get cursor page resource by id
         given()
                 .contentType("application/json")
-                .header(new Header("fuse-external-id", "test"))
+                .header(new Header("opengraph-external-id", "test"))
                 .with().port(8888)
-                .get("/fuse/query/1/cursor/"+cursorId.get() +"/page/"+pageId.get())
+                .get("/opengraph/query/1/cursor/"+cursorId.get() +"/page/"+pageId.get())
                 .then()
                 .assertThat()
                 .body(new TestUtils.ContentMatcher(o -> {
@@ -313,18 +313,18 @@ public class PageIT implements BaseITMarker {
         //submit query
         given()
                 .contentType("application/json")
-                .header(new Header("fuse-external-id", "test"))
+                .header(new Header("opengraph-external-id", "test"))
                 .with().port(8888)
                 .body(request)
-                .post("/fuse/query")
+                .post("/opengraph/query")
                 .then()
                 .assertThat()
                 .body(new TestUtils.ContentMatcher(o -> {
                     try {
                         ContentResponse contentResponse = new ObjectMapper().readValue(o.toString(), ContentResponse.class);
                         Map data = (Map) contentResponse.getData();
-                        assertTrue(data.get("resourceUrl").toString().endsWith("/fuse/query/1"));
-                        assertTrue(data.get("cursorStoreUrl").toString().endsWith("/fuse/query/1/cursor"));
+                        assertTrue(data.get("resourceUrl").toString().endsWith("/opengraph/query/1"));
+                        assertTrue(data.get("cursorStoreUrl").toString().endsWith("/opengraph/query/1/cursor"));
                         return contentResponse.getData()!=null;
                     } catch (Exception e) {
                         e.printStackTrace();
@@ -340,10 +340,10 @@ public class PageIT implements BaseITMarker {
         CreateCursorRequest cursorRequest = new CreateGraphCursorRequest();
         given()
                 .contentType("application/json")
-                .header(new Header("fuse-external-id", "test"))
+                .header(new Header("opengraph-external-id", "test"))
                 .with().port(8888)
                 .body(cursorRequest)
-                .post("/fuse/query/1/cursor")
+                .post("/opengraph/query/1/cursor")
                 .then()
                 .assertThat()
                 .body(new TestUtils.ContentMatcher(o -> {
@@ -367,10 +367,10 @@ public class PageIT implements BaseITMarker {
         pageRequest.setPageSize(100);
         given()
                 .contentType("application/json")
-                .header(new Header("fuse-external-id", "test"))
+                .header(new Header("opengraph-external-id", "test"))
                 .with().port(8888)
                 .body(pageRequest)
-                .post("/fuse/query/1/cursor/"+cursorId.get()+"/page")
+                .post("/opengraph/query/1/cursor/"+cursorId.get()+"/page")
                 .then()
                 .assertThat()
                 .body(new TestUtils.ContentMatcher(o -> {
@@ -392,9 +392,9 @@ public class PageIT implements BaseITMarker {
         //get cursor pages resource
         given()
                 .contentType("application/json")
-                .header(new Header("fuse-external-id", "test"))
+                .header(new Header("opengraph-external-id", "test"))
                 .with().port(8888)
-                .get("/fuse/query/1/cursor/"+cursorId.get())
+                .get("/opengraph/query/1/cursor/"+cursorId.get())
                 .then()
                 .assertThat()
                 .body(new TestUtils.ContentMatcher(o -> {
@@ -416,9 +416,9 @@ public class PageIT implements BaseITMarker {
         //get cursor page resource by id
         given()
                 .contentType("application/json")
-                .header(new Header("fuse-external-id", "test"))
+                .header(new Header("opengraph-external-id", "test"))
                 .with().port(8888)
-                .get("/fuse/query/1/cursor/"+cursorId.get()+"/page")
+                .get("/opengraph/query/1/cursor/"+cursorId.get()+"/page")
                 .then()
                 .assertThat()
                 .body(new TestUtils.ContentMatcher(o -> {

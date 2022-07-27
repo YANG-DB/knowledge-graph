@@ -55,18 +55,18 @@ public class QueryIT implements BaseITMarker {
         //submit query
         given()
                 .contentType("application/json")
-                .header(new Header("fuse-external-id", "test"))
+                .header(new Header("opengraph-external-id", "test"))
                 .with().port(8888)
                 .body(request)
-                .post("/fuse/query")
+                .post("/opengraph/query")
                 .then()
                 .assertThat()
                 .body(new TestUtils.ContentMatcher(o -> {
                     try {
                         ContentResponse contentResponse = new ObjectMapper().readValue(o.toString(), ContentResponse.class);
                         Map data = (Map) contentResponse.getData();
-                        assertTrue(data.get("resourceUrl").toString().endsWith("/fuse/query/1"));
-                        assertTrue(data.get("cursorStoreUrl").toString().endsWith("/fuse/query/1/cursor"));
+                        assertTrue(data.get("resourceUrl").toString().endsWith("/opengraph/query/1"));
+                        assertTrue(data.get("cursorStoreUrl").toString().endsWith("/opengraph/query/1/cursor"));
                         return contentResponse.getData() != null;
                     } catch (Exception e) {
                         e.printStackTrace();
@@ -89,19 +89,19 @@ public class QueryIT implements BaseITMarker {
         //submit query
         given()
                 .contentType("application/json")
-                .header(new Header("fuse-external-id", "test"))
+                .header(new Header("opengraph-external-id", "test"))
                 .with().port(8888)
                 .body(request)
-                .post("/fuse/query")
+                .post("/opengraph/query")
                 .then()
                 .assertThat()
                 .body(new TestUtils.ContentMatcher(o -> {
                     try {
                         ContentResponse contentResponse = new ObjectMapper().readValue(o.toString(), ContentResponse.class);
                         Map data = (Map) contentResponse.getData();
-                        assertTrue(data.get("resourceUrl").toString().endsWith("/fuse/query/1"));
-                        assertTrue(data.get("cursorStoreUrl").toString().endsWith("/fuse/query/1/cursor"));
-                        assertTrue(data.get("v1QueryUrl").toString().endsWith("/fuse/query/1/v1"));
+                        assertTrue(data.get("resourceUrl").toString().endsWith("/opengraph/query/1"));
+                        assertTrue(data.get("cursorStoreUrl").toString().endsWith("/opengraph/query/1/cursor"));
+                        assertTrue(data.get("v1QueryUrl").toString().endsWith("/opengraph/query/1/v1"));
                         return contentResponse.getData() != null;
                     } catch (Exception e) {
                         e.printStackTrace();
@@ -129,19 +129,19 @@ public class QueryIT implements BaseITMarker {
         //submit query
         given()
                 .contentType("application/json")
-                .header(new Header("fuse-external-id", "test"))
+                .header(new Header("opengraph-external-id", "test"))
                 .with().port(8888)
                 .body(request)
-                .post("/fuse/query")
+                .post("/opengraph/query")
                 .then()
                 .assertThat()
                 .body(new TestUtils.ContentMatcher(o -> {
                     try {
                         ContentResponse contentResponse = new ObjectMapper().readValue(o.toString(), ContentResponse.class);
                         Map data = (Map) contentResponse.getData();
-                        assertTrue(data.get("resourceUrl").toString().endsWith("/fuse/query/1"));
-                        assertTrue(data.get("cursorStoreUrl").toString().contains("/fuse/query/1/cursor"));
-                        assertTrue(data.get("v1QueryUrl").toString().endsWith("/fuse/query/1/v1"));
+                        assertTrue(data.get("resourceUrl").toString().endsWith("/opengraph/query/1"));
+                        assertTrue(data.get("cursorStoreUrl").toString().contains("/opengraph/query/1/cursor"));
+                        assertTrue(data.get("v1QueryUrl").toString().endsWith("/opengraph/query/1/v1"));
                         assertTrue(((Map)(((List) data.get("cursorResourceInfos")).get(0))).containsKey("cursorRequest"));
                         assertTrue(((Map)(((List) data.get("cursorResourceInfos")).get(0))).containsKey("pageStoreUrl"));
                         assertTrue(((Map)(((List) data.get("cursorResourceInfos")).get(0))).containsKey("pageResourceInfos"));
@@ -176,10 +176,10 @@ public class QueryIT implements BaseITMarker {
         //submit query
         given()
                 .contentType("application/json")
-                .header(new Header("fuse-external-id", "test"))
+                .header(new Header("opengraph-external-id", "test"))
                 .with().port(8888)
                 .body(request)
-                .post("/fuse/query")
+                .post("/opengraph/query")
                 .then()
                 .assertThat()
                 .body(new TestUtils.ContentMatcher(o -> {
@@ -211,19 +211,19 @@ public class QueryIT implements BaseITMarker {
         //submit query
         given()
                 .contentType("application/json")
-                .header(new Header("fuse-external-id", "test"))
+                .header(new Header("opengraph-external-id", "test"))
                 .with().port(8888)
                 .body(request)
-                .post("/fuse/query")
+                .post("/opengraph/query")
                 .then()
                 .assertThat()
                 .body(new TestUtils.ContentMatcher(o -> {
                     try {
                         ContentResponse contentResponse = new ObjectMapper().readValue(o.toString(), ContentResponse.class);
                         Map data = (Map) contentResponse.getData();
-                        assertTrue(data.get("resourceUrl").toString().endsWith("/fuse/query/1"));
-                        assertTrue(data.get("cursorStoreUrl").toString().endsWith("/fuse/query/1/cursor"));
-                        assertTrue(data.get("v1QueryUrl").toString().endsWith("/fuse/query/1/v1"));
+                        assertTrue(data.get("resourceUrl").toString().endsWith("/opengraph/query/1"));
+                        assertTrue(data.get("cursorStoreUrl").toString().endsWith("/opengraph/query/1/cursor"));
+                        assertTrue(data.get("v1QueryUrl").toString().endsWith("/opengraph/query/1/v1"));
                         return contentResponse.getData() != null;
                     } catch (Exception e) {
                         e.printStackTrace();
@@ -236,18 +236,18 @@ public class QueryIT implements BaseITMarker {
         //get query resource by id
         given()
                 .contentType("application/json")
-                .header(new Header("fuse-external-id", "test"))
+                .header(new Header("opengraph-external-id", "test"))
                 .with().port(8888)
-                .get("/fuse/query/1")
+                .get("/opengraph/query/1")
                 .then()
                 .assertThat()
                 .body(new TestUtils.ContentMatcher(o -> {
                     try {
                         ContentResponse contentResponse = new ObjectMapper().readValue(o.toString(), ContentResponse.class);
                         Map data = (Map) contentResponse.getData();
-                        assertTrue(data.get("resourceUrl").toString().endsWith("/fuse/query/1"));
-                        assertTrue(data.get("cursorStoreUrl").toString().endsWith("/fuse/query/1/cursor"));
-                        assertTrue(data.get("v1QueryUrl").toString().endsWith("/fuse/query/1/v1"));
+                        assertTrue(data.get("resourceUrl").toString().endsWith("/opengraph/query/1"));
+                        assertTrue(data.get("cursorStoreUrl").toString().endsWith("/opengraph/query/1/cursor"));
+                        assertTrue(data.get("v1QueryUrl").toString().endsWith("/opengraph/query/1/v1"));
                         return contentResponse.getData() != null;
                     } catch (Exception e) {
                         e.printStackTrace();
@@ -260,16 +260,16 @@ public class QueryIT implements BaseITMarker {
         //get cursor resource by id
         given()
                 .contentType("application/json")
-                .header(new Header("fuse-external-id", "test"))
+                .header(new Header("opengraph-external-id", "test"))
                 .with().port(8888)
-                .get("/fuse/query/1/cursor")
+                .get("/opengraph/query/1/cursor")
                 .then()
                 .assertThat()
                 .body(new TestUtils.ContentMatcher(o -> {
                     try {
                         ContentResponse contentResponse = new ObjectMapper().readValue(o.toString(), ContentResponse.class);
                         Map data = (Map) contentResponse.getData();
-                        assertTrue(data.get("resourceUrl").toString().endsWith("/fuse/query/1/cursor"));
+                        assertTrue(data.get("resourceUrl").toString().endsWith("/opengraph/query/1/cursor"));
                         return contentResponse.getData() != null;
                     } catch (Exception e) {
                         e.printStackTrace();
@@ -284,7 +284,7 @@ public class QueryIT implements BaseITMarker {
 
     @Test
     public void queryCreateAndFetchV1QueryResource() throws IOException {
-        BaseGraphClient GraphClient = new BaseGraphClient("http://localhost:8888/fuse");
+        BaseGraphClient GraphClient = new BaseGraphClient("http://localhost:8888/opengraph");
 
         //query request
         CreateQueryRequest request = new CreateQueryRequest();
@@ -294,19 +294,19 @@ public class QueryIT implements BaseITMarker {
         //submit query
         given()
                 .contentType("application/json")
-                .header(new Header("fuse-external-id", "test"))
+                .header(new Header("opengraph-external-id", "test"))
                 .with().port(8888)
                 .body(request)
-                .post("/fuse/query")
+                .post("/opengraph/query")
                 .then()
                 .assertThat()
                 .body(new TestUtils.ContentMatcher(o -> {
                     try {
                         ContentResponse contentResponse = new ObjectMapper().readValue(o.toString(), ContentResponse.class);
                         Map data = (Map) contentResponse.getData();
-                        assertTrue(data.get("resourceUrl").toString().endsWith("/fuse/query/1"));
-                        assertTrue(data.get("cursorStoreUrl").toString().endsWith("/fuse/query/1/cursor"));
-                        assertTrue(data.get("v1QueryUrl").toString().endsWith("/fuse/query/1/v1"));
+                        assertTrue(data.get("resourceUrl").toString().endsWith("/opengraph/query/1"));
+                        assertTrue(data.get("cursorStoreUrl").toString().endsWith("/opengraph/query/1/cursor"));
+                        assertTrue(data.get("v1QueryUrl").toString().endsWith("/opengraph/query/1/v1"));
                         return contentResponse.getData() != null;
                     } catch (Exception e) {
                         e.printStackTrace();
@@ -319,9 +319,9 @@ public class QueryIT implements BaseITMarker {
         //get query resource by id
         given()
                 .contentType("application/json")
-                .header(new Header("fuse-external-id", "test"))
+                .header(new Header("opengraph-external-id", "test"))
                 .with().port(8888)
-                .get("/fuse/query/1/v1")
+                .get("/opengraph/query/1/v1")
                 .then()
                 .assertThat()
                 .body(new TestUtils.ContentMatcher((Object o) -> {
@@ -344,16 +344,16 @@ public class QueryIT implements BaseITMarker {
         //get cursor resource by id
         given()
                 .contentType("application/json")
-                .header(new Header("fuse-external-id", "test"))
+                .header(new Header("opengraph-external-id", "test"))
                 .with().port(8888)
-                .get("/fuse/query/1/cursor")
+                .get("/opengraph/query/1/cursor")
                 .then()
                 .assertThat()
                 .body(new TestUtils.ContentMatcher(o -> {
                     try {
                         ContentResponse contentResponse = new ObjectMapper().readValue(o.toString(), ContentResponse.class);
                         Map data = (Map) contentResponse.getData();
-                        assertTrue(data.get("resourceUrl").toString().endsWith("/fuse/query/1/cursor"));
+                        assertTrue(data.get("resourceUrl").toString().endsWith("/opengraph/query/1/cursor"));
                         return contentResponse.getData() != null;
                     } catch (Exception e) {
                         e.printStackTrace();
@@ -368,7 +368,7 @@ public class QueryIT implements BaseITMarker {
 
     @Test
     public void queryCreateAndFetchAsgQueryResource() throws IOException {
-        BaseGraphClient GraphClient = new BaseGraphClient("http://localhost:8888/fuse");
+        BaseGraphClient GraphClient = new BaseGraphClient("http://localhost:8888/opengraph");
 
         //query request
         Query query = TestUtils.loadQuery("Q001.json");
@@ -379,20 +379,20 @@ public class QueryIT implements BaseITMarker {
         //submit query
         given()
                 .contentType("application/json")
-                .header(new Header("fuse-external-id", "test"))
+                .header(new Header("opengraph-external-id", "test"))
                 .with().port(8888)
                 .body(request)
-                .post("/fuse/query")
+                .post("/opengraph/query")
                 .then()
                 .assertThat()
                 .body(new TestUtils.ContentMatcher(o -> {
                     try {
                         ContentResponse contentResponse = new ObjectMapper().readValue(o.toString(), ContentResponse.class);
                         Map data = (Map) contentResponse.getData();
-                        assertTrue(data.get("resourceUrl").toString().endsWith("/fuse/query/1"));
-                        assertTrue(data.get("cursorStoreUrl").toString().endsWith("/fuse/query/1/cursor"));
-                        assertTrue(data.get("v1QueryUrl").toString().endsWith("/fuse/query/1/v1"));
-                        assertTrue(data.get("asgUrl").toString().endsWith("/fuse/query/1/asg"));
+                        assertTrue(data.get("resourceUrl").toString().endsWith("/opengraph/query/1"));
+                        assertTrue(data.get("cursorStoreUrl").toString().endsWith("/opengraph/query/1/cursor"));
+                        assertTrue(data.get("v1QueryUrl").toString().endsWith("/opengraph/query/1/v1"));
+                        assertTrue(data.get("asgUrl").toString().endsWith("/opengraph/query/1/asg"));
                         return contentResponse.getData() != null;
                     } catch (Exception e) {
                         e.printStackTrace();
@@ -406,9 +406,9 @@ public class QueryIT implements BaseITMarker {
         final AsgQuery[] asgQuery = {null};
         given()
                 .contentType("application/json")
-                .header(new Header("fuse-external-id", "test"))
+                .header(new Header("opengraph-external-id", "test"))
                 .with().port(8888)
-                .get("/fuse/query/1/asg")
+                .get("/opengraph/query/1/asg")
                 .then()
                 .assertThat()
                 .body(new TestUtils.ContentMatcher((Object o) -> {
@@ -429,9 +429,9 @@ public class QueryIT implements BaseITMarker {
         //get query resource by id
         given()
                 .contentType("application/json")
-                .header(new Header("fuse-external-id", "test"))
+                .header(new Header("opengraph-external-id", "test"))
                 .with().port(8888)
-                .get("/fuse/query/1/asg/print")
+                .get("/opengraph/query/1/asg/print")
                 .then()
                 .assertThat()
                 .body(new TestUtils.ContentMatcher((Object o) -> {
@@ -450,16 +450,16 @@ public class QueryIT implements BaseITMarker {
         //get cursor resource by id
         given()
                 .contentType("application/json")
-                .header(new Header("fuse-external-id", "test"))
+                .header(new Header("opengraph-external-id", "test"))
                 .with().port(8888)
-                .get("/fuse/query/1/cursor")
+                .get("/opengraph/query/1/cursor")
                 .then()
                 .assertThat()
                 .body(new TestUtils.ContentMatcher(o -> {
                     try {
                         ContentResponse contentResponse = new ObjectMapper().readValue(o.toString(), ContentResponse.class);
                         Map data = (Map) contentResponse.getData();
-                        assertTrue(data.get("resourceUrl").toString().endsWith("/fuse/query/1/cursor"));
+                        assertTrue(data.get("resourceUrl").toString().endsWith("/opengraph/query/1/cursor"));
                         return contentResponse.getData() != null;
                     } catch (Exception e) {
                         e.printStackTrace();
@@ -474,7 +474,7 @@ public class QueryIT implements BaseITMarker {
 
     @Test
     public void queryCreateAndDeleteResource() throws IOException {
-        BaseGraphClient GraphClient = new BaseGraphClient("http://localhost:8888/fuse");
+        BaseGraphClient GraphClient = new BaseGraphClient("http://localhost:8888/opengraph");
 
         //query request
         Query query = TestUtils.loadQuery("Q001.json");
@@ -485,18 +485,18 @@ public class QueryIT implements BaseITMarker {
         //submit query
         given()
                 .contentType("application/json")
-                .header(new Header("fuse-external-id", "test"))
+                .header(new Header("opengraph-external-id", "test"))
                 .with().port(8888)
                 .body(request)
-                .post("/fuse/query")
+                .post("/opengraph/query")
                 .then()
                 .assertThat()
                 .body(new TestUtils.ContentMatcher(o -> {
                     try {
                         ContentResponse contentResponse = new ObjectMapper().readValue(o.toString(), ContentResponse.class);
                         Map data = (Map) contentResponse.getData();
-                        assertTrue(data.get("resourceUrl").toString().endsWith("/fuse/query/1"));
-                        assertTrue(data.get("cursorStoreUrl").toString().endsWith("/fuse/query/1/cursor"));
+                        assertTrue(data.get("resourceUrl").toString().endsWith("/opengraph/query/1"));
+                        assertTrue(data.get("cursorStoreUrl").toString().endsWith("/opengraph/query/1/cursor"));
                         return contentResponse.getData() != null;
                     } catch (Exception e) {
                         e.printStackTrace();
@@ -509,17 +509,17 @@ public class QueryIT implements BaseITMarker {
         //get query resource by id
         given()
                 .contentType("application/json")
-                .header(new Header("fuse-external-id", "test"))
+                .header(new Header("opengraph-external-id", "test"))
                 .with().port(8888)
-                .get("/fuse/query/1")
+                .get("/opengraph/query/1")
                 .then()
                 .assertThat()
                 .body(new TestUtils.ContentMatcher(o -> {
                     try {
                         ContentResponse contentResponse = new ObjectMapper().readValue(o.toString(), ContentResponse.class);
                         Map data = (Map) contentResponse.getData();
-                        assertTrue(data.get("resourceUrl").toString().endsWith("/fuse/query/1"));
-                        assertTrue(data.get("cursorStoreUrl").toString().endsWith("/fuse/query/1/cursor"));
+                        assertTrue(data.get("resourceUrl").toString().endsWith("/opengraph/query/1"));
+                        assertTrue(data.get("cursorStoreUrl").toString().endsWith("/opengraph/query/1/cursor"));
                         return contentResponse.getData() != null;
                     } catch (Exception e) {
                         e.printStackTrace();
@@ -532,9 +532,9 @@ public class QueryIT implements BaseITMarker {
         //get query resource by id
         given()
                 .contentType("application/json")
-                .header(new Header("fuse-external-id", "test"))
+                .header(new Header("opengraph-external-id", "test"))
                 .with().port(8888)
-                .get("/fuse/query/1/print")
+                .get("/opengraph/query/1/print")
                 .then()
                 .assertThat()
                 .body(new TestUtils.ContentMatcher(o -> {
@@ -552,9 +552,9 @@ public class QueryIT implements BaseITMarker {
         //delete query
         given()
                 .contentType("application/json")
-                .header(new Header("fuse-external-id", "test"))
+                .header(new Header("opengraph-external-id", "test"))
                 .with().port(8888)
-                .delete("/fuse/query/1")
+                .delete("/opengraph/query/1")
                 .then()
                 .assertThat()
                 .statusCode(202)

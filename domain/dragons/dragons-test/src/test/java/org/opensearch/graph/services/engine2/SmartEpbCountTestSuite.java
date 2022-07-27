@@ -31,7 +31,7 @@ public class SmartEpbCountTestSuite implements BaseSuiteMarker {
 
         searchEmbeddedNode = GlobalSearchEmbeddedNode.getInstance("Dragons");
 
-        app = new GraphApp(new DefaultAppUrlSupplier("/fuse"))
+        app = new GraphApp(new DefaultAppUrlSupplier("/opengraph"))
                 .conf(new File(Paths.get("src", "test", "conf", "application.engine2.dev.M2.discrete.count.conf").toString()), "m2.smartEpb");
 
         app.start("server.join=false");

@@ -100,7 +100,7 @@ public class SnifferGraphClient implements GraphClient {
         //first time init the cluster map state
         loadClusterState();
 
-        //sniff fuse cluster state from elastic graph_node_info index
+        //sniff opengraph cluster state from elastic graph_node_info index
         scheduler.scheduleAtFixedRate(() -> loadClusterState(), 5,10,TimeUnit.SECONDS);
     }
 
@@ -127,12 +127,12 @@ public class SnifferGraphClient implements GraphClient {
     }
 
     private GraphClient selectNode() {
-        //todo select best appropriate node according to least busy (with respect to living fuse nodes)
+        //todo select best appropriate node according to least busy (with respect to living opengraph nodes)
         return GraphClients.asMap().values().iterator().next();
     }
 
     private GraphClient selectNode(String url) {
-        //todo select best appropriate node according to least busy & relevant to given url (with respect to living fuse nodes)
+        //todo select best appropriate node according to least busy & relevant to given url (with respect to living opengraph nodes)
         return GraphClients.asMap().values().iterator().next();
     }
 

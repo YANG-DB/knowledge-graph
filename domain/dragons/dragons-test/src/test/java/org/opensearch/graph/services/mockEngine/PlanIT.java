@@ -28,7 +28,7 @@ public class PlanIT implements BaseITMarker {
      * execute query with expected plan result
      */
     public void plan() throws IOException {
-        BaseGraphClient GraphClient = new BaseGraphClient("http://localhost:8888/fuse");
+        BaseGraphClient GraphClient = new BaseGraphClient("http://localhost:8888/opengraph");
 
         //query request
         CreateQueryRequest request = new CreateQueryRequest();
@@ -38,18 +38,18 @@ public class PlanIT implements BaseITMarker {
         //submit query
         given()
                 .contentType("application/json")
-                .header(new Header("fuse-external-id", "test"))
+                .header(new Header("opengraph-external-id", "test"))
                 .with().port(8888)
                 .body(request)
-                .post("/fuse/query")
+                .post("/opengraph/query")
                 .then()
                 .assertThat()
                 .body(new TestUtils.ContentMatcher(o -> {
                     try {
                         ContentResponse contentResponse = new ObjectMapper().readValue(o.toString(), ContentResponse.class);
                         Map data = (Map) contentResponse.getData();
-                        assertTrue(data.get("resourceUrl").toString().endsWith("/fuse/query/1"));
-                        assertTrue(data.get("cursorStoreUrl").toString().endsWith("/fuse/query/1/cursor"));
+                        assertTrue(data.get("resourceUrl").toString().endsWith("/opengraph/query/1"));
+                        assertTrue(data.get("cursorStoreUrl").toString().endsWith("/opengraph/query/1/cursor"));
                         return contentResponse.getData()!=null;
                     } catch (Exception e) {
                         e.printStackTrace();
@@ -63,9 +63,9 @@ public class PlanIT implements BaseITMarker {
         //get plan resource by id
         given()
                 .contentType("application/json")
-                .header(new Header("fuse-external-id", "test"))
+                .header(new Header("opengraph-external-id", "test"))
                 .with().port(8888)
-                .get("/fuse/query/1/plan")
+                .get("/opengraph/query/1/plan")
                 .then()
                 .assertThat()
                 .body(new TestUtils.ContentMatcher(o -> {
@@ -81,9 +81,9 @@ public class PlanIT implements BaseITMarker {
 
         given()
                 .contentType("application/json")
-                .header(new Header("fuse-external-id", "test"))
+                .header(new Header("opengraph-external-id", "test"))
                 .with().port(8888)
-                .get("/fuse/query/1/plan/print")
+                .get("/opengraph/query/1/plan/print")
                 .then()
                 .assertThat()
                 .body(new TestUtils.ContentMatcher(o -> {

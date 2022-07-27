@@ -39,19 +39,19 @@ public class InternalsControllerRegistrar extends AppControllerRegistrarBase<Int
     @Override
     public void register(Jooby app, AppUrlSupplier appUrlSupplier) {
         /** get the health status of the service */
-        app.get("/fuse/internal/statisticsProvider/name",
+        app.get("/opengraph/internal/statisticsProvider/name",
                 req -> Results.with(this.getController(app).getStatisticsProviderName()));
-        app.get("/fuse/internal/version",
+        app.get("/opengraph/internal/version",
                 req -> Results.with(this.getController(app).getVersion()));
-        app.get("/fuse/internal/config",
+        app.get("/opengraph/internal/config",
                 req -> Results.with(this.getController(app).getConfig()));
-        app.get("/fuse/internal/snowflakeId",
+        app.get("/opengraph/internal/snowflakeId",
                 req -> Results.with(this.getController(app).getSnowflakeId()));
-        app.get("/fuse/internal/cursorBindings",
+        app.get("/opengraph/internal/cursorBindings",
                 req -> Results.with(this.getController(app).getCursorBindings()));
-        app.get("/fuse/internal/statisticsProvider/setup",
+        app.get("/opengraph/internal/statisticsProvider/setup",
                 req -> Results.with(this.getController(app).getStatisticsProviderSetup()));
-        app.put("/fuse/internal/statisticsProvider/refresh",
+        app.put("/opengraph/internal/statisticsProvider/refresh",
                 req -> Results.with(this.getController(app).refreshStatisticsProviderSetup()));
     }
     //endregion

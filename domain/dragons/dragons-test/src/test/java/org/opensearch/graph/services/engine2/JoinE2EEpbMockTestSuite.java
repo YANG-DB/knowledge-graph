@@ -31,7 +31,7 @@ public class JoinE2EEpbMockTestSuite implements BaseSuiteMarker {
 
         elasticEmbeddedNode = GlobalSearchEmbeddedNode.getInstance("Dragons");
 
-        app = new GraphApp(new DefaultAppUrlSupplier("/fuse"))
+        app = new GraphApp(new DefaultAppUrlSupplier("/opengraph"))
                 .conf(new File(Paths.get("src", "test", "conf", "application.engine2.dev.M2.conf").toString()), "m2.mockEpb");
 
         app.start("server.join=false");

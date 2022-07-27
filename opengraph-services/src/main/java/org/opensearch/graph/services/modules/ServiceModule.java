@@ -94,7 +94,7 @@ import static com.google.inject.name.Names.named;
 /**
  * Created by lior.perry on 15/02/2017.
  * <p>
- * This module is called by the fuse-service scanner class loader
+ * This module is called by the opengraph-service scanner class loader
  */
 public class ServiceModule extends ModuleBase {
     private static final Logger logger = LoggerFactory.getLogger(ServiceModule.class);

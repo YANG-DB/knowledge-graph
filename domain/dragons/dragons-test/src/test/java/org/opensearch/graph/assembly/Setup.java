@@ -37,17 +37,17 @@ public abstract class Setup {
 
     public static void setup(boolean embedded, boolean init) throws Exception {
         init(embedded,init,true);
-        GraphClient = new BaseGraphClient("http://localhost:8888/fuse");
+        GraphClient = new BaseGraphClient("http://localhost:8888/opengraph");
     }
 
-    public static void setup(boolean embedded, boolean init,boolean startFuse) throws Exception {
-        init(embedded,init,startFuse);
-        GraphClient = new BaseGraphClient("http://localhost:8888/fuse");
+    public static void setup(boolean embedded, boolean init,boolean start) throws Exception {
+        init(embedded,init,start);
+        GraphClient = new BaseGraphClient("http://localhost:8888/opengraph");
     }
 
-    public static void setup(boolean embedded, boolean init, boolean startFuse, GraphClient givenGraphClient) throws Exception {
-        init(embedded,init,startFuse);
-        //set fuse client
+    public static void setup(boolean embedded, boolean init, boolean start, GraphClient givenGraphClient) throws Exception {
+        init(embedded,init,start);
+        //set client
         GraphClient = givenGraphClient;
     }
 
@@ -71,9 +71,9 @@ public abstract class Setup {
     }
 
     private static void start(boolean startGraph) {
-        // Start fuse app (based on Jooby app web server)
+        // Start  app (based on Jooby app web server)
         if(startGraph) {
-            // Load fuse engine config file
+            // Load opengraph engine config file
             String confFilePath = path.toString();
             //load configuration
             Config config = GraphUtils.loadConfig(new File(confFilePath),"activeProfile" );
@@ -82,7 +82,7 @@ public abstract class Setup {
                     "server.join=false"
             };
 
-            app = new GraphApp(new DefaultAppUrlSupplier("/fuse"))
+            app = new GraphApp(new DefaultAppUrlSupplier("/opengraph"))
                     .conf(path.toFile(), "activeProfile");
             app.start("server.join=false");
         }

@@ -91,7 +91,7 @@ public class GraphRunner {
             //load jooby App
             Jooby.run(() -> app != null ?
                             app :
-                            new GraphApp(new DefaultAppUrlSupplier("/fuse"))
+                            new GraphApp(new DefaultAppUrlSupplier("/opengraph"))
                                     .conf(config)
                                     .throwBootstrapException(),
                     joobyArgs);

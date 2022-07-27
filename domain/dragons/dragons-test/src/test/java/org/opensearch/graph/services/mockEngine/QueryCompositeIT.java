@@ -41,7 +41,7 @@ public class QueryCompositeIT implements BaseITMarker {
      */
     @Test
     public void queryWithOneInnerQueryCreate() throws IOException {
-        BaseGraphClient GraphClient = new BaseGraphClient("http://localhost:8888/fuse");
+        BaseGraphClient GraphClient = new BaseGraphClient("http://localhost:8888/opengraph");
         //query request
         CreateQueryRequest request = new CreateQueryRequest();
         request.setId("1");
@@ -50,20 +50,20 @@ public class QueryCompositeIT implements BaseITMarker {
         //submit query
         given()
                 .contentType("application/json")
-                .header(new Header("fuse-external-id", "test"))
+                .header(new Header("opengraph-external-id", "test"))
                 .with().port(8888)
                 .body(request)
-                .post("/fuse/query")
+                .post("/opengraph/query")
                 .then()
                 .assertThat()
                 .body(new TestUtils.ContentMatcher(o -> {
                     try {
                         final QueryResourceInfo queryResourceInfo = GraphClient.unwrap(o.toString(), QueryResourceInfo.class);
-                        assertTrue(queryResourceInfo.getAsgUrl().endsWith("fuse/query/1/asg"));
-                        assertTrue(queryResourceInfo.getCursorStoreUrl().endsWith("fuse/query/1/cursor"));
+                        assertTrue(queryResourceInfo.getAsgUrl().endsWith("opengraph/query/1/asg"));
+                        assertTrue(queryResourceInfo.getCursorStoreUrl().endsWith("opengraph/query/1/cursor"));
                         assertEquals(1,queryResourceInfo.getInnerUrlResourceInfos().size());
-                        assertTrue(queryResourceInfo.getInnerUrlResourceInfos().get(0).getAsgUrl().endsWith("fuse/query/1->q2/asg"));
-                        assertTrue(queryResourceInfo.getInnerUrlResourceInfos().get(0).getCursorStoreUrl().endsWith("fuse/query/1->q2/cursor"));
+                        assertTrue(queryResourceInfo.getInnerUrlResourceInfos().get(0).getAsgUrl().endsWith("opengraph/query/1->q2/asg"));
+                        assertTrue(queryResourceInfo.getInnerUrlResourceInfos().get(0).getCursorStoreUrl().endsWith("opengraph/query/1->q2/cursor"));
                         return GraphClient.unwrap(o.toString()) != null;
                     } catch (Exception e) {
                         e.printStackTrace();
@@ -76,16 +76,16 @@ public class QueryCompositeIT implements BaseITMarker {
         //get query resource by id
         given()
                 .contentType("application/json")
-                .header(new Header("fuse-external-id", "test"))
+                .header(new Header("opengraph-external-id", "test"))
                 .with().port(8888)
-                .get("/fuse/query/"+request.getId()+"->"+ CompositeQueryTestUtils.Q2().getName())
+                .get("/opengraph/query/"+request.getId()+"->"+ CompositeQueryTestUtils.Q2().getName())
                 .then()
                 .assertThat()
                 .body(new TestUtils.ContentMatcher(o -> {
                     try {
                         final QueryResourceInfo queryResourceInfo = GraphClient.unwrap(o.toString(), QueryResourceInfo.class);
-                        assertTrue(queryResourceInfo.getAsgUrl().endsWith("fuse/query/1->q2/asg"));
-                        assertTrue(queryResourceInfo.getCursorStoreUrl().endsWith("fuse/query/1->q2/cursor"));
+                        assertTrue(queryResourceInfo.getAsgUrl().endsWith("opengraph/query/1->q2/asg"));
+                        assertTrue(queryResourceInfo.getCursorStoreUrl().endsWith("opengraph/query/1->q2/cursor"));
                         return GraphClient.unwrap(o.toString()) != null;
                     } catch (Exception e) {
                         e.printStackTrace();
@@ -101,7 +101,7 @@ public class QueryCompositeIT implements BaseITMarker {
     @Test
     @Ignore("Only single hierarchy level if allowed")
     public void queryWithHierarchyInnerQueryCreate() throws IOException {
-        BaseGraphClient GraphClient = new BaseGraphClient("http://localhost:8888/fuse");
+        BaseGraphClient GraphClient = new BaseGraphClient("http://localhost:8888/opengraph");
         //query request
         CreateQueryRequest request = new CreateQueryRequest();
         request.setId("1");
@@ -110,20 +110,20 @@ public class QueryCompositeIT implements BaseITMarker {
         //submit query
         given()
                 .contentType("application/json")
-                .header(new Header("fuse-external-id", "test"))
+                .header(new Header("opengraph-external-id", "test"))
                 .with().port(8888)
                 .body(request)
-                .post("/fuse/query")
+                .post("/opengraph/query")
                 .then()
                 .assertThat()
                 .body(new TestUtils.ContentMatcher(o -> {
                     try {
                         final QueryResourceInfo queryResourceInfo = GraphClient.unwrap(o.toString(), QueryResourceInfo.class);
-                        assertTrue(queryResourceInfo.getAsgUrl().endsWith("fuse/query/1/asg"));
-                        assertTrue(queryResourceInfo.getCursorStoreUrl().endsWith("fuse/query/1/cursor"));
+                        assertTrue(queryResourceInfo.getAsgUrl().endsWith("opengraph/query/1/asg"));
+                        assertTrue(queryResourceInfo.getCursorStoreUrl().endsWith("opengraph/query/1/cursor"));
                         assertEquals(1,queryResourceInfo.getInnerUrlResourceInfos().size());
-                        assertTrue(queryResourceInfo.getInnerUrlResourceInfos().get(0).getAsgUrl().endsWith("fuse/query/1->q1/asg"));
-                        assertTrue(queryResourceInfo.getInnerUrlResourceInfos().get(0).getCursorStoreUrl().endsWith("fuse/query/1->q1/cursor"));
+                        assertTrue(queryResourceInfo.getInnerUrlResourceInfos().get(0).getAsgUrl().endsWith("opengraph/query/1->q1/asg"));
+                        assertTrue(queryResourceInfo.getInnerUrlResourceInfos().get(0).getCursorStoreUrl().endsWith("opengraph/query/1->q1/cursor"));
                         return GraphClient.unwrap(o.toString()) != null;
                     } catch (Exception e) {
                         e.printStackTrace();
@@ -136,19 +136,19 @@ public class QueryCompositeIT implements BaseITMarker {
         //get query resource by id
         given()
                 .contentType("application/json")
-                .header(new Header("fuse-external-id", "test"))
+                .header(new Header("opengraph-external-id", "test"))
                 .with().port(8888)
-                .get("/fuse/query/"+request.getId()+"->"+ CompositeQueryTestUtils.Q1().getName())
+                .get("/opengraph/query/"+request.getId()+"->"+ CompositeQueryTestUtils.Q1().getName())
                 .then()
                 .assertThat()
                 .body(new TestUtils.ContentMatcher(o -> {
                     try {
                         final QueryResourceInfo queryResourceInfo = GraphClient.unwrap(o.toString(), QueryResourceInfo.class);
-                        assertTrue(queryResourceInfo.getAsgUrl().endsWith("fuse/query/1->q1/asg"));
-                        assertTrue(queryResourceInfo.getCursorStoreUrl().endsWith("fuse/query/1->q1/cursor"));
+                        assertTrue(queryResourceInfo.getAsgUrl().endsWith("opengraph/query/1->q1/asg"));
+                        assertTrue(queryResourceInfo.getCursorStoreUrl().endsWith("opengraph/query/1->q1/cursor"));
                         assertEquals(1,queryResourceInfo.getInnerUrlResourceInfos().size());
-                        assertTrue(queryResourceInfo.getInnerUrlResourceInfos().get(0).getAsgUrl().endsWith("fuse/query/1->q2/asg"));
-                        assertTrue(queryResourceInfo.getInnerUrlResourceInfos().get(0).getCursorStoreUrl().endsWith("fuse/query/1->q2/cursor"));
+                        assertTrue(queryResourceInfo.getInnerUrlResourceInfos().get(0).getAsgUrl().endsWith("opengraph/query/1->q2/asg"));
+                        assertTrue(queryResourceInfo.getInnerUrlResourceInfos().get(0).getCursorStoreUrl().endsWith("opengraph/query/1->q2/cursor"));
                         return GraphClient.unwrap(o.toString()) != null;
                     } catch (Exception e) {
                         e.printStackTrace();
@@ -160,16 +160,16 @@ public class QueryCompositeIT implements BaseITMarker {
 
         given()
                 .contentType("application/json")
-                .header(new Header("fuse-external-id", "test"))
+                .header(new Header("opengraph-external-id", "test"))
                 .with().port(8888)
-                .get("/fuse/query/"+request.getId()+"->"+ CompositeQueryTestUtils.Q2().getName())
+                .get("/opengraph/query/"+request.getId()+"->"+ CompositeQueryTestUtils.Q2().getName())
                 .then()
                 .assertThat()
                 .body(new TestUtils.ContentMatcher(o -> {
                     try {
                         final QueryResourceInfo queryResourceInfo = GraphClient.unwrap(o.toString(), QueryResourceInfo.class);
-                        assertTrue(queryResourceInfo.getAsgUrl().endsWith("fuse/query/1->q2/asg"));
-                        assertTrue(queryResourceInfo.getCursorStoreUrl().endsWith("fuse/query/1->q2/cursor"));
+                        assertTrue(queryResourceInfo.getAsgUrl().endsWith("opengraph/query/1->q2/asg"));
+                        assertTrue(queryResourceInfo.getCursorStoreUrl().endsWith("opengraph/query/1->q2/cursor"));
                         assertEquals(0,queryResourceInfo.getInnerUrlResourceInfos().size());
                         return GraphClient.unwrap(o.toString()) != null;
                     } catch (Exception e) {
@@ -185,7 +185,7 @@ public class QueryCompositeIT implements BaseITMarker {
 
     @Test
     public void queryWithTwoInnerQueryCreate() throws IOException {
-        BaseGraphClient GraphClient = new BaseGraphClient("http://localhost:8888/fuse");
+        BaseGraphClient GraphClient = new BaseGraphClient("http://localhost:8888/opengraph");
         //query request
         CreateQueryRequest request = new CreateQueryRequest();
         request.setId("1");
@@ -194,17 +194,17 @@ public class QueryCompositeIT implements BaseITMarker {
         //submit query
         given()
                 .contentType("application/json")
-                .header(new Header("fuse-external-id", "test"))
+                .header(new Header("opengraph-external-id", "test"))
                 .with().port(8888)
                 .body(request)
-                .post("/fuse/query")
+                .post("/opengraph/query")
                 .then()
                 .assertThat()
                 .body(new TestUtils.ContentMatcher(o -> {
                     try {
                         final QueryResourceInfo queryResourceInfo = GraphClient.unwrap(o.toString(), QueryResourceInfo.class);
-                        assertTrue(queryResourceInfo.getAsgUrl().endsWith("fuse/query/1/asg"));
-                        assertTrue(queryResourceInfo.getCursorStoreUrl().endsWith("fuse/query/1/cursor"));
+                        assertTrue(queryResourceInfo.getAsgUrl().endsWith("opengraph/query/1/asg"));
+                        assertTrue(queryResourceInfo.getCursorStoreUrl().endsWith("opengraph/query/1/cursor"));
                         assertEquals(2,queryResourceInfo.getInnerUrlResourceInfos().size());
                         return GraphClient.unwrap(o.toString()) != null;
                     } catch (Exception e) {
@@ -218,16 +218,16 @@ public class QueryCompositeIT implements BaseITMarker {
         //get query resource by id
         given()
                 .contentType("application/json")
-                .header(new Header("fuse-external-id", "test"))
+                .header(new Header("opengraph-external-id", "test"))
                 .with().port(8888)
-                .get("/fuse/query/"+request.getId()+"->"+ CompositeQueryTestUtils.Q2().getName())
+                .get("/opengraph/query/"+request.getId()+"->"+ CompositeQueryTestUtils.Q2().getName())
                 .then()
                 .assertThat()
                 .body(new TestUtils.ContentMatcher(o -> {
                     try {
                         final QueryResourceInfo queryResourceInfo = GraphClient.unwrap(o.toString(), QueryResourceInfo.class);
-                        assertTrue(queryResourceInfo.getAsgUrl().endsWith("fuse/query/1->q2/asg"));
-                        assertTrue(queryResourceInfo.getCursorStoreUrl().endsWith("fuse/query/1->q2/cursor"));
+                        assertTrue(queryResourceInfo.getAsgUrl().endsWith("opengraph/query/1->q2/asg"));
+                        assertTrue(queryResourceInfo.getCursorStoreUrl().endsWith("opengraph/query/1->q2/cursor"));
                         return GraphClient.unwrap(o.toString()) != null;
                     } catch (Exception e) {
                         e.printStackTrace();
@@ -238,16 +238,16 @@ public class QueryCompositeIT implements BaseITMarker {
                 .contentType("application/json;charset=UTF-8");
         given()
                 .contentType("application/json")
-                .header(new Header("fuse-external-id", "test"))
+                .header(new Header("opengraph-external-id", "test"))
                 .with().port(8888)
-                .get("/fuse/query/"+request.getId()+"->"+ CompositeQueryTestUtils.Q3().getName())
+                .get("/opengraph/query/"+request.getId()+"->"+ CompositeQueryTestUtils.Q3().getName())
                 .then()
                 .assertThat()
                 .body(new TestUtils.ContentMatcher(o -> {
                     try {
                         final QueryResourceInfo queryResourceInfo = GraphClient.unwrap(o.toString(), QueryResourceInfo.class);
-                        assertTrue(queryResourceInfo.getAsgUrl().endsWith("fuse/query/1->q3/asg"));
-                        assertTrue(queryResourceInfo.getCursorStoreUrl().endsWith("fuse/query/1->q3/cursor"));
+                        assertTrue(queryResourceInfo.getAsgUrl().endsWith("opengraph/query/1->q3/asg"));
+                        assertTrue(queryResourceInfo.getCursorStoreUrl().endsWith("opengraph/query/1->q3/cursor"));
                         return GraphClient.unwrap(o.toString()) != null;
                     } catch (Exception e) {
                         e.printStackTrace();
@@ -259,9 +259,9 @@ public class QueryCompositeIT implements BaseITMarker {
         //delete query
         given()
                 .contentType("application/json")
-                .header(new Header("fuse-external-id", "test"))
+                .header(new Header("opengraph-external-id", "test"))
                 .with().port(8888)
-                .delete("/fuse/query/1")
+                .delete("/opengraph/query/1")
                 .then()
                 .assertThat()
                 .statusCode(202)
@@ -269,9 +269,9 @@ public class QueryCompositeIT implements BaseITMarker {
         //validate deleted
         given()
                 .contentType("application/json")
-                .header(new Header("fuse-external-id", "test"))
+                .header(new Header("opengraph-external-id", "test"))
                 .with().port(8888)
-                .get("/fuse/query/1")
+                .get("/opengraph/query/1")
                 .then()
                 .assertThat()
                 .statusCode(404)
@@ -279,9 +279,9 @@ public class QueryCompositeIT implements BaseITMarker {
         //validate inner deleted
         given()
                 .contentType("application/json")
-                .header(new Header("fuse-external-id", "test"))
+                .header(new Header("opengraph-external-id", "test"))
                 .with().port(8888)
-                .get("/fuse/query/1->q2")
+                .get("/opengraph/query/1->q2")
                 .then()
                 .assertThat()
                 .statusCode(404)
@@ -289,9 +289,9 @@ public class QueryCompositeIT implements BaseITMarker {
         //validate inner deleted
         given()
                 .contentType("application/json")
-                .header(new Header("fuse-external-id", "test"))
+                .header(new Header("opengraph-external-id", "test"))
                 .with().port(8888)
-                .get("/fuse/query/1->q3")
+                .get("/opengraph/query/1->q3")
                 .then()
                 .assertThat()
                 .statusCode(404)
@@ -314,19 +314,19 @@ public class QueryCompositeIT implements BaseITMarker {
         //submit query
         given()
                 .contentType("application/json")
-                .header(new Header("fuse-external-id", "test"))
+                .header(new Header("opengraph-external-id", "test"))
                 .with().port(8888)
                 .body(request)
-                .post("/fuse/query")
+                .post("/opengraph/query")
                 .then()
                 .assertThat()
                 .body(new TestUtils.ContentMatcher(o -> {
                     try {
                         ContentResponse contentResponse = new ObjectMapper().readValue(o.toString(), ContentResponse.class);
                         Map data = (Map) contentResponse.getData();
-                        assertTrue(data.get("resourceUrl").toString().endsWith("/fuse/query/call[1]"));
-                        assertTrue(data.get("cursorStoreUrl").toString().contains("/fuse/query/call[1]/cursor"));
-                        assertTrue(data.get("v1QueryUrl").toString().endsWith("/fuse/query/call[1]/v1"));
+                        assertTrue(data.get("resourceUrl").toString().endsWith("/opengraph/query/call[1]"));
+                        assertTrue(data.get("cursorStoreUrl").toString().contains("/opengraph/query/call[1]/cursor"));
+                        assertTrue(data.get("v1QueryUrl").toString().endsWith("/opengraph/query/call[1]/v1"));
                         assertTrue(((Map)(((List) data.get("cursorResourceInfos")).get(0))).containsKey("cursorRequest"));
                         assertTrue(((Map)(((List) data.get("cursorResourceInfos")).get(0))).containsKey("pageStoreUrl"));
                         assertTrue(((Map)(((List) data.get("cursorResourceInfos")).get(0))).containsKey("pageResourceInfos"));
@@ -362,10 +362,10 @@ public class QueryCompositeIT implements BaseITMarker {
         //submit query
         given()
                 .contentType("application/json")
-                .header(new Header("fuse-external-id", "test"))
+                .header(new Header("opengraph-external-id", "test"))
                 .with().port(8888)
                 .body(request)
-                .post("/fuse/query")
+                .post("/opengraph/query")
                 .then()
                 .assertThat()
                 .body(new TestUtils.ContentMatcher(o -> {
@@ -398,19 +398,19 @@ public class QueryCompositeIT implements BaseITMarker {
         //submit query
         given()
                 .contentType("application/json")
-                .header(new Header("fuse-external-id", "test"))
+                .header(new Header("opengraph-external-id", "test"))
                 .with().port(8888)
                 .body(request)
-                .post("/fuse/query")
+                .post("/opengraph/query")
                 .then()
                 .assertThat()
                 .body(new TestUtils.ContentMatcher(o -> {
                     try {
                         ContentResponse contentResponse = new ObjectMapper().readValue(o.toString(), ContentResponse.class);
                         Map data = (Map) contentResponse.getData();
-                        assertTrue(data.get("resourceUrl").toString().endsWith("/fuse/query/1"));
-                        assertTrue(data.get("cursorStoreUrl").toString().endsWith("/fuse/query/1/cursor"));
-                        assertTrue(data.get("v1QueryUrl").toString().endsWith("/fuse/query/1/v1"));
+                        assertTrue(data.get("resourceUrl").toString().endsWith("/opengraph/query/1"));
+                        assertTrue(data.get("cursorStoreUrl").toString().endsWith("/opengraph/query/1/cursor"));
+                        assertTrue(data.get("v1QueryUrl").toString().endsWith("/opengraph/query/1/v1"));
                         return contentResponse.getData() != null;
                     } catch (Exception e) {
                         e.printStackTrace();
@@ -423,18 +423,18 @@ public class QueryCompositeIT implements BaseITMarker {
         //get query resource by id
         given()
                 .contentType("application/json")
-                .header(new Header("fuse-external-id", "test"))
+                .header(new Header("opengraph-external-id", "test"))
                 .with().port(8888)
-                .get("/fuse/query/1")
+                .get("/opengraph/query/1")
                 .then()
                 .assertThat()
                 .body(new TestUtils.ContentMatcher(o -> {
                     try {
                         ContentResponse contentResponse = new ObjectMapper().readValue(o.toString(), ContentResponse.class);
                         Map data = (Map) contentResponse.getData();
-                        assertTrue(data.get("resourceUrl").toString().endsWith("/fuse/query/1"));
-                        assertTrue(data.get("cursorStoreUrl").toString().endsWith("/fuse/query/1/cursor"));
-                        assertTrue(data.get("v1QueryUrl").toString().endsWith("/fuse/query/1/v1"));
+                        assertTrue(data.get("resourceUrl").toString().endsWith("/opengraph/query/1"));
+                        assertTrue(data.get("cursorStoreUrl").toString().endsWith("/opengraph/query/1/cursor"));
+                        assertTrue(data.get("v1QueryUrl").toString().endsWith("/opengraph/query/1/v1"));
                         return contentResponse.getData() != null;
                     } catch (Exception e) {
                         e.printStackTrace();
@@ -447,16 +447,16 @@ public class QueryCompositeIT implements BaseITMarker {
         //get cursor resource by id
         given()
                 .contentType("application/json")
-                .header(new Header("fuse-external-id", "test"))
+                .header(new Header("opengraph-external-id", "test"))
                 .with().port(8888)
-                .get("/fuse/query/1/cursor")
+                .get("/opengraph/query/1/cursor")
                 .then()
                 .assertThat()
                 .body(new TestUtils.ContentMatcher(o -> {
                     try {
                         ContentResponse contentResponse = new ObjectMapper().readValue(o.toString(), ContentResponse.class);
                         Map data = (Map) contentResponse.getData();
-                        assertTrue(data.get("resourceUrl").toString().endsWith("/fuse/query/1/cursor"));
+                        assertTrue(data.get("resourceUrl").toString().endsWith("/opengraph/query/1/cursor"));
                         return contentResponse.getData() != null;
                     } catch (Exception e) {
                         e.printStackTrace();
@@ -471,7 +471,7 @@ public class QueryCompositeIT implements BaseITMarker {
 
     @Test
     public void queryCreateAndDeleteResource() throws IOException {
-        BaseGraphClient GraphClient = new BaseGraphClient("http://localhost:8888/fuse");
+        BaseGraphClient GraphClient = new BaseGraphClient("http://localhost:8888/opengraph");
 
         //query request
         Query query = TestUtils.loadQuery("Q001.json");
@@ -482,18 +482,18 @@ public class QueryCompositeIT implements BaseITMarker {
         //submit query
         given()
                 .contentType("application/json")
-                .header(new Header("fuse-external-id", "test"))
+                .header(new Header("opengraph-external-id", "test"))
                 .with().port(8888)
                 .body(request)
-                .post("/fuse/query")
+                .post("/opengraph/query")
                 .then()
                 .assertThat()
                 .body(new TestUtils.ContentMatcher(o -> {
                     try {
                         ContentResponse contentResponse = new ObjectMapper().readValue(o.toString(), ContentResponse.class);
                         Map data = (Map) contentResponse.getData();
-                        assertTrue(data.get("resourceUrl").toString().endsWith("/fuse/query/1"));
-                        assertTrue(data.get("cursorStoreUrl").toString().endsWith("/fuse/query/1/cursor"));
+                        assertTrue(data.get("resourceUrl").toString().endsWith("/opengraph/query/1"));
+                        assertTrue(data.get("cursorStoreUrl").toString().endsWith("/opengraph/query/1/cursor"));
                         return contentResponse.getData() != null;
                     } catch (Exception e) {
                         e.printStackTrace();
@@ -506,17 +506,17 @@ public class QueryCompositeIT implements BaseITMarker {
         //get query resource by id
         given()
                 .contentType("application/json")
-                .header(new Header("fuse-external-id", "test"))
+                .header(new Header("opengraph-external-id", "test"))
                 .with().port(8888)
-                .get("/fuse/query/1")
+                .get("/opengraph/query/1")
                 .then()
                 .assertThat()
                 .body(new TestUtils.ContentMatcher(o -> {
                     try {
                         ContentResponse contentResponse = new ObjectMapper().readValue(o.toString(), ContentResponse.class);
                         Map data = (Map) contentResponse.getData();
-                        assertTrue(data.get("resourceUrl").toString().endsWith("/fuse/query/1"));
-                        assertTrue(data.get("cursorStoreUrl").toString().endsWith("/fuse/query/1/cursor"));
+                        assertTrue(data.get("resourceUrl").toString().endsWith("/opengraph/query/1"));
+                        assertTrue(data.get("cursorStoreUrl").toString().endsWith("/opengraph/query/1/cursor"));
                         return contentResponse.getData() != null;
                     } catch (Exception e) {
                         e.printStackTrace();
@@ -529,9 +529,9 @@ public class QueryCompositeIT implements BaseITMarker {
         //get query resource by id
         given()
                 .contentType("application/json")
-                .header(new Header("fuse-external-id", "test"))
+                .header(new Header("opengraph-external-id", "test"))
                 .with().port(8888)
-                .get("/fuse/query/1/v1/print")
+                .get("/opengraph/query/1/v1/print")
                 .then()
                 .assertThat()
                 .body(new TestUtils.ContentMatcher(o -> {
@@ -549,9 +549,9 @@ public class QueryCompositeIT implements BaseITMarker {
         //delete query
         given()
                 .contentType("application/json")
-                .header(new Header("fuse-external-id", "test"))
+                .header(new Header("opengraph-external-id", "test"))
                 .with().port(8888)
-                .delete("/fuse/query/1")
+                .delete("/opengraph/query/1")
                 .then()
                 .assertThat()
                 .statusCode(202)
@@ -560,7 +560,7 @@ public class QueryCompositeIT implements BaseITMarker {
 
     @Test
     public void queryCreateWithInnerQueryAndDeleteResource() throws IOException {
-        BaseGraphClient GraphClient = new BaseGraphClient("http://localhost:8888/fuse");
+        BaseGraphClient GraphClient = new BaseGraphClient("http://localhost:8888/opengraph");
 
         //query request
         Query query = CompositeQueryTestUtils.Q1();
@@ -571,20 +571,20 @@ public class QueryCompositeIT implements BaseITMarker {
         //submit query
         given()
                 .contentType("application/json")
-                .header(new Header("fuse-external-id", "test"))
+                .header(new Header("opengraph-external-id", "test"))
                 .with().port(8888)
                 .body(request)
-                .post("/fuse/query")
+                .post("/opengraph/query")
                 .then()
                 .assertThat()
                 .body(new TestUtils.ContentMatcher(o -> {
                     try {
                         final QueryResourceInfo queryResourceInfo = GraphClient.unwrap(o.toString(), QueryResourceInfo.class);
-                        assertTrue(queryResourceInfo.getAsgUrl().endsWith("fuse/query/1/asg"));
-                        assertTrue(queryResourceInfo.getCursorStoreUrl().endsWith("fuse/query/1/cursor"));
+                        assertTrue(queryResourceInfo.getAsgUrl().endsWith("opengraph/query/1/asg"));
+                        assertTrue(queryResourceInfo.getCursorStoreUrl().endsWith("opengraph/query/1/cursor"));
                         assertEquals(1,queryResourceInfo.getInnerUrlResourceInfos().size());
-                        assertTrue(queryResourceInfo.getInnerUrlResourceInfos().get(0).getAsgUrl().endsWith("fuse/query/1->q2/asg"));
-                        assertTrue(queryResourceInfo.getInnerUrlResourceInfos().get(0).getCursorStoreUrl().endsWith("fuse/query/1->q2/cursor"));
+                        assertTrue(queryResourceInfo.getInnerUrlResourceInfos().get(0).getAsgUrl().endsWith("opengraph/query/1->q2/asg"));
+                        assertTrue(queryResourceInfo.getInnerUrlResourceInfos().get(0).getCursorStoreUrl().endsWith("opengraph/query/1->q2/cursor"));
                         return GraphClient.unwrap(o.toString()) != null;
                     } catch (Exception e) {
                         e.printStackTrace();
@@ -597,17 +597,17 @@ public class QueryCompositeIT implements BaseITMarker {
         //get query resource by id
         given()
                 .contentType("application/json")
-                .header(new Header("fuse-external-id", "test"))
+                .header(new Header("opengraph-external-id", "test"))
                 .with().port(8888)
-                .get("/fuse/query/1")
+                .get("/opengraph/query/1")
                 .then()
                 .assertThat()
                 .body(new TestUtils.ContentMatcher(o -> {
                     try {
                         ContentResponse contentResponse = new ObjectMapper().readValue(o.toString(), ContentResponse.class);
                         Map data = (Map) contentResponse.getData();
-                        assertTrue(data.get("resourceUrl").toString().endsWith("/fuse/query/1"));
-                        assertTrue(data.get("cursorStoreUrl").toString().endsWith("/fuse/query/1/cursor"));
+                        assertTrue(data.get("resourceUrl").toString().endsWith("/opengraph/query/1"));
+                        assertTrue(data.get("cursorStoreUrl").toString().endsWith("/opengraph/query/1/cursor"));
                         return contentResponse.getData() != null;
                     } catch (Exception e) {
                         e.printStackTrace();
@@ -618,17 +618,17 @@ public class QueryCompositeIT implements BaseITMarker {
                 .contentType("application/json;charset=UTF-8");
         given()
                 .contentType("application/json")
-                .header(new Header("fuse-external-id", "test"))
+                .header(new Header("opengraph-external-id", "test"))
                 .with().port(8888)
-                .get("/fuse/query/1->q2")
+                .get("/opengraph/query/1->q2")
                 .then()
                 .assertThat()
                 .body(new TestUtils.ContentMatcher(o -> {
                     try {
                         ContentResponse contentResponse = new ObjectMapper().readValue(o.toString(), ContentResponse.class);
                         Map data = (Map) contentResponse.getData();
-                        assertTrue(data.get("resourceUrl").toString().endsWith("/fuse/query/1->q2"));
-                        assertTrue(data.get("cursorStoreUrl").toString().endsWith("/fuse/query/1->q2/cursor"));
+                        assertTrue(data.get("resourceUrl").toString().endsWith("/opengraph/query/1->q2"));
+                        assertTrue(data.get("cursorStoreUrl").toString().endsWith("/opengraph/query/1->q2/cursor"));
                         return contentResponse.getData() != null;
                     } catch (Exception e) {
                         e.printStackTrace();
@@ -641,9 +641,9 @@ public class QueryCompositeIT implements BaseITMarker {
         //delete query
         given()
                 .contentType("application/json")
-                .header(new Header("fuse-external-id", "test"))
+                .header(new Header("opengraph-external-id", "test"))
                 .with().port(8888)
-                .delete("/fuse/query/1")
+                .delete("/opengraph/query/1")
                 .then()
                 .assertThat()
                 .statusCode(202)
@@ -651,9 +651,9 @@ public class QueryCompositeIT implements BaseITMarker {
         //validate deleted
         given()
                 .contentType("application/json")
-                .header(new Header("fuse-external-id", "test"))
+                .header(new Header("opengraph-external-id", "test"))
                 .with().port(8888)
-                .get("/fuse/query/1")
+                .get("/opengraph/query/1")
                 .then()
                 .assertThat()
                 .statusCode(404)
@@ -661,9 +661,9 @@ public class QueryCompositeIT implements BaseITMarker {
         //validate inner deleted
         given()
                 .contentType("application/json")
-                .header(new Header("fuse-external-id", "test"))
+                .header(new Header("opengraph-external-id", "test"))
                 .with().port(8888)
-                .get("/fuse/query/1->q2")
+                .get("/opengraph/query/1->q2")
                 .then()
                 .assertThat()
                 .statusCode(404)

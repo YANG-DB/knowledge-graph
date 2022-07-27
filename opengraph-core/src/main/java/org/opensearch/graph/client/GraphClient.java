@@ -192,14 +192,14 @@ public interface GraphClient {
     QueryResourceInfo postQuery(String queryStoreUrl, Query query, String id, String name, CreateCursorRequest createCursorRequest) throws IOException;
 
     /**
-     * call "fuse/load/ontology/{id}/init"
+     * call "opengraph/load/ontology/{id}/init"
      * @param ontology
      * @return
      */
     String initIndices(String ontology);
 
     /**
-     * call "fuse/load/ontology/{id}/drop"
+     * call "opengraph/load/ontology/{id}/drop"
      * @param ontology
      * @return
      */

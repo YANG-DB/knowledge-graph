@@ -42,7 +42,7 @@ public class GraphQLControllerRegistrar extends AppControllerRegistrarBase<Stand
     @Override
     public void register(Jooby app, AppUrlSupplier appUrlSupplier) {
         /** create new ontology*/
-        app.post("/fuse/graphql/ontology/:id"
+        app.post("/opengraph/graphql/ontology/:id"
                 ,req -> {
                     Route.of("translateGraphQLSchema").write();
                     String graphQLSchemas = req.body(String.class);

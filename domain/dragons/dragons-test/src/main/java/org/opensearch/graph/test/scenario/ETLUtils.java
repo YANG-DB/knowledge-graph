@@ -145,7 +145,7 @@ public abstract class ETLUtils {
     }
 
     public static TransportClient getClient() throws UnknownHostException {
-        Settings settings = Settings.builder().put("cluster.name", "fuse-test").build();
+        Settings settings = Settings.builder().put("cluster.name", "opengraph-test").build();
         return new PreBuiltTransportClient(settings)
                 .addTransportAddress(new TransportAddress(InetAddress.getByName("13.81.12.209"), 9300))
                 .addTransportAddress(new TransportAddress(InetAddress.getByName("13.73.165.97"), 9300))

@@ -24,14 +24,14 @@ public class SearchIT implements BaseITMarker {
     public void search() {
         given()
                 .contentType("application/json")
-                .header(new Header("fuse-external-id", "test"))
+                .header(new Header("opengraph-external-id", "test"))
                 .with().port(8888)
                 .body("{\"id\":1," +
                         "\"name\": \"hezi\"," +
                         "\"type\": \"search\"," +
                         "\"query\": \"plan me a graph!\" " +
                         "}")
-                .post("/fuse/search")
+                .post("/opengraph/search")
                 .then()
                 .assertThat()
 /*

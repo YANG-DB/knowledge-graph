@@ -37,7 +37,7 @@ public class ApiDescriptionControllerRegistrar extends AppControllerRegistrarBas
     //region AppControllerRegistrarBase Implementation
     @Override
     public void register(Jooby app, AppUrlSupplier appUrlSupplier) {
-        app.get("/fuse",() -> this.getController(app).getInfo());
+        app.get("/opengraph",() -> this.getController(app).getInfo());
     }
     //endregion
 }

@@ -88,7 +88,7 @@ public class BaseGraphClient implements GraphClient {
     }
 
     private <T> ResultResourceInfo loadGraphData(String ontology, String resourceURl, T root) throws IOException {
-        // URL:/fuse/load/ontology/:id/load
+        // URL:/opengraph/load/ontology/:id/load
         return new ResultResourceInfo<>(resourceURl, ontology, unwrap(postRequest(resourceURl, root)));
     }
 

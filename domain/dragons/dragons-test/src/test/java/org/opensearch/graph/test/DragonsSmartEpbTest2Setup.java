@@ -76,7 +76,7 @@ public class DragonsSmartEpbTest2Setup extends TestSetupBase  {
                 ORIGINATED_IN
         )).actionGet();
 
-        new MappingFileConfigurer("stat", Paths.get("fuse-test","fuse-benchmarks-test","src","main","resources","stat","stat_mappings.json").toString()).configure(client);
+        new MappingFileConfigurer("stat", Paths.get("opengraph-test","opengraph-benchmarks-test","src","main","resources","stat","stat_mappings.json").toString()).configure(client);
         Configuration statConfig = new StatConfiguration("stat/statistics.test.properties").getInstance();
         StatCalculator.run(client, client, statConfig);
         client.admin().indices().refresh(new RefreshRequest("stat")).actionGet();

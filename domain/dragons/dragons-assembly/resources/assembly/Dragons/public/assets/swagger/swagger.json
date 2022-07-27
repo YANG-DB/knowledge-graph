@@ -4,7 +4,7 @@
     "version": "1.0",
     "title": "YangDb [Dragons-Graph DB] API"
   },
-  "basePath": "/fuse",
+  "basePath": "/opengraph",
   "tags": [
     {
       "name": "YangDb",
