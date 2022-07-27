@@ -130,7 +130,7 @@ public class OWLToOntologyTransformer implements OntologyTransformerIfc<List<Str
     }
 
     /**
-     * populate yangDb ontology according to OWL ontology structure
+     * populate opengraph ontology according to OWL ontology structure
      *
      * @param builder
      * @param o
@@ -165,7 +165,7 @@ public class OWLToOntologyTransformer implements OntologyTransformerIfc<List<Str
 
     private void generateEntity(Ontology.OntologyBuilder builder, OWLOntology o, OWLReasoner reasoner, OWLClass ontologyClass) {
         String type = ontologyClass.getIRI().toString();
-        //ToDo add hirarchy information to yangDb ontology
+        //ToDo add hirarchy information to opengraph ontology
         //information used to infer structural inheritance
         NodeSet<OWLClass> subClasses = reasoner.getSubClasses(ontologyClass, true);
         NodeSet<OWLClass> superClasses = reasoner.getSuperClasses(ontologyClass, true);

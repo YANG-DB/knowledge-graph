@@ -66,7 +66,7 @@ public class GraphMLWriterTests {
 
     @Test
     public void simpleEntityWithRelationExport() throws IOException {
-        GraphMLWriter writer = new GraphMLWriter(true, emptyMap(), emptyMap(), "www.yangdb.org", "Relation", "Entity");
+        GraphMLWriter writer = new GraphMLWriter(true, emptyMap(), emptyMap(), "www.opengraph.org", "Relation", "Entity");
         final ByteArrayOutputStream stream = new ByteArrayOutputStream();
         final List<Assignment> assignments = assignment.getAssignments();
         writer.writeGraph(stream, assignments.get(0));

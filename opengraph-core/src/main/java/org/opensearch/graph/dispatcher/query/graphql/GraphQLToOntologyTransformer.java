@@ -88,7 +88,7 @@ public class GraphQLToOntologyTransformer implements OntologyTransformerIfc<Stri
 
     @Override
     /**
-     * API that will transform a GraphQL schema into YangDb ontology schema
+     * API that will transform a GraphQL schema into opengraph ontology schema
      *
      * @param source
      * @return
@@ -101,7 +101,7 @@ public class GraphQLToOntologyTransformer implements OntologyTransformerIfc<Stri
 
     @Override
     /**
-     * API that will translate a YangDb ontology schema to GraphQL schema
+     * API that will translate a opengraph ontology schema to GraphQL schema
      */
     public String translate(Ontology source) {
         //Todo
@@ -246,7 +246,7 @@ public class GraphQLToOntologyTransformer implements OntologyTransformerIfc<Stri
     }
 
     /**
-     * API that will transform a GraphQL schema into YangDb ontology schema
+     * API that will transform a GraphQL schema into opengraph ontology schema
      *
      * @param streams
      * @return

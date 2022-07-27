@@ -39,14 +39,14 @@ public class OWLOntologyTranslatorTest {
         Assert.assertEquals(ontology.getEnumeratedTypes().size(), 1);
         Ontology.Accessor accessor = new Ontology.Accessor(ontology);
 
-        Assert.assertEquals(accessor.enumeratedType$("http://yangdb.org/user#countries"),
-                new EnumeratedType("http://yangdb.org/user#countries",
-                        Arrays.asList(new Value(0, "http://yangdb.org/user#Eurasia"),
-                                new Value(1, "http://yangdb.org/user#NorthAmerica"),
-                                new Value(2, "http://yangdb.org/user#Antarctica"),
-                                new Value(3, "http://yangdb.org/user#Africa"),
-                                new Value(4, "http://yangdb.org/user#SouthAmerica"),
-                                new Value(5, "http://yangdb.org/user#Australia"))));
+        Assert.assertEquals(accessor.enumeratedType$("http://opengraph.org/user#countries"),
+                new EnumeratedType("http://opengraph.org/user#countries",
+                        Arrays.asList(new Value(0, "http://opengraph.org/user#Eurasia"),
+                                new Value(1, "http://opengraph.org/user#NorthAmerica"),
+                                new Value(2, "http://opengraph.org/user#Antarctica"),
+                                new Value(3, "http://opengraph.org/user#Africa"),
+                                new Value(4, "http://opengraph.org/user#SouthAmerica"),
+                                new Value(5, "http://opengraph.org/user#Australia"))));
     }
 
     @Test

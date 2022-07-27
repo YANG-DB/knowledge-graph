@@ -33,7 +33,8 @@ public interface OntologyNameSpace {
     String[] namespaces = new String[] {
             "http://xmlns.com/",
             "http://www.w3.org/",
-            "http://yangdb.org/"
+            "http://yangdb.org/",
+            "http://opensearch.org/",
     };
 
     String defaultNameSpace = namespaces[2];
