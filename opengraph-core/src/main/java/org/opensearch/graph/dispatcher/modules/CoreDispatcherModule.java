@@ -1,5 +1,25 @@
 package org.opensearch.graph.dispatcher.modules;
 
+/*-
+ * #%L
+ * opengraph-core
+ * %%
+ * Copyright (C) 2016 - 2022 org.opensearch
+ * %%
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ * 
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ * 
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ * #L%
+ */
+
 
 
 
@@ -56,7 +76,7 @@ public class CoreDispatcherModule extends ModuleBase {
             return new DirectoryOntologyProvider(conf.getString("opengraph.ontology_provider_dir"));
         } catch (ConfigException e1) {
             try {
-                return (OntologyProvider) Class.forName(conf.getString("fuse.ontology_provider")).getConstructor().newInstance();
+                return (OntologyProvider) Class.forName(conf.getString("opengraph.ontology_provider")).getConstructor().newInstance();
             } catch (ConfigException e2) {
                 throw new GraphError.GraphErrorException(new GraphError("No appropriate config value for { ontology_provider_dir | ontology_provider } found ",
                         "No appropriate config value for { ontology_provider_dir | ontology_mapping_provider } found "));
@@ -82,7 +102,7 @@ public class CoreDispatcherModule extends ModuleBase {
             return new DirectoryOntologyMappingProvider(ontology_provider_dir);
         } catch (ConfigException e1) {
             try {
-                String ontology_mapping_provider = conf.getString("fuse.ontology_mapping_provider");
+                String ontology_mapping_provider = conf.getString("opengraph.ontology_mapping_provider");
                 return (OntologyMappingProvider) Class.forName(ontology_mapping_provider).getConstructor().newInstance();
             } catch (ConfigException e2) {
                 return new OntologyMappingProvider.VoidOntologyMappingProvider();
@@ -102,7 +122,7 @@ public class CoreDispatcherModule extends ModuleBase {
             return new DirectoryOntologyTransformerProvider(conf.getString("opengraph.ontology_provider_dir"));
         } catch (ConfigException e) {
             try {
-                return (OntologyTransformerProvider) Class.forName(conf.getString("fuse.ontology_transformation_provider")).getConstructor().newInstance();
+                return (OntologyTransformerProvider) Class.forName(conf.getString("opengraph.ontology_transformation_provider")).getConstructor().newInstance();
             } catch (ConfigException.Missing missing) {
                 return new VoidOntologyTransformerProvider();
             }

@@ -37,7 +37,7 @@ public class TestExecutorModule extends ModuleBase {
         binder.install(new PrivateModule() {
             @Override
             protected void configure() {
-                boolean createMock = conf.hasPath("fuse.opensearch.mock") && conf.getBoolean("fuse.opensearch.mock");
+                boolean createMock = conf.hasPath("opengraph.opensearch.mock") && conf.getBoolean("opengraph.opensearch.mock");
                 this.bindConstant()
                         .annotatedWith(named(ClientProvider.createMockParameter))
                         .to(createMock);

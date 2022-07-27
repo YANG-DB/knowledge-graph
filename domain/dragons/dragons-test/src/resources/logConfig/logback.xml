@@ -11,13 +11,13 @@
   <conversionRule conversionWord="route" converterClass="org.opensearch.graph.logging.Route$Converter" />
   <conversionRule conversionWord="elapsed" converterClass="org.opensearch.graph.dispatcher.logging.Elapsed$Converter" />
   <conversionRule conversionWord="elapsedFrom" converterClass="org.opensearch.graph.dispatcher.logging.ElapsedFrom$Converter" />
-  <conversionRule conversionWord="elasticElapsed" converterClass="org.opensearch.graph.executor.opensearch.logging.ElasticElapsed$SingleConverter" />
-  <conversionRule conversionWord="elasticElapsedTotal" converterClass="org.opensearch.graph.executor.opensearch.logging.ElasticElapsed$TotalConverter" />
+  <conversionRule conversionWord="elasticElapsed" converterClass="org.opensearch.graph.executor.opensearch.logging.EngineElapsed$SingleConverter" />
+  <conversionRule conversionWord="elasticElapsedTotal" converterClass="org.opensearch.graph.executor.opensearch.logging.EngineElapsed$TotalConverter" />
   <conversionRule conversionWord="totalHits" converterClass="org.opensearch.graph.executor.opensearch.logging.ElasticResults$TotalHitsConverter" />
   <conversionRule conversionWord="hits" converterClass="org.opensearch.graph.executor.opensearch.logging.ElasticResults$HitsConverter" />
   <conversionRule conversionWord="totalShards" converterClass="org.opensearch.graph.executor.opensearch.logging.ElasticResults$TotalShardsConverter" />
   <conversionRule conversionWord="scrollId" converterClass="org.opensearch.graph.executor.opensearch.logging.ElasticResults$ScrollIdConverter" />
-  <conversionRule conversionWord="networkElasticElapsed" converterClass="org.opensearch.graph.executor.opensearch.logging.NetworkElasticElapsed$SingleConverter" />
+  <conversionRule conversionWord="networkElasticElapsed" converterClass="org.opensearch.graph.executor.opensearch.logging.NetworkEngineElapsed$SingleConverter" />
   <conversionRule conversionWord="networkElasticElapsedTotal" converterClass="org.opensearch.graph.executor.opensearch.logging.NetworkElasticElapsed$TotalConverter" />
   <conversionRule conversionWord="responseLength" converterClass="org.opensearch.graph.logging.ResponseLength$Converter" />
 

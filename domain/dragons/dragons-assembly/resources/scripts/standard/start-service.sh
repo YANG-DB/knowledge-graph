@@ -1,5 +1,5 @@
 #!/bin/bash
-mainClass=org.opensearch.graph.services.FuseRunner
+mainClass=org.opensearch.graph.services.GraphRunner
 configFile=config/application.conf
 classPath=".:lib/*"
 activeProfile=activeProfile

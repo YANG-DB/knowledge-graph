@@ -1,7 +1,7 @@
 @echo off
 setlocal enabledelayedexpansion
 
-set mainClass=org.opensearch.graph.services.FuseRunner
+set mainClass=org.opensearch.graph.services.GraphRunner
 set configFile=config/application.conf
 set classPath=".;lib/*"
 set activeProfile=activeProfile
