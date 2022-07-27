@@ -128,7 +128,7 @@ public interface QueryDriver {
      * @param cursorType
      * @return
      */
-    Optional<Object> runSparql(String sparql, String ontology, int pageSize, String cursorType);
+//    Optional<Object> runSparql(String sparql, String ontology, int pageSize, String cursorType);
 
     /**
      * get the next data page according to the given query->cursor->page resource

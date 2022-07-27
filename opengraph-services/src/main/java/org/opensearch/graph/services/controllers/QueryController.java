@@ -137,7 +137,7 @@ public interface QueryController<C,D> extends Controller<C,D> {
      * @param cursorType
      * @return
      */
-    ContentResponse<Object> runSparql(String sparql, String ontology, int pageSize, String cursorType);
+//    ContentResponse<Object> runSparql(String sparql, String ontology, int pageSize, String cursorType);
 
 
     /**

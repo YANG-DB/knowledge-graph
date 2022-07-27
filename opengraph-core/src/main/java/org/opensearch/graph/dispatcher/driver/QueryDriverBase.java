@@ -167,6 +167,7 @@ public abstract class QueryDriverBase implements QueryDriver {
         }
     }
 
+/*
     @Override
     public Optional<Object> runSparql(String sparql, String ontology, int pageSize, String cursorType) {
         String id = UUID.randomUUID().toString();
@@ -186,6 +187,7 @@ public abstract class QueryDriverBase implements QueryDriver {
 //            delete(id);
         }
     }
+*/
 
     @Override
     public Optional<Object> runGraphQL(String graphQL, String ontology, int pageSize, String cursorType) {

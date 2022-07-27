@@ -26,7 +26,6 @@ package org.opensearch.graph.asg.translator;
 
 import com.google.inject.Inject;
 import org.opensearch.graph.asg.translator.graphql.AsgGraphQLTransformer;
-import org.opensearch.graph.asg.translator.sparql.AsgSparQLTransformer;
 import org.opensearch.graph.asg.translator.cypher.AsgCypherTransformer;
 import org.opensearch.graph.dispatcher.query.JsonQueryTransformerFactory;
 import org.opensearch.graph.dispatcher.query.QueryTransformer;
@@ -39,14 +38,14 @@ public class BasicJsonQueryTransformerFactory implements JsonQueryTransformerFac
 
     private AsgCypherTransformer cypherTransformer;
     private AsgGraphQLTransformer graphQueryTransformer;
-    private AsgSparQLTransformer sparQLTransformer;
+//    private AsgSparQLTransformer sparQLTransformer;
 
     @Inject
     public BasicJsonQueryTransformerFactory(AsgCypherTransformer cypherTransformer,
-                                            AsgSparQLTransformer sparQLTransformer,
+//                                            AsgSparQLTransformer sparQLTransformer,
                                             AsgGraphQLTransformer graphQueryTransformer) {
         this.cypherTransformer = cypherTransformer;
-        this.sparQLTransformer = sparQLTransformer;
+//        this.sparQLTransformer = sparQLTransformer;
         this.graphQueryTransformer = graphQueryTransformer;
     }
 
@@ -54,8 +53,8 @@ public class BasicJsonQueryTransformerFactory implements JsonQueryTransformerFac
     @Override
     public QueryTransformer<QueryInfo<String>, AsgQuery> transform(String type) {
         switch (type) {
-            case CreateQueryRequestMetadata.TYPE_SPARQL:
-                return sparQLTransformer;
+//            case CreateQueryRequestMetadata.TYPE_SPARQL:
+//                return sparQLTransformer;
             case CreateQueryRequestMetadata.TYPE_CYPHERQL:
                 return cypherTransformer;
             case CreateQueryRequestMetadata.TYPE_GRAPHQL:

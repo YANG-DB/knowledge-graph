@@ -258,6 +258,7 @@ public class LoggingQueryController extends LoggingControllerBase<QueryControlle
                 }, this.resultHandler());
     }
 
+/*
     @Override
     public ContentResponse<Object> runSparql(String sparql, String ontology, int pageSize, String cursorType) {
         return new LoggingSyncMethodDecorator<ContentResponse<Object>>(
@@ -275,6 +276,7 @@ public class LoggingQueryController extends LoggingControllerBase<QueryControlle
                     return this.controller.runSparql(sparql,ontology , pageSize, cursorType);
                 }, this.resultHandler());
     }
+*/
 
     @Override
     public ContentResponse<QueryResourceInfo> createAndFetch(CreateQueryRequest request) {

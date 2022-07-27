@@ -127,8 +127,10 @@ public class QueryControllerRegistrar extends AppControllerRegistrarBase<QueryCo
         /**  register graphQL API context **/
         graphQLContext(app, appUrlSupplier);
 
-        /**  register sparql API context **/
+/*
+        //  register sparql API context
         sparqlContext(app, appUrlSupplier);
+*/
 
         /** call a query */
         app.post(appUrlSupplier.queryStoreUrl() + "/call", req -> API.call(app, req, this.getController(app)));
@@ -244,13 +246,15 @@ public class QueryControllerRegistrar extends AppControllerRegistrarBase<QueryCo
         app.post(appUrlSupplier.queryStoreUrl() + "/cypher/run", ( req,res) -> API.runCypher(app, req,res, this.getController(app)));
     }
 
+/*
     private void sparqlContext(Jooby app, AppUrlSupplier appUrlSupplier) {
-        /** create a sparql query */
+        // create a sparql query
         app.post(appUrlSupplier.queryStoreUrl() + "/sparql", req -> API.postSparql(app, req, this.getController(app)));
-        /** run a sparql query (support both get/post protocols) */
+        // run a sparql query (support both get/post protocols)
         app.get(appUrlSupplier.queryStoreUrl() + "/sparql/run", (req, res) -> API.runSparql(app, req, res, this.getController(app)));
         app.post(appUrlSupplier.queryStoreUrl() + "/sparql/run", (req, res) -> API.runSparql(app, req, res, this.getController(app)));
     }
+*/
 
     private void graphQLContext(Jooby app, AppUrlSupplier appUrlSupplier) {
         /** create a cypher query */
@@ -480,6 +484,7 @@ public class QueryControllerRegistrar extends AppControllerRegistrarBase<QueryCo
             RegistrarsUtils.with(req, resp, response);
         }
 
+/*
         public static void runSparql(Jooby app, final Request req, final Response resp, QueryController controller) throws Throwable {
             Route.of("runSparql").write();
 
@@ -504,6 +509,7 @@ public class QueryControllerRegistrar extends AppControllerRegistrarBase<QueryCo
 
             RegistrarsUtils.with(req, resp, response);
         }
+*/
 
         public static void runGraphQL(Jooby app, final Request req, final Response resp, QueryController controller) throws Throwable {
             Route.of("runGraphQL").write();

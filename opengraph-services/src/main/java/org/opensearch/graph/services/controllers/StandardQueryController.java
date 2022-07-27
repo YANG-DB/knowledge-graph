@@ -152,6 +152,7 @@ public class StandardQueryController implements QueryController<QueryController,
                 .successPredicate(objectContentResponse -> true)
                 .compose();
     }
+/*
     @Override
     public ContentResponse<Object> runSparql(String sparql, String ontology, int pageSize, String cursorType) {
         return Builder.builder(CREATED, INTERNAL_SERVER_ERROR )
@@ -159,6 +160,7 @@ public class StandardQueryController implements QueryController<QueryController,
                 .successPredicate(objectContentResponse -> true)
                 .compose();
     }
+*/
 
     @Override
     public ContentResponse<QueryResourceInfo> createAndFetch(CreateQueryRequest request) {
