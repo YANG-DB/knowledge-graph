@@ -21,7 +21,7 @@ import java.util.Arrays;
 import java.util.Collections;
 
 import static org.opensearch.graph.model.execution.plan.descriptors.AsgQueryDescriptor.print;
-import static org.opensearch.graph.model.transport.CreateQueryRequestMetadata.TYPE_SPARQL;
+//import static org.opensearch.graph.model.transport.CreateQueryRequestMetadata.TYPE_SPARQL;
 import static org.junit.Assert.assertEquals;
 
 /**
@@ -31,6 +31,7 @@ import static org.junit.Assert.assertEquals;
  */
 @Ignore
 public class SparqlSimpleSelectQueryTranslatorTest {
+    final String TYPE_SPARQL = "sparkQL";// if planned usage - replace with ...CreateQueryRequestMetadata.TYPE_SPARQL
     private static AsgSparQLTransformer sparQLTransformer;
 
 
