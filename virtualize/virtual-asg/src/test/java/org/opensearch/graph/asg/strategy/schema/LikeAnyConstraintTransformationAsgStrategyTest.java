@@ -19,7 +19,7 @@ import org.opensearch.graph.unipop.schemaProviders.GraphElementPropertySchema;
 import org.opensearch.graph.unipop.schemaProviders.GraphElementSchemaProvider;
 import org.opensearch.graph.unipop.schemaProviders.GraphVertexSchema;
 import org.apache.tinkerpop.gremlin.process.traversal.dsl.graph.__;
-import org.openserach.graph.asg.strategy.AsgStrategy;
+import org.opensearch.graph.asg.strategy.AsgStrategy;
 import org.junit.Assert;
 import org.junit.BeforeClass;
 import org.junit.Test;

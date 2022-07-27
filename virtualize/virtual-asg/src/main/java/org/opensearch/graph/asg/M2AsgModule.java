@@ -28,9 +28,8 @@ import com.google.inject.Binder;
 import org.opensearch.graph.dispatcher.query.JsonQueryTransformerFactory;
 import com.typesafe.config.Config;
 import org.jooby.Env;
-import org.openserach.graph.asg.AsgModule;
-import org.openserach.graph.asg.strategy.AsgStrategyRegistrar;
-import org.openserach.graph.asg.translator.BasicJsonQueryTransformerFactory;
+import org.opensearch.graph.asg.strategy.AsgStrategyRegistrar;
+import org.opensearch.graph.asg.translator.BasicJsonQueryTransformerFactory;
 
 public class M2AsgModule extends AsgModule {
     //region ModuleBase Implementation

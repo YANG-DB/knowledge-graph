@@ -47,8 +47,8 @@ import org.opensearch.graph.unipop.schemaProviders.GraphElementPropertySchema;
 import org.opensearch.graph.unipop.schemaProviders.GraphElementSchemaProvider;
 import org.opensearch.graph.unipop.schemaProviders.GraphVertexSchema;
 import javaslang.collection.Stream;
-import org.openserach.graph.asg.strategy.AsgElementStrategy;
-import org.openserach.graph.asg.strategy.AsgStrategy;
+import org.opensearch.graph.asg.strategy.AsgElementStrategy;
+import org.opensearch.graph.asg.strategy.AsgStrategy;
 
 import java.util.*;
 

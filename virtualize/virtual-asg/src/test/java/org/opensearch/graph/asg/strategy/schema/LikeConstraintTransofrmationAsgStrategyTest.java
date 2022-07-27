@@ -21,7 +21,7 @@ import org.apache.tinkerpop.gremlin.process.traversal.dsl.graph.__;
 import org.junit.Assert;
 import org.junit.BeforeClass;
 import org.junit.Test;
-import org.openserach.graph.asg.strategy.AsgStrategy;
+import org.opensearch.graph.asg.strategy.AsgStrategy;
 
 import java.util.Arrays;
 import java.util.Collection;
