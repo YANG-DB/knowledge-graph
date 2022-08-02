@@ -1,0 +1,6 @@
+enum AgentIdStatus {
+    verified
+    mismatch
+    missing
+    auth_metadata_missing
+}

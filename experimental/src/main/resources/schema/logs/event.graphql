@@ -1,0 +1,103 @@
+enum Categories {
+    authentication
+    configuration
+    database
+    driver
+    email
+    file
+    host
+    iam
+
+    intrusion_detection
+    malware
+    threat
+
+    network
+    package
+    process
+    registry
+    session
+    web
+}
+
+enum SubCategories {
+    start
+    end
+
+    info
+    error
+
+    admin
+    access
+
+    change
+    installation
+    creation
+    deletion
+
+    user
+    group
+
+    allowed
+    denied
+
+    connection
+    protocol
+
+    indicator
+}
+
+enum EventOutcome {
+    failure
+    success
+    unknown
+}
+enum EventKind {
+    alert
+    enrichment
+    event
+    metric
+    state
+    signal
+
+}
+
+type Categorization {
+    category: Categories
+    subCategory: SubCategories
+}
+
+
+type Event implements BaseRecord{
+    id:ID!
+    sequence:Long
+
+    category:[Categorization!]
+    kind: EventKind!
+    module: String
+    action: String
+    agent_id_status: AgentIdStatus
+    code: Int
+
+    timezone: String
+    created: Time
+    start: Time
+    end: Time
+    ingested: Time
+    duration: Long
+
+    original: String
+    dataset: String
+    hash: String
+    outcome: EventOutcome
+
+    provider: String
+    reason: String
+    reference: String
+    url: URL
+
+    riskScore: Float
+    riskScoreNorm: Float
+    severity: Long
+
+}

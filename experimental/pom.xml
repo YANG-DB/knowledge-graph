@@ -14,6 +14,15 @@
     <properties>
         <maven.compiler.source>16</maven.compiler.source>
         <maven.compiler.target>16</maven.compiler.target>
+        <org.snakeyaml.version>1.30</org.snakeyaml.version>
     </properties>
+
+    <dependencies>
+        <dependency>
+            <groupId>org.yaml</groupId>
+            <artifactId>snakeyaml</artifactId>
+            <version>${org.snakeyaml.version}</version>
+        </dependency>
+    </dependencies>
 
 </project>

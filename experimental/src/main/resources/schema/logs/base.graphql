@@ -1,0 +1,11 @@
+scalar Json
+scalar Long
+scalar URL
+
+
+type BaseRecord {
+    timestamp : Time!
+    labels : Json
+    message: String
+    tags: [String]
+}
