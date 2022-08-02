@@ -2,13 +2,14 @@ scalar Json
 scalar Long
 scalar URL
 
+# type of supported streams
 enum StreamType {
     logs
     metrics
     traces
     synthetics
 }
-
+# the most common attributes shared by all top level entities
 type BaseRecord {
     #'Date/time when the event originated.
     #
@@ -38,7 +39,7 @@ type BaseRecord {
     # List of keywords used to tag each event.
     tags: [String]
 }
-
+# data stream naming scheme uses the value of the data stream fields combine to the name of the actual data stream in the following manner: {data_stream.type}-{data_stream.dataset}-{data_stream.namespace}. This means the fields can only contain characters that are valid as part of names of data streams
 type StreamSet {
     #An overarching type for the data stream.
     streamType: StreamType
@@ -51,4 +52,12 @@ type StreamSet {
     # Examples include nginx.access, prometheus, endpoint etc. For data streams that otherwise fit, but that do not have dataset set we use the value "generic" for the dataset value.
     #    event.dataset should have the same value as data_stream.dataset.
     dataset:String
+}
+
+# top most level structuring an incoming format of any type of log
+type LogRecord {
+    #    The event's common characteristics
+    event: Event!
+    #    A list of top-level observations which describe 'things' that happened, where observed and reported
+    observations: [BaseRecord]
 }

@@ -1,7 +1,0 @@
-# top most level structuring an incoming format of any type of log
-type LogRecord {
-#    The event's common characteristics
-    event: Event!
-#    A list of top-level observations which describe 'things' that happened, where observed and reported
-    observations: [BaseRecord]
-}
