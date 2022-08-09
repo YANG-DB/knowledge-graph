@@ -59,5 +59,6 @@ type LogRecord {
     #    The event's common characteristics
     event: Event!
     #    A list of top-level observations which describe 'things' that happened, where observed and reported
+    #    AKA Attributes in the OTEL semantic definition (https://opentelemetry.io/docs/reference/specification/common/#attribute)
     observations: [BaseRecord]
 }

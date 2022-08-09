@@ -100,7 +100,6 @@ building-blocks of the observability logs store.
 Choosing a general purpose structured capable semantic definition language will be a significant task in the process
 of evolving the observability domain into maturity.
 
-
 ## Appendix
 
 1. *ECS*
@@ -109,5 +108,8 @@ of evolving the observability domain into maturity.
     3. Benefits: https://www.elastic.co/guide/en/ecs/current/ecs-faq.html#ecs-benefits
     4. Custom fields: https://www.elastic.co/guide/en/ecs/current/ecs-custom-fields-in-ecs.html
     5. ES mapping template: https://github.com/elastic/ecs/blob/master/generated/elasticsearch/7/template.json
+    6. SPAN - https://www.elastic.co/guide/en/apm/guide/8.3/data-model-spans.html
 
+2. *GraphQL*
+   1. https://github.com/google/rejoiner
 
