@@ -63,8 +63,8 @@ public class DirectoryOntologyProvider implements OntologyProvider {
                                 try {
                                     Ontology ontology = OntologyFinalizer.finalize(mapper.readValue(file, Ontology.class));
                                     return new Tuple2<>(ontology.getOnt(), ontology);
-                                } catch (IOException e) {
-                                    return new Tuple2<>(FilenameUtils.getBaseName(file.getName()), new Ontology());
+                                } catch (Throwable e) {
+                                    throw new GraphError.GraphErrorException("Ontology mapping error",e);
                                 }
                             });
         }

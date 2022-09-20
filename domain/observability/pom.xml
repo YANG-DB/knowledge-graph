@@ -13,11 +13,22 @@
     <packaging>pom</packaging>
 
     <modules>
+        <module>observability-ext</module>
         <module>observability-assembly</module>
     </modules>
 
     <properties>
         <checkstyle.skip>true</checkstyle.skip>
     </properties>
+
+    <dependencyManagement>
+        <dependencies>
+            <dependency>
+                <groupId>org.opensearch.graph</groupId>
+                <artifactId>observability-ext</artifactId>
+                <version>${opengraph.version}</version>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
 
 </project>

@@ -28,7 +28,7 @@
         "srcdest",
         "src",
         "dest",
-        "coordinates",
+        "coordinates"
       ]
     },
     {
@@ -143,7 +143,7 @@
       "name": "tags",
       "type": "string"
     },
-     {
+    {
       "pType": "url",
       "name": "url",
       "type": "string"
@@ -153,5 +153,5 @@
       "name": "timestamp",
       "type": "date"
     }
-   ]
+  ]
 }
