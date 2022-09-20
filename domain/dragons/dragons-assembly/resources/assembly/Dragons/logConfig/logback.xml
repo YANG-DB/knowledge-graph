@@ -14,7 +14,6 @@
   <conversionRule conversionWord="elasticElapsed" converterClass="org.opensearch.graph.executor.opensearch.logging.EngineElapsed$SingleConverter" />
   <conversionRule conversionWord="elasticElapsedTotal" converterClass="org.opensearch.graph.executor.opensearch.logging.EngineElapsed$TotalConverter" />
   <conversionRule conversionWord="networkElasticElapsed" converterClass="org.opensearch.graph.executor.opensearch.logging.NetworkEngineElapsed$SingleConverter" />
-  <conversionRule conversionWord="networkElasticElapsedTotal" converterClass="org.opensearch.graph.executor.opensearch.logging.NetworkElasticElapsed$TotalConverter" />
   <conversionRule conversionWord="responseLength" converterClass="org.opensearch.graph.logging.ResponseLength$Converter" />
 
   <!-- appenders -->

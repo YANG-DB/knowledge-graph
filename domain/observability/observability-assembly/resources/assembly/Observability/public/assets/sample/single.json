@@ -1,0 +1,38 @@
+{
+  "agent": "Mozilla/5.0 (X11; Linux i686) AppleWebKit/534.24 (KHTML, like Gecko) Chrome/11.0.696.50 Safari/534.24",
+  "bytes": 7002,
+  "clientip": "124.213.214.72",
+  "extension": "zip",
+  "geo": {
+    "srcdest": "IN:US",
+    "src": "IN",
+    "dest": "US",
+    "coordinates": {
+      "lat": 32.21261111,
+      "lon": -101.5216389
+    }
+  },
+  "host": "artifacts.opensearch.org",
+  "index": "opensearch_dashboards_sample_data_logs",
+  "ip": "124.213.214.72",
+  "machine": {
+    "ram": 19327352832,
+    "os": "win 7"
+  },
+  "memory": null,
+  "message": "124.213.214.72 - - [2018-08-04T17:22:43.374Z] \"GET /opensearch_dashboards/opensearch_dashboards-1.0.0-windows-x86_64.zip HTTP/1.1\" 200 7002 \"-\" \"Mozilla/5.0 (X11; Linux i686) AppleWebKit/534.24 (KHTML, like Gecko) Chrome/11.0.696.50 Safari/534.24\"",
+  "phpmemory": null,
+  "referer": "http://www.opensearch-opensearch-opensearch.com/success/scott-parazynski",
+  "request": "/opensearch_dashboards/opensearch_dashboards-1.0.0-windows-x86_64.zip",
+  "response": 200,
+  "tags": [
+    "warning",
+    "info"
+  ],
+  "@timestamp": "2018-08-04T17:22:43.374Z",
+  "url": "https://artifacts.opensearch.org/downloads/opensearch_dashboards/opensearch_dashboards-1.0.0-windows-x86_64.zip",
+  "utc_time": "2018-08-04T17:22:43.374Z",
+  "event": {
+    "dataset": "sample_web_logs"
+  }
+}

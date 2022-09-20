@@ -3,18 +3,18 @@
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <parent>
-        <artifactId>dragons</artifactId>
+        <artifactId>observability</artifactId>
         <groupId>org.opensearch.graph</groupId>
         <version>2.1.0-SNAPSHOT</version>
     </parent>
     <modelVersion>4.0.0</modelVersion>
     <packaging>pom</packaging>
 
-    <artifactId>dragons-assembly</artifactId>
+    <artifactId>obassembly-assembly</artifactId>
 
     <properties>
         <checkstyle.skip>true</checkstyle.skip>
-        <assembly>dragon</assembly>
+        <assembly>observability</assembly>
     </properties>
 
     <dependencies>
@@ -58,17 +58,13 @@
             <groupId>org.opensearch.graph</groupId>
             <artifactId>opengraph-statistics</artifactId>
         </dependency>
-       <dependency>
-           <groupId>org.opensearch.graph</groupId>
+        <dependency>
+            <groupId>org.opensearch.graph</groupId>
             <artifactId>test-framework</artifactId>
         </dependency>
         <dependency>
             <groupId>org.opensearch.graph</groupId>
             <artifactId>geojson</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>org.opensearch.graph</groupId>
-            <artifactId>dragons-ext</artifactId>
         </dependency>
         <dependency>
             <groupId>org.apache.logging.log4j</groupId>
@@ -124,7 +120,7 @@
     </dependencies>
 
     <build>
-        <finalName>dragon</finalName>
+        <finalName>observability</finalName>
         <plugins>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
@@ -179,8 +175,8 @@
                         </manifestEntries>
                     </archive>
                     <descriptors>
-                        <descriptor>assembly/graph.folder.service.engine3.dragons.graph.xml</descriptor>
-                        <descriptor>assembly/graph.zip.service.engine3.dragons.graph.xml</descriptor>
+                        <descriptor>assembly/graph.folder.service.engine3.observability.graph.xml</descriptor>
+                        <descriptor>assembly/graph.zip.service.engine3.observability.graph.xml</descriptor>
                     </descriptors>
                     <outputDirectory>${distr.dir}/</outputDirectory>
                     <tarLongFileMode>posix</tarLongFileMode>
@@ -188,7 +184,7 @@
                 </configuration>
                 <executions>
                     <execution>
-                        <id>dragon</id>
+                        <id>observability</id>
                         <phase>package</phase>
                         <goals>
                             <goal>single</goal>

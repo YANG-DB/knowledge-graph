@@ -1,0 +1,157 @@
+{
+  "ont": "Observability",
+  "entityTypes": [
+    {
+      "eType": "Log",
+      "name": "Log",
+      "properties": [
+        "agent",
+        "bytes",
+        "clientip",
+        "extension",
+        "host",
+        "ip",
+        "memory",
+        "message",
+        "referer",
+        "request",
+        "response",
+        "tags",
+        "timestamp",
+        "url"
+      ]
+    },
+    {
+      "eType": "Geo",
+      "name": "Geo",
+      "properties": [
+        "srcdest",
+        "src",
+        "dest",
+        "coordinates",
+      ]
+    },
+    {
+      "eType": "Machine",
+      "name": "Machine",
+      "properties": [
+        "ram",
+        "os"
+      ]
+    },
+    {
+      "eType": "Event",
+      "name": "Event",
+      "properties": [
+        "dataset"
+      ]
+    }
+  ],
+  "relationshipTypes": [
+    {
+      "rType": "Location",
+      "name": "Location",
+      "directional": true,
+      "ePairs": [
+        {
+          "eTypeA": "Log",
+          "eTypeB": "Geo"
+        }
+      ]
+    },
+    {
+      "rType": "Machine",
+      "name": "Machine",
+      "directional": true,
+      "ePairs": [
+        {
+          "eTypeA": "Log",
+          "eTypeB": "Machine"
+        }
+      ]
+    },
+    {
+      "rType": "Event",
+      "name": "Event",
+      "directional": true,
+      "ePairs": [
+        {
+          "eTypeA": "Log",
+          "eTypeB": "Event"
+        }
+      ]
+    }
+  ],
+  "properties": [
+    {
+      "pType": "agent",
+      "name": "agent",
+      "type": "string"
+    },
+    {
+      "pType": "bytes",
+      "name": "bytes",
+      "type": "long"
+    },
+    {
+      "pType": "memory",
+      "name": "memory",
+      "type": "long"
+    },
+    {
+      "pType": "clientip",
+      "name": "clientip",
+      "type": "string"
+    },
+    {
+      "pType": "extension",
+      "name": "extension",
+      "type": "string"
+    },
+    {
+      "pType": "host",
+      "name": "host",
+      "type": "string"
+    },
+    {
+      "pType": "ip",
+      "name": "ip",
+      "type": "string"
+    },
+    {
+      "pType": "message",
+      "name": "message",
+      "type": "string"
+    },
+    {
+      "pType": "referer",
+      "name": "referer",
+      "type": "string"
+    },
+    {
+      "pType": "request",
+      "name": "request",
+      "type": "string"
+    },
+    {
+      "pType": "response",
+      "name": "response",
+      "type": "string"
+    },
+    {
+      "pType": "tags",
+      "name": "tags",
+      "type": "string"
+    },
+     {
+      "pType": "url",
+      "name": "url",
+      "type": "string"
+    },
+    {
+      "pType": "timestamp",
+      "name": "timestamp",
+      "type": "date"
+    }
+   ]
+}

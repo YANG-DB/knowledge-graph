@@ -1,9 +1,9 @@
 <component name="ProjectRunConfigurationManager">
-  <configuration default="false" name="opensearch-runner" type="Application" factoryName="Application">
+  <configuration default="false" name="observability-runner" type="Application" factoryName="Application">
     <option name="INCLUDE_PROVIDED_SCOPE" value="true" />
     <option name="MAIN_CLASS_NAME" value="org.opensearch.graph.services.GraphRunner" />
     <module name="observability-assembly" />
-    <option name="PROGRAM_PARAMETERS" value="config/application.conf activeProfile config/logback.xml true" />
+    <option name="PROGRAM_PARAMETERS" value="config/application.conf activeProfile config/logback.xml" />
     <option name="VM_PARAMETERS" value="--illegal-access=permit -Dio.netty.tryReflectionSetAccessible=true" />
     <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/distrib/observability" />
     <extension name="coverage">
