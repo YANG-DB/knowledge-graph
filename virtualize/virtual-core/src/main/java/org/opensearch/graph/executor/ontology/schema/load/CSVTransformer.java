@@ -113,12 +113,12 @@ public class CSVTransformer implements DataTransformer<DataTransformerContext, C
             entityType.getIdField().forEach(field -> joiner.add(node.getOrDefault(field, UUID.randomUUID().toString())));
             //put classifiers
             element.put(entityType.idFieldName(), joiner.toString());
-            element.put(Utils.TYPE, entity.getType());
+            element.put(Utils.TYPE, entity.getType().getName());
 
             //populate fields
             populateMetadataFields(context, node, entity, element);
             populatePropertyFields(context, node, entity, element);
-            return new DocumentBuilder(element, joiner.toString(), entity.getType(), Optional.empty());
+            return new DocumentBuilder(element, joiner.toString(), entity.getType().getName(), Optional.empty());
         } catch (GraphError.GraphErrorException e) {
             return new DocumentBuilder(e.getError());
         }
@@ -144,7 +144,7 @@ public class CSVTransformer implements DataTransformer<DataTransformerContext, C
             String id = String.format("%s.%s", joiner.toString(), direction);
             //put classifiers
             element.put(relType.idFieldName(), id);
-            element.put(EngineIndexProviderMappingFactory.TYPE, relation.getType());
+            element.put(EngineIndexProviderMappingFactory.TYPE, relation.getType().getName());
             element.put(EngineIndexProviderMappingFactory.DIRECTION, direction);
 
             //populate fields
@@ -160,7 +160,7 @@ public class CSVTransformer implements DataTransformer<DataTransformerContext, C
             if (field != null)
                 partition = Optional.of(new Tuple2<>(field, DataLoaderUtils.parseValue(accessor.property$(field).getType(), node.get(field), Utils.sdf).toString()));
 
-            return new DocumentBuilder(element, id, relation.getType(), Optional.empty(), partition);
+            return new DocumentBuilder(element, id, relation.getType().getName(), Optional.empty(), partition);
         } catch (GraphError.GraphErrorException e) {
             return new DocumentBuilder(e.getError());
         }
@@ -176,7 +176,7 @@ public class CSVTransformer implements DataTransformer<DataTransformerContext, C
     private void populateMetadataFields(DataTransformerContext context, Map<String, String> node, Relation relation, ObjectNode element) {
         node.entrySet()
                 .stream()
-                .filter(m -> accessor.$relation$(relation.getType()).containsMetadata(m.getKey()))
+                .filter(m -> accessor.$relation$(relation.getType().getName()).containsMetadata(m.getKey()))
                 .filter(m -> DataLoaderUtils.validateValue(accessor.property$(m.getKey()).getType(), m.getValue(), Utils.sdf))
                 .forEach(m -> element.put(accessor.property$(m.getKey()).getpType(),
                         DataLoaderUtils.parseValue(accessor.property$(m.getKey()).getType(), m.getValue(), Utils.sdf).toString()));
@@ -193,12 +193,12 @@ public class CSVTransformer implements DataTransformer<DataTransformerContext, C
     private void populatePropertyFields(DataTransformerContext context, Map<String, String> node, Relation relation, ObjectNode element, String direction) {
         node.entrySet()
                 .stream()
-                .filter(m -> accessor.$relation$(relation.getType()).containsProperty(m.getKey()))
+                .filter(m -> accessor.$relation$(relation.getType().getName()).containsProperty(m.getKey()))
                 .filter(m -> DataLoaderUtils.validateValue(accessor.property$(m.getKey()).getType(), m.getValue(), Utils.sdf))
                 .forEach(m -> element.put(accessor.property$(m.getKey()).getpType(),
                         DataLoaderUtils.parseValue(accessor.property$(m.getKey()).getType(), m.getValue(), Utils.sdf).toString()));
 
-        RelationshipType relationshipType = accessor.$relation$(relation.getType());
+        RelationshipType relationshipType = accessor.$relation$(relation.getType().getName());
         //populate each pair
         switch (direction) {
             case "out":
@@ -239,7 +239,7 @@ public class CSVTransformer implements DataTransformer<DataTransformerContext, C
 
         //put classifiers
         entitySide.put(EngineIndexProviderMappingFactory.ID, sideId);
-        entitySide.put(Utils.TYPE, entity.getType());
+        entitySide.put(Utils.TYPE, entity.getType().getName());
 
         List<Redundant> redundant = relation.getRedundant(side);
         redundant.forEach(r -> populateRedundantField(r, node, side, entitySide));
@@ -262,7 +262,7 @@ public class CSVTransformer implements DataTransformer<DataTransformerContext, C
     private void populateMetadataFields(DataTransformerContext context, Map<String, String> node, Entity entity, ObjectNode element) {
         node.entrySet()
                 .stream()
-                .filter(m -> accessor.$entity$(entity.getType()).containsMetadata(m.getKey()))
+                .filter(m -> accessor.$entity$(entity.getType().getName()).containsMetadata(m.getKey()))
                 .filter(m -> DataLoaderUtils.validateValue(accessor.property$(m.getKey()).getType(), m.getValue(), Utils.sdf))
                 .forEach(m -> element.put(accessor.property$(m.getKey()).getpType(),
                         DataLoaderUtils.parseValue(accessor.property$(m.getKey()).getType(), m.getValue(), Utils.sdf).toString()));
@@ -278,7 +278,7 @@ public class CSVTransformer implements DataTransformer<DataTransformerContext, C
     private void populatePropertyFields(DataTransformerContext context, Map<String, String> node, Entity entity, ObjectNode element) {
         node.entrySet()
                 .stream()
-                .filter(m -> accessor.$entity$(entity.getType()).containsProperty(m.getKey()))
+                .filter(m -> accessor.$entity$(entity.getType().getName()).containsProperty(m.getKey()))
                 .filter(m -> DataLoaderUtils.validateValue(accessor.property$(m.getKey()).getType(), m.getValue(), Utils.sdf))
                 .forEach(m -> element.put(accessor.property$(m.getKey()).getpType(),
                         DataLoaderUtils.parseValue(accessor.property$(m.getKey()).getType(), m.getValue(), Utils.sdf).toString()));
@@ -292,7 +292,6 @@ public class CSVTransformer implements DataTransformer<DataTransformerContext, C
         String label();
 
         /**
-         * todo - calculate the type according to the ontology
          *
          * @return
          */

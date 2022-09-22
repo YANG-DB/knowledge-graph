@@ -28,6 +28,7 @@ import com.google.inject.Inject;
 import com.typesafe.config.Config;
 import org.opensearch.graph.dispatcher.ontology.IndexProviderFactory;
 import org.opensearch.graph.dispatcher.ontology.OntologyProvider;
+import org.opensearch.graph.model.schema.BaseTypeElement.Type;
 import org.opensearch.graph.model.schema.MappingIndexType;
 import org.opensearch.graph.executor.ontology.GraphElementSchemaProviderFactory;
 import org.opensearch.graph.model.GlobalConstants;
@@ -130,7 +131,7 @@ public class GraphElementSchemaProviderJsonFactory implements GraphElementSchema
         }
 
         return Collections.singletonList(new GraphEdgeSchema.Impl(r.getType(),
-                new StaticIndexPartitions(r.getProps().getValues().isEmpty() ? r.getType() : r.getProps().getValues().get(0))));
+                new StaticIndexPartitions(r.getProps().getValues().isEmpty() ? r.getType().getName() : r.getProps().getValues().get(0))));
     }
 
 
@@ -144,42 +145,36 @@ public class GraphElementSchemaProviderJsonFactory implements GraphElementSchema
         MappingIndexType type = MappingIndexType.valueOf(e.getPartition().toUpperCase());
         switch (type) {
             case UNIFIED:
+            case STATIC:
                 //todo verify correctness
                 return e.getProps().getValues().stream()
                         .map(v -> new GraphVertexSchema.Impl(
                                 e.getType(),
                                 new StaticIndexPartitions(v),
-                                getGraphElementPropertySchemas(e.getType())))
+                                getGraphElementPropertySchemas(e.getType().getName())))
                         .collect(Collectors.toList());
             case NESTED:
                 return e.getProps().getValues().stream()
                         .map(v -> new GraphVertexSchema.Impl(
                                 e.getType(),
                                 new NestedIndexPartitions(v),
-                                getGraphElementPropertySchemas(e.getType())))
-                        .collect(Collectors.toList());
-            case STATIC:
-                return e.getProps().getValues().stream()
-                        .map(v -> new GraphVertexSchema.Impl(
-                                e.getType(),
-                                new StaticIndexPartitions(v),
-                                getGraphElementPropertySchemas(e.getType())))
+                                getGraphElementPropertySchemas(e.getType().getName())))
                         .collect(Collectors.toList());
             case TIME:
                 return e.getProps().getValues().stream()
                         .map(v -> new GraphVertexSchema.Impl(
                                 e.getType(),
                                 new TimeBasedIndexPartitions(e.getProps()),
-                                getGraphElementPropertySchemas(e.getType())))
+                                getGraphElementPropertySchemas(e.getType().getName())))
                         .collect(Collectors.toList());
         }
         //default - when other partition type is declared
-        String v = e.getProps().getValues().isEmpty() ? e.getType() : e.getProps().getValues().get(0);
+        String v = e.getProps().getValues().isEmpty() ? e.getType().getName() : e.getProps().getValues().get(0);
         return Collections.singletonList(
                 new GraphVertexSchema.Impl(
                         e.getType(),
                         new StaticIndexPartitions(v),
-                        getGraphElementPropertySchemas(e.getType())));
+                        getGraphElementPropertySchemas(e.getType().getName())));
     }
 
 
@@ -188,8 +183,8 @@ public class GraphElementSchemaProviderJsonFactory implements GraphElementSchema
         return relation.map(RelationshipType::getePairs);
     }
 
-    private List<GraphEdgeSchema> generateGraphEdgeSchema(Relation r, String v, IndexPartitions partitions) {
-        Optional<List<EPair>> pairs = getEdgeSchemaOntologyPairs(v);
+    private List<GraphEdgeSchema> generateGraphEdgeSchema(Relation r, Type v, IndexPartitions partitions) {
+        Optional<List<EPair>> pairs = getEdgeSchemaOntologyPairs(v.getName());
 
         if (!pairs.isPresent())
             throw new GraphError.GraphErrorException(new GraphError("Schema generation exception", "No edges pairs are found for given relation name " + v));
@@ -203,12 +198,12 @@ public class GraphElementSchemaProviderJsonFactory implements GraphElementSchema
                 .collect(Collectors.toList());
     }
 
-    private GraphEdgeSchema.Impl constructEdgeSchema(Relation r, String v, IndexPartitions partitions, EPair p, Direction direction) {
+    private GraphEdgeSchema.Impl constructEdgeSchema(Relation r, Type v, IndexPartitions partitions, EPair p, Direction direction) {
         switch (direction) {
             case IN:
                 return new GraphEdgeSchema.Impl(
                         v,
-                        new GraphElementConstraint.Impl(__.has(T.label, v)),
+                        new GraphElementConstraint.Impl(__.has(T.label, v.getName())),
                         Optional.of(new GraphEdgeSchema.End.Impl(
                                 Collections.singletonList(ENTITY_A_ID),
                                 Optional.of(p.geteTypeB()),
@@ -227,7 +222,7 @@ public class GraphElementSchemaProviderJsonFactory implements GraphElementSchema
             default:
                 return new GraphEdgeSchema.Impl(
                         v,
-                        new GraphElementConstraint.Impl(__.has(T.label, v)),
+                        new GraphElementConstraint.Impl(__.has(T.label, v.getName())),
                         Optional.of(new GraphEdgeSchema.End.Impl(
                                 Collections.singletonList(ENTITY_A_ID),
                                 Optional.of(p.geteTypeA()),

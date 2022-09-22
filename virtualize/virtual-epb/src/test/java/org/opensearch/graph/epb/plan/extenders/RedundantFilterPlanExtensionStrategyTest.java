@@ -19,6 +19,7 @@ import org.opensearch.graph.model.execution.plan.relation.RelationOp;
 import org.opensearch.graph.model.ontology.Ontology;
 import org.opensearch.graph.model.query.properties.*;
 import org.opensearch.graph.model.query.quant.QuantType;
+import org.opensearch.graph.model.schema.BaseTypeElement;
 import org.opensearch.graph.unipop.schemaProviders.*;
 import org.opensearch.graph.unipop.schemaProviders.indexPartitions.StaticIndexPartitions;
 import javaslang.collection.Stream;
@@ -45,6 +46,7 @@ import static org.junit.Assert.assertTrue;
 import static org.mockito.Matchers.any;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
+import static org.opensearch.graph.model.schema.BaseTypeElement.*;
 
 public class RedundantFilterPlanExtensionStrategyTest {
     @Before
@@ -191,14 +193,14 @@ public class RedundantFilterPlanExtensionStrategyTest {
         Iterable<GraphVertexSchema> vertexSchemas =
                 Stream.ofAll(ont.entities())
                         .map(entity -> (GraphVertexSchema) new GraphVertexSchema.Impl(
-                                entity.geteType(),
+                                Type.of(entity.geteType()),
                                 new StaticIndexPartitions(Collections.singletonList("index"))))
                         .toJavaList();
 
         Iterable<GraphEdgeSchema> edgeSchemas =
                 Stream.ofAll(ont.relations())
                         .map(relation -> (GraphEdgeSchema) new GraphEdgeSchema.Impl(
-                                relation.getrType(),
+                                Type.of(relation.getrType()),
                                 new GraphElementConstraint.Impl(__.has(T.label, relation.getrType())),
                                 Optional.of(new GraphEdgeSchema.End.Impl(
                                         Collections.singletonList(GlobalConstants.EdgeSchema.SOURCE_ID),

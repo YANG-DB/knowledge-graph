@@ -210,7 +210,7 @@ public class EngineIndexProviderMappingFactory implements OntologyIndexGenerator
                     break;
                 case TIME:
                     String label = r.getrType();
-                    ESPutIndexTemplateRequestBuilder request = new ESPutIndexTemplateRequestBuilder(client, PutIndexTemplateAction.INSTANCE, relation.getType().toLowerCase());
+                    ESPutIndexTemplateRequestBuilder request = new ESPutIndexTemplateRequestBuilder(client, PutIndexTemplateAction.INSTANCE, relation.getType().getName().toLowerCase());
                     //todo - Only the time based partition will have a template suffix with astrix added to allow numbering and dates as part of the naming convention
                     request.setPatterns(new ArrayList<>(Arrays.asList(r.getName().toLowerCase(), label, r.getName(), String.format(relation.getProps().getIndexFormat(), "*"))))
                             .setSettings(generateSettings(ontology, r, relation, label))
@@ -221,7 +221,7 @@ public class EngineIndexProviderMappingFactory implements OntologyIndexGenerator
                     request.setPatterns(request.request().patterns().stream().distinct().collect(Collectors.toList()));
 
                     //add the request
-                    requests.put(relation.getType(), request);
+                    requests.put(relation.getType().getName(), request);
                     break;
                 default:
                     String result = "No mapping found";
@@ -302,7 +302,7 @@ public class EngineIndexProviderMappingFactory implements OntologyIndexGenerator
                         //generate entity mapping - each entity should be a nested objects array
                         Map<String, Object> objectMap = generateNestedEntityMapping(ontology, rootProperties, entity.withMapping(CHILD));
                         //generate relation mapping - each entity's relation should be a nested objects array inside the entity
-                        List<RelationshipType> relationshipTypes = ontology.relationBySideA(entity.getType());
+                        List<RelationshipType> relationshipTypes = ontology.relationBySideA(entity.getType().getName());
                         relationshipTypes.forEach(rel -> {
                             Relation relation = this.indexProvider.getRelation(rel.getName()).get();
                             generateNestedRelationMapping(ontology, (Map<String, Object>) objectMap.get(PROPERTIES), relation.withMapping(CHILD));
@@ -383,7 +383,7 @@ public class EngineIndexProviderMappingFactory implements OntologyIndexGenerator
                             case TIME:
                                 //time partitioned index
                                 ESPutIndexTemplateRequestBuilder request = new ESPutIndexTemplateRequestBuilder(client, PutIndexTemplateAction.INSTANCE, e.getName().toLowerCase());
-                                String label = entity.getType();
+                                String label = entity.getType().getName();
                                 request.setPatterns(new ArrayList<>(Arrays.asList(e.getName().toLowerCase(), label, e.getName(), String.format(entity.getProps().getIndexFormat(), "*"))))
                                         .setSettings(generateSettings(ontology, e, entity, label))
                                         .addMapping(label, generateEntityMapping(ontology, e, entity, label.toLowerCase()));
@@ -501,7 +501,7 @@ public class EngineIndexProviderMappingFactory implements OntologyIndexGenerator
     }
 
     private void generateNestedRelationMapping(Ontology.Accessor ontology, Map<String, Object> parent, BaseTypeElement<? extends BaseTypeElement> nest) {
-        Optional<RelationshipType> relation = ontology.relation(nest.getType());
+        Optional<RelationshipType> relation = ontology.relation(nest.getType().getName());
         if (!relation.isPresent())
             throw new GraphError.GraphErrorException(new GraphError("Mapping generation exception", "No relation with name " + nest.getType() + " found in ontology"));
 
@@ -527,12 +527,12 @@ public class EngineIndexProviderMappingFactory implements OntologyIndexGenerator
         //assuming single value exists (this is the field name)
         //add mapping only if properties size > 0
         if (properties.size() > 0) {
-            parent.put(nest.getType(), mapping);
+            parent.put(nest.getType().getName(), mapping);
         }
     }
 
     private Map<String, Object> generateNestedEntityMapping(Ontology.Accessor ontology, Map<String, Object> parent, BaseTypeElement<? extends BaseTypeElement> nest) {
-        Optional<EntityType> entity = ontology.entity(nest.getType());
+        Optional<EntityType> entity = ontology.entity(nest.getType().getName());
         if (!entity.isPresent())
             throw new GraphError.GraphErrorException(new GraphError("Mapping generation exception", "No entity with name " + nest.getType() + " found in ontology"));
 
@@ -555,7 +555,7 @@ public class EngineIndexProviderMappingFactory implements OntologyIndexGenerator
 
         //add mapping only if properties size > 0
         if (properties.size() > 0) {
-            parent.put(nest.getType(), mapping);
+            parent.put(nest.getType().getName(), mapping);
         }
         return mapping;
     }
@@ -667,7 +667,7 @@ public class EngineIndexProviderMappingFactory implements OntologyIndexGenerator
         Settings.Builder builder = getSettings();
         if (relation.getNested().isEmpty()) {
             //assuming id is a mandatory part of metadata/properties
-            builder.put("sort.field", ontology.relation$(relation.getType()).idFieldName())
+            builder.put("sort.field", ontology.relation$(relation.getType().getName()).idFieldName())
                     .put("sort.order", "asc");
         }
         return builder.build();
@@ -677,7 +677,7 @@ public class EngineIndexProviderMappingFactory implements OntologyIndexGenerator
         Settings.Builder builder = getSettings();
         if (entity.getNested().isEmpty()) {
             //assuming id is a mandatory part of metadata/properties
-            builder.put("sort.field", ontology.entity$(entity.getType()).idFieldName())
+            builder.put("sort.field", ontology.entity$(entity.getType().getName()).idFieldName())
                     .put("sort.order", "asc");
         }
         return builder.build();

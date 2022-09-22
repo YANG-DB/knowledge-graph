@@ -71,7 +71,7 @@ public class DiscreteVertexConverter<E extends Element> implements ElementConver
             source.put("score", searchHit.getScore());
         }
 
-        String label = this.typeToLabelVertexSchemas.get(source.get("type")).getLabel();
+        String label = this.typeToLabelVertexSchemas.get(source.get("type")).getLabel().getName();
         String stepName = context.getStepDescriptor().getDescription().orElse(label);
         profiler.get().incrementCount(stepName,1);
         return Arrays.asList((E)new DiscreteVertex(

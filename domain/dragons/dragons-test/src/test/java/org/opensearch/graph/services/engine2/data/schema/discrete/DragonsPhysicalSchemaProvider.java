@@ -1,6 +1,7 @@
 package org.opensearch.graph.services.engine2.data.schema.discrete;
 
 import org.opensearch.graph.model.GlobalConstants;
+import org.opensearch.graph.model.schema.BaseTypeElement;
 import org.opensearch.graph.unipop.schemaProviders.*;
 import org.opensearch.graph.unipop.schemaProviders.indexPartitions.IndexPartitions;
 import org.opensearch.graph.unipop.schemaProviders.indexPartitions.StaticIndexPartitions;
@@ -14,6 +15,7 @@ import java.util.Collections;
 import java.util.Optional;
 
 import static org.opensearch.graph.model.OntologyTestUtils.*;
+import static org.opensearch.graph.model.schema.BaseTypeElement.*;
 import static org.opensearch.graph.test.data.DragonsOntology.POWER;
 
 /**
@@ -30,14 +32,14 @@ public class DragonsPhysicalSchemaProvider implements GraphElementSchemaProvider
         switch (label) {
             case "Person":
                 return Collections.singletonList(new GraphVertexSchema.Impl(
-                        label,
+                        Type.of(label),
                         new IndexPartitions.Impl(GlobalConstants._ID,
                                 new IndexPartitions.Partition.Range.Impl<>("p001", "p005", "person1"),
                                 new IndexPartitions.Partition.Range.Impl<>("p005", "p010", "person2"))
                 ));
             case "Dragon":
                 return Collections.singletonList(new GraphVertexSchema.Impl(
-                        label,
+                        Type.of(label),
                         new GraphElementRouting.Impl(
                                 new GraphElementPropertySchema.Impl("personId", "string")
                         ),
@@ -49,7 +51,8 @@ public class DragonsPhysicalSchemaProvider implements GraphElementSchemaProvider
             case "Kingdom":
             case "Horse":
             case "Guild":
-                return Collections.singletonList(new GraphVertexSchema.Impl(label, new StaticIndexPartitions()));
+                return Collections.singletonList(
+                        new GraphVertexSchema.Impl(Type.of(label), new StaticIndexPartitions()));
         }
 
         return Collections.emptyList();
@@ -64,7 +67,7 @@ public class DragonsPhysicalSchemaProvider implements GraphElementSchemaProvider
         switch (label) {
             case "own":
                 return Collections.singletonList(new GraphEdgeSchema.Impl(
-                        "own",
+                        Type.of("own"),
                         new GraphElementConstraint.Impl(__.has(T.label, "Dragon")),
                         Optional.of(new GraphEdgeSchema.End.Impl(
                                 Collections.singletonList("personId"),
@@ -103,7 +106,7 @@ public class DragonsPhysicalSchemaProvider implements GraphElementSchemaProvider
 
             default:
                 return Collections.singletonList(new GraphEdgeSchema.Impl(
-                        label,
+                        Type.of(label),
                         new StaticIndexPartitions()
                 ));
         }

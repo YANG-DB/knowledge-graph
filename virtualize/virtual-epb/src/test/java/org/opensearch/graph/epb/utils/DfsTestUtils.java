@@ -23,6 +23,7 @@ import org.opensearch.graph.model.query.entity.ETyped;
 import org.opensearch.graph.model.query.entity.EUntyped;
 import org.opensearch.graph.model.query.properties.EPropGroup;
 import org.opensearch.graph.model.query.properties.RelPropGroup;
+import org.opensearch.graph.model.schema.BaseTypeElement;
 import org.opensearch.graph.unipop.schemaProviders.*;
 import org.opensearch.graph.unipop.schemaProviders.indexPartitions.StaticIndexPartitions;
 import javaslang.collection.Stream;
@@ -33,6 +34,8 @@ import java.util.Arrays;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.Optional;
+
+import static org.opensearch.graph.model.schema.BaseTypeElement.*;
 
 /**
  * Created by lior.perry on 2/20/2018.
@@ -117,14 +120,14 @@ public interface DfsTestUtils {
         Iterable<GraphVertexSchema> vertexSchemas =
                 Stream.ofAll(ont.entities())
                         .map(entity -> (GraphVertexSchema) new GraphVertexSchema.Impl(
-                                entity.geteType(),
+                                Type.of(entity.geteType()),
                                 new StaticIndexPartitions(Collections.singletonList("index"))))
                         .toJavaList();
 
         Iterable<GraphEdgeSchema> edgeSchemas =
                 Stream.ofAll(ont.relations())
                         .map(relation -> (GraphEdgeSchema) new GraphEdgeSchema.Impl(
-                                relation.getrType(),
+                                Type.of(relation.getrType()),
                                 new GraphElementConstraint.Impl(__.has(T.label, relation.getrType())),
                                 Optional.of(new GraphEdgeSchema.End.Impl(
                                         Collections.singletonList(GlobalConstants.EdgeSchema.SOURCE_ID),

@@ -39,16 +39,4 @@ public class InnerQueryCursorTest {
         Assert.assertTrue(nextResults.getAssignments().get(0).getEntities().get(0).geteTag().contains("Child"));
         Assert.assertEquals("Entity", nextResults.getAssignments().get(0).getEntities().get(0).geteType());
     }
-
-    @Test
-    public void testOnlyRootsElement() {
-        //todo
-    }
-
-    @Test
-    public void testSinglePath() {
-        //todo
-    }
-
-
 }

@@ -91,7 +91,7 @@ public class GraphElementSchemaProviderJsonFactoryTest {
                     Iterable<GraphEdgeSchema> edgeSchemas = schemaProvider.getEdgeSchemas(label);
                     Assert.assertNotNull(edgeSchemas);
                     GraphEdgeSchema schema = edgeSchemas.iterator().next();
-                    switch (schema.getLabel()) {
+                    switch (schema.getLabel().getName()) {
                         case "Freeze":
                             Assert.assertEquals(schema.getApplications().size(), 1);
                             Assert.assertEquals(schema.getEndA().get().getRedundantProperties().spliterator().estimateSize(), 2);
@@ -173,7 +173,7 @@ public class GraphElementSchemaProviderJsonFactoryTest {
                 .filter(p->p.getIndexPartitions().get().getPartitions().iterator().hasNext())
                 .count());
         schemaProvider.getEdgeSchemas().forEach(schema -> {
-            switch (schema.getLabel()) {
+            switch (schema.getLabel().getName()) {
                 case "HasProfession":
                     Assert.assertEquals(schemaProvider.getEdgeSchemas("HasProfession").spliterator().estimateSize(), 2);
                     break;

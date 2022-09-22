@@ -24,6 +24,7 @@ package org.opensearch.graph.generator.data.generation;
 
 
 import com.google.common.base.Stopwatch;
+import org.apache.commons.lang.NotImplementedException;
 import org.opensearch.graph.generator.configuration.DragonConfiguration;
 import org.opensearch.graph.generator.data.generation.entity.DragonGenerator;
 import org.opensearch.graph.generator.data.generation.graph.GraphGeneratorBase;
@@ -255,7 +256,7 @@ public class DragonsGraphGenerator extends GraphGeneratorBase<DragonConfiguratio
 
     @Override
     protected void writeCSVs(List<Dragon> elements) {
-        //todo
+        throw NotImplementedException
     }
 
     @Override

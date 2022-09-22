@@ -85,7 +85,6 @@ public class IndexProviderBasedCSVLoader implements CSVDataLoader {
 
     @Override
     public LoadResponse<String, GraphError> load(String type, String label, String payload, GraphDataLoader.Directive directive) throws IOException {
-        //todo
         DataTransformerContext context = transformer.transform(new CSVTransformer.CsvElement() {
             @Override
             public String label() {

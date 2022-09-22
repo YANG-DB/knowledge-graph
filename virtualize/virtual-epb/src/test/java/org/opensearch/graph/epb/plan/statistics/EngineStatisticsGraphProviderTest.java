@@ -19,6 +19,7 @@ import org.opensearch.graph.epb.plan.statistics.provider.EngineStatProvider;
 import org.opensearch.graph.epb.plan.statistics.provider.EngineStatisticsGraphProvider;
 import org.opensearch.graph.epb.plan.statistics.util.StatConfigTestUtil;
 import org.opensearch.graph.model.ontology.*;
+import org.opensearch.graph.model.schema.BaseTypeElement;
 import org.opensearch.graph.stats.model.bucket.BucketRange;
 import org.opensearch.graph.stats.model.bucket.BucketTerm;
 import org.opensearch.graph.stats.model.configuration.Field;
@@ -45,6 +46,7 @@ import java.util.concurrent.TimeUnit;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 import static org.mockito.Mockito.when;
+import static org.opensearch.graph.model.schema.BaseTypeElement.Type.*;
 
 /**
  * Created by benishue on 25-May-17.
@@ -226,14 +228,14 @@ public class EngineStatisticsGraphProviderTest {
         Iterable<GraphVertexSchema> vertexSchemas =
                 Stream.ofAll(ont.entities())
                         .map(entity -> (GraphVertexSchema) new GraphVertexSchema.Impl(
-                                entity.geteType(),
+                                of(entity.geteType()),
                                 new StaticIndexPartitions(VERTEX_INDICES)))
                         .toJavaList();
 
         Iterable<GraphEdgeSchema> edgeSchemas =
                 Stream.ofAll(ont.relations())
                         .map(relation -> (GraphEdgeSchema) new GraphEdgeSchema.Impl(
-                                relation.getrType(),
+                                of(relation.getrType()),
                                 new GraphElementConstraint.Impl(__.has(T.label, relation.getrType())),
                                 Optional.of(new GraphEdgeSchema.End.Impl(
                                         Collections.singletonList(relation.getePairs().get(0).geteTypeA() + "IdA"),

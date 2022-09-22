@@ -81,7 +81,7 @@ public class StepPatternCypherTranslatorStrategy implements CypherElementTransla
         }
 
         if (!element.types().isEmpty()) {
-            //todo
+            //todo - check how to implement multi-types
         }
 
         final SemanticDirection direction = element.direction();

@@ -28,6 +28,8 @@ import com.google.inject.Inject;
 import org.opensearch.graph.model.ontology.*;
 import javaslang.collection.Stream;
 import org.apache.tinkerpop.gremlin.structure.Direction;
+import org.opensearch.graph.model.schema.BaseTypeElement;
+import org.opensearch.graph.model.schema.BaseTypeElement.Type;
 
 import java.util.*;
 
@@ -125,7 +127,7 @@ public class OntologySchemaProvider implements GraphElementSchemaProvider {
         }
 
         return Optional.of(new GraphVertexSchema.Impl(
-                label,
+                Type.of(label),
                 vertexSchema.getConstraint(),
                 vertexSchema.getRouting(),
                 vertexSchema.getIndexPartitions(),
@@ -152,7 +154,7 @@ public class OntologySchemaProvider implements GraphElementSchemaProvider {
         }
 
         return Optional.of(new GraphEdgeSchema.Impl(
-                label,
+                Type.of(label),
                 edgeSchema.getConstraint(),
                 edgeSchema.getEndA().isPresent() ?
                         Optional.of(new GraphEdgeSchema.End.Impl(

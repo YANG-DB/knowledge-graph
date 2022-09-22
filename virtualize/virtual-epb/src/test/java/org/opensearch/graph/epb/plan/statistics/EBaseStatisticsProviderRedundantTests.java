@@ -9,6 +9,7 @@ import org.opensearch.graph.model.query.entity.ETyped;
 import org.opensearch.graph.model.query.properties.RedundantRelProp;
 import org.opensearch.graph.model.query.properties.RelProp;
 import org.opensearch.graph.model.query.properties.RelPropGroup;
+import org.opensearch.graph.model.schema.BaseTypeElement;
 import org.opensearch.graph.unipop.schemaProviders.*;
 import org.opensearch.graph.unipop.schemaProviders.indexPartitions.StaticIndexPartitions;
 import org.apache.tinkerpop.gremlin.process.traversal.dsl.graph.__;
@@ -24,6 +25,7 @@ import static org.mockito.Matchers.eq;
 import static org.mockito.Matchers.isA;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
+import static org.opensearch.graph.model.schema.BaseTypeElement.*;
 
 /**
  * Created by moti on 5/9/2017.
@@ -51,7 +53,7 @@ public class EBaseStatisticsProviderRedundantTests {
                         ))));
 
         GraphVertexSchema graphVertexSchema = new GraphVertexSchema.Impl(
-                "Guild",
+                Type.of("Guild"),
                 new GraphElementConstraint.Impl(__.has(T.label, "Guild")),
                 Optional.empty(),
                 Optional.of(new StaticIndexPartitions(Collections.emptyList())),

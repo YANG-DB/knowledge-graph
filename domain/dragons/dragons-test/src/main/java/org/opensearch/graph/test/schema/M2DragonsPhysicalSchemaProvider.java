@@ -23,6 +23,7 @@ package org.opensearch.graph.test.schema;
 
 
 import org.opensearch.graph.model.GlobalConstants;
+import org.opensearch.graph.model.schema.BaseTypeElement;
 import org.opensearch.graph.unipop.schemaProviders.*;
 import org.opensearch.graph.unipop.schemaProviders.indexPartitions.StaticIndexPartitions;
 import javaslang.collection.Stream;
@@ -34,6 +35,7 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.Optional;
 
+import static org.opensearch.graph.model.schema.BaseTypeElement.*;
 import static org.opensearch.graph.unipop.schemaProviders.GraphEdgeSchema.Application.endA;
 import static org.opensearch.graph.test.data.DragonsOntology.FIRE;
 
@@ -44,15 +46,15 @@ public class M2DragonsPhysicalSchemaProvider extends GraphElementSchemaProvider.
     public M2DragonsPhysicalSchemaProvider() {
         super(
                 Arrays.asList(
-                        new GraphVertexSchema.Impl("Person", new StaticIndexPartitions("person")),
-                        new GraphVertexSchema.Impl("Dragon", new StaticIndexPartitions("dragon")),
-                        new GraphVertexSchema.Impl("Kingdom", new StaticIndexPartitions("kingdom")),
-                        new GraphVertexSchema.Impl("Horse", new StaticIndexPartitions()),
-                        new GraphVertexSchema.Impl("Guild", new StaticIndexPartitions())
+                        new GraphVertexSchema.Impl(Type.of("Person"), new StaticIndexPartitions("person")),
+                        new GraphVertexSchema.Impl(Type.of("Dragon"), new StaticIndexPartitions("dragon")),
+                        new GraphVertexSchema.Impl(Type.of("Kingdom"), new StaticIndexPartitions("kingdom")),
+                        new GraphVertexSchema.Impl(Type.of("Horse"), new StaticIndexPartitions()),
+                        new GraphVertexSchema.Impl(Type.of("Guild"), new StaticIndexPartitions())
                 ),
                 Arrays.asList(
                         new GraphEdgeSchema.Impl(
-                                "fire",
+                                Type.of("fire"),
                                 new GraphElementConstraint.Impl(__.has(T.label, "fire")),
                                 Optional.of(new GraphEdgeSchema.End.Impl(
                                         Collections.singletonList(GlobalConstants.EdgeSchema.SOURCE_ID),
@@ -76,7 +78,7 @@ public class M2DragonsPhysicalSchemaProvider extends GraphElementSchemaProvider.
                                 Collections.emptyList(),
                                 Stream.of(endA).toJavaSet()),
                         new GraphEdgeSchema.Impl(
-                                "fire",
+                                Type.of("fire"),
                                 new GraphElementConstraint.Impl(__.has(T.label, "fire")),
                                 Optional.of(new GraphEdgeSchema.End.Impl(
                                         Collections.singletonList(GlobalConstants.EdgeSchema.SOURCE_ID),
@@ -100,7 +102,7 @@ public class M2DragonsPhysicalSchemaProvider extends GraphElementSchemaProvider.
                                 Collections.emptyList(),
                                 Stream.of(endA).toJavaSet()),
                         new GraphEdgeSchema.Impl(
-                                "originatedIn",
+                                Type.of("originatedIn"),
                                 new GraphElementConstraint.Impl(__.has(T.label, "originatedIn")),
                                 Optional.of(new GraphEdgeSchema.End.Impl(
                                         Collections.singletonList(GlobalConstants.EdgeSchema.SOURCE_ID),
@@ -123,7 +125,7 @@ public class M2DragonsPhysicalSchemaProvider extends GraphElementSchemaProvider.
                                 Collections.emptyList(),
                                 Stream.of(endA).toJavaSet()),
                         new GraphEdgeSchema.Impl(
-                                "originatedIn",
+                                Type.of("originatedIn"),
                                 new GraphElementConstraint.Impl(__.has(T.label, "originatedIn")),
                                 Optional.of(new GraphEdgeSchema.End.Impl(
                                         Collections.singletonList(GlobalConstants.EdgeSchema.SOURCE_ID),

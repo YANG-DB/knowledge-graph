@@ -152,6 +152,41 @@
       "pType": "timestamp",
       "name": "timestamp",
       "type": "date"
+    },
+    {
+      "pType": "srcdest",
+      "name": "srcdest",
+      "type": "string"
+    },
+    {
+      "pType": "src",
+      "name": "src",
+      "type": "string"
+    },
+    {
+      "pType": "dest",
+      "name": "dest",
+      "type": "string"
+    },
+    {
+      "pType": "coordinates",
+      "name": "coordinates",
+      "type": "geo_point"
+    },
+    {
+      "pType": "ram",
+      "name": "ram",
+      "type": "long"
+    },
+    {
+      "pType": "os",
+      "name": "os",
+      "type": "string"
+    },
+    {
+      "pType": "dataset",
+      "name": "dataset",
+      "type": "string"
     }
   ]
 }

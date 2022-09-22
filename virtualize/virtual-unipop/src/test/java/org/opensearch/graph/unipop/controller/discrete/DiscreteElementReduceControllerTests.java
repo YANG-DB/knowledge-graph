@@ -4,6 +4,8 @@ import com.codahale.metrics.MetricRegistry;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.google.common.collect.ImmutableSet;
 import org.opensearch.graph.model.GlobalConstants;
+import org.opensearch.graph.model.schema.BaseTypeElement;
+import org.opensearch.graph.model.schema.BaseTypeElement.Type;
 import org.opensearch.graph.test.framework.index.SearchEmbeddedNode;
 import org.opensearch.graph.test.framework.index.GlobalSearchEmbeddedNode;
 import org.opensearch.graph.test.framework.index.Mappings;
@@ -302,7 +304,7 @@ public class DiscreteElementReduceControllerTests {
         return new GraphElementSchemaProvider.Impl(
                 Arrays.asList(
                         new GraphVertexSchema.Impl(
-                                "Dragon",
+                                Type.of("Dragon"),
                                 new GraphElementConstraint.Impl(__.has(T.label, "Dragon")),
                                 Optional.of(new GraphElementRouting.Impl(
                                         new GraphElementPropertySchema.Impl("faction")
@@ -310,7 +312,7 @@ public class DiscreteElementReduceControllerTests {
                                 Optional.of(new IndexPartitions.Impl("_id", dragonPartitions)),
                                 Collections.emptyList()),
                         new GraphVertexSchema.Impl(
-                                "Coin",
+                                Type.of("Coin"),
                                 new GraphElementConstraint.Impl(__.has(T.label, "Coin")),
                                 Optional.empty(),
                                 Optional.of(new IndexPartitions.Impl("dragonId", coinPartitions)),
@@ -318,14 +320,14 @@ public class DiscreteElementReduceControllerTests {
                                         new GraphElementPropertySchema.Impl("material", "string"),
                                         new GraphElementPropertySchema.Impl("weight", "int"))),
                         new GraphVertexSchema.Impl(
-                                "Fire",
+                                Type.of("Fire"),
                                 new GraphElementConstraint.Impl(__.has(T.label, "FireSingular")),
                                 Optional.empty(),
                                 Optional.of(new IndexPartitions.Impl("_id", firePartitions)),
                                 Collections.emptyList())),
                 Arrays.asList(
                         new GraphEdgeSchema.Impl(
-                                "hasCoin",
+                                Type.of("hasCoin"),
                                 new GraphElementConstraint.Impl(__.has(T.label, "Coin")),
                                 Optional.of(new GraphEdgeSchema.End.Impl(
                                         Collections.singletonList("dragonId"),
@@ -349,7 +351,7 @@ public class DiscreteElementReduceControllerTests {
                                 Optional.empty(),
                                 Collections.emptyList()),
                         new GraphEdgeSchema.Impl(
-                                "hasOutFire",
+                                Type.of("hasOutFire"),
                                 new GraphElementConstraint.Impl(__.and(__.has(T.label, "FireDual"), __.has(GlobalConstants.EdgeSchema.DIRECTION, Direction.OUT.toString().toLowerCase()))),
                                 Optional.of(new GraphEdgeSchema.End.Impl(
                                         Collections.singletonList("entityAId"),
@@ -369,7 +371,7 @@ public class DiscreteElementReduceControllerTests {
                                 Collections.emptyList(),
                                 Stream.of(endA).toJavaSet()),
                         new GraphEdgeSchema.Impl(
-                                "hasOutFire",
+                                Type.of("hasOutFire"),
                                 new GraphElementConstraint.Impl(__.has(T.label, "FireSingular")),
                                 Optional.of(new GraphEdgeSchema.End.Impl(Collections.singletonList("entityAId"), Optional.of("Dragon"))),
                                 Optional.of(new GraphEdgeSchema.End.Impl(
@@ -385,7 +387,7 @@ public class DiscreteElementReduceControllerTests {
                                 Collections.emptyList(),
                                 Stream.of(GraphEdgeSchema.Application.endB).toJavaSet()),
                         new GraphEdgeSchema.Impl(
-                                "hasInFire",
+                                Type.of("hasInFire"),
                                 new GraphElementConstraint.Impl(__.and(__.has(T.label, "FireDual"), __.has(GlobalConstants.EdgeSchema.DIRECTION, Direction.IN.toString().toLowerCase()))),
                                 Optional.of(new GraphEdgeSchema.End.Impl(
                                         Collections.singletonList("entityAId"),
@@ -405,7 +407,7 @@ public class DiscreteElementReduceControllerTests {
                                 Collections.emptyList(),
                                 Stream.of(endA).toJavaSet()),
                         new GraphEdgeSchema.Impl(
-                                "hasInFire",
+                                Type.of("hasInFire"),
                                 new GraphElementConstraint.Impl(__.has(T.label, "FireSingular")),
                                 Optional.of(new GraphEdgeSchema.End.Impl(Collections.singletonList("entityBId"), Optional.of("Dragon"))),
                                 Optional.of(new GraphEdgeSchema.End.Impl(
@@ -421,7 +423,7 @@ public class DiscreteElementReduceControllerTests {
                                 Collections.emptyList(),
                                 Stream.of(GraphEdgeSchema.Application.endB).toJavaSet()),
                         new GraphEdgeSchema.Impl(
-                                "hasFire",
+                                Type.of("hasFire"),
                                 new GraphElementConstraint.Impl(__.has(T.label, "FireDual")),
                                 Optional.of(new GraphEdgeSchema.End.Impl(
                                         Collections.singletonList("entityAId"),
@@ -441,7 +443,7 @@ public class DiscreteElementReduceControllerTests {
                                 Collections.emptyList(),
                                 Stream.of(endA).toJavaSet()),
                         new GraphEdgeSchema.Impl(
-                                "fire",
+                                Type.of("fire"),
                                 new GraphElementConstraint.Impl(__.has(T.label, "FireDual")),
                                 Optional.of(new GraphEdgeSchema.End.Impl(
                                         Collections.singletonList("entityAId"),
@@ -458,7 +460,7 @@ public class DiscreteElementReduceControllerTests {
                                 Collections.emptyList(),
                                 Stream.of(endA).toJavaSet()),
                         new GraphEdgeSchema.Impl(
-                                "fire",
+                                Type.of("fire"),
                                 new GraphElementConstraint.Impl(__.has(T.label, "FireDual")),
                                 Optional.of(new GraphEdgeSchema.End.Impl(
                                         Collections.singletonList("entityAId"),

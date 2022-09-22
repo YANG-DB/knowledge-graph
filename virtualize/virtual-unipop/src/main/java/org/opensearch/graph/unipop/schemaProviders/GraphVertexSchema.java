@@ -26,6 +26,8 @@ package org.opensearch.graph.unipop.schemaProviders;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonInclude;
+import org.opensearch.graph.model.schema.BaseTypeElement;
+import org.opensearch.graph.model.schema.BaseTypeElement.Type;
 import org.opensearch.graph.unipop.schemaProviders.indexPartitions.IndexPartitions;
 import org.apache.tinkerpop.gremlin.structure.Vertex;
 
@@ -40,27 +42,27 @@ public interface GraphVertexSchema extends GraphElementSchema {
     @JsonIgnoreProperties(ignoreUnknown = true)
     class Impl extends GraphElementSchema.Impl implements GraphVertexSchema {
         //region Constructors
-        public Impl(String label ) {
+        public Impl(Type label ) {
             super(label);
         }
 
-        public Impl(String label, GraphElementRouting routing) {
+        public Impl(Type label , GraphElementRouting routing) {
             super(label, routing);
         }
 
-        public Impl(String label, IndexPartitions indexPartitions) {
+        public Impl(Type label , IndexPartitions indexPartitions) {
             super(label, indexPartitions);
         }
 
-        public Impl(String label, GraphElementRouting routing, IndexPartitions indexPartitions) {
+        public Impl(Type label , GraphElementRouting routing, IndexPartitions indexPartitions) {
             super(label, routing, indexPartitions);
         }
 
-        public Impl(String label, IndexPartitions indexPartitions, Iterable<GraphElementPropertySchema> properties) {
+        public Impl(Type label , IndexPartitions indexPartitions, Iterable<GraphElementPropertySchema> properties) {
             super(label, indexPartitions, properties);
         }
 
-        public Impl(String label,
+        public Impl(Type label ,
                     GraphElementConstraint constraint,
                     Optional<GraphElementRouting> routing,
                     Optional<IndexPartitions> indexPartitions,

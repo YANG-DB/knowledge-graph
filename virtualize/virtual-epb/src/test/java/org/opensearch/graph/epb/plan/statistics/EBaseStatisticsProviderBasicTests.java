@@ -13,6 +13,7 @@ import org.opensearch.graph.model.query.properties.EProp;
 import org.opensearch.graph.model.query.properties.EPropGroup;
 import org.opensearch.graph.model.query.properties.RelProp;
 import org.opensearch.graph.model.query.properties.RelPropGroup;
+import org.opensearch.graph.model.schema.BaseTypeElement;
 import org.opensearch.graph.unipop.schemaProviders.*;
 import org.opensearch.graph.unipop.schemaProviders.indexPartitions.StaticIndexPartitions;
 import javaslang.collection.Stream;
@@ -31,6 +32,7 @@ import static org.opensearch.graph.model.OntologyTestUtils.*;
 import static org.mockito.Matchers.any;
 import static org.mockito.Matchers.eq;
 import static org.mockito.Mockito.when;
+import static org.opensearch.graph.model.schema.BaseTypeElement.*;
 
 /**
  * Created by lior.perry on 4/27/2017.
@@ -642,14 +644,14 @@ public class EBaseStatisticsProviderBasicTests {
         Iterable<GraphVertexSchema> vertexSchemas =
                 Stream.ofAll(ont.entities())
                         .map(entity -> (GraphVertexSchema) new GraphVertexSchema.Impl(
-                                entity.geteType(),
+                                Type.of(entity.geteType()),
                                 new StaticIndexPartitions(Collections.emptyList())))
                         .toJavaList();
 
         Iterable<GraphEdgeSchema> edgeSchemas =
                 Stream.ofAll(ont.relations())
                         .map(relation -> (GraphEdgeSchema) new GraphEdgeSchema.Impl(
-                                relation.getrType(),
+                                Type.of(relation.getrType()),
                                 new GraphElementConstraint.Impl(__.has(T.label, relation.getrType())),
                                 Optional.of(new GraphEdgeSchema.End.Impl(
                                         Collections.singletonList(relation.getePairs().get(0).geteTypeA() + "IdA"),

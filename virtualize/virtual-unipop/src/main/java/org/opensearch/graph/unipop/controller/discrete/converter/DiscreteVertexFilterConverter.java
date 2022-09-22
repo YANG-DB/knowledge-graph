@@ -73,7 +73,7 @@ public class DiscreteVertexFilterConverter implements ElementConverter<SearchHit
         Map<String, Object> source = new HashMap<>(hit.getSourceAsMap());
         contextVertexProperties.putAll(source);
 
-        String label = this.typeToLabelVertexSchemas.get(source.get("type")).getLabel();
+        String label = this.typeToLabelVertexSchemas.get(source.get("type")).getLabel().getName();
         String stepName = context.getStepDescriptor().getDescription().orElse(label);
         profiler.get().incrementCount(stepName,1);
 

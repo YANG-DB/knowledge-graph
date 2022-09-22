@@ -118,8 +118,8 @@ public class DiscreteEdgeConverter<E extends Element> implements ElementConverte
                     inV = new DiscreteVertex(inId, inEndSchema.getLabel().get(), context.getGraph(), inVertexProperties);
 
                     edges.add((E) new DiscreteEdge(
-                            this.edgeIdProvider.get(edgeSchema.getLabel(), outV, inV, edgeProperties),
-                            edgeSchema.getLabel(),
+                            this.edgeIdProvider.get(edgeSchema.getLabel().getName(), outV, inV, edgeProperties),
+                            edgeSchema.getLabel().getName(),
                             outV,
                             inV,
                             inV,
@@ -151,8 +151,8 @@ public class DiscreteEdgeConverter<E extends Element> implements ElementConverte
                     outV = new DiscreteVertex(outId, outEndSchema.getLabel().get(), context.getGraph(), outVertexProperties);
 
                     edges.add((E) new DiscreteEdge(
-                            this.edgeIdProvider.get(edgeSchema.getLabel(), outV, inV, edgeProperties),
-                            edgeSchema.getLabel(),
+                            this.edgeIdProvider.get(edgeSchema.getLabel().getName(), outV, inV, edgeProperties),
+                            edgeSchema.getLabel().getName(),
                             outV,
                             inV,
                             outV,

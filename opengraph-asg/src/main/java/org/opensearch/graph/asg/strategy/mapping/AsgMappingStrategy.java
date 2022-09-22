@@ -100,10 +100,8 @@ public class AsgMappingStrategy implements AsgStrategy {
 
         switch (fieldType._1) {
             case ENTITY:
-                //todo
                 break;
             case ENUM:
-                //todo
                 break;
             case PROPERTY:
                 Property property = targetAccessor.property$(fieldType._2);
@@ -142,10 +140,8 @@ public class AsgMappingStrategy implements AsgStrategy {
 
         switch (fieldType._1) {
             case ENTITY:
-                //todo
                 break;
             case ENUM:
-                //todo
                 break;
             case PROPERTY:
                 Property property = targetAccessor.property$(fieldType._2);

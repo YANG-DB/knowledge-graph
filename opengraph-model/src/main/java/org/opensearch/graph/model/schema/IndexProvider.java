@@ -29,6 +29,7 @@ package org.opensearch.graph.model.schema;
 import com.fasterxml.jackson.annotation.*;
 import com.google.common.collect.ImmutableList;
 import org.opensearch.graph.model.ontology.Ontology;
+import org.opensearch.graph.model.schema.BaseTypeElement.Type;
 
 import java.util.*;
 import java.util.stream.Collectors;
@@ -160,13 +161,13 @@ public class IndexProvider {
             provider.ontology = ontology.getOnt();
             //generate entities
             provider.entities = ontology.getEntityTypes().stream().map(e ->
-                    new Entity(e.getName(), MappingIndexType.STATIC.name(), PartitionType.INDEX.name(),
+                    new Entity(Type.of(e.getName()), MappingIndexType.STATIC.name(), PartitionType.INDEX.name(),
                             //E/S indices need to be lower cased
                             new Props(ImmutableList.of(e.getName().toLowerCase())), Collections.emptyList(), Collections.emptyMap()))
                     .collect(Collectors.toList());
             //generate relations
             provider.relations = ontology.getRelationshipTypes().stream().map(e ->
-                    new Relation(e.getName(), MappingIndexType.STATIC.name(), PartitionType.INDEX.name(), false, Collections.emptyList(),
+                    new Relation(Type.of(e.getName()), MappingIndexType.STATIC.name(), PartitionType.INDEX.name(), false, Collections.emptyList(),
                             //E/S indices need to be lower cased
                             new Props(ImmutableList.of(e.getName().toLowerCase())), Collections.emptyList(), Collections.emptyMap()))
                     .collect(Collectors.toList());

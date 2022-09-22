@@ -3,6 +3,8 @@ package org.opensearch.graph.unipop.controller.promise.appender;
 import org.opensearch.graph.model.GlobalConstants;
 import org.opensearch.graph.model.OntologyTestUtils;
 import org.opensearch.graph.model.ontology.Ontology;
+import org.opensearch.graph.model.schema.BaseTypeElement;
+import org.opensearch.graph.model.schema.BaseTypeElement.Type;
 import org.opensearch.graph.unipop.controller.common.appender.ConstraintSearchAppender;
 import org.opensearch.graph.unipop.controller.common.context.CompositeControllerContext;
 import org.opensearch.graph.unipop.controller.common.context.VertexControllerContext;
@@ -58,7 +60,7 @@ public class ConstraintSearchAppenderTest {
         Iterable<GraphVertexSchema> vertexSchemas =
                 Stream.ofAll(ont.entities())
                         .map(entity -> (GraphVertexSchema) new GraphVertexSchema.Impl(
-                                entity.geteType(),
+                                Type.of(entity.geteType()),
                                 entity.geteType().equals(OntologyTestUtils.PERSON.name) ? new StaticIndexPartitions(Arrays.asList("Persons1", "Persons2")) :
                                         entity.geteType().equals(OntologyTestUtils.DRAGON.name) ? new StaticIndexPartitions(Arrays.asList("Dragons1", "Dragons2")) :
                                             entity.geteType().equals(OntologyTestUtils.PROFESSION.name) ? new NestedIndexPartitions("Persons1") :
@@ -68,7 +70,7 @@ public class ConstraintSearchAppenderTest {
         Iterable<GraphEdgeSchema> edgeSchemas =
                 Stream.ofAll(ont.relations())
                         .map(relation -> (GraphEdgeSchema) new GraphEdgeSchema.Impl(
-                                relation.getrType(),
+                                Type.of(relation.getrType()),
                                 new GraphElementConstraint.Impl(__.has(T.label, relation.getrType())),
                                 Optional.of(new GraphEdgeSchema.End.Impl(
                                         Collections.singletonList(relation.getePairs().get(0).geteTypeA() + "IdA"),

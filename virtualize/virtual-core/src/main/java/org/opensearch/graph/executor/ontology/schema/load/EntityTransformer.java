@@ -109,7 +109,7 @@ public class EntityTransformer implements DataTransformer<DataTransformerContext
             //put classifiers
             String id = String.format("%s.%s", edge.getId(), direction);
             element.put(EngineIndexProviderMappingFactory.ID, id);
-            element.put(EngineIndexProviderMappingFactory.TYPE, relation.getType());
+            element.put(EngineIndexProviderMappingFactory.TYPE, relation.getType().getName());
             element.put(EngineIndexProviderMappingFactory.DIRECTION, direction);
 
             //populate metadata
@@ -125,7 +125,7 @@ public class EntityTransformer implements DataTransformer<DataTransformerContext
             if (field != null)
                 partition = Optional.of(new Tuple2<>(field, parseValue(accessor.property$(field).getType(), edge.getProperty(field), Utils.sdf).toString()));
 
-            return new DocumentBuilder(element, id, relation.getType(), Optional.empty(), partition);
+            return new DocumentBuilder(element, id, relation.getType().getName(), Optional.empty(), partition);
         } catch (GraphError.GraphErrorException e) {
             return new DocumentBuilder(e.getError());
         }
@@ -147,7 +147,7 @@ public class EntityTransformer implements DataTransformer<DataTransformerContext
             //translate entity
             translateEntity(mapper, indexProvider, accessor, context, node, element, entity);
 
-            return new DocumentBuilder(element, node.getId(), entity.getType(), Optional.empty());
+            return new DocumentBuilder(element, node.getId(), entity.getType().getName(), Optional.empty());
         } catch (GraphError.GraphErrorException e) {
             return new DocumentBuilder(e.getError());
         }
@@ -195,7 +195,7 @@ public class EntityTransformer implements DataTransformer<DataTransformerContext
 
     static void translateEntity(ObjectMapper mapper, IndexProvider indexProvider, Ontology.Accessor accessor, DataTransformerContext<LogicalGraphModel> context, LogicalNode node, ObjectNode element, Entity entity) {
         element.put(EngineIndexProviderMappingFactory.ID, node.getId());
-        element.put(EngineIndexProviderMappingFactory.TYPE, entity.getType());
+        element.put(EngineIndexProviderMappingFactory.TYPE, entity.getType().getName());
 
         //populate metadata
         populateMetadataFields(mapper, indexProvider, accessor, context, node, element);
@@ -319,7 +319,7 @@ public class EntityTransformer implements DataTransformer<DataTransformerContext
 
         //put classifiers
         entitySide.put(EngineIndexProviderMappingFactory.ID, source.get().getId());
-        entitySide.put(EngineIndexProviderMappingFactory.TYPE, entity.getType());
+        entitySide.put(EngineIndexProviderMappingFactory.TYPE, entity.getType().getName());
 
         List<Redundant> redundant = relation.getRedundant(side);
         redundant.forEach(r -> populateRedundantField(r, source.get(), entitySide));

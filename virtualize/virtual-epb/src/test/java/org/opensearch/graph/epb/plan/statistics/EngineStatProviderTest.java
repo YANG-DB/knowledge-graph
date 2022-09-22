@@ -91,8 +91,6 @@ public class EngineStatProviderTest {
     private static final int STAT_TRANSPORT_PORT = 9300;
     //endregion
 
-    //todo Add more tests
-
     @Test
     public void getGenderFieldStatisticsTest() throws Exception {
         EngineStatProvider engineStatProvider = new EngineStatProvider(statConfig,

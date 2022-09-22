@@ -46,7 +46,7 @@ import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 public class Relation implements BaseTypeElement<Relation> {
 
     @JsonProperty("type")
-    private String type;
+    private Type type;
     @JsonProperty("partition")
     private String partition;
     @JsonProperty("mapping")
@@ -64,7 +64,7 @@ public class Relation implements BaseTypeElement<Relation> {
 
     public Relation() {}
 
-    public Relation(String type, String partition, String mapping, boolean symmetric, List<Relation> nested, Props props, List<Redundant> redundant, Map<String, Object> additionalProperties) {
+    public Relation(Type type, String partition, String mapping, boolean symmetric, List<Relation> nested, Props props, List<Redundant> redundant, Map<String, Object> additionalProperties) {
         this.type = type;
         this.partition = partition;
         this.mapping = mapping;
@@ -86,12 +86,12 @@ public class Relation implements BaseTypeElement<Relation> {
     }
 
     @JsonProperty("type")
-    public String getType() {
+    public Type getType() {
         return type;
     }
 
     @JsonProperty("type")
-    public void setType(String type) {
+    public void setType(Type type) {
         this.type = type;
     }
 
@@ -169,7 +169,7 @@ public class Relation implements BaseTypeElement<Relation> {
     }
 
     @JsonIgnore
-    public Relation withType(String type) {
+    public Relation withType(Type type) {
         this.type = type;
         return this;
     }

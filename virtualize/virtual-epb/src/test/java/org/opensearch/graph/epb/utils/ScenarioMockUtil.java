@@ -5,6 +5,7 @@ import org.opensearch.graph.epb.plan.statistics.Statistics;
 import org.opensearch.graph.model.GlobalConstants;
 import org.opensearch.graph.model.OntologyTestUtils;
 import org.opensearch.graph.model.ontology.Ontology;
+import org.opensearch.graph.model.schema.BaseTypeElement;
 import org.opensearch.graph.unipop.controller.utils.traversal.TraversalValuesByKeyProvider;
 import org.opensearch.graph.unipop.schemaProviders.*;
 import org.opensearch.graph.unipop.schemaProviders.indexPartitions.IndexPartitions;
@@ -26,6 +27,7 @@ import static org.mockito.Matchers.any;
 import static org.mockito.Matchers.eq;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
+import static org.opensearch.graph.model.schema.BaseTypeElement.*;
 
 /**
  * Created by moti on 5/17/2017.
@@ -218,7 +220,7 @@ public class ScenarioMockUtil {
         Iterable<GraphVertexSchema> vertexSchemas =
                 Stream.ofAll(this.ont.entities())
                         .map(entity -> (GraphVertexSchema) new GraphVertexSchema.Impl(
-                                entity.geteType(),
+                                Type.of(entity.geteType()),
                                 indexPartitionMap.getOrDefault(new Tuple<>(entity.geteType(), ElementType.vertex),
                                         new StaticIndexPartitions(Collections.singletonList("idx1")))))
                         .toJavaList();
@@ -226,7 +228,7 @@ public class ScenarioMockUtil {
         Iterable<GraphEdgeSchema> edgeSchemas =
                 Stream.ofAll(this.ont.relations())
                         .map(relation -> (GraphEdgeSchema) new GraphEdgeSchema.Impl(
-                                relation.getrType(),
+                                Type.of(relation.getrType()),
                                 new GraphElementConstraint.Impl(__.has(T.label, relation.getrType())),
                                 Optional.of(new GraphEdgeSchema.End.Impl(
                                         Collections.singletonList(relation.getePairs().get(0).geteTypeA() + "IdA"),

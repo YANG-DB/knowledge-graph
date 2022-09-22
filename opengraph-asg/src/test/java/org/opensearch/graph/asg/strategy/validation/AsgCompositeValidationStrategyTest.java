@@ -25,7 +25,6 @@ import static org.opensearch.graph.model.query.properties.constraint.ConstraintO
 /**
  * Created by lior.perry on 6/6/2017.
  */
-//todo implement
 @Ignore
 public class AsgCompositeValidationStrategyTest {
     Ontology ontology;

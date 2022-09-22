@@ -44,7 +44,7 @@ import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 public class Entity implements BaseTypeElement<Entity> {
 
     @JsonProperty("type")
-    private String type;
+    private Type type;
     @JsonProperty("partition")
     private String partition;
     @JsonProperty("mapping")
@@ -59,7 +59,7 @@ public class Entity implements BaseTypeElement<Entity> {
 
     public Entity() {}
 
-    public Entity(String type, String partition, String mapping, Props props, List<Entity> nested, Map<String, Object> additionalProperties) {
+    public Entity(Type type, String partition, String mapping, Props props, List<Entity> nested, Map<String, Object> additionalProperties) {
         this.type = type;
         this.partition = partition;
         this.mapping = mapping;
@@ -79,12 +79,12 @@ public class Entity implements BaseTypeElement<Entity> {
     }
 
     @JsonProperty("type")
-    public String getType() {
+    public Type getType() {
         return type;
     }
 
     @JsonProperty("type")
-    public void setType(String type) {
+    public void setType(Type type) {
         this.type = type;
     }
 
@@ -142,7 +142,7 @@ public class Entity implements BaseTypeElement<Entity> {
     }
 
     @JsonIgnore
-    public Entity withType(String type) {
+    public Entity withType(Type type) {
         this.type = type;
         return this;
     }
@@ -152,4 +152,5 @@ public class Entity implements BaseTypeElement<Entity> {
         this.partition = partition;
         return this;
     }
+
 }

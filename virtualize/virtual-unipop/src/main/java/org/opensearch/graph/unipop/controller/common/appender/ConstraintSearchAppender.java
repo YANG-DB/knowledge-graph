@@ -34,6 +34,7 @@ import org.opensearch.graph.unipop.controller.utils.traversal.TraversalHasStepFi
 import org.opensearch.graph.unipop.controller.utils.traversal.TraversalQueryTranslator;
 import org.opensearch.graph.unipop.controller.utils.traversal.TraversalValuesByKeyProvider;
 import org.opensearch.graph.unipop.schemaProviders.GraphElementConstraint;
+import org.opensearch.graph.unipop.schemaProviders.GraphElementSchema;
 import org.opensearch.graph.unipop.structure.ElementType;
 import javaslang.collection.Stream;
 import org.apache.tinkerpop.gremlin.process.traversal.P;
@@ -64,13 +65,13 @@ public class ConstraintSearchAppender implements SearchAppender<CompositeControl
                     context.getElementType().equals(ElementType.vertex) ?
                             Stream.ofAll(labels)
                                     .flatMap(label -> context.getSchemaProvider().getVertexSchemas(label))
-                                    .map(p->p.getConstraint())
+                                    .map(GraphElementSchema::getConstraint)
                                     .toJavaList() :
                             Stream.ofAll(context.getSchemaProvider().getEdgeSchemas(
                                     getLabel(context,"?"),
                                     context.getDirection(),
                                     Stream.ofAll(new TraversalValuesByKeyProvider().getValueByKey(context.getConstraint().get().getTraversal(), T.label.getAccessor())).get(0)))
-                                    .map(p->p.getConstraint())
+                                    .map(GraphElementSchema::getConstraint)
                                     .toJavaList();
 
         if (!elementConstraints.isEmpty()) {

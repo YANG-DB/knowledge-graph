@@ -13,6 +13,8 @@ import org.opensearch.graph.model.query.properties.constraint.ConstraintOp;
 import org.opensearch.graph.model.query.properties.EProp;
 import org.opensearch.graph.model.query.properties.EPropGroup;
 import org.opensearch.graph.model.query.properties.SchematicEProp;
+import org.opensearch.graph.model.schema.BaseTypeElement;
+import org.opensearch.graph.model.schema.BaseTypeElement.Type;
 import org.opensearch.graph.unipop.schemaProviders.GraphElementConstraint;
 import org.opensearch.graph.unipop.schemaProviders.GraphElementPropertySchema;
 import org.opensearch.graph.unipop.schemaProviders.GraphElementSchemaProvider;
@@ -66,7 +68,7 @@ public class LikeConstraintTransofrmationAsgStrategyTest {
         GraphElementSchemaProvider schemaProvider = new GraphElementSchemaProvider.Impl(
                 Collections.singletonList(
                         new GraphVertexSchema.Impl(
-                                "Person",
+                                Type.of("Person"),
                                 new GraphElementConstraint.Impl(__.start()),
                                 Optional.empty(),
                                 Optional.empty(),

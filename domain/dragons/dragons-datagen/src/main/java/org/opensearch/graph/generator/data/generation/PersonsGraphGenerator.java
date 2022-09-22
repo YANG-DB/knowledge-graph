@@ -24,6 +24,7 @@ package org.opensearch.graph.generator.data.generation;
 
 
 import com.google.common.base.Stopwatch;
+import org.apache.commons.lang.NotImplementedException;
 import org.opensearch.graph.generator.configuration.PersonConfiguration;
 import org.opensearch.graph.generator.data.generation.entity.PersonGenerator;
 import org.opensearch.graph.generator.data.generation.graph.GraphGeneratorBase;
@@ -219,7 +220,7 @@ public class PersonsGraphGenerator extends GraphGeneratorBase<PersonConfiguratio
 
     @Override
     protected void writeCSVs(List<Person> elements) {
-        //todo
+       throw new NotImplementedException();
     }
     //endregion
 

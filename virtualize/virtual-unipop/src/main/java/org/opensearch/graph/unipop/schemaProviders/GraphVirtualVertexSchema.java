@@ -26,13 +26,15 @@ package org.opensearch.graph.unipop.schemaProviders;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonInclude;
+import org.opensearch.graph.model.schema.BaseTypeElement;
+import org.opensearch.graph.model.schema.BaseTypeElement.Type;
 
 public interface GraphVirtualVertexSchema extends GraphVertexSchema {
     @JsonInclude(JsonInclude.Include.NON_EMPTY)
     @JsonIgnoreProperties(ignoreUnknown = true)
     class Impl extends GraphVertexSchema.Impl implements GraphVirtualVertexSchema {
         //region Constructors
-        public Impl(String label) {
+        public Impl(Type label ) {
             super(label);
         }
         //endregion

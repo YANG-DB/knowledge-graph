@@ -27,6 +27,7 @@ import org.opensearch.graph.dispatcher.urlSupplier.AppUrlSupplier;
 import org.opensearch.graph.logging.Route;
 import org.opensearch.graph.model.execution.plan.descriptors.OntologyDescriptor;
 import org.opensearch.graph.model.ontology.Ontology;
+import org.opensearch.graph.model.resourceInfo.GraphError;
 import org.opensearch.graph.model.transport.ContentResponse;
 import org.opensearch.graph.model.transport.Status;
 import org.opensearch.graph.services.rendering.SVGGraphRenderer;
@@ -105,9 +106,7 @@ public class CatalogControllerRegistrar extends AppControllerRegistrarBase<Catal
          * @throws Throwable
          */
         public static Object dataView(Jooby app, Request req, Response resp, CatalogControllerRegistrar controller) throws Throwable {
-
             Route.of("getCatalogOntologyVisualization").write();
-
             ContentResponse<Ontology> ontology = controller.getController(app).getOntology(req.param("id").value());
             String dotGraph = OntologyDescriptor.printGraph(ontology.getData());
             File file = SVGGraphRenderer.render(ontology.getData().getOnt(), dotGraph);

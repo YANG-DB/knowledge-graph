@@ -1,6 +1,7 @@
 package org.opensearch.graph.services.engine2.data.schema.promise;
 
 import org.opensearch.graph.model.GlobalConstants;
+import org.opensearch.graph.model.schema.BaseTypeElement;
 import org.opensearch.graph.unipop.schemaProviders.*;
 import org.opensearch.graph.unipop.schemaProviders.indexPartitions.StaticIndexPartitions;
 import org.apache.tinkerpop.gremlin.structure.Direction;
@@ -10,6 +11,7 @@ import java.util.Collections;
 import java.util.Optional;
 
 import static org.opensearch.graph.model.OntologyTestUtils.*;
+import static org.opensearch.graph.model.schema.BaseTypeElement.*;
 
 /**
  * Created by roman.margolis on 28/09/2017.
@@ -18,14 +20,14 @@ public class DragonsPhysicalSchemaProvider extends GraphElementSchemaProvider.Im
     public DragonsPhysicalSchemaProvider() {
         super(
                 Arrays.asList(
-                        new GraphVertexSchema.Impl("Person", new StaticIndexPartitions("person")),
-                        new GraphVertexSchema.Impl("Dragon", new StaticIndexPartitions("dragon")),
-                        new GraphVertexSchema.Impl("Kingdom", new StaticIndexPartitions()),
-                        new GraphVertexSchema.Impl("Horse", new StaticIndexPartitions()),
-                        new GraphVertexSchema.Impl("Guild", new StaticIndexPartitions())
+                        new GraphVertexSchema.Impl(Type.of("Person"), new StaticIndexPartitions("person")),
+                        new GraphVertexSchema.Impl(Type.of("Dragon"), new StaticIndexPartitions("dragon")),
+                        new GraphVertexSchema.Impl(Type.of("Kingdom"), new StaticIndexPartitions()),
+                        new GraphVertexSchema.Impl(Type.of("Horse"), new StaticIndexPartitions()),
+                        new GraphVertexSchema.Impl(Type.of("Guild"), new StaticIndexPartitions())
                 ),
                 Collections.singletonList(new GraphEdgeSchema.Impl(
-                        "fire",
+                        Type.of("fire"),
                         Optional.of(new GraphEdgeSchema.End.Impl(
                                 Collections.singletonList(GlobalConstants.EdgeSchema.SOURCE_ID),
                                 Optional.of("Dragon"),

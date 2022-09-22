@@ -366,17 +366,6 @@ public class OWLToOntologyTransformer implements OntologyTransformerIfc<List<Str
         return properties;
     }
 
-    /**
-     * import OWL annotations (directives)
-     *
-     * @param o
-     */
-    private void importOntologyAnnotationProperties(OWLOntology o) {
-        //
-        for (OWLAnnotationProperty annotation : o.getAnnotationPropertiesInSignature()) {
-            //todo - import annotations directives
-        }
-    }
 
 }
 

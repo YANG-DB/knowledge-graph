@@ -64,7 +64,7 @@ public abstract class Setup {
         }
 
         if(init) {
-            //todo some init stuff
+            //todo - move all related init action here
         }
 
         start(startGraph);

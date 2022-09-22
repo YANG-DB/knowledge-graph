@@ -24,6 +24,8 @@ package org.opensearch.graph.unipop.schemaProviders;
 
 
 
+import org.opensearch.graph.model.schema.BaseTypeElement;
+import org.opensearch.graph.model.schema.BaseTypeElement.Type;
 import org.opensearch.graph.unipop.schemaProviders.indexPartitions.IndexPartitions;
 import javaslang.Tuple2;
 import javaslang.collection.Stream;
@@ -37,7 +39,7 @@ import java.util.Optional;
 public interface GraphElementSchema {
     Class getSchemaElementType();
 
-    String getLabel();
+    Type getLabel();
 
     GraphElementConstraint getConstraint();
 
@@ -51,14 +53,14 @@ public interface GraphElementSchema {
 
     abstract class Impl implements GraphElementSchema {
         //region Constructors
-        public Impl(String label ) {
+        public Impl(Type label ) {
             this(label,
                     new GraphElementConstraint.Impl(__.start().has(T.label, label)),
                     Optional.empty(),
                     Optional.empty(),
                     Collections.emptyList());
         }
-        public Impl(String label, GraphElementRouting routing) {
+        public Impl(Type label, GraphElementRouting routing) {
             this(label,
                     new GraphElementConstraint.Impl(__.start().has(T.label, label)),
                     Optional.of(routing),
@@ -66,7 +68,7 @@ public interface GraphElementSchema {
                     Collections.emptyList());
         }
 
-        public Impl(String label, IndexPartitions indexPartitions) {
+        public Impl(Type label, IndexPartitions indexPartitions) {
             this(label,
                     new GraphElementConstraint.Impl(__.start().has(T.label, label)),
                     Optional.empty(),
@@ -74,13 +76,13 @@ public interface GraphElementSchema {
                     Collections.emptyList());
         }
 
-        public Impl(String label,
+        public Impl(Type label,
                     GraphElementRouting routing,
                     IndexPartitions indexPartitions) {
             this(label, new GraphElementConstraint.Impl(__.start().has(T.label, label)), Optional.of(routing), Optional.of(indexPartitions), Collections.emptyList());
         }
 
-        public Impl(String label,
+        public Impl(Type label,
                     IndexPartitions indexPartitions,
                     Iterable<GraphElementPropertySchema> properties) {
             this(label,
@@ -90,7 +92,7 @@ public interface GraphElementSchema {
                     properties);
         }
 
-        public Impl(String label,
+        public Impl(Type label,
                     GraphElementConstraint constraint,
                     Optional<GraphElementRouting> routing,
                     Optional<IndexPartitions> indexPartitions,
@@ -105,7 +107,7 @@ public interface GraphElementSchema {
 
         //region GraphElementSchema Implementation
         @Override
-        public String getLabel() {
+        public Type getLabel() {
             return this.label;
         }
 
@@ -136,7 +138,7 @@ public interface GraphElementSchema {
         //endregion
 
         //region Fields
-        private String label;
+        private Type label;
         private GraphElementConstraint constraint;
         private Optional<GraphElementRouting> routing;
         private Optional<IndexPartitions> indexPartitions;

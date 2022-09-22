@@ -160,23 +160,19 @@ public class GraphTraversalCursor extends BaseCursor {
     }
 
     private int agg(List<Relationship> relationships, CalculatedFieldProjection con) {
+        //todo implement correctly !!
         switch (con.getExpression()) {
             case count:
                 return relationships.size();
             case max:
-                //todo what ?!?!?
                 return relationships.size();
             case min:
-                //todo what ?!?!?
                 return relationships.size();
             case avg:
-                //todo what ?!?!?
                 return relationships.size();
             case distinct:
-                //todo what ?!?!?
                 return relationships.size();
             case sum:
-                //todo what ?!?!?
                 return relationships.size();
             default:
                 return relationships.size();

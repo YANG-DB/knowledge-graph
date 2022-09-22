@@ -125,14 +125,14 @@ public class StandardDashboardDriver implements DashboardDriver {
             if (vertex.getIndexPartitions().isPresent()) {
                 ObjectNode node = objectMapper.createObjectNode();
                 collectIndexMetadata(node, true, vertex.getIndexPartitions().get());
-                root.put(vertex.getLabel(), node);
+                root.put(vertex.getLabel().getName(), node);
             }
         });
         schemaProviderFactory.get(ontology).getEdgeSchemas().forEach(edgeSchema -> {
             if (edgeSchema.getIndexPartitions().isPresent()) {
                 ObjectNode node = objectMapper.createObjectNode();
                 collectIndexMetadata(node, false, edgeSchema.getIndexPartitions().get());
-                root.put(edgeSchema.getLabel(), node);
+                root.put(edgeSchema.getLabel().getName(), node);
             }
         });
 

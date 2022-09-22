@@ -34,6 +34,7 @@ import org.jooq.Query;
 import org.jooq.Table;
 import org.jooq.impl.CreateTableStatement;
 import org.jooq.impl.DefaultConfiguration;
+import org.opensearch.graph.model.schema.BaseTypeElement.Type;
 
 import java.util.Arrays;
 import java.util.Collections;
@@ -79,7 +80,7 @@ public class DDLToIndexProviderTranslator implements IndexProviderTranslator<Lis
 
         //build ontology entity
         String tableName = table.getName().toLowerCase();
-        indexProvider.withEntity(new Entity(tableName, STATIC.name(), "Index",
+        indexProvider.withEntity(new Entity(Type.of(tableName), STATIC.name(), "Index",
                 new Props(ImmutableList.of(tableName)), Collections.emptyList(), Collections.emptyMap()));
 
         //build relations - FK will now be transformed into EPairs inside
@@ -92,7 +93,7 @@ public class DDLToIndexProviderTranslator implements IndexProviderTranslator<Lis
             foreignKey(statement.getConstraints())
                     .forEach(fk ->
                             indexProvider.withRelation(
-                                    new Relation(fk.getName().toLowerCase(),
+                                    new Relation(Type.of(fk.getName().toLowerCase()),
                                             UNIFIED.name(),
                                             "Index",
                                             false,

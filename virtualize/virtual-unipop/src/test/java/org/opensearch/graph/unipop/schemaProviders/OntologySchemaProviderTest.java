@@ -3,6 +3,8 @@ package org.opensearch.graph.unipop.schemaProviders;
 import com.google.common.collect.Lists;
 import org.opensearch.graph.model.GlobalConstants;
 import org.opensearch.graph.model.ontology.*;
+import org.opensearch.graph.model.schema.BaseTypeElement;
+import org.opensearch.graph.model.schema.BaseTypeElement.Type;
 import org.opensearch.graph.unipop.schemaProviders.indexPartitions.IndexPartitions;
 import org.opensearch.graph.unipop.schemaProviders.indexPartitions.StaticIndexPartitions;
 import javaslang.collection.Stream;
@@ -74,12 +76,12 @@ public class OntologySchemaProviderTest {
     private OntologySchemaProvider getOntologySchemaProvider(Ontology ontology) {
         return new OntologySchemaProvider(ontology, new GraphElementSchemaProvider.Impl(
                 Arrays.asList(
-                        new GraphVertexSchema.Impl("Person", new StaticIndexPartitions(Arrays.asList("vertexIndex1", "vertexIndex2"))),
-                        new GraphVertexSchema.Impl("Dragon", new StaticIndexPartitions(Arrays.asList("vertexIndex1", "vertexIndex2")))
+                        new GraphVertexSchema.Impl(Type.of("Person"), new StaticIndexPartitions(Arrays.asList("vertexIndex1", "vertexIndex2"))),
+                        new GraphVertexSchema.Impl(Type.of("Dragon"), new StaticIndexPartitions(Arrays.asList("vertexIndex1", "vertexIndex2")))
                         ),
                 Arrays.asList(
                     new GraphEdgeSchema.Impl(
-                        "Fire",
+                        Type.of("Fire"),
                         Optional.of(new GraphEdgeSchema.End.Impl(
                                 Collections.singletonList(GlobalConstants.EdgeSchema.SOURCE_ID),
                                 Optional.of("Dragon"))),

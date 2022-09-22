@@ -46,7 +46,7 @@ public class ContainsGeoDistanceQueryTranslator implements PredicateQueryTransla
     @Override
     public QueryBuilder translate(QueryBuilder queryBuilder, AggregationBuilder aggregationBuilder, String key, P<?> predicate) {
         Contains contains = (Contains) predicate.getBiPredicate();
-        final List box = (List) predicate.getValue();
+        final List box = (List) predicate.getValue();//checked in the PredicateQueryTranslator.test() to verify this is a list
         switch (contains) {
             case within:
                 if (CollectionUtil.listFromObjectValue(predicate.getValue()).isEmpty()) {
