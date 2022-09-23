@@ -2,6 +2,11 @@
   "ont": "Dragons",
   "properties": [
     {
+      "pType": "kingdom",
+      "name": "kingdom",
+      "type": "Kingdom"
+    },
+    {
       "pType": "id",
       "name": "id",
       "type": "string"
@@ -87,14 +92,15 @@
       "eType": "Person",
       "name": "Person",
        "metadata": [],
- "properties": [
+       "properties": [
         "id",
         "firstName",
         "lastName",
         "gender",
         "birthDate",
         "deathDate",
-        "height"
+        "height",
+         "kingdom"
       ]
     },
     {

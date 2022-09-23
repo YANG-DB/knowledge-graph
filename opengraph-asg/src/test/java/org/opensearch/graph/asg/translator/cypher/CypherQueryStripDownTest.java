@@ -16,7 +16,7 @@ import static scala.collection.JavaConverters.asJavaCollectionConverter;
 /**
  * Created by lior.perry
  */
-public class CypherUtilsTest {
+public class CypherQueryStripDownTest {
 
 
     //region Test Methods

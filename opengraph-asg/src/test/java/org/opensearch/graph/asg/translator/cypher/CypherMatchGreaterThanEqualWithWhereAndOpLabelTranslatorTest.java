@@ -42,6 +42,21 @@ public class CypherMatchGreaterThanEqualWithWhereAndOpLabelTranslatorTest {
     //endregion
 
     @Test
+    public void testMatch_A_where_A_fields_is_Of_Embedded_Type_Return_A() {
+        AsgTranslator<QueryInfo<String>, AsgQuery> translator = new CypherTranslator(() -> Collections.singleton(match));
+        String q = "MATCH (a:Dragon) where a.kingdom.name = 'Charles' RETURN a";
+        final AsgQuery query = translator.translate(new QueryInfo<>(q,"q", TYPE_CYPHERQL, "ont"));
+        AsgQuery expected = AsgQuery.Builder
+                .start("cypher_", "Dragons")
+                .next(typed(1,"Dragon", "a"))
+                .next(quant1(100, all))
+                .in(ePropGroup(101,all,of(101, "kingdom.name", of(eq, "Charles"))))
+                .build();
+        expected.setProjectedFields(Collections.singletonMap("a", Collections.singletonList(AsgQueryUtil.getByTag(expected.getStart(), "a").get())));
+        assertEquals(print(expected), print(query));
+    }
+
+    @Test
     public void testMatch_A_where_A_OfType_Return_A() {
         AsgTranslator<QueryInfo<String>, AsgQuery> translator = new CypherTranslator(() -> Collections.singleton(match));
         String q = "MATCH (a:Dragon) where a.age > 100 RETURN a";

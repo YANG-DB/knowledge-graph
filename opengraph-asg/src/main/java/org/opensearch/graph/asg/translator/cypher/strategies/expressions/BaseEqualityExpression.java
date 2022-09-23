@@ -114,6 +114,11 @@ public abstract class BaseEqualityExpression<T extends BinaryOperatorExpression>
         if (CypherUtils.var(property).isEmpty())
             return Optional.empty();
 
+        //in case of compound name (a.b.c) we need to take the complete name after the first var (a)
+        if (property.asCanonicalStringVal().contains(CypherUtils.var(property).get(0).asCanonicalStringVal())) {
+            return Optional.of(property.asCanonicalStringVal().substring(
+                    CypherUtils.var(property).get(0).asCanonicalStringVal().length()+1));
+        }
         return Optional.of(((Property) prop).propertyKey().name());
     }
 

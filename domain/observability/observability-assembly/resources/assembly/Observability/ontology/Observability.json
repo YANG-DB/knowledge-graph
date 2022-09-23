@@ -18,7 +18,10 @@
         "response",
         "tags",
         "timestamp",
-        "url"
+        "url",
+        "machine",
+        "geo",
+        "event"
       ]
     },
     {
@@ -116,7 +119,7 @@
     {
       "pType": "ip",
       "name": "ip",
-      "type": "string"
+      "type": "ip"
     },
     {
       "pType": "message",
@@ -181,12 +184,28 @@
     {
       "pType": "os",
       "name": "os",
-      "type": "string"
+      "type": "text"
     },
     {
       "pType": "dataset",
       "name": "dataset",
       "type": "string"
+    },
+    {
+      "pType": "machine",
+      "name": "machine",
+      "type": "Machine"
+    },
+    {
+      "pType": "geo",
+      "name": "geo",
+      "type": "Geo"
+    },
+    {
+      "pType": "event",
+      "name": "event",
+      "type": "Event"
     }
+
   ]
 }

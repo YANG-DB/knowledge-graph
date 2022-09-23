@@ -96,16 +96,15 @@ public class ConversionUtil {
                         return Text.queryString((V) constraint.getExpr());
                     case match:
                         return Text.match((V) constraint.getExpr());
+                    case contains:
                     case match_phrase:
                         return Text.matchPhrase((V) constraint.getExpr());
                     case like:
-                        return Text.like((V) constraint.getExpr());
                     case likeAny:
+                    case endsWith:
                         return Text.like((V) constraint.getExpr());
                     case startsWith:
                         return Text.prefix((V) constraint.getExpr());
-                    case endsWith:
-                        return Text.like((V) constraint.getExpr());
                     default:
                         throw new RuntimeException(constraint.getOp() + " not supported constraint");
                 }

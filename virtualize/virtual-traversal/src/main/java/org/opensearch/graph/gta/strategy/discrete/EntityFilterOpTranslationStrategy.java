@@ -142,7 +142,7 @@ public class EntityFilterOpTranslationStrategy extends PlanOpTranslationStrategy
 
             List<Traversal> epropGroupTraversals = Collections.emptyList();
             if (!ePropGroup.getProps().isEmpty() || !ePropGroup.getGroups().isEmpty()) {
-                epropGroupTraversals = Collections.singletonList(convertEPropGroupToTraversal(ePropGroup, ont));
+                epropGroupTraversals = Collections.singletonList(convertEPropGroupToTraversal(entity, ePropGroup, ont));
             }
 
             if (!epropGroupTraversals.isEmpty()) {
@@ -175,7 +175,7 @@ public class EntityFilterOpTranslationStrategy extends PlanOpTranslationStrategy
 
         List<Traversal> epropGroupTraversals = Collections.emptyList();
         if (!ePropGroup.getProps().isEmpty() || !ePropGroup.getGroups().isEmpty()) {
-            epropGroupTraversals = Collections.singletonList(convertEPropGroupToTraversal(ePropGroup, ont));
+            epropGroupTraversals = Collections.singletonList(convertEPropGroupToTraversal(entity, ePropGroup, ont));
         }
 
         List<Traversal> traversals = Stream.ofAll(entityTraversals).appendAll(epropGroupTraversals).toJavaList();
@@ -214,15 +214,15 @@ public class EntityFilterOpTranslationStrategy extends PlanOpTranslationStrategy
         return null;
     }
 
-    private Traversal convertEPropGroupToTraversal(EPropGroup ePropGroup, Ontology.Accessor ont) {
+    private Traversal convertEPropGroupToTraversal(EEntityBase entity, EPropGroup ePropGroup, Ontology.Accessor ont) {
         List<Traversal> childGroupTraversals = Stream.ofAll(ePropGroup.getGroups())
-                .map(childGroup -> convertEPropGroupToTraversal(childGroup, ont))
+                .map(childGroup -> convertEPropGroupToTraversal(entity, childGroup, ont))
                 .toJavaList();
 
         List<Traversal> epropTraversals = Stream.ofAll(ePropGroup.getProps())
                 .filter(eProp -> eProp.getCon() != null)
                 .filter(eProp -> !(eProp.getCon() instanceof WhereByConstraint))
-                .map(eprop -> convertEPropToTraversal(eprop, ont))
+                .map(eprop -> convertEPropToTraversal(entity, eprop, ont))
                 .toJavaList();
 
 
@@ -253,8 +253,8 @@ public class EntityFilterOpTranslationStrategy extends PlanOpTranslationStrategy
         return ret;
     }
 
-    private Traversal convertEPropToTraversal(EProp eProp, Ontology.Accessor ont) {
-        Optional<Property> property = ont.$property(eProp.getpType());
+    private Traversal convertEPropToTraversal(EEntityBase entity, EProp eProp, Ontology.Accessor ont) {
+        Optional<Property> property = ont.$property(entity,eProp.getpType());
         if (!property.isPresent()) {
             return __.start();
         }

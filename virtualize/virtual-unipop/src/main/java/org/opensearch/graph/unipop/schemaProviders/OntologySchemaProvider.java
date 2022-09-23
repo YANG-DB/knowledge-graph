@@ -131,16 +131,15 @@ public class OntologySchemaProvider implements GraphElementSchemaProvider {
                 vertexSchema.getConstraint(),
                 vertexSchema.getRouting(),
                 vertexSchema.getIndexPartitions(),
-                Stream.ofAll(entityType.get().getProperties() == null ? Collections.emptyList() : entityType.get().getProperties())
-                        .map(pType -> $ont.$property(pType))
+                Stream.ofAll($ont.cascadingFields(entityType.get().geteType()))
+                        .map(pType -> $ont.$property(label,pType))
                         .filter(Optional::isPresent)
-                        .map(property -> (GraphElementPropertySchema)
-                                (vertexSchema.getProperty(property.get().getName()).isPresent() ?
-                                new GraphElementPropertySchema.Impl(
-                                        property.get().getName(),
-                                        property.get().getType(),
-                                        vertexSchema.getProperty(property.get().getName()).get().getIndexingSchemes()) :
-                                new GraphElementPropertySchema.Impl(property.get().getName(), property.get().getType())))));
+                        .map(property -> vertexSchema.getProperty(property.get().getName()).isPresent() ?
+                        new GraphElementPropertySchema.Impl(
+                                property.get().getName(),
+                                property.get().getType(),
+                                vertexSchema.getProperty(property.get().getName()).get().getIndexingSchemes()) :
+                        new GraphElementPropertySchema.Impl(property.get().getName(), property.get().getType()))));
     }
 
     private Optional<GraphEdgeSchema> getRelationSchema(
@@ -181,15 +180,14 @@ public class OntologySchemaProvider implements GraphElementSchemaProvider {
                 edgeSchema.getRouting(),
                 edgeSchema.getIndexPartitions(),
                 Stream.ofAll(relationshipType.get().getProperties() == null ? Collections.emptyList() : relationshipType.get().getProperties())
-                        .map(pType -> $ont.$property(pType))
+                        .map(pType -> $ont.$property(label,pType))
                         .filter(property -> property.isPresent())
-                        .map(property -> (GraphElementPropertySchema)
-                                (edgeSchema.getProperty(property.get().getName()).isPresent() ?
-                                        new GraphElementPropertySchema.Impl(
-                                                property.get().getName(),
-                                                property.get().getType(),
-                                                edgeSchema.getProperty(property.get().getName()).get().getIndexingSchemes()) :
-                                        new GraphElementPropertySchema.Impl(property.get().getName(), property.get().getType()))),
+                        .map(property -> edgeSchema.getProperty(property.get().getName()).isPresent() ?
+                                new GraphElementPropertySchema.Impl(
+                                        property.get().getName(),
+                                        property.get().getType(),
+                                        edgeSchema.getProperty(property.get().getName()).get().getIndexingSchemes()) :
+                                new GraphElementPropertySchema.Impl(property.get().getName(), property.get().getType())),
                 edgeSchema.getApplications()
         ));
     }

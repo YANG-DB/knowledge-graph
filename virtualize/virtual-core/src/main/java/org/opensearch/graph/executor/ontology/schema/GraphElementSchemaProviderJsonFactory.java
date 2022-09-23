@@ -28,14 +28,11 @@ import com.google.inject.Inject;
 import com.typesafe.config.Config;
 import org.opensearch.graph.dispatcher.ontology.IndexProviderFactory;
 import org.opensearch.graph.dispatcher.ontology.OntologyProvider;
+import org.opensearch.graph.model.ontology.*;
 import org.opensearch.graph.model.schema.BaseTypeElement.Type;
 import org.opensearch.graph.model.schema.MappingIndexType;
 import org.opensearch.graph.executor.ontology.GraphElementSchemaProviderFactory;
 import org.opensearch.graph.model.GlobalConstants;
-import org.opensearch.graph.model.ontology.EPair;
-import org.opensearch.graph.model.ontology.EntityType;
-import org.opensearch.graph.model.ontology.Ontology;
-import org.opensearch.graph.model.ontology.RelationshipType;
 import org.opensearch.graph.model.resourceInfo.GraphError;
 import org.opensearch.graph.model.schema.*;
 import org.opensearch.graph.unipop.schemaProviders.*;
@@ -141,7 +138,7 @@ public class GraphElementSchemaProviderJsonFactory implements GraphElementSchema
                 .collect(Collectors.toList());
     }
 
-    private List<GraphVertexSchema> generateGraphVertexSchema(Entity e) {
+    private List<GraphVertexSchema> generateGraphVertexSchema( Entity e) {
         MappingIndexType type = MappingIndexType.valueOf(e.getPartition().toUpperCase());
         switch (type) {
             case UNIFIED:
@@ -183,7 +180,7 @@ public class GraphElementSchemaProviderJsonFactory implements GraphElementSchema
         return relation.map(RelationshipType::getePairs);
     }
 
-    private List<GraphEdgeSchema> generateGraphEdgeSchema(Relation r, Type v, IndexPartitions partitions) {
+    private List<GraphEdgeSchema> generateGraphEdgeSchema( Relation r, Type v, IndexPartitions partitions) {
         Optional<List<EPair>> pairs = getEdgeSchemaOntologyPairs(v.getName());
 
         if (!pairs.isPresent())
@@ -252,18 +249,17 @@ public class GraphElementSchemaProviderJsonFactory implements GraphElementSchema
     private List<GraphElementPropertySchema> getGraphElementPropertySchemas(String type) {
         EntityType entityType = accessor.entity$(type);
         List<GraphElementPropertySchema> elementPropertySchemas = new ArrayList<>();
-        entityType.getProperties()
-                .stream()
-                .filter(v -> accessor.pType(v).isPresent())
+        accessor.cascadingFields(entityType.geteType())
                 .forEach(v -> {
-                    switch (accessor.property$(v).getType()) {
+                    Property property = accessor.property$(entityType.geteType(), v);
+                    switch (property.getType()) {
                         case TEXT:
-                            elementPropertySchemas.add(new GraphElementPropertySchema.Impl(v, accessor.pType$(v),
+                            elementPropertySchemas.add(new GraphElementPropertySchema.Impl(v, property.getType(),
                                     //todo add all types of possible analyzers - such as ngram ...
                                     Arrays.asList(new GraphElementPropertySchema.ExactIndexingSchema.Impl(v + "." + KEYWORD))));
                             break;
                         default:
-                            elementPropertySchemas.add(new GraphElementPropertySchema.Impl(v, accessor.pType$(v)));
+                            elementPropertySchemas.add(new GraphElementPropertySchema.Impl(v, property.getType()));
                     }
                 });
 
