@@ -28,6 +28,7 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import javaslang.Tuple2;
 import javaslang.collection.Stream;
+import org.opensearch.graph.model.ontology.Property;
 
 import java.util.Collections;
 import java.util.Map;
@@ -127,7 +128,11 @@ public interface GraphElementPropertySchema {
             this(name, type,
                     Collections.singletonList(
                             new ExactIndexingSchema.Impl(name)));
-
+        }
+        public Impl(Property property) {
+            this(property.getName(), property.getType(),
+                    Collections.singletonList(
+                            new ExactIndexingSchema.Impl(property.getName())));
         }
 
         public Impl(String name, String type, Iterable<IndexingSchema> indexingSchemes) {

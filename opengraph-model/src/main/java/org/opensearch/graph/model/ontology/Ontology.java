@@ -677,8 +677,8 @@ public class Ontology {
                                 .map(this::pName)
                                 .filter(Optional::isPresent)
                                 .map(Optional::get)
-                                .filter(p -> $element(p.getName()).isPresent())
-                                .map(p -> cascadingElementFieldsPName(p.getName()).stream()
+                                .filter(p -> $element(p.getType()).isPresent())//check is this property actually an entity
+                                .map(p -> cascadingElementFieldsPName(p.getType()).stream()
                                         .map(e -> p.getName().concat(".").concat(e))
                                         .collect(Collectors.toList())
                                     ).flatMap(Collection::stream)
@@ -700,8 +700,8 @@ public class Ontology {
                                 .map(this::$pType)
                                 .filter(Optional::isPresent)
                                 .map(Optional::get)
-                                .filter(p -> $element(p.getName()).isPresent())
-                                .map(p -> cascadingElementFieldsPName(p.getName()).stream()
+                                .filter(p -> $element(p.getType()).isPresent())//check is this property actually an entity
+                                .map(p -> cascadingElementFieldsPType(p.getType()).stream()
                                         .map(e -> p.getName().concat(".").concat(e))
                                         .collect(Collectors.toList())
                                     ).flatMap(Collection::stream)

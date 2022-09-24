@@ -144,7 +144,7 @@ public class EBaseStatisticsProvider implements StatisticsProvider {
             if (relProp instanceof RedundantRelProp){
                 graphElementPropertySchema = graphEdgeSchema.getEndB().get().getRedundantProperty(graphElementSchemaProvider.getPropertySchema(property.getName()).get()).get();
             }else {
-                graphElementPropertySchema = graphEdgeSchema.getProperty(property.getName()).get();
+                graphElementPropertySchema = graphEdgeSchema.getProperty(property).get();
             }
 
             Optional<Statistics.SummaryStatistics> conditionCardinality = getConditionCardinality(graphEdgeSchema, graphElementPropertySchema, relProp.getCon(), relevantIndices, property.getType());
@@ -228,7 +228,7 @@ public class EBaseStatisticsProvider implements StatisticsProvider {
         Statistics.SummaryStatistics minVertexSummaryStatistics = getVertexStatistics(graphVertexSchema, relevantIndices);
         for(EProp eProp : Stream.ofAll(entityFilter.getProps()).filter(eProp -> eProp.getCon() != null)){
             Property property = ont.pType$( eProp.getpType() );
-            Optional<GraphElementPropertySchema> graphElementPropertySchema = graphVertexSchema.getProperty(property.getName());
+            Optional<GraphElementPropertySchema> graphElementPropertySchema = graphVertexSchema.getProperty(property);
             if(graphElementPropertySchema.isPresent()) {
                 Optional<Statistics.SummaryStatistics> conditionCardinality = getConditionCardinality(graphVertexSchema, graphElementPropertySchema.get(), eProp.getCon(), relevantIndices, property.getType());
                 if (conditionCardinality.isPresent() && minVertexSummaryStatistics.getTotal() > conditionCardinality.get().getTotal())

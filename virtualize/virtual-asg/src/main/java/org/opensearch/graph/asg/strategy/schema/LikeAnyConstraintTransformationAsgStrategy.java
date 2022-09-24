@@ -107,7 +107,7 @@ public class LikeAnyConstraintTransformationAsgStrategy implements AsgStrategy, 
                 continue;
             }
 
-            Optional<GraphElementPropertySchema> propertySchema = vertexSchema.getProperty(property.get().getName());
+            Optional<GraphElementPropertySchema> propertySchema = vertexSchema.getProperty(property.get());
             if (!propertySchema.isPresent()) {
                 continue;
             }

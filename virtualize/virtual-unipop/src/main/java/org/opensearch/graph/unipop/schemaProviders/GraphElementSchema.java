@@ -24,7 +24,7 @@ package org.opensearch.graph.unipop.schemaProviders;
 
 
 
-import org.opensearch.graph.model.schema.BaseTypeElement;
+import org.opensearch.graph.model.ontology.Property;
 import org.opensearch.graph.model.schema.BaseTypeElement.Type;
 import org.opensearch.graph.unipop.schemaProviders.indexPartitions.IndexPartitions;
 import javaslang.Tuple2;
@@ -49,7 +49,7 @@ public interface GraphElementSchema {
 
     Iterable<GraphElementPropertySchema> getProperties();
 
-    Optional<GraphElementPropertySchema> getProperty(String name);
+    Optional<GraphElementPropertySchema> getProperty(Property property);
 
     abstract class Impl implements GraphElementSchema {
         //region Constructors
@@ -127,8 +127,8 @@ public interface GraphElementSchema {
         }
 
         @Override
-        public Optional<GraphElementPropertySchema> getProperty(String name) {
-            return Optional.ofNullable(this.properties.get(name));
+        public Optional<GraphElementPropertySchema> getProperty(Property property) {
+            return Optional.ofNullable(this.properties.getOrDefault(property.getName(),this.properties.get(property.getpType())));
         }
 
         @Override

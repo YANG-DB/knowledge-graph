@@ -133,11 +133,11 @@ public class OntologySchemaProvider implements GraphElementSchemaProvider {
                 Stream.ofAll($ont.cascadingElementFieldsPName(entityType.get().geteType()))
                         .map(pType -> $ont.$pType(label,pType))
                         .filter(Optional::isPresent)
-                        .map(property -> vertexSchema.getProperty(property.get().getName()).isPresent() ?
+                        .map(property -> vertexSchema.getProperty(property.get()).isPresent() ?
                         new GraphElementPropertySchema.Impl(
                                 property.get().getName(),
                                 property.get().getType(),
-                                vertexSchema.getProperty(property.get().getName()).get().getIndexingSchemes()) :
+                                vertexSchema.getProperty(property.get()).get().getIndexingSchemes()) :
                         new GraphElementPropertySchema.Impl(property.get().getName(), property.get().getType()))));
     }
 
@@ -181,11 +181,11 @@ public class OntologySchemaProvider implements GraphElementSchemaProvider {
                 Stream.ofAll(relationshipType.get().getProperties() == null ? Collections.emptyList() : relationshipType.get().getProperties())
                         .map(pType -> $ont.$pType(label,pType))
                         .filter(property -> property.isPresent())
-                        .map(property -> edgeSchema.getProperty(property.get().getName()).isPresent() ?
+                        .map(property -> edgeSchema.getProperty(property.get()).isPresent() ?
                                 new GraphElementPropertySchema.Impl(
                                         property.get().getName(),
                                         property.get().getType(),
-                                        edgeSchema.getProperty(property.get().getName()).get().getIndexingSchemes()) :
+                                        edgeSchema.getProperty(property.get()).get().getIndexingSchemes()) :
                                 new GraphElementPropertySchema.Impl(property.get().getName(), property.get().getType())),
                 edgeSchema.getApplications()
         ));
