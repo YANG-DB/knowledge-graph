@@ -189,8 +189,8 @@ public class GraphQLToOntologyTransformer implements OntologyTransformerIfc<Stri
         e.getProperties().forEach(p -> builder.field(
                 GraphQLFieldDefinition.newFieldDefinition()
                         .name(p)
-                        .type(type(accessor.property$(p).getType(), accessor))
-                        .definition(new FieldDefinition(p, new TypeName(accessor.property$(p).getType())))
+                        .type(type(accessor.pName$(p).getType(), accessor))
+                        .definition(new FieldDefinition(p, new TypeName(accessor.pName$(p).getType())))
                         .build()
         ));
 

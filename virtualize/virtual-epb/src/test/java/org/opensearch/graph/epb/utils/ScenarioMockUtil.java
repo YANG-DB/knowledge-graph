@@ -5,7 +5,6 @@ import org.opensearch.graph.epb.plan.statistics.Statistics;
 import org.opensearch.graph.model.GlobalConstants;
 import org.opensearch.graph.model.OntologyTestUtils;
 import org.opensearch.graph.model.ontology.Ontology;
-import org.opensearch.graph.model.schema.BaseTypeElement;
 import org.opensearch.graph.unipop.controller.utils.traversal.TraversalValuesByKeyProvider;
 import org.opensearch.graph.unipop.schemaProviders.*;
 import org.opensearch.graph.unipop.schemaProviders.indexPartitions.IndexPartitions;
@@ -237,7 +236,7 @@ public class ScenarioMockUtil {
                                                 .map(redundantEntry -> (GraphRedundantPropertySchema) new GraphRedundantPropertySchema.Impl(
                                                         redundantEntry.getKey(),
                                                         redundantEntry.getValue(),
-                                                        this.ont.property$(redundantEntry.getKey()).getType()))
+                                                        this.ont.pName$(redundantEntry.getKey()).getType()))
                                                 .toJavaList())),
                                 Optional.of(new GraphEdgeSchema.End.Impl(
                                         Collections.singletonList(relation.getePairs().get(0).geteTypeB() + "IdB"),
@@ -246,7 +245,7 @@ public class ScenarioMockUtil {
                                                 .map(redundantEntry -> (GraphRedundantPropertySchema) new GraphRedundantPropertySchema.Impl(
                                                         redundantEntry.getKey(),
                                                         redundantEntry.getValue(),
-                                                        this.ont.property$(redundantEntry.getKey()).getType()))
+                                                        this.ont.pName$(redundantEntry.getKey()).getType()))
                                                 .toJavaList())),
                                 Direction.OUT,
                                 Optional.of(new GraphEdgeSchema.DirectionSchema.Impl(GlobalConstants.EdgeSchema.DIRECTION, "out", "in")),

@@ -72,10 +72,6 @@ import org.opensearch.graph.services.GraphUtils;
 import org.opensearch.graph.services.controllers.*;
 import org.opensearch.graph.services.controllers.languages.graphql.LoggingGraphQLController;
 import org.opensearch.graph.services.controllers.languages.graphql.StandardGraphQLController;
-import org.opensearch.graph.services.controllers.languages.sparql.LoggingSparqlController;
-import org.opensearch.graph.services.controllers.languages.sparql.StandardSparqlController;
-import org.opensearch.graph.services.controllers.languages.sql.LoggingSqlController;
-import org.opensearch.graph.services.controllers.languages.sql.StandardSqlController;
 import org.opensearch.graph.services.controllers.logging.*;
 import org.opensearch.graph.services.suppliers.CachedRequestIdSupplier;
 import org.opensearch.graph.services.suppliers.RequestExternalMetadataSupplier;
@@ -122,8 +118,6 @@ public class ServiceModule extends ModuleBase {
         bindPageController(env, config, binder);
         bindCatalogController(env, config, binder);
         bindGraphQLController(env, config, binder);
-        bindSparqlController(env, config, binder);
-        bindSqlController(env, config, binder);
         bindDataLoaderController(env, config, binder);
         bindIdGeneratorController(env, config, binder);
 
@@ -349,50 +343,6 @@ public class ServiceModule extends ModuleBase {
 
                 this.expose(SchemaTranslatorController.class)
                         .annotatedWith(named(StandardGraphQLController.transformerName));
-            }
-        });
-    }
-
-    private void bindSparqlController(Env env, Config config, Binder binder) {
-        binder.install(new PrivateModule() {
-            @Override
-            protected void configure() {
-                this.bind(SchemaTranslatorController.class)
-                        .annotatedWith(named(LoggingSparqlController.controllerParameter))
-                        .to(StandardGraphQLController.class);
-
-                this.bind(Logger.class)
-                        .annotatedWith(named(LoggingSparqlController.loggerParameter))
-                        .toInstance(LoggerFactory.getLogger(StandardGraphQLController.class));
-
-                this.bind(SchemaTranslatorController.class)
-                        .annotatedWith(named(StandardSparqlController.transformerName))
-                        .to(LoggingSparqlController.class);
-
-                this.expose(SchemaTranslatorController.class)
-                        .annotatedWith(named(StandardSparqlController.transformerName));
-            }
-        });
-    }
-
-    private void bindSqlController(Env env, Config config, Binder binder) {
-        binder.install(new PrivateModule() {
-            @Override
-            protected void configure() {
-                this.bind(SchemaTranslatorController.class)
-                        .annotatedWith(named(LoggingSqlController.controllerParameter))
-                        .to(StandardGraphQLController.class);
-
-                this.bind(Logger.class)
-                        .annotatedWith(named(LoggingSqlController.loggerParameter))
-                        .toInstance(LoggerFactory.getLogger(StandardGraphQLController.class));
-
-                this.bind(SchemaTranslatorController.class)
-                        .annotatedWith(named(StandardSqlController.transformerName))
-                        .to(LoggingSqlController.class);
-
-                this.expose(SchemaTranslatorController.class)
-                        .annotatedWith(named(StandardSqlController.transformerName));
             }
         });
     }

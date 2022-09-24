@@ -1,7 +1,7 @@
 package org.opensearch.graph.executor.opensearch;
 
 import org.opensearch.graph.dispatcher.modules.ModuleBase;
-import org.opensearch.graph.executor.BaseModuleInjectionTest;
+import org.opensearch.graph.executor.BaseModuleInjectionIT;
 import org.opensearch.action.search.SearchRequest;
 import org.opensearch.client.Client;
 import org.junit.Assert;
@@ -11,7 +11,7 @@ import org.junit.Test;
 import java.util.concurrent.TimeoutException;
 
 @Ignore("Fix test which is running in same package as ElasticIndexProviderMappingFactoryTests ")
-public class TimeoutAdvisorClientTests extends BaseModuleInjectionTest {
+public class TimeoutAdvisorClientIT extends BaseModuleInjectionIT {
 
 
     @Test

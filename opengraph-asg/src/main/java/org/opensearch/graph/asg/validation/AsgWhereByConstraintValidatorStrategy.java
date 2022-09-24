@@ -66,7 +66,7 @@ public class AsgWhereByConstraintValidatorStrategy implements AsgValidatorStrate
                         errors.add(String.format(ERROR_2,tagEntity));
 
                     String projectedField = con.getProjectedField();
-                    if(!context.getOntologyAccessor().$property(projectedField).isPresent())
+                    if(!context.getOntologyAccessor().$pType(projectedField).isPresent())
                         errors.add(String.format(ERROR_3,projectedField));
 
                 });

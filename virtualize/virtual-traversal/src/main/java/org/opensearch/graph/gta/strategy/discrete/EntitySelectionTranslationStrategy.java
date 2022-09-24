@@ -93,8 +93,8 @@ public class EntitySelectionTranslationStrategy extends PlanOpTranslationStrateg
         Stream.ofAll(lastEntityFilterOp.getAsgEbase().geteBase().getProps())
                 .filter(eProp -> eProp.getProj() != null)
                 .filter(eProp -> !(eProp.getProj() instanceof CalculatedFieldProjection))
-                .forEach(eProp -> traversal.has(context.getOnt().$property$(eProp.getpType()).getName(),
-                        SelectP.raw(context.getOnt().$property$(eProp.getpType()).getName())));
+                .forEach(eProp -> traversal.has(context.getOnt().pType$(eProp.getpType()).getName(),
+                        SelectP.raw(context.getOnt().pType$(eProp.getpType()).getName())));
 
         if (PlanUtil.isFirst(plan.getPlan(), lastEntityOp.get())) {
             return traversal;

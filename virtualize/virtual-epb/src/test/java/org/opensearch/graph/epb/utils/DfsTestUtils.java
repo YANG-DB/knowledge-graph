@@ -23,7 +23,6 @@ import org.opensearch.graph.model.query.entity.ETyped;
 import org.opensearch.graph.model.query.entity.EUntyped;
 import org.opensearch.graph.model.query.properties.EPropGroup;
 import org.opensearch.graph.model.query.properties.RelPropGroup;
-import org.opensearch.graph.model.schema.BaseTypeElement;
 import org.opensearch.graph.unipop.schemaProviders.*;
 import org.opensearch.graph.unipop.schemaProviders.indexPartitions.StaticIndexPartitions;
 import javaslang.collection.Stream;
@@ -136,10 +135,10 @@ public interface DfsTestUtils {
                                         Collections.singletonList(GlobalConstants.EdgeSchema.DEST_ID),
                                         Optional.of(relation.getePairs().get(0).geteTypeB()),
                                         Arrays.asList(
-                                                new GraphRedundantPropertySchema.Impl("firstName", "entityB.firstName", ont.property$("firstName").getType()),
-                                                new GraphRedundantPropertySchema.Impl("gender", "entityB.gender", ont.property$("gender").getType()),
-                                                new GraphRedundantPropertySchema.Impl("id", GlobalConstants.EdgeSchema.DEST_ID, ont.property$("firstName").getType()),
-                                                new GraphRedundantPropertySchema.Impl("type", GlobalConstants.EdgeSchema.DEST_TYPE, ont.property$("type").getType())
+                                                new GraphRedundantPropertySchema.Impl("firstName", "entityB.firstName", ont.pName$("firstName").getType()),
+                                                new GraphRedundantPropertySchema.Impl("gender", "entityB.gender", ont.pName$("gender").getType()),
+                                                new GraphRedundantPropertySchema.Impl("id", GlobalConstants.EdgeSchema.DEST_ID, ont.pName$("firstName").getType()),
+                                                new GraphRedundantPropertySchema.Impl("type", GlobalConstants.EdgeSchema.DEST_TYPE, ont.pName$("type").getType())
                                         ))),
                                 org.apache.tinkerpop.gremlin.structure.Direction.OUT,
                                 Optional.of(new GraphEdgeSchema.DirectionSchema.Impl(GlobalConstants.EdgeSchema.DIRECTION, "out", "in")),

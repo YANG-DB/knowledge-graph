@@ -45,7 +45,9 @@ public abstract class CsvToJsonConverter {
      */
     public static String csvToJson(String csv) throws IOException {
 
-        CsvSchema csvSchema = CsvSchema.builder().setUseHeader(true).build();
+        CsvSchema csvSchema = CsvSchema.builder()
+                .addColumn("name").addColumn("year").addColumn("genres").addColumn("runtime")
+                .setUseHeader(true).build();
         CsvMapper csvMapper = new CsvMapper();
 
         // Read data from CSV file

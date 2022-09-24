@@ -422,11 +422,11 @@ public class EngineIndexProviderMappingFactory implements OntologyIndexGenerator
 
     public void populateProperty(Ontology.Accessor ontology, BaseTypeElement<? extends BaseTypeElement> element, Map<String, Object> properties, BaseElement entityType) {
         entityType.getMetadata().forEach(v -> {
-            Map<String, Object> parseType = parseType(ontology, ontology.property$(v).getType());
+            Map<String, Object> parseType = parseType(ontology, ontology.pName$(v).getType());
             if (!parseType.isEmpty()) properties.put(v, parseType);
         });
         entityType.getProperties().forEach(v -> {
-            Map<String, Object> parseType = parseType(ontology, ontology.property$(v).getType());
+            Map<String, Object> parseType = parseType(ontology, ontology.pName$(v).getType());
             if (!parseType.isEmpty()) properties.put(v, parseType);
         });
         //populate nested documents
@@ -482,8 +482,8 @@ public class EngineIndexProviderMappingFactory implements OntologyIndexGenerator
 
 
         //populate fields & metadata
-        relation.get().getMetadata().forEach(v -> properties.put(v, parseType(ontology, ontology.property$(v).getType())));
-        relation.get().getProperties().forEach(v -> properties.put(v, parseType(ontology, ontology.property$(v).getType())));
+        relation.get().getMetadata().forEach(v -> properties.put(v, parseType(ontology, ontology.pName$(v).getType())));
+        relation.get().getProperties().forEach(v -> properties.put(v, parseType(ontology, ontology.pName$(v).getType())));
         //set direction
         properties.put(DIRECTION, parseType(ontology, "string"));
         //populate  sideA (entityA)
@@ -551,7 +551,7 @@ public class EngineIndexProviderMappingFactory implements OntologyIndexGenerator
         populateProperty(ontology, nest, properties, entity.get());
         //assuming single value exists (this is the field name)
         if (nest.getProps().getValues().isEmpty())
-            throw new GraphError.GraphErrorException(new GraphError("Mapping generation exception", "Nested entity with name " + nest.getType() + " has no property value in mapping file"));
+            throw new GraphError.GraphErrorException(new GraphError("Mapping generation exception", "Nested entity with name " + nest.getType().getName() + " has no property value in mapping file"));
 
         //add mapping only if properties size > 0
         if (properties.size() > 0) {
@@ -567,11 +567,11 @@ public class EngineIndexProviderMappingFactory implements OntologyIndexGenerator
         sideProperties.put(PROPERTIES, values);
 
         //add side ID
-        values.put(ID, parseType(ontology, ontology.property$(ID).getType()));
+        values.put(ID, parseType(ontology, ontology.pName$(ID).getType()));
         //add side TYPE
-        values.put(TYPE, parseType(ontology, ontology.property$(TYPE).getType()));
+        values.put(TYPE, parseType(ontology, ontology.pName$(TYPE).getType()));
         indexProvider.getRelation(label).get().getRedundant(side)
-                .forEach(r -> values.put(r.getName(), parseType(ontology, ontology.property$(r.getName()).getType())));
+                .forEach(r -> values.put(r.getName(), parseType(ontology, ontology.pName$(r.getName()).getType())));
     }
 
     /**

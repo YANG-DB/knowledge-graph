@@ -28,7 +28,6 @@ import com.google.inject.Inject;
 import org.opensearch.graph.model.ontology.*;
 import javaslang.collection.Stream;
 import org.apache.tinkerpop.gremlin.structure.Direction;
-import org.opensearch.graph.model.schema.BaseTypeElement;
 import org.opensearch.graph.model.schema.BaseTypeElement.Type;
 
 import java.util.*;
@@ -79,7 +78,7 @@ public class OntologySchemaProvider implements GraphElementSchemaProvider {
 
     @Override
     public Optional<GraphElementPropertySchema> getPropertySchema(String name) {
-        Optional<Property> property = $ont.property(name);
+        Optional<Property> property = $ont.pName(name);
         if (!property.isPresent()) {
             return Optional.empty();
         }
@@ -131,8 +130,8 @@ public class OntologySchemaProvider implements GraphElementSchemaProvider {
                 vertexSchema.getConstraint(),
                 vertexSchema.getRouting(),
                 vertexSchema.getIndexPartitions(),
-                Stream.ofAll($ont.cascadingFields(entityType.get().geteType()))
-                        .map(pType -> $ont.$property(label,pType))
+                Stream.ofAll($ont.cascadingElementFieldsPName(entityType.get().geteType()))
+                        .map(pType -> $ont.$pType(label,pType))
                         .filter(Optional::isPresent)
                         .map(property -> vertexSchema.getProperty(property.get().getName()).isPresent() ?
                         new GraphElementPropertySchema.Impl(
@@ -180,7 +179,7 @@ public class OntologySchemaProvider implements GraphElementSchemaProvider {
                 edgeSchema.getRouting(),
                 edgeSchema.getIndexPartitions(),
                 Stream.ofAll(relationshipType.get().getProperties() == null ? Collections.emptyList() : relationshipType.get().getProperties())
-                        .map(pType -> $ont.$property(label,pType))
+                        .map(pType -> $ont.$pType(label,pType))
                         .filter(property -> property.isPresent())
                         .map(property -> edgeSchema.getProperty(property.get().getName()).isPresent() ?
                                 new GraphElementPropertySchema.Impl(

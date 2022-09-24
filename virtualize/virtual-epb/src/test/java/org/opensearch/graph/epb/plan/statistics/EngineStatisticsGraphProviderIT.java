@@ -10,6 +10,7 @@ import org.apache.tinkerpop.gremlin.structure.Direction;
 import org.apache.tinkerpop.gremlin.structure.T;
 import org.junit.AfterClass;
 import org.junit.BeforeClass;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.mockito.Mockito;
 import org.opensearch.client.transport.TransportClient;
@@ -19,7 +20,6 @@ import org.opensearch.graph.epb.plan.statistics.provider.EngineStatProvider;
 import org.opensearch.graph.epb.plan.statistics.provider.EngineStatisticsGraphProvider;
 import org.opensearch.graph.epb.plan.statistics.util.StatConfigTestUtil;
 import org.opensearch.graph.model.ontology.*;
-import org.opensearch.graph.model.schema.BaseTypeElement;
 import org.opensearch.graph.stats.model.bucket.BucketRange;
 import org.opensearch.graph.stats.model.bucket.BucketTerm;
 import org.opensearch.graph.stats.model.configuration.Field;
@@ -32,6 +32,7 @@ import org.opensearch.graph.stats.model.result.StatRangeResult;
 import org.opensearch.graph.stats.model.result.StatTermResult;
 import org.opensearch.graph.stats.util.SearchStatsUtil;
 import org.opensearch.graph.stats.util.StatUtil;
+import org.opensearch.graph.test.BaseITMarker;
 import org.opensearch.graph.test.framework.index.GlobalSearchEmbeddedNode;
 import org.opensearch.graph.test.framework.index.MappingFileConfigurer;
 import org.opensearch.graph.test.framework.index.SearchEmbeddedNode;
@@ -51,7 +52,8 @@ import static org.opensearch.graph.model.schema.BaseTypeElement.Type.*;
 /**
  * Created by benishue on 25-May-17.
  */
-public class EngineStatisticsGraphProviderTest {
+@Ignore("Migrate to OS")
+public class EngineStatisticsGraphProviderIT implements BaseITMarker {
     @Test
     public void getVertexCardinality() throws Exception {
         Ontology.Accessor ont = new Ontology.Accessor(getOntology());

@@ -102,7 +102,7 @@ public class LikeAnyConstraintTransformationAsgStrategy implements AsgStrategy, 
             // currently supports a single vertex schema
             GraphVertexSchema vertexSchema = Stream.ofAll(vertexSchemas).get(0);
 
-            Optional<Property> property = ont.$property(eProp.getpType());
+            Optional<Property> property = ont.$pType(eProp.getpType());
             if (!property.isPresent()) {
                 continue;
             }

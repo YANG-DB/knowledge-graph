@@ -17,14 +17,14 @@ import java.nio.file.Paths;
  */
 @RunWith(Suite.class)
 @Suite.SuiteClasses({
-        DemoStatTest.class,
-        SearchStatsUtilTest.class,
-        StatCalculatorDynamicFieldTest.class,
-        StatCalculatorTest.class,
-        StatConfigurationTest.class
+        DemoStatIT.class,
+        SearchStatsUtilsIT.class,
+        StatCalculatorDynamicFieldIT.class,
+        StatCalculatorIT.class,
+        StatConfigurationIT.class
 })
 @Ignore("Must be upgrades to support opensearch new version")
-public class StatTestSuite implements BaseSuiteMarker {
+public class StatTestIT implements BaseSuiteMarker {
     private static final String CONFIGURATION_FILE_PATH = "statistics.test.properties";
 
     public static final String MAPPING_DATA_FILE_DRAGON_PATH = Paths.get("src", "test", "resources", "elastic.test.data.dragon.mapping.json").toString();

@@ -49,12 +49,12 @@ public class GraphQLOntologyTranslatorTest {
         Assert.assertEquals(ontology.getProperties().size(), 6);
         Ontology.Accessor accessor = new Ontology.Accessor(ontology);
 
-        Assert.assertTrue(equal(accessor.property$("id"), new Property.MandatoryProperty(new Property("id", "id", "ID"))));
-        Assert.assertTrue(equal(accessor.property$("name"), new Property.MandatoryProperty(new Property("name", "name", "String"))));
-        Assert.assertTrue(equal(accessor.property$("appearsIn"), new Property.MandatoryProperty(new Property("appearsIn", "appearsIn", "Episode"))));
-        Assert.assertTrue(equal(accessor.property$("description"), new Property("description", "description", "String")));
-        Assert.assertTrue(equal(accessor.property$("primaryFunction"), new Property("primaryFunction", "primaryFunction", "String")));
-        Assert.assertTrue(equal(accessor.property$("homePlanet"), new Property("homePlanet", "homePlanet", "String")));
+        Assert.assertTrue(equal(accessor.pName$("id"), new Property.MandatoryProperty(new Property("id", "id", "ID"))));
+        Assert.assertTrue(equal(accessor.pName$("name"), new Property.MandatoryProperty(new Property("name", "name", "String"))));
+        Assert.assertTrue(equal(accessor.pName$("appearsIn"), new Property.MandatoryProperty(new Property("appearsIn", "appearsIn", "Episode"))));
+        Assert.assertTrue(equal(accessor.pName$("description"), new Property("description", "description", "String")));
+        Assert.assertTrue(equal(accessor.pName$("primaryFunction"), new Property("primaryFunction", "primaryFunction", "String")));
+        Assert.assertTrue(equal(accessor.pName$("homePlanet"), new Property("homePlanet", "homePlanet", "String")));
     }
 
     @Test

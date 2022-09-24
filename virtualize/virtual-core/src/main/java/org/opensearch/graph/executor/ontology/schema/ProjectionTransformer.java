@@ -130,8 +130,8 @@ public class ProjectionTransformer implements DataTransformer<DataTransformerCon
     }
 
     private void populateField(String key, Object value, ObjectNode element) {
-        String pType = accessor.property$(key).getpType();
-        Object result = DataLoaderUtils.parseValue(accessor.property$(key).getType(), value, Utils.sdf);
+        String pType = accessor.pName$(key).getpType();
+        Object result = DataLoaderUtils.parseValue(accessor.pName$(key).getType(), value, Utils.sdf);
         //all primitive non string types
         element.put(pType, result.toString());
     }

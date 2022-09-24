@@ -249,9 +249,9 @@ public class GraphElementSchemaProviderJsonFactory implements GraphElementSchema
     private List<GraphElementPropertySchema> getGraphElementPropertySchemas(String type) {
         EntityType entityType = accessor.entity$(type);
         List<GraphElementPropertySchema> elementPropertySchemas = new ArrayList<>();
-        accessor.cascadingFields(entityType.geteType())
+        accessor.cascadingElementFieldsPName(entityType.geteType())
                 .forEach(v -> {
-                    Property property = accessor.property$(entityType.geteType(), v);
+                    Property property = accessor.$pType(entityType.geteType(), v).get();
                     switch (property.getType()) {
                         case TEXT:
                             elementPropertySchemas.add(new GraphElementPropertySchema.Impl(v, property.getType(),

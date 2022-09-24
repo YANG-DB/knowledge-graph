@@ -2,6 +2,7 @@ package org.opensearch.graph.stats;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.Assert;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.opensearch.graph.model.GlobalConstants;
 import org.opensearch.graph.stats.model.bucket.BucketRange;
@@ -10,6 +11,7 @@ import org.opensearch.graph.stats.model.configuration.*;
 import org.opensearch.graph.stats.model.enums.DataType;
 import org.opensearch.graph.stats.model.histogram.*;
 import org.opensearch.graph.stats.util.StatUtil;
+import org.opensearch.graph.test.BaseITMarker;
 import org.skyscreamer.jsonassert.JSONAssert;
 
 import java.util.Arrays;
@@ -18,7 +20,8 @@ import java.util.Collections;
 /**
  * Created by benishue on 30-Apr-17.
  */
-public class StatConfigurationTest {
+@Ignore
+public class StatConfigurationIT implements BaseITMarker {
     @Test
     public void statModelTest() throws Exception {
         StatContainer statContainer = buildStatContainer();

@@ -2,6 +2,7 @@ package org.opensearch.graph.executor;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.typesafe.config.Config;
+import org.junit.Ignore;
 import org.opensearch.graph.dispatcher.ontology.IndexProviderFactory;
 import org.opensearch.graph.dispatcher.ontology.OntologyProvider;
 import org.opensearch.graph.executor.opensearch.OpensearchIndexProviderMappingFactoryIT;
@@ -43,6 +44,7 @@ import static org.mockito.Mockito.when;
         IndexProviderBasedCSVLoaderIT.class,
         OpensearchIndexProviderMappingFactoryIT.class
 })
+@Ignore("Migrate to OS")
 public class TestSuiteIndexProviderSuite implements BaseSuiteMarker {
     private static SearchEmbeddedNode searchEmbeddedNode;
 

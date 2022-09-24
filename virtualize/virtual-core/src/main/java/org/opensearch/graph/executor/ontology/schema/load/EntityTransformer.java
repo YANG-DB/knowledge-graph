@@ -123,7 +123,7 @@ public class EntityTransformer implements DataTransformer<DataTransformerContext
             //in case of a partition field - set in the document builder
             String field = relation.getProps().getPartitionField();
             if (field != null)
-                partition = Optional.of(new Tuple2<>(field, parseValue(accessor.property$(field).getType(), edge.getProperty(field), Utils.sdf).toString()));
+                partition = Optional.of(new Tuple2<>(field, parseValue(accessor.pName$(field).getType(), edge.getProperty(field), Utils.sdf).toString()));
 
             return new DocumentBuilder(element, id, relation.getType().getName(), Optional.empty(), partition);
         } catch (GraphError.GraphErrorException e) {
@@ -154,10 +154,10 @@ public class EntityTransformer implements DataTransformer<DataTransformerContext
     }
 
     static ObjectNode populate(ObjectMapper mapper, Ontology.Accessor accessor, IndexProvider indexProvider, DataTransformerContext<LogicalGraphModel> context, ObjectNode element, Map.Entry<String, Object> m) {
-        String pType = accessor.property$(m.getKey()).getpType();
-        String type = accessor.property$(m.getKey()).getType();
+        String pType = accessor.pName$(m.getKey()).getpType();
+        String type = accessor.pName$(m.getKey()).getType();
 
-        Object result = parseValue(accessor.property$(m.getKey()).getType(), m.getValue(), Utils.sdf);
+        Object result = parseValue(accessor.pName$(m.getKey()).getType(), m.getValue(), Utils.sdf);
 
         //case of primitive type
         if (String.class.isAssignableFrom(result.getClass())) {

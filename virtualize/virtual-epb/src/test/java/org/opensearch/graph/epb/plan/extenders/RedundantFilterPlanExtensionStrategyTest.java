@@ -19,7 +19,6 @@ import org.opensearch.graph.model.execution.plan.relation.RelationOp;
 import org.opensearch.graph.model.ontology.Ontology;
 import org.opensearch.graph.model.query.properties.*;
 import org.opensearch.graph.model.query.quant.QuantType;
-import org.opensearch.graph.model.schema.BaseTypeElement;
 import org.opensearch.graph.unipop.schemaProviders.*;
 import org.opensearch.graph.unipop.schemaProviders.indexPartitions.StaticIndexPartitions;
 import javaslang.collection.Stream;
@@ -209,11 +208,11 @@ public class RedundantFilterPlanExtensionStrategyTest {
                                         Collections.singletonList(GlobalConstants.EdgeSchema.DEST_ID),
                                         Optional.of(relation.getePairs().get(0).geteTypeB()),
                                         Arrays.asList(
-                                                new GraphRedundantPropertySchema.Impl("firstName", "entityB.firstName", ont.property$("firstName").getType()),
-                                                new GraphRedundantPropertySchema.Impl("name", GlobalConstants.EdgeSchema.DEST_NAME, ont.property$("name").getType()),
-                                                new GraphRedundantPropertySchema.Impl("gender", "entityB.gender", ont.property$("gender").getType()),
-                                                new GraphRedundantPropertySchema.Impl("id", GlobalConstants.EdgeSchema.DEST_ID, ont.property$("firstName").getType()),
-                                                new GraphRedundantPropertySchema.Impl("type", GlobalConstants.EdgeSchema.DEST_TYPE, ont.property$("type").getType())
+                                                new GraphRedundantPropertySchema.Impl("firstName", "entityB.firstName", ont.pName$("firstName").getType()),
+                                                new GraphRedundantPropertySchema.Impl("name", GlobalConstants.EdgeSchema.DEST_NAME, ont.pName$("name").getType()),
+                                                new GraphRedundantPropertySchema.Impl("gender", "entityB.gender", ont.pName$("gender").getType()),
+                                                new GraphRedundantPropertySchema.Impl("id", GlobalConstants.EdgeSchema.DEST_ID, ont.pName$("firstName").getType()),
+                                                new GraphRedundantPropertySchema.Impl("type", GlobalConstants.EdgeSchema.DEST_TYPE, ont.pName$("type").getType())
                                         ))),
                                 Direction.OUT,
                                 Optional.of(new GraphEdgeSchema.DirectionSchema.Impl("direction", "out", "in")),

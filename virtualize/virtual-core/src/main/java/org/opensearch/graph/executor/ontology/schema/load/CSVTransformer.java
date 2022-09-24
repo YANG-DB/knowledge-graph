@@ -158,7 +158,7 @@ public class CSVTransformer implements DataTransformer<DataTransformerContext, C
             //in case of a partition field - set in the document builder
             String field = relation.getProps().getPartitionField();
             if (field != null)
-                partition = Optional.of(new Tuple2<>(field, DataLoaderUtils.parseValue(accessor.property$(field).getType(), node.get(field), Utils.sdf).toString()));
+                partition = Optional.of(new Tuple2<>(field, DataLoaderUtils.parseValue(accessor.pName$(field).getType(), node.get(field), Utils.sdf).toString()));
 
             return new DocumentBuilder(element, id, relation.getType().getName(), Optional.empty(), partition);
         } catch (GraphError.GraphErrorException e) {
@@ -177,9 +177,9 @@ public class CSVTransformer implements DataTransformer<DataTransformerContext, C
         node.entrySet()
                 .stream()
                 .filter(m -> accessor.$relation$(relation.getType().getName()).containsMetadata(m.getKey()))
-                .filter(m -> DataLoaderUtils.validateValue(accessor.property$(m.getKey()).getType(), m.getValue(), Utils.sdf))
-                .forEach(m -> element.put(accessor.property$(m.getKey()).getpType(),
-                        DataLoaderUtils.parseValue(accessor.property$(m.getKey()).getType(), m.getValue(), Utils.sdf).toString()));
+                .filter(m -> DataLoaderUtils.validateValue(accessor.pName$(m.getKey()).getType(), m.getValue(), Utils.sdf))
+                .forEach(m -> element.put(accessor.pName$(m.getKey()).getpType(),
+                        DataLoaderUtils.parseValue(accessor.pName$(m.getKey()).getType(), m.getValue(), Utils.sdf).toString()));
     }
 
 
@@ -194,9 +194,9 @@ public class CSVTransformer implements DataTransformer<DataTransformerContext, C
         node.entrySet()
                 .stream()
                 .filter(m -> accessor.$relation$(relation.getType().getName()).containsProperty(m.getKey()))
-                .filter(m -> DataLoaderUtils.validateValue(accessor.property$(m.getKey()).getType(), m.getValue(), Utils.sdf))
-                .forEach(m -> element.put(accessor.property$(m.getKey()).getpType(),
-                        DataLoaderUtils.parseValue(accessor.property$(m.getKey()).getType(), m.getValue(), Utils.sdf).toString()));
+                .filter(m -> DataLoaderUtils.validateValue(accessor.pName$(m.getKey()).getType(), m.getValue(), Utils.sdf))
+                .forEach(m -> element.put(accessor.pName$(m.getKey()).getpType(),
+                        DataLoaderUtils.parseValue(accessor.pName$(m.getKey()).getType(), m.getValue(), Utils.sdf).toString()));
 
         RelationshipType relationshipType = accessor.$relation$(relation.getType().getName());
         //populate each pair
@@ -263,9 +263,9 @@ public class CSVTransformer implements DataTransformer<DataTransformerContext, C
         node.entrySet()
                 .stream()
                 .filter(m -> accessor.$entity$(entity.getType().getName()).containsMetadata(m.getKey()))
-                .filter(m -> DataLoaderUtils.validateValue(accessor.property$(m.getKey()).getType(), m.getValue(), Utils.sdf))
-                .forEach(m -> element.put(accessor.property$(m.getKey()).getpType(),
-                        DataLoaderUtils.parseValue(accessor.property$(m.getKey()).getType(), m.getValue(), Utils.sdf).toString()));
+                .filter(m -> DataLoaderUtils.validateValue(accessor.pName$(m.getKey()).getType(), m.getValue(), Utils.sdf))
+                .forEach(m -> element.put(accessor.pName$(m.getKey()).getpType(),
+                        DataLoaderUtils.parseValue(accessor.pName$(m.getKey()).getType(), m.getValue(), Utils.sdf).toString()));
     }
 
 
@@ -279,9 +279,9 @@ public class CSVTransformer implements DataTransformer<DataTransformerContext, C
         node.entrySet()
                 .stream()
                 .filter(m -> accessor.$entity$(entity.getType().getName()).containsProperty(m.getKey()))
-                .filter(m -> DataLoaderUtils.validateValue(accessor.property$(m.getKey()).getType(), m.getValue(), Utils.sdf))
-                .forEach(m -> element.put(accessor.property$(m.getKey()).getpType(),
-                        DataLoaderUtils.parseValue(accessor.property$(m.getKey()).getType(), m.getValue(), Utils.sdf).toString()));
+                .filter(m -> DataLoaderUtils.validateValue(accessor.pName$(m.getKey()).getType(), m.getValue(), Utils.sdf))
+                .forEach(m -> element.put(accessor.pName$(m.getKey()).getpType(),
+                        DataLoaderUtils.parseValue(accessor.pName$(m.getKey()).getType(), m.getValue(), Utils.sdf).toString()));
     }
 
 

@@ -102,13 +102,13 @@ public class AsgEntityPropertiesValidatorStrategy implements AsgValidatorStrateg
             EntityType entityType = accessor.$entity$(((Typed.eTyped) base.geteBase()).geteType());
             String pType = property.getpType();
 
-            if (accessor.cascadingFields(entityType.geteType()).stream().noneMatch(p -> p.equals(pType))) {
+            if (accessor.cascadingElementFieldsPName(entityType.geteType()).stream().noneMatch(p -> p.equals(pType))) {
                 errors.add(ERROR_2 + ":" + print(base, property));
             }
 
         } else if (base.geteBase() instanceof EUntyped) {
             Stream<String> types = Stream.ofAll(((EUntyped) base.geteBase()).getvTypes()).map(accessor::$entity$)
-                    .flatMap(e->accessor.cascadingFields(e.geteType()));
+                    .flatMap(e->accessor.cascadingElementFieldsPName(e.geteType()));
             String pType = property.getpType();
 
             //skip projection fields validation

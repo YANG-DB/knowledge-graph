@@ -3,7 +3,7 @@ package org.opensearch.graph.executor.opensearch;
 
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.Sets;
-import org.opensearch.graph.executor.BaseModuleInjectionTest;
+import org.opensearch.graph.executor.BaseModuleInjectionIT;
 import org.opensearch.graph.executor.TestSuiteIndexProviderSuite;
 import org.opensearch.graph.executor.ontology.schema.RawSchema;
 import org.opensearch.graph.test.BaseITMarker;
@@ -22,7 +22,7 @@ import java.io.IOException;
 import java.util.*;
 import java.util.stream.Collectors;
 
-public class OpensearchIndexProviderMappingFactoryIT extends BaseModuleInjectionTest implements BaseITMarker {
+public class OpensearchIndexProviderMappingFactoryIT extends BaseModuleInjectionIT implements BaseITMarker {
 
     @Test
     public void testGenerateNestedMapping() {

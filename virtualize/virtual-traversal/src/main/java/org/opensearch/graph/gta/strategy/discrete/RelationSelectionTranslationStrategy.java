@@ -68,8 +68,8 @@ public class RelationSelectionTranslationStrategy extends PlanOpTranslationStrat
 
         Stream.ofAll(relationFilterOp.getAsgEbase().geteBase().getProps())
                 .filter(relProp -> relProp.getProj() != null)
-                .forEach(relProp -> traversal.has(context.getOnt().$property$(relProp.getpType()).getName(),
-                        SelectP.raw(context.getOnt().$property$(relProp.getpType()).getName())));
+                .forEach(relProp -> traversal.has(context.getOnt().pType$(relProp.getpType()).getName(),
+                        SelectP.raw(context.getOnt().pType$(relProp.getpType()).getName())));
 
         Stream.ofAll(relationFilterOp.getAsgEbase().geteBase().getProps())
                 .filter(relProp -> RedundantSelectionRelProp.class.isAssignableFrom(relProp.getClass()))

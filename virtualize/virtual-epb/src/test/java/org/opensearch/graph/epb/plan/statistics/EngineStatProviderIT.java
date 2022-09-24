@@ -1,6 +1,7 @@
 package org.opensearch.graph.epb.plan.statistics;
 
 import com.codahale.metrics.MetricRegistry;
+import org.junit.Ignore;
 import org.opensearch.graph.epb.plan.statistics.configuration.StatConfig;
 import org.opensearch.graph.epb.plan.statistics.provider.EngineStatDocumentProvider;
 import org.opensearch.graph.epb.plan.statistics.provider.EngineStatProvider;
@@ -14,6 +15,7 @@ import org.opensearch.graph.stats.model.configuration.StatContainer;
 import org.opensearch.graph.stats.model.configuration.Type;
 import org.opensearch.graph.stats.model.enums.DataType;
 import org.opensearch.graph.stats.model.histogram.*;
+import org.opensearch.graph.test.BaseITMarker;
 import org.opensearch.graph.test.framework.index.SearchEmbeddedNode;
 import org.opensearch.graph.test.framework.index.GlobalSearchEmbeddedNode;
 import org.opensearch.graph.test.framework.index.MappingFileConfigurer;
@@ -38,7 +40,8 @@ import static org.junit.Assert.assertTrue;
 /**
  * Created by benishue on 28-May-17.
  */
-public class EngineStatProviderTest {
+@Ignore("Migrate to OS")
+public class EngineStatProviderIT implements BaseITMarker {
 
     //region Parameters
     private static TransportClient dataClient;

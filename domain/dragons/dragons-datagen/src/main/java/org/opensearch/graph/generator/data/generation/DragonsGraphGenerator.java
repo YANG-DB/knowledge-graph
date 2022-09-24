@@ -256,7 +256,7 @@ public class DragonsGraphGenerator extends GraphGeneratorBase<DragonConfiguratio
 
     @Override
     protected void writeCSVs(List<Dragon> elements) {
-        throw NotImplementedException
+        throw new NotImplementedException();
     }
 
     @Override

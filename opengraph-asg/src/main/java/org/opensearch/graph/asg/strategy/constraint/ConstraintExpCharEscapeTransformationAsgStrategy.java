@@ -64,7 +64,7 @@ public class ConstraintExpCharEscapeTransformationAsgStrategy implements AsgStra
     private void applyExpressionTransformation(AsgStrategyContext context, EBase eBase, Class klass) {
         if (klass == EProp.class || klass == RelProp.class) {
             BaseProp eProp = (BaseProp) eBase;
-            Optional<Property> property = context.getOntologyAccessor().$property(eProp.getpType());
+            Optional<Property> property = context.getOntologyAccessor().$pType(eProp.getpType());
             final Constraint con = eProp.getCon();
             if (property.isPresent()
                     && con != null

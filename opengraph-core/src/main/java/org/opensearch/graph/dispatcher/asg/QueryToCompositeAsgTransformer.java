@@ -83,7 +83,7 @@ public class QueryToCompositeAsgTransformer extends QueryToAsgTransformer {
     //region Private Methods
 
     private void applyExpressionTransformation(AsgQuery query, AsgStrategyContext context, BaseProp eBase) {
-        Optional<Property> property = context.getOntologyAccessor().$property(eBase.getpType());
+        Optional<Property> property = context.getOntologyAccessor().$pType(eBase.getpType());
         if (eBase.getCon() != null) {
             Constraint con = eBase.getCon();
             if (property.isPresent() && con instanceof InnerQueryConstraint) {

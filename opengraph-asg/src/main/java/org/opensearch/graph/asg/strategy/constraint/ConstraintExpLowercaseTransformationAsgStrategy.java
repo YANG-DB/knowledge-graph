@@ -67,7 +67,7 @@ public class ConstraintExpLowercaseTransformationAsgStrategy implements AsgStrat
     private void applyExpressionTransformation(AsgStrategyContext context, EBase eBase, Class klass) {
         if (BaseProp.class.isAssignableFrom(klass)) {
             BaseProp eProp = (BaseProp) eBase;
-            Optional<Property> property = context.getOntologyAccessor().$property(eProp.getpType());
+            Optional<Property> property = context.getOntologyAccessor().$pType(eProp.getpType());
             final Constraint con = eProp.getCon();
             if (con != null && property.isPresent() && property.get().getType().equals("string")) {
                 if (con.getExpr() instanceof List) {

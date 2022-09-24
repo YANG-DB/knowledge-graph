@@ -17,7 +17,7 @@ import static java.util.Collections.singleton;
 public class GraphMLWriterTests {
     private AssignmentsQueryResult assignment;
     public static final String EXPECTED_GRAPHML = "<?xml version=\"1.0\" ?>\n" +
-            "<graphml xmlns=\"http://graphml.graphdrawing.org/xmlns\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" xsi:schemaLocation=\"http://graphml.graphdrawing.org/xmlns www.yangdb.org\">\n" +
+            "<graphml xmlns=\"http://graphml.graphdrawing.org/xmlns\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" xsi:schemaLocation=\"http://graphml.graphdrawing.org/xmlns www.opengraph.org\">\n" +
             "    <key id=\"Entity\" for=\"node\" attr.name=\"Entity\" attr.type=\"string\"></key>\n" +
             "    <key id=\"Relation\" for=\"edge\" attr.name=\"Relation\" attr.type=\"string\"></key>\n" +
             "    <graph id=\"G\" edgedefault=\"directed\">\n" +

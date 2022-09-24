@@ -700,7 +700,7 @@ public abstract class EntityRelationEntityIT implements BaseITMarker {
                 new Start(0, 1),
                 new ETyped(1, "A", $ont.eType$(DRAGON.name), 2, 0),
                 new Rel(2, $ont.rType$(FIRE.getName()), Rel.Direction.R, null, 4, 3),
-                new RelProp(3, $ont.pType$(TEMPERATURE.name).toString(), of(op, value), 0),
+                new RelProp(3, $ont.$pType(TEMPERATURE.name).toString(), of(op, value), 0),
                 new ETyped(4, "B", $ont.eType$(DRAGON.name), 0, 0)
         )).build();
 
@@ -730,7 +730,7 @@ public abstract class EntityRelationEntityIT implements BaseITMarker {
                 new Start(0, 1),
                 new ETyped(1, "A", $ont.eType$(DRAGON.name), 2, 0),
                 new Quant1(2, QuantType.all, Arrays.asList(3, 4), 0),
-                new EProp(3, $ont.pType$(BIRTH_DATE.name).toString(), of(op, value)),
+                new EProp(3, $ont.$pType(BIRTH_DATE.name).get().toString(), of(op, value)),
                 new Rel(4, $ont.rType$(FIRE.getName()), Rel.Direction.R, null, 5, 0),
                 new ETyped(5, "B", $ont.eType$(DRAGON.name), 0, 0)
         )).build();
@@ -759,7 +759,7 @@ public abstract class EntityRelationEntityIT implements BaseITMarker {
                 new ETyped(1, "A", $ont.eType$(DRAGON.name), 2, 0),
                 new Rel(2, $ont.rType$(FIRE.getName()), Rel.Direction.R, null, 3, 0),
                 new ETyped(3, "B", $ont.eType$(DRAGON.name), 4, 0),
-                new EProp(4, $ont.pType$(BIRTH_DATE.name), of(op, value))
+                new EProp(4, $ont.pTypeByName(BIRTH_DATE.name), of(op, value))
         )).build();
 
         long startingDate = sdf.parse("1980-01-01 00:00:00").getTime();

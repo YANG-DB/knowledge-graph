@@ -145,7 +145,7 @@ public class RelationFilterOpTranslationStrategy extends PlanOpTranslationStrate
     private Optional<Traversal> convertRelPropToTraversal(RelProp relProp, Ontology.Accessor ont) {
         if (!relProp.isAggregation()) {
             //row based constraint
-            Optional<Property> property = ont.$property(relProp.getpType());
+            Optional<Property> property = ont.$pType(relProp.getpType());
             if (property.isPresent()) {
                 if (relProp.getClass().equals(RelProp.class)) {
                     return Optional.of(__.start().has(property.get().getName(), ConversionUtil.convertConstraint(relProp.getCon())));

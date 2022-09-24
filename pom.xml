@@ -42,7 +42,7 @@
         <maven-surefire-plugin.version>2.22.0</maven-surefire-plugin.version>
         <maven-surefire-report-plugin.version>2.22.0</maven-surefire-report-plugin.version>
         <maven-jxr-plugin.version>2.5</maven-jxr-plugin.version>
-        <maven-release-plugin.version>3.0.0-M1</maven-release-plugin.version>
+        <maven-release-plugin.version>3.0.0-M7</maven-release-plugin.version>
         <maven-jar-plugin.version>3.0.2</maven-jar-plugin.version>
         <maven-checkstyle-plugin.version>2.12.1</maven-checkstyle-plugin.version>
         <maven-assembly-plugin.version>3.1.0</maven-assembly-plugin.version>
@@ -154,7 +154,7 @@
         <!-- test -->
         <junit.version>4.12</junit.version>
         <easymock.version>3.2</easymock.version>
-        <rest-assured.version>3.0.1</rest-assured.version>
+        <rest-assured.version>4.4.0</rest-assured.version>
         <mockito-core.version>3.12.4</mockito-core.version>
         <assertj.version>3.6.2</assertj.version>
         <jsonassert.version>1.4.0</jsonassert.version>
@@ -892,6 +892,10 @@
             </plugin>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-failsafe-plugin</artifactId>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-jar-plugin</artifactId>
             </plugin>
             <plugin>
@@ -991,9 +995,6 @@
                         <threadCount>1</threadCount>
                         <perCoreThreadCount>false</perCoreThreadCount>
                         <rerunFailingTestsCount>0</rerunFailingTestsCount>
-                        <includes>
-                            <include>**/*.java</include>
-                        </includes>
                         <argLine>
                             -Xmx1536m -XX:MaxPermSize=256m -Duser.timezone=${user.timezone}
                             -Dio.netty.tryReflectionSetAccessible=true
@@ -1127,6 +1128,11 @@
                 </plugin>
                 <plugin>
                     <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-failsafe-plugin</artifactId>
+                    <version>3.0.0-M7</version>
+                </plugin>
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
                     <artifactId>maven-surefire-report-plugin</artifactId>
                     <version>${maven-surefire-report-plugin.version}</version>
                 </plugin>
@@ -1227,6 +1233,5 @@
                 <module>domain</module>
             </modules>
         </profile>
-
     </profiles>
 </project>

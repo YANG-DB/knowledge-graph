@@ -9,9 +9,9 @@ package org.opensearch.graph.epb.plan.estimation.pattern;
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- * 
+ *
  *      http://www.apache.org/licenses/LICENSE-2.0
- * 
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -40,6 +40,7 @@ import org.opensearch.graph.model.execution.plan.entity.EntityOp;
 import org.opensearch.graph.model.execution.plan.entity.GoToEntityOp;
 import org.opensearch.graph.model.execution.plan.relation.RelationFilterOp;
 import org.opensearch.graph.model.execution.plan.relation.RelationOp;
+import scala.tools.nsc.doc.model.Object;
 
 import java.lang.reflect.Method;
 import java.util.*;
@@ -56,22 +57,16 @@ public class RegexPatternCostEstimator implements CostEstimator<Plan, PlanDetail
         return RegexPatternCostEstimator.Pattern.values();
     }
 
-    private static Map<String, Integer> getNamedGroups(java.util.regex.Pattern regex) {
-        try {
-            Method namedGroupsMethod = java.util.regex.Pattern.class.getDeclaredMethod("namedGroups");
-            namedGroupsMethod.setAccessible(true);
-
-            Map<String, Integer> namedGroups = null;
-            namedGroups = (Map<String, Integer>) namedGroupsMethod.invoke(regex);
-
-            if (namedGroups == null) {
-                throw new InternalError();
-            }
-
-            return Collections.unmodifiableMap(namedGroups);
-        } catch (Exception e) {
-            throw new RuntimeException(e);
+    private static Map<String, Integer> getNamedGroups(java.util.regex.Pattern regex,Matcher matcher) {
+        Map<String, Integer> namedGroups = new HashMap<>();
+        int foundCounter = 0;
+        for (PatternPart part : PatternPart.values()) {
+            try {
+                if(Objects.nonNull(matcher.group(part.value())))
+                    namedGroups.put(part.value,matcher.start(part.value));
+            }catch (IllegalArgumentException ignored){}//ignore group
         }
+        return Collections.unmodifiableMap(namedGroups);
     }
 
     static {
@@ -171,7 +166,7 @@ public class RegexPatternCostEstimator implements CostEstimator<Plan, PlanDetail
             java.util.regex.Pattern compile = regexPattern.getCompiledPattern();
             Matcher matcher = compile.matcher(opsString);
             if (matcher.find()) {
-                Map<PatternPart, PlanOp> patternParts = getStepPatternParts(planStep, getNamedGroups(compile), matcher);
+                Map<PatternPart, PlanOp> patternParts = getStepPatternParts(planStep, getNamedGroups(compile,matcher), matcher);
                 org.opensearch.graph.epb.plan.estimation.pattern.Pattern pattern = buildPattern(regexPattern, patternParts, plan);
                 PatternCostEstimator.Result<Plan, CountEstimatesCost> result = estimator.estimate(pattern, context);
                 newPlan = pattern.buildNewPlan(result, context.getPreviousCost());

@@ -1,5 +1,6 @@
 package org.opensearch.graph.stats;
 
+import org.junit.Ignore;
 import org.opensearch.graph.stats.model.bucket.BucketRange;
 import org.opensearch.graph.stats.model.bucket.BucketTerm;
 import org.opensearch.graph.stats.model.enums.DataType;
@@ -16,19 +17,21 @@ import org.opensearch.action.admin.indices.refresh.RefreshRequest;
 import org.junit.AfterClass;
 import org.junit.BeforeClass;
 import org.junit.Test;
+import org.opensearch.graph.test.BaseITMarker;
 import org.opensearch.graph.test.framework.index.MappingFileConfigurer;
 import org.opensearch.graph.test.framework.populator.SearchEngineDataPopulator;
 
 import java.util.*;
 
-import static org.opensearch.graph.stats.StatTestSuite.dataClient;
+import static org.opensearch.graph.stats.StatTestIT.dataClient;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
 /**
  * Created by benishue on 24/05/2017.
  */
-public class SearchStatsUtilTest {
+@Ignore
+public class SearchStatsUtilsIT  implements BaseITMarker{
     private static Iterable<Map<String, Object>> dragonsList;
 
     private static final int NUM_OF_DRAGONS_IN_INDEX = 1000;
@@ -238,7 +241,7 @@ public class SearchStatsUtilTest {
                 DRAGON_GENDERS,
                 DRAGON_ADDRESS_LENGTH);
 
-        new MappingFileConfigurer(DATA_INDEX_NAME, StatTestSuite.MAPPING_DATA_FILE_DRAGON_PATH).configure(dataClient);
+        new MappingFileConfigurer(DATA_INDEX_NAME, StatTestIT.MAPPING_DATA_FILE_DRAGON_PATH).configure(dataClient);
 
         new SearchEngineDataPopulator(
                 dataClient,

@@ -21,7 +21,7 @@ import static org.mockito.Matchers.argThat;
 /**
  * Created by lior.perry on 2/19/2018.
  */
-public abstract class BaseModuleInjectionTest {
+public abstract class BaseModuleInjectionIT {
     protected Injector injector;
     protected Config config;
     protected List<ModuleBase> modules;

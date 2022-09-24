@@ -72,7 +72,7 @@ public class NewGraphHierarchyTraversalCursor extends BaseCursor {
 
         this.context = context;
         this.ont = new Ontology.Accessor(context.getOntology());
-        this.typeProperty = this.ont.property$("type");
+        this.typeProperty = this.ont.pName$("type");
 
         this.includeEntities = context.getCursorRequest().getInclude().equals(CreateCursorRequest.Include.all) ||
                 context.getCursorRequest().getInclude().equals(CreateCursorRequest.Include.entities);
@@ -216,7 +216,7 @@ public class NewGraphHierarchyTraversalCursor extends BaseCursor {
 
     private Optional<Property> toProperty(VertexProperty vertexProperty) {
         return Stream.of(vertexProperty.key())
-                .map(key -> this.ont.property(key))
+                .map(key -> this.ont.pName(key))
                 .filter(Optional::isPresent)
                 .filter(property -> !property.get().getpType().equals(this.typeProperty.getpType()))
                 .map(property -> new Property(property.get().getpType(), "raw", vertexProperty.value()))

@@ -1,5 +1,6 @@
 package org.opensearch.graph.stats;
 
+import org.junit.Ignore;
 import org.opensearch.graph.stats.configuration.StatConfiguration;
 import org.opensearch.graph.stats.model.histogram.Histogram;
 import org.opensearch.graph.stats.model.histogram.HistogramDynamic;
@@ -9,19 +10,21 @@ import org.opensearch.action.admin.indices.refresh.RefreshRequest;
 import org.junit.AfterClass;
 import org.junit.BeforeClass;
 import org.junit.Test;
+import org.opensearch.graph.test.BaseITMarker;
 import org.opensearch.graph.test.framework.index.MappingFileConfigurer;
 import org.opensearch.graph.test.framework.populator.SearchEngineDataPopulator;
 
 import java.util.*;
 
-import static org.opensearch.graph.stats.StatTestSuite.*;
+import static org.opensearch.graph.stats.StatTestIT.*;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
 /**
  * Created by benishue on 08-Jun-17.
  */
-public class StatCalculatorDynamicFieldTest {
+@Ignore
+public class StatCalculatorDynamicFieldIT implements BaseITMarker {
     private static final int NUM_OF_DRAGONS_IN_INDEX_1 = 1000;
     private static final int NUM_OF_DRAGONS_IN_INDEX_2 = 555;
     private static final int NUM_OF_DRAGONS_IN_INDEX_3 = 200;

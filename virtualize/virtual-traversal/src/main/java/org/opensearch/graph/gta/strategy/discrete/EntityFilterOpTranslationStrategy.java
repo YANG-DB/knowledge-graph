@@ -40,10 +40,7 @@ import org.opensearch.graph.model.execution.plan.entity.EntityFilterOp;
 import org.opensearch.graph.model.execution.plan.entity.EntityOp;
 import org.opensearch.graph.model.ontology.Ontology;
 import org.opensearch.graph.model.ontology.Property;
-import org.opensearch.graph.model.query.entity.EConcrete;
-import org.opensearch.graph.model.query.entity.EEntityBase;
-import org.opensearch.graph.model.query.entity.ETyped;
-import org.opensearch.graph.model.query.entity.EUntyped;
+import org.opensearch.graph.model.query.entity.*;
 import org.opensearch.graph.model.query.properties.EProp;
 import org.opensearch.graph.model.query.properties.EPropGroup;
 import org.opensearch.graph.model.query.properties.RankingProp;
@@ -254,7 +251,7 @@ public class EntityFilterOpTranslationStrategy extends PlanOpTranslationStrategy
     }
 
     private Traversal convertEPropToTraversal(EEntityBase entity, EProp eProp, Ontology.Accessor ont) {
-        Optional<Property> property = ont.$property(entity,eProp.getpType());
+        Optional<Property> property = $property(ont, entity,eProp.getpType());
         if (!property.isPresent()) {
             return __.start();
         }
@@ -276,6 +273,14 @@ public class EntityFilterOpTranslationStrategy extends PlanOpTranslationStrategy
         return !Stream.of(vertexStep.getEdgeLabels())
                 .filter(edgeLabel -> edgeLabel.equals(GlobalConstants.Labels.PROMISE_FILTER))
                 .isEmpty();
+
+    }
+
+    private Optional<Property> $property(Ontology.Accessor ont, EEntityBase entity, String pType) {
+        if (entity instanceof Typed && ont.cascadingFieldPName(((Typed) entity).getTyped(), pType).isPresent()) {
+            return ont.$pType(((Typed) entity).getTyped(), pType);
+        }
+        return ont.$pType(pType);
 
     }
     //endregion

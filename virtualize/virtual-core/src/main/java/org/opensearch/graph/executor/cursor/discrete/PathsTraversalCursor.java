@@ -104,7 +104,7 @@ public class PathsTraversalCursor extends BaseCursor {
                     });
         }
 
-        this.typeProperty = this.ont.property$("type");
+        this.typeProperty = this.ont.pName$("type");
     }
     //endregion
 
@@ -208,7 +208,7 @@ public class PathsTraversalCursor extends BaseCursor {
 
     protected Optional<Property> toProperty(org.apache.tinkerpop.gremlin.structure.Property vertexProperty) {
         return Stream.of(vertexProperty.key())
-                .map(key -> this.ont.property(key))
+                .map(key -> this.ont.pName(key))
                 .filter(Optional::isPresent)
                 .filter(property -> !property.get().getpType().equals(this.typeProperty.getpType()))
                 .map(property -> new Property(property.get().getpType(), RAW, vertexProperty.value()))

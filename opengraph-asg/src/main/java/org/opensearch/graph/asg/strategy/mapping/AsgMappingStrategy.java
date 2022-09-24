@@ -104,7 +104,7 @@ public class AsgMappingStrategy implements AsgStrategy {
             case ENUM:
                 break;
             case PROPERTY:
-                Property property = targetAccessor.property$(fieldType._2);
+                Property property = targetAccessor.pName$(fieldType._2);
                 replaceByProperty(relationshipType, property, elements, query, context);
                 break;
         }
@@ -144,7 +144,7 @@ public class AsgMappingStrategy implements AsgStrategy {
             case ENUM:
                 break;
             case PROPERTY:
-                Property property = targetAccessor.property$(fieldType._2);
+                Property property = targetAccessor.pName$(fieldType._2);
                 replaceByProperty(entityType, property, elements, query, context);
                 break;
         }

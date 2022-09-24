@@ -140,7 +140,7 @@ public class RedundantSelectionFilterPlanExtensionStrategy implements PlanExtens
                     .toJavaList()
                     .forEach(p -> {
                 Optional<GraphRedundantPropertySchema> redundantVertexProperty = endSchema
-                        .getRedundantProperty(schemaProvider.getPropertySchema($ont.$property$(p.getpType()).getName()).get());
+                        .getRedundantProperty(schemaProvider.getPropertySchema($ont.pType$(p.getpType()).getName()).get());
                 if (redundantVertexProperty.isPresent()) {
                     RelProp relProp = RedundantSelectionRelProp.of(
                             maxEnum.addAndGet(1),

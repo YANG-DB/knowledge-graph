@@ -105,7 +105,7 @@ public class RelationFilterOpTranslationStrategy extends PlanOpTranslationStrate
     }
 
     private Traversal convertRelPropToTraversal(RelProp relProp, Ontology.Accessor ont) {
-        Optional<Property> property = ont.$property(relProp.getpType());
+        Optional<Property> property = ont.$pType(relProp.getpType());
         return property.<Traversal>map(property1 ->
                 __.has(SchematicRelProp.class.isAssignableFrom(relProp.getClass()) ?
                         ((SchematicRelProp)relProp).getSchematicName() :

@@ -234,7 +234,7 @@ public class TraversalWiringFactory implements WiringFactory {
             builder.currentIndex(pathContext.get(env.getExecutionStepInfo().getParent().getPath().getPathWithoutListEnd().toString()));
         }
         String name = env.getField().getName();
-        Property property = accessor.property$(name);
+        Property property = accessor.pName$(name);
         builder.eProp(property.getpType());
         return name;
     }
@@ -248,7 +248,7 @@ public class TraversalWiringFactory implements WiringFactory {
         if (pathContext.containsKey(env.getExecutionStepInfo().getParent().getPath().getPathWithoutListEnd().toString())) {
             builder.currentIndex(pathContext.get(env.getExecutionStepInfo().getParent().getPath().getPathWithoutListEnd().toString()));
         }
-        Property enumProp = accessor.property$(env.getField().getName());
+        Property enumProp = accessor.pName$(env.getField().getName());
         builder.eProp(env.getField().getName());
         //select first value since no matter which value selected for mock data
         return accessor.enumeratedType$(enumProp.getType()).getValues().get(0).getName();
@@ -348,7 +348,7 @@ public class TraversalWiringFactory implements WiringFactory {
     }
 
     private  void populateGraphValue(Ontology.Accessor accessor, Query.Builder builder, GraphQLFieldDefinition fldDef) {
-        Property property = accessor.property$(fldDef.getName());
+        Property property = accessor.pName$(fldDef.getName());
         builder.eProp(property.getpType());
     }
 

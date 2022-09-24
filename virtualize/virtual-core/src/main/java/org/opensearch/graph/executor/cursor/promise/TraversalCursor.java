@@ -71,7 +71,7 @@ public class TraversalCursor extends BaseCursor {
         super(context);
         this.ont = new Ontology.Accessor(context.getOntology());
         this.flatPlan = PlanUtil.flat(context.getQueryResource().getExecutionPlan().getPlan());
-        this.typeProperty = ont.property$("type");
+        this.typeProperty = ont.pName$("type");
     }
     //endregion
 
@@ -199,7 +199,7 @@ public class TraversalCursor extends BaseCursor {
     }
 
     private Property toProperty(VertexProperty vertexProperty) {
-        return new Property(ont.property$(vertexProperty.key()).getpType(), "raw", vertexProperty.value());
+        return new Property(ont.pName$(vertexProperty.key()).getpType(), "raw", vertexProperty.value());
     }
     //endregion
 

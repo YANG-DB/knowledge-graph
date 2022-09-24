@@ -1,9 +1,6 @@
 package org.opensearch.graph.stats;
 
-import org.junit.AfterClass;
-import org.junit.BeforeClass;
-import org.junit.Rule;
-import org.junit.Test;
+import org.junit.*;
 import org.junit.rules.ExpectedException;
 import org.opensearch.action.admin.indices.delete.DeleteIndexRequest;
 import org.opensearch.action.admin.indices.refresh.RefreshRequest;
@@ -11,6 +8,7 @@ import org.opensearch.graph.stats.configuration.StatConfiguration;
 import org.opensearch.graph.stats.util.SearchStatsUtil;
 import org.opensearch.graph.stats.util.StatTestUtil;
 import org.opensearch.graph.stats.util.StatUtil;
+import org.opensearch.graph.test.BaseITMarker;
 import org.opensearch.graph.test.framework.index.MappingFileConfigurer;
 import org.opensearch.graph.test.framework.populator.SearchEngineDataPopulator;
 
@@ -20,12 +18,13 @@ import java.util.Map;
 import java.util.Optional;
 
 import static org.junit.Assert.*;
-import static org.opensearch.graph.stats.StatTestSuite.*;
+import static org.opensearch.graph.stats.StatTestIT.*;
 
 /**
  * Created by benishue on 04-May-17.
  */
-public class StatCalculatorTest {
+@Ignore
+public class StatCalculatorIT implements BaseITMarker {
     private static final String CONFIGURATION_FILE_PATH = "statistics.test.properties";
 
     private static final int NUM_OF_DRAGONS_IN_INDEX_1 = 1000;

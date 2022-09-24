@@ -66,7 +66,7 @@ public class ConstraintTypeTransformationAsgStrategy implements AsgStrategy {
     private void applyExpressionTransformation(AsgStrategyContext context, EBase eBase, Class klass) {
         if (klass == EProp.class) {
             EProp eProp = (EProp) eBase;
-            Optional<Property> property = context.getOntologyAccessor().$property(eProp.getpType());
+            Optional<Property> property = context.getOntologyAccessor().$pType(eProp.getpType());
 
             ConstraintOp op = eProp.getCon().getOp();
             if (property.isPresent() && context.getOntologyAccessor().enumeratedType(property.get().getType()).isPresent()) {
@@ -84,7 +84,7 @@ public class ConstraintTypeTransformationAsgStrategy implements AsgStrategy {
         }
         if (klass == RelProp.class) {
             RelProp relProp = (RelProp) eBase;
-            Optional<Property> property = context.getOntologyAccessor().$property(relProp.getpType());
+            Optional<Property> property = context.getOntologyAccessor().$pType(relProp.getpType());
             if (property.isPresent() && context.getOntologyAccessor().enumeratedType(property.get().getType()).isPresent()) {
                 //replace string content with enum value
                 Constraint newCon = relProp.getCon().clone();

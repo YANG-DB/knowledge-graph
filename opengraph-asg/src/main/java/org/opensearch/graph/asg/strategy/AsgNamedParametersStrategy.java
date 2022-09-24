@@ -122,7 +122,7 @@ public class AsgNamedParametersStrategy implements AsgStrategy {
     }
 
     private Object parseValue(EProp eProp, Object exp, NamedParameter namedParameter) {
-        Optional<Property> property = context.getOntologyAccessor().$property(eProp.getpType());
+        Optional<Property> property = context.getOntologyAccessor().$pType(eProp.getpType());
 
         if (exp == null)
             return namedParameter.getValue();

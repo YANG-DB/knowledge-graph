@@ -143,7 +143,7 @@ public class RedundantFilterPlanExtensionStrategy implements PlanExtensionStrate
                     Stream.ofAll(vTypes).map(eType -> $ont.$entity$(eType).getName()).toJavaList());
 
             Optional<GraphRedundantPropertySchema> redundantTypeProperty = endSchema
-                    .getRedundantProperty(schemaProvider.getPropertySchema($ont.$property$(OntologyFinalizer.TYPE_FIELD_PTYPE).getName()).get());
+                    .getRedundantProperty(schemaProvider.getPropertySchema($ont.pType$(OntologyFinalizer.TYPE_FIELD_PTYPE).getName()).get());
 
             if(redundantTypeProperty.isPresent()) {
                 RelProp relProp = RedundantRelProp.of(0, redundantTypeProperty.get().getPropertyRedundantName(),
@@ -157,7 +157,7 @@ public class RedundantFilterPlanExtensionStrategy implements PlanExtensionStrate
             Constraint constraint = Constraint.of(ConstraintOp.eq, eConcrete.geteID());
 
             Optional<GraphRedundantPropertySchema> redundantIdProperty = endSchema
-                    .getRedundantProperty(schemaProvider.getPropertySchema($ont.$property$(OntologyFinalizer.ID_FIELD_PTYPE).getName()).get());
+                    .getRedundantProperty(schemaProvider.getPropertySchema($ont.pType$(OntologyFinalizer.ID_FIELD_PTYPE).getName()).get());
 
             if(redundantIdProperty.isPresent()) {
                 RelProp relProp = RedundantRelProp.of(0, redundantIdProperty.get().getPropertyRedundantName(),
@@ -219,7 +219,7 @@ public class RedundantFilterPlanExtensionStrategy implements PlanExtensionStrate
         boolean fullyRedundantProps =
                 Stream.ofAll(ePropGroup.getProps())
                 .filter(eProp -> eProp.getCon() != null)
-                .map(eProp -> endSchema.getRedundantProperty(schemaProvider.getPropertySchema($ont.$property$(eProp.getpType()).getName()).get()))
+                .map(eProp -> endSchema.getRedundantProperty(schemaProvider.getPropertySchema($ont.pType$(eProp.getpType()).getName()).get()))
                 .filter(redudantProp -> !redudantProp.isPresent())
                 .isEmpty();
 
@@ -253,7 +253,7 @@ public class RedundantFilterPlanExtensionStrategy implements PlanExtensionStrate
         if (thisRedundancy.equals(Redundancy.safePartial) || thisRedundancy.equals(Redundancy.full)) {
             for (EProp eProp : Stream.ofAll(ePropGroup.getProps()).filter(eProp -> eProp.getCon() != null)) {
                 Optional<GraphRedundantPropertySchema> redundantVertexProperty = endSchema
-                        .getRedundantProperty(schemaProvider.getPropertySchema($ont.$property$(eProp.getpType()).getName()).get());
+                        .getRedundantProperty(schemaProvider.getPropertySchema($ont.pType$(eProp.getpType()).getName()).get());
                 redundantVertexProperty.ifPresent(graphRedundantPropertySchema -> redundantRelProps.add(RedundantRelProp.of(
                         0,
                         graphRedundantPropertySchema.getPropertyRedundantName(),
@@ -286,7 +286,7 @@ public class RedundantFilterPlanExtensionStrategy implements PlanExtensionStrate
 
         List<EProp> nonRedundantEProps = new ArrayList<>();
         for (EProp eProp : Stream.ofAll(ePropGroup.getProps()).filter(eProp -> eProp.getCon() != null)) {
-            if (!endSchema.getRedundantProperty(schemaProvider.getPropertySchema($ont.$property$(eProp.getpType()).getName()).get()).isPresent()) {
+            if (!endSchema.getRedundantProperty(schemaProvider.getPropertySchema($ont.pType$(eProp.getpType()).getName()).get()).isPresent()) {
                 nonRedundantEProps.add(eProp);
             }
         }
