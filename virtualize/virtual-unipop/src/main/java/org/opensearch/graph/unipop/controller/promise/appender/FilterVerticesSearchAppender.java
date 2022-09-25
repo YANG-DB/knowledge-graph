@@ -2,7 +2,7 @@ package org.opensearch.graph.unipop.controller.promise.appender;
 
 /*-
  * #%L
- * fuse-dv-unipop
+ * virtual-unipop
  * %%
  * Copyright (C) 2016 - 2022 org.opensearch
  * %%
@@ -20,6 +20,10 @@ package org.opensearch.graph.unipop.controller.promise.appender;
  * #L%
  */
 
+
+
+
+
 import org.opensearch.graph.unipop.controller.common.appender.SearchAppender;
 import org.opensearch.graph.unipop.controller.common.context.VertexControllerContext;
 import org.opensearch.graph.unipop.controller.search.AggregationBuilder;
@@ -33,9 +37,6 @@ import org.apache.tinkerpop.gremlin.process.traversal.dsl.graph.__;
 import org.apache.tinkerpop.gremlin.structure.T;
 import org.apache.tinkerpop.gremlin.structure.Vertex;
 
-/**
- * Created by Elad on 4/30/2017.
- */
 public class FilterVerticesSearchAppender implements SearchAppender<VertexControllerContext> {
 
     @Override

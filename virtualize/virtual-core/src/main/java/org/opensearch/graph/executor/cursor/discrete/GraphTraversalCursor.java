@@ -20,6 +20,10 @@ package org.opensearch.graph.executor.cursor.discrete;
  * #L%
  */
 
+
+
+
+
 import org.opensearch.graph.dispatcher.cursor.Cursor;
 import org.opensearch.graph.dispatcher.cursor.CursorFactory;
 import org.opensearch.graph.executor.cursor.BaseCursor;
@@ -36,9 +40,6 @@ import java.util.*;
 
 import static org.opensearch.graph.executor.cursor.discrete.CalculatedFieldsUtil.findCalculaedFields;
 
-/**
- * Created by roman.margolis on 02/10/2017.
- */
 public class GraphTraversalCursor extends BaseCursor {
     //region Factory
     public static class Factory implements CursorFactory {
@@ -159,23 +160,19 @@ public class GraphTraversalCursor extends BaseCursor {
     }
 
     private int agg(List<Relationship> relationships, CalculatedFieldProjection con) {
+        //todo implement correctly !!
         switch (con.getExpression()) {
             case count:
                 return relationships.size();
             case max:
-                //todo what ?!?!?
                 return relationships.size();
             case min:
-                //todo what ?!?!?
                 return relationships.size();
             case avg:
-                //todo what ?!?!?
                 return relationships.size();
             case distinct:
-                //todo what ?!?!?
                 return relationships.size();
             case sum:
-                //todo what ?!?!?
                 return relationships.size();
             default:
                 return relationships.size();

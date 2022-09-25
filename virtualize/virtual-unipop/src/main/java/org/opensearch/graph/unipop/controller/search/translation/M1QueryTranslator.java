@@ -2,7 +2,7 @@ package org.opensearch.graph.unipop.controller.search.translation;
 
 /*-
  * #%L
- * fuse-dv-unipop
+ * virtual-unipop
  * %%
  * Copyright (C) 2016 - 2022 org.opensearch
  * %%
@@ -20,9 +20,10 @@ package org.opensearch.graph.unipop.controller.search.translation;
  * #L%
  */
 
-/**
- * Created by Roman on 18/05/2017.
- */
+
+
+
+
 public class M1QueryTranslator extends CompositeQueryTranslator {
     //region Static
     public static M1QueryTranslator instance = new M1QueryTranslator();

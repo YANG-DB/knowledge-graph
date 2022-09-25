@@ -2,7 +2,7 @@ package org.opensearch.graph.unipop.schemaProviders;
 
 /*-
  * #%L
- * fuse-dv-unipop
+ * virtual-unipop
  * %%
  * Copyright (C) 2016 - 2022 org.opensearch
  * %%
@@ -20,9 +20,10 @@ package org.opensearch.graph.unipop.schemaProviders;
  * #L%
  */
 
-/**
- * Created by roman on 3/19/2015.
- */
+
+
+
+
 public interface GraphElementRouting {
     GraphElementPropertySchema getRoutingProperty();
 

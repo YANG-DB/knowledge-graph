@@ -22,6 +22,10 @@
 
 
 
+
+
+
+
 //
 //import org.apache.tinkerpop.gremlin.process.traversal.Scope;
 //import org.apache.tinkerpop.gremlin.process.traversal.Traversal;
@@ -34,9 +38,6 @@
 //import org.apache.tinkerpop.gremlin.structure.Graph;
 //import org.unipop.structure.UniGraph;
 //
-///**
-// * Created by Roman on 11/12/2015.
-// */
 //public class UniGraphGroupCountStepStrategy extends AbstractTraversalStrategy<TraversalStrategy.ProviderOptimizationStrategy> implements TraversalStrategy.ProviderOptimizationStrategy {
 //    //region AbstractTraversalStrategy Implementation
 //    @Override

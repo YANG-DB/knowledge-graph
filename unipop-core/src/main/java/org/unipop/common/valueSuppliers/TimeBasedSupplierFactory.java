@@ -23,11 +23,12 @@ package org.unipop.common.valueSuppliers;
 
 
 
+
+
+
+
 import java.util.function.Supplier;
 
-/**
- * Created by Roman on 8/21/2018.
- */
 public abstract class TimeBasedSupplierFactory implements Supplier<Supplier<Integer>> {
     //region Constructors
     public TimeBasedSupplierFactory() {

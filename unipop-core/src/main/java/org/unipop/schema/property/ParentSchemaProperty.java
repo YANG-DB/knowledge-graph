@@ -23,15 +23,16 @@ package org.unipop.schema.property;
 
 
 
+
+
+
+
 import java.util.Collection;
 import java.util.Collections;
 import java.util.Map;
 import java.util.Set;
 import java.util.stream.Collectors;
 
-/**
- * Created by sbarzilay on 8/2/16.
- */
 public interface ParentSchemaProperty extends PropertySchema{
     Collection<PropertySchema> getChildren();
 

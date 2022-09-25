@@ -9,9 +9,9 @@ package org.opensearch.graph.executor.cursor.discrete;
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- *
+ * 
  *      http://www.apache.org/licenses/LICENSE-2.0
- *
+ * 
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -19,6 +19,10 @@ package org.opensearch.graph.executor.cursor.discrete;
  * limitations under the License.
  * #L%
  */
+
+
+
+
 
 import org.opensearch.graph.dispatcher.cursor.Cursor;
 import org.opensearch.graph.dispatcher.cursor.CursorFactory;
@@ -46,9 +50,6 @@ import java.util.*;
 
 import static org.opensearch.graph.model.results.AssignmentsQueryResult.Builder.instance;
 
-/**
- * Created by roman.margolis on 02/10/2017.
- */
 public class PathsTraversalCursor extends BaseCursor {
 
     public static final String RAW = "raw";
@@ -103,7 +104,7 @@ public class PathsTraversalCursor extends BaseCursor {
                     });
         }
 
-        this.typeProperty = this.ont.property$("type");
+        this.typeProperty = this.ont.pName$("type");
     }
     //endregion
 
@@ -207,7 +208,7 @@ public class PathsTraversalCursor extends BaseCursor {
 
     protected Optional<Property> toProperty(org.apache.tinkerpop.gremlin.structure.Property vertexProperty) {
         return Stream.of(vertexProperty.key())
-                .map(key -> this.ont.property(key))
+                .map(key -> this.ont.pName(key))
                 .filter(Optional::isPresent)
                 .filter(property -> !property.get().getpType().equals(this.typeProperty.getpType()))
                 .map(property -> new Property(property.get().getpType(), RAW, vertexProperty.value()))

@@ -2,7 +2,7 @@ package org.opensearch.graph.unipop.controller.common.context;
 
 /*-
  * #%L
- * fuse-dv-unipop
+ * virtual-unipop
  * %%
  * Copyright (C) 2016 - 2022 org.opensearch
  * %%
@@ -20,11 +20,12 @@ package org.opensearch.graph.unipop.controller.common.context;
  * #L%
  */
 
+
+
+
+
 import org.opensearch.graph.unipop.schemaProviders.GraphElementSchemaProvider;
 
-/**
- * Created by roman.margolis on 12/09/2017.
- */
 public interface SchemaProviderContext {
     GraphElementSchemaProvider getSchemaProvider();
 }

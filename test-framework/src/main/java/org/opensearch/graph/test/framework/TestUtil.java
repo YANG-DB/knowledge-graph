@@ -20,11 +20,12 @@ package org.opensearch.graph.test.framework;
  * #L%
  */
 
+
+
+
+
 import java.io.File;
 
-/**
- * Created by moti on 3/27/2017.
- */
 public class TestUtil {
     public static void deleteFolder(String folder) {
         File folderFile = new File(folder);

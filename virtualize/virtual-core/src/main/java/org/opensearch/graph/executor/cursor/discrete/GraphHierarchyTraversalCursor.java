@@ -20,6 +20,10 @@ package org.opensearch.graph.executor.cursor.discrete;
  * #L%
  */
 
+
+
+
+
 import org.opensearch.graph.dispatcher.cursor.Cursor;
 import org.opensearch.graph.dispatcher.cursor.CursorFactory;
 import org.opensearch.graph.executor.cursor.BaseCursor;
@@ -37,9 +41,6 @@ import java.util.*;
 
 import static org.opensearch.graph.model.results.AssignmentsQueryResult.Builder.instance;
 
-/**
- * Created by roman.margolis on 11/03/2018.
- */
 public class GraphHierarchyTraversalCursor extends BaseCursor {
     //region Factory
     public static class Factory implements CursorFactory {

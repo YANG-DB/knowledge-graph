@@ -9,9 +9,9 @@ package org.opensearch.graph.executor.ontology.schema.load;
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- *
+ * 
  *      http://www.apache.org/licenses/LICENSE-2.0
- *
+ * 
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -19,6 +19,10 @@ package org.opensearch.graph.executor.ontology.schema.load;
  * limitations under the License.
  * #L%
  */
+
+
+
+
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.node.ArrayNode;
@@ -30,13 +34,13 @@ import org.opensearch.graph.dispatcher.ontology.IndexProviderFactory;
 import org.opensearch.graph.dispatcher.ontology.OntologyProvider;
 import org.opensearch.graph.executor.ontology.DataTransformer;
 import org.opensearch.graph.executor.ontology.schema.RawSchema;
-import org.opensearch.graph.executor.opensearch.ElasticIndexProviderMappingFactory;
+import org.opensearch.graph.executor.opensearch.EngineIndexProviderMappingFactory;
 import org.opensearch.graph.model.Range;
 import org.opensearch.graph.model.logical.LogicalEdge;
 import org.opensearch.graph.model.logical.LogicalGraphModel;
 import org.opensearch.graph.model.logical.LogicalNode;
 import org.opensearch.graph.model.ontology.Ontology;
-import org.opensearch.graph.model.resourceInfo.FuseError;
+import org.opensearch.graph.model.resourceInfo.GraphError;
 import org.opensearch.graph.model.schema.Entity;
 import org.opensearch.graph.model.schema.IndexProvider;
 import org.opensearch.graph.model.schema.Redundant;
@@ -54,9 +58,6 @@ import java.util.stream.Collectors;
 
 import static org.opensearch.graph.executor.ontology.schema.load.DataLoaderUtils.parseValue;
 
-/**
- * translator that takes the specific ontology with the actual schema and translates the logical graph model into a set of (schematic according to real mapping) elastic documents
- */
 public class EntityTransformer implements DataTransformer<DataTransformerContext<LogicalGraphModel>, LogicalGraphModel> {
 
 
@@ -71,7 +72,7 @@ public class EntityTransformer implements DataTransformer<DataTransformerContext
     public EntityTransformer(Config config, OntologyProvider ontology, IndexProviderFactory indexProvider, RawSchema schema, IdGeneratorDriver<Range> idGenerator, Client client) {
         String assembly = config.getString("assembly");
         this.accessor = new Ontology.Accessor(ontology.get(assembly).orElseThrow(
-                () -> new FuseError.FuseErrorException(new FuseError("No Ontology present for assembly", "No Ontology present for assembly" + assembly))));
+                () -> new GraphError.GraphErrorException(new GraphError("No Ontology present for assembly", "No Ontology present for assembly" + assembly))));
         //if no index provider found with assembly name - generate default one accoring to ontology and simple Static Index Partitioning strategy
         this.indexProvider = indexProvider.get(assembly).orElseGet(() -> IndexProvider.Builder.generate(accessor.get()));
         this.schema = schema;
@@ -104,12 +105,12 @@ public class EntityTransformer implements DataTransformer<DataTransformerContext
         try {
             ObjectNode element = mapper.createObjectNode();
             Relation relation = indexProvider.getRelation(edge.label())
-                    .orElseThrow(() -> new FuseError.FuseErrorException(new FuseError("Logical Graph Transformation Error", "No matching edge found with label " + edge.label())));
+                    .orElseThrow(() -> new GraphError.GraphErrorException(new GraphError("Logical Graph Transformation Error", "No matching edge found with label " + edge.label())));
             //put classifiers
             String id = String.format("%s.%s", edge.getId(), direction);
-            element.put(ElasticIndexProviderMappingFactory.ID, id);
-            element.put(ElasticIndexProviderMappingFactory.TYPE, relation.getType());
-            element.put(ElasticIndexProviderMappingFactory.DIRECTION, direction);
+            element.put(EngineIndexProviderMappingFactory.ID, id);
+            element.put(EngineIndexProviderMappingFactory.TYPE, relation.getType().getName());
+            element.put(EngineIndexProviderMappingFactory.DIRECTION, direction);
 
             //populate metadata
             populateMetadataFields(mapper, indexProvider, accessor, context, edge, element);
@@ -122,10 +123,10 @@ public class EntityTransformer implements DataTransformer<DataTransformerContext
             //in case of a partition field - set in the document builder
             String field = relation.getProps().getPartitionField();
             if (field != null)
-                partition = Optional.of(new Tuple2<>(field, parseValue(accessor.property$(field).getType(), edge.getProperty(field), Utils.sdf).toString()));
+                partition = Optional.of(new Tuple2<>(field, parseValue(accessor.pName$(field).getType(), edge.getProperty(field), Utils.sdf).toString()));
 
-            return new DocumentBuilder(element, id, relation.getType(), Optional.empty(), partition);
-        } catch (FuseError.FuseErrorException e) {
+            return new DocumentBuilder(element, id, relation.getType().getName(), Optional.empty(), partition);
+        } catch (GraphError.GraphErrorException e) {
             return new DocumentBuilder(e.getError());
         }
     }
@@ -142,21 +143,21 @@ public class EntityTransformer implements DataTransformer<DataTransformerContext
         try {
             ObjectNode element = mapper.createObjectNode();
             Entity entity = indexProvider.getEntity(node.label())
-                    .orElseThrow(() -> new FuseError.FuseErrorException(new FuseError("Logical Graph Transformation Error", "No matching node found with label " + node.label())));
+                    .orElseThrow(() -> new GraphError.GraphErrorException(new GraphError("Logical Graph Transformation Error", "No matching node found with label " + node.label())));
             //translate entity
             translateEntity(mapper, indexProvider, accessor, context, node, element, entity);
 
-            return new DocumentBuilder(element, node.getId(), entity.getType(), Optional.empty());
-        } catch (FuseError.FuseErrorException e) {
+            return new DocumentBuilder(element, node.getId(), entity.getType().getName(), Optional.empty());
+        } catch (GraphError.GraphErrorException e) {
             return new DocumentBuilder(e.getError());
         }
     }
 
     static ObjectNode populate(ObjectMapper mapper, Ontology.Accessor accessor, IndexProvider indexProvider, DataTransformerContext<LogicalGraphModel> context, ObjectNode element, Map.Entry<String, Object> m) {
-        String pType = accessor.property$(m.getKey()).getpType();
-        String type = accessor.property$(m.getKey()).getType();
+        String pType = accessor.pName$(m.getKey()).getpType();
+        String type = accessor.pName$(m.getKey()).getType();
 
-        Object result = parseValue(accessor.property$(m.getKey()).getType(), m.getValue(), Utils.sdf);
+        Object result = parseValue(accessor.pName$(m.getKey()).getType(), m.getValue(), Utils.sdf);
 
         //case of primitive type
         if (String.class.isAssignableFrom(result.getClass())) {
@@ -193,8 +194,8 @@ public class EntityTransformer implements DataTransformer<DataTransformerContext
     }
 
     static void translateEntity(ObjectMapper mapper, IndexProvider indexProvider, Ontology.Accessor accessor, DataTransformerContext<LogicalGraphModel> context, LogicalNode node, ObjectNode element, Entity entity) {
-        element.put(ElasticIndexProviderMappingFactory.ID, node.getId());
-        element.put(ElasticIndexProviderMappingFactory.TYPE, entity.getType());
+        element.put(EngineIndexProviderMappingFactory.ID, node.getId());
+        element.put(EngineIndexProviderMappingFactory.TYPE, entity.getType().getName());
 
         //populate metadata
         populateMetadataFields(mapper, indexProvider, accessor, context, node, element);
@@ -243,7 +244,7 @@ public class EntityTransformer implements DataTransformer<DataTransformerContext
     public static void populateFields(ObjectMapper mapper, IndexProvider indexProvider, Ontology.Accessor accessor, DataTransformerContext<LogicalGraphModel> context, LogicalNode node, Entity entity, ObjectNode element) {
         //todo check the structure of the index
         switch (entity.getMapping()) {
-            case ElasticIndexProviderMappingFactory.CHILD:
+            case EngineIndexProviderMappingFactory.CHILD:
             case Utils.INDEX:
                 //populate properties
                 node.fields().entrySet()
@@ -268,14 +269,14 @@ public class EntityTransformer implements DataTransformer<DataTransformerContext
         //populate redundant fields A
         switch (direction) {
             case "out":
-                element.put(ElasticIndexProviderMappingFactory.ENTITY_A, populateSide(ElasticIndexProviderMappingFactory.ENTITY_A, context, edge.getSource(), relation));
+                element.put(EngineIndexProviderMappingFactory.ENTITY_A, populateSide(EngineIndexProviderMappingFactory.ENTITY_A, context, edge.getSource(), relation));
                 //populate redundant fields B
-                element.put(ElasticIndexProviderMappingFactory.ENTITY_B, populateSide(ElasticIndexProviderMappingFactory.ENTITY_B, context, edge.getTarget(), relation));
+                element.put(EngineIndexProviderMappingFactory.ENTITY_B, populateSide(EngineIndexProviderMappingFactory.ENTITY_B, context, edge.getTarget(), relation));
                 break;
             case "in":
-                element.put(ElasticIndexProviderMappingFactory.ENTITY_B, populateSide(ElasticIndexProviderMappingFactory.ENTITY_A, context, edge.getSource(), relation));
+                element.put(EngineIndexProviderMappingFactory.ENTITY_B, populateSide(EngineIndexProviderMappingFactory.ENTITY_A, context, edge.getSource(), relation));
                 //populate redundant fields B
-                element.put(ElasticIndexProviderMappingFactory.ENTITY_A, populateSide(ElasticIndexProviderMappingFactory.ENTITY_B, context, edge.getTarget(), relation));
+                element.put(EngineIndexProviderMappingFactory.ENTITY_A, populateSide(EngineIndexProviderMappingFactory.ENTITY_B, context, edge.getTarget(), relation));
                 break;
         }
 
@@ -309,16 +310,16 @@ public class EntityTransformer implements DataTransformer<DataTransformerContext
         ObjectNode entitySide = mapper.createObjectNode();
         Optional<LogicalNode> source = nodeById(context, sideId);
         if (!source.isPresent()) {
-            throw new FuseError.FuseErrorException(new FuseError("Logical Graph Transformation Error", "No matching node found with sideId " + sideId));
+            throw new GraphError.GraphErrorException(new GraphError("Logical Graph Transformation Error", "No matching node found with sideId " + sideId));
         }
 
         //get type (label) of the side node
         Entity entity = indexProvider.getEntity(source.get().label())
-                .orElseThrow(() -> new FuseError.FuseErrorException(new FuseError("Logical Graph Transformation Error", "No matching node found with label " + source.get().label())));
+                .orElseThrow(() -> new GraphError.GraphErrorException(new GraphError("Logical Graph Transformation Error", "No matching node found with label " + source.get().label())));
 
         //put classifiers
-        entitySide.put(ElasticIndexProviderMappingFactory.ID, source.get().getId());
-        entitySide.put(ElasticIndexProviderMappingFactory.TYPE, entity.getType());
+        entitySide.put(EngineIndexProviderMappingFactory.ID, source.get().getId());
+        entitySide.put(EngineIndexProviderMappingFactory.TYPE, entity.getType().getName());
 
         List<Redundant> redundant = relation.getRedundant(side);
         redundant.forEach(r -> populateRedundantField(r, source.get(), entitySide));

@@ -2,7 +2,7 @@ package org.opensearch.graph.unipop.process;
 
 /*-
  * #%L
- * fuse-dv-unipop
+ * virtual-unipop
  * %%
  * Copyright (C) 2016 - 2022 org.opensearch
  * %%
@@ -20,6 +20,10 @@ package org.opensearch.graph.unipop.process;
  * #L%
  */
 
+
+
+
+
 import javaslang.collection.Stream;
 import org.apache.tinkerpop.gremlin.process.traversal.Traversal;
 import org.apache.tinkerpop.gremlin.process.traversal.Traverser;
@@ -32,9 +36,6 @@ import java.util.*;
 import java.util.function.BiFunction;
 import java.util.function.Supplier;
 
-/**
- * Created by Roman on 7/2/2017.
- */
 public class JoinStep<S, E extends Element> extends AbstractStep<S, E> implements TraversalParent, ByModulating {
     //region Constructors
     public JoinStep(Traversal.Admin traversal) {

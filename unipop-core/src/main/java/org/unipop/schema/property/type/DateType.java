@@ -23,15 +23,16 @@ package org.unipop.schema.property.type;
 
 
 
+
+
+
+
 import org.apache.tinkerpop.gremlin.process.traversal.Compare;
 import org.apache.tinkerpop.gremlin.process.traversal.P;
 import org.unipop.process.predicate.Date;
 
 import java.util.function.BiPredicate;
 
-/**
- * Created by sbarzilay on 8/19/16.
- */
 public class DateType implements PropertyType {
     @Override
     public String getType() {

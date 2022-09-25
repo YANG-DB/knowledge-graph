@@ -4,7 +4,7 @@ package org.opensearch.graph.model.date;
  * #%L
  * opengraph-model
  * %%
- * Copyright (C) 2016 - 2021 The YangDb Graph Database Project
+ * Copyright (C) 2016 - 2022 org.opensearch
  * %%
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -20,17 +20,15 @@ package org.opensearch.graph.model.date;
  * #L%
  */
 
+
+
+
+
 import java.time.LocalDateTime;
 import java.time.OffsetDateTime;
 import java.util.Calendar;
 import java.util.Date;
 
-/**
- * This is an convenience utils for {@link DateParser}.
- *
- * @author sulin
- * @since 2019-09-15 11:19:31
- */
 public final class DateParserUtils {
 
     private DateParserUtils() {

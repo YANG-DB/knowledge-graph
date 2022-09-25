@@ -4,7 +4,7 @@ package org.opensearch.graph.model.date;
  * #%L
  * opengraph-model
  * %%
- * Copyright (C) 2016 - 2021 The YangDb Graph Database Project
+ * Copyright (C) 2016 - 2022 org.opensearch
  * %%
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -20,14 +20,12 @@ package org.opensearch.graph.model.date;
  * #L%
  */
 
+
+
+
+
 import java.util.*;
 
-/**
- * Predefine some date parser's rules, and support to customize new rules.
- *
- * @author sulin
- * @since 2019-09-12 14:34:29
- */
 public final class DateParserBuilder {
 
     static final String[] months = {

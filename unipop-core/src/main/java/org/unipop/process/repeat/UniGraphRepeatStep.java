@@ -23,6 +23,10 @@ package org.unipop.process.repeat;
 
 
 
+
+
+
+
 import com.google.common.collect.Iterators;
 import org.apache.tinkerpop.gremlin.process.traversal.Traversal;
 import org.apache.tinkerpop.gremlin.process.traversal.Traverser;
@@ -38,9 +42,6 @@ import org.unipop.structure.UniGraph;
 
 import java.util.*;
 
-/**
- * Created by TechUser on 6/27/2016.
- */
 public class UniGraphRepeatStep<S> extends UniBulkStep<S, S> implements TraversalParent {
     private Traversal.Admin<S, S> repeatTraversal = null;
     private Traversal.Admin<S, ?> untilTraversal = null;

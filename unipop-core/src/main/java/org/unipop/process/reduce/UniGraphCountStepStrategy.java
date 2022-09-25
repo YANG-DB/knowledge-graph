@@ -22,6 +22,10 @@
 
 
 
+
+
+
+
 //
 //import org.apache.tinkerpop.gremlin.process.traversal.Step;
 //import org.apache.tinkerpop.gremlin.process.traversal.Traversal;
@@ -39,9 +43,6 @@
 //
 //import java.util.*;
 //
-///**
-// * Created by Gilad on 02/11/2015.
-// */
 //public class UniGraphCountStepStrategy extends AbstractTraversalStrategy<TraversalStrategy.ProviderOptimizationStrategy> implements TraversalStrategy.ProviderOptimizationStrategy {
 //    //region AbstractTraversalStrategy Implementation
 //    @Override

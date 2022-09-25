@@ -2,7 +2,7 @@ package org.opensearch.graph.unipop.promise;
 
 /*-
  * #%L
- * fuse-dv-unipop
+ * virtual-unipop
  * %%
  * Copyright (C) 2016 - 2022 org.opensearch
  * %%
@@ -20,6 +20,10 @@ package org.opensearch.graph.unipop.promise;
  * #L%
  */
 
+
+
+
+
 import org.apache.commons.configuration.Configuration;
 import org.apache.tinkerpop.gremlin.process.computer.GraphComputer;
 import org.apache.tinkerpop.gremlin.structure.Edge;
@@ -29,9 +33,6 @@ import org.apache.tinkerpop.gremlin.structure.Vertex;
 
 import java.util.Iterator;
 
-/**
- * Created by benishue on 08-Mar-17.
- */
 public class PromiseGraph implements Graph {
     @Override
     public Vertex addVertex(Object... keyValues) {

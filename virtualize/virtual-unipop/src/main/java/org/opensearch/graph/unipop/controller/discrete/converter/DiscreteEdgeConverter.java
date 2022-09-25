@@ -2,16 +2,16 @@ package org.opensearch.graph.unipop.controller.discrete.converter;
 
 /*-
  * #%L
- * fuse-dv-unipop
+ * virtual-unipop
  * %%
  * Copyright (C) 2016 - 2022 org.opensearch
  * %%
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- *
+ * 
  *      http://www.apache.org/licenses/LICENSE-2.0
- *
+ * 
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -19,6 +19,10 @@ package org.opensearch.graph.unipop.controller.discrete.converter;
  * limitations under the License.
  * #L%
  */
+
+
+
+
 
 import org.opensearch.graph.model.GlobalConstants;
 import org.opensearch.graph.unipop.controller.common.context.VertexControllerContext;
@@ -45,9 +49,6 @@ import java.util.*;
 
 import static org.opensearch.graph.unipop.controller.common.appender.EdgeUtils.getLabel;
 
-/**
- * Created by roman.margolis on 14/09/2017.
- */
 public class DiscreteEdgeConverter<E extends Element> implements ElementConverter<DataItem, E> {
     //region Constructors
     public DiscreteEdgeConverter(VertexControllerContext context, Profiler profiler) {
@@ -117,8 +118,8 @@ public class DiscreteEdgeConverter<E extends Element> implements ElementConverte
                     inV = new DiscreteVertex(inId, inEndSchema.getLabel().get(), context.getGraph(), inVertexProperties);
 
                     edges.add((E) new DiscreteEdge(
-                            this.edgeIdProvider.get(edgeSchema.getLabel(), outV, inV, edgeProperties),
-                            edgeSchema.getLabel(),
+                            this.edgeIdProvider.get(edgeSchema.getLabel().getName(), outV, inV, edgeProperties),
+                            edgeSchema.getLabel().getName(),
                             outV,
                             inV,
                             inV,
@@ -150,8 +151,8 @@ public class DiscreteEdgeConverter<E extends Element> implements ElementConverte
                     outV = new DiscreteVertex(outId, outEndSchema.getLabel().get(), context.getGraph(), outVertexProperties);
 
                     edges.add((E) new DiscreteEdge(
-                            this.edgeIdProvider.get(edgeSchema.getLabel(), outV, inV, edgeProperties),
-                            edgeSchema.getLabel(),
+                            this.edgeIdProvider.get(edgeSchema.getLabel().getName(), outV, inV, edgeProperties),
+                            edgeSchema.getLabel().getName(),
                             outV,
                             inV,
                             outV,

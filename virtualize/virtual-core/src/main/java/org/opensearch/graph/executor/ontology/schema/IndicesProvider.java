@@ -20,6 +20,10 @@ package org.opensearch.graph.executor.ontology.schema;
  * #L%
  */
 
+
+
+
+
 public interface IndicesProvider {
 
     Iterable<String> indices();

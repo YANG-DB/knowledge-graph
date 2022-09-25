@@ -23,6 +23,10 @@ package org.unipop.schema.property;
 
 
 
+
+
+
+
 import org.apache.tinkerpop.gremlin.process.traversal.P;
 import org.apache.tinkerpop.gremlin.process.traversal.step.util.HasContainer;
 import org.json.JSONArray;
@@ -39,9 +43,6 @@ import java.util.function.BiPredicate;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
-/**
- * Created by sbarzilay on 8/1/16.
- */
 public class DateFieldPropertySchema extends FieldPropertySchema implements DatePropertySchema {
     protected final String sourceFormat;
     protected final List<String> displayFormat;

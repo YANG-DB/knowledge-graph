@@ -22,6 +22,10 @@
 
 
 
+
+
+
+
 //
 //import org.apache.tinkerpop.gremlin.process.traversal.TraversalStrategies;
 //import org.apache.tinkerpop.gremlin.process.traversal.util.DefaultTraversalStrategies;
@@ -34,9 +38,6 @@
 //import org.unipop.process.vertex.UniGraphVertexStepStrategy;
 //import org.unipop.structure.UniGraph;
 //
-///**
-// * Created by Gilad on 01/11/2015.
-// */
 //public class OptimizedStrategyRegistrar implements StrategyProvider {
 //    //region org.unipop.process.strategyregistrar.StrategyProvider Implementation
 //    @Override

@@ -23,6 +23,10 @@ package org.unipop.process.union;
 
 
 
+
+
+
+
 import org.apache.tinkerpop.gremlin.process.traversal.Traversal;
 import org.apache.tinkerpop.gremlin.process.traversal.Traverser;
 import org.apache.tinkerpop.gremlin.process.traversal.step.TraversalParent;
@@ -37,9 +41,6 @@ import org.unipop.structure.UniGraph;
 import java.util.*;
 import java.util.stream.Collectors;
 
-/**
- * Created by sbarzilay on 6/6/16.
- */
 public class UniGraphUnionStep<S,E> extends UniBulkStep<S,E> implements TraversalParent{
     Iterator<Traverser.Admin<E>> results = EmptyIterator.instance();
     List<Traversal.Admin<?, E>> unionTraversals;

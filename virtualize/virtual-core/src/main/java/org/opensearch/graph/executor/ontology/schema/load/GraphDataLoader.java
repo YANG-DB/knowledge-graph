@@ -20,15 +20,16 @@ package org.opensearch.graph.executor.ontology.schema.load;
  * #L%
  */
 
+
+
+
+
 import org.opensearch.graph.model.logical.LogicalGraphModel;
 import org.opensearch.graph.model.results.LoadResponse;
 
 import java.io.File;
 import java.io.IOException;
 
-/**
- * Created by lior.perry on 2/11/2018.
- */
 public interface GraphDataLoader<S,F> {
 
     /**

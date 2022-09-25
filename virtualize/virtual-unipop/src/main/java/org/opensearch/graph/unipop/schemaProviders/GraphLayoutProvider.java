@@ -2,7 +2,7 @@ package org.opensearch.graph.unipop.schemaProviders;
 
 /*-
  * #%L
- * fuse-dv-unipop
+ * virtual-unipop
  * %%
  * Copyright (C) 2016 - 2022 org.opensearch
  * %%
@@ -20,11 +20,12 @@ package org.opensearch.graph.unipop.schemaProviders;
  * #L%
  */
 
+
+
+
+
 import java.util.Optional;
 
-/**
- * Created by moti on 5/17/2017.
- */
 public interface GraphLayoutProvider {
     class NoneRedundant implements GraphLayoutProvider {
         public static GraphLayoutProvider getInstance() {

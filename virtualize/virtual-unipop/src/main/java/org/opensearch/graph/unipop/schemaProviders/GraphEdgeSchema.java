@@ -2,7 +2,7 @@ package org.opensearch.graph.unipop.schemaProviders;
 
 /*-
  * #%L
- * fuse-dv-unipop
+ * virtual-unipop
  * %%
  * Copyright (C) 2016 - 2022 org.opensearch
  * %%
@@ -20,8 +20,14 @@ package org.opensearch.graph.unipop.schemaProviders;
  * #L%
  */
 
+
+
+
+
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonInclude;
+import org.opensearch.graph.model.schema.BaseTypeElement;
+import org.opensearch.graph.model.schema.BaseTypeElement.Type;
 import org.opensearch.graph.unipop.schemaProviders.indexPartitions.IndexPartitions;
 import javaslang.Tuple2;
 import javaslang.collection.Stream;
@@ -32,9 +38,6 @@ import org.apache.tinkerpop.gremlin.structure.T;
 
 import java.util.*;
 
-/**
- * Created by roman on 1/16/2015.
- */
 public interface GraphEdgeSchema extends GraphElementSchema {
     enum Application {
         start,
@@ -188,7 +191,7 @@ public interface GraphEdgeSchema extends GraphElementSchema {
     @JsonIgnoreProperties(ignoreUnknown = true)
     class Impl extends GraphElementSchema.Impl implements GraphEdgeSchema {
         //region Constructors
-        public Impl(String label,
+        public Impl(Type label,
                     GraphElementRouting routing) {
             this(label,
                     new GraphElementConstraint.Impl(__.has(T.label, label)),
@@ -201,7 +204,7 @@ public interface GraphEdgeSchema extends GraphElementSchema {
                     Collections.emptyList());
         }
 
-        public Impl(String label,
+        public Impl(Type label,
                     IndexPartitions indexPartitions) {
             this(label,
                     new GraphElementConstraint.Impl(__.has(T.label, label)),
@@ -214,7 +217,7 @@ public interface GraphEdgeSchema extends GraphElementSchema {
                     Collections.emptyList());
         }
 
-        public Impl(String label,
+        public Impl(Type label,
                     Optional<End> endA,
                     Optional<End> endB,
                     Direction direction,
@@ -231,7 +234,7 @@ public interface GraphEdgeSchema extends GraphElementSchema {
                     Collections.emptyList());
         }
 
-        public Impl(String label,
+        public Impl(Type label,
                     Optional<End> endA,
                     Optional<End> endB,
                     Direction direction,
@@ -248,7 +251,7 @@ public interface GraphEdgeSchema extends GraphElementSchema {
                     Collections.emptyList());
         }
 
-        public Impl(String label,
+        public Impl(Type label,
                     Optional<End> endA,
                     Optional<End> endB,
                     Direction direction,
@@ -266,7 +269,7 @@ public interface GraphEdgeSchema extends GraphElementSchema {
                     Collections.emptyList());
         }
 
-        public Impl(String label,
+        public Impl(Type label,
                     GraphElementConstraint constraint,
                     Optional<End> endA,
                     Optional<End> endB,
@@ -287,7 +290,7 @@ public interface GraphEdgeSchema extends GraphElementSchema {
                     Stream.of(Application.endA, Application.endB, Application.start).toJavaSet());
         }
 
-        public Impl(String label,
+        public Impl(Type label,
                     GraphElementConstraint constraint,
                     Optional<End> endA,
                     Optional<End> endB,
@@ -304,8 +307,6 @@ public interface GraphEdgeSchema extends GraphElementSchema {
             this.directionSchema = directionSchema;
             this.applications = applications;
         }
-
-
         //endregion
 
         //region GraphEdgeSchema Implementation

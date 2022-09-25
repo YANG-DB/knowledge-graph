@@ -2,7 +2,7 @@ package org.opensearch.graph.unipop.controller.common;
 
 /*-
  * #%L
- * fuse-dv-unipop
+ * virtual-unipop
  * %%
  * Copyright (C) 2016 - 2022 org.opensearch
  * %%
@@ -20,6 +20,10 @@ package org.opensearch.graph.unipop.controller.common;
  * #L%
  */
 
+
+
+
+
 import org.opensearch.graph.unipop.controller.utils.CollectionUtil;
 import javaslang.collection.Stream;
 import org.apache.tinkerpop.gremlin.process.traversal.step.util.HasContainer;
@@ -31,10 +35,6 @@ import org.unipop.query.search.SearchVertexQuery;
 import java.util.*;
 import java.util.function.Predicate;
 
-/**
- * Created by Roman on 15/05/2017.
- * Edge controller query interface
- */
 public abstract class VertexControllerBase implements SearchVertexQuery.SearchVertexController{
     //region Constructors
     public VertexControllerBase(Predicate<Iterable<String>> applicablePredicate) {

@@ -9,9 +9,9 @@ package org.opensearch.graph.executor.ontology.schema.load;
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- *
+ * 
  *      http://www.apache.org/licenses/LICENSE-2.0
- *
+ * 
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -20,6 +20,10 @@ package org.opensearch.graph.executor.ontology.schema.load;
  * #L%
  */
 
+
+
+
+
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 import com.google.inject.Inject;
@@ -27,14 +31,14 @@ import com.typesafe.config.Config;
 import org.opensearch.graph.dispatcher.driver.IdGeneratorDriver;
 import org.opensearch.graph.dispatcher.ontology.IndexProviderFactory;
 import org.opensearch.graph.dispatcher.ontology.OntologyProvider;
-import org.opensearch.graph.executor.opensearch.ElasticIndexProviderMappingFactory;
+import org.opensearch.graph.executor.opensearch.EngineIndexProviderMappingFactory;
 import org.opensearch.graph.executor.ontology.DataTransformer;
 import org.opensearch.graph.executor.ontology.schema.RawSchema;
 import org.opensearch.graph.model.Range;
 import org.opensearch.graph.model.ontology.EntityType;
 import org.opensearch.graph.model.ontology.Ontology;
 import org.opensearch.graph.model.ontology.RelationshipType;
-import org.opensearch.graph.model.resourceInfo.FuseError;
+import org.opensearch.graph.model.resourceInfo.GraphError;
 import org.opensearch.graph.model.schema.Entity;
 import org.opensearch.graph.model.schema.IndexProvider;
 import org.opensearch.graph.model.schema.Redundant;
@@ -63,7 +67,7 @@ public class CSVTransformer implements DataTransformer<DataTransformerContext, C
     public CSVTransformer(Config config, OntologyProvider ontology, IndexProviderFactory indexProvider, RawSchema schema, IdGeneratorDriver<Range> idGenerator, Client client) {
         String assembly = config.getString("assembly");
         this.accessor = new Ontology.Accessor(ontology.get(assembly).orElseThrow(
-                () -> new FuseError.FuseErrorException(new FuseError("No Ontology present for assembly", "No Ontology present for assembly" + assembly))));
+                () -> new GraphError.GraphErrorException(new GraphError("No Ontology present for assembly", "No Ontology present for assembly" + assembly))));
 
         //if no index provider found with assembly name - generate default one accoring to ontology and simple Static Index Partitioning strategy
         this.indexProvider = indexProvider.get(assembly).orElseGet(() -> IndexProvider.Builder.generate(accessor.get()));
@@ -94,36 +98,28 @@ public class CSVTransformer implements DataTransformer<DataTransformerContext, C
                 dataRecords.forEach(r -> context.withRelation(translate(context, relType, r.toMap(), "out")));
             }
         } catch (IOException e) {
-            throw new FuseError.FuseErrorException("Error while building graph Element from csv row ", e);
+            throw new GraphError.GraphErrorException("Error while building graph Element from csv row ", e);
         }
         return context;
     }
 
-    /**
-     * transform single entity-row into document
-     *
-     * @param context
-     * @param entityType
-     * @param node
-     * @return
-     */
     private DocumentBuilder translate(DataTransformerContext context, EntityType entityType, Map<String, String> node) {
         try {
             ObjectNode element = mapper.createObjectNode();
             Entity entity = indexProvider.getEntity(entityType.geteType())
-                    .orElseThrow(() -> new FuseError.FuseErrorException(new FuseError("CSV Transformation Error", "No matching node found with label " + entityType.geteType())));
+                    .orElseThrow(() -> new GraphError.GraphErrorException(new GraphError("CSV Transformation Error", "No matching node found with label " + entityType.geteType())));
             //put id (take according to ontology id field mapping or generate UUID of none found)
             StringJoiner joiner = new StringJoiner(".");
             entityType.getIdField().forEach(field -> joiner.add(node.getOrDefault(field, UUID.randomUUID().toString())));
             //put classifiers
             element.put(entityType.idFieldName(), joiner.toString());
-            element.put(Utils.TYPE, entity.getType());
+            element.put(Utils.TYPE, entity.getType().getName());
 
             //populate fields
             populateMetadataFields(context, node, entity, element);
             populatePropertyFields(context, node, entity, element);
-            return new DocumentBuilder(element, joiner.toString(), entity.getType(), Optional.empty());
-        } catch (FuseError.FuseErrorException e) {
+            return new DocumentBuilder(element, joiner.toString(), entity.getType().getName(), Optional.empty());
+        } catch (GraphError.GraphErrorException e) {
             return new DocumentBuilder(e.getError());
         }
     }
@@ -140,7 +136,7 @@ public class CSVTransformer implements DataTransformer<DataTransformerContext, C
         try {
             ObjectNode element = mapper.createObjectNode();
             Relation relation = indexProvider.getRelation(relType.getrType())
-                    .orElseThrow(() -> new FuseError.FuseErrorException(new FuseError("CSV Transformation Error", "No matching node found with label " + relType.getrType())));
+                    .orElseThrow(() -> new GraphError.GraphErrorException(new GraphError("CSV Transformation Error", "No matching node found with label " + relType.getrType())));
             //put id (take according to ontology id field mapping or generate UUID of none found)
             StringJoiner joiner = new StringJoiner(".");
             relType.getIdField().forEach(field -> joiner.add(node.getOrDefault(field, UUID.randomUUID().toString())));
@@ -148,8 +144,8 @@ public class CSVTransformer implements DataTransformer<DataTransformerContext, C
             String id = String.format("%s.%s", joiner.toString(), direction);
             //put classifiers
             element.put(relType.idFieldName(), id);
-            element.put(ElasticIndexProviderMappingFactory.TYPE, relation.getType());
-            element.put(ElasticIndexProviderMappingFactory.DIRECTION, direction);
+            element.put(EngineIndexProviderMappingFactory.TYPE, relation.getType().getName());
+            element.put(EngineIndexProviderMappingFactory.DIRECTION, direction);
 
             //populate fields
             populateMetadataFields(context, node, relation, element);
@@ -162,10 +158,10 @@ public class CSVTransformer implements DataTransformer<DataTransformerContext, C
             //in case of a partition field - set in the document builder
             String field = relation.getProps().getPartitionField();
             if (field != null)
-                partition = Optional.of(new Tuple2<>(field, DataLoaderUtils.parseValue(accessor.property$(field).getType(), node.get(field), Utils.sdf).toString()));
+                partition = Optional.of(new Tuple2<>(field, DataLoaderUtils.parseValue(accessor.pName$(field).getType(), node.get(field), Utils.sdf).toString()));
 
-            return new DocumentBuilder(element, id, relation.getType(), Optional.empty(), partition);
-        } catch (FuseError.FuseErrorException e) {
+            return new DocumentBuilder(element, id, relation.getType().getName(), Optional.empty(), partition);
+        } catch (GraphError.GraphErrorException e) {
             return new DocumentBuilder(e.getError());
         }
     }
@@ -180,10 +176,10 @@ public class CSVTransformer implements DataTransformer<DataTransformerContext, C
     private void populateMetadataFields(DataTransformerContext context, Map<String, String> node, Relation relation, ObjectNode element) {
         node.entrySet()
                 .stream()
-                .filter(m -> accessor.$relation$(relation.getType()).containsMetadata(m.getKey()))
-                .filter(m -> DataLoaderUtils.validateValue(accessor.property$(m.getKey()).getType(), m.getValue(), Utils.sdf))
-                .forEach(m -> element.put(accessor.property$(m.getKey()).getpType(),
-                        DataLoaderUtils.parseValue(accessor.property$(m.getKey()).getType(), m.getValue(), Utils.sdf).toString()));
+                .filter(m -> accessor.$relation$(relation.getType().getName()).containsMetadata(m.getKey()))
+                .filter(m -> DataLoaderUtils.validateValue(accessor.pName$(m.getKey()).getType(), m.getValue(), Utils.sdf))
+                .forEach(m -> element.put(accessor.pName$(m.getKey()).getpType(),
+                        DataLoaderUtils.parseValue(accessor.pName$(m.getKey()).getType(), m.getValue(), Utils.sdf).toString()));
     }
 
 
@@ -197,28 +193,28 @@ public class CSVTransformer implements DataTransformer<DataTransformerContext, C
     private void populatePropertyFields(DataTransformerContext context, Map<String, String> node, Relation relation, ObjectNode element, String direction) {
         node.entrySet()
                 .stream()
-                .filter(m -> accessor.$relation$(relation.getType()).containsProperty(m.getKey()))
-                .filter(m -> DataLoaderUtils.validateValue(accessor.property$(m.getKey()).getType(), m.getValue(), Utils.sdf))
-                .forEach(m -> element.put(accessor.property$(m.getKey()).getpType(),
-                        DataLoaderUtils.parseValue(accessor.property$(m.getKey()).getType(), m.getValue(), Utils.sdf).toString()));
+                .filter(m -> accessor.$relation$(relation.getType().getName()).containsProperty(m.getKey()))
+                .filter(m -> DataLoaderUtils.validateValue(accessor.pName$(m.getKey()).getType(), m.getValue(), Utils.sdf))
+                .forEach(m -> element.put(accessor.pName$(m.getKey()).getpType(),
+                        DataLoaderUtils.parseValue(accessor.pName$(m.getKey()).getType(), m.getValue(), Utils.sdf).toString()));
 
-        RelationshipType relationshipType = accessor.$relation$(relation.getType());
+        RelationshipType relationshipType = accessor.$relation$(relation.getType().getName());
         //populate each pair
         switch (direction) {
             case "out":
                 //for each pair do:
                 relationshipType.getePairs().stream().filter(pair -> pair.geteTypeB().equalsIgnoreCase(node.get(DEST_TYPE)))
                         .forEach(pair -> {
-                            element.put(ElasticIndexProviderMappingFactory.ENTITY_A, populateSide(ElasticIndexProviderMappingFactory.ENTITY_A, context, node.get(pair.getSideAIdField()), pair.geteTypeA(), relation, node));
-                            element.put(ElasticIndexProviderMappingFactory.ENTITY_B, populateSide(ElasticIndexProviderMappingFactory.ENTITY_B, context, node.get(pair.getSideBIdField()), pair.geteTypeB(), relation, node));
+                            element.put(EngineIndexProviderMappingFactory.ENTITY_A, populateSide(EngineIndexProviderMappingFactory.ENTITY_A, context, node.get(pair.getSideAIdField()), pair.geteTypeA(), relation, node));
+                            element.put(EngineIndexProviderMappingFactory.ENTITY_B, populateSide(EngineIndexProviderMappingFactory.ENTITY_B, context, node.get(pair.getSideBIdField()), pair.geteTypeB(), relation, node));
                         });
                 break;
             case "in":
                 //for each pair do:
                 relationshipType.getePairs().stream().filter(pair -> pair.geteTypeB().equalsIgnoreCase(node.get(DEST_TYPE)))
                         .forEach(pair -> {
-                            element.put(ElasticIndexProviderMappingFactory.ENTITY_B, populateSide(ElasticIndexProviderMappingFactory.ENTITY_A, context, node.get(pair.getSideAIdField()), pair.geteTypeA(), relation, node));
-                            element.put(ElasticIndexProviderMappingFactory.ENTITY_A, populateSide(ElasticIndexProviderMappingFactory.ENTITY_B, context, node.get(pair.getSideBIdField()), pair.geteTypeB(), relation, node));
+                            element.put(EngineIndexProviderMappingFactory.ENTITY_B, populateSide(EngineIndexProviderMappingFactory.ENTITY_A, context, node.get(pair.getSideAIdField()), pair.geteTypeA(), relation, node));
+                            element.put(EngineIndexProviderMappingFactory.ENTITY_A, populateSide(EngineIndexProviderMappingFactory.ENTITY_B, context, node.get(pair.getSideBIdField()), pair.geteTypeB(), relation, node));
                         });
                 break;
         }
@@ -239,11 +235,11 @@ public class CSVTransformer implements DataTransformer<DataTransformerContext, C
 
         //get type (label) of the side node
         Entity entity = indexProvider.getEntity(sideType)
-                .orElseThrow(() -> new FuseError.FuseErrorException(new FuseError("Logical Graph Transformation Error", "No matching node found with label " + sideType)));
+                .orElseThrow(() -> new GraphError.GraphErrorException(new GraphError("Logical Graph Transformation Error", "No matching node found with label " + sideType)));
 
         //put classifiers
-        entitySide.put(ElasticIndexProviderMappingFactory.ID, sideId);
-        entitySide.put(Utils.TYPE, entity.getType());
+        entitySide.put(EngineIndexProviderMappingFactory.ID, sideId);
+        entitySide.put(Utils.TYPE, entity.getType().getName());
 
         List<Redundant> redundant = relation.getRedundant(side);
         redundant.forEach(r -> populateRedundantField(r, node, side, entitySide));
@@ -266,10 +262,10 @@ public class CSVTransformer implements DataTransformer<DataTransformerContext, C
     private void populateMetadataFields(DataTransformerContext context, Map<String, String> node, Entity entity, ObjectNode element) {
         node.entrySet()
                 .stream()
-                .filter(m -> accessor.$entity$(entity.getType()).containsMetadata(m.getKey()))
-                .filter(m -> DataLoaderUtils.validateValue(accessor.property$(m.getKey()).getType(), m.getValue(), Utils.sdf))
-                .forEach(m -> element.put(accessor.property$(m.getKey()).getpType(),
-                        DataLoaderUtils.parseValue(accessor.property$(m.getKey()).getType(), m.getValue(), Utils.sdf).toString()));
+                .filter(m -> accessor.$entity$(entity.getType().getName()).containsMetadata(m.getKey()))
+                .filter(m -> DataLoaderUtils.validateValue(accessor.pName$(m.getKey()).getType(), m.getValue(), Utils.sdf))
+                .forEach(m -> element.put(accessor.pName$(m.getKey()).getpType(),
+                        DataLoaderUtils.parseValue(accessor.pName$(m.getKey()).getType(), m.getValue(), Utils.sdf).toString()));
     }
 
 
@@ -282,10 +278,10 @@ public class CSVTransformer implements DataTransformer<DataTransformerContext, C
     private void populatePropertyFields(DataTransformerContext context, Map<String, String> node, Entity entity, ObjectNode element) {
         node.entrySet()
                 .stream()
-                .filter(m -> accessor.$entity$(entity.getType()).containsProperty(m.getKey()))
-                .filter(m -> DataLoaderUtils.validateValue(accessor.property$(m.getKey()).getType(), m.getValue(), Utils.sdf))
-                .forEach(m -> element.put(accessor.property$(m.getKey()).getpType(),
-                        DataLoaderUtils.parseValue(accessor.property$(m.getKey()).getType(), m.getValue(), Utils.sdf).toString()));
+                .filter(m -> accessor.$entity$(entity.getType().getName()).containsProperty(m.getKey()))
+                .filter(m -> DataLoaderUtils.validateValue(accessor.pName$(m.getKey()).getType(), m.getValue(), Utils.sdf))
+                .forEach(m -> element.put(accessor.pName$(m.getKey()).getpType(),
+                        DataLoaderUtils.parseValue(accessor.pName$(m.getKey()).getType(), m.getValue(), Utils.sdf).toString()));
     }
 
 
@@ -296,7 +292,6 @@ public class CSVTransformer implements DataTransformer<DataTransformerContext, C
         String label();
 
         /**
-         * todo - calculate the type according to the ontology
          *
          * @return
          */

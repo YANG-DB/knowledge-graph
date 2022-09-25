@@ -19,7 +19,6 @@ public class OntologyTest {
 
     private ObjectMapper mapper = new ObjectMapper();
     private static Ontology ontologyShortObj = new Ontology();
-    private static Ontology ontologyWithCompositeObj = new Ontology();
 
 
     @Test

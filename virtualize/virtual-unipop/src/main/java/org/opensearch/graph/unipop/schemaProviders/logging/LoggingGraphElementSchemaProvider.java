@@ -2,7 +2,7 @@ package org.opensearch.graph.unipop.schemaProviders.logging;
 
 /*-
  * #%L
- * fuse-dv-unipop
+ * virtual-unipop
  * %%
  * Copyright (C) 2016 - 2022 org.opensearch
  * %%
@@ -20,6 +20,10 @@ package org.opensearch.graph.unipop.schemaProviders.logging;
  * #L%
  */
 
+
+
+
+
 import com.google.inject.name.Named;
 import org.opensearch.graph.dispatcher.logging.*;
 import org.opensearch.graph.unipop.schemaProviders.GraphEdgeSchema;
@@ -35,9 +39,6 @@ import java.util.Optional;
 import static org.opensearch.graph.dispatcher.logging.LogMessage.Level.*;
 import static org.opensearch.graph.dispatcher.logging.LogType.*;
 
-/**
- * Created by roman.margolis on 20/02/2018.
- */
 public class LoggingGraphElementSchemaProvider implements GraphElementSchemaProvider {
     public static final String schemaProviderParameter = "LoggingGraphElementSchemaProvider.@schemaProviderParameter";
     public static final String warnLoggerParameter = "LoggingGraphElementSchemaProvider.@warnLogger";

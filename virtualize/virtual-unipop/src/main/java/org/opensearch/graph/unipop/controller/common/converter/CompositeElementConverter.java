@@ -2,7 +2,7 @@ package org.opensearch.graph.unipop.controller.common.converter;
 
 /*-
  * #%L
- * fuse-dv-unipop
+ * virtual-unipop
  * %%
  * Copyright (C) 2016 - 2022 org.opensearch
  * %%
@@ -20,13 +20,14 @@ package org.opensearch.graph.unipop.controller.common.converter;
  * #L%
  */
 
+
+
+
+
 import javaslang.collection.Stream;
 
 import java.util.Collections;
 
-/**
- * Created by roman.margolis on 14/09/2017.
- */
 public class CompositeElementConverter<TElementSource, TElementDest> implements ElementConverter<TElementSource, TElementDest> {
     //region Constructors
     @SafeVarargs

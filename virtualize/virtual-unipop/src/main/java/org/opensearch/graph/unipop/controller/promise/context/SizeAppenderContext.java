@@ -2,7 +2,7 @@ package org.opensearch.graph.unipop.controller.promise.context;
 
 /*-
  * #%L
- * fuse-dv-unipop
+ * virtual-unipop
  * %%
  * Copyright (C) 2016 - 2022 org.opensearch
  * %%
@@ -20,11 +20,12 @@ package org.opensearch.graph.unipop.controller.promise.context;
  * #L%
  */
 
+
+
+
+
 import org.unipop.query.search.SearchQuery;
 
-/**
- * Created by Elad on 4/30/2017.
- */
 public interface SizeAppenderContext {
     SearchQuery getSearchQuery();
 }

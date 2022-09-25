@@ -2,16 +2,16 @@ package org.opensearch.graph.unipop.controller.search.translation;
 
 /*-
  * #%L
- * fuse-dv-unipop
+ * virtual-unipop
  * %%
  * Copyright (C) 2016 - 2022 org.opensearch
  * %%
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- * 
+ *
  *      http://www.apache.org/licenses/LICENSE-2.0
- * 
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -19,6 +19,7 @@ package org.opensearch.graph.unipop.controller.search.translation;
  * limitations under the License.
  * #L%
  */
+
 
 import org.opensearch.graph.unipop.controller.search.AggregationBuilder;
 import org.opensearch.graph.unipop.controller.search.QueryBuilder;
@@ -28,14 +29,11 @@ import org.unipop.process.predicate.Text;
 
 import java.util.List;
 
-/**
- * Created by Roman on 18/05/2017.
- */
 public class TextQueryTranslator implements PredicateQueryTranslator {
     //region PredicateQueryTranslator Implementation
     @Override
     public QueryBuilder translate(QueryBuilder queryBuilder, AggregationBuilder aggregationBuilder, String key, P<?> predicate) {
-        Text.TextPredicate text = (Text.TextPredicate)predicate.getBiPredicate();
+        Text.TextPredicate text = (Text.TextPredicate) predicate.getBiPredicate();
         switch (text) {
             case PREFIX:
                 List<String> prefixes = CollectionUtil.listFromObjectValue(predicate.getValue());
@@ -62,7 +60,7 @@ public class TextQueryTranslator implements PredicateQueryTranslator {
                         break;
                     default:
                         queryBuilder.push().bool().should();
-                        regexs.forEach(regex ->  queryBuilder.push().regexp(key, regex).pop());
+                        regexs.forEach(regex -> queryBuilder.push().regexp(key, regex).pop());
                         queryBuilder.pop();
                 }
                 break;
@@ -71,7 +69,7 @@ public class TextQueryTranslator implements PredicateQueryTranslator {
                 if (Iterable.class.isAssignableFrom(predicate.getValue().getClass())) {
                     queryBuilder.push().bool().should();
                     // ((Iterable)predicate.getValue()).forEach(likeValue -> queryBuilder.push().wildcardScript(key, likeValue.toString()).pop());// - ES 5 wildcard script
-                    ((Iterable)predicate.getValue()).forEach(likeValue -> queryBuilder.push().wildcard(key, likeValue.toString()).pop());
+                    ((Iterable) predicate.getValue()).forEach(likeValue -> queryBuilder.push().wildcard(key, likeValue.toString()).pop());
                     queryBuilder.pop();
                 } else {
                     //queryBuilder.push().wildcardScript(key, predicate.getValue().toString()).pop(); // - ES 5 wildcard script
@@ -83,7 +81,7 @@ public class TextQueryTranslator implements PredicateQueryTranslator {
                 if (Iterable.class.isAssignableFrom(predicate.getValue().getClass())) {
                     queryBuilder.push().bool().should();
                     // ((Iterable)predicate.getValue()).forEach(likeValue -> queryBuilder.push().wildcardScript(key, likeValue.toString()).pop());// - ES 5 wildcard script
-                    ((Iterable)predicate.getValue()).forEach(likeValue -> queryBuilder.push().match(key, likeValue.toString()).pop());
+                    ((Iterable) predicate.getValue()).forEach(likeValue -> queryBuilder.push().match(key, likeValue.toString()).pop());
                     queryBuilder.pop();
                 } else {
                     //queryBuilder.push().wildcardScript(key, predicate.getValue().toString()).pop(); // - ES 5 wildcard script
@@ -94,7 +92,7 @@ public class TextQueryTranslator implements PredicateQueryTranslator {
                 if (Iterable.class.isAssignableFrom(predicate.getValue().getClass())) {
                     queryBuilder.push().bool().should();
                     // ((Iterable)predicate.getValue()).forEach(likeValue -> queryBuilder.push().wildcardScript(key, likeValue.toString()).pop());// - ES 5 wildcard script
-                    ((Iterable)predicate.getValue()).forEach(likeValue -> queryBuilder.push().matchPhrase(key, likeValue.toString()).pop());
+                    ((Iterable) predicate.getValue()).forEach(likeValue -> queryBuilder.push().matchPhrase(key, likeValue.toString()).pop());
                     queryBuilder.pop();
                 } else {
                     //queryBuilder.push().wildcardScript(key, predicate.getValue().toString()).pop(); // - ES 5 wildcard script
@@ -102,11 +100,11 @@ public class TextQueryTranslator implements PredicateQueryTranslator {
                 }
                 break;
 
-                case QUERY_STRING:
+            case QUERY_STRING:
                 if (Iterable.class.isAssignableFrom(predicate.getValue().getClass())) {
                     queryBuilder.push().bool().should();
                     // ((Iterable)predicate.getValue()).forEach(likeValue -> queryBuilder.push().wildcardScript(key, likeValue.toString()).pop());// - ES 5 wildcard script
-                    ((Iterable)predicate.getValue()).forEach(likeValue -> queryBuilder.push().queryString(key, likeValue.toString()).pop());
+                    ((Iterable) predicate.getValue()).forEach(likeValue -> queryBuilder.push().queryString(key, likeValue.toString()).pop());
                     queryBuilder.pop();
                 } else {
                     //queryBuilder.push().wildcardScript(key, predicate.getValue().toString()).pop(); // - ES 5 wildcard script

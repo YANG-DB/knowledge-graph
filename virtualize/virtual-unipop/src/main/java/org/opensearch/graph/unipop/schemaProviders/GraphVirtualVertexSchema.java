@@ -2,7 +2,7 @@ package org.opensearch.graph.unipop.schemaProviders;
 
 /*-
  * #%L
- * fuse-dv-unipop
+ * virtual-unipop
  * %%
  * Copyright (C) 2016 - 2022 org.opensearch
  * %%
@@ -20,18 +20,21 @@ package org.opensearch.graph.unipop.schemaProviders;
  * #L%
  */
 
+
+
+
+
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonInclude;
+import org.opensearch.graph.model.schema.BaseTypeElement;
+import org.opensearch.graph.model.schema.BaseTypeElement.Type;
 
-/**
- * Created by roman.margolis on 13/12/2017.
- */
 public interface GraphVirtualVertexSchema extends GraphVertexSchema {
     @JsonInclude(JsonInclude.Include.NON_EMPTY)
     @JsonIgnoreProperties(ignoreUnknown = true)
     class Impl extends GraphVertexSchema.Impl implements GraphVirtualVertexSchema {
         //region Constructors
-        public Impl(String label) {
+        public Impl(Type label ) {
             super(label);
         }
         //endregion

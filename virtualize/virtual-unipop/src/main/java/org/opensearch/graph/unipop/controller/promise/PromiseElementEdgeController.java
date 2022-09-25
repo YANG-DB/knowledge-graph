@@ -2,7 +2,7 @@ package org.opensearch.graph.unipop.controller.promise;
 
 /*-
  * #%L
- * fuse-dv-unipop
+ * virtual-unipop
  * %%
  * Copyright (C) 2016 - 2022 org.opensearch
  * %%
@@ -20,6 +20,10 @@ package org.opensearch.graph.unipop.controller.promise;
  * #L%
  */
 
+
+
+
+
 import com.codahale.metrics.MetricRegistry;
 import org.opensearch.graph.unipop.controller.OpensearchGraphConfiguration;
 import org.opensearch.graph.unipop.schemaProviders.GraphElementSchemaProvider;
@@ -30,9 +34,6 @@ import org.unipop.structure.UniGraph;
 
 import java.util.Iterator;
 
-/**
- * Created by lior.perry on 4/2/2017.
- */ //region PromiseElementEdgeController Implementation
 public class PromiseElementEdgeController implements SearchQuery.SearchController {
     public PromiseElementEdgeController(Client client, OpensearchGraphConfiguration configuration, UniGraph graph, GraphElementSchemaProvider schemaProvider, MetricRegistry metricRegistry) {}
 

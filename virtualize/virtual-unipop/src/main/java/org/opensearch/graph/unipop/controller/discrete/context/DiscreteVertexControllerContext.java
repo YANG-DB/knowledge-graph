@@ -2,7 +2,7 @@ package org.opensearch.graph.unipop.controller.discrete.context;
 
 /*-
  * #%L
- * fuse-dv-unipop
+ * virtual-unipop
  * %%
  * Copyright (C) 2016 - 2022 org.opensearch
  * %%
@@ -20,6 +20,10 @@ package org.opensearch.graph.unipop.controller.discrete.context;
  * #L%
  */
 
+
+
+
+
 import org.opensearch.graph.unipop.controller.common.context.VertexControllerContext;
 import org.opensearch.graph.unipop.promise.TraversalConstraint;
 import org.opensearch.graph.unipop.schemaProviders.GraphElementSchemaProvider;
@@ -32,9 +36,6 @@ import org.unipop.structure.UniGraph;
 
 import java.util.Optional;
 
-/**
- * Created by roman.margolis on 13/09/2017.
- */
 public class DiscreteVertexControllerContext extends VertexControllerContext.Impl {
     public DiscreteVertexControllerContext(UniGraph graph, StepDescriptor stepDescriptor, GraphElementSchemaProvider schemaProvider, Optional<TraversalConstraint> constraint, Iterable<HasContainer> selectPHasContainers, int limit, Direction direction, Iterable<Vertex> bulkVertices) {
         super(graph,stepDescriptor, ElementType.edge, schemaProvider, constraint, selectPHasContainers, limit, direction, bulkVertices);

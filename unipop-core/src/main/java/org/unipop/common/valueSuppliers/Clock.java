@@ -25,9 +25,10 @@ package org.unipop.common.valueSuppliers;
 
 
 
-/**
- * Created by Roman on 8/21/2018.
- */
+
+
+
+
 public interface Clock {
     long getTime();
 

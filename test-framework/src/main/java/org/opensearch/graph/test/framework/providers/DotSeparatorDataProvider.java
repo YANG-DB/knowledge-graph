@@ -20,15 +20,16 @@ package org.opensearch.graph.test.framework.providers;
  * #L%
  */
 
+
+
+
+
 import javaslang.collection.Stream;
 
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-/**
- * Created by moti on 4/12/2017.
- */
 public class DotSeparatorDataProvider implements GenericDataProvider {
     private GenericDataProvider innerProvider;
 

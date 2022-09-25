@@ -2,7 +2,7 @@ package org.opensearch.graph.unipop.controller.promise.appender;
 
 /*-
  * #%L
- * fuse-dv-unipop
+ * virtual-unipop
  * %%
  * Copyright (C) 2016 - 2022 org.opensearch
  * %%
@@ -19,6 +19,10 @@ package org.opensearch.graph.unipop.controller.promise.appender;
  * limitations under the License.
  * #L%
  */
+
+
+
+
 
 import org.opensearch.graph.unipop.controller.common.appender.SearchAppender;
 import org.opensearch.graph.unipop.controller.common.context.CompositeControllerContext;
@@ -48,9 +52,6 @@ import java.util.Set;
 
 import static org.opensearch.graph.unipop.controller.common.appender.EdgeUtils.getLabel;
 
-/**
- * Created by Elad on 4/26/2017.
- */
 public class PromiseConstraintSearchAppender implements SearchAppender<CompositeControllerContext> {
     //region ElementControllerContext Implementation
     @Override

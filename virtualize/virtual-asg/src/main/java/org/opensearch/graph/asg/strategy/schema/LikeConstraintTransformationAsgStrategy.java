@@ -20,6 +20,10 @@ package org.opensearch.graph.asg.strategy.schema;
  * #L%
  */
 
+
+
+
+
 import org.opensearch.graph.asg.strategy.schema.utils.LikeUtil;
 import org.opensearch.graph.dispatcher.ontology.OntologyProvider;
 import org.opensearch.graph.model.asgQuery.AsgQueryUtil;
@@ -41,17 +45,14 @@ import org.opensearch.graph.unipop.schemaProviders.GraphElementPropertySchema;
 import org.opensearch.graph.unipop.schemaProviders.GraphElementSchemaProvider;
 import org.opensearch.graph.unipop.schemaProviders.GraphVertexSchema;
 import javaslang.collection.Stream;
-import org.openserach.graph.asg.strategy.AsgElementStrategy;
-import org.openserach.graph.asg.strategy.AsgStrategy;
+import org.opensearch.graph.asg.strategy.AsgElementStrategy;
+import org.opensearch.graph.asg.strategy.AsgStrategy;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
 
-/**
- * Created by roman.margolis on 05/02/2018.
- */
 public class LikeConstraintTransformationAsgStrategy implements AsgStrategy, AsgElementStrategy<EPropGroup> {
     //region Constructors
     public LikeConstraintTransformationAsgStrategy(OntologyProvider ontologyProvider, GraphElementSchemaProviderFactory schemaProviderFactory) {
@@ -99,12 +100,12 @@ public class LikeConstraintTransformationAsgStrategy implements AsgStrategy, Asg
             // currently supports a single vertex schema
             GraphVertexSchema vertexSchema = Stream.ofAll(vertexSchemas).get(0);
 
-            Optional<Property> property = ont.$property(eProp.getpType());
+            Optional<Property> property = ont.$pType(eProp.getpType());
             if (!property.isPresent()) {
                 continue;
             }
 
-            Optional<GraphElementPropertySchema> propertySchema = vertexSchema.getProperty(property.get().getName());
+            Optional<GraphElementPropertySchema> propertySchema = vertexSchema.getProperty(property.get());
             if (!propertySchema.isPresent()) {
                 continue;
             }

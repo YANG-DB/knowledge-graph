@@ -20,6 +20,10 @@ package org.opensearch.graph.model.query.properties.constraint;
  * #L%
  */
 
+
+
+
+
 public interface WhereByFacet {
 
     String getProjectedField();

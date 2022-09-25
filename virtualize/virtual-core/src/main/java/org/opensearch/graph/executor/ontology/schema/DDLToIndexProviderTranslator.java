@@ -4,14 +4,14 @@ package org.opensearch.graph.executor.ontology.schema;
  * #%L
  * virtual-core
  * %%
- * Copyright (C) 2016 - 2020 The YangDb Graph Database Project
+ * Copyright (C) 2016 - 2022 org.opensearch
  * %%
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- *
+ * 
  *      http://www.apache.org/licenses/LICENSE-2.0
- *
+ * 
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -20,9 +20,13 @@ package org.opensearch.graph.executor.ontology.schema;
  * #L%
  */
 
+
+
+
+
 import com.google.common.collect.ImmutableList;
 import com.typesafe.config.Config;
-import org.opensearch.graph.model.resourceInfo.FuseError;
+import org.opensearch.graph.model.resourceInfo.GraphError;
 import org.opensearch.graph.model.schema.*;
 import org.jooq.Parser;
 import org.jooq.Queries;
@@ -30,6 +34,7 @@ import org.jooq.Query;
 import org.jooq.Table;
 import org.jooq.impl.CreateTableStatement;
 import org.jooq.impl.DefaultConfiguration;
+import org.opensearch.graph.model.schema.BaseTypeElement.Type;
 
 import java.util.Arrays;
 import java.util.Collections;
@@ -57,14 +62,14 @@ public class DDLToIndexProviderTranslator implements IndexProviderTranslator<Lis
         return indexProvider;
     }
 
-    private void parseTable(String table, IndexProvider indexProvider) throws FuseError.FuseErrorException {
+    private void parseTable(String table, IndexProvider indexProvider) throws GraphError.GraphErrorException {
         try {
             Queries queries = parser.parse(table);
             Arrays.stream(queries.queries())
                     .filter(q -> q.getClass().getSimpleName().endsWith("CreateTableImpl"))
                     .forEach(q -> parse(q, indexProvider));
         } catch (Throwable t) {
-            throw new FuseError.FuseErrorException("Error Parsing DDL file " + table, t);
+            throw new GraphError.GraphErrorException("Error Parsing DDL file " + table, t);
         }
     }
 
@@ -75,7 +80,7 @@ public class DDLToIndexProviderTranslator implements IndexProviderTranslator<Lis
 
         //build ontology entity
         String tableName = table.getName().toLowerCase();
-        indexProvider.withEntity(new Entity(tableName, STATIC.name(), "Index",
+        indexProvider.withEntity(new Entity(Type.of(tableName), STATIC.name(), "Index",
                 new Props(ImmutableList.of(tableName)), Collections.emptyList(), Collections.emptyMap()));
 
         //build relations - FK will now be transformed into EPairs inside
@@ -88,7 +93,7 @@ public class DDLToIndexProviderTranslator implements IndexProviderTranslator<Lis
             foreignKey(statement.getConstraints())
                     .forEach(fk ->
                             indexProvider.withRelation(
-                                    new Relation(fk.getName().toLowerCase(),
+                                    new Relation(Type.of(fk.getName().toLowerCase()),
                                             UNIFIED.name(),
                                             "Index",
                                             false,

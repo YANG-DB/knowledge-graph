@@ -2,7 +2,7 @@ package org.opensearch.graph.unipop.controller.common.appender;
 
 /*-
  * #%L
- * fuse-dv-unipop
+ * virtual-unipop
  * %%
  * Copyright (C) 2016 - 2022 org.opensearch
  * %%
@@ -20,6 +20,10 @@ package org.opensearch.graph.unipop.controller.common.appender;
  * #L%
  */
 
+
+
+
+
 import org.opensearch.graph.unipop.controller.common.context.ElementControllerContext;
 import org.opensearch.graph.unipop.controller.search.SearchBuilder;
 import org.opensearch.graph.unipop.controller.utils.traversal.TraversalValuesByKeyProvider;
@@ -35,9 +39,6 @@ import org.apache.tinkerpop.gremlin.structure.T;
 
 import java.util.*;
 
-/**
- * Created by lior.perry on 27/03/2017.
- */
 
 // This appender will add getIndices getTo the search builder based on the elements IndexPartitions only.
 public class IndexSearchAppender implements SearchAppender<ElementControllerContext> {

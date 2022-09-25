@@ -2,7 +2,7 @@ package org.opensearch.graph.unipop.controller.discrete.converter;
 
 /*-
  * #%L
- * fuse-dv-unipop
+ * virtual-unipop
  * %%
  * Copyright (C) 2016 - 2022 org.opensearch
  * %%
@@ -19,6 +19,10 @@ package org.opensearch.graph.unipop.controller.discrete.converter;
  * limitations under the License.
  * #L%
  */
+
+
+
+
 
 import org.opensearch.graph.unipop.controller.common.context.VertexControllerContext;
 import org.opensearch.graph.unipop.controller.common.converter.ElementConverter;
@@ -39,9 +43,6 @@ import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
 
-/**
- * Created by Roman on 11/15/2017.
- */
 public class DiscreteVertexFilterConverter implements ElementConverter<SearchHit, Edge> {
     //region Constructor
     public DiscreteVertexFilterConverter(VertexControllerContext context,Profiler profiler) {
@@ -72,7 +73,7 @@ public class DiscreteVertexFilterConverter implements ElementConverter<SearchHit
         Map<String, Object> source = new HashMap<>(hit.getSourceAsMap());
         contextVertexProperties.putAll(source);
 
-        String label = this.typeToLabelVertexSchemas.get(source.get("type")).getLabel();
+        String label = this.typeToLabelVertexSchemas.get(source.get("type")).getLabel().getName();
         String stepName = context.getStepDescriptor().getDescription().orElse(label);
         profiler.get().incrementCount(stepName,1);
 

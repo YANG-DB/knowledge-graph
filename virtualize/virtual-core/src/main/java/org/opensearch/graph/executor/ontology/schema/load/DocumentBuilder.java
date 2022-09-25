@@ -20,12 +20,14 @@ package org.opensearch.graph.executor.ontology.schema.load;
  * #L%
  */
 
+
+
+
+
 import com.fasterxml.jackson.databind.node.ObjectNode;
-import org.opensearch.graph.model.ontology.Property;
-import org.opensearch.graph.model.resourceInfo.FuseError;
+import org.opensearch.graph.model.resourceInfo.GraphError;
 import javaslang.Tuple2;
 
-import java.util.Map;
 import java.util.Optional;
 
 public class DocumentBuilder {
@@ -34,9 +36,9 @@ public class DocumentBuilder {
     private String type;
     private Optional<String> routing;
     private Optional<Tuple2<String,String>> partitionField;
-    private FuseError error;
+    private GraphError error;
 
-    public DocumentBuilder(FuseError error) {
+    public DocumentBuilder(GraphError error) {
         this.error = error;
     }
 
@@ -86,7 +88,7 @@ public class DocumentBuilder {
         return getError()!=null;
     }
 
-    public FuseError getError() {
+    public GraphError getError() {
         return error;
     }
 }

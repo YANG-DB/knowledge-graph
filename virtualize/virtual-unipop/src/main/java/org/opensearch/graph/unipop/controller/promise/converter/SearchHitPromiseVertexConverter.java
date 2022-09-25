@@ -2,7 +2,7 @@ package org.opensearch.graph.unipop.controller.promise.converter;
 
 /*-
  * #%L
- * fuse-dv-unipop
+ * virtual-unipop
  * %%
  * Copyright (C) 2016 - 2022 org.opensearch
  * %%
@@ -20,6 +20,10 @@ package org.opensearch.graph.unipop.controller.promise.converter;
  * #L%
  */
 
+
+
+
+
 import org.opensearch.graph.unipop.controller.common.converter.ElementConverter;
 import org.opensearch.graph.unipop.promise.Promise;
 import org.opensearch.graph.unipop.structure.promise.PromiseVertex;
@@ -31,9 +35,6 @@ import org.unipop.structure.UniGraph;
 import java.util.Collections;
 import java.util.Optional;
 
-/**
- * Created by roman on 11/17/2015.
- */
 public class SearchHitPromiseVertexConverter implements ElementConverter<SearchHit, Element> {
     //region Constructor
     public SearchHitPromiseVertexConverter(UniGraph graph) {

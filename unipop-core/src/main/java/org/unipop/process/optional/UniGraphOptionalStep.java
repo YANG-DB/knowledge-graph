@@ -23,6 +23,10 @@ package org.unipop.process.optional;
 
 
 
+
+
+
+
 import javaslang.collection.Stream;
 import org.apache.tinkerpop.gremlin.process.traversal.Traversal;
 import org.apache.tinkerpop.gremlin.process.traversal.Traverser;
@@ -34,9 +38,6 @@ import org.unipop.structure.UniGraph;
 
 import java.util.*;
 
-/**
- * Created by roman.margolis on 28/11/2017.
- */
 public class UniGraphOptionalStep<S, E> extends UniBulkStep<S, E> implements TraversalParent {
     //region Constructors
     public UniGraphOptionalStep(Traversal.Admin traversal, UniGraph graph) {

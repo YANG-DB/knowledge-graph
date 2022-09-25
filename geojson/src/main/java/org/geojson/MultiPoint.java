@@ -20,6 +20,10 @@ package org.geojson;
  * #L%
  */
 
+
+
+
+
 public class MultiPoint extends Geometry<LngLatAlt> {
 
 	public MultiPoint() {

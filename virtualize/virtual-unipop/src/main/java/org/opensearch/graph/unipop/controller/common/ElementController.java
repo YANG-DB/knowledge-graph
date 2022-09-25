@@ -2,7 +2,7 @@ package org.opensearch.graph.unipop.controller.common;
 
 /*-
  * #%L
- * fuse-dv-unipop
+ * virtual-unipop
  * %%
  * Copyright (C) 2016 - 2022 org.opensearch
  * %%
@@ -20,6 +20,10 @@ package org.opensearch.graph.unipop.controller.common;
  * #L%
  */
 
+
+
+
+
 import javaslang.collection.Stream;
 import org.apache.tinkerpop.gremlin.structure.Edge;
 import org.apache.tinkerpop.gremlin.structure.Element;
@@ -32,11 +36,6 @@ import java.util.Iterator;
 import java.util.Map;
 import java.util.Objects;
 
-/**
- * Created by lior.perry on 19/03/2017.
- *
- * g.V() OR g.E() ==> edge controller
- */
 public class ElementController implements SearchQuery.SearchController {
     //region Constructors
     public ElementController(

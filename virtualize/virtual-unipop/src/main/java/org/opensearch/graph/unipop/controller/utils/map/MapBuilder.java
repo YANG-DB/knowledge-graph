@@ -2,7 +2,7 @@ package org.opensearch.graph.unipop.controller.utils.map;
 
 /*-
  * #%L
- * fuse-dv-unipop
+ * virtual-unipop
  * %%
  * Copyright (C) 2016 - 2022 org.opensearch
  * %%
@@ -20,13 +20,14 @@ package org.opensearch.graph.unipop.controller.utils.map;
  * #L%
  */
 
+
+
+
+
 import java.util.HashMap;
 import java.util.Map;
 import java.util.function.Supplier;
 
-/**
- * Created by Roman on 5/9/2017.
- */
 public class MapBuilder<TKey, TValue> implements Supplier<Map<TKey, TValue>> {
     //region Constructors
     public MapBuilder() {

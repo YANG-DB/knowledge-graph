@@ -9,9 +9,9 @@ package org.opensearch.graph.executor.ontology.schema.load;
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- *
+ * 
  *      http://www.apache.org/licenses/LICENSE-2.0
- *
+ * 
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -20,10 +20,14 @@ package org.opensearch.graph.executor.ontology.schema.load;
  * #L%
  */
 
+
+
+
+
 import com.google.inject.Inject;
 import org.opensearch.graph.executor.ontology.schema.RawSchema;
 import org.opensearch.graph.model.Range;
-import org.opensearch.graph.model.resourceInfo.FuseError;
+import org.opensearch.graph.model.resourceInfo.GraphError;
 import org.opensearch.graph.model.results.LoadResponse;
 import javaslang.Tuple2;
 import org.opensearch.action.bulk.BulkRequestBuilder;
@@ -37,10 +41,6 @@ import static org.opensearch.graph.executor.ontology.schema.load.DataLoaderUtils
 import static org.opensearch.graph.executor.ontology.schema.load.DataLoaderUtils.getZipType;
 import static org.opensearch.graph.model.results.LoadResponse.LoadResponseImpl;
 
-/**
- * Loader for CSV Data Model to E/S
- * - load with file
- */
 public class IndexProviderBasedCSVLoader implements CSVDataLoader {
     private static Map<String, Range.StatefulRange> ranges = new HashMap<>();
 
@@ -58,7 +58,7 @@ public class IndexProviderBasedCSVLoader implements CSVDataLoader {
     }
 
     @Override
-    public LoadResponse<String, FuseError> load(String type, String label, File data, GraphDataLoader.Directive directive) throws IOException {
+    public LoadResponse<String, GraphError> load(String type, String label, File data, GraphDataLoader.Directive directive) throws IOException {
         DataTransformerContext context;
         String contentType = Files.probeContentType(data.toPath());
         if(Objects.isNull(contentType))
@@ -84,8 +84,7 @@ public class IndexProviderBasedCSVLoader implements CSVDataLoader {
     }
 
     @Override
-    public LoadResponse<String, FuseError> load(String type, String label, String payload, GraphDataLoader.Directive directive) throws IOException {
-        //todo
+    public LoadResponse<String, GraphError> load(String type, String label, String payload, GraphDataLoader.Directive directive) throws IOException {
         DataTransformerContext context = transformer.transform(new CSVTransformer.CsvElement() {
             @Override
             public String label() {
@@ -112,7 +111,7 @@ public class IndexProviderBasedCSVLoader implements CSVDataLoader {
      * @param directive
      * @return
      */
-    private LoadResponse<String, FuseError> load(DataTransformerContext context, GraphDataLoader.Directive directive) {
+    private LoadResponse<String, GraphError> load(DataTransformerContext context, GraphDataLoader.Directive directive) {
         //load bulk requests
         Tuple2<Response, BulkRequestBuilder> tuple = LoadUtils.load(schema, client, context);
         //submit bulk request

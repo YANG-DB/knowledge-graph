@@ -2,7 +2,7 @@ package org.opensearch.graph.unipop.controller.common.appender;
 
 /*-
  * #%L
- * fuse-dv-unipop
+ * virtual-unipop
  * %%
  * Copyright (C) 2016 - 2022 org.opensearch
  * %%
@@ -19,6 +19,10 @@ package org.opensearch.graph.unipop.controller.common.appender;
  * limitations under the License.
  * #L%
  */
+
+
+
+
 
 import org.opensearch.graph.model.GlobalConstants;
 import org.opensearch.graph.unipop.controller.common.context.ElementControllerContext;
@@ -40,9 +44,6 @@ import java.util.List;
 import java.util.Optional;
 import java.util.Set;
 
-/**
- * Created by roman.margolis on 24/09/2017.
- */
 public class ElementIndexSearchAppender implements SearchAppender<ElementControllerContext> {
     //region SearchAppender Implementation
     @Override

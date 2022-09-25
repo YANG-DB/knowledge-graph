@@ -2,12 +2,9 @@ package org.opensearch.graph.model.results;
 
 /*-
  * #%L
- * Assignment.java - opengraph-model - yangdb - 2,016
- * org.codehaus.mojo-license-maven-plugin-1.16
- * $Id$
- * $HeadURL$
+ * opengraph-model
  * %%
- * Copyright (C) 2016 - 2018 yangdb   ------ www.yangdb.org ------
+ * Copyright (C) 2016 - 2022 org.opensearch
  * %%
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -24,6 +21,11 @@ package org.opensearch.graph.model.results;
  */
 
 
+
+
+
+
+
 import com.fasterxml.jackson.annotation.JsonAnyGetter;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonInclude;
@@ -31,9 +33,6 @@ import com.fasterxml.jackson.annotation.JsonInclude;
 import java.util.*;
 import java.util.concurrent.atomic.AtomicLong;
 
-/**
- * Created by benishue on 21-Feb-17.
- */
 
 
 @JsonInclude(JsonInclude.Include.NON_EMPTY)

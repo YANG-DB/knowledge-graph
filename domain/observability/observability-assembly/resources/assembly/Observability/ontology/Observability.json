@@ -1,0 +1,211 @@
+{
+  "ont": "Observability",
+  "entityTypes": [
+    {
+      "eType": "Log",
+      "name": "Log",
+      "properties": [
+        "agent",
+        "bytes",
+        "clientip",
+        "extension",
+        "host",
+        "ip",
+        "memory",
+        "message",
+        "referer",
+        "request",
+        "response",
+        "tags",
+        "timestamp",
+        "url",
+        "machine",
+        "geo",
+        "event"
+      ]
+    },
+    {
+      "eType": "Geo",
+      "name": "Geo",
+      "properties": [
+        "srcdest",
+        "src",
+        "dest",
+        "coordinates"
+      ]
+    },
+    {
+      "eType": "Machine",
+      "name": "Machine",
+      "properties": [
+        "ram",
+        "os"
+      ]
+    },
+    {
+      "eType": "Event",
+      "name": "Event",
+      "properties": [
+        "dataset"
+      ]
+    }
+  ],
+  "relationshipTypes": [
+    {
+      "rType": "Location",
+      "name": "Location",
+      "directional": true,
+      "ePairs": [
+        {
+          "eTypeA": "Log",
+          "eTypeB": "Geo"
+        }
+      ]
+    },
+    {
+      "rType": "Machine",
+      "name": "Machine",
+      "directional": true,
+      "ePairs": [
+        {
+          "eTypeA": "Log",
+          "eTypeB": "Machine"
+        }
+      ]
+    },
+    {
+      "rType": "Event",
+      "name": "Event",
+      "directional": true,
+      "ePairs": [
+        {
+          "eTypeA": "Log",
+          "eTypeB": "Event"
+        }
+      ]
+    }
+  ],
+  "properties": [
+    {
+      "pType": "agent",
+      "name": "agent",
+      "type": "string"
+    },
+    {
+      "pType": "bytes",
+      "name": "bytes",
+      "type": "long"
+    },
+    {
+      "pType": "memory",
+      "name": "memory",
+      "type": "long"
+    },
+    {
+      "pType": "clientip",
+      "name": "clientip",
+      "type": "string"
+    },
+    {
+      "pType": "extension",
+      "name": "extension",
+      "type": "string"
+    },
+    {
+      "pType": "host",
+      "name": "host",
+      "type": "string"
+    },
+    {
+      "pType": "ip",
+      "name": "ip",
+      "type": "ip"
+    },
+    {
+      "pType": "message",
+      "name": "message",
+      "type": "string"
+    },
+    {
+      "pType": "referer",
+      "name": "referer",
+      "type": "string"
+    },
+    {
+      "pType": "request",
+      "name": "request",
+      "type": "string"
+    },
+    {
+      "pType": "response",
+      "name": "response",
+      "type": "string"
+    },
+    {
+      "pType": "tags",
+      "name": "tags",
+      "type": "string"
+    },
+    {
+      "pType": "url",
+      "name": "url",
+      "type": "string"
+    },
+    {
+      "pType": "timestamp",
+      "name": "timestamp",
+      "type": "date"
+    },
+    {
+      "pType": "srcdest",
+      "name": "srcdest",
+      "type": "string"
+    },
+    {
+      "pType": "src",
+      "name": "src",
+      "type": "string"
+    },
+    {
+      "pType": "dest",
+      "name": "dest",
+      "type": "string"
+    },
+    {
+      "pType": "coordinates",
+      "name": "coordinates",
+      "type": "geo_point"
+    },
+    {
+      "pType": "ram",
+      "name": "ram",
+      "type": "long"
+    },
+    {
+      "pType": "os",
+      "name": "os",
+      "type": "text"
+    },
+    {
+      "pType": "dataset",
+      "name": "dataset",
+      "type": "string"
+    },
+    {
+      "pType": "machine",
+      "name": "machine",
+      "type": "Machine"
+    },
+    {
+      "pType": "geo",
+      "name": "geo",
+      "type": "Geo"
+    },
+    {
+      "pType": "event",
+      "name": "event",
+      "type": "Event"
+    }
+
+  ]
+}

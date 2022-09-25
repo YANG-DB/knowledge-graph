@@ -22,6 +22,10 @@
 
 
 
+
+
+
+
 //
 //import org.apache.tinkerpop.gremlin.process.traversal.Step;
 //import org.apache.tinkerpop.gremlin.process.traversal.Traversal;
@@ -47,9 +51,6 @@
 //import java.util.Optional;
 //import java.util.Set;
 //
-///**
-// * Created by Gilad on 03/11/2015.
-// */
 //public class UniGraphGroupStepStrategy extends AbstractTraversalStrategy<TraversalStrategy.ProviderOptimizationStrategy> implements TraversalStrategy.ProviderOptimizationStrategy {
 //    //region AbstractTraversalStrategy Implementation
 //    @Override

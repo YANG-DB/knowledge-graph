@@ -2,7 +2,7 @@ package org.opensearch.graph.unipop.controller.utils.idProvider;
 
 /*-
  * #%L
- * fuse-dv-unipop
+ * virtual-unipop
  * %%
  * Copyright (C) 2016 - 2022 org.opensearch
  * %%
@@ -20,13 +20,14 @@ package org.opensearch.graph.unipop.controller.utils.idProvider;
  * #L%
  */
 
+
+
+
+
 import org.apache.tinkerpop.gremlin.structure.Vertex;
 
 import java.util.Map;
 
-/**
- * Created by Roman on 15/05/2017.
- */
 public interface EdgeIdProvider<T>  {
     T get(String edgeLabel, Vertex outV, Vertex inV, Map<String, Object> properties);
 }

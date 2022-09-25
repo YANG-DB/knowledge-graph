@@ -2,7 +2,7 @@ package org.opensearch.graph.unipop.controller.common.context;
 
 /*-
  * #%L
- * fuse-dv-unipop
+ * virtual-unipop
  * %%
  * Copyright (C) 2016 - 2022 org.opensearch
  * %%
@@ -20,6 +20,10 @@ package org.opensearch.graph.unipop.controller.common.context;
  * #L%
  */
 
+
+
+
+
 import org.opensearch.graph.unipop.promise.TraversalConstraint;
 import org.opensearch.graph.unipop.schemaProviders.GraphElementSchemaProvider;
 import org.opensearch.graph.unipop.structure.ElementType;
@@ -32,9 +36,6 @@ import org.unipop.structure.UniGraph;
 import java.util.Collections;
 import java.util.Optional;
 
-/**
- * Created by roman.margolis on 15/11/2017.
- */
 public interface CompositeControllerContext extends VertexControllerContext{
     Optional<ElementControllerContext> getElementControllerContext();
     Optional<VertexControllerContext> getVertexControllerContext();

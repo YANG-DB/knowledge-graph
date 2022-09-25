@@ -23,13 +23,14 @@ package org.unipop.schema.property;
 
 
 
+
+
+
+
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.util.Date;
 
-/**
- * Created by sbarzilay on 8/2/16.
- */
 public interface DatePropertySchema {
     DateFormat getSourceDateFormat();
 

@@ -20,13 +20,13 @@ package org.opensearch.graph.model.logical;
  * #L%
  */
 
+
+
+
+
 import java.util.Map;
 
 public interface Vertex<V extends Vertex> {
-    /**
-     *
-     * @return
-     */
     String id();
 
     /**

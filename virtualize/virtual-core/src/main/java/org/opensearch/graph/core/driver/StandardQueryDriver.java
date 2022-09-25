@@ -20,6 +20,10 @@ package org.opensearch.graph.core.driver;
  * #L%
  */
 
+
+
+
+
 import com.google.inject.Inject;
 import org.opensearch.graph.dispatcher.driver.CursorDriver;
 import org.opensearch.graph.dispatcher.driver.PageDriver;
@@ -42,9 +46,6 @@ import org.opensearch.graph.model.transport.CreateQueryRequest;
 
 import static org.opensearch.graph.model.transport.CreateQueryRequestMetadata.QueryType.concrete;
 
-/**
- * Created by lior.perry on 20/02/2017.
- */
 public class StandardQueryDriver extends QueryDriverBase {
     //region Constructors
     @Inject

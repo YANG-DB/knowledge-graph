@@ -23,6 +23,10 @@ package org.unipop.query.search;
 
 
 
+
+
+
+
 import org.apache.tinkerpop.gremlin.process.traversal.Order;
 import org.apache.tinkerpop.gremlin.structure.Direction;
 import org.apache.tinkerpop.gremlin.structure.Edge;
@@ -38,9 +42,6 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
 
-/**
- * search controller query interface
- */
 public class SearchVertexQuery extends SearchQuery<Edge> implements VertexQuery {
 
     private final List<Vertex> vertices;

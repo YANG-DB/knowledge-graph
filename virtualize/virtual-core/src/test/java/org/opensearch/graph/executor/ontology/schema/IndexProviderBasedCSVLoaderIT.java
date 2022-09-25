@@ -10,7 +10,7 @@ import org.opensearch.graph.executor.ontology.schema.load.IndexProviderBasedCSVL
 import org.opensearch.graph.model.results.LoadResponse;
 import org.opensearch.graph.model.Range;
 import org.opensearch.graph.model.ontology.Ontology;
-import org.opensearch.graph.model.resourceInfo.FuseError;
+import org.opensearch.graph.model.resourceInfo.GraphError;
 import org.opensearch.graph.model.schema.IndexProvider;
 import org.opensearch.graph.test.BaseITMarker;
 import org.opensearch.action.admin.indices.refresh.RefreshRequest;
@@ -83,7 +83,7 @@ public class IndexProviderBasedCSVLoaderIT implements BaseITMarker {
 //        Assert.assertEquals(19,graphLoader.init());
 
         URL resource = Thread.currentThread().getContextClassLoader().getResource("schema/csv/Dragons.csv");
-        LoadResponse<String, FuseError> response = csvLoader.load("Entity","Dragon",new File(resource.toURI()), GraphDataLoader.Directive.INSERT);
+        LoadResponse<String, GraphError> response = csvLoader.load("Entity","Dragon",new File(resource.toURI()), GraphDataLoader.Directive.INSERT);
         Assert.assertEquals(2,response.getResponses().size());
         Assert.assertEquals(3,response.getResponses().get(1).getSuccesses().size());
 
@@ -112,7 +112,7 @@ public class IndexProviderBasedCSVLoaderIT implements BaseITMarker {
 //        Assert.assertEquals(19,graphLoader.init());
 
         URL resource  = Thread.currentThread().getContextClassLoader().getResource("schema/csv/Fire.csv");
-        LoadResponse<String, FuseError> response = csvLoader.load("Relation","Fire",new File(resource.toURI()), GraphDataLoader.Directive.INSERT);
+        LoadResponse<String, GraphError> response = csvLoader.load("Relation","Fire",new File(resource.toURI()), GraphDataLoader.Directive.INSERT);
         Assert.assertEquals(2,response.getResponses().size());
         Assert.assertEquals(4,response.getResponses().get(1).getSuccesses().size());
 

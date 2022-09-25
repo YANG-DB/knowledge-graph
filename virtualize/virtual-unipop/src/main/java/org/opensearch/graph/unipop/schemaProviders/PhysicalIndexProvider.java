@@ -2,7 +2,7 @@ package org.opensearch.graph.unipop.schemaProviders;
 
 /*-
  * #%L
- * fuse-dv-unipop
+ * virtual-unipop
  * %%
  * Copyright (C) 2016 - 2022 org.opensearch
  * %%
@@ -20,14 +20,15 @@ package org.opensearch.graph.unipop.schemaProviders;
  * #L%
  */
 
+
+
+
+
 import org.opensearch.graph.unipop.schemaProviders.indexPartitions.IndexPartitions;
 import org.opensearch.graph.unipop.structure.*;
 import org.opensearch.graph.unipop.structure.ElementType;
 
 
-/**
- * Created by benishue on 23-Mar-17.
- */
 public interface PhysicalIndexProvider {
     class Constant implements PhysicalIndexProvider {
         //region Constructors

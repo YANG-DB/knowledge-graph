@@ -2,7 +2,7 @@ package org.opensearch.graph.unipop.controller.utils.map;
 
 /*-
  * #%L
- * fuse-dv-unipop
+ * virtual-unipop
  * %%
  * Copyright (C) 2016 - 2022 org.opensearch
  * %%
@@ -20,13 +20,14 @@ package org.opensearch.graph.unipop.controller.utils.map;
  * #L%
  */
 
+
+
+
+
 import javaslang.collection.Stream;
 
 import java.util.*;
 
-/**
- * Created by roman.margolis on 19/10/2017.
- */
 public class MapHelper {
     //region Public Static Methods
     static public <T> Optional<T> value(Map<String, Object> map, String key) {

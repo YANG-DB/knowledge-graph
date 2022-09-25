@@ -20,6 +20,10 @@ package org.geojson;
  * #L%
  */
 
+
+
+
+
 import com.fasterxml.jackson.annotation.JsonInclude;
 
 import java.util.HashMap;

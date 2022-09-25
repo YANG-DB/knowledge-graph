@@ -2,7 +2,7 @@ package org.opensearch.graph.unipop.controller.common.converter;
 
 /*-
  * #%L
- * fuse-dv-unipop
+ * virtual-unipop
  * %%
  * Copyright (C) 2016 - 2022 org.opensearch
  * %%
@@ -20,11 +20,12 @@ package org.opensearch.graph.unipop.controller.common.converter;
  * #L%
  */
 
+
+
+
+
 import org.unipop.process.ProfilerIfc;
 
-/**
- * Created by roman on 3/16/2015.
- */
 public interface ElementConverter<TElementSource, TElementDest> extends ProfilerIfc {
     Iterable<TElementDest> convert(TElementSource source);
 }

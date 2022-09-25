@@ -20,6 +20,10 @@ package org.opensearch.graph.executor.opensearch.logging;
  * #L%
  */
 
+
+
+
+
 import com.codahale.metrics.Meter;
 import org.opensearch.graph.dispatcher.logging.LogMessage;
 import org.opensearch.action.ActionFuture;
@@ -39,9 +43,6 @@ import java.util.function.Function;
 
 import static com.codahale.metrics.MetricRegistry.name;
 
-/**
- * Created by roman.margolis on 02/01/2018.
- */
 public class LoggingActionFuture<T> implements ListenableActionFuture<T> {
     //region Constructors
     public LoggingActionFuture(

@@ -9,9 +9,9 @@ package org.opensearch.graph.executor.ontology.schema;
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- *
+ * 
  *      http://www.apache.org/licenses/LICENSE-2.0
- *
+ * 
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -20,12 +20,16 @@ package org.opensearch.graph.executor.ontology.schema;
  * #L%
  */
 
+
+
+
+
 import com.google.inject.Inject;
 import com.typesafe.config.Config;
 import org.opensearch.graph.dispatcher.ontology.OntologyProvider;
 import org.opensearch.graph.executor.ontology.GraphElementSchemaProviderFactory;
 import org.opensearch.graph.model.ontology.Ontology;
-import org.opensearch.graph.model.resourceInfo.FuseError;
+import org.opensearch.graph.model.resourceInfo.GraphError;
 import org.opensearch.graph.unipop.schemaProviders.GraphElementSchemaProvider;
 import org.opensearch.graph.unipop.schemaProviders.indexPartitions.IndexPartitions;
 import org.opensearch.graph.unipop.schemaProviders.indexPartitions.NestedIndexPartitions;
@@ -45,7 +49,7 @@ public final class IndexProviderRawSchema extends SystemIndicesProvider implemen
     public IndexProviderRawSchema(Config config, OntologyProvider provider, GraphElementSchemaProviderFactory schemaProviderFactory) {
         String assembly = config.getString("assembly");
         Optional<Ontology> ontology = provider.get(assembly);
-        Ontology ont = ontology.orElseThrow(() -> new FuseError.FuseErrorException(new FuseError("No Ontology present for assembly", "No Ontology present for assembly" + assembly)));
+        Ontology ont = ontology.orElseThrow(() -> new GraphError.GraphErrorException(new GraphError("No Ontology present for assembly", "No Ontology present for assembly" + assembly)));
         this.schemaProvider = schemaProviderFactory.get(ont);
     }
 
@@ -70,7 +74,7 @@ public final class IndexProviderRawSchema extends SystemIndicesProvider implemen
         if (schemaProvider.getEdgeSchemas(type).iterator().hasNext())
             return schemaProvider.getEdgeSchemas(type).iterator().next().getIndexPartitions().get();
 
-        throw new FuseError.FuseErrorException("No valid partition found for " + type, new FuseError("IndexProvider Schema Error", "No valid partition found for " + type));
+        throw new GraphError.GraphErrorException("No valid partition found for " + type, new GraphError("IndexProvider Schema Error", "No valid partition found for " + type));
     }
 
     @Override

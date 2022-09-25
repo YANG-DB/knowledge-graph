@@ -2,7 +2,7 @@ package org.opensearch.graph.unipop.controller.discrete;
 
 /*-
  * #%L
- * fuse-dv-unipop
+ * virtual-unipop
  * %%
  * Copyright (C) 2016 - 2022 org.opensearch
  * %%
@@ -19,6 +19,10 @@ package org.opensearch.graph.unipop.controller.discrete;
  * limitations under the License.
  * #L%
  */
+
+
+
+
 
 import com.codahale.metrics.MetricRegistry;
 import org.opensearch.graph.unipop.controller.OpensearchGraphConfiguration;
@@ -60,9 +64,6 @@ import java.util.Optional;
 
 import static org.opensearch.graph.unipop.controller.utils.SearchAppenderUtil.wrap;
 
-/**
- * Created by Roman on 3/14/2018.
- */
 public class DiscreteElementReduceController implements ReduceQuery.SearchController {
     //region Constructors
     public DiscreteElementReduceController(

@@ -2,16 +2,16 @@ package org.opensearch.graph.unipop.schemaProviders.indexPartitions;
 
 /*-
  * #%L
- * fuse-dv-unipop
+ * virtual-unipop
  * %%
  * Copyright (C) 2016 - 2022 org.opensearch
  * %%
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- *
+ * 
  *      http://www.apache.org/licenses/LICENSE-2.0
- *
+ * 
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -19,6 +19,10 @@ package org.opensearch.graph.unipop.schemaProviders.indexPartitions;
  * limitations under the License.
  * #L%
  */
+
+
+
+
 
 import javaslang.collection.Stream;
 
@@ -32,9 +36,6 @@ public interface IndexPartitions {
 
     Iterable<Partition> getPartitions();
 
-    /**
-     * collect all indices names from index partitions
-     */
     default Iterable<String> getIndices() {
         return StreamSupport.stream(getPartitions().spliterator(), false)
                 .flatMap(p -> StreamSupport.stream(p.getIndices().spliterator(), false))

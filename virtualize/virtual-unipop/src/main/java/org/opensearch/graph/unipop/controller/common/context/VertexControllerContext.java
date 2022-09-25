@@ -2,7 +2,7 @@ package org.opensearch.graph.unipop.controller.common.context;
 
 /*-
  * #%L
- * fuse-dv-unipop
+ * virtual-unipop
  * %%
  * Copyright (C) 2016 - 2022 org.opensearch
  * %%
@@ -19,6 +19,10 @@ package org.opensearch.graph.unipop.controller.common.context;
  * limitations under the License.
  * #L%
  */
+
+
+
+
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonInclude;
@@ -37,9 +41,6 @@ import java.util.Optional;
 import java.util.stream.Collectors;
 import java.util.stream.StreamSupport;
 
-/**
- * Created by roman.margolis on 13/09/2017.
- */
 public interface VertexControllerContext extends BulkContext, DirectionContext, ElementControllerContext {
     @JsonInclude(JsonInclude.Include.NON_EMPTY)
     @JsonIgnoreProperties(ignoreUnknown = true)

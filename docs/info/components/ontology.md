@@ -151,16 +151,16 @@ The ontology schema is constructed from the next elements:
  
      Create a new ontology 
         
-       [POST] http://localhost:8888/fuse/catalog/ontology
+       [POST] http://localhost:8888/opengraph/catalog/ontology
              Body => Ontology json document
   
      Get All ontologies
      
-       [GET] http://localhost:8888/fuse/catalog/ontology
+       [GET] http://localhost:8888/opengraph/catalog/ontology
 
      Get specific ontology by name
 
-       [GET] http://localhost:8888/fuse/catalog/ontology/:id
+       [GET] http://localhost:8888/opengraph/catalog/ontology/:id
            id => ontology Name
 
 

@@ -2,7 +2,7 @@ package org.opensearch.graph.unipop.process.traversal.traverser;
 
 /*-
  * #%L
- * fuse-dv-unipop
+ * virtual-unipop
  * %%
  * Copyright (C) 2016 - 2022 org.opensearch
  * %%
@@ -20,9 +20,10 @@ package org.opensearch.graph.unipop.process.traversal.traverser;
  * #L%
  */
 
-/**
- * Created by Roman on 1/27/2018.
- */
+
+
+
+
 public interface StringOrdinalDictionary {
     String getString(byte ordinal);
 

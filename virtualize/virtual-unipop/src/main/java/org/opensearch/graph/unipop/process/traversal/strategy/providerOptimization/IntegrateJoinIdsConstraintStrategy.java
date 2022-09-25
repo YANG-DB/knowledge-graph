@@ -2,7 +2,7 @@ package org.opensearch.graph.unipop.process.traversal.strategy.providerOptimizat
 
 /*-
  * #%L
- * fuse-dv-unipop
+ * virtual-unipop
  * %%
  * Copyright (C) 2016 - 2022 org.opensearch
  * %%
@@ -20,13 +20,14 @@ package org.opensearch.graph.unipop.process.traversal.strategy.providerOptimizat
  * #L%
  */
 
+
+
+
+
 import org.apache.tinkerpop.gremlin.process.traversal.Traversal;
 import org.apache.tinkerpop.gremlin.process.traversal.TraversalStrategy;
 import org.apache.tinkerpop.gremlin.process.traversal.strategy.AbstractTraversalStrategy;
 
-/**
- * Created by Roman on 04/07/2017.
- */
 public class IntegrateJoinIdsConstraintStrategy
         extends AbstractTraversalStrategy<TraversalStrategy.ProviderOptimizationStrategy> {
     //region AbstractTraversalStrategy Implementation

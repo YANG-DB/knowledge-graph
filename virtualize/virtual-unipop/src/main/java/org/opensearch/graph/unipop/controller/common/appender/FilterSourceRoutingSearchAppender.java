@@ -2,7 +2,7 @@ package org.opensearch.graph.unipop.controller.common.appender;
 
 /*-
  * #%L
- * fuse-dv-unipop
+ * virtual-unipop
  * %%
  * Copyright (C) 2016 - 2022 org.opensearch
  * %%
@@ -20,6 +20,10 @@ package org.opensearch.graph.unipop.controller.common.appender;
  * #L%
  */
 
+
+
+
+
 import org.opensearch.graph.unipop.controller.common.context.CompositeControllerContext;
 import org.opensearch.graph.unipop.controller.common.context.ElementControllerContext;
 import org.opensearch.graph.unipop.controller.common.context.VertexControllerContext;
@@ -33,9 +37,6 @@ import org.apache.tinkerpop.gremlin.structure.T;
 
 import java.util.*;
 
-/**
- * Created by roman.margolis on 18/09/2017.
- */
 public class FilterSourceRoutingSearchAppender implements SearchAppender<CompositeControllerContext> {
     //region SearchAppender Implementation
     @Override

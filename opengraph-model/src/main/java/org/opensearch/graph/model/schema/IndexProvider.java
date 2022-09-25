@@ -9,9 +9,9 @@ package org.opensearch.graph.model.schema;
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- *
+ * 
  *      http://www.apache.org/licenses/LICENSE-2.0
- *
+ * 
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -21,32 +21,15 @@ package org.opensearch.graph.model.schema;
  */
 
 
-/*-
- *
- * Ontology.java - opengraph-model - yangdb - 2,016
- * org.codehaus.mojo-license-maven-plugin-1.16
- * $Id$
- * $HeadURL$
- * %%
- * Copyright (C) 2016 - 2019 yangdb   ------ www.yangdb.org ------
- * %%
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
- *
- *      http://www.apache.org/licenses/LICENSE-2.0
- *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
- *
- */
+
+
+
+
 
 import com.fasterxml.jackson.annotation.*;
 import com.google.common.collect.ImmutableList;
 import org.opensearch.graph.model.ontology.Ontology;
+import org.opensearch.graph.model.schema.BaseTypeElement.Type;
 
 import java.util.*;
 import java.util.stream.Collectors;
@@ -139,24 +122,24 @@ public class IndexProvider {
     public Optional<Entity> getEntity(String label) {
         Optional<Entity> nest = getEntities().stream().filter(e -> !e.getNested().isEmpty())
                 .flatMap(e -> e.getNested().stream())
-                .filter(nested -> nested.getType().equals(label))
+                .filter(nested -> nested.getType().getName().equals(label))
                 .findAny();
         if (nest.isPresent())
             return nest;
 
-        return getEntities().stream().filter(e -> e.getType().equals(label)).findAny();
+        return getEntities().stream().filter(e -> e.getType().getName().equals(label)).findAny();
     }
 
     @JsonIgnore
     public Optional<Relation> getRelation(String label) {
         Optional<Relation> nest = getRelations().stream().filter(e -> !e.getNested().isEmpty())
                 .flatMap(e -> e.getNested().stream())
-                .filter(nested -> nested.getType().equals(label))
+                .filter(nested -> nested.getType().getName().equals(label))
                 .findAny();
         if (nest.isPresent())
             return nest;
 
-        return getRelations().stream().filter(e -> e.getType().equals(label)).findAny();
+        return getRelations().stream().filter(e -> e.getType().getName().equals(label)).findAny();
     }
 
     public static class Builder {
@@ -178,13 +161,13 @@ public class IndexProvider {
             provider.ontology = ontology.getOnt();
             //generate entities
             provider.entities = ontology.getEntityTypes().stream().map(e ->
-                    new Entity(e.getName(), MappingIndexType.STATIC.name(), PartitionType.INDEX.name(),
+                    new Entity(Type.of(e.getName()), MappingIndexType.STATIC.name(), PartitionType.INDEX.name(),
                             //E/S indices need to be lower cased
                             new Props(ImmutableList.of(e.getName().toLowerCase())), Collections.emptyList(), Collections.emptyMap()))
                     .collect(Collectors.toList());
             //generate relations
             provider.relations = ontology.getRelationshipTypes().stream().map(e ->
-                    new Relation(e.getName(), MappingIndexType.STATIC.name(), PartitionType.INDEX.name(), false, Collections.emptyList(),
+                    new Relation(Type.of(e.getName()), MappingIndexType.STATIC.name(), PartitionType.INDEX.name(), false, Collections.emptyList(),
                             //E/S indices need to be lower cased
                             new Props(ImmutableList.of(e.getName().toLowerCase())), Collections.emptyList(), Collections.emptyMap()))
                     .collect(Collectors.toList());

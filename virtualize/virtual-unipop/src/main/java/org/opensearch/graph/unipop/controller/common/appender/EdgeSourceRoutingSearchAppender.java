@@ -2,7 +2,7 @@ package org.opensearch.graph.unipop.controller.common.appender;
 
 /*-
  * #%L
- * fuse-dv-unipop
+ * virtual-unipop
  * %%
  * Copyright (C) 2016 - 2022 org.opensearch
  * %%
@@ -20,6 +20,10 @@ package org.opensearch.graph.unipop.controller.common.appender;
  * #L%
  */
 
+
+
+
+
 import org.opensearch.graph.unipop.controller.common.context.VertexControllerContext;
 import org.opensearch.graph.unipop.controller.search.SearchBuilder;
 import org.opensearch.graph.unipop.controller.utils.traversal.TraversalValuesByKeyProvider;
@@ -35,9 +39,6 @@ import java.util.Set;
 
 import static org.opensearch.graph.unipop.controller.common.appender.EdgeUtils.getLabel;
 
-/**
- * Created by roman.margolis on 03/01/2018.
- */
 public class EdgeSourceRoutingSearchAppender  implements SearchAppender<VertexControllerContext> {
     //region SearchAppender Implementation
     @Override

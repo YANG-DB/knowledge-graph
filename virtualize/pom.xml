@@ -11,6 +11,7 @@
 
     <artifactId>virtualize</artifactId>
     <packaging>pom</packaging>
+
     <properties>
         <checkstyle.skip>true</checkstyle.skip>
     </properties>
@@ -19,10 +20,8 @@
         <module>virtual-unipop</module>
         <module>virtual-core</module>
         <module>virtual-asg</module>
-        <!--        <module>fuse-dv-gta</module>-->
-        <!--        <module>fuse-dv-epb</module>-->
-        <!--        <module>fuse-dv-unipop</module>-->
-        <!--        <module>fuse-dv-stat</module>-->
+        <module>virtual-epb</module>
+        <module>virtual-traversal</module>
     </modules>
 
 </project>

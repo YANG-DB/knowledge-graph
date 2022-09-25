@@ -4,7 +4,7 @@ package org.opensearch.graph.model.date;
  * #%L
  * opengraph-model
  * %%
- * Copyright (C) 2016 - 2021 The YangDb Graph Database Project
+ * Copyright (C) 2016 - 2022 org.opensearch
  * %%
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -21,6 +21,10 @@ package org.opensearch.graph.model.date;
  */
 
 
+
+
+
+
 import com.github.sisyphsu.retree.ReMatcher;
 
 import java.time.LocalDateTime;
@@ -28,16 +32,6 @@ import java.time.OffsetDateTime;
 import java.time.format.DateTimeParseException;
 import java.util.*;
 
-/**
- * DateParser represents an unique parser context, it shouldn't be used concurrently.
- * <p>
- * In most cases, datetime's parsing should be very fast, so you can use {@link DateParserUtils} directly.
- * <p>
- * If need use it in multiple threads, you can create your own parser by {@link DateParserBuilder}.
- *
- * @author sulin
- * @since 2019-09-12 14:28:50
- */
 public final class DateParser {
 
     private final ReMatcher matcher;

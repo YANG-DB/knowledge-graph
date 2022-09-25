@@ -2,7 +2,7 @@ package org.opensearch.graph.unipop.process.traversal.traverser;
 
 /*-
  * #%L
- * fuse-dv-unipop
+ * virtual-unipop
  * %%
  * Copyright (C) 2016 - 2022 org.opensearch
  * %%
@@ -20,6 +20,10 @@ package org.opensearch.graph.unipop.process.traversal.traverser;
  * #L%
  */
 
+
+
+
+
 import org.apache.tinkerpop.gremlin.process.traversal.Path;
 import org.apache.tinkerpop.gremlin.process.traversal.Pop;
 import org.apache.tinkerpop.gremlin.process.traversal.Step;
@@ -27,9 +31,6 @@ import org.apache.tinkerpop.gremlin.process.traversal.traverser.B_O_S_SE_SL_Trav
 
 import java.util.Set;
 
-/**
- * Created by Roman on 1/25/2018.
- */
 public class ThinPathTraverser<T> extends B_O_S_SE_SL_Traverser<T> {
     //region Constructors
     protected ThinPathTraverser() {

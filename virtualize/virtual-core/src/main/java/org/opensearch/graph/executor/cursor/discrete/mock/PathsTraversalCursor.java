@@ -20,6 +20,10 @@ package org.opensearch.graph.executor.cursor.discrete.mock;
  * #L%
  */
 
+
+
+
+
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.opensearch.graph.dispatcher.cursor.Cursor;
 import org.opensearch.graph.dispatcher.cursor.CursorFactory;
@@ -31,9 +35,6 @@ import java.io.File;
 import java.io.IOException;
 import java.nio.file.Paths;
 
-/**
- * Created by roman.margolis on 08/11/2017.
- */
 public class PathsTraversalCursor extends BaseCursor {
     //region Factory
     public static class Factory implements CursorFactory {

@@ -20,6 +20,10 @@ package org.opensearch.graph.executor.cursor;
  * #L%
  */
 
+
+
+
+
 import org.opensearch.graph.dispatcher.cursor.CursorFactory;
 import org.opensearch.graph.dispatcher.ontology.OntologyProvider;
 import org.opensearch.graph.dispatcher.provision.CursorRuntimeProvision;
@@ -34,9 +38,6 @@ import org.opensearch.client.Client;
 import java.util.List;
 import java.util.concurrent.atomic.AtomicLong;
 
-/**
- * Created by Roman on 05/04/2017.
- */
 public class TraversalCursorContext implements CursorFactory.Context<GraphElementSchemaProvider> {
     //region Constructor
     public TraversalCursorContext(

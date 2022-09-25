@@ -23,6 +23,10 @@ package org.unipop.process.edge;
 
 
 
+
+
+
+
 import org.apache.tinkerpop.gremlin.process.traversal.Traversal;
 import org.apache.tinkerpop.gremlin.process.traversal.TraversalStrategy;
 import org.apache.tinkerpop.gremlin.process.traversal.step.map.EdgeOtherVertexStep;
@@ -31,9 +35,6 @@ import org.apache.tinkerpop.gremlin.process.traversal.strategy.AbstractTraversal
 import org.apache.tinkerpop.gremlin.process.traversal.util.TraversalHelper;
 import org.unipop.structure.UniGraph;
 
-/**
- * Created by sbarzilay on 6/8/16.
- */
 public class EdgeStepsStrategy extends AbstractTraversalStrategy<TraversalStrategy.ProviderOptimizationStrategy> implements TraversalStrategy.ProviderOptimizationStrategy {
     @Override
     public void apply(Traversal.Admin<?, ?> traversal) {

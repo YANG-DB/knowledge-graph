@@ -2,7 +2,7 @@ package org.opensearch.graph.unipop.controller.utils.idProvider;
 
 /*-
  * #%L
- * fuse-dv-unipop
+ * virtual-unipop
  * %%
  * Copyright (C) 2016 - 2022 org.opensearch
  * %%
@@ -20,6 +20,10 @@ package org.opensearch.graph.unipop.controller.utils.idProvider;
  * #L%
  */
 
+
+
+
+
 import org.opensearch.graph.unipop.controller.utils.traversal.TraversalHashProvider;
 import org.opensearch.graph.unipop.promise.TraversalConstraint;
 import org.opensearch.graph.unipop.promise.TraversalPromise;
@@ -28,9 +32,6 @@ import org.apache.tinkerpop.gremlin.structure.Vertex;
 import java.util.Map;
 import java.util.Optional;
 
-/**
- * Created by Roman on 15/05/2017.
- */
 public class HashEdgeIdProvider implements EdgeIdProvider<String> {
     //region Constructors
     public HashEdgeIdProvider(Optional<TraversalConstraint> constraint) throws Exception {

@@ -2,7 +2,7 @@ package org.opensearch.graph.unipop.controller.search;
 
 /*-
  * #%L
- * fuse-dv-unipop
+ * virtual-unipop
  * %%
  * Copyright (C) 2016 - 2022 org.opensearch
  * %%
@@ -19,6 +19,10 @@ package org.opensearch.graph.unipop.controller.search;
  * limitations under the License.
  * #L%
  */
+
+
+
+
 
 import javaslang.collection.Stream;
 import org.apache.tinkerpop.gremlin.process.traversal.Compare;
@@ -47,9 +51,6 @@ import java.util.function.BiPredicate;
 import java.util.function.Predicate;
 import java.util.stream.Collectors;
 
-/**
- * Created by lior.perry on 26/03/2017.
- */
 public class AggregationBuilder implements Cloneable {
 
 

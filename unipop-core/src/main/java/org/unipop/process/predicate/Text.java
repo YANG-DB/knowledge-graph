@@ -23,15 +23,16 @@ package org.unipop.process.predicate;
 
 
 
+
+
+
+
 import org.apache.commons.lang.NotImplementedException;
 import org.apache.commons.lang.StringUtils;
 import org.apache.tinkerpop.gremlin.process.traversal.P;
 
 import java.util.function.BiPredicate;
 
-/**
- * Created by sbarzilay on 12/15/15.
- */
 public class Text {
     public static <V> P<V> queryString(final V value) {
         return new P(TextPredicate.QUERY_STRING, value);

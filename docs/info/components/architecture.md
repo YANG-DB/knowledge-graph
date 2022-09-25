@@ -79,8 +79,8 @@ We can see here the code snippet taken from the knowledge assembly distribution 
       "org.opensearch.graph.services.modules.LoggingJacksonModule",
       "org.opensearch.graph.dispatcher.modules.CoreDispatcherModule",
       "org.opensearch.graph.dispatcher.query.graphql.GraphQLModule",
-      "org.opensearch.graph.dispatcher.query.rdf.SparqlModule",
-      "org.opensearch.graph.dispatcher.query.sql.SqlModule",
+      
+      
       "org.opensearch.graph.dispatcher.modules.DescriptorsModule",
       "org.opensearch.graph.asg.translator.graphql.AsgGraphQLModule",
       "org.opensearch.graph.asg.translator.cypher.AsgCypherModule",

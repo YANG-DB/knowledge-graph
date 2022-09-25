@@ -2,7 +2,7 @@ package org.opensearch.graph.unipop.controller.common.context;
 
 /*-
  * #%L
- * fuse-dv-unipop
+ * virtual-unipop
  * %%
  * Copyright (C) 2016 - 2022 org.opensearch
  * %%
@@ -20,9 +20,10 @@ package org.opensearch.graph.unipop.controller.common.context;
  * #L%
  */
 
-/**
- * Created by roman.margolis on 14/09/2017.
- */
+
+
+
+
 public interface LimitContext {
     int getLimit();
 }

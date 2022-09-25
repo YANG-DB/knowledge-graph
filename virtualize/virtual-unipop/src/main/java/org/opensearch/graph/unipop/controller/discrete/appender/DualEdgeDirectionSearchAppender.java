@@ -2,7 +2,7 @@ package org.opensearch.graph.unipop.controller.discrete.appender;
 
 /*-
  * #%L
- * fuse-dv-unipop
+ * virtual-unipop
  * %%
  * Copyright (C) 2016 - 2022 org.opensearch
  * %%
@@ -19,6 +19,10 @@ package org.opensearch.graph.unipop.controller.discrete.appender;
  * limitations under the License.
  * #L%
  */
+
+
+
+
 
 import org.opensearch.graph.unipop.controller.common.context.VertexControllerContext;
 import org.opensearch.graph.unipop.controller.promise.appender.SearchQueryAppenderBase;
@@ -37,9 +41,6 @@ import java.util.Set;
 
 import static org.opensearch.graph.unipop.controller.common.appender.EdgeUtils.getLabel;
 
-/**
- * Created by roman.margolis on 22/01/2018.
- */
 public class DualEdgeDirectionSearchAppender extends SearchQueryAppenderBase<VertexControllerContext> {
     //region SearchQueryAppenderBase Implementation
     @Override

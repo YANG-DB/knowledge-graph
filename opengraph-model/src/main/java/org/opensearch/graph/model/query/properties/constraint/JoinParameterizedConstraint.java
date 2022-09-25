@@ -20,6 +20,10 @@ package org.opensearch.graph.model.query.properties.constraint;
  * #L%
  */
 
+
+
+
+
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 @JsonIgnoreProperties(ignoreUnknown = true)

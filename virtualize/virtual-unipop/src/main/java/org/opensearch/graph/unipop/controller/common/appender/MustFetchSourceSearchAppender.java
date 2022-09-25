@@ -2,7 +2,7 @@ package org.opensearch.graph.unipop.controller.common.appender;
 
 /*-
  * #%L
- * fuse-dv-unipop
+ * virtual-unipop
  * %%
  * Copyright (C) 2016 - 2022 org.opensearch
  * %%
@@ -20,15 +20,16 @@ package org.opensearch.graph.unipop.controller.common.appender;
  * #L%
  */
 
+
+
+
+
 import org.opensearch.graph.unipop.controller.common.context.ElementControllerContext;
 import org.opensearch.graph.unipop.controller.search.SearchBuilder;
 import javaslang.collection.Stream;
 
 import java.util.List;
 
-/**
- * Created by roman.margolis on 28/12/2017.
- */
 public class MustFetchSourceSearchAppender implements SearchAppender<ElementControllerContext> {
     //region Constructors
     public MustFetchSourceSearchAppender(String...mustFetchFields) {

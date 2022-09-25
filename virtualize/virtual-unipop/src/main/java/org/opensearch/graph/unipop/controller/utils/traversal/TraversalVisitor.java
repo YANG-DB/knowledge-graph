@@ -2,7 +2,7 @@ package org.opensearch.graph.unipop.controller.utils.traversal;
 
 /*-
  * #%L
- * fuse-dv-unipop
+ * virtual-unipop
  * %%
  * Copyright (C) 2016 - 2022 org.opensearch
  * %%
@@ -20,6 +20,10 @@ package org.opensearch.graph.unipop.controller.utils.traversal;
  * #L%
  */
 
+
+
+
+
 import org.opensearch.graph.unipop.step.BoostingStepWrapper;
 import org.opensearch.graph.unipop.step.NestedStepWrapper;
 import javaslang.collection.Stream;
@@ -29,9 +33,6 @@ import org.apache.tinkerpop.gremlin.process.traversal.step.filter.*;
 
 import java.util.List;
 
-/**
- * Created by benishue on 27-Mar-17.
- */
 public class TraversalVisitor<TReturn> {
     //Public Methods
     public TReturn visit(Traversal traversal) {

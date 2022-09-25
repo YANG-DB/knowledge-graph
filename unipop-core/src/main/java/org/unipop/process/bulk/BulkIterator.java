@@ -23,6 +23,10 @@ package org.unipop.process.bulk;
 
 
 
+
+
+
+
 import org.apache.tinkerpop.gremlin.process.traversal.util.FastNoSuchElementException;
 
 import java.util.ArrayList;
@@ -31,9 +35,6 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.function.Supplier;
 
-/**
- * Created by sbarzilay on 7/6/16.
- */
 public class BulkIterator<S> implements Iterator<List<S>> {
     //region Constructors
     public BulkIterator(Iterator<S> innerIterator, Supplier<Supplier<Integer>> bulkSizeSupplierFactory) {

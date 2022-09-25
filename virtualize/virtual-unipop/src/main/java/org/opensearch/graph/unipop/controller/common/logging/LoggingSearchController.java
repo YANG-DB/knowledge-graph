@@ -2,7 +2,7 @@ package org.opensearch.graph.unipop.controller.common.logging;
 
 /*-
  * #%L
- * fuse-dv-unipop
+ * virtual-unipop
  * %%
  * Copyright (C) 2016 - 2022 org.opensearch
  * %%
@@ -20,6 +20,10 @@ package org.opensearch.graph.unipop.controller.common.logging;
  * #L%
  */
 
+
+
+
+
 import com.codahale.metrics.MetricRegistry;
 import org.opensearch.graph.dispatcher.decorators.MethodDecorator.ResultHandler.Passthrough;
 import org.opensearch.graph.dispatcher.logging.*;
@@ -34,9 +38,6 @@ import java.util.Iterator;
 
 import static org.opensearch.graph.dispatcher.logging.LogMessage.Level.trace;
 
-/**
- * Created by Roman on 12/14/2017.
- */
 public class LoggingSearchController implements SearchQuery.SearchController {
     //region Constructors
     public LoggingSearchController(

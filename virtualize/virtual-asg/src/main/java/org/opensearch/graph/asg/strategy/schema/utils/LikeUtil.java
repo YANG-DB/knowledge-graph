@@ -20,6 +20,10 @@ package org.opensearch.graph.asg.strategy.schema.utils;
  * #L%
  */
 
+
+
+
+
 import org.opensearch.graph.model.query.properties.EProp;
 import org.opensearch.graph.model.query.properties.SchematicEProp;
 import org.opensearch.graph.model.query.properties.constraint.Constraint;
@@ -35,9 +39,6 @@ import java.util.Optional;
 import static org.opensearch.graph.unipop.schemaProviders.GraphElementPropertySchema.IndexingSchema.Type.exact;
 import static org.opensearch.graph.unipop.schemaProviders.GraphElementPropertySchema.IndexingSchema.Type.ngrams;
 
-/**
- * Created by roman.margolis on 07/03/2018.
- */
 public class LikeUtil {
     public static Iterable<EProp> applyWildcardRules(EProp eProp, GraphElementPropertySchema propertySchema) {
         Optional<GraphElementPropertySchema.ExactIndexingSchema> exactIndexingSchema = propertySchema.getIndexingSchema(exact);

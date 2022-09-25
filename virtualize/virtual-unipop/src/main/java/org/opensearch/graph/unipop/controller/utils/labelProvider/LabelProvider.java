@@ -2,7 +2,7 @@ package org.opensearch.graph.unipop.controller.utils.labelProvider;
 
 /*-
  * #%L
- * fuse-dv-unipop
+ * virtual-unipop
  * %%
  * Copyright (C) 2016 - 2022 org.opensearch
  * %%
@@ -20,9 +20,10 @@ package org.opensearch.graph.unipop.controller.utils.labelProvider;
  * #L%
  */
 
-/**
- * Created by Roman on 22/05/2017.
- */
+
+
+
+
 public interface LabelProvider<T> {
     String get(T data);
 }

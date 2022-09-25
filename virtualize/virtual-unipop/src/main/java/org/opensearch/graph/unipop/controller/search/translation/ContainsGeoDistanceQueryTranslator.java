@@ -2,7 +2,7 @@ package org.opensearch.graph.unipop.controller.search.translation;
 
 /*-
  * #%L
- * fuse-dv-unipop
+ * virtual-unipop
  * %%
  * Copyright (C) 2016 - 2022 org.opensearch
  * %%
@@ -20,6 +20,10 @@ package org.opensearch.graph.unipop.controller.search.translation;
  * #L%
  */
 
+
+
+
+
 import org.opensearch.graph.unipop.controller.search.AggregationBuilder;
 import org.opensearch.graph.unipop.controller.search.QueryBuilder;
 import org.opensearch.graph.unipop.controller.utils.CollectionUtil;
@@ -30,9 +34,6 @@ import org.opensearch.common.geo.GeoPoint;
 import java.util.Arrays;
 import java.util.List;
 
-/**
- * Created by Roman on 18/05/2017.
- */
 public class ContainsGeoDistanceQueryTranslator implements PredicateQueryTranslator {
     public static final String GEO_DISTANCE = "geo_distance";
     private String[] geoFields;
@@ -45,7 +46,7 @@ public class ContainsGeoDistanceQueryTranslator implements PredicateQueryTransla
     @Override
     public QueryBuilder translate(QueryBuilder queryBuilder, AggregationBuilder aggregationBuilder, String key, P<?> predicate) {
         Contains contains = (Contains) predicate.getBiPredicate();
-        final List box = (List) predicate.getValue();
+        final List box = (List) predicate.getValue();//checked in the PredicateQueryTranslator.test() to verify this is a list
         switch (contains) {
             case within:
                 if (CollectionUtil.listFromObjectValue(predicate.getValue()).isEmpty()) {

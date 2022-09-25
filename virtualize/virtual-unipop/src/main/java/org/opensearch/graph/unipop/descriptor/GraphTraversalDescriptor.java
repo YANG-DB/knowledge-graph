@@ -2,7 +2,7 @@ package org.opensearch.graph.unipop.descriptor;
 
 /*-
  * #%L
- * fuse-dv-unipop
+ * virtual-unipop
  * %%
  * Copyright (C) 2016 - 2022 org.opensearch
  * %%
@@ -20,12 +20,13 @@ package org.opensearch.graph.unipop.descriptor;
  * #L%
  */
 
+
+
+
+
 import org.opensearch.graph.model.descriptors.Descriptor;
 import org.apache.tinkerpop.gremlin.process.traversal.dsl.graph.DefaultGraphTraversal;
 
-/**
- * Created by moti on 6/21/2017.
- */
 public class GraphTraversalDescriptor implements Descriptor<DefaultGraphTraversal> {
     @Override
     public String describe(DefaultGraphTraversal query) {

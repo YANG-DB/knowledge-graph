@@ -23,6 +23,10 @@ package org.unipop.process.optional;
 
 
 
+
+
+
+
 import javaslang.collection.Stream;
 import org.apache.tinkerpop.gremlin.process.traversal.Step;
 import org.apache.tinkerpop.gremlin.process.traversal.Traversal;
@@ -40,9 +44,6 @@ import org.unipop.structure.UniGraph;
 import java.util.Collections;
 import java.util.Set;
 
-/**
- * Created by roman.margolis on 28/11/2017.
- */
 public class UniGraphOptionalStepStrategy extends AbstractTraversalStrategy<TraversalStrategy.ProviderOptimizationStrategy> implements TraversalStrategy.ProviderOptimizationStrategy {
     //region AbstractTraversalStrategy Implementation
     @Override

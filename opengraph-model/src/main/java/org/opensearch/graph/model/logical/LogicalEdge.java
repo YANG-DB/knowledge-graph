@@ -9,9 +9,9 @@ package org.opensearch.graph.model.logical;
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- *
+ * 
  *      http://www.apache.org/licenses/LICENSE-2.0
- *
+ * 
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -19,6 +19,10 @@ package org.opensearch.graph.model.logical;
  * limitations under the License.
  * #L%
  */
+
+
+
+
 
 import com.fasterxml.jackson.annotation.*;
 import org.opensearch.graph.model.ontology.RelationshipType;
@@ -30,25 +34,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 
-/**
- * //example
- * {
- * "id": 101,
- * "source": "0",
- * "target": "1",
- * "metadata": {
- * "label": "called",
- * "user-defined": "values"
- * },
- * "properties":{
- * "date":"01/01/2000",
- * "duration":"120",
- * "medium": "cellular"
- * "sourceLocation": "40.06,-71.34"
- * "sourceTarget": "41.12,-70.9"
- * }
- * }
- */
 @JsonInclude(JsonInclude.Include.NON_EMPTY)
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class LogicalEdge implements Edge {

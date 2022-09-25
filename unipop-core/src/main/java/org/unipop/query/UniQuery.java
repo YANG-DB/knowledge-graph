@@ -23,6 +23,10 @@ package org.unipop.query;
 
 
 
+
+
+
+
 public abstract class UniQuery {
     private StepDescriptor stepDescriptor;
 

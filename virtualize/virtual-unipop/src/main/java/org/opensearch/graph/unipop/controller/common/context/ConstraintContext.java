@@ -2,7 +2,7 @@ package org.opensearch.graph.unipop.controller.common.context;
 
 /*-
  * #%L
- * fuse-dv-unipop
+ * virtual-unipop
  * %%
  * Copyright (C) 2016 - 2022 org.opensearch
  * %%
@@ -20,13 +20,14 @@ package org.opensearch.graph.unipop.controller.common.context;
  * #L%
  */
 
+
+
+
+
 import org.opensearch.graph.unipop.promise.TraversalConstraint;
 
 import java.util.Optional;
 
-/**
- * Created by Elad on 4/30/2017.
- */
 public interface ConstraintContext {
     Optional<TraversalConstraint> getConstraint();
 }

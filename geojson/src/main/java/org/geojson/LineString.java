@@ -20,6 +20,10 @@ package org.geojson;
  * #L%
  */
 
+
+
+
+
 public class LineString extends MultiPoint {
 
 	public LineString() {

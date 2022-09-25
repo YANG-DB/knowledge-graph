@@ -23,6 +23,10 @@ package org.unipop.process.repeat;
 
 
 
+
+
+
+
 import org.apache.tinkerpop.gremlin.process.traversal.Traversal;
 import org.apache.tinkerpop.gremlin.process.traversal.TraversalStrategy;
 import org.apache.tinkerpop.gremlin.process.traversal.step.branch.RepeatStep;
@@ -39,9 +43,6 @@ import org.unipop.structure.UniGraph;
 import java.util.HashSet;
 import java.util.Set;
 
-/**
- * Created by sbarzilay on 3/30/16.
- */
 public class UniGraphRepeatStepStrategy extends AbstractTraversalStrategy<TraversalStrategy.ProviderOptimizationStrategy> implements TraversalStrategy.ProviderOptimizationStrategy {
     @Override
     public Set<Class<? extends ProviderOptimizationStrategy>> applyPrior() {

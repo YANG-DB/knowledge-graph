@@ -2,7 +2,7 @@ package org.opensearch.graph.unipop.controller.utils.traversal;
 
 /*-
  * #%L
- * fuse-dv-unipop
+ * virtual-unipop
  * %%
  * Copyright (C) 2016 - 2022 org.opensearch
  * %%
@@ -20,13 +20,14 @@ package org.opensearch.graph.unipop.controller.utils.traversal;
  * #L%
  */
 
+
+
+
+
 import org.apache.tinkerpop.gremlin.process.traversal.Traversal;
 
 import java.util.Set;
 
-/**
- * Created by benishue on 27-Mar-17.
- */
 public interface TraversalValueByKeyProvider<T> {
     Set<String> getValueByKey(Traversal traversal, String key);
 }

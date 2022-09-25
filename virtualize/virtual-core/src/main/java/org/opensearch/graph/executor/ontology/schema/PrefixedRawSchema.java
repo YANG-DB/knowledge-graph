@@ -20,6 +20,10 @@ package org.opensearch.graph.executor.ontology.schema;
  * #L%
  */
 
+
+
+
+
 import com.google.inject.Inject;
 import com.google.inject.name.Named;
 import org.opensearch.graph.unipop.schemaProviders.indexPartitions.IndexPartitions;
@@ -28,9 +32,6 @@ import javaslang.collection.Stream;
 
 import java.util.List;
 
-/**
- * Created by roman.margolis on 01/03/2018.
- */
 public class PrefixedRawSchema implements RawSchema {
     //region Static
     public static final String rawSchemaParameter = "PrefixedRawSchema.@rawSchema";

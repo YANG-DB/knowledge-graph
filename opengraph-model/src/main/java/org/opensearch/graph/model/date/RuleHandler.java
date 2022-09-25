@@ -4,7 +4,7 @@ package org.opensearch.graph.model.date;
  * #%L
  * opengraph-model
  * %%
- * Copyright (C) 2016 - 2021 The YangDb Graph Database Project
+ * Copyright (C) 2016 - 2022 org.opensearch
  * %%
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -20,15 +20,12 @@ package org.opensearch.graph.model.date;
  * #L%
  */
 
+
+
+
+
 import com.github.sisyphsu.retree.ReMatcher;
 
-/**
- * This class represents the standard specification of rule's handler.
- * It should parse the specified substring to fill some fields of DateTime.
- *
- * @author sulin
- * @since 2019-09-14 14:25:45
- */
 @FunctionalInterface
 public interface RuleHandler {
 

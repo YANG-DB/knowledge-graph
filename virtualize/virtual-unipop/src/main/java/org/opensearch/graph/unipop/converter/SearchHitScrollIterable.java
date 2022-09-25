@@ -2,7 +2,7 @@ package org.opensearch.graph.unipop.converter;
 
 /*-
  * #%L
- * fuse-dv-unipop
+ * virtual-unipop
  * %%
  * Copyright (C) 2016 - 2022 org.opensearch
  * %%
@@ -20,6 +20,10 @@ package org.opensearch.graph.unipop.converter;
  * #L%
  */
 
+
+
+
+
 import org.opensearch.graph.dispatcher.provision.ScrollProvisioning;
 import org.opensearch.graph.unipop.controller.search.SearchOrderProvider;
 import org.opensearch.action.search.SearchRequestBuilder;
@@ -33,9 +37,6 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.NoSuchElementException;
 
-/**
- * Created by roman on 3/16/2015.
- */
 public class SearchHitScrollIterable implements Iterable<SearchHit> {
     //region Constructor
     public SearchHitScrollIterable(

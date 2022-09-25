@@ -20,6 +20,10 @@ package org.opensearch.graph.executor.opensearch.logging;
  * #L%
  */
 
+
+
+
+
 import com.codahale.metrics.Meter;
 import org.opensearch.graph.dispatcher.logging.LogMessage;
 import org.opensearch.action.ActionListener;
@@ -29,9 +33,6 @@ import java.io.IOException;
 import java.util.Optional;
 import java.util.function.Function;
 
-/**
- * Created by roman.margolis on 14/12/2017.
- */
 public class LoggingActionListener<TResponse> implements ActionListener<TResponse> {
     //region Constructors
     public LoggingActionListener(

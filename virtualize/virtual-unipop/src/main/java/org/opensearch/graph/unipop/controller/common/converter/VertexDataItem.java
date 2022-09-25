@@ -2,7 +2,7 @@ package org.opensearch.graph.unipop.controller.common.converter;
 
 /*-
  * #%L
- * fuse-dv-unipop
+ * virtual-unipop
  * %%
  * Copyright (C) 2016 - 2022 org.opensearch
  * %%
@@ -20,15 +20,16 @@ package org.opensearch.graph.unipop.controller.common.converter;
  * #L%
  */
 
+
+
+
+
 import javaslang.Tuple2;
 import javaslang.collection.Stream;
 import org.apache.tinkerpop.gremlin.structure.Vertex;
 
 import java.util.Map;
 
-/**
- * Created by roman.margolis on 14/03/2018.
- */
 public class VertexDataItem implements DataItem {
     //region Constructors
     public VertexDataItem(Vertex vertex) {

@@ -9,9 +9,9 @@ package org.opensearch.graph.model.logical;
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- *
+ * 
  *      http://www.apache.org/licenses/LICENSE-2.0
- *
+ * 
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -20,35 +20,16 @@ package org.opensearch.graph.model.logical;
  * #L%
  */
 
+
+
+
+
 import com.fasterxml.jackson.annotation.*;
 import org.opensearch.graph.model.ontology.EntityType;
 import org.opensearch.graph.model.results.Property;
 
 import java.util.*;
 
-/**
- * //example
- * {
- * "id": "0",
- * "label": "person",
- * "metadata": {
- * "user-defined": "values"
- * }
- * "properties":{
- * "fName": "first name",
- * "lName":"last name",
- * "born": "12/12/2000",
- * "age": "19",
- * "email": "myName@fuse.com",
- * "address": {
- * "state": "my state",
- * "street": "my street",
- * "city": "my city",
- * "zip": "gZip"
- * }
- * }
- * }
- */
 @JsonInclude(JsonInclude.Include.NON_EMPTY)
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class LogicalNode implements Vertex<LogicalNode> {

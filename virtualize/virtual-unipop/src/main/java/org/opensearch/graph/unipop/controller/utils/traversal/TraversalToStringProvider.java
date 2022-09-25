@@ -2,7 +2,7 @@ package org.opensearch.graph.unipop.controller.utils.traversal;
 
 /*-
  * #%L
- * fuse-dv-unipop
+ * virtual-unipop
  * %%
  * Copyright (C) 2016 - 2022 org.opensearch
  * %%
@@ -20,13 +20,14 @@ package org.opensearch.graph.unipop.controller.utils.traversal;
  * #L%
  */
 
+
+
+
+
 import javaslang.collection.Stream;
 import org.apache.tinkerpop.gremlin.process.traversal.Traversal;
 import org.apache.tinkerpop.gremlin.process.traversal.step.filter.*;
 
-/**
- * Created by Roman on 15/05/2017.
- */
 public class TraversalToStringProvider implements TraversalValueProvider<String> {
     //region TraversalIdProvider
     @Override

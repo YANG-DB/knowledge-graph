@@ -4,7 +4,7 @@ package org.opensearch.graph.model.date;
  * #%L
  * opengraph-model
  * %%
- * Copyright (C) 2016 - 2021 The YangDb Graph Database Project
+ * Copyright (C) 2016 - 2022 org.opensearch
  * %%
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -21,17 +21,15 @@ package org.opensearch.graph.model.date;
  */
 
 
+
+
+
+
 import java.time.*;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.TimeZone;
 
-/**
- * This DateTime used for caching the properties of parser.
- *
- * @author sulin
- * @since 2019-09-12 14:58:15
- */
 public final class DateBuilder {
 
     private static final ZoneId UTC_ZONE_ID = ZoneId.of("UTC");

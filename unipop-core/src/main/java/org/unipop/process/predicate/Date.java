@@ -23,6 +23,10 @@ package org.unipop.process.predicate;
 
 
 
+
+
+
+
 import org.apache.commons.lang.StringUtils;
 import org.apache.tinkerpop.gremlin.process.traversal.Compare;
 import org.apache.tinkerpop.gremlin.process.traversal.P;
@@ -31,9 +35,6 @@ import org.apache.tinkerpop.gremlin.process.traversal.util.OrP;
 
 import java.util.function.BiPredicate;
 
-/**
- * Created by sbarzilay on 8/18/16.
- */
 public class Date {
     public static <V> P<V> eq(final V value) { return new P(DatePredicate.eq, value); }
     public static <V> P<V> neq(final V value) { return new P(DatePredicate.neq, value); }

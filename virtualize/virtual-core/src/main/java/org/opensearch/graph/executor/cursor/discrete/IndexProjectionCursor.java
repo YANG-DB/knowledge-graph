@@ -4,14 +4,14 @@ package org.opensearch.graph.executor.cursor.discrete;
  * #%L
  * virtual-core
  * %%
- * Copyright (C) 2016 - 2019 The Fuse Graph Database Project
+ * Copyright (C) 2016 - 2022 org.opensearch
  * %%
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- *
+ * 
  *      http://www.apache.org/licenses/LICENSE-2.0
- *
+ * 
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -19,6 +19,10 @@ package org.opensearch.graph.executor.cursor.discrete;
  * limitations under the License.
  * #L%
  */
+
+
+
+
 
 import org.opensearch.graph.dispatcher.cursor.Cursor;
 import org.opensearch.graph.dispatcher.cursor.CursorFactory;
@@ -29,7 +33,7 @@ import org.opensearch.graph.executor.ontology.schema.load.*;
 import org.opensearch.graph.model.ontology.Ontology;
 import org.opensearch.graph.model.projection.ProjectionAssignment;
 import org.opensearch.graph.model.query.Query;
-import org.opensearch.graph.model.resourceInfo.FuseError;
+import org.opensearch.graph.model.resourceInfo.GraphError;
 import org.opensearch.graph.model.results.AssignmentsProjectionResult;
 import org.opensearch.graph.model.results.AssignmentsQueryResult;
 import org.opensearch.graph.model.results.LoadResponse;
@@ -45,9 +49,6 @@ import static org.opensearch.graph.model.GlobalConstants.ProjectionConfigs.PROJE
 import static org.opensearch.graph.model.results.AssignmentsQueryResult.Builder.instance;
 import static org.opensearch.graph.model.results.LoadResponse.buildAssignment;
 
-/**
- * this cursor will create a new Index which is the query result projection and populate this index with the query results as the arrive
- */
 public class IndexProjectionCursor extends PathsTraversalCursor {
 
     public static class Factory implements CursorFactory {
@@ -140,7 +141,7 @@ public class IndexProjectionCursor extends PathsTraversalCursor {
         }
 
         DataTransformerContext<List<ProjectionAssignment>> context = transformer.transform(result, GraphDataLoader.Directive.INSERT);
-        LoadResponse<String, FuseError> load = load(this.context.getClient(), context);
+        LoadResponse<String, GraphError> load = load(this.context.getClient(), context);
         //report back the projection results
         projectionResult.setAssignments(Collections.singletonList(buildAssignment(load)));
         return projectionResult;
@@ -152,7 +153,7 @@ public class IndexProjectionCursor extends PathsTraversalCursor {
      * @param context
      * @return
      */
-    private LoadResponse<String, FuseError> load(Client client, DataTransformerContext context) {
+    private LoadResponse<String, GraphError> load(Client client, DataTransformerContext context) {
         //load bulk requests
         Tuple2<Response, BulkRequestBuilder> tuple = LoadUtils.load(resolver, client, context);
         //submit bulk request

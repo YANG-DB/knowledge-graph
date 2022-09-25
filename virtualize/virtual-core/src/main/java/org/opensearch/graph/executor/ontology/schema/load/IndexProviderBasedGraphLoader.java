@@ -20,6 +20,10 @@ package org.opensearch.graph.executor.ontology.schema.load;
  * #L%
  */
 
+
+
+
+
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.google.inject.Inject;
 import org.opensearch.graph.dispatcher.driver.IdGeneratorDriver;
@@ -27,7 +31,7 @@ import org.opensearch.graph.executor.ontology.schema.RawSchema;
 import org.opensearch.graph.model.GlobalConstants;
 import org.opensearch.graph.model.Range;
 import org.opensearch.graph.model.logical.LogicalGraphModel;
-import org.opensearch.graph.model.resourceInfo.FuseError;
+import org.opensearch.graph.model.resourceInfo.GraphError;
 import org.opensearch.graph.model.results.LoadResponse;
 import org.opensearch.graph.unipop.schemaProviders.indexPartitions.IndexPartitions;
 import org.opensearch.graph.unipop.schemaProviders.indexPartitions.TimeSeriesIndexPartitions;
@@ -51,12 +55,7 @@ import java.util.*;
 import static org.opensearch.graph.executor.ontology.schema.load.DataLoaderUtils.extractFile;
 import static org.opensearch.graph.model.results.LoadResponse.LoadResponseImpl;
 
-/**
- * Loader for Graph Data Model to E/S
- *  - load directly with Json structure
- *  - load with file
- */
-public class IndexProviderBasedGraphLoader implements GraphDataLoader<String, FuseError> {
+public class IndexProviderBasedGraphLoader implements GraphDataLoader<String, GraphError> {
     private static final SimpleDateFormat sdf = new SimpleDateFormat(GlobalConstants.DEFAULT_DATE_FORMAT);
     public static final int NUM_IDS = 1000;
     private static Map<String, Range.StatefulRange> ranges = new HashMap<>();
@@ -83,7 +82,7 @@ public class IndexProviderBasedGraphLoader implements GraphDataLoader<String, Fu
     }
 
     @Override
-    public LoadResponse<String, FuseError> load(String ontology, LogicalGraphModel root, Directive directive) {
+    public LoadResponse<String, GraphError> load(String ontology, LogicalGraphModel root, Directive directive) {
         //todo load correct ontology graph transformer and use it to transform data to the actual schema structure
         BulkRequestBuilder bulk = client.prepareBulk();
         Response upload = new Response("Upload");
@@ -109,12 +108,12 @@ public class IndexProviderBasedGraphLoader implements GraphDataLoader<String, Fu
                     BulkItemResponse.Failure failure = item.getFailure();
                     DocWriteRequest<?> request = bulk.request().requests().get(item.getItemId());
                     //todo - get TechId from request
-                    upload.failure(new FuseError("commit failed", failure.toString()));
+                    upload.failure(new GraphError("commit failed", failure.toString()));
                 }
 
             }
         }catch (Exception err) {
-            upload.failure(new FuseError("commit failed", err.toString()));
+            upload.failure(new GraphError("commit failed", err.toString()));
         }
     }
 
@@ -123,7 +122,7 @@ public class IndexProviderBasedGraphLoader implements GraphDataLoader<String, Fu
         for (DocumentBuilder documentBuilder : context.getEntities()) {
             try {
                 buildIndexRequest(bulk, documentBuilder);
-            } catch (FuseError.FuseErrorException e) {
+            } catch (GraphError.GraphErrorException e) {
                 upload.failure(e.getError());
             }
         }
@@ -131,7 +130,7 @@ public class IndexProviderBasedGraphLoader implements GraphDataLoader<String, Fu
         for (DocumentBuilder e : context.getRelations()) {
             try {
                 buildIndexRequest(bulk, e);
-            } catch (FuseError.FuseErrorException err) {
+            } catch (GraphError.GraphErrorException err) {
                 upload.failure(err.getError());
             }
         }
@@ -150,8 +149,8 @@ public class IndexProviderBasedGraphLoader implements GraphDataLoader<String, Fu
             bulk.add(request);
             return request;
         } catch (Throwable err) {
-            throw new FuseError.FuseErrorException("Error while building Index request", err,
-                    new FuseError("Error while building Index request", err.getMessage()));
+            throw new GraphError.GraphErrorException("Error while building Index request", err,
+                    new GraphError("Error while building Index request", err.getMessage()));
         }
     }
 
@@ -176,7 +175,7 @@ public class IndexProviderBasedGraphLoader implements GraphDataLoader<String, Fu
 
 
     @Override
-    public LoadResponse<String, FuseError> load(String ontology, File data, Directive directive) throws IOException {
+    public LoadResponse<String, GraphError> load(String ontology, File data, Directive directive) throws IOException {
         String contentType = Files.probeContentType(data.toPath());
         if(Objects.isNull(contentType))
             contentType = DataLoaderUtils.getZipType(data);

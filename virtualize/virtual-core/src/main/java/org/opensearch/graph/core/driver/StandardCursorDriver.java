@@ -9,9 +9,9 @@ package org.opensearch.graph.core.driver;
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- *
+ * 
  *      http://www.apache.org/licenses/LICENSE-2.0
- *
+ * 
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -19,6 +19,10 @@ package org.opensearch.graph.core.driver;
  * limitations under the License.
  * #L%
  */
+
+
+
+
 
 import com.codahale.metrics.MetricRegistry;
 import com.google.inject.Inject;
@@ -43,7 +47,7 @@ import org.opensearch.graph.model.execution.plan.PlanWithCost;
 import org.opensearch.graph.model.execution.plan.composite.Plan;
 import org.opensearch.graph.model.execution.plan.costs.PlanDetailedCost;
 import org.opensearch.graph.model.ontology.Ontology;
-import org.opensearch.graph.model.resourceInfo.FuseError;
+import org.opensearch.graph.model.resourceInfo.GraphError;
 import org.opensearch.graph.model.transport.cursor.CreateCursorRequest;
 import org.opensearch.graph.model.transport.cursor.CreateInnerQueryCursorRequest;
 import javaslang.collection.Stream;
@@ -58,9 +62,6 @@ import java.util.Optional;
 import static org.opensearch.graph.model.asgQuery.AsgCompositeQuery.hasInnerQuery;
 import static org.unipop.process.Profiler.PROFILER;
 
-/**
- * Created by lior.perry on 20/02/2017.
- */
 public class StandardCursorDriver extends CursorDriverBase {
     private final Client client;
     private final GraphElementSchemaProviderFactory schemaProvider;
@@ -95,7 +96,7 @@ public class StandardCursorDriver extends CursorDriverBase {
         PlanWithCost<Plan, PlanDetailedCost> executionPlan = queryResource.getExecutionPlan();
         //get the ontology name from the asg query since a transformation between ontologies might have occurred - see AsgMappingStrategy
         Ontology ontology = this.ontologyProvider.get(queryResource.getAsgQuery().getOnt())
-                .orElseThrow(() -> new FuseError.FuseErrorException(new FuseError("No target Ontology field found ", "No target Ontology field found for " + queryResource.getAsgQuery().getOnt())));
+                .orElseThrow(() -> new GraphError.GraphErrorException(new GraphError("No target Ontology field found ", "No target Ontology field found for " + queryResource.getAsgQuery().getOnt())));
 
         GraphTraversal<?, ?> traversal = createTraversal(executionPlan, ontology);
 
@@ -163,7 +164,7 @@ public class StandardCursorDriver extends CursorDriverBase {
     @Override
     public Optional<GraphTraversal> traversal(PlanWithCost plan, String ontology) {
         return Optional.of(createTraversal(plan, this.ontologyProvider.get(ontology)
-                .orElseThrow(() -> new FuseError.FuseErrorException(new FuseError("No target Ontology field found ", "No target Ontology found for " + ontology)))));
+                .orElseThrow(() -> new GraphError.GraphErrorException(new GraphError("No target Ontology field found ", "No target Ontology found for " + ontology)))));
     }
 
     //endregion

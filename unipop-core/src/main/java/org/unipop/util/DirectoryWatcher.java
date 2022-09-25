@@ -22,6 +22,10 @@ package org.unipop.util;
 
 
 
+
+
+
+
 import java.io.IOException;
 import java.nio.file.*;
 import java.util.Timer;
@@ -30,9 +34,6 @@ import java.util.TimerTask;
 import static java.nio.file.LinkOption.NOFOLLOW_LINKS;
 import static java.nio.file.StandardWatchEventKinds.*;
 
-/**
- * Created by sbarzilay on 8/14/16.
- */
 public class DirectoryWatcher {
     private WatchService service;
     private OnFileChange onFileChange;

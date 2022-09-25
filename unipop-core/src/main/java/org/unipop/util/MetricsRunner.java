@@ -22,6 +22,10 @@ package org.unipop.util;
 
 
 
+
+
+
+
 import org.apache.tinkerpop.gremlin.process.traversal.util.MutableMetrics;
 import org.apache.tinkerpop.gremlin.process.traversal.util.TraversalMetrics;
 import org.unipop.query.UniQuery;
@@ -33,9 +37,6 @@ import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
-/**
- * Created by sbarzilay on 8/2/16.
- */
 public class MetricsRunner {
     private Optional<MutableMetrics> metrics;
     private MutableMetrics controllerMetrics;

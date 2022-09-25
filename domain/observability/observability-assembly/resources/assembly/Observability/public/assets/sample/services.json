@@ -1,0 +1,722 @@
+[
+    {
+      "_index": "otel-v1-apm-service-map",
+      "_id": "nHcC8xTV8traJL3W2zDPww==",
+      "_score": 1.0,
+      "_source": {
+        "serviceName": "authentication",
+        "kind": "SPAN_KIND_SERVER",
+        "destination": null,
+        "target": {
+          "resource": "server_request_login",
+          "domain": "authentication"
+        },
+        "traceGroupName": "load_main_screen",
+        "hashId": "nHcC8xTV8traJL3W2zDPww=="
+      }
+    },
+    {
+      "_index": "otel-v1-apm-service-map",
+      "_id": "6Rx2pb/AtLKLR4KnHh+Aog==",
+      "_score": 1.0,
+      "_source": {
+        "serviceName": "payment",
+        "kind": "SPAN_KIND_CLIENT",
+        "destination": {
+          "resource": "/logs",
+          "domain": "analytics-service"
+        },
+        "target": null,
+        "traceGroupName": "client_checkout",
+        "hashId": "6Rx2pb/AtLKLR4KnHh+Aog=="
+      }
+    },
+    {
+      "_index": "otel-v1-apm-service-map",
+      "_id": "tXEh3symNDTITnb/JtgUAQ==",
+      "_score": 1.0,
+      "_source": {
+        "serviceName": "analytics-service",
+        "kind": "SPAN_KIND_SERVER",
+        "destination": null,
+        "target": {
+          "resource": "/logs",
+          "domain": "analytics-service"
+        },
+        "traceGroupName": "client_create_order",
+        "hashId": "tXEh3symNDTITnb/JtgUAQ=="
+      }
+    },
+    {
+      "_index": "otel-v1-apm-service-map",
+      "_id": "kSY6gLrGOBh8YX3cEDCndg==",
+      "_score": 1.0,
+      "_source": {
+        "serviceName": "recommendation",
+        "kind": "SPAN_KIND_CLIENT",
+        "destination": {
+          "resource": "/logs",
+          "domain": "analytics-service"
+        },
+        "target": null,
+        "traceGroupName": "load_main_screen",
+        "hashId": "kSY6gLrGOBh8YX3cEDCndg=="
+      }
+    },
+    {
+      "_index": "otel-v1-apm-service-map",
+      "_id": "roX6tGXvCJeZW7SFJMBFKA==",
+      "_score": 1.0,
+      "_source": {
+        "serviceName": "analytics-service",
+        "kind": "SPAN_KIND_SERVER",
+        "destination": null,
+        "target": {
+          "resource": "/logs",
+          "domain": "analytics-service"
+        },
+        "traceGroupName": "load_main_screen",
+        "hashId": "roX6tGXvCJeZW7SFJMBFKA=="
+      }
+    },
+    {
+      "_index": "otel-v1-apm-service-map",
+      "_id": "md6PmbxmuV4WOmVVdqkP0w==",
+      "_score": 1.0,
+      "_source": {
+        "serviceName": "analytics-service",
+        "kind": "SPAN_KIND_SERVER",
+        "destination": null,
+        "target": {
+          "resource": "/logs",
+          "domain": "analytics-service"
+        },
+        "traceGroupName": "client_pay_order",
+        "hashId": "md6PmbxmuV4WOmVVdqkP0w=="
+      }
+    },
+    {
+      "_index": "otel-v1-apm-service-map",
+      "_id": "vVC4U6JrIz9uyZseTPb4YQ==",
+      "_score": 1.0,
+      "_source": {
+        "serviceName": "authentication",
+        "kind": "SPAN_KIND_CLIENT",
+        "destination": {
+          "resource": "/logs",
+          "domain": "analytics-service"
+        },
+        "target": null,
+        "traceGroupName": "load_main_screen",
+        "hashId": "vVC4U6JrIz9uyZseTPb4YQ=="
+      }
+    },
+    {
+      "_index": "otel-v1-apm-service-map",
+      "_id": "5aShvpERPjuk2dXmfYPeGw==",
+      "_score": 1.0,
+      "_source": {
+        "serviceName": "frontend-client",
+        "kind": "SPAN_KIND_CLIENT",
+        "destination": {
+          "resource": "payment",
+          "domain": "payment"
+        },
+        "target": null,
+        "traceGroupName": "client_checkout",
+        "hashId": "5aShvpERPjuk2dXmfYPeGw=="
+      }
+    },
+    {
+      "_index": "otel-v1-apm-service-map",
+      "_id": "5LTSGQfic2RYHvrURmIDew==",
+      "_score": 1.0,
+      "_source": {
+        "serviceName": "database",
+        "kind": "SPAN_KIND_SERVER",
+        "destination": null,
+        "target": {
+          "resource": "getIntentory",
+          "domain": "database"
+        },
+        "traceGroupName": "load_main_screen",
+        "hashId": "5LTSGQfic2RYHvrURmIDew=="
+      }
+    },
+    {
+      "_index": "otel-v1-apm-service-map",
+      "_id": "n+JXabfCcrIeMP691QwcpA==",
+      "_score": 1.0,
+      "_source": {
+        "serviceName": "payment",
+        "kind": "SPAN_KIND_CLIENT",
+        "destination": {
+          "resource": "update_inventory",
+          "domain": "inventory"
+        },
+        "target": null,
+        "traceGroupName": "client_checkout",
+        "hashId": "n+JXabfCcrIeMP691QwcpA=="
+      }
+    },
+    {
+      "_index": "otel-v1-apm-service-map",
+      "_id": "ftn94Oe1mZwUMyvg2+V8MA==",
+      "_score": 1.0,
+      "_source": {
+        "serviceName": "database",
+        "kind": "SPAN_KIND_SERVER",
+        "destination": null,
+        "target": {
+          "resource": "getCart",
+          "domain": "database"
+        },
+        "traceGroupName": "client_delivery_status",
+        "hashId": "ftn94Oe1mZwUMyvg2+V8MA=="
+      }
+    },
+    {
+      "_index": "otel-v1-apm-service-map",
+      "_id": "uXkISg6U505anMl1tck75Q==",
+      "_score": 1.0,
+      "_source": {
+        "serviceName": "inventory",
+        "kind": "SPAN_KIND_CLIENT",
+        "destination": {
+          "resource": "/logs",
+          "domain": "analytics-service"
+        },
+        "target": null,
+        "traceGroupName": "load_main_screen",
+        "hashId": "uXkISg6U505anMl1tck75Q=="
+      }
+    },
+    {
+      "_index": "otel-v1-apm-service-map",
+      "_id": "IBLMEZli7Q3BJTBMmjynDg==",
+      "_score": 1.0,
+      "_source": {
+        "serviceName": "analytics-service",
+        "kind": "SPAN_KIND_SERVER",
+        "destination": null,
+        "target": {
+          "resource": "/logs",
+          "domain": "analytics-service"
+        },
+        "traceGroupName": "client_delivery_status",
+        "hashId": "IBLMEZli7Q3BJTBMmjynDg=="
+      }
+    },
+    {
+      "_index": "otel-v1-apm-service-map",
+      "_id": "smEM+A4secOk8FOTDhrqOg==",
+      "_score": 1.0,
+      "_source": {
+        "serviceName": "order",
+        "kind": "SPAN_KIND_CLIENT",
+        "destination": {
+          "resource": "cartEmpty",
+          "domain": "database"
+        },
+        "target": null,
+        "traceGroupName": "client_cancel_order",
+        "hashId": "smEM+A4secOk8FOTDhrqOg=="
+      }
+    },
+    {
+      "_index": "otel-v1-apm-service-map",
+      "_id": "G92mlRHfmMvQD2lArmh0Zw==",
+      "_score": 1.0,
+      "_source": {
+        "serviceName": "order",
+        "kind": "SPAN_KIND_CLIENT",
+        "destination": {
+          "resource": "/logs",
+          "domain": "analytics-service"
+        },
+        "target": null,
+        "traceGroupName": "client_pay_order",
+        "hashId": "G92mlRHfmMvQD2lArmh0Zw=="
+      }
+    },
+    {
+      "_index": "otel-v1-apm-service-map",
+      "_id": "qEMd88Fa9974qME14b7Kow==",
+      "_score": 1.0,
+      "_source": {
+        "serviceName": "order",
+        "kind": "SPAN_KIND_CLIENT",
+        "destination": {
+          "resource": "addItemToCart",
+          "domain": "database"
+        },
+        "target": null,
+        "traceGroupName": "client_create_order",
+        "hashId": "qEMd88Fa9974qME14b7Kow=="
+      }
+    },
+    {
+      "_index": "otel-v1-apm-service-map",
+      "_id": "mpTVw7lUu8Up9GtBUSELzw==",
+      "_score": 1.0,
+      "_source": {
+        "serviceName": "frontend-client",
+        "kind": "SPAN_KIND_CLIENT",
+        "destination": {
+          "resource": "get_order",
+          "domain": "order"
+        },
+        "target": null,
+        "traceGroupName": "client_delivery_status",
+        "hashId": "mpTVw7lUu8Up9GtBUSELzw=="
+      }
+    },
+    {
+      "_index": "otel-v1-apm-service-map",
+      "_id": "vgoAV/423h26Su5VKVCrHA==",
+      "_score": 1.0,
+      "_source": {
+        "serviceName": "frontend-client",
+        "kind": "SPAN_KIND_CLIENT",
+        "destination": {
+          "resource": "server_request_login",
+          "domain": "authentication"
+        },
+        "target": null,
+        "traceGroupName": "load_main_screen",
+        "hashId": "vgoAV/423h26Su5VKVCrHA=="
+      }
+    },
+    {
+      "_index": "otel-v1-apm-service-map",
+      "_id": "tH75FnJ4hXfERLahbk67NA==",
+      "_score": 1.0,
+      "_source": {
+        "serviceName": "order",
+        "kind": "SPAN_KIND_CLIENT",
+        "destination": {
+          "resource": "getCart",
+          "domain": "database"
+        },
+        "target": null,
+        "traceGroupName": "client_delivery_status",
+        "hashId": "tH75FnJ4hXfERLahbk67NA=="
+      }
+    },
+    {
+      "_index": "otel-v1-apm-service-map",
+      "_id": "zA5g821XNTNVGjL2Re+T/w==",
+      "_score": 1.0,
+      "_source": {
+        "serviceName": "payment",
+        "kind": "SPAN_KIND_SERVER",
+        "destination": null,
+        "target": {
+          "resource": "payment",
+          "domain": "payment"
+        },
+        "traceGroupName": "client_checkout",
+        "hashId": "zA5g821XNTNVGjL2Re+T/w=="
+      }
+    },
+    {
+      "_index": "otel-v1-apm-service-map",
+      "_id": "JoFoNWxblmsk90V3KAC6Mw==",
+      "_score": 1.0,
+      "_source": {
+        "serviceName": "frontend-client",
+        "kind": "SPAN_KIND_CLIENT",
+        "destination": {
+          "resource": "update_order",
+          "domain": "order"
+        },
+        "target": null,
+        "traceGroupName": "client_create_order",
+        "hashId": "JoFoNWxblmsk90V3KAC6Mw=="
+      }
+    },
+    {
+      "_index": "otel-v1-apm-service-map",
+      "_id": "bG/EgRvp5yWM8S/ewA7CeA==",
+      "_score": 1.0,
+      "_source": {
+        "serviceName": "frontend-client",
+        "kind": "SPAN_KIND_CLIENT",
+        "destination": {
+          "resource": "pay_order",
+          "domain": "order"
+        },
+        "target": null,
+        "traceGroupName": "client_pay_order",
+        "hashId": "bG/EgRvp5yWM8S/ewA7CeA=="
+      }
+    },
+    {
+      "_index": "otel-v1-apm-service-map",
+      "_id": "82uLVoVcdLutBGhi8GcehQ==",
+      "_score": 1.0,
+      "_source": {
+        "serviceName": "database",
+        "kind": "SPAN_KIND_SERVER",
+        "destination": null,
+        "target": {
+          "resource": "cartSold",
+          "domain": "database"
+        },
+        "traceGroupName": "client_pay_order",
+        "hashId": "82uLVoVcdLutBGhi8GcehQ=="
+      }
+    },
+    {
+      "_index": "otel-v1-apm-service-map",
+      "_id": "+EtgSBZbmVZY9fAqD+mJVQ==",
+      "_score": 1.0,
+      "_source": {
+        "serviceName": "database",
+        "kind": "SPAN_KIND_SERVER",
+        "destination": null,
+        "target": {
+          "resource": "cartEmpty",
+          "domain": "database"
+        },
+        "traceGroupName": "client_cancel_order",
+        "hashId": "+EtgSBZbmVZY9fAqD+mJVQ=="
+      }
+    },
+    {
+      "_index": "otel-v1-apm-service-map",
+      "_id": "lZcUyuhGYfnaQqt+r73njA==",
+      "_score": 1.0,
+      "_source": {
+        "serviceName": "database",
+        "kind": "SPAN_KIND_SERVER",
+        "destination": null,
+        "target": {
+          "resource": "updateItem",
+          "domain": "database"
+        },
+        "traceGroupName": "client_checkout",
+        "hashId": "lZcUyuhGYfnaQqt+r73njA=="
+      }
+    },
+    {
+      "_index": "otel-v1-apm-service-map",
+      "_id": "4/dbUR9mx3HxFrBOZtP6Lw==",
+      "_score": 1.0,
+      "_source": {
+        "serviceName": "database",
+        "kind": "SPAN_KIND_SERVER",
+        "destination": null,
+        "target": {
+          "resource": "addItemToCart",
+          "domain": "database"
+        },
+        "traceGroupName": "client_create_order",
+        "hashId": "4/dbUR9mx3HxFrBOZtP6Lw=="
+      }
+    },
+    {
+      "_index": "otel-v1-apm-service-map",
+      "_id": "7/jRp2VF7544pBN6+mK2vw==",
+      "_score": 1.0,
+      "_source": {
+        "serviceName": "inventory",
+        "kind": "SPAN_KIND_CLIENT",
+        "destination": {
+          "resource": "updateItem",
+          "domain": "database"
+        },
+        "target": null,
+        "traceGroupName": "client_checkout",
+        "hashId": "7/jRp2VF7544pBN6+mK2vw=="
+      }
+    },
+    {
+      "_index": "otel-v1-apm-service-map",
+      "_id": "VGkxs9ySDsQKAaXlf7tFdg==",
+      "_score": 1.0,
+      "_source": {
+        "serviceName": "order",
+        "kind": "SPAN_KIND_SERVER",
+        "destination": null,
+        "target": {
+          "resource": "get_order",
+          "domain": "order"
+        },
+        "traceGroupName": "client_delivery_status",
+        "hashId": "VGkxs9ySDsQKAaXlf7tFdg=="
+      }
+    },
+    {
+      "_index": "otel-v1-apm-service-map",
+      "_id": "zT64jAt7FIedXfhiKIKNsg==",
+      "_score": 1.0,
+      "_source": {
+        "serviceName": "order",
+        "kind": "SPAN_KIND_SERVER",
+        "destination": null,
+        "target": {
+          "resource": "update_order",
+          "domain": "order"
+        },
+        "traceGroupName": "client_create_order",
+        "hashId": "zT64jAt7FIedXfhiKIKNsg=="
+      }
+    },
+    {
+      "_index": "otel-v1-apm-service-map",
+      "_id": "xw6RCawB/rzbZ6kv0D4x0w==",
+      "_score": 1.0,
+      "_source": {
+        "serviceName": "order",
+        "kind": "SPAN_KIND_SERVER",
+        "destination": null,
+        "target": {
+          "resource": "clear_order",
+          "domain": "order"
+        },
+        "traceGroupName": "client_cancel_order",
+        "hashId": "xw6RCawB/rzbZ6kv0D4x0w=="
+      }
+    },
+    {
+      "_index": "otel-v1-apm-service-map",
+      "_id": "Vp+wn6ysuN+c0dyioFZjRg==",
+      "_score": 1.0,
+      "_source": {
+        "serviceName": "order",
+        "kind": "SPAN_KIND_CLIENT",
+        "destination": {
+          "resource": "/logs",
+          "domain": "analytics-service"
+        },
+        "target": null,
+        "traceGroupName": "client_create_order",
+        "hashId": "Vp+wn6ysuN+c0dyioFZjRg=="
+      }
+    },
+    {
+      "_index": "otel-v1-apm-service-map",
+      "_id": "2/jQH927AMtF2WZMylDMDQ==",
+      "_score": 1.0,
+      "_source": {
+        "serviceName": "inventory",
+        "kind": "SPAN_KIND_CLIENT",
+        "destination": {
+          "resource": "/logs",
+          "domain": "analytics-service"
+        },
+        "target": null,
+        "traceGroupName": "client_checkout",
+        "hashId": "2/jQH927AMtF2WZMylDMDQ=="
+      }
+    },
+    {
+      "_index": "otel-v1-apm-service-map",
+      "_id": "mZYvSouwJIYzb/YHHR/0Mg==",
+      "_score": 1.0,
+      "_source": {
+        "serviceName": "inventory",
+        "kind": "SPAN_KIND_SERVER",
+        "destination": null,
+        "target": {
+          "resource": "update_inventory",
+          "domain": "inventory"
+        },
+        "traceGroupName": "client_checkout",
+        "hashId": "mZYvSouwJIYzb/YHHR/0Mg=="
+      }
+    },
+    {
+      "_index": "otel-v1-apm-service-map",
+      "_id": "AU3Kn8HEG52uXVpmo0IK2g==",
+      "_score": 1.0,
+      "_source": {
+        "serviceName": "inventory",
+        "kind": "SPAN_KIND_SERVER",
+        "destination": null,
+        "target": {
+          "resource": "read_inventory",
+          "domain": "inventory"
+        },
+        "traceGroupName": "load_main_screen",
+        "hashId": "AU3Kn8HEG52uXVpmo0IK2g=="
+      }
+    },
+    {
+      "_index": "otel-v1-apm-service-map",
+      "_id": "jVBZpblgxVXEDfBo0JQX6A==",
+      "_score": 1.0,
+      "_source": {
+        "serviceName": "order",
+        "kind": "SPAN_KIND_CLIENT",
+        "destination": {
+          "resource": "/logs",
+          "domain": "analytics-service"
+        },
+        "target": null,
+        "traceGroupName": "client_delivery_status",
+        "hashId": "jVBZpblgxVXEDfBo0JQX6A=="
+      }
+    },
+    {
+      "_index": "otel-v1-apm-service-map",
+      "_id": "LaIlCIqcSBujD6E7HP3PTQ==",
+      "_score": 1.0,
+      "_source": {
+        "serviceName": "order",
+        "kind": "SPAN_KIND_SERVER",
+        "destination": null,
+        "target": {
+          "resource": "pay_order",
+          "domain": "order"
+        },
+        "traceGroupName": "client_pay_order",
+        "hashId": "LaIlCIqcSBujD6E7HP3PTQ=="
+      }
+    },
+    {
+      "_index": "otel-v1-apm-service-map",
+      "_id": "yzLB0GSsao4dvqVkR2zmYA==",
+      "_score": 1.0,
+      "_source": {
+        "serviceName": "recommendation",
+        "kind": "SPAN_KIND_SERVER",
+        "destination": null,
+        "target": {
+          "resource": "recommend",
+          "domain": "recommendation"
+        },
+        "traceGroupName": "load_main_screen",
+        "hashId": "yzLB0GSsao4dvqVkR2zmYA=="
+      }
+    },
+    {
+      "_index": "otel-v1-apm-service-map",
+      "_id": "8JvOMXSL6Hvf9C2jhum5sA==",
+      "_score": 1.0,
+      "_source": {
+        "serviceName": "order",
+        "kind": "SPAN_KIND_CLIENT",
+        "destination": {
+          "resource": "/logs",
+          "domain": "analytics-service"
+        },
+        "target": null,
+        "traceGroupName": "client_cancel_order",
+        "hashId": "8JvOMXSL6Hvf9C2jhum5sA=="
+      }
+    },
+    {
+      "_index": "otel-v1-apm-service-map",
+      "_id": "k/XY09UW54o31tkx3+rCRw==",
+      "_score": 1.0,
+      "_source": {
+        "serviceName": "authentication",
+        "kind": "SPAN_KIND_CLIENT",
+        "destination": {
+          "resource": "recommend",
+          "domain": "recommendation"
+        },
+        "target": null,
+        "traceGroupName": "load_main_screen",
+        "hashId": "k/XY09UW54o31tkx3+rCRw=="
+      }
+    },
+    {
+      "_index": "otel-v1-apm-service-map",
+      "_id": "5zJU9hp/t1AdgblDfFDOXQ==",
+      "_score": 1.0,
+      "_source": {
+        "serviceName": "analytics-service",
+        "kind": "SPAN_KIND_SERVER",
+        "destination": null,
+        "target": {
+          "resource": "/logs",
+          "domain": "analytics-service"
+        },
+        "traceGroupName": "client_checkout",
+        "hashId": "5zJU9hp/t1AdgblDfFDOXQ=="
+      }
+    },
+    {
+      "_index": "otel-v1-apm-service-map",
+      "_id": "KIySJpq7dvvDj5nofZ7tqw==",
+      "_score": 1.0,
+      "_source": {
+        "serviceName": "analytics-service",
+        "kind": "SPAN_KIND_SERVER",
+        "destination": null,
+        "target": {
+          "resource": "/logs",
+          "domain": "analytics-service"
+        },
+        "traceGroupName": "client_cancel_order",
+        "hashId": "KIySJpq7dvvDj5nofZ7tqw=="
+      }
+    },
+    {
+      "_index": "otel-v1-apm-service-map",
+      "_id": "1MEZjF+x1T015XUk5Tjbuw==",
+      "_score": 1.0,
+      "_source": {
+        "serviceName": "inventory",
+        "kind": "SPAN_KIND_CLIENT",
+        "destination": {
+          "resource": "getIntentory",
+          "domain": "database"
+        },
+        "target": null,
+        "traceGroupName": "load_main_screen",
+        "hashId": "1MEZjF+x1T015XUk5Tjbuw=="
+      }
+    },
+    {
+      "_index": "otel-v1-apm-service-map",
+      "_id": "zIYLVbtNe1bnfLhCk3BbOw==",
+      "_score": 1.0,
+      "_source": {
+        "serviceName": "order",
+        "kind": "SPAN_KIND_CLIENT",
+        "destination": {
+          "resource": "cartSold",
+          "domain": "database"
+        },
+        "target": null,
+        "traceGroupName": "client_pay_order",
+        "hashId": "zIYLVbtNe1bnfLhCk3BbOw=="
+      }
+    },
+    {
+      "_index": "otel-v1-apm-service-map",
+      "_id": "00aTIGyGNbec9vfKsJkHMA==",
+      "_score": 1.0,
+      "_source": {
+        "serviceName": "frontend-client",
+        "kind": "SPAN_KIND_CLIENT",
+        "destination": {
+          "resource": "clear_order",
+          "domain": "order"
+        },
+        "target": null,
+        "traceGroupName": "client_cancel_order",
+        "hashId": "00aTIGyGNbec9vfKsJkHMA=="
+      }
+    },
+    {
+      "_index": "otel-v1-apm-service-map",
+      "_id": "2hnSYfBfhz/0R9wDYJsqUg==",
+      "_score": 1.0,
+      "_source": {
+        "serviceName": "recommendation",
+        "kind": "SPAN_KIND_CLIENT",
+        "destination": {
+          "resource": "read_inventory",
+          "domain": "inventory"
+        },
+        "target": null,
+        "traceGroupName": "load_main_screen",
+        "hashId": "2hnSYfBfhz/0R9wDYJsqUg=="
+      }
+    }
+  ]

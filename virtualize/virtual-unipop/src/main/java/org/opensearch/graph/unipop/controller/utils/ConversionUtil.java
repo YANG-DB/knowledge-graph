@@ -2,7 +2,7 @@ package org.opensearch.graph.unipop.controller.utils;
 
 /*-
  * #%L
- * fuse-dv-unipop
+ * virtual-unipop
  * %%
  * Copyright (C) 2016 - 2022 org.opensearch
  * %%
@@ -20,15 +20,16 @@ package org.opensearch.graph.unipop.controller.utils;
  * #L%
  */
 
+
+
+
+
 import javaslang.collection.Stream;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.TimeZone;
 
-/**
- * Created by Roman on 17/05/2017.
- */
 public class ConversionUtil {
     public static SimpleDateFormat sdf;
     static  {

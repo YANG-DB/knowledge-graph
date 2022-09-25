@@ -23,6 +23,10 @@ package org.unipop.process.start;
 
 
 
+
+
+
+
 import org.apache.tinkerpop.gremlin.process.traversal.Step;
 import org.apache.tinkerpop.gremlin.process.traversal.Traversal;
 import org.apache.tinkerpop.gremlin.process.traversal.TraversalStrategy;
@@ -34,9 +38,6 @@ import org.apache.tinkerpop.gremlin.structure.Graph;
 import org.unipop.process.predicate.PredicatesUtil;
 import org.unipop.structure.UniGraph;
 
-/**
- * Created by Roman on 3/14/2018.
- */
 public class UniGraphStartCountStepStrategy extends AbstractTraversalStrategy<TraversalStrategy.ProviderOptimizationStrategy> implements TraversalStrategy.ProviderOptimizationStrategy{
     //region AbstractTraversalStrategy Implementation
     @Override

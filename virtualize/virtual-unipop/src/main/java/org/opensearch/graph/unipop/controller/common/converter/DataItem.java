@@ -2,7 +2,7 @@ package org.opensearch.graph.unipop.controller.common.converter;
 
 /*-
  * #%L
- * fuse-dv-unipop
+ * virtual-unipop
  * %%
  * Copyright (C) 2016 - 2022 org.opensearch
  * %%
@@ -20,11 +20,12 @@ package org.opensearch.graph.unipop.controller.common.converter;
  * #L%
  */
 
+
+
+
+
 import java.util.Map;
 
-/**
- * Created by roman.margolis on 14/03/2018.
- */
 public interface DataItem {
     Object id();
     Map<String, Object> properties();

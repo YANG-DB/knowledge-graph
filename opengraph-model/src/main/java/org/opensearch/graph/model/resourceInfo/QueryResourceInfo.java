@@ -20,28 +20,10 @@ package org.opensearch.graph.model.resourceInfo;
  * #L%
  */
 
-/*-
- *
- * QueryResourceInfo.java - opengraph-model - yangdb - 2,016
- * org.codehaus.mojo-license-maven-plugin-1.16
- * $Id$
- * $HeadURL$
- * %%
- * Copyright (C) 2016 - 2019 yangdb   ------ www.yangdb.org ------
- * %%
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
- *
- *      http://www.apache.org/licenses/LICENSE-2.0
- *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
- *
- */
+
+
+
+
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 import org.opensearch.graph.model.transport.CreateQueryRequestMetadata.QueryType;
@@ -52,14 +34,14 @@ import java.util.List;
 
 /**
  * resources
- * http://domain/fuse/query/:id
- * http://domain/fuse/query/:id/asg
- * http://domain/fuse/query/:id/inner
- * http://domain/fuse/query/:id/v1
- * http://domain/fuse/query/:id/plan
- * http://domain/fuse/query/:id/elastic
- * http://domain/fuse/query/:id/cursor/:sequence
- * http://domain/fuse/query/:id/cursor/:sequence/result/:sequence
+ * http://domain/opengraph/query/:id
+ * http://domain/opengraph/query/:id/asg
+ * http://domain/opengraph/query/:id/inner
+ * http://domain/opengraph/query/:id/v1
+ * http://domain/opengraph/query/:id/plan
+ * http://domain/opengraph/query/:id/elastic
+ * http://domain/opengraph/query/:id/cursor/:sequence
+ * http://domain/opengraph/query/:id/cursor/:sequence/result/:sequence
  */
 public class QueryResourceInfo extends ResourceInfoBase {
 
@@ -110,7 +92,7 @@ public class QueryResourceInfo extends ResourceInfoBase {
         return elasticQueryUrl;
     }
 
-    public FuseError getError() {
+    public GraphError getError() {
         return error;
     }
 
@@ -135,7 +117,7 @@ public class QueryResourceInfo extends ResourceInfoBase {
 
 //endregion
 
-    public QueryResourceInfo error(FuseError error) {
+    public QueryResourceInfo error(GraphError error) {
         QueryResourceInfo clone = new QueryResourceInfo(
                 QueryType.concrete,
                 this.getResourceUrl(),
@@ -155,7 +137,7 @@ public class QueryResourceInfo extends ResourceInfoBase {
     private String elasticQueryUrl;
     private QueryType type;
 
-    private FuseError error;
+    private GraphError error;
 
     private List<QueryResourceInfo> innerUrlResourceInfos;
     private List<CursorResourceInfo> cursorResourceInfos;

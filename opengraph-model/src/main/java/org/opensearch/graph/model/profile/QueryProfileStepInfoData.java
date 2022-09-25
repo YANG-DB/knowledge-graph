@@ -4,7 +4,7 @@ package org.opensearch.graph.model.profile;
  * #%L
  * opengraph-model
  * %%
- * Copyright (C) 2016 - 2020 The YangDb Graph Database Project
+ * Copyright (C) 2016 - 2022 org.opensearch
  * %%
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -20,11 +20,12 @@ package org.opensearch.graph.model.profile;
  * #L%
  */
 
+
+
+
+
 import com.fasterxml.jackson.annotation.JsonInclude;
 
-/**
- * Query profiling step info
- */
 @JsonInclude(JsonInclude.Include.NON_EMPTY)
 public class QueryProfileStepInfoData {
     private String stepName;

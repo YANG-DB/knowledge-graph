@@ -24,11 +24,12 @@ package org.unipop.process.predicate;
 
 
 
+
+
+
+
 import org.apache.tinkerpop.gremlin.process.traversal.P;
 
-/**
- * Created by Roman on 11/9/2015.
- */
 public class ExistsP<V> extends P<V> {
     //region Constructors
     public ExistsP() {

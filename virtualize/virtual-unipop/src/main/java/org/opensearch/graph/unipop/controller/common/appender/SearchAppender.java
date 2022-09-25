@@ -2,7 +2,7 @@ package org.opensearch.graph.unipop.controller.common.appender;
 
 /*-
  * #%L
- * fuse-dv-unipop
+ * virtual-unipop
  * %%
  * Copyright (C) 2016 - 2022 org.opensearch
  * %%
@@ -20,11 +20,12 @@ package org.opensearch.graph.unipop.controller.common.appender;
  * #L%
  */
 
+
+
+
+
 import org.opensearch.graph.unipop.controller.search.SearchBuilder;
 
-/**
- * Created by lior.perry on 27/03/2017.
- */
 public interface SearchAppender<TContext> {
     boolean append(SearchBuilder searchBuilder, TContext context);
 }

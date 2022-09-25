@@ -20,6 +20,10 @@ package org.opensearch.graph.executor.mock.opensearch;
  * #L%
  */
 
+
+
+
+
 import org.opensearch.action.*;
 import org.opensearch.action.bulk.BulkRequest;
 import org.opensearch.action.bulk.BulkRequestBuilder;
@@ -49,9 +53,6 @@ import org.opensearch.threadpool.ThreadPool;
 
 import java.util.Map;
 
-/**
- * Created by roman.margolis on 08/11/2017.
- */
 public class MockClient implements Client {
 
     @Override

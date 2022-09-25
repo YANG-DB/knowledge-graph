@@ -22,6 +22,10 @@ package org.unipop.process.predicate;
 
 
 
+
+
+
+
 import org.apache.tinkerpop.gremlin.process.traversal.P;
 import org.apache.tinkerpop.gremlin.process.traversal.util.ConnectiveP;
 
@@ -41,9 +45,6 @@ public class CountFilterP<V> extends P<V> {
                         : first.equals(second));
             }
 
-            /**
-             * The negative of {@code eq} is {@link #neq}.
-             */
             @Override
             public CountFilterCompare negate() {
                 return neq;

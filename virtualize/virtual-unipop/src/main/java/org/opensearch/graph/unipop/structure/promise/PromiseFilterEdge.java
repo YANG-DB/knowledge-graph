@@ -2,7 +2,7 @@ package org.opensearch.graph.unipop.structure.promise;
 
 /*-
  * #%L
- * fuse-dv-unipop
+ * virtual-unipop
  * %%
  * Copyright (C) 2016 - 2022 org.opensearch
  * %%
@@ -20,6 +20,10 @@ package org.opensearch.graph.unipop.structure.promise;
  * #L%
  */
 
+
+
+
+
 import org.opensearch.graph.model.GlobalConstants;
 import org.opensearch.graph.unipop.controller.utils.map.MapBuilder;
 import org.apache.tinkerpop.gremlin.structure.T;
@@ -27,9 +31,6 @@ import org.apache.tinkerpop.gremlin.structure.Vertex;
 import org.unipop.structure.UniEdge;
 import org.unipop.structure.UniGraph;
 
-/**
- * Created by Roman on 5/9/2017.
- */
 public class PromiseFilterEdge extends UniEdge {
 
     //region Constructor

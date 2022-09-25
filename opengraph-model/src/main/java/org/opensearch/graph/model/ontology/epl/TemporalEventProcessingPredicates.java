@@ -4,7 +4,7 @@ package org.opensearch.graph.model.ontology.epl;
  * #%L
  * opengraph-model
  * %%
- * Copyright (C) 2016 - 2020 The YangDb Graph Database Project
+ * Copyright (C) 2016 - 2022 org.opensearch
  * %%
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -20,15 +20,14 @@ package org.opensearch.graph.model.ontology.epl;
  * #L%
  */
 
+
+
+
+
 import com.fasterxml.jackson.annotation.JsonInclude;
 import org.opensearch.graph.model.query.properties.constraint.Constraint;
 import org.opensearch.graph.model.query.quant.Quant1;
 
-/**
- * this event processing semantic language operator is used to define
- * a relation between elements in the query which is not related to the ontology structure but to the occurrence of
- * the instances of the subjective parts
- */
 @JsonInclude(JsonInclude.Include.NON_EMPTY)
 public class TemporalEventProcessingPredicates extends Quant1 {
     private Semantics semantics;

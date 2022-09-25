@@ -20,6 +20,10 @@ package org.opensearch.graph.executor.opensearch.logging;
  * #L%
  */
 
+
+
+
+
 import com.codahale.metrics.Meter;
 import com.codahale.metrics.Timer;
 import org.opensearch.graph.dispatcher.logging.LogMessage;
@@ -33,9 +37,6 @@ import java.io.Closeable;
 import java.io.IOException;
 import java.util.function.Function;
 
-/**
- * Created by roman.margolis on 14/12/2017.
- */
 public class LoggingSearchRequestBuilder extends SearchRequestBuilder {
     //region Constructors
     public LoggingSearchRequestBuilder(

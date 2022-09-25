@@ -2,7 +2,7 @@ package org.opensearch.graph.unipop.controller.promise.converter;
 
 /*-
  * #%L
- * fuse-dv-unipop
+ * virtual-unipop
  * %%
  * Copyright (C) 2016 - 2022 org.opensearch
  * %%
@@ -20,6 +20,10 @@ package org.opensearch.graph.unipop.controller.promise.converter;
  * #L%
  */
 
+
+
+
+
 import org.opensearch.graph.unipop.controller.common.converter.ElementConverter;
 import org.opensearch.graph.unipop.promise.Promise;
 import org.opensearch.graph.unipop.structure.promise.PromiseFilterEdge;
@@ -33,9 +37,6 @@ import java.util.Arrays;
 import java.util.Map;
 import java.util.Optional;
 
-/**
- * Created by Elad on 4/30/2017.
- */
 public class SearchHitPromiseFilterEdgeConverter implements ElementConverter<SearchHit, Edge> {
 
     //region Constructor

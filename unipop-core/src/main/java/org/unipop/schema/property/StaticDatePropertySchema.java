@@ -23,6 +23,10 @@ package org.unipop.schema.property;
 
 
 
+
+
+
+
 import org.apache.tinkerpop.gremlin.process.traversal.P;
 import org.json.JSONObject;
 
@@ -32,9 +36,6 @@ import java.util.Collections;
 import java.util.Date;
 import java.util.Map;
 
-/**
- * Created by sbarzilay on 8/2/16.
- */
 public class StaticDatePropertySchema extends StaticPropertySchema implements DatePropertySchema {
     protected final String sourceFormat;
     protected final String displayFormat;

@@ -2,7 +2,7 @@ package org.opensearch.graph.unipop.schemaProviders;
 
 /*-
  * #%L
- * fuse-dv-unipop
+ * virtual-unipop
  * %%
  * Copyright (C) 2016 - 2022 org.opensearch
  * %%
@@ -20,18 +20,20 @@ package org.opensearch.graph.unipop.schemaProviders;
  * #L%
  */
 
+
+
+
+
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import javaslang.Tuple2;
 import javaslang.collection.Stream;
+import org.opensearch.graph.model.ontology.Property;
 
 import java.util.Collections;
 import java.util.Map;
 import java.util.Optional;
 
-/**
- * Created by moti on 4/27/2017.
- */
 public interface GraphElementPropertySchema {
     String getName();
     String getType();
@@ -126,7 +128,11 @@ public interface GraphElementPropertySchema {
             this(name, type,
                     Collections.singletonList(
                             new ExactIndexingSchema.Impl(name)));
-
+        }
+        public Impl(Property property) {
+            this(property.getName(), property.getType(),
+                    Collections.singletonList(
+                            new ExactIndexingSchema.Impl(property.getName())));
         }
 
         public Impl(String name, String type, Iterable<IndexingSchema> indexingSchemes) {

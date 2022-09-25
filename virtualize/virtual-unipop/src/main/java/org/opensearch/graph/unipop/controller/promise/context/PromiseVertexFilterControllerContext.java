@@ -2,7 +2,7 @@ package org.opensearch.graph.unipop.controller.promise.context;
 
 /*-
  * #%L
- * fuse-dv-unipop
+ * virtual-unipop
  * %%
  * Copyright (C) 2016 - 2022 org.opensearch
  * %%
@@ -20,6 +20,10 @@ package org.opensearch.graph.unipop.controller.promise.context;
  * #L%
  */
 
+
+
+
+
 import org.opensearch.graph.unipop.controller.common.context.VertexControllerContext;
 import org.opensearch.graph.unipop.promise.TraversalConstraint;
 import org.opensearch.graph.unipop.schemaProviders.GraphElementSchemaProvider;
@@ -33,9 +37,6 @@ import org.unipop.structure.UniGraph;
 import java.util.List;
 import java.util.Optional;
 
-/**
- * Created by Elad on 4/30/2017.
- */
 public class PromiseVertexFilterControllerContext extends VertexControllerContext.Impl {
     //region Constructors
     public PromiseVertexFilterControllerContext(UniGraph graph,

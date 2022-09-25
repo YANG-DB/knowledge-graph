@@ -2,7 +2,7 @@ package org.opensearch.graph.unipop.schemaProviders;
 
 /*-
  * #%L
- * fuse-dv-unipop
+ * virtual-unipop
  * %%
  * Copyright (C) 2016 - 2022 org.opensearch
  * %%
@@ -20,11 +20,12 @@ package org.opensearch.graph.unipop.schemaProviders;
  * #L%
  */
 
+
+
+
+
 import java.util.Optional;
 
-/**
- * Created by k on 11/23/2015.
- */
 public class PrefixedEdgeRedundancy implements GraphEdgeRedundancy {
     //region Constructor
     public PrefixedEdgeRedundancy(String prefix) {

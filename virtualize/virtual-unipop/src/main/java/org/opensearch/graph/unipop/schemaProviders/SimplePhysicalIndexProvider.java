@@ -2,7 +2,7 @@ package org.opensearch.graph.unipop.schemaProviders;
 
 /*-
  * #%L
- * fuse-dv-unipop
+ * virtual-unipop
  * %%
  * Copyright (C) 2016 - 2022 org.opensearch
  * %%
@@ -20,15 +20,16 @@ package org.opensearch.graph.unipop.schemaProviders;
  * #L%
  */
 
+
+
+
+
 import org.opensearch.graph.unipop.schemaProviders.indexPartitions.IndexPartitions;
 import org.opensearch.graph.unipop.schemaProviders.indexPartitions.StaticIndexPartitions;
 import org.opensearch.graph.unipop.structure.ElementType;
 
 import java.util.Collections;
 
-/**
- * Created by Roman on 06/04/2017.
- */
 public class SimplePhysicalIndexProvider implements PhysicalIndexProvider {
     //region Constructors
     public SimplePhysicalIndexProvider(String vertexIndexName, String edgeIndexName) {

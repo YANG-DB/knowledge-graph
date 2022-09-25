@@ -23,6 +23,10 @@ package org.unipop.process.order;
 
 
 
+
+
+
+
 import com.google.common.collect.Sets;
 import org.apache.tinkerpop.gremlin.process.traversal.Order;
 import org.apache.tinkerpop.gremlin.process.traversal.Step;
@@ -49,9 +53,6 @@ import java.util.*;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
-/**
- * Created by sbarzilay on 8/17/16.
- */
 public class UniGraphOrderStrategy extends AbstractTraversalStrategy<TraversalStrategy.ProviderOptimizationStrategy> implements TraversalStrategy.ProviderOptimizationStrategy{
     @Override
     public Set<Class<? extends ProviderOptimizationStrategy>> applyPrior() {

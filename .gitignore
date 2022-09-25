@@ -12,4 +12,4 @@ log/access.log
 log/todo-backend.log
 
 *.zip
-
+/distrib/

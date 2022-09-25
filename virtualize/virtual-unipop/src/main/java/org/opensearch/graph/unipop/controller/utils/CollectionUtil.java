@@ -2,7 +2,7 @@ package org.opensearch.graph.unipop.controller.utils;
 
 /*-
  * #%L
- * fuse-dv-unipop
+ * virtual-unipop
  * %%
  * Copyright (C) 2016 - 2022 org.opensearch
  * %%
@@ -20,14 +20,15 @@ package org.opensearch.graph.unipop.controller.utils;
  * #L%
  */
 
+
+
+
+
 import javaslang.collection.Stream;
 
 import java.util.Collections;
 import java.util.List;
 
-/**
- * Created by lior.perry on 19/03/2017.
- */
 public class CollectionUtil {
     public static <T> List<T> listFromObjectValue(Object value) {
         if (value == null) {

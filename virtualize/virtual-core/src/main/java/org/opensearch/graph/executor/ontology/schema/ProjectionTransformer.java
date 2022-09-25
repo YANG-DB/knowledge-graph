@@ -4,7 +4,7 @@ package org.opensearch.graph.executor.ontology.schema;
  * #%L
  * virtual-core
  * %%
- * Copyright (C) 2016 - 2021 The YangDb Graph Database Project
+ * Copyright (C) 2016 - 2022 org.opensearch
  * %%
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -19,6 +19,10 @@ package org.opensearch.graph.executor.ontology.schema;
  * limitations under the License.
  * #L%
  */
+
+
+
+
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.node.ArrayNode;
@@ -51,9 +55,6 @@ import static org.opensearch.graph.model.GlobalConstants.ID;
 import static org.opensearch.graph.model.GlobalConstants.ProjectionConfigs.TAG;
 import static org.opensearch.graph.model.GlobalConstants.TYPE;
 
-/**
- * transforms a single assignment (row) into a projection document (containing list of nodes and within each node a list of first hop edges)
- */
 public class ProjectionTransformer implements DataTransformer<DataTransformerContext<List<ProjectionAssignment>>, AssignmentsQueryResult<Entity, Relationship>> {
     private static ObjectMapper mapper = new ObjectMapper();
     private final Ontology.Accessor accessor;
@@ -129,8 +130,8 @@ public class ProjectionTransformer implements DataTransformer<DataTransformerCon
     }
 
     private void populateField(String key, Object value, ObjectNode element) {
-        String pType = accessor.property$(key).getpType();
-        Object result = DataLoaderUtils.parseValue(accessor.property$(key).getType(), value, Utils.sdf);
+        String pType = accessor.pName$(key).getpType();
+        Object result = DataLoaderUtils.parseValue(accessor.pName$(key).getType(), value, Utils.sdf);
         //all primitive non string types
         element.put(pType, result.toString());
     }

@@ -2,7 +2,7 @@ package org.opensearch.graph.unipop.controller.discrete;
 
 /*-
  * #%L
- * fuse-dv-unipop
+ * virtual-unipop
  * %%
  * Copyright (C) 2016 - 2022 org.opensearch
  * %%
@@ -19,6 +19,10 @@ package org.opensearch.graph.unipop.controller.discrete;
  * limitations under the License.
  * #L%
  */
+
+
+
+
 import com.codahale.metrics.MetricRegistry;
 import org.opensearch.graph.dispatcher.provision.ScrollProvisioning;
 
@@ -65,10 +69,6 @@ import java.util.stream.StreamSupport;
 
 import static org.opensearch.graph.unipop.controller.utils.SearchAppenderUtil.wrap;
 
-/**
- * Created by roman.margolis on 13/09/2017.
- * This Search controller is responsible for the Edge type documents search pushed down to the engine...
- */
 public class DiscreteVertexController extends VertexControllerBase {
     //region Constructors
     public DiscreteVertexController(Client client, OpensearchGraphConfiguration configuration, UniGraph graph, GraphElementSchemaProvider schemaProvider, SearchOrderProviderFactory orderProviderFactory, MetricRegistry metricRegistry) {

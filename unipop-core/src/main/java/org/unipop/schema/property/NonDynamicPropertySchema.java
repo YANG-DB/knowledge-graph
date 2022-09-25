@@ -23,6 +23,10 @@ package org.unipop.schema.property;
 
 
 
+
+
+
+
 import org.unipop.query.predicates.PredicatesHolder;
 import org.unipop.query.predicates.PredicatesHolderFactory;
 

@@ -2,16 +2,16 @@ package org.opensearch.graph.unipop.controller.common.appender;
 
 /*-
  * #%L
- * fuse-dv-unipop
+ * virtual-unipop
  * %%
  * Copyright (C) 2016 - 2022 org.opensearch
  * %%
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- *
+ * 
  *      http://www.apache.org/licenses/LICENSE-2.0
- *
+ * 
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -19,6 +19,10 @@ package org.opensearch.graph.unipop.controller.common.appender;
  * limitations under the License.
  * #L%
  */
+
+
+
+
 
 import org.opensearch.graph.unipop.controller.common.context.CompositeControllerContext;
 import org.opensearch.graph.unipop.controller.common.context.ElementControllerContext;
@@ -30,6 +34,7 @@ import org.opensearch.graph.unipop.controller.utils.traversal.TraversalHasStepFi
 import org.opensearch.graph.unipop.controller.utils.traversal.TraversalQueryTranslator;
 import org.opensearch.graph.unipop.controller.utils.traversal.TraversalValuesByKeyProvider;
 import org.opensearch.graph.unipop.schemaProviders.GraphElementConstraint;
+import org.opensearch.graph.unipop.schemaProviders.GraphElementSchema;
 import org.opensearch.graph.unipop.structure.ElementType;
 import javaslang.collection.Stream;
 import org.apache.tinkerpop.gremlin.process.traversal.P;
@@ -46,9 +51,6 @@ import java.util.Set;
 
 import static org.opensearch.graph.unipop.controller.common.appender.EdgeUtils.getLabel;
 
-/**
- * Created by Elad on 4/26/2017.
- */
 public class ConstraintSearchAppender implements SearchAppender<CompositeControllerContext> {
     //region ElementControllerContext Implementation
     @Override
@@ -63,13 +65,13 @@ public class ConstraintSearchAppender implements SearchAppender<CompositeControl
                     context.getElementType().equals(ElementType.vertex) ?
                             Stream.ofAll(labels)
                                     .flatMap(label -> context.getSchemaProvider().getVertexSchemas(label))
-                                    .map(p->p.getConstraint())
+                                    .map(GraphElementSchema::getConstraint)
                                     .toJavaList() :
                             Stream.ofAll(context.getSchemaProvider().getEdgeSchemas(
                                     getLabel(context,"?"),
                                     context.getDirection(),
                                     Stream.ofAll(new TraversalValuesByKeyProvider().getValueByKey(context.getConstraint().get().getTraversal(), T.label.getAccessor())).get(0)))
-                                    .map(p->p.getConstraint())
+                                    .map(GraphElementSchema::getConstraint)
                                     .toJavaList();
 
         if (!elementConstraints.isEmpty()) {

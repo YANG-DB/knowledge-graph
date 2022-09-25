@@ -20,12 +20,16 @@ package org.opensearch.graph.core.driver;
  * #L%
  */
 
+
+
+
+
 import com.google.inject.Inject;
 import com.google.inject.name.Named;
 import org.opensearch.graph.dispatcher.driver.IdGeneratorDriver;
 import org.opensearch.graph.executor.ExecutorModule;
 import org.opensearch.graph.model.Range;
-import org.opensearch.graph.model.resourceInfo.FuseError;
+import org.opensearch.graph.model.resourceInfo.GraphError;
 import org.opensearch.graph.model.transport.Status;
 import io.github.resilience4j.retry.Retry;
 import io.github.resilience4j.retry.RetryConfig;
@@ -48,9 +52,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.function.Supplier;
 
-/**
- * Created by roman.margolis on 20/03/2018.
- */
 public class BasicIdGenerator implements IdGeneratorDriver<Range> {
     public static final String indexNameParameter = "BasicIdGenerator.@indexName";
     public static final String IDSEQUENCE = "idsequence";
@@ -124,7 +125,7 @@ public class BasicIdGenerator implements IdGeneratorDriver<Range> {
                 generateIndex();
                 addFirstSequenceId(genName);
             } catch (Throwable t) {
-                throw new FuseError.FuseErrorException("Error while attempting to get Snowflake ID ...", t);
+                throw new GraphError.GraphErrorException("Error while attempting to get Snowflake ID ...", t);
             }
         }
         //activate retry

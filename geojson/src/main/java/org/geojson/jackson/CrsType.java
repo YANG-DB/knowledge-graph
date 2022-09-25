@@ -20,6 +20,10 @@ package org.geojson.jackson;
  * #L%
  */
 
+
+
+
+
 public enum CrsType {
 	name, link;
 }

@@ -20,6 +20,10 @@ package org.opensearch.graph.executor.resource;
  * #L%
  */
 
+
+
+
+
 import com.codahale.metrics.Counter;
 import com.codahale.metrics.Gauge;
 import com.codahale.metrics.MetricRegistry;
@@ -46,7 +50,7 @@ import static org.opensearch.common.xcontent.XContentFactory.jsonBuilder;
 
 public class PersistantNodeStatusResource implements NodeStatusResource {
 
-    public static final String SYSTEM = "fuse_node_info";
+    public static final String SYSTEM = "graph_node_info";
     public static final String ID = "id";
     public static final String DATA = "data";
     public static final String UPDATE_TIME = "updateTime";

@@ -20,6 +20,10 @@ package org.opensearch.graph.model.results;
  * #L%
  */
 
+
+
+
+
 import org.opensearch.graph.model.query.properties.constraint.NamedParameter;
 
 import java.util.*;
@@ -29,13 +33,6 @@ public abstract class AssignmentUtils {
 
     public static final String ID = "id";//id projected entityField = "eID"
 
-    /**
-     * find entity.field tag name in query result assignments and collect them to an set
-     *
-     * @param result
-     * @param tag
-     * @return
-     */
     public static NamedParameter collectByTag(AssignmentsQueryResult<Entity,Relationship> result, String tag) {
         Set results = new LinkedHashSet<>();
         String[] split = tag.split("[.]");

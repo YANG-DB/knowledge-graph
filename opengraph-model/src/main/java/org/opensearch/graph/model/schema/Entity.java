@@ -9,9 +9,9 @@ package org.opensearch.graph.model.schema;
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- *
+ * 
  *      http://www.apache.org/licenses/LICENSE-2.0
- *
+ * 
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -19,6 +19,10 @@ package org.opensearch.graph.model.schema;
  * limitations under the License.
  * #L%
  */
+
+
+
+
 
 import java.util.*;
 import java.util.stream.Collectors;
@@ -40,7 +44,7 @@ import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 public class Entity implements BaseTypeElement<Entity> {
 
     @JsonProperty("type")
-    private String type;
+    private Type type;
     @JsonProperty("partition")
     private String partition;
     @JsonProperty("mapping")
@@ -55,7 +59,7 @@ public class Entity implements BaseTypeElement<Entity> {
 
     public Entity() {}
 
-    public Entity(String type, String partition, String mapping, Props props, List<Entity> nested, Map<String, Object> additionalProperties) {
+    public Entity(Type type, String partition, String mapping, Props props, List<Entity> nested, Map<String, Object> additionalProperties) {
         this.type = type;
         this.partition = partition;
         this.mapping = mapping;
@@ -75,12 +79,12 @@ public class Entity implements BaseTypeElement<Entity> {
     }
 
     @JsonProperty("type")
-    public String getType() {
+    public Type getType() {
         return type;
     }
 
     @JsonProperty("type")
-    public void setType(String type) {
+    public void setType(Type type) {
         this.type = type;
     }
 
@@ -138,7 +142,7 @@ public class Entity implements BaseTypeElement<Entity> {
     }
 
     @JsonIgnore
-    public Entity withType(String type) {
+    public Entity withType(Type type) {
         this.type = type;
         return this;
     }
@@ -148,4 +152,5 @@ public class Entity implements BaseTypeElement<Entity> {
         this.partition = partition;
         return this;
     }
+
 }

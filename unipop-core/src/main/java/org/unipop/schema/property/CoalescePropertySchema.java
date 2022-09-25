@@ -23,6 +23,10 @@ package org.unipop.schema.property;
 
 
 
+
+
+
+
 import org.apache.tinkerpop.gremlin.process.traversal.step.util.HasContainer;
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -33,9 +37,6 @@ import org.unipop.util.PropertySchemaFactory;
 
 import java.util.*;
 
-/**
- * Created by sbarzilay on 8/8/16.
- */
 public class CoalescePropertySchema implements ParentSchemaProperty {
     protected final String key;
     protected final List<PropertySchema> children;

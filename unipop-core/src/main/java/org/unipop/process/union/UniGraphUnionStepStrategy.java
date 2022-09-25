@@ -23,6 +23,10 @@ package org.unipop.process.union;
 
 
 
+
+
+
+
 import com.google.common.collect.Sets;
 import org.apache.tinkerpop.gremlin.process.traversal.Traversal;
 import org.apache.tinkerpop.gremlin.process.traversal.TraversalStrategy;
@@ -47,9 +51,6 @@ import org.unipop.structure.UniGraph;
 
 import java.util.Set;
 
-/**
- * Created by sbarzilay on 3/23/16.
- */
 public class UniGraphUnionStepStrategy extends AbstractTraversalStrategy<TraversalStrategy.ProviderOptimizationStrategy> implements TraversalStrategy.ProviderOptimizationStrategy {
     @Override
     public Set<Class<? extends ProviderOptimizationStrategy>> applyPrior() {

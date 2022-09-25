@@ -2,7 +2,7 @@ package org.opensearch.graph.unipop.controller.utils.traversal;
 
 /*-
  * #%L
- * fuse-dv-unipop
+ * virtual-unipop
  * %%
  * Copyright (C) 2016 - 2022 org.opensearch
  * %%
@@ -20,6 +20,10 @@ package org.opensearch.graph.unipop.controller.utils.traversal;
  * #L%
  */
 
+
+
+
+
 import javaslang.collection.Stream;
 import org.apache.tinkerpop.gremlin.process.traversal.Traversal;
 import org.apache.tinkerpop.gremlin.process.traversal.step.filter.HasStep;
@@ -27,9 +31,6 @@ import org.apache.tinkerpop.gremlin.process.traversal.step.filter.HasStep;
 import java.util.HashSet;
 import java.util.Set;
 
-/**
- * Created by benishue on 27-Mar-17.
- */
 public class TraversalValuesByKeyProvider implements TraversalValueByKeyProvider<Set<String>> {
 
     @Override

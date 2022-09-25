@@ -20,6 +20,10 @@ package org.opensearch.graph.executor.resource;
  * #L%
  */
 
+
+
+
+
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.module.SimpleModule;
 import com.google.inject.Inject;
@@ -59,7 +63,7 @@ import static org.opensearch.index.query.QueryBuilders.matchAllQuery;
 
 public class PersistentResourceStore implements ResourceStore {
 
-    public static final String SYSTEM = "fuse_system";
+    public static final String SYSTEM = "graph_system";
     public static final String PROJECTION = "projection";
     public static final String ID = "id";
     public static final String NAME = "name";

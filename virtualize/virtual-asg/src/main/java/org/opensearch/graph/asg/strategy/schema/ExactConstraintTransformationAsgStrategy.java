@@ -9,9 +9,9 @@ package org.opensearch.graph.asg.strategy.schema;
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- *
+ * 
  *      http://www.apache.org/licenses/LICENSE-2.0
- *
+ * 
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -20,7 +20,11 @@ package org.opensearch.graph.asg.strategy.schema;
  * #L%
  */
 
-import org.openserach.graph.asg.strategy.AsgStrategy;
+
+
+
+
+import org.opensearch.graph.asg.strategy.AsgStrategy;
 import org.opensearch.graph.dispatcher.ontology.OntologyProvider;
 import org.opensearch.graph.executor.ontology.GraphElementSchemaProviderFactory;
 import org.opensearch.graph.model.asgQuery.AsgEBase;
@@ -45,9 +49,6 @@ import java.util.Set;
 
 import static org.opensearch.graph.unipop.schemaProviders.GraphElementPropertySchema.IndexingSchema.Type.exact;
 
-/**
- * Created by roman.margolis on 08/02/2018.
- */
 public class ExactConstraintTransformationAsgStrategy implements AsgStrategy {
     //region Constructors
     public ExactConstraintTransformationAsgStrategy(
@@ -99,12 +100,12 @@ public class ExactConstraintTransformationAsgStrategy implements AsgStrategy {
             // currently supporting a single vertex schema
             GraphVertexSchema vertexSchema = Stream.ofAll(vertexSchemas).get(0);
 
-            Optional<Property> property = ont.$property(eProp.getpType());
+            Optional<Property> property = ont.$pType(eTypedAsgEBase.geteBase().geteType(),eProp.getpType());
             if (!property.isPresent()) {
                 continue;
             }
 
-            Optional<GraphElementPropertySchema> propertySchema = vertexSchema.getProperty(property.get().getName());
+            Optional<GraphElementPropertySchema> propertySchema = vertexSchema.getProperty(property.get());
             if (!propertySchema.isPresent()) {
                 continue;
             }

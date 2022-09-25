@@ -20,19 +20,23 @@ package org.opensearch.graph.executor.ontology.schema.load;
  * #L%
  */
 
+
+
+
+
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonInclude;
-import org.opensearch.graph.model.resourceInfo.FuseError;
+import org.opensearch.graph.model.resourceInfo.GraphError;
 import org.opensearch.graph.model.results.LoadResponse;
 
 import java.util.ArrayList;
 import java.util.List;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
-public class Response implements LoadResponse.CommitResponse<String, FuseError> {
+public class Response implements LoadResponse.CommitResponse<String, GraphError> {
 
     @JsonInclude(JsonInclude.Include.NON_NULL)
-    private List<FuseError> failures;
+    private List<GraphError> failures;
     @JsonInclude(JsonInclude.Include.NON_NULL)
     private List<String> success;
     @JsonInclude(JsonInclude.Include.NON_NULL)
@@ -47,12 +51,12 @@ public class Response implements LoadResponse.CommitResponse<String, FuseError> 
         this.success = new ArrayList<>();
     }
 
-    public Response failure(FuseError err) {
+    public Response failure(GraphError err) {
         failures.add(err);
         return this;
     }
 
-    public Response failure(List<FuseError> failed) {
+    public Response failure(List<GraphError> failed) {
         this.failures.addAll(failed);
         return this;
     }
@@ -67,7 +71,7 @@ public class Response implements LoadResponse.CommitResponse<String, FuseError> 
         return this;
     }
 
-    public List<FuseError> getFailures() {
+    public List<GraphError> getFailures() {
         return failures;
     }
 

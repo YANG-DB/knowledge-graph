@@ -2,7 +2,7 @@ package org.opensearch.graph.unipop.controller.promise.converter;
 
 /*-
  * #%L
- * fuse-dv-unipop
+ * virtual-unipop
  * %%
  * Copyright (C) 2016 - 2022 org.opensearch
  * %%
@@ -20,6 +20,10 @@ package org.opensearch.graph.unipop.controller.promise.converter;
  * #L%
  */
 
+
+
+
+
 import org.opensearch.graph.model.GlobalConstants;
 import org.opensearch.graph.unipop.controller.utils.idProvider.EdgeIdProvider;
 import org.opensearch.graph.unipop.controller.utils.labelProvider.LabelProvider;
@@ -35,9 +39,6 @@ import org.unipop.structure.UniGraph;
 
 import java.util.*;
 
-/**
- * Created by roman on 11/17/2015.
- */
 public class AggregationPromiseEdgeIterableConverter implements ElementConverter<Map<String, Aggregation>, Iterator<Edge>> {
     //region Constructor
     public AggregationPromiseEdgeIterableConverter(

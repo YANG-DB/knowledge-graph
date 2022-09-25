@@ -2,7 +2,7 @@ package org.opensearch.graph.unipop.controller.search.translation;
 
 /*-
  * #%L
- * fuse-dv-unipop
+ * virtual-unipop
  * %%
  * Copyright (C) 2016 - 2022 org.opensearch
  * %%
@@ -20,15 +20,16 @@ package org.opensearch.graph.unipop.controller.search.translation;
  * #L%
  */
 
+
+
+
+
 import org.opensearch.graph.model.GlobalConstants;
 import org.opensearch.graph.unipop.controller.search.AggregationBuilder;
 import org.opensearch.graph.unipop.controller.search.QueryBuilder;
 import org.apache.tinkerpop.gremlin.process.traversal.P;
 import org.apache.tinkerpop.gremlin.structure.Graph;
 
-/**
- * Created by Roman on 18/05/2017.
- */
 public class HiddenQueryTranslator extends CompositeQueryTranslator {
     //region Constructors
     public HiddenQueryTranslator(Iterable<PredicateQueryTranslator> translators) {

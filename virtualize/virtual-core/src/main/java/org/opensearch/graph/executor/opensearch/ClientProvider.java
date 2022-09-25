@@ -20,6 +20,10 @@ package org.opensearch.graph.executor.opensearch;
  * #L%
  */
 
+
+
+
+
 import com.google.inject.Inject;
 import com.google.inject.Provider;
 import com.google.inject.name.Named;
@@ -35,9 +39,6 @@ import org.opensearch.transport.client.PreBuiltTransportClient;
 import java.net.InetAddress;
 import java.net.UnknownHostException;
 
-/**
- * Created by roman.margolis on 04/01/2018.
- */
 public class ClientProvider implements Provider<Client> {
     public static final String createMockParameter = "ClientProvider.@createMock";
 

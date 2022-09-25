@@ -20,6 +20,10 @@ package org.opensearch.graph.executor.ontology.schema;
  * #L%
  */
 
+
+
+
+
 import com.google.inject.Inject;
 import com.google.inject.name.Named;
 import org.opensearch.graph.unipop.schemaProviders.indexPartitions.IndexPartitions;
@@ -27,9 +31,6 @@ import org.apache.commons.collections4.CollectionUtils;
 
 import java.util.*;
 
-/**
- * Created by roman.margolis on 01/03/2018.
- */
 public class CachedRawSchema implements RawSchema {
     public static final String rawSchemaParameter = "CachedRawSchema.@rawSchema";
     public static final String systemIndicesParameter = "CachedRawSchema.@systemIndices";

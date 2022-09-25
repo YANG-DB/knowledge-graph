@@ -111,7 +111,7 @@
     <module name="IllegalImport" />
     <module name="AvoidStarImport" />
     <module name="ImportOrder">
-      <property name="groups" value="org.yangdb.fuse,org.apache,au.com.,com.,io.,mondrian.,net.,org.,scala.,/^javax?\./"/>
+      <property name="groups" value="org.opensearch.graph,org.apache,au.com.,com.,io.,mondrian.,net.,org.,scala.,/^javax?\./"/>
       <property name="ordered" value="true"/>
       <property name="separated" value="true"/>
       <property name="option" value="bottom"/>

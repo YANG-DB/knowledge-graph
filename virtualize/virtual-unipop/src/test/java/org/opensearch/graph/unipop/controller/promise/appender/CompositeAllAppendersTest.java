@@ -4,6 +4,8 @@ import org.opensearch.graph.model.ontology.EPair;
 import org.opensearch.graph.model.ontology.EntityType;
 import org.opensearch.graph.model.ontology.Ontology;
 import org.opensearch.graph.model.ontology.RelationshipType;
+import org.opensearch.graph.model.schema.BaseTypeElement;
+import org.opensearch.graph.model.schema.BaseTypeElement.Type;
 import org.opensearch.graph.unipop.controller.common.appender.CompositeSearchAppender;
 import org.opensearch.graph.unipop.controller.common.appender.ElementGlobalTypeSearchAppender;
 import org.opensearch.graph.unipop.controller.common.appender.IndexSearchAppender;
@@ -230,11 +232,11 @@ public class CompositeAllAppendersTest {
     private OntologySchemaProvider getOntologySchemaProvider(Ontology ontology) {
         return new OntologySchemaProvider(ontology, new GraphElementSchemaProvider.Impl(
                 Arrays.asList(
-                        new GraphVertexSchema.Impl("Dragon", new StaticIndexPartitions(Arrays.asList("dragonIndex1", "dragonIndex2"))),
-                        new GraphVertexSchema.Impl("Person", new StaticIndexPartitions(Collections.singletonList("personIndex1")))
+                        new GraphVertexSchema.Impl(Type.of("Dragon"), new StaticIndexPartitions(Arrays.asList("dragonIndex1", "dragonIndex2"))),
+                        new GraphVertexSchema.Impl(Type.of("Person"), new StaticIndexPartitions(Collections.singletonList("personIndex1")))
                 ),
                 Collections.singletonList(
-                        new GraphEdgeSchema.Impl("", new StaticIndexPartitions(Arrays.asList("edgeIndex1", "edgeIndex2"))))
+                        new GraphEdgeSchema.Impl(Type.Unknown, new StaticIndexPartitions(Arrays.asList("edgeIndex1", "edgeIndex2"))))
         ));
     }
 

@@ -2,7 +2,7 @@ package org.opensearch.graph.unipop.controller.promise.context;
 
 /*-
  * #%L
- * fuse-dv-unipop
+ * virtual-unipop
  * %%
  * Copyright (C) 2016 - 2022 org.opensearch
  * %%
@@ -20,6 +20,10 @@ package org.opensearch.graph.unipop.controller.promise.context;
  * #L%
  */
 
+
+
+
+
 import org.opensearch.graph.unipop.controller.common.context.ElementControllerContext;
 import org.opensearch.graph.unipop.promise.*;
 import org.opensearch.graph.unipop.schemaProviders.*;
@@ -35,9 +39,6 @@ import org.unipop.structure.UniGraph;
 import java.util.ArrayList;
 import java.util.Optional;
 
-/**
- * Created by lior.perry on 27/03/2017.
- */
 public class PromiseElementControllerContext extends ElementControllerContext.Impl {
 
     //region Constructors

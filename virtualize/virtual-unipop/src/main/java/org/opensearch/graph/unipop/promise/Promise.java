@@ -2,7 +2,7 @@ package org.opensearch.graph.unipop.promise;
 
 /*-
  * #%L
- * fuse-dv-unipop
+ * virtual-unipop
  * %%
  * Copyright (C) 2016 - 2022 org.opensearch
  * %%
@@ -20,9 +20,10 @@ package org.opensearch.graph.unipop.promise;
  * #L%
  */
 
-/**
- * Created by lior.perry on 07/03/2017.
- */
+
+
+
+
 public interface Promise {
     Object getId();
 

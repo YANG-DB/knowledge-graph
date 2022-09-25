@@ -2,7 +2,7 @@ package org.opensearch.graph.unipop.controller.utils.traversal;
 
 /*-
  * #%L
- * fuse-dv-unipop
+ * virtual-unipop
  * %%
  * Copyright (C) 2016 - 2022 org.opensearch
  * %%
@@ -20,6 +20,10 @@ package org.opensearch.graph.unipop.controller.utils.traversal;
  * #L%
  */
 
+
+
+
+
 import org.apache.tinkerpop.gremlin.process.traversal.Traversal;
 import org.apache.tinkerpop.gremlin.process.traversal.step.filter.HasStep;
 
@@ -27,9 +31,6 @@ import java.util.HashSet;
 import java.util.Set;
 import java.util.function.Predicate;
 
-/**
- * Created by Roman on 9/17/2017.
- */
 public class TraversalHasStepFinder implements TraversalValueProvider<Iterable<HasStep>> {
     //region Constructors
     public TraversalHasStepFinder(Predicate<HasStep<?>> hasStepPredicate) {

@@ -2,7 +2,7 @@ package org.opensearch.graph.unipop.controller.common.appender;
 
 /*-
  * #%L
- * fuse-dv-unipop
+ * virtual-unipop
  * %%
  * Copyright (C) 2016 - 2022 org.opensearch
  * %%
@@ -20,14 +20,15 @@ package org.opensearch.graph.unipop.controller.common.appender;
  * #L%
  */
 
+
+
+
+
 import org.opensearch.graph.unipop.controller.common.context.ElementControllerContext;
 import org.opensearch.graph.unipop.controller.promise.appender.SearchQueryAppenderBase;
 import org.opensearch.graph.unipop.controller.search.AggregationBuilder;
 import org.opensearch.graph.unipop.controller.search.QueryBuilder;
 
-/**
- * Created by lior.perry on 27/03/2017.
- */
 @Deprecated
 public class ElementGlobalTypeSearchAppender extends SearchQueryAppenderBase<ElementControllerContext> {
     //region SearchQueryAppenderBase Implementation

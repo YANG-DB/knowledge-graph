@@ -20,6 +20,10 @@ package org.opensearch.graph.executor.cursor.discrete;
  * #L%
  */
 
+
+
+
+
 import org.opensearch.graph.dispatcher.cursor.Cursor;
 import org.opensearch.graph.dispatcher.cursor.CursorFactory;
 import org.opensearch.graph.executor.CompositeTraversalCursorContext;
@@ -54,12 +58,6 @@ public class InnerQueryCursor implements Cursor {
 
     //region Cursor Implementation
 
-    /**
-     * drain all possible results
-     *
-     * @param numResults
-     * @return
-     */
     @Override
     public QueryResultBase getNextResults(int numResults) {
         AssignmentsQueryResult all = new AssignmentsQueryResult(new ArrayList<>());

@@ -2,7 +2,7 @@ package org.opensearch.graph.unipop.controller.utils.traversal;
 
 /*-
  * #%L
- * fuse-dv-unipop
+ * virtual-unipop
  * %%
  * Copyright (C) 2016 - 2022 org.opensearch
  * %%
@@ -20,6 +20,10 @@ package org.opensearch.graph.unipop.controller.utils.traversal;
  * #L%
  */
 
+
+
+
+
 import org.apache.tinkerpop.gremlin.process.traversal.Traversal;
 
 import java.io.UnsupportedEncodingException;
@@ -27,9 +31,6 @@ import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.util.Optional;
 
-/**
- * Created by Roman on 15/05/2017.
- */
 public class TraversalHashProvider implements TraversalValueProvider<String> {
     //region Constructor
     public TraversalHashProvider(TraversalValueProvider<String> innerIdProvider, String hashAlgorithm) throws NoSuchAlgorithmException {

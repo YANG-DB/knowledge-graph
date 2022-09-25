@@ -2,7 +2,7 @@ package org.opensearch.graph.unipop.structure.discrete;
 
 /*-
  * #%L
- * fuse-dv-unipop
+ * virtual-unipop
  * %%
  * Copyright (C) 2016 - 2022 org.opensearch
  * %%
@@ -20,6 +20,10 @@ package org.opensearch.graph.unipop.structure.discrete;
  * #L%
  */
 
+
+
+
+
 import javaslang.Tuple2;
 import javaslang.collection.Stream;
 import org.apache.tinkerpop.gremlin.structure.VertexProperty;
@@ -29,9 +33,6 @@ import org.unipop.structure.UniVertexProperty;
 
 import java.util.*;
 
-/**
- * Created by roman.margolis on 12/09/2017.
- */
 public class DiscreteVertex extends UniVertex {
     //region Constructor
     public DiscreteVertex(Object id, String label, UniGraph graph, Map<String, Object> properties) {

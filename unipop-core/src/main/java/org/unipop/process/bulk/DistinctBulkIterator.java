@@ -23,15 +23,16 @@ package org.unipop.process.bulk;
 
 
 
+
+
+
+
 import org.apache.tinkerpop.gremlin.process.traversal.util.FastNoSuchElementException;
 
 import java.util.*;
 import java.util.function.Function;
 import java.util.function.Supplier;
 
-/**
- * Created by roman.margolis on 13/03/2018.
- */
 public class DistinctBulkIterator<S, TId> implements Iterator<List<S>> {
     //region Constructors
     public DistinctBulkIterator(Iterator<S> innerIterator, Function<S, TId> idFunction, Supplier<Supplier<Integer>> bulkSizeSupplierFactory) {

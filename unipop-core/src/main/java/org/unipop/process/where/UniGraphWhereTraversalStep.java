@@ -23,6 +23,10 @@ package org.unipop.process.where;
 
 
 
+
+
+
+
 import org.apache.tinkerpop.gremlin.process.traversal.Pop;
 import org.apache.tinkerpop.gremlin.process.traversal.Traversal;
 import org.apache.tinkerpop.gremlin.process.traversal.Traverser;
@@ -40,9 +44,6 @@ import org.unipop.process.traverser.UniGraphTraverserStep;
 
 import java.util.*;
 
-/**
- * Created by sbarzilay on 5/2/16.
- */
 public class UniGraphWhereTraversalStep<S extends Element> extends AbstractStep<S, S> implements TraversalParent {
     protected Traversal.Admin<S, S> whereTraversal;
     protected Iterator<Traverser.Admin<S>> results;

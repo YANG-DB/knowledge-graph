@@ -23,6 +23,10 @@ package org.unipop.process.start;
 
 
 
+
+
+
+
 import javaslang.collection.Stream;
 import org.apache.tinkerpop.gremlin.process.traversal.Step;
 import org.apache.tinkerpop.gremlin.process.traversal.Traverser;
@@ -43,9 +47,6 @@ import java.util.stream.Collectors;
 
 import static org.unipop.process.Profiler.PROFILER;
 
-/**
- * Created by Roman on 3/14/2018.
- */
 public class UniGraphStartCountStep<S> extends AbstractStep<S, Long> implements ReceivesPredicatesHolder<S, Long> {
     //region Constructors
     public UniGraphStartCountStep(UniGraphStartStep uniGraphStartStep, ControllerManager controllerManager) {

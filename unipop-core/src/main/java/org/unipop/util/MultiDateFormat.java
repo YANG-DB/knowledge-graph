@@ -24,14 +24,15 @@ package org.unipop.util;
 
 
 
+
+
+
+
 import java.text.*;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-/**
- * Created by sbarzilay on 8/19/16.
- */
 public class MultiDateFormat extends DateFormat {
     private List<SimpleDateFormat> formats;
 

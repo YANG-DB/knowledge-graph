@@ -2,9 +2,9 @@ package org.opensearch.graph.model.schema;
 
 /*-
  * #%L
- * virtual-core
+ * opengraph-model
  * %%
- * Copyright (C) 2016 - 2020 The YangDb Graph Database Project
+ * Copyright (C) 2016 - 2022 org.opensearch
  * %%
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -19,6 +19,10 @@ package org.opensearch.graph.model.schema;
  * limitations under the License.
  * #L%
  */
+
+
+
+
 
 public enum PartitionType {
     //a complete index

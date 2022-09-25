@@ -2,7 +2,7 @@ package org.opensearch.graph.unipop.controller.utils.traversal;
 
 /*-
  * #%L
- * fuse-dv-unipop
+ * virtual-unipop
  * %%
  * Copyright (C) 2016 - 2022 org.opensearch
  * %%
@@ -19,6 +19,10 @@ package org.opensearch.graph.unipop.controller.utils.traversal;
  * limitations under the License.
  * #L%
  */
+
+
+
+
 
 import org.opensearch.graph.unipop.controller.search.AggregationBuilder;
 import org.opensearch.graph.unipop.controller.search.QueryBuilder;
@@ -37,9 +41,6 @@ import org.unipop.process.predicate.ExistsP;
 import java.util.List;
 import java.util.function.Supplier;
 
-/**
- * Created by lior.perry on 27/03/2017.
- */
 public class TraversalQueryTranslator extends TraversalVisitor<Boolean>{
     //region Constructor
     public TraversalQueryTranslator(

@@ -2,7 +2,7 @@ package org.opensearch.graph.unipop.structure.promise;
 
 /*-
  * #%L
- * fuse-dv-unipop
+ * virtual-unipop
  * %%
  * Copyright (C) 2016 - 2022 org.opensearch
  * %%
@@ -20,6 +20,10 @@ package org.opensearch.graph.unipop.structure.promise;
  * #L%
  */
 
+
+
+
+
 import org.opensearch.graph.unipop.controller.utils.map.MapBuilder;
 import org.opensearch.graph.unipop.promise.Constraint;
 import org.opensearch.graph.unipop.promise.Promise;
@@ -31,9 +35,6 @@ import java.util.Collections;
 import java.util.Map;
 import java.util.Optional;
 
-/**
- * Created by lior.perry on 19/03/2017.
- */
 public class PromiseVertex extends UniVertex {
     //region Constructor
     public PromiseVertex(Promise promise, Optional<Constraint> constraint, UniGraph graph) {

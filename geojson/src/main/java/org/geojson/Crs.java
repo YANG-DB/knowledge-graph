@@ -20,6 +20,10 @@ package org.geojson;
  * #L%
  */
 
+
+
+
+
 import org.geojson.jackson.CrsType;
 
 import java.io.Serializable;

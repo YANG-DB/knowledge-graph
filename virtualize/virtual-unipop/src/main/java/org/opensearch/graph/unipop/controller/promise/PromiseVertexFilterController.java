@@ -2,7 +2,7 @@ package org.opensearch.graph.unipop.controller.promise;
 
 /*-
  * #%L
- * fuse-dv-unipop
+ * virtual-unipop
  * %%
  * Copyright (C) 2016 - 2022 org.opensearch
  * %%
@@ -19,6 +19,10 @@ package org.opensearch.graph.unipop.controller.promise;
  * limitations under the License.
  * #L%
  */
+
+
+
+
 
 import com.codahale.metrics.MetricRegistry;
 import org.opensearch.graph.dispatcher.provision.ScrollProvisioning;
@@ -58,13 +62,6 @@ import java.util.Optional;
 
 import static org.opensearch.graph.unipop.controller.utils.SearchAppenderUtil.wrap;
 
-/**
- * Created by Elad on 4/27/2017.
- * This controller handles constraints on the endB vertices of promise edges.
- * These constraints are modeled as constraints on special virtual 'promise-filter' edges.
- * The controller starts with promise-vertices, filter these vertices
- * and build promise-edges containing the result vertices as end vertices.
- */
 public class PromiseVertexFilterController extends VertexControllerBase {
 
     //region Constructors

@@ -20,6 +20,10 @@ package org.opensearch.graph.executor.logging;
  * #L%
  */
 
+
+
+
+
 import com.google.inject.Inject;
 import com.google.inject.name.Named;
 import org.opensearch.graph.executor.ontology.GraphElementSchemaProviderFactory;
@@ -28,9 +32,6 @@ import org.opensearch.graph.unipop.schemaProviders.GraphElementSchemaProvider;
 import org.opensearch.graph.unipop.schemaProviders.logging.LoggingGraphElementSchemaProvider;
 import org.slf4j.Logger;
 
-/**
- * Created by roman.margolis on 20/02/2018.
- */
 public class LoggingGraphElementSchemaProviderFactory implements GraphElementSchemaProviderFactory {
     public static final String schemaProviderFactoryParameter = "LoggingGraphElementSchemaProviderFactory.@schemaProviderFactory";
     public static final String warnLoggerParameter = "LoggingGraphElementSchemaProviderFactory.@warnLogger";

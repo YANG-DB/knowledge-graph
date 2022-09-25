@@ -2,7 +2,7 @@ package org.opensearch.graph.unipop.controller.search.translation;
 
 /*-
  * #%L
- * fuse-dv-unipop
+ * virtual-unipop
  * %%
  * Copyright (C) 2016 - 2022 org.opensearch
  * %%
@@ -20,6 +20,10 @@ package org.opensearch.graph.unipop.controller.search.translation;
  * #L%
  */
 
+
+
+
+
 import org.opensearch.graph.unipop.controller.search.AggregationBuilder;
 import org.opensearch.graph.unipop.controller.search.QueryBuilder;
 import org.apache.tinkerpop.gremlin.process.traversal.P;
@@ -27,41 +31,6 @@ import org.unipop.process.predicate.CountFilterP;
 
 import java.util.Collections;
 
-/**
- *
- * Example of a terms count query with range filter on amount of terms
- * {
- *   "size": 0,
- *   "query": {
- *     "bool": {
- *       "filter": [
- *         {
- *           "term": {
- *             "direction": "out"
- *           }
- *         }
- *       ]
- *     }
- *   },
- *   "aggs": {
- *     "edges": {
- *       "entityA.id": {
- *         "field": "entityA.id"
- *       },
- *       "aggs": {
- *         "range_bucket_filter": {
- *           "bucket_selector": {
- *             "buckets_path": {
- *               "edgeCount": "_count"
- *             },
- *             "script": "def a=params.edgeCount; a > 405 && a < 567"
- *           }
- *         }
- *       }
- *     }
- *   }
- * }
- */
 public class CountFilterQueryTranslator implements PredicateQueryTranslator {
     //region PredicateQueryTranslator Implementation
     @Override

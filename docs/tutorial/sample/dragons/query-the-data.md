@@ -45,19 +45,19 @@ After the server completes the execution it returns the following results:
   "renderElapsed": "00000081",
   "totalElapsed": "00001448",
   "data": {
-    "resourceUrl": "http://20.10.10.104:8888/fuse/query/4db03973-e509-4263-8a22-c5ad43ae5a96",
+    "resourceUrl": "http://20.10.10.104:8888/opengraph/query/4db03973-e509-4263-8a22-c5ad43ae5a96",
     "resourceId": "4db03973-e509-4263-8a22-c5ad43ae5a96",
-    "cursorStoreUrl": "http://20.10.10.104:8888/fuse/query/4db03973-e509-4263-8a22-c5ad43ae5a96/cursor/1/page",
-    "explainPlanUrl": "http://20.10.10.104:8888/fuse/query/4db03973-e509-4263-8a22-c5ad43ae5a96/plan",
-    "v1QueryUrl": "http://20.10.10.104:8888/fuse/query/4db03973-e509-4263-8a22-c5ad43ae5a96/v1",
-    "asgUrl": "http://20.10.10.104:8888/fuse/query/4db03973-e509-4263-8a22-c5ad43ae5a96/asg",
-    "elasticQueryUrl": "http://20.10.10.104:8888/fuse/query/4db03973-e509-4263-8a22-c5ad43ae5a96/elastic",
+    "cursorStoreUrl": "http://20.10.10.104:8888/opengraph/query/4db03973-e509-4263-8a22-c5ad43ae5a96/cursor/1/page",
+    "explainPlanUrl": "http://20.10.10.104:8888/opengraph/query/4db03973-e509-4263-8a22-c5ad43ae5a96/plan",
+    "v1QueryUrl": "http://20.10.10.104:8888/opengraph/query/4db03973-e509-4263-8a22-c5ad43ae5a96/v1",
+    "asgUrl": "http://20.10.10.104:8888/opengraph/query/4db03973-e509-4263-8a22-c5ad43ae5a96/asg",
+    "elasticQueryUrl": "http://20.10.10.104:8888/opengraph/query/4db03973-e509-4263-8a22-c5ad43ae5a96/elastic",
     "type": "concrete",
     "error": null,
     "innerUrlResourceInfos": [],
     "cursorResourceInfos": [
       {
-        "resourceUrl": "http://20.10.10.104:8888/fuse/query/4db03973-e509-4263-8a22-c5ad43ae5a96/cursor/1",
+        "resourceUrl": "http://20.10.10.104:8888/opengraph/query/4db03973-e509-4263-8a22-c5ad43ae5a96/cursor/1",
         "resourceId": "1",
         "error": null,
         "cursorRequest": {
@@ -72,13 +72,13 @@ After the server completes the execution it returns the following results:
           "include": "all",
           "format": "JSON"
         },
-        "pageStoreUrl": "http://20.10.10.104:8888/fuse/query/4db03973-e509-4263-8a22-c5ad43ae5a96/cursor/1/page",
+        "pageStoreUrl": "http://20.10.10.104:8888/opengraph/query/4db03973-e509-4263-8a22-c5ad43ae5a96/cursor/1/page",
         "pageResourceInfos": [
           {
-            "resourceUrl": "http://20.10.10.104:8888/fuse/query/4db03973-e509-4263-8a22-c5ad43ae5a96/cursor/1/page/1",
+            "resourceUrl": "http://20.10.10.104:8888/opengraph/query/4db03973-e509-4263-8a22-c5ad43ae5a96/cursor/1/page/1",
             "resourceId": "1",
             "executionTime": 0,
-            "dataUrl": "http://20.10.10.104:8888/fuse/query/4db03973-e509-4263-8a22-c5ad43ae5a96/cursor/1/page/1/data",
+            "dataUrl": "http://20.10.10.104:8888/opengraph/query/4db03973-e509-4263-8a22-c5ad43ae5a96/cursor/1/page/1/data",
             "requestedPageSize": 100,
             "actualPageSize": 1,
             "data": {
@@ -89,7 +89,7 @@ After the server completes the execution it returns the following results:
               "assignments": [...],
               "resultType": "assignments"
             },
-            "elasticQueryUrl": "http://20.10.10.104:8888/fuse/query/4db03973-e509-4263-8a22-c5ad43ae5a96/cursor/1/page/1/elastic",
+            "elasticQueryUrl": "http://20.10.10.104:8888/opengraph/query/4db03973-e509-4263-8a22-c5ad43ae5a96/cursor/1/page/1/elastic",
             "available": true
           }
         ]

@@ -1,0 +1,60 @@
+package org.opensearch.graph.services.mockEngine;
+
+import org.opensearch.graph.services.TestsConfiguration;
+import org.opensearch.graph.test.BaseITMarker;
+import io.restassured.http.Header;
+import org.junit.Assume;
+import org.junit.Before;
+import org.junit.Ignore;
+import org.junit.Test;
+
+import static io.restassured.RestAssured.given;
+import static org.hamcrest.Matchers.equalTo;
+import static uk.co.datumedge.hamcrest.json.SameJSONAs.sameJSONAs;
+
+public class ApiDescriptorIT implements BaseITMarker {
+    @Before
+    public void before() {
+        Assume.assumeTrue(TestsConfiguration.instance.shouldRunTestClass(this.getClass()));
+    }
+
+    @Test
+    @Ignore
+    /**
+     * execute query with expected plan result
+     */
+    public void api() {
+        given()
+                .contentType("application/json")
+                .header(new Header("opengraph-external-id", "test"))
+                .with().port(8888)
+                .get("/opengraph")
+                .then()
+                .assertThat()
+                .body(sameJSONAs("{ \"data\":{\"resourceUrl\":\"/opengraph\",\"healthUrl\":\"/opengraph/health\",\"queryStoreUrl\":\"/opengraph/query\",\"searchStoreUrl\":\"/opengraph/search\",\"catalogStoreUrl\":\"/opengraph/catalog/ontology\"}")
+                        .allowingExtraUnexpectedFields()
+                        .allowingAnyArrayOrdering())
+                .statusCode(200)
+                .contentType("application/json;charset=UTF-8");
+    }
+
+    @Test
+    public void checkHealth() {
+        given()
+                .contentType("application/json")
+                .header(new Header("opengraph-external-id", "test"))
+                .with().port(8888)
+                .get("/opengraph/health")
+                .then()
+                .assertThat()
+                .body(equalTo("\"Alive And Well...\""))
+                .header("Access-Control-Allow-Origin", equalTo("*"))
+                .header("Access-Control-Allow-Methods", equalTo("POST, GET, OPTIONS, DELETE, PATCH"))
+                .header("Access-Control-Max-Age", equalTo("3600"))
+                .header("Access-Control-Allow-Headers", "accept")
+                .statusCode(200)
+                .contentType("application/json;charset=UTF-8");
+    }
+
+}
+

@@ -3,6 +3,8 @@ package org.opensearch.graph.unipop.schemaProviders;
 import com.google.common.collect.Lists;
 import org.opensearch.graph.model.GlobalConstants;
 import org.opensearch.graph.model.ontology.*;
+import org.opensearch.graph.model.schema.BaseTypeElement;
+import org.opensearch.graph.model.schema.BaseTypeElement.Type;
 import org.opensearch.graph.unipop.schemaProviders.indexPartitions.IndexPartitions;
 import org.opensearch.graph.unipop.schemaProviders.indexPartitions.StaticIndexPartitions;
 import javaslang.collection.Stream;
@@ -15,6 +17,7 @@ import org.mockito.Mockito;
 import java.util.*;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
 import static org.mockito.Mockito.when;
 
 /**
@@ -29,8 +32,9 @@ public class OntologySchemaProviderTest {
         OntologySchemaProvider ontologySchemaProvider = getOntologySchemaProvider(ontology);
         GraphVertexSchema vertexPersonSchema = Stream.ofAll(ontologySchemaProvider.getVertexSchemas("Person")).get(0);
 
-        assertEquals(vertexPersonSchema.getConstraint().getTraversalConstraint(), __.start().has(T.label, "Person"));
-        List<String> indices = Stream.ofAll(vertexPersonSchema.getIndexPartitions().get().getPartitions()).flatMap(IndexPartitions.Partition::getIndices).toJavaList();
+        assertEquals(vertexPersonSchema.getConstraint().getTraversalConstraint().toString(),__.start().has(T.label, "Person").toString());
+        List<String> indices = Stream.ofAll(vertexPersonSchema.getIndexPartitions().get().getPartitions())
+                .flatMap(IndexPartitions.Partition::getIndices).toJavaList();
         assertEquals(2, indices.size());
 
         assertEquals("vertexIndex1", Stream.ofAll(indices).get(0));
@@ -38,7 +42,7 @@ public class OntologySchemaProviderTest {
     }
 
     @Test
-    public void getEdgeSchema() throws Exception {
+    public void getEdgeSchema() {
         Ontology ontology = getOntology();
         OntologySchemaProvider ontologySchemaProvider = getOntologySchemaProvider(ontology);
         GraphEdgeSchema edgeDragonFiresPersonSchema = Stream.ofAll(ontologySchemaProvider.getEdgeSchemas("Fire")).get(0);
@@ -64,7 +68,7 @@ public class OntologySchemaProviderTest {
         Ontology ontology = getOntology();
         OntologySchemaProvider ontologySchemaProvider = getOntologySchemaProvider(ontology);
         GraphVertexSchema person = Stream.ofAll(ontologySchemaProvider.getVertexSchemas("Person")).get(0);
-        GraphElementPropertySchema name = person.getProperty("name").get();
+        GraphElementPropertySchema name = person.getProperty(new Property("name","name","type")).get();
         assertEquals(name.getName(), "name");
     }
 
@@ -72,24 +76,29 @@ public class OntologySchemaProviderTest {
 
     //region Private Methods
     private OntologySchemaProvider getOntologySchemaProvider(Ontology ontology) {
-        return new OntologySchemaProvider(ontology, new GraphElementSchemaProvider.Impl(
+        GraphElementSchemaProvider.Impl schemaProvider = new GraphElementSchemaProvider.Impl(
                 Arrays.asList(
-                        new GraphVertexSchema.Impl("Person", new StaticIndexPartitions(Arrays.asList("vertexIndex1", "vertexIndex2"))),
-                        new GraphVertexSchema.Impl("Dragon", new StaticIndexPartitions(Arrays.asList("vertexIndex1", "vertexIndex2")))
-                        ),
+                        new GraphVertexSchema.Impl(Type.of("Person"),
+                                new StaticIndexPartitions(Arrays.asList("vertexIndex1", "vertexIndex2")),
+                                Arrays.asList(new GraphElementPropertySchema.Impl("name","string"))
+                            ),
+                        new GraphVertexSchema.Impl(Type.of("Dragon"), new StaticIndexPartitions(Arrays.asList("vertexIndex1", "vertexIndex2")))
+                ),
                 Arrays.asList(
-                    new GraphEdgeSchema.Impl(
-                        "Fire",
-                        Optional.of(new GraphEdgeSchema.End.Impl(
-                                Collections.singletonList(GlobalConstants.EdgeSchema.SOURCE_ID),
-                                Optional.of("Dragon"))),
-                        Optional.of(new GraphEdgeSchema.End.Impl(
-                                Collections.singletonList(GlobalConstants.EdgeSchema.DEST_ID),
-                                Optional.of("Dragon"))),
-                        Direction.OUT,
-                        Optional.of(new GraphEdgeSchema.DirectionSchema.Impl(GlobalConstants.EdgeSchema.DIRECTION, "out", "in")),
-                        new StaticIndexPartitions(Arrays.asList("edgeIndex1", "edgeIndex2"))))
-        ));
+                        new GraphEdgeSchema.Impl(
+                                Type.of("Fire"),
+                                Optional.of(new GraphEdgeSchema.End.Impl(
+                                        Collections.singletonList(GlobalConstants.EdgeSchema.SOURCE_ID),
+                                        Optional.of("Dragon"))),
+                                Optional.of(new GraphEdgeSchema.End.Impl(
+                                        Collections.singletonList(GlobalConstants.EdgeSchema.DEST_ID),
+                                        Optional.of("Dragon"))),
+                                Direction.OUT,
+                                Optional.of(new GraphEdgeSchema.DirectionSchema.Impl(GlobalConstants.EdgeSchema.DIRECTION, "out", "in")),
+                                new StaticIndexPartitions(Arrays.asList("edgeIndex1", "edgeIndex2")))),
+                Arrays.asList(new GraphElementPropertySchema.Impl("name","string"))
+        );
+        return new OntologySchemaProvider(ontology, schemaProvider);
     }
 
     private Ontology getOntology() {

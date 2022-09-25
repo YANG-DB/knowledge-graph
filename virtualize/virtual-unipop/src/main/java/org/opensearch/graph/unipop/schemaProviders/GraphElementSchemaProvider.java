@@ -2,7 +2,7 @@ package org.opensearch.graph.unipop.schemaProviders;
 
 /*-
  * #%L
- * fuse-dv-unipop
+ * virtual-unipop
  * %%
  * Copyright (C) 2016 - 2022 org.opensearch
  * %%
@@ -20,19 +20,21 @@ package org.opensearch.graph.unipop.schemaProviders;
  * #L%
  */
 
+
+
+
+
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import javaslang.Tuple2;
 import javaslang.collection.Stream;
 import org.apache.tinkerpop.gremlin.structure.Direction;
+import org.opensearch.graph.model.schema.BaseTypeElement;
 
 import java.util.*;
 
 import static org.opensearch.graph.unipop.schemaProviders.GraphEdgeSchema.Application.endB;
 
-/**
- * Created by roman on 1/16/2015.
- */
 public interface GraphElementSchemaProvider {
     Iterable<GraphVertexSchema> getVertexSchemas(String label);
 
@@ -96,7 +98,7 @@ public interface GraphElementSchemaProvider {
             this.labelFieldName = labelFieldName;
             this.vertexSchemas = Stream.ofAll(vertexSchemas)
                     .groupBy(GraphElementSchema::getLabel)
-                    .toJavaMap(grouping -> new Tuple2<>(grouping._1(), grouping._2().toJavaList()));
+                    .toJavaMap(grouping -> new Tuple2<>(grouping._1().getName(), grouping._2().toJavaList()));
 
             this.edgeSchemas = complementEdgeSchemas(edgeSchemas);
 
@@ -107,12 +109,14 @@ public interface GraphElementSchemaProvider {
                     Stream.ofAll(this.vertexSchemas.values())
                     .flatMap(vertexSchemas1 -> vertexSchemas1)
                     .map(GraphElementSchema::getLabel)
+                    .map(BaseTypeElement.Type::getName)
                     .toJavaSet();
 
             this.edgeLabels =
                     Stream.ofAll(this.edgeSchemas.values())
                             .flatMap(edgeSchemas1 -> edgeSchemas1)
                             .map(GraphElementSchema::getLabel)
+                            .map(BaseTypeElement.Type::getName)
                             .toJavaSet();
 
             this.propertyNames =
@@ -202,14 +206,15 @@ public interface GraphElementSchemaProvider {
 
             Map<String, List<GraphEdgeSchema>> labelSchemas =
                     Stream.ofAll(edgeSchemas) // temporary - should be complementedSchemas
-                            .groupBy(edgeSchema -> edgeSchemaKey(edgeSchema.getLabel()))
+                            .groupBy(edgeSchema -> edgeSchemaKey(edgeSchema.getLabel().getName()))
                             .toJavaMap(grouping -> new Tuple2<>(grouping._1(), grouping._2().toJavaList()));
 
             Map<String, List<GraphEdgeSchema>> labelALabelSchemas =
                     Stream.ofAll(complementedSchemas)
                             .filter(edgeSchema -> edgeSchema.getEndA().isPresent())
                             .filter(edgeSchema -> edgeSchema.getEndA().get().getLabel().isPresent())
-                            .groupBy(edgeSchema -> edgeSchemaKey(edgeSchema.getEndA().get().getLabel().get(), edgeSchema.getLabel()))
+                            .groupBy(edgeSchema -> edgeSchemaKey(edgeSchema.getEndA().get().getLabel().get(),
+                                    edgeSchema.getLabel().getName()))
                             .toJavaMap(grouping -> new Tuple2<>(grouping._1(), grouping._2().toJavaList()));
 
             Map<String, List<GraphEdgeSchema>> labelADirLabelSchemas =
@@ -219,7 +224,7 @@ public interface GraphElementSchemaProvider {
                             .groupBy(edgeSchema -> edgeSchemaKey(
                                     edgeSchema.getEndA().get().getLabel().get(),
                                     edgeSchema.getDirection().toString(),
-                                    edgeSchema.getLabel()))
+                                    edgeSchema.getLabel().getName()))
                             .toJavaMap(grouping -> new Tuple2<>(grouping._1(), grouping._2().toJavaList()));
 
             Map<String, List<GraphEdgeSchema>> labelADirLabelLabelBSchemas =
@@ -231,7 +236,7 @@ public interface GraphElementSchemaProvider {
                             .groupBy(edgeSchema -> edgeSchemaKey(
                                     edgeSchema.getEndA().get().getLabel().get(),
                                     edgeSchema.getDirection().toString(),
-                                    edgeSchema.getLabel(),
+                                    edgeSchema.getLabel().getName(),
                                     edgeSchema.getEndB().get().getLabel().get()))
                             .toJavaMap(grouping -> new Tuple2<>(grouping._1(), grouping._2().toJavaList()));
 

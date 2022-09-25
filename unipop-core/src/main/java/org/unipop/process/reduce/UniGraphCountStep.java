@@ -22,6 +22,10 @@
 
 
 
+
+
+
+
 //
 //import org.apache.tinkerpop.gremlin.process.traversal.Traversal;
 //import org.apache.tinkerpop.gremlin.process.traversal.step.util.EmptyStep;
@@ -36,9 +40,6 @@
 //import java.util.*;
 //import java.util.stream.Collectors;
 //
-///**
-// * Created by Gilad on 02/11/2015.
-// */
 //public class UniGraphCountStep<E extends Element> extends ReducingBarrierStep<E, Long> {
 //    //region Constructor
 //    public UniGraphCountStep(Traversal.Admin traversal, Class elementClass, List<HasContainer> hasContainers, Object[] ids, String[] edgeLabels, Optional<Direction> direction, ControllerManager controllerManager) {

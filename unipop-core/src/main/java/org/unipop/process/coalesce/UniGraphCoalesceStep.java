@@ -23,6 +23,10 @@ package org.unipop.process.coalesce;
 
 
 
+
+
+
+
 import com.google.common.collect.Lists;
 import org.apache.tinkerpop.gremlin.process.traversal.Traversal;
 import org.apache.tinkerpop.gremlin.process.traversal.Traverser;
@@ -38,9 +42,6 @@ import org.unipop.structure.UniGraph;
 import java.util.*;
 import java.util.function.BinaryOperator;
 
-/**
- * Created by sbarzilay on 3/15/16.
- */
 public class UniGraphCoalesceStep<S, E> extends UniBulkStep<S, E> implements TraversalParent {
     private final List<Traversal.Admin<S, E>> coalesceTraversals;
     private Iterator<Traverser.Admin<E>> results = EmptyIterator.instance();

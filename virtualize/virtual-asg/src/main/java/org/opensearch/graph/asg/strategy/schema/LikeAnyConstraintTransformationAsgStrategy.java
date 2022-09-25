@@ -20,6 +20,10 @@ package org.opensearch.graph.asg.strategy.schema;
  * #L%
  */
 
+
+
+
+
 import org.opensearch.graph.asg.strategy.schema.utils.LikeUtil;
 import org.opensearch.graph.dispatcher.ontology.OntologyProvider;
 import org.opensearch.graph.model.asgQuery.AsgQueryUtil;
@@ -43,16 +47,13 @@ import org.opensearch.graph.unipop.schemaProviders.GraphElementPropertySchema;
 import org.opensearch.graph.unipop.schemaProviders.GraphElementSchemaProvider;
 import org.opensearch.graph.unipop.schemaProviders.GraphVertexSchema;
 import javaslang.collection.Stream;
-import org.openserach.graph.asg.strategy.AsgElementStrategy;
-import org.openserach.graph.asg.strategy.AsgStrategy;
+import org.opensearch.graph.asg.strategy.AsgElementStrategy;
+import org.opensearch.graph.asg.strategy.AsgStrategy;
 
 import java.util.*;
 
 import static org.opensearch.graph.unipop.schemaProviders.GraphElementPropertySchema.IndexingSchema.Type.ngrams;
 
-/**
- * Created by roman.margolis on 07/03/2018.
- */
 public class LikeAnyConstraintTransformationAsgStrategy implements AsgStrategy, AsgElementStrategy<EPropGroup> {
     //region Constructors
     public LikeAnyConstraintTransformationAsgStrategy(OntologyProvider ontologyProvider, GraphElementSchemaProviderFactory schemaProviderFactory) {
@@ -101,12 +102,12 @@ public class LikeAnyConstraintTransformationAsgStrategy implements AsgStrategy, 
             // currently supports a single vertex schema
             GraphVertexSchema vertexSchema = Stream.ofAll(vertexSchemas).get(0);
 
-            Optional<Property> property = ont.$property(eProp.getpType());
+            Optional<Property> property = ont.$pType(eProp.getpType());
             if (!property.isPresent()) {
                 continue;
             }
 
-            Optional<GraphElementPropertySchema> propertySchema = vertexSchema.getProperty(property.get().getName());
+            Optional<GraphElementPropertySchema> propertySchema = vertexSchema.getProperty(property.get());
             if (!propertySchema.isPresent()) {
                 continue;
             }

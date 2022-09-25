@@ -23,6 +23,10 @@ package org.unipop.process.start;
 
 
 
+
+
+
+
 import javaslang.collection.Stream;
 import org.apache.tinkerpop.gremlin.process.traversal.Traverser;
 import org.apache.tinkerpop.gremlin.process.traversal.step.util.AbstractStep;
@@ -39,9 +43,6 @@ import org.unipop.query.predicates.PredicatesHolderFactory;
 import java.util.List;
 import java.util.NoSuchElementException;
 
-/**
- * Created by Roman on 3/14/2018.
- */
 public class UniGraphStartEdgeCountStep<S> extends AbstractStep<S, Long> implements ReceivesPredicatesHolder<S, Long> {
 
 

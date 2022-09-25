@@ -23,6 +23,10 @@ package org.unipop.util;
 
 
 
+
+
+
+
 import org.unipop.schema.property.*;
 
 import java.util.ArrayList;
@@ -30,9 +34,6 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
 
-/**
- * Created by sbarzilay on 8/8/16.
- */
 public class PropertySchemaFactory {
     public static List<PropertySchema.PropertySchemaBuilder> builders;
 

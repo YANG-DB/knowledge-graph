@@ -2,7 +2,7 @@ package org.opensearch.graph.unipop.controller.search.translation;
 
 /*-
  * #%L
- * fuse-dv-unipop
+ * virtual-unipop
  * %%
  * Copyright (C) 2016 - 2022 org.opensearch
  * %%
@@ -20,6 +20,10 @@ package org.opensearch.graph.unipop.controller.search.translation;
  * #L%
  */
 
+
+
+
+
 import org.opensearch.graph.unipop.controller.search.AggregationBuilder;
 import org.opensearch.graph.unipop.controller.search.QueryBuilder;
 import javaslang.collection.Stream;
@@ -27,9 +31,6 @@ import org.apache.tinkerpop.gremlin.process.traversal.P;
 
 import java.util.List;
 
-/**
- * Created by Roman on 18/05/2017.
- */
 public class CompositeQueryTranslator implements PredicateQueryTranslator {
     //region Constructors
     public CompositeQueryTranslator(PredicateQueryTranslator...translators) {

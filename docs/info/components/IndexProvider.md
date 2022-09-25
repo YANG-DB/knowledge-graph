@@ -225,14 +225,14 @@ The 'Elasticsearch' index provider offers the next possibilities to store Person
   
     Create the schematic mapping (index template) for the schema: 
     
-      [POST] http://localhost:8888/fuse/load/ontology/:id/mapping
+      [POST] http://localhost:8888/opengraph/load/ontology/:id/mapping
             id => ontology Name
             Body => IndexProvider json document
              
 
     Create the schematic indices (including index template) for the schema: 
 
-      [POST] http://localhost:8888/fuse/load/ontology/:id/indices
+      [POST] http://localhost:8888/opengraph/load/ontology/:id/indices
             id => ontology Name
             Body => IndexProvider json document
              

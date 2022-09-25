@@ -2,7 +2,7 @@ package org.opensearch.graph.unipop.controller.common.appender;
 
 /*-
  * #%L
- * fuse-dv-unipop
+ * virtual-unipop
  * %%
  * Copyright (C) 2016 - 2022 org.opensearch
  * %%
@@ -20,12 +20,13 @@ package org.opensearch.graph.unipop.controller.common.appender;
  * #L%
  */
 
+
+
+
+
 import org.opensearch.graph.unipop.controller.common.context.ElementControllerContext;
 import org.opensearch.graph.unipop.controller.search.SearchBuilder;
 
-/**
- * Created by roman.margolis on 25/09/2017.
- */
 public class NormalizeIndexSearchAppender implements SearchAppender<ElementControllerContext> {
     //region Constructors
     public NormalizeIndexSearchAppender(int maxNumValues) {

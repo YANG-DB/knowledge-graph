@@ -20,6 +20,10 @@ package org.opensearch.graph.model.transport;
  * #L%
  */
 
+
+
+
+
 import com.fasterxml.jackson.annotation.JsonInclude;
 import org.opensearch.graph.model.transport.cursor.CreateCursorRequest;
 
@@ -27,7 +31,7 @@ public interface CreateQueryRequestMetadata<T> {
     String TYPE_V1QL = "v1";
     String TYPE_CYPHERQL = "cypher";
     String TYPE_GRAPHQL = "graphQL";
-    String TYPE_SPARQL = "sparkQL";
+//    String TYPE_SPARQL = "sparkQL";
 
     boolean isSearchPlan();
 
@@ -41,13 +45,6 @@ public interface CreateQueryRequestMetadata<T> {
 
     StorageType getStorageType();
 
-    /**
-     * specific question format type:
-     *  - V1 Query
-     *  - Cypher Query
-     *  - GraphQL Query
-     * @return
-     */
     String getType();
 
     /**

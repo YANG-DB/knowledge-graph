@@ -20,6 +20,10 @@ package org.opensearch.graph.model.transport.cursor;
  * #L%
  */
 
+
+
+
+
 import org.opensearch.graph.model.transport.CreatePageRequest;
 
 public class CreateForwardOnlyPathTraversalCursorRequest extends CreateCursorRequest {

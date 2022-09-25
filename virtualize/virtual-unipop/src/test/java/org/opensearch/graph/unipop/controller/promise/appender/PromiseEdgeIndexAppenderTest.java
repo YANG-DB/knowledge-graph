@@ -5,6 +5,8 @@ import org.opensearch.graph.model.ontology.EPair;
 import org.opensearch.graph.model.ontology.EntityType;
 import org.opensearch.graph.model.ontology.Ontology;
 import org.opensearch.graph.model.ontology.RelationshipType;
+import org.opensearch.graph.model.schema.BaseTypeElement;
+import org.opensearch.graph.model.schema.BaseTypeElement.Type;
 import org.opensearch.graph.unipop.controller.common.context.VertexControllerContext;
 import org.opensearch.graph.unipop.controller.promise.context.PromiseVertexControllerContext;
 import org.opensearch.graph.unipop.controller.search.SearchBuilder;
@@ -517,8 +519,8 @@ public class PromiseEdgeIndexAppenderTest {
         return new OntologySchemaProvider(ontology, new GraphElementSchemaProvider.Impl(
                 Collections.emptyList(),
                 Arrays.asList(
-                        new GraphEdgeSchema.Impl(STATIC_INDEX_EDGE, new StaticIndexPartitions(STATIC_INDEX_NAMES)),
-                        new GraphEdgeSchema.Impl(TIME_SERIES_INDEX_EDGE,
+                        new GraphEdgeSchema.Impl(Type.of(STATIC_INDEX_EDGE), new StaticIndexPartitions(STATIC_INDEX_NAMES)),
+                        new GraphEdgeSchema.Impl(Type.of(TIME_SERIES_INDEX_EDGE),
                                 new TimeSeriesIndexPartitions() {
                                     @Override
                                     public Optional<String> getPartitionField() {

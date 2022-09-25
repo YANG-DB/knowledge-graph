@@ -20,6 +20,10 @@ package org.opensearch.graph.executor.ontology.discrete;
  * #L%
  */
 
+
+
+
+
 import com.codahale.metrics.MetricRegistry;
 import com.google.common.collect.ImmutableSet;
 import com.google.inject.Inject;
@@ -33,9 +37,9 @@ import org.opensearch.graph.unipop.controller.common.logging.LoggingSearchContro
 import org.opensearch.graph.unipop.controller.common.logging.LoggingSearchVertexController;
 import org.opensearch.graph.unipop.controller.discrete.*;
 import org.opensearch.graph.unipop.controller.search.SearchOrderProviderFactory;
-import org.opensearch.graph.unipop.process.traversal.strategy.FuseStandardStrategyProvider;
+import org.opensearch.graph.unipop.process.traversal.strategy.StandardStrategyProvider;
 import org.opensearch.graph.unipop.schemaProviders.GraphElementSchemaProvider;
-import org.opensearch.graph.unipop.structure.FuseUniGraph;
+import org.opensearch.graph.unipop.structure.SearchUniGraph;
 import org.opensearch.client.Client;
 import org.unipop.configuration.UniGraphConfiguration;
 import org.unipop.query.controller.ControllerManager;
@@ -45,9 +49,6 @@ import org.unipop.structure.UniGraph;
 
 import java.util.Set;
 
-/**
- * Created by Roman on 06/04/2017.
- */
 public class M1ElasticUniGraphProvider implements UniGraphProvider {
     //region Constructors
     @Inject
@@ -69,10 +70,10 @@ public class M1ElasticUniGraphProvider implements UniGraphProvider {
 
     @Override
     public UniGraph getGraph(Ontology ontology) throws Exception {
-        return new FuseUniGraph(
+        return new SearchUniGraph(
                 this.uniGraphConfiguration,
                 controllerManagerFactory(this.schemaProviderFactory.get(ontology), this.metricRegistry),
-                new FuseStandardStrategyProvider());
+                new StandardStrategyProvider());
     }
 
     //region Private Methods

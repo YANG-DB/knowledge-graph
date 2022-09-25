@@ -20,6 +20,10 @@ package org.opensearch.graph.executor.logging;
  * #L%
  */
 
+
+
+
+
 import com.codahale.metrics.MetricRegistry;
 import com.google.inject.Inject;
 import com.google.inject.name.Named;
@@ -29,9 +33,6 @@ import org.opensearch.graph.dispatcher.cursor.LoggingCursor;
 import org.opensearch.graph.executor.cursor.TraversalCursorContext;
 import org.slf4j.Logger;
 
-/**
- * Created by roman.margolis on 07/01/2018.
- */
 public class LoggingCursorFactory implements CursorFactory {
     public static final String cursorFactoryParameter = "LoggingCursorFactory.@cursorFactory";
     public static final String cursorLoggerParameter = "LoggingCursorFactory.@cursorLogger";

@@ -22,6 +22,10 @@
 
 
 
+
+
+
+
 //
 //import org.apache.tinkerpop.gremlin.process.traversal.Traversal;
 //import org.apache.tinkerpop.gremlin.process.traversal.step.util.ReducingBarrierStep;
@@ -32,9 +36,6 @@
 //
 //import java.util.*;
 //
-///**
-// * Created by Gilad on 03/11/2015.
-// */
 //public class UniGraphGroupStep<E extends Element> extends ReducingBarrierStep<E, Map<String, Object>> {
 //    //region Constructor
 //    public UniGraphGroupStep(

@@ -9,9 +9,9 @@ package org.opensearch.graph.executor.ontology.schema.load;
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- *
+ * 
  *      http://www.apache.org/licenses/LICENSE-2.0
- *
+ * 
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -20,9 +20,13 @@ package org.opensearch.graph.executor.ontology.schema.load;
  * #L%
  */
 
+
+
+
+
 import org.opensearch.graph.executor.ontology.schema.RawSchema;
 import org.opensearch.graph.model.date.DateParser;
-import org.opensearch.graph.model.resourceInfo.FuseError;
+import org.opensearch.graph.model.resourceInfo.GraphError;
 import javaslang.collection.Stream;
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.io.FilenameUtils;
@@ -51,14 +55,6 @@ import static java.lang.Double.parseDouble;
 public interface DataLoaderUtils {
     DateParser parser = DateParser.newBuilder().build();
 
-    /**
-     * init E/S indices templates
-     *
-     * @param client
-     * @param schema
-     * @return
-     * @throws IOException
-     */
     static long init(Client client, RawSchema schema) {
         try {
             String workingDir = System.getProperty("user.dir");
@@ -87,7 +83,7 @@ public interface DataLoaderUtils {
 
             return Stream.ofAll(allIndices).count(s -> !s.isEmpty());
         } catch (Throwable t) {
-            throw new FuseError.FuseErrorException("INIT() - Create Indices error ", t);
+            throw new GraphError.GraphErrorException("INIT() - Create Indices error ", t);
 
         }
     }

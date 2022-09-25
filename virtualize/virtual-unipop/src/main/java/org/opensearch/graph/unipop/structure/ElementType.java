@@ -2,7 +2,7 @@ package org.opensearch.graph.unipop.structure;
 
 /*-
  * #%L
- * fuse-dv-unipop
+ * virtual-unipop
  * %%
  * Copyright (C) 2016 - 2022 org.opensearch
  * %%
@@ -20,9 +20,10 @@ package org.opensearch.graph.unipop.structure;
  * #L%
  */
 
-/**
- * Created by benishue on 27-Mar-17.
- */
+
+
+
+
     public enum ElementType {
         vertex,
         edge

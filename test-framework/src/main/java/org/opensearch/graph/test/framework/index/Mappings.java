@@ -20,15 +20,16 @@ package org.opensearch.graph.test.framework.index;
  * #L%
  */
 
+
+
+
+
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import java.util.HashMap;
 import java.util.Map;
 
-/**
- * Created by Roman on 5/16/2017.
- */
 public class Mappings {
     public static class Mapping {
         public static class Property {

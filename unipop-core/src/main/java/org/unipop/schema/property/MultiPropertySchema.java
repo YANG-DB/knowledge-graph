@@ -23,6 +23,10 @@ package org.unipop.schema.property;
 
 
 
+
+
+
+
 import org.apache.tinkerpop.gremlin.process.traversal.step.util.HasContainer;
 import org.json.JSONArray;
 import org.unipop.query.predicates.PredicatesHolder;
@@ -33,9 +37,6 @@ import org.unipop.util.PropertySchemaFactory;
 import java.util.*;
 import java.util.stream.Collectors;
 
-/**
- * Created by sbarzilay on 7/28/16.
- */
 public class MultiPropertySchema implements ParentSchemaProperty {
     private String key;
     private List<PropertySchema> schemas;

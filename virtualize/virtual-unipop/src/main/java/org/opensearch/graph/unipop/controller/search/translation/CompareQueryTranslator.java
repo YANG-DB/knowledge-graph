@@ -2,7 +2,7 @@ package org.opensearch.graph.unipop.controller.search.translation;
 
 /*-
  * #%L
- * fuse-dv-unipop
+ * virtual-unipop
  * %%
  * Copyright (C) 2016 - 2022 org.opensearch
  * %%
@@ -20,14 +20,15 @@ package org.opensearch.graph.unipop.controller.search.translation;
  * #L%
  */
 
+
+
+
+
 import org.opensearch.graph.unipop.controller.search.AggregationBuilder;
 import org.opensearch.graph.unipop.controller.search.QueryBuilder;
 import org.apache.tinkerpop.gremlin.process.traversal.Compare;
 import org.apache.tinkerpop.gremlin.process.traversal.P;
 
-/**
- * Created by Roman on 18/05/2017.
- */
 public class CompareQueryTranslator implements PredicateQueryTranslator {
     //region Constructors
     public CompareQueryTranslator() {
@@ -46,26 +47,30 @@ public class CompareQueryTranslator implements PredicateQueryTranslator {
         String rangeName = shouldAggregateRange ? key : null;
         switch (compare) {
             case eq:
-                queryBuilder.push().term(key, predicate.getValue()).pop();
+                queryBuilder.push().term(key, getPredicateValue(predicate)).pop();
                 break;
             case neq:
-                queryBuilder.push().bool().mustNot().term(key, predicate.getValue()).pop();
+                queryBuilder.push().bool().mustNot().term(key, getPredicateValue(predicate)).pop();
                 break;
             case gt:
-                queryBuilder.push().range(rangeName, key).from(predicate.getValue()).includeLower(false).pop();
+                queryBuilder.push().range(rangeName, key).from(getPredicateValue(predicate)).includeLower(false).pop();
                 break;
             case gte:
-                queryBuilder.push().range(rangeName, key).from(predicate.getValue()).includeLower(true).pop();
+                queryBuilder.push().range(rangeName, key).from(getPredicateValue(predicate)).includeLower(true).pop();
                 break;
             case lt:
-                queryBuilder.push().range(rangeName, key).to(predicate.getValue()).includeUpper(false).pop();
+                queryBuilder.push().range(rangeName, key).to(getPredicateValue(predicate)).includeUpper(false).pop();
                 break;
             case lte:
-                queryBuilder.push().range(rangeName, key).to(predicate.getValue()).includeUpper(true).pop();
+                queryBuilder.push().range(rangeName, key).to(getPredicateValue(predicate)).includeUpper(true).pop();
                 break;
         }
 
         return queryBuilder;
+    }
+
+    private String getPredicateValue(P<?> predicate) {
+        return predicate.getValue().toString();
     }
     //endregion
 

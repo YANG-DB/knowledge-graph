@@ -2,7 +2,7 @@ package org.opensearch.graph.unipop.process.traversal.dsl.graph;
 
 /*-
  * #%L
- * fuse-dv-unipop
+ * virtual-unipop
  * %%
  * Copyright (C) 2016 - 2022 org.opensearch
  * %%
@@ -20,17 +20,18 @@ package org.opensearch.graph.unipop.process.traversal.dsl.graph;
  * #L%
  */
 
+
+
+
+
 import org.apache.tinkerpop.gremlin.process.traversal.dsl.graph.GraphTraversal;
 import org.apache.tinkerpop.gremlin.process.traversal.util.DefaultTraversalStrategies;
 
-/**
- * Created by Roman on 1/29/2018.
- */
 public class __ {
     protected __() {
     }
 
     public static <A> GraphTraversal<A, A> start() {
-        return new FuseGraphTraversal<>(new FuseGraphTraversalSource(null, new DefaultTraversalStrategies()));
+        return new SearchGraphTraversal<>(new SearchGraphTraversalSource(null, new DefaultTraversalStrategies()));
     }
 }

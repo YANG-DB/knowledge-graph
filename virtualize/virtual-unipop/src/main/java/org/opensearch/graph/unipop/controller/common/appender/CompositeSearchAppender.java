@@ -2,7 +2,7 @@ package org.opensearch.graph.unipop.controller.common.appender;
 
 /*-
  * #%L
- * fuse-dv-unipop
+ * virtual-unipop
  * %%
  * Copyright (C) 2016 - 2022 org.opensearch
  * %%
@@ -20,12 +20,13 @@ package org.opensearch.graph.unipop.controller.common.appender;
  * #L%
  */
 
+
+
+
+
 import org.opensearch.graph.unipop.controller.search.SearchBuilder;
 import javaslang.collection.Stream;
 
-/**
- * Created by lior.perry on 28/03/2017.
- */
 public class CompositeSearchAppender<TContext> implements SearchAppender<TContext> {
     public enum Mode {
         first,

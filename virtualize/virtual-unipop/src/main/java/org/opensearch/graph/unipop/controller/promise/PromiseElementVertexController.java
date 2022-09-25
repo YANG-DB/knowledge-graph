@@ -2,7 +2,7 @@ package org.opensearch.graph.unipop.controller.promise;
 
 /*-
  * #%L
- * fuse-dv-unipop
+ * virtual-unipop
  * %%
  * Copyright (C) 2016 - 2022 org.opensearch
  * %%
@@ -19,6 +19,10 @@ package org.opensearch.graph.unipop.controller.promise;
  * limitations under the License.
  * #L%
  */
+
+
+
+
 
 import com.codahale.metrics.MetricRegistry;
 import org.opensearch.graph.dispatcher.provision.ScrollProvisioning;
@@ -62,9 +66,6 @@ import java.util.function.BiPredicate;
 
 import static org.opensearch.graph.unipop.controller.utils.SearchAppenderUtil.wrap;
 
-/**
- * Created by lior.perry on 4/2/2017.
- */
 public class PromiseElementVertexController implements SearchQuery.SearchController {
 
     //region Constructors

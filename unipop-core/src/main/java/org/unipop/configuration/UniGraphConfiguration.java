@@ -23,14 +23,15 @@ package org.unipop.configuration;
 
 
 
+
+
+
+
 import org.apache.commons.configuration.BaseConfiguration;
 import org.apache.commons.configuration.Configuration;
 
 import java.util.function.Consumer;
 
-/**
- * Created by Roman on 14/05/2017.
- */
 public class UniGraphConfiguration extends BaseConfiguration {
     //region Constructors
     public UniGraphConfiguration() {}
