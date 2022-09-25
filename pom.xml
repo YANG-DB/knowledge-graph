@@ -84,17 +84,17 @@
         <openCypher.spark.version>0.2.3</openCypher.spark.version>
 
         <!--graph ql java-->
-        <graphql.java.version>14.0</graphql.java.version>
+        <graphql.java.version>17.4</graphql.java.version>
 
         <!-- commons -->
-        <commons-io.version>2.5</commons-io.version>
+        <commons-io.version>[2.7,)</commons-io.version>
         <commons-configuration.version>1.10</commons-configuration.version>
         <commons-lang3.version>3.5</commons-lang3.version>
         <commons-math3.version>3.6.1</commons-math3.version>
         <commons-collections4.version>4.1</commons-collections4.version>
 
         <!-- google -->
-        <google.guava.version>21.0</google.guava.version>
+        <google.guava.version>[24.1.1,)</google.guava.version>
         <google.guice.version>4.1.0</google.guice.version>
 
         <!-- caffeine -->
@@ -143,8 +143,8 @@
 
         <!-- logging -->
         <slf4j.version>1.7.25</slf4j.version>
-        <logback.version>1.2.3</logback.version>
-        <log4j.version>2.7</log4j.version>
+        <logback.version>[1.2.9,)</logback.version>
+        <log4j.version>[2.13.2.1,)</log4j.version>
         <logback-elasticsearch-appender.version>1.6</logback-elasticsearch-appender.version>
 
         <!-- metrics -->
