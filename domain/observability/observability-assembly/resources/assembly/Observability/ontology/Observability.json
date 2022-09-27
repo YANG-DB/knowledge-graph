@@ -174,8 +174,8 @@
   ],
   "relationshipTypes": [
     {
-      "rType": "Location",
-      "name": "Location",
+      "rType": "hasLocation",
+      "name": "hasLocation",
       "directional": true,
       "ePairs": [
         {
@@ -185,8 +185,8 @@
       ]
     },
     {
-      "rType": "Machine",
-      "name": "Machine",
+      "rType": "hasMachine",
+      "name": "hasMachine",
       "directional": true,
       "ePairs": [
         {
@@ -196,13 +196,105 @@
       ]
     },
     {
-      "rType": "Event",
-      "name": "Event",
+      "rType": "hasEvent",
+      "name": "hasEvent",
       "directional": true,
       "ePairs": [
         {
           "eTypeA": "Log",
           "eTypeB": "Event"
+        },
+        {
+          "eTypeA": "Span",
+          "eTypeB": "Event"
+        }
+      ]
+    },
+    {
+      "rType": "hasInstrumentationLibrary",
+      "name": "hasInstrumentationLibrary",
+      "directional": true,
+      "ePairs": [
+        {
+          "eTypeA": "Span",
+          "eTypeB": "InstrumentationLibrary"
+        }
+      ]
+    },
+    {
+      "rType": "hasEventAttributes",
+      "name": "hasEventAttributes",
+      "directional": true,
+      "ePairs": [
+        {
+          "eTypeA": "Event",
+          "eTypeB": "EventAttributes"
+        }
+      ]
+    },
+    {
+      "rType": "hasLinks",
+      "name": "hasLinks",
+      "directional": true,
+      "ePairs": [
+        {
+          "eTypeA": "Span",
+          "eTypeB": "Links"
+        }
+      ]
+    },
+    {
+      "rType": "hasResources",
+      "name": "hasResources",
+      "directional": true,
+      "ePairs": [
+        {
+          "eTypeA": "Span",
+          "eTypeB": "Resources"
+        }
+      ]
+    },
+   {
+      "rType": "hasStatus",
+      "name": "hasStatus",
+      "directional": true,
+      "ePairs": [
+        {
+          "eTypeA": "Span",
+          "eTypeB": "Status"
+        }
+      ]
+    },
+   {
+      "rType": "hasSpanContent",
+      "name": "hasSpanContent",
+      "directional": true,
+      "ePairs": [
+        {
+          "eTypeA": "Span",
+          "eTypeB": "SpanContent"
+        }
+      ]
+    },
+   {
+      "rType": "hasTraceGroupFields",
+      "name": "hasTraceGroupFields",
+      "directional": true,
+      "ePairs": [
+        {
+          "eTypeA": "Span",
+          "eTypeB": "TraceGroupFields"
+        }
+      ]
+    },
+  {
+      "rType": "hasSpanAttributes",
+      "name": "hasSpanAttributes",
+      "directional": true,
+      "ePairs": [
+        {
+          "eTypeA": "Span",
+          "eTypeB": "SpanAttributes"
         }
       ]
     }
@@ -603,10 +695,40 @@
       "name": "event",
       "type": "Event"
     },
+   {
+      "pType": "events",
+      "name": "events",
+      "type": "Event"
+    },
     {
       "pType": "eventAttributes",
       "name": "attributes",
       "type": "EventAttributes"
+    },
+   {
+      "pType": "instrumentationLibrary",
+      "name": "instrumentationLibrary",
+      "type": "InstrumentationLibrary"
+    },
+   {
+      "pType": "traceGroupFields",
+      "name": "traceGroupFields",
+      "type": "TraceGroupFields"
+    },
+   {
+      "pType": "links",
+      "name": "links",
+      "type": "Links"
+    },
+   {
+      "pType": "status",
+      "name": "status",
+      "type": "Status"
+    },
+  {
+      "pType": "resources",
+      "name": "resources",
+      "type": "Resources"
     },
     {
       "pType": "span",

@@ -9,9 +9,9 @@ package org.opensearch.graph.model.execution.plan.descriptors;
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- * 
+ *
  *      http://www.apache.org/licenses/LICENSE-2.0
- * 
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -21,10 +21,7 @@ package org.opensearch.graph.model.execution.plan.descriptors;
  */
 
 
-
-
-
-
+import com.google.common.base.Supplier;
 import org.opensearch.graph.model.descriptors.GraphDescriptor;
 import org.opensearch.graph.model.ontology.*;
 import org.opensearch.graph.model.resourceInfo.GraphError;
@@ -49,16 +46,25 @@ public class OntologyDescriptor implements GraphDescriptor<Ontology> {
         //general node shape
         sb.append(" \t node [shape=Mrecord]; \n");
         sb.append(" \t node [style=filled]; \n");
-
-        //iterate over the entities
-        ontology.getEntityTypes().forEach(e -> printEntity(accessor, sb, e));
-        //iterate over the relations
-        ontology.getRelationshipTypes().forEach(r -> printRelation(accessor, sb, r));
-        //print enums
-        ontology.getEnumeratedTypes().forEach(enm -> sb.append(printEnum(accessor, enm)));
-
+        try {
+            //iterate over the entities
+            ontology.getEntityTypes().forEach(e -> printEntity(accessor, sb, e));
+            //iterate over the relations
+            ontology.getRelationshipTypes().forEach(r -> printRelation(accessor, sb, r));
+            //print enums
+            ontology.getEnumeratedTypes().forEach(enm -> sb.append(printEnum(accessor, enm)));
+        } catch (GraphError.GraphErrorException err) {
+            //log error and send as a result
+            sb.delete(0,sb.length());
+            sb.append("digraph G { \n");
+            sb.append(String.format(" \t error [label=\"%s \"] \n", err.getError().getErrorDescription()));
+        }
         sb.append(" \n\t }");
-        return sb.toString();
+        return fixGraphVizIllegalChars(sb.toString());
+    }
+
+    private String fixGraphVizIllegalChars(String graph) {
+        return graph.replace("@","_");
     }
 
 
@@ -117,7 +123,9 @@ public class OntologyDescriptor implements GraphDescriptor<Ontology> {
     }
 
     private static String possibleArrowToType(Ontology.Accessor accessor, Property prop) {
-        Ontology.Accessor.NodeType nodeType = accessor.matchNameToType(prop.getpType()).get()._1();
+        Ontology.Accessor.NodeType nodeType = accessor.matchNameToType(prop.getpType())
+                .orElseThrow(() -> new GraphError.GraphErrorException("Ontology missing the next property ",
+                        "No property found named " + prop.getpType()))._1();
         switch (nodeType) {
             case PROPERTY:
             case RELATION:

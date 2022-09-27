@@ -9,9 +9,9 @@ package org.opensearch.graph.model.resourceInfo;
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- * 
+ *
  *      http://www.apache.org/licenses/LICENSE-2.0
- * 
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -21,12 +21,10 @@ package org.opensearch.graph.model.resourceInfo;
  */
 
 
-
-
-
-
 import java.io.PrintWriter;
 import java.io.StringWriter;
+import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  * Created by lior.perry on 6/11/2017.
@@ -35,12 +33,13 @@ public class GraphError {
     private String errorCode;
     private String errorDescription;
 
-    public GraphError() {}
+    public GraphError() {
+    }
 
     public GraphError(String errorCode, Throwable e) {
         this.errorCode = errorCode;
         StringWriter sw = new StringWriter();
-        if(e!=null) {
+        if (e != null) {
             e.printStackTrace(new PrintWriter(sw));
             //todo check is in debug mode
             e.printStackTrace();
@@ -88,7 +87,17 @@ public class GraphError {
 
         public GraphErrorException(String error, String description) {
             super();
-            this.error = new GraphError(error,description);
+            this.error = new GraphError(error, description);
+        }
+
+        public GraphErrorException(List<String> error, List<String> description) {
+            super();
+            this.error = new GraphError(String.join(",", error), String.join(",", description));
+        }
+
+        public GraphErrorException(List<GraphError> errors) {
+            this(errors.stream().map(GraphError::getErrorCode).collect(Collectors.toList()),
+                    errors.stream().map(GraphError::getErrorDescription).collect(Collectors.toList()));
         }
 
         public GraphErrorException(GraphError error) {
@@ -103,11 +112,16 @@ public class GraphError {
 
         public GraphErrorException(String message, Throwable cause) {
             super(message, cause);
-            this.error = new GraphError(message,cause);
+            this.error = new GraphError(message, cause);
         }
 
         public GraphError getError() {
             return error;
+        }
+
+        @Override
+        public String getMessage() {
+            return getError().toString();
         }
 
         @Override

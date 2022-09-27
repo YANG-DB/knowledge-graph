@@ -24,6 +24,7 @@ package org.opensearch.graph.unipop.schemaProviders;
 
 
 
+import com.google.common.base.Supplier;
 import com.google.inject.Inject;
 import org.opensearch.graph.model.ontology.*;
 import javaslang.collection.Stream;
@@ -78,7 +79,7 @@ public class OntologySchemaProvider implements GraphElementSchemaProvider {
 
     @Override
     public Optional<GraphElementPropertySchema> getPropertySchema(String name) {
-        Optional<Property> property = $ont.pName(name);
+        Optional<Property> property = $ont.pNameOrType(name);
         if (!property.isPresent()) {
             return Optional.empty();
         }

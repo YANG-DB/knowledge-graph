@@ -525,6 +525,15 @@ public class Ontology {
             return Optional.ofNullable(this.propertiesByName.get(propertyName));
         }
 
+        /**
+         * returns property by its name/type - returns optional empty if not found
+         * @param key
+         * @return
+         */
+        public Optional<Property> pNameOrType(String key) {
+            return Optional.ofNullable(this.propertiesByName.getOrDefault(key,this.propertiesByPtype.get(key)));
+        }
+
          /**
          * return property (no matter which element it belongs to) - throws exception if not found
          * @param propertyName
@@ -845,8 +854,8 @@ public class Ontology {
             if (rType(name).isPresent())
                 return Optional.of(Tuple.of(NodeType.RELATION, rType$(name)));
             //property TYPE
-            if (pName(name).isPresent())
-                return Optional.of(Tuple.of(NodeType.PROPERTY, pName$(name).getpType()));
+            if (pNameOrType(name).isPresent())
+                return Optional.of(Tuple.of(NodeType.PROPERTY, pNameOrType(name).get().getpType()));
 
             return Optional.empty();
         }

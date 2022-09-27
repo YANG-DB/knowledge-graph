@@ -29,6 +29,7 @@ import com.fasterxml.jackson.annotation.JsonInclude;
 import javaslang.Tuple2;
 import javaslang.collection.Stream;
 import org.apache.tinkerpop.gremlin.structure.Direction;
+import org.opensearch.graph.model.resourceInfo.GraphError;
 import org.opensearch.graph.model.schema.BaseTypeElement;
 
 import java.util.*;
@@ -351,10 +352,19 @@ public interface GraphElementSchemaProvider {
 
         private void initializePropertySchemas() {
             this.propertySchemas = new HashMap<>();
+            List<GraphError> schemaValidationErrors = new ArrayList<>();
 
             for(String propertyName : this.propertyNames) {
-                this.propertySchemas.put(propertyName, this.schemaProvider.getPropertySchema(propertyName).get());
+                Optional<GraphElementPropertySchema> propertySchema = this.schemaProvider.getPropertySchema(propertyName);
+                if(!propertySchema.isPresent()) {
+                    schemaValidationErrors.add(new GraphError(String.format("No Schema element found for %s", propertyName), "Error Creating Index Schema"));
+                } else {
+                    this.propertySchemas.put(propertyName, propertySchema.get());
+                }
             }
+
+            if(!schemaValidationErrors.isEmpty())
+                throw new GraphError.GraphErrorException(schemaValidationErrors);
         }
 
         //endregion

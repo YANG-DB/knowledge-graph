@@ -96,7 +96,8 @@ public class AsgMappingStrategy implements AsgStrategy {
                 && relationshipType.getSource().contains(((Rel) asgEBase.geteBase()).getrType()));
 
         Tuple2<Ontology.Accessor.NodeType, String> fieldType = targetAccessor.matchNameToType(relationshipType.getTargetField())
-                .orElseThrow(() -> new GraphError.GraphErrorException(new GraphError("No target Ontology field found ", "No target Ontology field found for " + relationshipType.getTargetField())));
+                .orElseThrow(() -> new GraphError.GraphErrorException(new GraphError("No target Ontology field found ",
+                        "No target Ontology field found for " + relationshipType.getTargetField())));
 
         switch (fieldType._1) {
             case ENTITY:
@@ -136,7 +137,8 @@ public class AsgMappingStrategy implements AsgStrategy {
          *              case: enum - set enum.value(source)
          */
         Tuple2<Ontology.Accessor.NodeType, String> fieldType = targetAccessor.matchNameToType(entityType.getTargetField())
-                .orElseThrow(() -> new GraphError.GraphErrorException(new GraphError("No target Ontology field found ", "No target Ontology field found for " + entityType.getTargetField())));
+                .orElseThrow(() -> new GraphError.GraphErrorException(new GraphError("No target Ontology field found ",
+                        "No target Ontology field found for " + entityType.getTargetField())));
 
         switch (fieldType._1) {
             case ENTITY:

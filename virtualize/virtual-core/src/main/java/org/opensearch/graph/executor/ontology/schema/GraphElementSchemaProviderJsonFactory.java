@@ -9,9 +9,9 @@ package org.opensearch.graph.executor.ontology.schema;
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- * 
+ *
  *      http://www.apache.org/licenses/LICENSE-2.0
- * 
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -19,9 +19,6 @@ package org.opensearch.graph.executor.ontology.schema;
  * limitations under the License.
  * #L%
  */
-
-
-
 
 
 import com.google.inject.Inject;
@@ -138,7 +135,7 @@ public class GraphElementSchemaProviderJsonFactory implements GraphElementSchema
                 .collect(Collectors.toList());
     }
 
-    private List<GraphVertexSchema> generateGraphVertexSchema( Entity e) {
+    private List<GraphVertexSchema> generateGraphVertexSchema(Entity e) {
         MappingIndexType type = MappingIndexType.valueOf(e.getPartition().toUpperCase());
         switch (type) {
             case UNIFIED:
@@ -180,7 +177,7 @@ public class GraphElementSchemaProviderJsonFactory implements GraphElementSchema
         return relation.map(RelationshipType::getePairs);
     }
 
-    private List<GraphEdgeSchema> generateGraphEdgeSchema( Relation r, Type v, IndexPartitions partitions) {
+    private List<GraphEdgeSchema> generateGraphEdgeSchema(Relation r, Type v, IndexPartitions partitions) {
         Optional<List<EPair>> pairs = getEdgeSchemaOntologyPairs(v.getName());
 
         if (!pairs.isPresent())
@@ -241,29 +238,43 @@ public class GraphElementSchemaProviderJsonFactory implements GraphElementSchema
 
     private void validateSchema(List<EPair> pairList) {
         pairList.forEach(pair -> {
-            if ( !(accessor.$element(pair.geteTypeA()).isPresent()) || !(accessor.$element(pair.geteTypeB()).isPresent()))
+            if (!(accessor.$element(pair.geteTypeA()).isPresent()) || !(accessor.$element(pair.geteTypeB()).isPresent()))
                 throw new GraphError.GraphErrorException(new GraphError("Schema generation exception", " Pair containing " + pair.toString() + " was not matched against the current ontology"));
         });
     }
 
     private List<GraphElementPropertySchema> getGraphElementPropertySchemas(String type) {
-        EntityType entityType = accessor.entity$(type);
+        List<GraphError> schemaValidationErrors = new ArrayList<>();
+        Optional<EntityType> entity = accessor.entity(type);
+        if (!entity.isPresent())
+            throw new GraphError.GraphErrorException(new GraphError(String.format("No Schema element found for %s", type),
+                    "Error Creating Index Schema"));
+
+        EntityType entityType = entity.get();
         List<GraphElementPropertySchema> elementPropertySchemas = new ArrayList<>();
         accessor.cascadingElementFieldsPType(entityType.geteType())
                 .forEach(v -> {
-                    Property property = accessor.$pType(entityType.geteType(), v).get();
-                    switch (property.getType()) {
-                        case TEXT:
-                            elementPropertySchemas.add(new GraphElementPropertySchema.Impl(v, property.getType(),
-                                    //todo add all types of possible analyzers - such as ngram ...
-                                    Arrays.asList(new GraphElementPropertySchema.ExactIndexingSchema.Impl(v + "." + KEYWORD))));
-                            break;
-                        default:
-                            elementPropertySchemas.add(new GraphElementPropertySchema.Impl(v, property.getType()));
+                    Optional<Property> prop = accessor.$pType(entityType.geteType(), v);
+                    if (!prop.isPresent()) {
+                        schemaValidationErrors.add(new GraphError(String.format("No Schema element found for %s", v), "Error Creating Index Schema"));
+                    } else {
+                        Property property = prop.get();
+                        switch (property.getType()) {
+                            case TEXT:
+                                elementPropertySchemas.add(new GraphElementPropertySchema.Impl(v, property.getType(),
+                                        //todo add all types of possible analyzers - such as ngram ...
+                                        Arrays.asList(new GraphElementPropertySchema.ExactIndexingSchema.Impl(v + "." + KEYWORD))));
+                                break;
+                            default:
+                                elementPropertySchemas.add(new GraphElementPropertySchema.Impl(v, property.getType()));
+                        }
                     }
                 });
 
-        return elementPropertySchemas;
+        if (schemaValidationErrors.isEmpty())
+            return elementPropertySchemas;
+
+        throw new GraphError.GraphErrorException(schemaValidationErrors);
     }
 
 
@@ -271,12 +282,12 @@ public class GraphElementSchemaProviderJsonFactory implements GraphElementSchema
         List<GraphRedundantPropertySchema> redundantPropertySchemas = new ArrayList<>();
         //verify ontology
         accessor.$element(entityType)
-                    .orElseThrow(() -> new GraphError.GraphErrorException(new GraphError("Schema generation exception","No Element in Ontology "+entityType)))
+                .orElseThrow(() -> new GraphError.GraphErrorException(new GraphError("Schema generation exception", "No Element in Ontology " + entityType)))
                 .getIdField()
-                  .forEach(field -> {
+                .forEach(field -> {
                     if (!accessor.$element(entityType).get().fields().contains(field))
                         throw new GraphError.GraphErrorException(new GraphError("Schema generation exception", " Element " + entityType + " not containing " + ID + " metadata property "));
-        });
+                });
         validateRedundant(entityType, entitySide, rel.getRedundant());
         redundantPropertySchemas.add(new GraphRedundantPropertySchema.Impl(ID, String.format("%s.%s", entitySide, ID), "string"));
         //add all RedundantProperty according to schema
