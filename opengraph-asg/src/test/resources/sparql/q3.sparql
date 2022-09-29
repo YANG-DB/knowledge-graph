@@ -1,5 +1,0 @@
-SELECT DISTINCT ?surfer
-    WHERE {?js a <Person>;
-        <name> "Jhone";
-        <knows>/<knows> ?surfer;
-        ?surfer <hobby> "surfer".}

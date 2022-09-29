@@ -9,9 +9,9 @@ package org.opensearch.graph.unipop.schemaProviders;
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- * 
+ *
  *      http://www.apache.org/licenses/LICENSE-2.0
- * 
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -19,9 +19,6 @@ package org.opensearch.graph.unipop.schemaProviders;
  * limitations under the License.
  * #L%
  */
-
-
-
 
 
 import org.opensearch.graph.model.ontology.Property;
@@ -33,8 +30,11 @@ import org.opensearch.graph.unipop.process.traversal.dsl.graph.__;
 import org.apache.tinkerpop.gremlin.structure.T;
 
 import java.util.Collections;
+import java.util.List;
 import java.util.Map;
 import java.util.Optional;
+import java.util.stream.Collectors;
+import java.util.stream.StreamSupport;
 
 public interface GraphElementSchema {
     Class getSchemaElementType();
@@ -53,13 +53,14 @@ public interface GraphElementSchema {
 
     abstract class Impl implements GraphElementSchema {
         //region Constructors
-        public Impl(Type label ) {
+        public Impl(Type label) {
             this(label,
                     new GraphElementConstraint.Impl(__.start().has(T.label, label)),
                     Optional.empty(),
                     Optional.empty(),
                     Collections.emptyList());
         }
+
         public Impl(Type label, GraphElementRouting routing) {
             this(label,
                     new GraphElementConstraint.Impl(__.start().has(T.label, label)),
@@ -101,7 +102,7 @@ public interface GraphElementSchema {
             this.constraint = constraint;
             this.routing = routing;
             this.indexPartitions = indexPartitions;
-            this.properties = Stream.ofAll(properties).toJavaMap(property -> new Tuple2<>(property.getName(), property));
+            this.properties = StreamSupport.stream(properties.spliterator(),false).collect(Collectors.toList());
         }
         //endregion
 
@@ -123,12 +124,16 @@ public interface GraphElementSchema {
 
         @Override
         public Iterable<GraphElementPropertySchema> getProperties() {
-            return this.properties.values();
+            return this.properties;
         }
 
         @Override
         public Optional<GraphElementPropertySchema> getProperty(Property property) {
-            return Optional.ofNullable(this.properties.getOrDefault(property.getName(),this.properties.get(property.getpType())));
+            return properties.stream()
+                    .filter(p -> p.getName().equals(property.getName()) &&
+                            p.getType().equals(property.getType()) &&
+                            p.getpType().equals(property.getpType()))
+                    .findFirst();
         }
 
         @Override
@@ -142,7 +147,7 @@ public interface GraphElementSchema {
         private GraphElementConstraint constraint;
         private Optional<GraphElementRouting> routing;
         private Optional<IndexPartitions> indexPartitions;
-        private Map<String, GraphElementPropertySchema> properties;
+        private List<GraphElementPropertySchema> properties;
         //endregion
     }
 }

@@ -9,9 +9,9 @@ package org.opensearch.graph.unipop.schemaProviders;
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- * 
+ *
  *      http://www.apache.org/licenses/LICENSE-2.0
- * 
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -21,10 +21,6 @@ package org.opensearch.graph.unipop.schemaProviders;
  */
 
 
-
-
-
-import com.google.common.base.Supplier;
 import com.google.inject.Inject;
 import org.opensearch.graph.model.ontology.*;
 import javaslang.collection.Stream;
@@ -43,7 +39,8 @@ public class OntologySchemaProvider implements GraphElementSchemaProvider {
 
         this.vertexLabels = new HashSet<>(Stream.ofAll($ont.eNames()).toJavaList());
         this.edgeLabels = new HashSet<>(Stream.ofAll($ont.rNames()).toJavaList());
-        this.propertyNames = new HashSet<>(Stream.ofAll($ont.pTypes()).toJavaList());
+        this.propertyNames = new HashSet<>(Stream.ofAll($ont.pNames()).toJavaList());
+        this.propertyPTypes = new HashSet<>(Stream.ofAll($ont.pTypes()).toJavaList());
     }
     //endregion
 
@@ -77,6 +74,7 @@ public class OntologySchemaProvider implements GraphElementSchemaProvider {
         return mergeEdgeSchemasWithRelationship(label, Stream.ofAll(this.schemaProvider.getEdgeSchemas(vertexLabelA, direction, label, vertexLabelB)));
     }
 
+
     @Override
     public Optional<GraphElementPropertySchema> getPropertySchema(String name) {
         Optional<Property> property = $ont.pNameOrType(name);
@@ -88,6 +86,7 @@ public class OntologySchemaProvider implements GraphElementSchemaProvider {
 
         return Optional.of(new GraphElementPropertySchema.Impl(
                 property.get().getName(),
+                property.get().getpType(),
                 property.get().getType(),
                 propertySchema.map(GraphElementPropertySchema::getIndexingSchemes)
                         .orElseGet(() -> Collections.singletonList(
@@ -110,6 +109,11 @@ public class OntologySchemaProvider implements GraphElementSchemaProvider {
     }
 
     @Override
+    public Iterable<String> getPropertyPTypes() {
+        return this.propertyPTypes;
+    }
+
+    @Override
     public Optional<String> getLabelFieldName() {
         return schemaProvider.getLabelFieldName();
     }
@@ -126,20 +130,21 @@ public class OntologySchemaProvider implements GraphElementSchemaProvider {
             return Optional.of(vertexSchema);
         }
 
+        Stream<GraphElementPropertySchema> properties = Stream.ofAll($ont.cascadingElementFieldsPType(entityType.get().geteType()))
+                .map(pType -> $ont.$pType(label, pType))
+                .filter(Optional::isPresent)
+                .map(property -> vertexSchema.getProperty(property.get()).isPresent() ?
+                        vertexSchema.getProperty(property.get()).get() :
+                        new GraphElementPropertySchema.Impl(
+                                property.get().getName(),
+                                property.get().getpType(),
+                                property.get().getType()));
         return Optional.of(new GraphVertexSchema.Impl(
                 Type.of(label),
                 vertexSchema.getConstraint(),
                 vertexSchema.getRouting(),
                 vertexSchema.getIndexPartitions(),
-                Stream.ofAll($ont.cascadingElementFieldsPName(entityType.get().geteType()))
-                        .map(pType -> $ont.$pType(label,pType))
-                        .filter(Optional::isPresent)
-                        .map(property -> vertexSchema.getProperty(property.get()).isPresent() ?
-                        new GraphElementPropertySchema.Impl(
-                                property.get().getName(),
-                                property.get().getType(),
-                                vertexSchema.getProperty(property.get()).get().getIndexingSchemes()) :
-                        new GraphElementPropertySchema.Impl(property.get().getName(), property.get().getType()))));
+                properties));
     }
 
     private Optional<GraphEdgeSchema> getRelationSchema(
@@ -180,13 +185,13 @@ public class OntologySchemaProvider implements GraphElementSchemaProvider {
                 edgeSchema.getRouting(),
                 edgeSchema.getIndexPartitions(),
                 Stream.ofAll(relationshipType.get().getProperties() == null ? Collections.emptyList() : relationshipType.get().getProperties())
-                        .map(pType -> $ont.$pType(label,pType))
+                        .map(pType -> $ont.$pType(label, pType))
                         .filter(property -> property.isPresent())
                         .map(property -> edgeSchema.getProperty(property.get()).isPresent() ?
                                 new GraphElementPropertySchema.Impl(
                                         property.get().getName(),
-                                        property.get().getType(),
-                                        edgeSchema.getProperty(property.get()).get().getIndexingSchemes()) :
+                                        property.get().getpType(),
+                                        property.get().getType(), edgeSchema.getProperty(property.get()).get().getIndexingSchemes()) :
                                 new GraphElementPropertySchema.Impl(property.get().getName(), property.get().getType())),
                 edgeSchema.getApplications()
         ));
@@ -235,5 +240,6 @@ public class OntologySchemaProvider implements GraphElementSchemaProvider {
     protected Set<String> vertexLabels;
     protected Set<String> edgeLabels;
     protected Set<String> propertyNames;
+    protected Set<String> propertyPTypes;
     //endregion
 }

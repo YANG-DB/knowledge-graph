@@ -70,7 +70,7 @@ public class UnionOpTranslationStrategyTest {
 
         PlanOpTranslationStrategy strategy = new UnionOpTranslationStrategy(new M2PlanOpTranslationStrategy());
 
-        Ontology ontology = Ontology.OntologyBuilder.anOntology().withEntityTypes(
+        Ontology ontology = Ontology.OntologyBuilder.anOntology("ont").withEntityTypes(
                 Collections.singletonList(
                         EntityType.Builder.get().withEType("1").withName("Person").build()
                 )).build();
@@ -111,7 +111,7 @@ public class UnionOpTranslationStrategyTest {
 
         PlanOpTranslationStrategy strategy = new UnionOpTranslationStrategy(new M2PlanOpTranslationStrategy());
 
-        Ontology ontology = Ontology.OntologyBuilder.anOntology()
+        Ontology ontology = Ontology.OntologyBuilder.anOntology("ont")
                 .withRelationshipTypes(
                         Arrays.asList(
                                 RelationshipType.Builder.get().withRType("4").withName("Has").build(),
@@ -167,7 +167,7 @@ public class UnionOpTranslationStrategyTest {
 
         PlanOpTranslationStrategy strategy = new UnionOpTranslationStrategy(new M2PlanOpTranslationStrategy());
 
-        Ontology ontology = Ontology.OntologyBuilder.anOntology()
+        Ontology ontology = Ontology.OntologyBuilder.anOntology("ont")
                 .withRelationshipTypes(
                         Arrays.asList(
                                 RelationshipType.Builder.get().withRType("4").withName("Has").build(),

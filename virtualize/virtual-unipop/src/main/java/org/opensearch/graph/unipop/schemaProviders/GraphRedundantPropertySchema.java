@@ -39,8 +39,8 @@ public interface GraphRedundantPropertySchema extends GraphElementPropertySchema
             this.propertyRedundantName = redundantName;
         }
 
-        public Impl(String name, String redundantName, String type, Iterable<IndexingSchema> indexingSchemes) {
-            super(name, type, indexingSchemes);
+        public Impl(String name,String pType, String redundantName, String type, Iterable<IndexingSchema> indexingSchemes) {
+            super(name, pType, type, indexingSchemes);
             this.propertyRedundantName = redundantName;
         }
         //endregion

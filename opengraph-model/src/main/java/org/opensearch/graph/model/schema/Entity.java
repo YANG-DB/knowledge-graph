@@ -83,6 +83,11 @@ public class Entity implements BaseTypeElement<Entity> {
         return type;
     }
 
+    @Override
+    public boolean hasProperties() {
+        return props != null && !props.getValues().isEmpty();
+    }
+
     @JsonProperty("type")
     public void setType(Type type) {
         this.type = type;

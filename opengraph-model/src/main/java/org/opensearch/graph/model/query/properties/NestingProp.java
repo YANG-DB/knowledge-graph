@@ -1,4 +1,4 @@
-package org.opensearch.graph.model.ontology;
+package org.opensearch.graph.model.query.properties;
 
 /*-
  * #%L
@@ -20,19 +20,15 @@ package org.opensearch.graph.model.ontology;
  * #L%
  */
 
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.ObjectMapper;
-import org.opensearch.graph.model.descriptors.Descriptor;
 
-public class OntologyDescriptor implements Descriptor<Ontology> {
-    private ObjectMapper mapper = new ObjectMapper();
+/**
+ * marker interface stating the following property is actually a nested entity
+ */
+public interface NestingProp {
+    /**
+     * get the path name of the nesting entity
+     * @return
+     */
+    String getPath();
 
-    @Override
-    public String describe(Ontology item) {
-        try {
-            return mapper.writeValueAsString(item);
-        } catch (JsonProcessingException e) {
-            throw new RuntimeException(e);
-        }
-    }
 }

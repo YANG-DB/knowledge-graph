@@ -261,6 +261,30 @@ public class LoggingGraphElementSchemaProvider implements GraphElementSchemaProv
     }
 
     @Override
+    public Iterable<String> getPropertyPTypes() {
+        boolean thrownException = false;
+
+        try {
+            new LogMessage.Impl(this.verboseLogger, trace, "start getPropertyPTypes", sequence, LogType.of(start), getPropertyPType, ElapsedFrom.now()).log();
+            Iterable<String> propertyPTypes = this.schemaProvider.getPropertyPTypes();
+            if (Stream.ofAll(propertyPTypes).isEmpty()) {
+                new LogMessage.Impl(this.warnLogger, warn, "no property types found",
+                        sequence, LogType.of(log), getPropertyPType, ElapsedFrom.now()).log();
+            }
+            return propertyPTypes;
+        } catch (Exception ex) {
+            thrownException = true;
+            new LogMessage.Impl(this.verboseLogger, error, "failed getPropertyPTypes", sequence, LogType.of(failure), getPropertyPType, ElapsedFrom.now())
+                    .with(ex).log();
+            throw ex;
+        } finally {
+            if (!thrownException) {
+                new LogMessage.Impl(this.verboseLogger, trace, "finish getPropertyPTypes", sequence, LogType.of(success), getPropertyPType, ElapsedFrom.now()).log();
+            }
+        }
+    }
+
+    @Override
     public Iterable<String> getPropertyNames() {
         boolean thrownException = false;
 
@@ -284,6 +308,7 @@ public class LoggingGraphElementSchemaProvider implements GraphElementSchemaProv
         }
     }
 
+
     @Override
     public Optional<String> getLabelFieldName() {
         return schemaProvider.getLabelFieldName();
@@ -301,6 +326,7 @@ public class LoggingGraphElementSchemaProvider implements GraphElementSchemaProv
     private static MethodName.MDCWriter getVertexLabels = MethodName.of("getVertexLabels");
     private static MethodName.MDCWriter getEdgeLabels = MethodName.of("getEdgeLabels");
     private static MethodName.MDCWriter getPropertyNames = MethodName.of("getPropertyNames");
+    private static MethodName.MDCWriter getPropertyPType = MethodName.of("getPropertyPType");
 
     private static LogMessage.MDCWriter sequence = Sequence.incr();
     //endregion

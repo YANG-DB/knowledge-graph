@@ -9,9 +9,9 @@ package org.opensearch.graph.asg.strategy.schema;
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- * 
+ *
  *      http://www.apache.org/licenses/LICENSE-2.0
- * 
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -19,9 +19,6 @@ package org.opensearch.graph.asg.strategy.schema;
  * limitations under the License.
  * #L%
  */
-
-
-
 
 
 import org.opensearch.graph.asg.strategy.AsgStrategy;
@@ -58,8 +55,8 @@ public class ExactConstraintTransformationAsgStrategy implements AsgStrategy {
         this.schemaProviderFactory = schemaProviderFactory;
 
         this.includedOps = Stream.of(ConstraintOp.eq, ConstraintOp.ne, ConstraintOp.gt,
-                ConstraintOp.ge, ConstraintOp.lt, ConstraintOp.le, ConstraintOp.empty, ConstraintOp.notEmpty,
-                ConstraintOp.inSet, ConstraintOp.notInSet, ConstraintOp.inRange, ConstraintOp.notInRange, ConstraintOp.likeAny)
+                        ConstraintOp.ge, ConstraintOp.lt, ConstraintOp.le, ConstraintOp.empty, ConstraintOp.notEmpty,
+                        ConstraintOp.inSet, ConstraintOp.notInSet, ConstraintOp.inRange, ConstraintOp.notInRange, ConstraintOp.likeAny)
                 .toJavaSet();
     }
     //endregion
@@ -88,7 +85,7 @@ public class ExactConstraintTransformationAsgStrategy implements AsgStrategy {
 
     private void transformEPropGroup(Ontology.Accessor ont, GraphElementSchemaProvider schemaProvider, EPropGroup ePropGroup, AsgEBase<ETyped> eTypedAsgEBase) {
         for (EProp eProp : new ArrayList<>(ePropGroup.getProps())) {
-            if (eProp.getCon()!=null && !this.includedOps.contains(eProp.getCon().getOp())) {
+            if (eProp.getCon() != null && !this.includedOps.contains(eProp.getCon().getOp())) {
                 continue;
             }
 
@@ -100,7 +97,7 @@ public class ExactConstraintTransformationAsgStrategy implements AsgStrategy {
             // currently supporting a single vertex schema
             GraphVertexSchema vertexSchema = Stream.ofAll(vertexSchemas).get(0);
 
-            Optional<Property> property = ont.$pType(eTypedAsgEBase.geteBase().geteType(),eProp.getpType());
+            Optional<Property> property = ont.$pType(eTypedAsgEBase.geteBase().geteType(), eProp.getpType());
             if (!property.isPresent()) {
                 continue;
             }
@@ -112,27 +109,33 @@ public class ExactConstraintTransformationAsgStrategy implements AsgStrategy {
 
             Optional<GraphElementPropertySchema.ExactIndexingSchema> exactIndexingSchema = propertySchema.get().getIndexingSchema(exact);
             if (!exactIndexingSchema.isPresent()) {
-                // should throw an error?
-                throw new IllegalStateException("should have exact schema index");
+                return;
             }
 
             ePropGroup.getProps().remove(eProp);
-            if(eProp instanceof RankingProp){
+            if (eProp instanceof RankingProp) {
                 ePropGroup.getProps().add(new SchematicRankedEProp(
-                        0,
+                        eProp.geteNum(),
                         eProp.getpType(),
                         exactIndexingSchema.get().getName(),
                         eProp.getCon(),
                         ((RankingProp) eProp).getBoost()));
-            }else if(eProp.isConstraint()){
+            } else if (eProp instanceof NestingProp) {
+                ePropGroup.getProps().add(new SchematicNestedEProp(
+                        eProp.geteNum(),
+                        eProp.getpType(),
+                        exactIndexingSchema.get().getName(),
+                        eProp.getCon(),
+                        ((NestingProp) eProp).getPath()));
+            } else if (eProp.isConstraint()) {
                 ePropGroup.getProps().add(new SchematicEProp(
-                        0,
+                        eProp.geteNum(),
                         eProp.getpType(),
                         exactIndexingSchema.get().getName(),
                         eProp.getCon()));
-            }else if(eProp.isProjection()) {
+            } else if (eProp.isProjection()) {
                 ePropGroup.getProps().add(new EProp(
-                        0,
+                        eProp.geteNum(),
                         eProp.getpType(),
                         new IdentityProjection()));
             }

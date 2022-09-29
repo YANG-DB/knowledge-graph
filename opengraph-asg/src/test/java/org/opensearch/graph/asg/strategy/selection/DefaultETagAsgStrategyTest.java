@@ -33,23 +33,7 @@ public class DefaultETagAsgStrategyTest {
 
     @Test
     public void testType1QueryTagged() {
-        DefaultETagAsgStrategy strategy = new DefaultETagAsgStrategy(new OntologyProvider() {
-            @Override
-            public Optional<Ontology> get(String id) {
-                return Optional.of(ontology);
-            }
-
-            @Override
-            public Collection<Ontology> getAll() {
-                return Collections.singleton(ontology);
-            }
-
-            @Override
-            public Ontology add(Ontology ontology) {
-                return ontology;
-            }
-        });
-
+        DefaultETagAsgStrategy strategy = new DefaultETagAsgStrategy();
         AsgQuery query = AsgQuery.Builder.start("Q1", "Dragons")
                 .next(typed(1, PERSON.type))
                 .next(ePropGroup(10, EProp.of(11, FIRST_NAME.type, of(eq, "Moshe"))))
@@ -66,22 +50,7 @@ public class DefaultETagAsgStrategyTest {
 
     @Test
     public void testType2QueryTagged() {
-        DefaultETagAsgStrategy strategy = new DefaultETagAsgStrategy(new OntologyProvider() {
-            @Override
-            public Optional<Ontology> get(String id) {
-                return Optional.of(ontology);
-            }
-
-            @Override
-            public Collection<Ontology> getAll() {
-                return Collections.singleton(ontology);
-            }
-
-            @Override
-            public Ontology add(Ontology ontology) {
-                return ontology;
-            }
-        });
+        DefaultETagAsgStrategy strategy = new DefaultETagAsgStrategy();
 
         AsgQuery query = AsgQuery.Builder.start("q", "O")
                 .next(typed(1, "entity1", "_A"))

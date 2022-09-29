@@ -20,11 +20,6 @@ package org.opensearch.graph.model.execution.plan.descriptors;
  * #L%
  */
 
-
-
-
-
-
 import org.opensearch.graph.model.Below;
 import org.opensearch.graph.model.Container;
 import org.opensearch.graph.model.Next;

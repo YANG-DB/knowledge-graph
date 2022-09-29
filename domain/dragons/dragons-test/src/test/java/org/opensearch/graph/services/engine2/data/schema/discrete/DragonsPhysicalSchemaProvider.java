@@ -153,6 +153,11 @@ public class DragonsPhysicalSchemaProvider implements GraphElementSchemaProvider
     }
 
     @Override
+    public Iterable<String> getPropertyPTypes() {
+        return Collections.emptyList();
+    }
+
+    @Override
     public Optional<String> getLabelFieldName() {
         return Optional.empty();
     }

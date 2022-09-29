@@ -117,7 +117,7 @@ public class EntityOpTranslationStrategyTest {
 
         EntityOpTranslationStrategy strategy = new EntityOpTranslationStrategy(EntityTranslationOptions.none);
 
-        Ontology ontology = Ontology.OntologyBuilder.anOntology().withEntityTypes(Collections.singletonList(
+        Ontology ontology = Ontology.OntologyBuilder.anOntology("ont").withEntityTypes(Collections.singletonList(
                 EntityType.Builder.get().withEType("1").withName("Person").build()
         )).build();
 
@@ -159,7 +159,7 @@ public class EntityOpTranslationStrategyTest {
                 new EntityOp(AsgQueryUtil.<EEntityBase>element(query, 3).get())
         );
 
-        Ontology ontology = Ontology.OntologyBuilder.anOntology().withEntityTypes(Collections.singletonList(
+        Ontology ontology = Ontology.OntologyBuilder.anOntology("ont").withEntityTypes(Collections.singletonList(
                 EntityType.Builder.get().withEType("2").withName("Person").build()
         )).build();
 

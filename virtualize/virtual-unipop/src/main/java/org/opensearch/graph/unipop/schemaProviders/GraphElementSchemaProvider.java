@@ -49,6 +49,7 @@ public interface GraphElementSchemaProvider {
     Iterable<String> getVertexLabels();
     Iterable<String> getEdgeLabels();
     Iterable<String> getPropertyNames();
+    Iterable<String> getPropertyPTypes();
     Optional<String> getLabelFieldName();
 
     default Iterable<GraphVertexSchema> getVertexSchemas() {
@@ -63,8 +64,15 @@ public interface GraphElementSchemaProvider {
                 .toJavaList();
     }
 
-    default Iterable<GraphElementPropertySchema> getPropertySchemas() {
+    default Iterable<GraphElementPropertySchema> getPropertyByNameSchemas() {
         return Stream.ofAll(getPropertyNames())
+                .map(this::getPropertySchema)
+                .filter(Optional::isPresent)
+                .map(Optional::get)
+                .toJavaList();
+    }
+    default Iterable<GraphElementPropertySchema> getPropertyByPTypeSchemas() {
+        return Stream.ofAll(getPropertyPTypes())
                 .map(this::getPropertySchema)
                 .filter(Optional::isPresent)
                 .map(Optional::get)
@@ -88,14 +96,14 @@ public interface GraphElementSchemaProvider {
 
         public Impl(Iterable<GraphVertexSchema> vertexSchemas,
                     Iterable<GraphEdgeSchema> edgeSchemas,
-                    Iterable<GraphElementPropertySchema> propertySchemas) {
-            this(null,vertexSchemas,edgeSchemas,propertySchemas);
+                    Iterable<GraphElementPropertySchema> propertyNameSchemas) {
+            this(null,vertexSchemas,edgeSchemas, propertyNameSchemas);
         }
 
         public Impl(Optional<String> labelFieldName,
                 Iterable<GraphVertexSchema> vertexSchemas,
                     Iterable<GraphEdgeSchema> edgeSchemas,
-                    Iterable<GraphElementPropertySchema> propertySchemas) {
+                    Iterable<GraphElementPropertySchema> propertyNameSchemas) {
             this.labelFieldName = labelFieldName;
             this.vertexSchemas = Stream.ofAll(vertexSchemas)
                     .groupBy(GraphElementSchema::getLabel)
@@ -103,8 +111,11 @@ public interface GraphElementSchemaProvider {
 
             this.edgeSchemas = complementEdgeSchemas(edgeSchemas);
 
-            this.propertySchemas = Stream.ofAll(propertySchemas)
+            this.propertyNameSchemas = Stream.ofAll(propertyNameSchemas)
                     .toJavaMap(propertySchema -> new Tuple2<>(propertySchema.getName(), propertySchema));
+
+            this.propertyPTypeSchemas = Stream.ofAll(propertyNameSchemas)
+                    .toJavaMap(propertySchema -> new Tuple2<>(propertySchema.getpType(), propertySchema));
 
             this.vertexLabels =
                     Stream.ofAll(this.vertexSchemas.values())
@@ -121,8 +132,13 @@ public interface GraphElementSchemaProvider {
                             .toJavaSet();
 
             this.propertyNames =
-                    Stream.ofAll(this.propertySchemas.values())
+                    Stream.ofAll(this.propertyNameSchemas.values())
                     .map(GraphElementPropertySchema::getName)
+                    .toJavaSet();
+
+            this.propertyPTypes =
+                    Stream.ofAll(this.propertyPTypeSchemas.values())
+                    .map(GraphElementPropertySchema::getpType)
                     .toJavaSet();
         }
         //endregion
@@ -172,7 +188,7 @@ public interface GraphElementSchemaProvider {
 
         @Override
         public Optional<GraphElementPropertySchema> getPropertySchema(String name) {
-            return Optional.ofNullable(this.propertySchemas.get(name));
+            return Optional.ofNullable(this.propertyNameSchemas.getOrDefault(name,this.propertyPTypeSchemas.get(name)));
         }
 
         @Override
@@ -188,6 +204,10 @@ public interface GraphElementSchemaProvider {
         @Override
         public Iterable<String> getPropertyNames() {
             return this.propertyNames;
+        }
+        @Override
+        public Iterable<String> getPropertyPTypes() {
+            return this.propertyPTypes;
         }
 
         @Override
@@ -292,10 +312,12 @@ public interface GraphElementSchemaProvider {
         //region Fields
         protected Map<String, List<GraphVertexSchema>> vertexSchemas;
         protected Map<String, List<GraphEdgeSchema>> edgeSchemas;
-        protected Map<String, GraphElementPropertySchema> propertySchemas;
+        protected Map<String, GraphElementPropertySchema> propertyNameSchemas;
+        protected Map<String, GraphElementPropertySchema> propertyPTypeSchemas;
         protected Iterable<String> vertexLabels;
         protected Iterable<String> edgeLabels;
         protected Iterable<String> propertyNames;
+        protected Iterable<String> propertyPTypes;
         protected Optional<String> labelFieldName;
         //endregion
     }
@@ -351,7 +373,7 @@ public interface GraphElementSchemaProvider {
         }
 
         private void initializePropertySchemas() {
-            this.propertySchemas = new HashMap<>();
+            this.propertyNameSchemas = new HashMap<>();
             List<GraphError> schemaValidationErrors = new ArrayList<>();
 
             for(String propertyName : this.propertyNames) {
@@ -359,7 +381,7 @@ public interface GraphElementSchemaProvider {
                 if(!propertySchema.isPresent()) {
                     schemaValidationErrors.add(new GraphError(String.format("No Schema element found for %s", propertyName), "Error Creating Index Schema"));
                 } else {
-                    this.propertySchemas.put(propertyName, propertySchema.get());
+                    this.propertyNameSchemas.put(propertyName, propertySchema.get());
                 }
             }
 

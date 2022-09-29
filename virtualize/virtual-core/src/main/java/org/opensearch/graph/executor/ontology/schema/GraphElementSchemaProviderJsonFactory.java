@@ -46,6 +46,7 @@ import java.text.SimpleDateFormat;
 import java.util.*;
 import java.util.stream.Collectors;
 
+import static org.opensearch.graph.model.schema.MappingIndexType.*;
 import static org.opensearch.graph.unipop.schemaProviders.GraphEdgeSchema.Application.endA;
 import static java.util.stream.Stream.concat;
 
@@ -105,7 +106,7 @@ public class GraphElementSchemaProviderJsonFactory implements GraphElementSchema
     }
 
     private List<GraphEdgeSchema> generateGraphEdgeSchema(Relation r) {
-        MappingIndexType type = MappingIndexType.valueOf(r.getPartition().toUpperCase());
+        MappingIndexType type = valueOf(r.getPartition().toUpperCase());
         switch (type) {
             case UNIFIED:
                 //todo verify correctness
@@ -136,7 +137,7 @@ public class GraphElementSchemaProviderJsonFactory implements GraphElementSchema
     }
 
     private List<GraphVertexSchema> generateGraphVertexSchema(Entity e) {
-        MappingIndexType type = MappingIndexType.valueOf(e.getPartition().toUpperCase());
+        MappingIndexType type = valueOf(e.getPartition().toUpperCase());
         switch (type) {
             case UNIFIED:
             case STATIC:
@@ -145,21 +146,21 @@ public class GraphElementSchemaProviderJsonFactory implements GraphElementSchema
                         .map(v -> new GraphVertexSchema.Impl(
                                 e.getType(),
                                 new StaticIndexPartitions(v),
-                                getGraphElementPropertySchemas(e.getType().getName())))
+                                generateGraphElementPropertySchemas(STATIC, v, e.getType().getName())))
                         .collect(Collectors.toList());
             case NESTED:
                 return e.getProps().getValues().stream()
                         .map(v -> new GraphVertexSchema.Impl(
                                 e.getType(),
                                 new NestedIndexPartitions(v),
-                                getGraphElementPropertySchemas(e.getType().getName())))
+                                generateGraphElementPropertySchemas(NESTED, v, e.getType().getName())))
                         .collect(Collectors.toList());
             case TIME:
                 return e.getProps().getValues().stream()
                         .map(v -> new GraphVertexSchema.Impl(
                                 e.getType(),
                                 new TimeBasedIndexPartitions(e.getProps()),
-                                getGraphElementPropertySchemas(e.getType().getName())))
+                                generateGraphElementPropertySchemas(TIME, v, e.getType().getName())))
                         .collect(Collectors.toList());
         }
         //default - when other partition type is declared
@@ -168,7 +169,7 @@ public class GraphElementSchemaProviderJsonFactory implements GraphElementSchema
                 new GraphVertexSchema.Impl(
                         e.getType(),
                         new StaticIndexPartitions(v),
-                        getGraphElementPropertySchemas(e.getType().getName())));
+                        generateGraphElementPropertySchemas(STATIC, v, e.getType().getName())));
     }
 
 
@@ -243,7 +244,7 @@ public class GraphElementSchemaProviderJsonFactory implements GraphElementSchema
         });
     }
 
-    private List<GraphElementPropertySchema> getGraphElementPropertySchemas(String type) {
+    private List<GraphElementPropertySchema> generateGraphElementPropertySchemas(MappingIndexType mappingIndexType, String mappingName, String type) {
         List<GraphError> schemaValidationErrors = new ArrayList<>();
         Optional<EntityType> entity = accessor.entity(type);
         if (!entity.isPresent())
@@ -252,29 +253,61 @@ public class GraphElementSchemaProviderJsonFactory implements GraphElementSchema
 
         EntityType entityType = entity.get();
         List<GraphElementPropertySchema> elementPropertySchemas = new ArrayList<>();
-        accessor.cascadingElementFieldsPType(entityType.geteType())
-                .forEach(v -> {
-                    Optional<Property> prop = accessor.$pType(entityType.geteType(), v);
-                    if (!prop.isPresent()) {
-                        schemaValidationErrors.add(new GraphError(String.format("No Schema element found for %s", v), "Error Creating Index Schema"));
-                    } else {
-                        Property property = prop.get();
-                        switch (property.getType()) {
-                            case TEXT:
-                                elementPropertySchemas.add(new GraphElementPropertySchema.Impl(v, property.getType(),
-                                        //todo add all types of possible analyzers - such as ngram ...
-                                        Arrays.asList(new GraphElementPropertySchema.ExactIndexingSchema.Impl(v + "." + KEYWORD))));
-                                break;
-                            default:
-                                elementPropertySchemas.add(new GraphElementPropertySchema.Impl(v, property.getType()));
-                        }
-                    }
-                });
+        for (String property : accessor.cascadingElementFieldsPType(entityType.geteType())) {
+            Optional<GraphElementPropertySchema> propertySchema = generatePropertySchema(schemaValidationErrors, mappingIndexType, mappingName, entityType, property);
+            propertySchema.ifPresent(elementPropertySchemas::add);
+        }
 
         if (schemaValidationErrors.isEmpty())
             return elementPropertySchemas;
 
         throw new GraphError.GraphErrorException(schemaValidationErrors);
+    }
+
+    private Optional<GraphElementPropertySchema> generatePropertySchema(List<GraphError> schemaValidationErrors,
+                                                                        MappingIndexType mappingIndexType,
+                                                                        String mappingName,
+                                                                        EntityType entityType,
+                                                                        String propertyKey) {
+        Optional<Property> prop = accessor.$pType(entityType.geteType(), propertyKey);
+        if (!prop.isPresent()) {
+            schemaValidationErrors.add(new GraphError(String.format("No Schema element found for %s", propertyKey), "Error Creating Index Schema"));
+            return Optional.empty();
+        } else {
+            Property property = prop.get();
+
+            GraphElementPropertySchema.Impl propertySchema = new GraphElementPropertySchema.Impl(propertyKey,
+                    property.getpType(),
+                    property.getType(),
+                    new ArrayList<>());
+
+            switch (property.getType()) {
+                case TEXT:
+                    propertySchema.addIndexSchema(new GraphElementPropertySchema.ExactIndexingSchema.Impl(property + "." + KEYWORD));
+                    break;
+            }
+            switch (mappingIndexType) {
+                case NESTED:
+                    propertySchema.addIndexSchema(new GraphElementPropertySchema.NestedIndexingSchema.Impl(mappingName));
+                    break;
+            }
+            //cascading nested fields
+            if (accessor.isNestedField(entityType.geteType(), propertyKey)) {
+                Optional<EntityType> nestedEntity = accessor.getNestedEntity(entityType.geteType(), propertyKey);
+                if (nestedEntity.isPresent()) {
+                    Optional<Entity> providerEntity = indexProvider.getEntity(nestedEntity.get().geteType());
+                    if (providerEntity.isPresent() && valueOf(providerEntity.get().getPartition().toUpperCase()).equals(NESTED)) {
+                        if (providerEntity.get().hasProperties()) {
+                            propertySchema.addIndexSchema(new GraphElementPropertySchema.NestedIndexingSchema.Impl(providerEntity.get().getProps().getValues().get(0)));
+                        } else {
+                            propertySchema.addIndexSchema(new GraphElementPropertySchema.NestedIndexingSchema.Impl(mappingName));
+                        }
+                    }
+                }
+            }
+
+            return Optional.of(propertySchema);
+        }
     }
 
 

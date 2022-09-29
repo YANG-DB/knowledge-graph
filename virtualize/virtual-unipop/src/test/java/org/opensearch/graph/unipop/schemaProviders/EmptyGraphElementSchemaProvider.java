@@ -38,6 +38,11 @@ public class EmptyGraphElementSchemaProvider implements GraphElementSchemaProvid
     }
 
     @Override
+    public Iterable<String> getPropertyPTypes() {
+        return Collections.emptyList();
+    }
+
+    @Override
     public Optional<GraphElementPropertySchema> getPropertySchema(String name) {
         return Optional.empty();
     }

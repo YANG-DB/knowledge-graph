@@ -29,6 +29,7 @@ public class OntologyTestUtils {
     public static Property DEATH_DATE = new Property("deathDate", STRING, "deathDate");
     public static Property HEIGHT = new Property("height", INT, "height");
     public static Property NAME = new Property("name", STRING, "name");
+    public static Property KINGDOM_PROP = new Property("kingdom", KINGDOM.type, "kingdom");
     public static Property COLOR = new Property("color", TYPE_COLOR, "color");
     public static Property POWER = new Property("power", INT, "power");
 
@@ -236,7 +237,7 @@ public class OntologyTestUtils {
         public static String type = "Person";
 
 
-        public static List<Property> propertyList = Arrays.asList(FIRST_NAME, LAST_NAME, GENDER, BIRTH_DATE, DEATH_DATE, HEIGHT, NAME);
+        public static List<Property> propertyList = Arrays.asList(FIRST_NAME, LAST_NAME, GENDER, BIRTH_DATE, DEATH_DATE, HEIGHT, NAME, KINGDOM_PROP);
 
         public static List<RelationshipType> relationshipList = Arrays.asList(
                 KNOW.addPair(new EPair(type, PERSON.type)),
@@ -297,6 +298,7 @@ public class OntologyTestUtils {
                         get().build(END_DATE.type, END_DATE.name, DATE),
                         get().build(TIMESTAMP.type, TIMESTAMP.name, DATE),
                         get().build(TEMPERATURE.type, TEMPERATURE.name, INT),
+                        get().build(KINGDOM_PROP.type, KINGDOM_PROP.name, KINGDOM.type),
                         get().build(COLOR.type, COLOR.name, TYPE_COLOR)))
         );
 

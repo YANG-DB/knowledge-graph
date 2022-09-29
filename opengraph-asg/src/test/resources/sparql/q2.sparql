@@ -1,4 +1,0 @@
-SELECT ?ee ?friends
-    WHERE {?ee a <Person>;
-        <name> "Emil";
-        <knows> ?friends }

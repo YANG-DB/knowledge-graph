@@ -37,12 +37,17 @@ import java.util.Optional;
 public interface GraphElementPropertySchema {
     String getName();
     String getType();
+    String getpType();
 
     Iterable<IndexingSchema> getIndexingSchemes();
+
     <T extends IndexingSchema> Optional<T> getIndexingSchema(IndexingSchema.Type type);
+
+    GraphElementPropertySchema addIndexSchema(IndexingSchema indexingSchema);
 
     interface IndexingSchema {
         enum Type {
+            nested,
             exact,
             ngrams,
             edgeNgrams
@@ -89,6 +94,17 @@ public interface GraphElementPropertySchema {
             //endregion
         }
     }
+    interface NestedIndexingSchema extends IndexingSchema {
+        @JsonInclude(JsonInclude.Include.NON_EMPTY)
+        @JsonIgnoreProperties(ignoreUnknown = true)
+        class Impl extends IndexingSchema.Impl implements ExactIndexingSchema {
+            //region Constructors
+            public Impl(String path) {
+                super(Type.nested, path);
+            }
+            //endregion
+        }
+    }
 
     interface NgramsIndexingSchema extends IndexingSchema {
         int getMaxSize();
@@ -125,18 +141,24 @@ public interface GraphElementPropertySchema {
         }
 
         public Impl(String name, String type) {
-            this(name, type,
-                    Collections.singletonList(
+            this(name, name,
+                    type, Collections.singletonList(
+                            new ExactIndexingSchema.Impl(name)));
+        }
+        public Impl(String name, String pType, String type) {
+            this(name, pType,
+                    type, Collections.singletonList(
                             new ExactIndexingSchema.Impl(name)));
         }
         public Impl(Property property) {
-            this(property.getName(), property.getType(),
-                    Collections.singletonList(
+            this(property.getName(),property.getpType() ,
+                    property.getType(), Collections.singletonList(
                             new ExactIndexingSchema.Impl(property.getName())));
         }
 
-        public Impl(String name, String type, Iterable<IndexingSchema> indexingSchemes) {
+        public Impl(String name, String pType, String type, Iterable<IndexingSchema> indexingSchemes) {
             this.name = name;
+            this.pType = pType;
             this.type = type;
             this.indexingSchemes = Stream.ofAll(indexingSchemes)
                     .toJavaMap(indexingSchema -> new Tuple2<>(indexingSchema.getType(), indexingSchema));
@@ -154,6 +176,10 @@ public interface GraphElementPropertySchema {
             return this.type;
         }
 
+        public String getpType() {
+            return pType;
+        }
+
         @Override
         public Iterable<IndexingSchema> getIndexingSchemes() {
             return this.indexingSchemes.values();
@@ -166,8 +192,18 @@ public interface GraphElementPropertySchema {
         //endregion
 
         //region Fields
+        //represents the local name for the property
         private String name;
+        //represents the storage type for the property
         private String type;
+        //represents the fully qualified name for the property
+        private String pType;
+
+        @Override
+        public GraphElementPropertySchema addIndexSchema(IndexingSchema indexingSchema) {
+            this.indexingSchemes.put(indexingSchema.getType(),indexingSchema);
+            return this;
+        }
 
         private Map<IndexingSchema.Type, IndexingSchema> indexingSchemes;
         //endregion

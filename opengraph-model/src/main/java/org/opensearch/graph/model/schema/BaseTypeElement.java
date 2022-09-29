@@ -9,9 +9,9 @@ package org.opensearch.graph.model.schema;
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- * 
+ *
  *      http://www.apache.org/licenses/LICENSE-2.0
- * 
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -19,9 +19,6 @@ package org.opensearch.graph.model.schema;
  * limitations under the License.
  * #L%
  */
-
-
-
 
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
@@ -41,19 +38,24 @@ public interface BaseTypeElement<T> {
 
     String getPartition();
 
-     Type getType();
+    Type getType();
+
+    boolean hasProperties();
 
     @JsonInclude(JsonInclude.Include.NON_NULL)
     class Type {
-        public static final Type Unknown = new Type("",Optional.empty(),true);
+        public static final Type Unknown = new Type("", Optional.empty(), true);
         private String name;
         private Optional<String> field = Optional.empty();
         private boolean implicit;
 
-        private Type() {}
-        public Type(String name) {
-            this(name,Optional.empty(),false);
+        private Type() {
         }
+
+        public Type(String name) {
+            this(name, Optional.empty(), false);
+        }
+
         public Type(String name, Optional<String> field, boolean implicit) {
             this.name = name;
             this.field = field;
@@ -62,7 +64,7 @@ public interface BaseTypeElement<T> {
 
         @JsonIgnore
         public static Type of(String name) {
-            return new Type(name,Optional.empty(),false);
+            return new Type(name, Optional.empty(), false);
         }
 
         @JsonProperty("name")

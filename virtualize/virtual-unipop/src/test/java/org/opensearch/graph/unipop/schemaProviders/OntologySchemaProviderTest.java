@@ -68,7 +68,7 @@ public class OntologySchemaProviderTest {
         Ontology ontology = getOntology();
         OntologySchemaProvider ontologySchemaProvider = getOntologySchemaProvider(ontology);
         GraphVertexSchema person = Stream.ofAll(ontologySchemaProvider.getVertexSchemas("Person")).get(0);
-        GraphElementPropertySchema name = person.getProperty(new Property("name","name","type")).get();
+        GraphElementPropertySchema name = person.getProperty(new Property("name","1","string")).get();
         assertEquals(name.getName(), "name");
     }
 
@@ -114,6 +114,7 @@ public class OntologySchemaProviderTest {
         Property nameProp = new Property();
         nameProp.setName("name");
         nameProp.setpType("1");
+        nameProp.setType("string");
 
         when(ontology.getProperties()).then(invocationOnMock -> Collections.singleton(nameProp));
 
