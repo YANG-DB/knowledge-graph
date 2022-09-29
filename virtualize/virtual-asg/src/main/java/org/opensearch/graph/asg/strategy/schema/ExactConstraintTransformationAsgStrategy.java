@@ -112,26 +112,28 @@ public class ExactConstraintTransformationAsgStrategy implements AsgStrategy {
                 return;
             }
 
+            String exactName = exactIndexingSchema.get().getName();
+
             ePropGroup.getProps().remove(eProp);
             if (eProp instanceof RankingProp) {
                 ePropGroup.getProps().add(new SchematicRankedEProp(
                         eProp.geteNum(),
                         eProp.getpType(),
-                        exactIndexingSchema.get().getName(),
+                        exactName,
                         eProp.getCon(),
                         ((RankingProp) eProp).getBoost()));
             } else if (eProp instanceof NestingProp) {
                 ePropGroup.getProps().add(new SchematicNestedEProp(
                         eProp.geteNum(),
                         eProp.getpType(),
-                        exactIndexingSchema.get().getName(),
+                        exactName,
                         eProp.getCon(),
                         ((NestingProp) eProp).getPath()));
             } else if (eProp.isConstraint()) {
                 ePropGroup.getProps().add(new SchematicEProp(
                         eProp.geteNum(),
                         eProp.getpType(),
-                        exactIndexingSchema.get().getName(),
+                        exactName,
                         eProp.getCon()));
             } else if (eProp.isProjection()) {
                 ePropGroup.getProps().add(new EProp(

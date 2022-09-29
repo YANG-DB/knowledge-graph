@@ -25,7 +25,7 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
-import com.google.common.collect.Sets;
+import org.opensearch.graph.model.ontology.Property.NestedProperty;
 import org.opensearch.graph.model.resourceInfo.GraphError;
 import javaslang.Tuple;
 import javaslang.Tuple2;
@@ -464,6 +464,28 @@ public class Ontology {
         }
 
         /**
+         * get entity properties
+         * @param entityType
+         * @return
+         */
+        public List<Property> $properties(EntityType entityType) {
+            return entityType.getProperties().stream()
+                    .map(this::pName$)
+                    .collect(Collectors.toList());
+        }
+
+        /**
+         * get relation properties
+         * @param relationshipType
+         * @return
+         */
+        public List<Property> $properties(RelationshipType relationshipType) {
+            return relationshipType.getProperties().stream()
+                    .map(this::pName$)
+                    .collect(Collectors.toList());
+        }
+
+        /**
          * get relation by its type - returns error not found
          *
          * @param rType
@@ -641,6 +663,7 @@ public class Ontology {
          * @return
          */
         public List<EntityType> nested$(String eType) {
+            if (!entity(eType).isPresent()) return Collections.emptyList();
             return entity$(eType).fields().stream()
                     .map(this::pType$)
                     .filter(p -> $entity(p.getType()).isPresent())
@@ -723,6 +746,20 @@ public class Ontology {
                 return original.map(property -> new Property(original.get().getName(), pType, property.getType()));
             }
             return Optional.empty();
+        }
+
+        /**
+         * get all nested properties for an element (entity/relation)
+         * @param type
+         * @return
+         */
+        public List<Property> generateCascadingElementFields(String type) {
+            if (!$element(type).isPresent()) return Collections.emptyList();
+            return nested$(type).stream()
+                    .flatMap(e -> $properties(e).stream()
+                            .map(p -> new NestedProperty(e.getName(), p)))
+                    .collect(Collectors.toList());
+
         }
 
         /**
@@ -940,6 +977,7 @@ public class Ontology {
 
             return Optional.empty();
         }
+
 
 
         public enum NodeType {

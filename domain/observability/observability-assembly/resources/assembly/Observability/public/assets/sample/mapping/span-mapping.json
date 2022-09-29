@@ -50,6 +50,11 @@
               }
             }
           },
+          "eventAttributes": {
+            "type": "alias",
+            "path": "attributes"
+          },
+
           "droppedAttributesCount": {
             "type": "long"
           },
@@ -172,6 +177,10 @@
                 }
               }
             }
+          },
+          "resourceAttributes": {
+            "type": "alias",
+            "path": "attributes"
           }
         }
       },
@@ -375,6 +384,10 @@
                 }
               }
             }
+          },
+          "spanAttributes": {
+            "type": "alias",
+            "path": "attributes"
           }
         }
       },

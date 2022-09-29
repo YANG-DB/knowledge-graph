@@ -202,6 +202,12 @@ public class OntologyAccessorTest extends TestCase {
     }
 
     @Test
+    public void testCascadingElementFields() {
+        Assert.assertEquals(0,accessor.generateCascadingElementFields("Dragon").size());
+        Assert.assertEquals(1,accessor.generateCascadingElementFields("Person").size());
+        Assert.assertEquals("kingdom.name",accessor.generateCascadingElementFields("Person").get(0).getName());
+    }
+    @Test
     public void testNested$() {
         Assert.assertEquals(0, accessor.nested$("Dragon").size());
         Assert.assertEquals(1, accessor.nested$("Person").size());

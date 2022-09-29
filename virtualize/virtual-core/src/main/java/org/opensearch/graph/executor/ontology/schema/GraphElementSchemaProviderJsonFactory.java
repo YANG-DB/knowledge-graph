@@ -283,7 +283,7 @@ public class GraphElementSchemaProviderJsonFactory implements GraphElementSchema
 
             switch (property.getType()) {
                 case TEXT:
-                    propertySchema.addIndexSchema(new GraphElementPropertySchema.ExactIndexingSchema.Impl(property + "." + KEYWORD));
+                    propertySchema.addIndexSchema(new GraphElementPropertySchema.ExactIndexingSchema.Impl(property.getpType() + "." + KEYWORD));
                     break;
             }
             switch (mappingIndexType) {

@@ -77,7 +77,7 @@
         "name",
         "time",
         "droppedAttributesCount",
-        "attributes"
+        "eventAttributes"
       ]
     },
     {
@@ -129,7 +129,7 @@
       "eType": "SpanContent",
       "name": "SpanContent",
       "properties": [
-        "attributes"
+        "spanAttributes"
       ]
     },
     {
@@ -254,7 +254,7 @@
         }
       ]
     },
-   {
+    {
       "rType": "hasStatus",
       "name": "hasStatus",
       "directional": true,
@@ -265,7 +265,7 @@
         }
       ]
     },
-   {
+    {
       "rType": "hasSpanContent",
       "name": "hasSpanContent",
       "directional": true,
@@ -276,7 +276,7 @@
         }
       ]
     },
-   {
+    {
       "rType": "hasTraceGroupFields",
       "name": "hasTraceGroupFields",
       "directional": true,
@@ -287,7 +287,7 @@
         }
       ]
     },
-  {
+    {
       "rType": "hasSpanAttributes",
       "name": "hasSpanAttributes",
       "directional": true,
@@ -625,38 +625,38 @@
       "name": "http@server_name",
       "type": "text"
     },
-   {
+    {
       "pType": "http@status_code",
       "name": "http@status_code",
       "type": "text"
     },
-   {
+    {
       "pType": "http@status_text",
       "name": "http@status_text",
       "type": "text"
     },
-  {
+    {
       "pType": "http@target",
       "name": "http@target",
       "type": "text"
     },
- {
+    {
       "pType": "http@url",
       "name": "http@url",
       "type": "text"
     },
- {
+    {
       "pType": "http@user_agent",
       "name": "http@user_agent",
       "type": "text"
     },
 
-  {
+    {
       "pType": "net@peer@ip",
       "name": "net@peer@ip",
       "type": "text"
     },
-   {
+    {
       "pType": "net@peer@name",
       "name": "net@peer@name",
       "type": "text"
@@ -666,12 +666,12 @@
       "name": "net@peer@port",
       "type": "text"
     },
-     {
+    {
       "pType": "thread@id",
       "name": "thread@id",
       "type": "text"
     },
-       {
+    {
       "pType": "thread@name",
       "name": "thread@name",
       "type": "text"
@@ -695,37 +695,37 @@
       "name": "event",
       "type": "Event"
     },
-   {
+    {
       "pType": "events",
       "name": "events",
       "type": "Event"
     },
     {
       "pType": "eventAttributes",
-      "name": "attributes",
+      "name": "eventAttributes",
       "type": "EventAttributes"
     },
-   {
+    {
       "pType": "instrumentationLibrary",
       "name": "instrumentationLibrary",
       "type": "InstrumentationLibrary"
     },
-   {
+    {
       "pType": "traceGroupFields",
       "name": "traceGroupFields",
       "type": "TraceGroupFields"
     },
-   {
+    {
       "pType": "links",
       "name": "links",
       "type": "Links"
     },
-   {
+    {
       "pType": "status",
       "name": "status",
       "type": "Status"
     },
-  {
+    {
       "pType": "resources",
       "name": "resources",
       "type": "Resources"
@@ -737,7 +737,7 @@
     },
     {
       "pType": "spanAttributes",
-      "name": "attributes",
+      "name": "spanAttributes",
       "type": "SpanAttributes"
     }
   ]

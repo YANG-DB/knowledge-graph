@@ -9,9 +9,9 @@ package org.opensearch.graph.model.ontology;
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- * 
+ *
  *      http://www.apache.org/licenses/LICENSE-2.0
- * 
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -19,11 +19,6 @@ package org.opensearch.graph.model.ontology;
  * limitations under the License.
  * #L%
  */
-
-
-
-
-
 
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
@@ -104,7 +99,7 @@ public class Property {
     }
 
     @Override
-    protected Property clone()  {
+    protected Property clone() {
         return new Property(this);
     }
 
@@ -126,11 +121,12 @@ public class Property {
 
     /**
      * check equality by not using the class type
+     *
      * @param source
      * @param other
      * @return
      */
-    public static boolean equal(Property source,Property other) {
+    public static boolean equal(Property source, Property other) {
         return source.pType.equals(other.pType) &&
                 source.name.equals(other.name) &&
                 source.type.equals(other.type);
@@ -241,6 +237,23 @@ public class Property {
 
         public static Optional<Property> of(Optional<Property> property) {
             return property.map(MandatoryProperty::new);
+        }
+    }
+
+    public static class NestedProperty extends Property {
+
+        public NestedProperty(String prefix, Property property) {
+            super(prefix + "." + property.name, prefix + "." + property.pType, property.type);
+        }
+
+        @Override
+        public boolean equals(Object o) {
+            return super.equals(o);
+        }
+
+        @Override
+        public int hashCode() {
+            return super.hashCode();
         }
     }
 
