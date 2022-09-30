@@ -31,6 +31,8 @@ import java.util.*;
 
 public class OntologySchemaProvider implements GraphElementSchemaProvider {
 
+    public static final String TEXT = "text";
+
     //region Constructor
     @Inject
     public OntologySchemaProvider(Ontology ontology, GraphElementSchemaProvider schemaProvider) {
@@ -83,14 +85,21 @@ public class OntologySchemaProvider implements GraphElementSchemaProvider {
         }
 
         Optional<GraphElementPropertySchema> propertySchema = this.schemaProvider.getPropertySchema(name);
-
+        Iterable<GraphElementPropertySchema.IndexingSchema> schemas = propertySchema.map(GraphElementPropertySchema::getIndexingSchemes)
+                .orElseGet(Collections::emptyList);
+        // if type text add exact index schema
+        switch (property.get().getType()) {
+            case TEXT:
+                schemas = propertySchema.map(GraphElementPropertySchema::getIndexingSchemes)
+                        .orElseGet(() -> Collections.singletonList(
+                                new GraphElementPropertySchema.ExactIndexingSchema.Impl(property.get().getName())));
+                break;
+        }
         return Optional.of(new GraphElementPropertySchema.Impl(
                 property.get().getName(),
                 property.get().getpType(),
                 property.get().getType(),
-                propertySchema.map(GraphElementPropertySchema::getIndexingSchemes)
-                        .orElseGet(() -> Collections.singletonList(
-                                new GraphElementPropertySchema.ExactIndexingSchema.Impl(property.get().getName())))));
+                schemas));
     }
 
     @Override

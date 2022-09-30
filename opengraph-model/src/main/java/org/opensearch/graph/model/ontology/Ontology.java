@@ -30,6 +30,7 @@ import org.opensearch.graph.model.resourceInfo.GraphError;
 import javaslang.Tuple;
 import javaslang.Tuple2;
 import javaslang.collection.Stream;
+import org.opensearch.graph.model.schema.Entity;
 
 import java.awt.geom.Point2D;
 import java.lang.reflect.Array;
@@ -720,11 +721,11 @@ public class Ontology {
                 Optional<Property> original = pName(array[array.length - 1]);
                 // found by name - so replace it in the returned property
                 if (cascadingElementFieldsPName(elementType).stream().anyMatch(p -> p.equals(nameOrType)))
-                    return original.map(property -> new Property(nameOrType, property.getpType(), property.getType()));
+                    return original.map(property -> new NestedProperty(nameOrType, nameOrType, property.getType()));
 
                 // found by type - so replace it in the returned property
                 if (cascadingElementFieldsPType(elementType).stream().anyMatch(p -> p.equals(nameOrType)))
-                    return original.map(property -> new Property(original.get().getName(), nameOrType, property.getType()));
+                    return original.map(property -> new NestedProperty(nameOrType, nameOrType, property.getType()));
             }
             return Optional.empty();
         }
@@ -740,10 +741,10 @@ public class Ontology {
             if (cascadingElementFieldsPType(elementType).stream().anyMatch(p -> p.equals(pType))) {
                 //since the field is combined of cascading entities - we take the last one which is an actual field
                 String[] array = pType.split("\\.");
-                if (array.length == 0) return Optional.empty();
+                if (array.length < 2) return Optional.empty();
 
                 Optional<Property> original = pName(array[array.length - 1]);
-                return original.map(property -> new Property(original.get().getName(), pType, property.getType()));
+                return original.map(property -> new NestedProperty(pType, pType, property.getType()));
             }
             return Optional.empty();
         }
@@ -754,12 +755,23 @@ public class Ontology {
          * @return
          */
         public List<Property> generateCascadingElementFields(String type) {
-            if (!$element(type).isPresent()) return Collections.emptyList();
+            if (!$entity(type).isPresent()) return Collections.emptyList();
             return nested$(type).stream()
                     .flatMap(e -> $properties(e).stream()
-                            .map(p -> new NestedProperty(e.getName(), p)))
+                            .filter(p -> nestedEntityFieldName($entity(type).get(),e).isPresent())
+                            .map(p -> new NestedProperty(nestedEntityFieldName($entity(type).get(),e).get().getpType(), p)))
                     .collect(Collectors.toList());
 
+        }
+
+        /**
+         * get parent entity field name for child nested entity
+         * @param parentEntity
+         * @param nestedEntity
+         * @return
+         */
+        public Optional<Property> nestedEntityFieldName(EntityType parentEntity, EntityType nestedEntity) {
+            return $properties(parentEntity).stream().filter(p->p.getType().equals(nestedEntity.geteType())).findFirst();
         }
 
         /**

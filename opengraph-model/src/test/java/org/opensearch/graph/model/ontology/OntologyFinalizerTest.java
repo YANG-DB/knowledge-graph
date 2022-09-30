@@ -25,6 +25,6 @@ public class OntologyFinalizerTest extends TestCase {
         Ontology finalize = OntologyFinalizer.finalize(ontology);
         Assert.assertEquals(15,finalize.getProperties().size());
         Assert.assertTrue(finalize.getProperties()
-                .contains(new Property.NestedProperty("kingdom",new Property("name","name","string"))));
+                .contains(new Property.NestedProperty("origin",new Property("name","name","string"))));
     }
 }

@@ -202,10 +202,18 @@ public class OntologyAccessorTest extends TestCase {
     }
 
     @Test
+    public void testNestedEntityFieldName() {
+        Assert.assertFalse(accessor.nestedEntityFieldName(accessor.$entity$("Person"),accessor.$entity$("Dragon")).isPresent());
+        Assert.assertFalse(accessor.nestedEntityFieldName(accessor.$entity$("Kingdom"),accessor.$entity$("Person")).isPresent());
+        Assert.assertTrue(accessor.nestedEntityFieldName(accessor.$entity$("Person"),accessor.$entity$("Kingdom")).isPresent());
+        Assert.assertEquals("origin",accessor.nestedEntityFieldName(accessor.$entity$("Person"),accessor.$entity$("Kingdom")).get().getName());
+
+    }
+    @Test
     public void testCascadingElementFields() {
         Assert.assertEquals(0,accessor.generateCascadingElementFields("Dragon").size());
         Assert.assertEquals(1,accessor.generateCascadingElementFields("Person").size());
-        Assert.assertEquals("kingdom.name",accessor.generateCascadingElementFields("Person").get(0).getName());
+        Assert.assertEquals("origin.name",accessor.generateCascadingElementFields("Person").get(0).getName());
     }
     @Test
     public void testNested$() {
@@ -234,7 +242,23 @@ public class OntologyAccessorTest extends TestCase {
         Assert.assertFalse(accessor.cascadingFieldNameOrType("Person","origin.").isPresent());
         Assert.assertFalse(accessor.cascadingFieldNameOrType("Person","origin.bla").isPresent());
         Assert.assertTrue(accessor.cascadingFieldNameOrType("Person","origin.name").isPresent());
+        Assert.assertTrue(accessor.cascadingFieldNameOrType("Person","origin.name")
+                .get().equals(new Property.NestedProperty("origin.name","origin.name","string")));
     }
+
+    @Test
+    public void testCascadingFieldPType() {
+        Assert.assertFalse(accessor.cascadingFieldPType("Person","id").isPresent());
+        Assert.assertFalse(accessor.cascadingFieldPType("Person","name").isPresent());
+        Assert.assertFalse(accessor.cascadingFieldPType("Person","origin").isPresent());
+        Assert.assertFalse(accessor.cascadingFieldPType("Person",".origin").isPresent());
+        Assert.assertFalse(accessor.cascadingFieldPType("Person","origin.").isPresent());
+        Assert.assertFalse(accessor.cascadingFieldPType("Person","origin.bla").isPresent());
+        Assert.assertTrue(accessor.cascadingFieldPType("Person","origin.name").isPresent());
+        Assert.assertTrue(accessor.cascadingFieldPType("Person","origin.name")
+                .get().equals(new Property.NestedProperty("origin.name","origin.name","string")));
+    }
+
 
     @Test
     public void cascadingFieldPType() {

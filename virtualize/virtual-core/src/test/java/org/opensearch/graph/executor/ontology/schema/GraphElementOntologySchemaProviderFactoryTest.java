@@ -12,6 +12,7 @@ import org.opensearch.graph.dispatcher.ontology.OntologyProvider;
 import org.opensearch.graph.executor.ontology.GraphElementSchemaProviderFactory;
 import org.opensearch.graph.executor.ontology.OntologyGraphElementSchemaProviderFactory;
 import org.opensearch.graph.model.ontology.Ontology;
+import org.opensearch.graph.model.ontology.OntologyFinalizer;
 import org.opensearch.graph.model.schema.IndexProvider;
 import org.opensearch.graph.unipop.schemaProviders.GraphEdgeSchema;
 import org.opensearch.graph.unipop.schemaProviders.GraphElementPropertySchema;
@@ -53,7 +54,7 @@ public class GraphElementOntologySchemaProviderFactoryTest {
         InputStream stream = Thread.currentThread().getContextClassLoader().getResourceAsStream("schema/DragonsIndexProviderNested.conf");
         provider = mapper.readValue(stream, IndexProvider.class);
         stream = Thread.currentThread().getContextClassLoader().getResourceAsStream("schema/Dragons.json");
-        ontology = mapper.readValue(stream, Ontology.class);
+        ontology = OntologyFinalizer.finalize(mapper.readValue(stream, Ontology.class));
     }
 
     private GraphElementSchemaProviderFactory getFactory() {
@@ -87,7 +88,6 @@ public class GraphElementOntologySchemaProviderFactoryTest {
     }
 
     @Test
-    @Ignore("fix the properties to reflect the cascading for nested entities")
     public void testGraphElementPropertiesSchemaProvider() {
         GraphElementSchemaProviderFactory jsonFactory = getFactory();
         GraphElementSchemaProvider schemaProvider = jsonFactory.get(ontology);
@@ -97,9 +97,9 @@ public class GraphElementOntologySchemaProviderFactoryTest {
         List<GraphElementPropertySchema> properties = StreamSupport.stream(propertySchemas.spliterator(), false)
                 .collect(Collectors.toList());
 
-        Assert.assertEquals(30, properties.size());
+        Assert.assertEquals(35, properties.size());
         Assert.assertEquals(1, properties.stream().filter(p -> p.getType().equals("Profession")).count());
-        Assert.assertEquals(6, properties.stream().filter(p -> p.getName().startsWith("profession.")).count());
+        Assert.assertEquals(4, properties.stream().filter(p -> p.getName().startsWith("profession.")).count());
 
     }
 

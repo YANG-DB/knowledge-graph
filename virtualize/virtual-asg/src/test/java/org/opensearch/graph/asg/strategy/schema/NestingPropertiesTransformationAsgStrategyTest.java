@@ -31,7 +31,7 @@ public class NestingPropertiesTransformationAsgStrategyTest {
         Ontology ontology = Ontology.OntologyBuilder.anOntology("ont")
                 .withEntityTypes(Arrays.asList(
                         EntityType.Builder.get().withEType("Person").withName("Person")
-                                .withProperties(Arrays.asList("name", "dragons"))
+                                .withProperties(Arrays.asList("name","title", "dragons"))
                                 .build(),
                         EntityType.Builder.get().withEType("Dragon").withName("Dragon")
                                 .withProperties(Arrays.asList("name","age")).build())
@@ -41,7 +41,7 @@ public class NestingPropertiesTransformationAsgStrategyTest {
                                 .build()))
                 .withProperties(new HashSet<>(Arrays.asList(
                         Property.Builder.get().withPType("age").withName("age").withType("int").build(),
-                        Property.Builder.get().withPType("name").withName("name").withType("string").build(),
+                        Property.Builder.get().withPType("name").withName("name").withType("text").build(),
                         Property.Builder.get().withPType("dragons").withName("dragons").withType("Dragon").build())))
                 .build();
 
@@ -53,17 +53,17 @@ public class NestingPropertiesTransformationAsgStrategyTest {
                                 Optional.empty(),
                                 Optional.empty(),
                                 Arrays.asList(
-                                        new GraphElementPropertySchema.Impl("name", "name", "string", Collections.singletonList(
+                                        new GraphElementPropertySchema.Impl("name", "name", "text", Collections.singletonList(
                                                 new GraphElementPropertySchema.ExactIndexingSchema.Impl("name.keyword")
                                         )),
                                         new GraphElementPropertySchema.Impl("dragons","dragons" , "Dragon", Collections.singletonList(
                                                 //this is the nested "path" section
                                                 new GraphElementPropertySchema.ExactIndexingSchema.Impl("dragons")
                                         )),
-                                        new GraphElementPropertySchema.Impl("name","dragons.name" , "string", Collections.singletonList(
+                                        new GraphElementPropertySchema.Impl("dragons.name","dragons.name" , "text", Collections.singletonList(
                                                 new GraphElementPropertySchema.ExactIndexingSchema.Impl("dragons.name.keyword")
                                         )),
-                                        new GraphElementPropertySchema.Impl("age", "dragons.age", "int",Collections.emptyList()))
+                                        new GraphElementPropertySchema.Impl("dragons.age", "dragons.age", "int",Collections.emptyList()))
                         ),
                         new GraphVertexSchema.Impl(
                                 Type.of("Dragon"),
@@ -71,7 +71,7 @@ public class NestingPropertiesTransformationAsgStrategyTest {
                                 Optional.empty(),
                                 Optional.empty(),
                                 Collections.singletonList(
-                                        new GraphElementPropertySchema.Impl("name", "name", "string", Collections.singletonList(
+                                        new GraphElementPropertySchema.Impl("name", "name", "text", Collections.singletonList(
                                                 new GraphElementPropertySchema.ExactIndexingSchema.Impl("name.keyword")
                                         ))
                                 )
@@ -79,10 +79,10 @@ public class NestingPropertiesTransformationAsgStrategyTest {
                 ),
                 Collections.emptyList(),
                 Arrays.asList(
-                        new GraphElementPropertySchema.Impl("name","name" , "string", Collections.singletonList(
+                        new GraphElementPropertySchema.Impl("name","name" , "text", Collections.singletonList(
                                 new GraphElementPropertySchema.ExactIndexingSchema.Impl("name.keyword")
                         )),
-                       new GraphElementPropertySchema.Impl("name","dragons.name" , "string", Arrays.asList(
+                       new GraphElementPropertySchema.Impl("name","dragons.name" , "text", Arrays.asList(
                                 new GraphElementPropertySchema.ExactIndexingSchema.Impl("name.keyword"),
                                 new GraphElementPropertySchema.NestedIndexingSchema.Impl("dragons")
                         )),

@@ -75,7 +75,7 @@ public class GraphElementSchemaProviderJsonFactory implements GraphElementSchema
         this.accessor = new Ontology.Accessor(ontologyProvider.get(assembly).orElseThrow(() ->
                 new GraphError.GraphErrorException(new GraphError("No Ontology present for assembly", "No Ontology present for assembly" + assembly))));
 
-        //if no index provider found with assembly name - generate default one accoring to ontology and simple Static Index Partitioning strategy
+        //if no index provider found with assembly name - generate default one according to ontology and simple Static Index Partitioning strategy
         this.indexProvider = indexProvider.get(assembly).orElseGet(() ->
                 IndexProvider.Builder.generate(accessor.get()));
 
@@ -291,7 +291,7 @@ public class GraphElementSchemaProviderJsonFactory implements GraphElementSchema
                     propertySchema.addIndexSchema(new GraphElementPropertySchema.NestedIndexingSchema.Impl(mappingName));
                     break;
             }
-            //cascading nested fields
+            //cascading nested fields - for derivative entities
             if (accessor.isNestedField(entityType.geteType(), propertyKey)) {
                 Optional<EntityType> nestedEntity = accessor.getNestedEntity(entityType.geteType(), propertyKey);
                 if (nestedEntity.isPresent()) {
@@ -322,7 +322,7 @@ public class GraphElementSchemaProviderJsonFactory implements GraphElementSchema
                         throw new GraphError.GraphErrorException(new GraphError("Schema generation exception", " Element " + entityType + " not containing " + ID + " metadata property "));
                 });
         validateRedundant(entityType, entitySide, rel.getRedundant());
-        redundantPropertySchemas.add(new GraphRedundantPropertySchema.Impl(ID, String.format("%s.%s", entitySide, ID), "string"));
+        redundantPropertySchemas.add(new GraphRedundantPropertySchema.Impl(ID, String.format("%s.%s", entitySide, ID), "text"));
         //add all RedundantProperty according to schema
         validateRedundant(entityType, entitySide, rel.getRedundant());
         rel.getRedundant()

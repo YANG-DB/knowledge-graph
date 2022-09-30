@@ -242,6 +242,9 @@ public class Property {
 
     public static class NestedProperty extends Property {
 
+        public NestedProperty(String name, String pType, String type) {
+            super(name,pType,type);
+        }
         public NestedProperty(String prefix, Property property) {
             super(prefix + "." + property.name, prefix + "." + property.pType, property.type);
         }
