@@ -22,6 +22,7 @@ package org.opensearch.graph.unipop.schemaProviders;
 
 
 import com.google.inject.Inject;
+import org.opensearch.graph.model.GlobalConstants;
 import org.opensearch.graph.model.ontology.*;
 import javaslang.collection.Stream;
 import org.apache.tinkerpop.gremlin.structure.Direction;
@@ -31,7 +32,7 @@ import java.util.*;
 
 public class OntologySchemaProvider implements GraphElementSchemaProvider {
 
-    public static final String TEXT = "text";
+    public static final String TEXT =  GlobalConstants.Scalars.TEXT;
 
     //region Constructor
     @Inject

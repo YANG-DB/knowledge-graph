@@ -53,7 +53,7 @@ import static java.util.stream.Stream.concat;
 public class GraphElementSchemaProviderJsonFactory implements GraphElementSchemaProviderFactory {
 
     public static final String KEYWORD = "keyword";
-    public static final String TEXT = "text";
+    public static final String TEXT = GlobalConstants.Scalars.TEXT;
     public static final String _ID = GlobalConstants._ID;
 
     public static final String ID = "id";

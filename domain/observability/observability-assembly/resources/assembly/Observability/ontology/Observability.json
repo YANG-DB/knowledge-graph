@@ -39,6 +39,7 @@
         "host",
         "ip",
         "memory",
+        "index",
         "message",
         "referer",
         "request",
@@ -323,7 +324,7 @@
     {
       "pType": "serviceName",
       "name": "serviceName",
-      "type": "text"
+      "type": "string"
     },
     {
       "pType": "name",
@@ -333,22 +334,22 @@
     {
       "pType": "parentSpanId",
       "name": "parentSpanId",
-      "type": "text"
+      "type": "string"
     },
     {
       "pType": "spanId",
       "name": "spanId",
-      "type": "text"
+      "type": "string"
     },
     {
       "pType": "kind",
       "name": "kind",
-      "type": "text"
+      "type": "string"
     },
     {
       "pType": "agent",
       "name": "agent",
-      "type": "string"
+      "type": "text"
     },
     {
       "pType": "bytes",
@@ -368,12 +369,17 @@
     {
       "pType": "extension",
       "name": "extension",
-      "type": "string"
+      "type": "text"
     },
     {
       "pType": "host",
       "name": "host",
-      "type": "string"
+      "type": "text"
+    },
+    {
+      "pType": "index",
+      "name": "index",
+      "type": "text"
     },
     {
       "pType": "ip",
@@ -473,12 +479,12 @@
     {
       "pType": "traceGroup",
       "name": "traceGroup",
-      "type": "text"
+      "type": "string"
     },
     {
       "pType": "traceId",
       "name": "traceId",
-      "type": "text"
+      "type": "string"
     },
     {
       "pType": "traceState",
@@ -493,12 +499,12 @@
     {
       "pType": "exception@message",
       "name": "exception@message",
-      "type": "string"
+      "type": "text"
     },
     {
       "pType": "exception@stacktrace",
       "name": "exception@stacktrace",
-      "type": "string"
+      "type": "text"
     },
     {
       "pType": "exception@type",

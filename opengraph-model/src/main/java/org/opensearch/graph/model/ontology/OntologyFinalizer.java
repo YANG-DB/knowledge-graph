@@ -26,6 +26,7 @@ package org.opensearch.graph.model.ontology;
 
 
 import javaslang.collection.Stream;
+import org.opensearch.graph.model.GlobalConstants;
 
 /**
  * Created by moti on 5/14/2017.
@@ -48,10 +49,12 @@ public class OntologyFinalizer {
         Ontology.Accessor accessor = new Ontology.Accessor(ontology);
 
         if (ontology.getProperties().stream().noneMatch(p -> p.getpType().equals(ID_FIELD_PTYPE)))
-            ontology.getProperties().add(Property.Builder.get().withName(ID_FIELD_NAME).withPType(ID_FIELD_PTYPE).withType("text").build());
+            ontology.getProperties().add(Property.Builder.get().withName(ID_FIELD_NAME).withPType(ID_FIELD_PTYPE)
+                    .withType(GlobalConstants.Scalars.STRING).build());
 
         if (ontology.getProperties().stream().noneMatch(p -> p.getpType().equals(TYPE_FIELD_PTYPE)))
-            ontology.getProperties().add(Property.Builder.get().withName(TYPE_FIELD_PTYPE).withPType(TYPE_FIELD_PTYPE).withType("text").build());
+            ontology.getProperties().add(Property.Builder.get().withName(TYPE_FIELD_PTYPE)
+                    .withPType(TYPE_FIELD_PTYPE).withType(GlobalConstants.Scalars.STRING).build());
 
         Stream.ofAll(ontology.getEntityTypes())
                 .forEach(entityType -> {

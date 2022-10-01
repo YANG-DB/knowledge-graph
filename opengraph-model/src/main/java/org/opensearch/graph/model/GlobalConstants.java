@@ -39,6 +39,18 @@ public class GlobalConstants {
     public static final String RAW = "raw";
     public static final String TYPE = "type";
 
+    public static class Scalars {
+        public static final String STRING = "string"; //equal to keyword
+        public static final String TEXT = "text";
+        public static final String DATE = "date";
+        public static final String LONG = "long";
+        public static final String INT = "int";
+        public static final String FLOAT = "float";
+        public static final String DOUBLE = "double";
+        public static final String GEO = "geo_point";
+
+
+    }
     public static class ProjectionConfigs {
         public static final String PROJECTION = "projection";
         public static final String TAG = "tag";
