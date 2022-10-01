@@ -289,6 +289,7 @@ public class OntologyTestUtils {
                 Arrays.asList(
                         get().build(FIRST_NAME.type, FIRST_NAME.name, STRING),
                         get().build(LAST_NAME.type, LAST_NAME.name, STRING),
+                        get().build(DESCRIPTION.type, DESCRIPTION.name, STRING),
                         get().build(GENDER.type, GENDER.name, TYPE_GENDER),
                         get().build(BIRTH_DATE.type, BIRTH_DATE.name, DATE),
                         get().build(DEATH_DATE.type, DEATH_DATE.name, DATE),
@@ -311,12 +312,14 @@ public class OntologyTestUtils {
                         FREEZE,
                         FIRE,
                         MEMBER_OF,
+                        HAS_PROFESSION,
                         OWN))
         );
 
         //entities
         ontologyShortObj.getEntityTypes().addAll(Arrays.asList(
                 new EntityType(PERSON.type, PERSON.name, PERSON.propertyList.stream().map(p1 -> p1.type).collect(Collectors.toList())),
+                new EntityType(PROFESSION.type, PROFESSION.name, PROFESSION.propertyList.stream().map(p1 -> p1.type).collect(Collectors.toList())),
                 new EntityType(HORSE.type, HORSE.name, HORSE.propertyList.stream().map(p1 -> p1.type).collect(Collectors.toList())),
                 new EntityType(DRAGON.type, DRAGON.name, DRAGON.propertyList.stream().map(p1 -> p1.type).collect(Collectors.toList())),
                 new EntityType(KINGDOM.type, KINGDOM.name, KINGDOM.propertyList.stream().map(p1 -> p1.type).collect(Collectors.toList())),

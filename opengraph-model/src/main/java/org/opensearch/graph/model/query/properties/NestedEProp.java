@@ -82,6 +82,9 @@ public class NestedEProp extends EProp implements NestingProp {
         return clone;
     }
 
+    public static NestedEProp of(int eNum, String parent, String pType, Constraint con) {
+        return new NestedEProp(new EProp(eNum,pType,con),parent);
+    }
     //endregion
     public String getPath() {
         return path;

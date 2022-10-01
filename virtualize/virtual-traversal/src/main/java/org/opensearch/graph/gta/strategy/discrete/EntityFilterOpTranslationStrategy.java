@@ -55,7 +55,7 @@ import org.apache.tinkerpop.gremlin.process.traversal.step.filter.HasStep;
 import org.apache.tinkerpop.gremlin.process.traversal.step.map.EdgeOtherVertexStep;
 import org.apache.tinkerpop.gremlin.process.traversal.step.map.VertexStep;
 import org.apache.tinkerpop.gremlin.structure.T;
-import org.opensearch.graph.unipop.step.NestedStepWrapper;
+import org.opensearch.graph.unipop.step.NestingStepWrapper;
 
 import java.util.Collections;
 import java.util.List;
@@ -265,7 +265,7 @@ public class EntityFilterOpTranslationStrategy extends PlanOpTranslationStrategy
         }
         if(eProp instanceof NestingProp) {
             GraphTraversal.Admin admin = __.start().asAdmin();
-            traversal = admin.addStep(new NestedStepWrapper(traversal.asAdmin().getEndStep(), ((NestingProp) eProp).getPath()));
+            traversal = admin.addStep(new NestingStepWrapper(traversal.asAdmin().getEndStep(), ((NestingProp) eProp).getPath()));
         }
         return traversal;
 

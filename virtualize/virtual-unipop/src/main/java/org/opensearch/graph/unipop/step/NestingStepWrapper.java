@@ -29,18 +29,19 @@ import org.apache.tinkerpop.gremlin.process.traversal.Traversal;
 import org.apache.tinkerpop.gremlin.process.traversal.Traverser;
 
 import java.util.Iterator;
+import java.util.Objects;
 import java.util.Set;
 
-public class NestedStepWrapper<S,E> implements Step<S,E> {
+public class NestingStepWrapper<S,E> implements Step<S,E> {
 
-    public NestedStepWrapper(Step<S, E> innerStep, String eType) {
+    public NestingStepWrapper(Step<S, E> innerStep, String nestingPath) {
         this.innerStep = innerStep;
-        this.eType = eType;
+        this.nestingPath = nestingPath;
     }
 
 
-    public String geteType() {
-        return eType;
+    public String getNestingPath() {
+        return nestingPath;
     }
 
     public Step<S, E> getInnerStep() {
@@ -94,7 +95,7 @@ public class NestedStepWrapper<S,E> implements Step<S,E> {
 
     @Override
     public Step<S, E> clone() {
-        return new NestedStepWrapper<>(innerStep, eType);
+        return new NestingStepWrapper<>(innerStep, nestingPath);
     }
 
     @Override
@@ -134,13 +135,26 @@ public class NestedStepWrapper<S,E> implements Step<S,E> {
 
     @Override
     public String toString() {
-        return "NestedStepWrapper{" +
+        return "NestingStepWrapper{" +
                 "innerStep=" + innerStep +
-                ", eType=" + eType +
+                ", eType=" + nestingPath +
                 '}';
     }
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        NestingStepWrapper<?, ?> that = (NestingStepWrapper<?, ?>) o;
+        return innerStep.equals(that.innerStep) && nestingPath.equals(that.nestingPath);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(innerStep, nestingPath);
+    }
+
     private Step<S,E> innerStep;
-    private String eType;
+    private String nestingPath;
 
 }

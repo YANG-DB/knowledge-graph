@@ -101,4 +101,30 @@ public interface BaseTypeElement<T> {
         }
     }
 
+    @JsonInclude(JsonInclude.Include.NON_NULL)
+    class NestedType extends Type {
+        private String path;
+
+        @JsonIgnore
+        public static NestedType of(String name,String path) {
+            return new NestedType(name, path, Optional.empty(), false);
+        }
+
+        private NestedType() {}
+
+        public NestedType(String name,String path) {
+            super(name);
+            this.path = path;
+        }
+
+        public NestedType(String name, String path, Optional<String> field, boolean implicit) {
+            super(name, field, implicit);
+            this.path = path;
+        }
+
+        @JsonProperty("path")
+        public String getPath() {
+            return path;
+        }
+    }
 }

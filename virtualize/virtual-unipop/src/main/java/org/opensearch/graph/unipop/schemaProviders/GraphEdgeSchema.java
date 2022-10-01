@@ -26,6 +26,8 @@ package org.opensearch.graph.unipop.schemaProviders;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonInclude;
+import org.apache.tinkerpop.gremlin.process.traversal.dsl.graph.GraphTraversal;
+import org.opensearch.graph.model.query.properties.NestingProp;
 import org.opensearch.graph.model.schema.BaseTypeElement;
 import org.opensearch.graph.model.schema.BaseTypeElement.Type;
 import org.opensearch.graph.unipop.schemaProviders.indexPartitions.IndexPartitions;
@@ -35,8 +37,11 @@ import org.apache.tinkerpop.gremlin.process.traversal.dsl.graph.__;
 import org.apache.tinkerpop.gremlin.structure.Direction;
 import org.apache.tinkerpop.gremlin.structure.Edge;
 import org.apache.tinkerpop.gremlin.structure.T;
+import org.opensearch.graph.unipop.step.NestingStepWrapper;
 
 import java.util.*;
+
+import static org.opensearch.graph.unipop.schemaProviders.GraphElementSchema.generateConstraint;
 
 public interface GraphEdgeSchema extends GraphElementSchema {
     enum Application {
@@ -98,7 +103,6 @@ public interface GraphEdgeSchema extends GraphElementSchema {
             //endregion
         }
     }
-
 
     interface End {
         Iterable<String> getIdFields();
@@ -194,7 +198,7 @@ public interface GraphEdgeSchema extends GraphElementSchema {
         public Impl(Type label,
                     GraphElementRouting routing) {
             this(label,
-                    new GraphElementConstraint.Impl(__.has(T.label, label)),
+                    generateConstraint(label),
                     Optional.empty(),
                     Optional.empty(),
                     Direction.OUT,
@@ -207,7 +211,7 @@ public interface GraphEdgeSchema extends GraphElementSchema {
         public Impl(Type label,
                     IndexPartitions indexPartitions) {
             this(label,
-                    new GraphElementConstraint.Impl(__.has(T.label, label)),
+                    generateConstraint(label),
                     Optional.empty(),
                     Optional.empty(),
                     Direction.OUT,
@@ -224,7 +228,7 @@ public interface GraphEdgeSchema extends GraphElementSchema {
                     Optional<DirectionSchema> directionSchema,
                     GraphElementRouting routing) {
             this(label,
-                    new GraphElementConstraint.Impl(__.has(T.label, label)),
+                    generateConstraint(label),
                     endA,
                     endB,
                     direction,
@@ -241,7 +245,7 @@ public interface GraphEdgeSchema extends GraphElementSchema {
                     Optional<DirectionSchema> directionSchema,
                     IndexPartitions indexPartitions) {
             this(label,
-                    new GraphElementConstraint.Impl(__.has(T.label, label)),
+                    generateConstraint(label),
                     endA,
                     endB,
                     direction,
@@ -259,7 +263,7 @@ public interface GraphEdgeSchema extends GraphElementSchema {
                     Optional<GraphElementRouting> routing,
                     Optional<IndexPartitions> indexPartitions) {
             this(label,
-                    new GraphElementConstraint.Impl(__.has(T.label, label)),
+                    generateConstraint(label),
                     endA,
                     endB,
                     direction,
@@ -334,6 +338,7 @@ public interface GraphEdgeSchema extends GraphElementSchema {
         public Set<Application> getApplications() {
             return this.applications;
         }
+
         //endregion
 
         //region Fields

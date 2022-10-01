@@ -21,17 +21,18 @@ package org.opensearch.graph.unipop.schemaProviders;
  */
 
 
+import org.apache.tinkerpop.gremlin.process.traversal.dsl.graph.GraphTraversal;
+import org.apache.tinkerpop.gremlin.process.traversal.dsl.graph.__;
 import org.opensearch.graph.model.ontology.Property;
+import org.opensearch.graph.model.schema.BaseTypeElement;
+import org.opensearch.graph.model.schema.BaseTypeElement.NestedType;
 import org.opensearch.graph.model.schema.BaseTypeElement.Type;
 import org.opensearch.graph.unipop.schemaProviders.indexPartitions.IndexPartitions;
-import javaslang.Tuple2;
-import javaslang.collection.Stream;
-import org.opensearch.graph.unipop.process.traversal.dsl.graph.__;
 import org.apache.tinkerpop.gremlin.structure.T;
+import org.opensearch.graph.unipop.step.NestingStepWrapper;
 
 import java.util.Collections;
 import java.util.List;
-import java.util.Map;
 import java.util.Optional;
 import java.util.stream.Collectors;
 import java.util.stream.StreamSupport;
@@ -51,11 +52,26 @@ public interface GraphElementSchema {
 
     Optional<GraphElementPropertySchema> getProperty(Property property);
 
+    /**
+     * derive the has-type traversal constraint according to the actual given Type
+     *
+     * @param label
+     * @return
+     */
+    static GraphElementConstraint.Impl generateConstraint(Type label) {
+        if (NestedType.class.isAssignableFrom(label.getClass())) {
+            GraphTraversal.Admin<Object, Object> admin = __.start().asAdmin();
+            admin.addStep(new NestingStepWrapper(__.has(T.label, label.getName()).asAdmin().getStartStep(), ((NestedType) label).getPath()));
+            return new GraphElementConstraint.Impl(admin);
+        }
+        return new GraphElementConstraint.Impl(__.has(T.label, label.getName()));
+    }
+
     abstract class Impl implements GraphElementSchema {
         //region Constructors
         public Impl(Type label) {
             this(label,
-                    new GraphElementConstraint.Impl(__.start().has(T.label, label)),
+                    generateConstraint(label),
                     Optional.empty(),
                     Optional.empty(),
                     Collections.emptyList());
@@ -63,7 +79,7 @@ public interface GraphElementSchema {
 
         public Impl(Type label, GraphElementRouting routing) {
             this(label,
-                    new GraphElementConstraint.Impl(__.start().has(T.label, label)),
+                    generateConstraint(label),
                     Optional.of(routing),
                     Optional.empty(),
                     Collections.emptyList());
@@ -71,7 +87,7 @@ public interface GraphElementSchema {
 
         public Impl(Type label, IndexPartitions indexPartitions) {
             this(label,
-                    new GraphElementConstraint.Impl(__.start().has(T.label, label)),
+                    generateConstraint(label),
                     Optional.empty(),
                     Optional.of(indexPartitions),
                     Collections.emptyList());
@@ -80,14 +96,14 @@ public interface GraphElementSchema {
         public Impl(Type label,
                     GraphElementRouting routing,
                     IndexPartitions indexPartitions) {
-            this(label, new GraphElementConstraint.Impl(__.start().has(T.label, label)), Optional.of(routing), Optional.of(indexPartitions), Collections.emptyList());
+            this(label, generateConstraint(label), Optional.of(routing), Optional.of(indexPartitions), Collections.emptyList());
         }
 
         public Impl(Type label,
                     IndexPartitions indexPartitions,
                     Iterable<GraphElementPropertySchema> properties) {
             this(label,
-                    new GraphElementConstraint.Impl(__.start().has(T.label, label)),
+                    generateConstraint(label),
                     Optional.empty(),
                     Optional.of(indexPartitions),
                     properties);
@@ -102,7 +118,7 @@ public interface GraphElementSchema {
             this.constraint = constraint;
             this.routing = routing;
             this.indexPartitions = indexPartitions;
-            this.properties = StreamSupport.stream(properties.spliterator(),false).collect(Collectors.toList());
+            this.properties = StreamSupport.stream(properties.spliterator(), false).collect(Collectors.toList());
         }
         //endregion
 
