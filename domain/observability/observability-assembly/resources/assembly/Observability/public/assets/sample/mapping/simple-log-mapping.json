@@ -2,12 +2,12 @@
   "template": "observability-logs*",
   "mappings" : {
     "properties" : {
+      "type" : {
+        "type" : "keyword"
+      },
       "@timestamp" : {
         "type" : "alias",
         "path" : "timestamp"
-      },
-      "type" : {
-        "type" : "keyword"
       },
       "agent" : {
         "type" : "text",

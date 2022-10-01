@@ -1,6 +1,9 @@
 {
   "mapping": {
     "properties": {
+      "type" : {
+        "type" : "keyword"
+      },
       "droppedAttributesCount": {
         "type": "long"
       },
@@ -19,8 +22,14 @@
       "events": {
         "type": "nested",
         "properties": {
+          "type" : {
+            "type" : "keyword"
+          },
           "attributes": {
             "properties": {
+              "type" : {
+                "type" : "keyword"
+              },
               "exception@message": {
                 "type": "text",
                 "fields": {
@@ -74,6 +83,9 @@
       },
       "instrumentationLibrary": {
         "properties": {
+          "type" : {
+            "type" : "keyword"
+          },
           "name": {
             "type": "text",
             "fields": {
@@ -111,8 +123,14 @@
       },
       "resource": {
         "properties": {
+          "type" : {
+            "type" : "keyword"
+          },
           "attributes": {
             "properties": {
+              "type" : {
+                "type" : "keyword"
+              },
               "host@hostname": {
                 "type": "text",
                 "fields": {
@@ -189,8 +207,14 @@
       },
       "span": {
         "properties": {
+          "type" : {
+            "type" : "keyword"
+          },
           "attributes": {
             "properties": {
+              "type" : {
+                "type" : "keyword"
+              },
               "component": {
                 "type": "text",
                 "fields": {
@@ -400,6 +424,9 @@
       },
       "status": {
         "properties": {
+          "type" : {
+            "type" : "keyword"
+          },
           "code": {
             "type": "integer"
           },
@@ -414,6 +441,9 @@
       },
       "traceGroupFields": {
         "properties": {
+          "type" : {
+            "type" : "keyword"
+          },
           "durationInNanos": {
             "type": "long"
           },

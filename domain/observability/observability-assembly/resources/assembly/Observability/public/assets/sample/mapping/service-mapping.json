@@ -1,8 +1,14 @@
 {
   "mappings": {
     "properties": {
+      "type" : {
+        "type" : "keyword"
+      },
       "destination": {
         "properties": {
+          "type" : {
+            "type" : "keyword"
+          },
           "domain": {
             "type": "keyword",
             "ignore_above": 1024
@@ -27,6 +33,9 @@
       },
       "target": {
         "properties": {
+          "type" : {
+            "type" : "keyword"
+          },
           "domain": {
             "type": "keyword",
             "ignore_above": 1024
