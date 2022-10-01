@@ -53,7 +53,7 @@ public final class GraphMLTokens {
     public static final String DATA = "data";
     public static final String LABEL_E = "labelE";
     public static final String LABEL_V = "labelV";
-    public static final String STRING = "string";
+    public static final String STRING = "string";//represents keyword
     public static final String FLOAT = "float";
     public static final String DOUBLE = "double";
     public static final String LONG = "long";

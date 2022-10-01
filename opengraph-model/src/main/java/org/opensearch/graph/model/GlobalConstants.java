@@ -40,7 +40,7 @@ public class GlobalConstants {
     public static final String TYPE = "type";
 
     public static class Scalars {
-        public static final String STRING = "string"; //equal to keyword
+        public static final String STRING = "string"; //represents keyword
         public static final String TEXT = "text";
         public static final String DATE = "date";
         public static final String LONG = "long";

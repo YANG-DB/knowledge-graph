@@ -1000,7 +1000,7 @@ public class Ontology {
     }
 
     public enum OntologyPrimitiveType {
-        STRING,
+        STRING,//represents keyword
         TEXT,
         DATE,
         LONG,

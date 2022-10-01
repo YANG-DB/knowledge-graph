@@ -49,7 +49,7 @@ public class EngineStatisticsGraphProvider implements GraphStatisticsProvider {
     private static final String ENUM = "enum";
     private static final String INT = "int";
     private static final String FLOAT = "float";
-    private static final String STRING = "string";
+    private static final String STRING = "string";// represents keyword
 
     private static final String FIELD_NAME_TYPE = "type";
     private static final String FIELD_NAME_EDGE = GlobalConstants.EdgeSchema.SOURCE_ID;

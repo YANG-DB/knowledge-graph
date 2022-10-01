@@ -17,7 +17,7 @@ public class OntologyTestUtils {
 
     public static final String DATE = "date";
     public static final String INT = "int";
-    public static final String STRING = "string";
+    public static final String STRING = "string";// represents keyword
     public static final String CM = "cm";
     public static final String ORDER = "Order";
 
