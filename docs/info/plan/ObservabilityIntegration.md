@@ -33,6 +33,7 @@ The following assumptions for the first release are taken:
 - Create Observability open-graph installation guide
 - Create Observability open-graph data ingestion guide
 - Create Observability open-graph usage tutorial
+- Create Observability open-graph client API usage tutorial
 
 ### Code Related - Tasks
 
@@ -43,6 +44,10 @@ The following assumptions for the first release are taken:
 
 ----------------------------------------------------------------------------------------------------------------
 
+- Enable client API including
+  - security
+  - compression
+  - fault tolerance
 - Enable nested-types queries for Observability
 - Add compression for query response bulk
 
@@ -51,7 +56,6 @@ The following assumptions for the first release are taken:
 - Fix Integration Tests to work with Opensearch Test artifact 
 - Add Observability Domain specific IT
 - Add Observability coverage metric
-
 
 ### Release - Tasks
  - Disable all external API part from Query (including swagger)
