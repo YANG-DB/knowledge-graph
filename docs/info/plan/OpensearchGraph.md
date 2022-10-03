@@ -164,7 +164,15 @@ Discovering insights refers to finding new data that may be valuable to what we 
 
 In other words, we start with a question. These questions can range from asking within the text, or even more complex ones regarding other data which is augmented by the text mined output.
 
+**Data Fusion** 
+
+...
+
+...
 
 
 **Data Correlation** 
 
+...
+
+...
