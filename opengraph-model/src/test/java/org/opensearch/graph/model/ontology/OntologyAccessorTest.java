@@ -17,7 +17,7 @@ public class OntologyAccessorTest extends TestCase {
 
     @Override
     public void setUp() throws Exception {
-        InputStream stream = Thread.currentThread().getContextClassLoader().getResourceAsStream("OntologyJsons/Dragons_Ontology_with_nesting.json");
+        InputStream stream = Thread.currentThread().getContextClassLoader().getResourceAsStream("OntologyJsons/Dragons_Ontology_with_double_nesting.json");
         accessor = new Ontology.Accessor(new ObjectMapper().readValue(stream, Ontology.class));
     }
 
@@ -27,7 +27,7 @@ public class OntologyAccessorTest extends TestCase {
     @Test
     public void testCascadingByTypeFields() {
         List<String> fieldTypes = accessor.cascadingElementFieldsPType("Person");
-        Assert.assertEquals(8, fieldTypes.size());
+        Assert.assertEquals(13, fieldTypes.size());
         Assert.assertTrue(fieldTypes.contains("origin"));
         Assert.assertTrue(fieldTypes.contains("origin.name"));
     }
@@ -38,7 +38,7 @@ public class OntologyAccessorTest extends TestCase {
     @Test
     public void testCascadingByNameFields() {
         List<String> fieldTypes = accessor.cascadingElementFieldsPName("Person");
-        Assert.assertEquals(8, fieldTypes.size());
+        Assert.assertEquals(13, fieldTypes.size());
         Assert.assertTrue(fieldTypes.contains("origin"));
         Assert.assertTrue(fieldTypes.contains("origin.name"));
     }
@@ -46,9 +46,11 @@ public class OntologyAccessorTest extends TestCase {
     @Test
     public void testPTypes() {
         List<String> elements = StreamSupport.stream(accessor.pTypes().spliterator(), false).collect(Collectors.toList());
-        Assert.assertEquals(13, elements.size());
+        Assert.assertEquals(18, elements.size());
         Assert.assertTrue(elements.contains("origin"));
         Assert.assertTrue(elements.contains("origin.name"));
+        Assert.assertTrue(elements.contains("dragons"));
+        Assert.assertTrue(elements.contains("dragons.name"));
     }
 
     @Test
@@ -203,23 +205,42 @@ public class OntologyAccessorTest extends TestCase {
 
     @Test
     public void testNestedEntityFieldName() {
-        Assert.assertFalse(accessor.nestedEntityFieldName(accessor.$entity$("Person"),accessor.$entity$("Dragon")).isPresent());
-        Assert.assertFalse(accessor.nestedEntityFieldName(accessor.$entity$("Kingdom"),accessor.$entity$("Person")).isPresent());
-        Assert.assertTrue(accessor.nestedEntityFieldName(accessor.$entity$("Person"),accessor.$entity$("Kingdom")).isPresent());
-        Assert.assertEquals("origin",accessor.nestedEntityFieldName(accessor.$entity$("Person"),accessor.$entity$("Kingdom")).get().getName());
+        Assert.assertTrue(accessor.nestedEntityFieldName(accessor.$entity$("Person"),accessor.$entity$("Horse")).isEmpty());
+        Assert.assertTrue(accessor.nestedEntityFieldName(accessor.$entity$("Kingdom"),accessor.$entity$("Person")).isEmpty());
+        Assert.assertFalse(accessor.nestedEntityFieldName(accessor.$entity$("Person"),accessor.$entity$("Kingdom")).isEmpty());
+        Assert.assertFalse(accessor.nestedEntityFieldName(accessor.$entity$("Person"),accessor.$entity$("Dragon")).isEmpty());
+
+        Assert.assertEquals("origin",accessor.nestedEntityFieldName(accessor.$entity$("Dragon"), accessor.$entity$("Kingdom")).get(0).getName());
+        Assert.assertEquals("origin",accessor.nestedEntityFieldName(accessor.$entity$("Person"), accessor.$entity$("Kingdom")).get(0).getName());
+        Assert.assertEquals("dragons",accessor.nestedEntityFieldName(accessor.$entity$("Person"), accessor.$entity$("Dragon")).get(0).getName());
 
     }
     @Test
     public void testCascadingElementFields() {
-        Assert.assertEquals(0,accessor.generateCascadingElementFields("Dragon").size());
-        Assert.assertEquals(1,accessor.generateCascadingElementFields("Person").size());
-        Assert.assertEquals("origin.name",accessor.generateCascadingElementFields("Person").get(0).getName());
+        Assert.assertEquals(1,accessor.generateCascadingElementFields("Kingdom").size());
+
+        Assert.assertEquals(4,accessor.generateCascadingElementFields("Dragon").size());
+        Assert.assertTrue(accessor.generateCascadingElementFields("Dragon").stream().anyMatch(p->p.getpType().equals("origin")));
+        Assert.assertTrue(accessor.generateCascadingElementFields("Dragon").stream().anyMatch(p->p.getpType().equals("origin.name")));
+
+        Assert.assertEquals(13,accessor.generateCascadingElementFields("Person").size());
+        Assert.assertTrue(accessor.generateCascadingElementFields("Person").stream().anyMatch(p->p.getpType().equals("origin")));
+        Assert.assertTrue(accessor.generateCascadingElementFields("Person").stream().anyMatch(p->p.getpType().equals("origin.name")));
+        Assert.assertTrue(accessor.generateCascadingElementFields("Person").stream().anyMatch(p->p.getpType().equals("dragons")));
+        Assert.assertTrue(accessor.generateCascadingElementFields("Person").stream().anyMatch(p->p.getpType().equals("dragons.name")));
+        Assert.assertTrue(accessor.generateCascadingElementFields("Person").stream().anyMatch(p->p.getpType().equals("dragons.gender")));
+        Assert.assertTrue(accessor.generateCascadingElementFields("Person").stream().anyMatch(p->p.getpType().equals("dragons.origin")));
+        Assert.assertTrue(accessor.generateCascadingElementFields("Person").stream().anyMatch(p->p.getpType().equals("dragons.origin.name")));
+
+
     }
     @Test
     public void testNested$() {
-        Assert.assertEquals(0, accessor.nested$("Dragon").size());
-        Assert.assertEquals(1, accessor.nested$("Person").size());
+        Assert.assertEquals(0, accessor.nested$("Kingdom").size());
+        Assert.assertEquals(1, accessor.nested$("Dragon").size());
+        Assert.assertEquals(2, accessor.nested$("Person").size());
         Assert.assertEquals("Kingdom", accessor.nested$("Person").get(0).geteType());
+        Assert.assertEquals("Dragon", accessor.nested$("Person").get(1).geteType());
     }
 
     @Test

@@ -97,9 +97,9 @@ public class GraphElementOntologySchemaProviderFactoryTest {
         List<GraphElementPropertySchema> properties = StreamSupport.stream(propertySchemas.spliterator(), false)
                 .collect(Collectors.toList());
 
-        Assert.assertEquals(35, properties.size());
+        Assert.assertEquals(37, properties.size());
         Assert.assertEquals(1, properties.stream().filter(p -> p.getType().equals("Profession")).count());
-        Assert.assertEquals(4, properties.stream().filter(p -> p.getName().startsWith("profession.")).count());
+        Assert.assertEquals(6, properties.stream().filter(p -> p.getName().startsWith("profession.")).count());
 
     }
 

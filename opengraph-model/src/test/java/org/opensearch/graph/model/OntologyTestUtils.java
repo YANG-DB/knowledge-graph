@@ -5,6 +5,8 @@ import org.opensearch.graph.model.ontology.*;
 import java.util.*;
 import java.util.stream.Collectors;
 
+import static org.opensearch.graph.model.GlobalConstants.ID;
+import static org.opensearch.graph.model.GlobalConstants.TYPE;
 import static org.opensearch.graph.model.OntologyTestUtils.Color.TYPE_COLOR;
 import static org.opensearch.graph.model.OntologyTestUtils.Gender.TYPE_GENDER;
 import static org.opensearch.graph.model.ontology.Property.Builder.get;
@@ -287,6 +289,8 @@ public class OntologyTestUtils {
         //properties
         ontologyShortObj.setProperties(new HashSet<>(
                 Arrays.asList(
+                        get().build(TYPE, TYPE, STRING),
+                        get().build(ID, ID, STRING),
                         get().build(FIRST_NAME.type, FIRST_NAME.name, STRING),
                         get().build(LAST_NAME.type, LAST_NAME.name, STRING),
                         get().build(DESCRIPTION.type, DESCRIPTION.name, STRING),

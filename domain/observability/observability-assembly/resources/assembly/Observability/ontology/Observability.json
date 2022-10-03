@@ -78,16 +78,40 @@
         "name",
         "time",
         "droppedAttributesCount",
-        "eventAttributes"
+        "attributes"
       ]
     },
     {
-      "eType": "EventAttributes",
-      "name": "EventAttributes",
+      "eType": "Attributes",
+      "name": "Attributes",
       "properties": [
         "exception@message",
         "exception@stacktrace",
-        "exception@type"
+        "exception@type",
+        "component",
+        "db@instance",
+        "db@statement",
+        "db@statement@parameters",
+        "db@type",
+        "db@user",
+        "host@port",
+        "http@client_ip",
+        "http@flavor",
+        "http@host",
+        "http@method",
+        "http@route",
+        "http@scheme",
+        "http@server_name",
+        "http@status_code",
+        "http@status_text",
+        "http@target",
+        "http@url",
+        "http@user_agent",
+        "net@peer@ip",
+        "net@peer@name",
+        "net@peer@port",
+        "thread@id",
+        "thread@name"
       ]
     },
     {
@@ -130,7 +154,7 @@
       "eType": "SpanContent",
       "name": "SpanContent",
       "properties": [
-        "spanAttributes"
+        "attributes"
       ]
     },
     {
@@ -140,36 +164,6 @@
         "durationInNanos",
         "endTime",
         "statusCode"
-      ]
-    },
-    {
-      "eType": "SpanAttributes",
-      "name": "SpanAttributes",
-      "properties": [
-        "component",
-        "db@instance",
-        "db@statement",
-        "db@statement@parameters",
-        "db@type",
-        "db@user",
-        "host@port",
-        "http@client_ip",
-        "http@flavor",
-        "http@host",
-        "http@method",
-        "http@route",
-        "http@scheme",
-        "http@server_name",
-        "http@status_code",
-        "http@status_text",
-        "http@target",
-        "http@url",
-        "http@user_agent",
-        "net@peer@ip",
-        "net@peer@name",
-        "net@peer@port",
-        "thread@id",
-        "thread@name"
       ]
     }
   ],
@@ -223,13 +217,13 @@
       ]
     },
     {
-      "rType": "hasEventAttributes",
-      "name": "hasEventAttributes",
+      "rType": "hasAttributes",
+      "name": "hasAttributes",
       "directional": true,
       "ePairs": [
         {
           "eTypeA": "Event",
-          "eTypeB": "EventAttributes"
+          "eTypeB": "Attributes"
         }
       ]
     },
@@ -289,13 +283,13 @@
       ]
     },
     {
-      "rType": "hasSpanAttributes",
-      "name": "hasSpanAttributes",
+      "rType": "hasAttributes",
+      "name": "hasAttributes",
       "directional": true,
       "ePairs": [
         {
           "eTypeA": "Span",
-          "eTypeB": "SpanAttributes"
+          "eTypeB": "Attributes"
         }
       ]
     }
@@ -656,7 +650,6 @@
       "name": "http@user_agent",
       "type": "text"
     },
-
     {
       "pType": "net@peer@ip",
       "name": "net@peer@ip",
@@ -682,10 +675,16 @@
       "name": "thread@name",
       "type": "text"
     },
-
-
-
-
+    {
+      "pType": "id",
+      "name": "id",
+      "type": "string"
+    },
+    {
+      "pType": "type",
+      "name": "type",
+      "type": "string"
+    },
     {
       "pType": "machine",
       "name": "machine",
@@ -705,11 +704,6 @@
       "pType": "events",
       "name": "events",
       "type": "Event"
-    },
-    {
-      "pType": "eventAttributes",
-      "name": "eventAttributes",
-      "type": "EventAttributes"
     },
     {
       "pType": "instrumentationLibrary",
@@ -742,9 +736,9 @@
       "type": "SpanContent"
     },
     {
-      "pType": "spanAttributes",
-      "name": "spanAttributes",
-      "type": "SpanAttributes"
+      "pType": "attributes",
+      "name": "attributes",
+      "type": "Attributes"
     }
   ]
 }

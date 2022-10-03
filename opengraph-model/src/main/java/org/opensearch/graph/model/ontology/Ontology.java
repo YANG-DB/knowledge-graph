@@ -40,6 +40,8 @@ import java.util.function.Supplier;
 import java.util.stream.Collectors;
 import java.util.stream.StreamSupport;
 
+import static java.util.stream.Stream.*;
+
 /**
  * Created by benishue on 22-Feb-17.
  */
@@ -465,10 +467,24 @@ public class Ontology {
         }
 
         /**
-         * get entity properties
-         * @param entityType
+         * get entity/relation properties
+         *
+         * @param elementType
          * @return
          */
+        public List<Property> $properties(BaseElement elementType) {
+            return
+                    elementType.getProperties().stream()
+                            .map(this::pType$)
+                            .collect(Collectors.toList());
+        }
+
+            /**
+             * get entity properties
+             *
+             * @param entityType
+             * @return
+             */
         public List<Property> $properties(EntityType entityType) {
             return entityType.getProperties().stream()
                     .map(this::pName$)
@@ -477,6 +493,7 @@ public class Ontology {
 
         /**
          * get relation properties
+         *
          * @param relationshipType
          * @return
          */
@@ -681,7 +698,7 @@ public class Ontology {
          * @return
          */
         public Optional<EntityType> getNestedEntity(String parentEntity, String propertyKey) {
-            if(!cascadingFieldNameOrType(parentEntity,propertyKey).isPresent())
+            if (!cascadingFieldNameOrType(parentEntity, propertyKey).isPresent())
                 return Optional.empty();
 
             //since the field is combined of cascading entities - we take the last one which is an actual field
@@ -689,7 +706,7 @@ public class Ontology {
             if (array.length < 2) return Optional.empty();
 
             Optional<Property> original = pName(array[array.length - 1]);
-            if(!original.isPresent())
+            if (!original.isPresent())
                 return Optional.empty();
 
             return nested$(parentEntity).stream().filter(e -> e.containsProperty(original.get().getName())).findFirst();
@@ -751,27 +768,58 @@ public class Ontology {
 
         /**
          * get all nested properties for an element (entity/relation)
+         *
          * @param type
          * @return
          */
         public List<Property> generateCascadingElementFields(String type) {
-            if (!$entity(type).isPresent()) return Collections.emptyList();
-            return nested$(type).stream()
-                    .flatMap(e -> $properties(e).stream()
-                            .filter(p -> nestedEntityFieldName($entity(type).get(),e).isPresent())
-                            .map(p -> new NestedProperty(nestedEntityFieldName($entity(type).get(),e).get().getpType(), p)))
-                    .collect(Collectors.toList());
+            if (!$element(type).isPresent()) return Collections.emptyList();
 
+            List<Property> propertyList = new ArrayList<>();
+            //only add primitive type properties to root element
+            propertyList.addAll($properties($element(type).get()).stream().filter(p->!$element(p.getType()).isPresent()).collect(Collectors.toList()));
+            //add all nested properties recursively
+            propertyList.addAll(_generateCascadingElementFields(Optional.empty(),type));
+            return propertyList;
+        }
+
+        public List<Property> _generateCascadingElementFields(Optional<String> parent,String type) {
+            if (!$element(type).isPresent()) return Collections.emptyList();
+            return $element(type).get().fields().stream()
+                    .map(this::$pType)
+                    .filter(Optional::isPresent)
+                    .map(Optional::get)
+                    .flatMap(p -> _getNestedPropertyStream(parent, p).stream())
+                    .collect(Collectors.toList());
+        }
+
+        private List<Property> _getNestedPropertyStream(Optional<String> parent, Property p) {
+            List<Property> props = new ArrayList<>();
+            if ($element(p.getType()).isPresent()) {
+                //check is this property actually an entity - if so recurse for inner nested elements
+                props.add(new NestedProperty(_getPrefix(parent, p.getpType()), _getPrefix(parent, p.getpType()), p.getType()));
+                props.addAll(_generateCascadingElementFields(Optional.of(_getPrefix(parent, p.getpType())), p.getType()));
+            }
+            else if(parent.isPresent()) {
+                // if property not nested element - generate its primitives
+                props.add(new NestedProperty(_getPrefix(parent, p.getpType()), _getPrefix(parent, p.getpType()), p.getType()));
+            }
+            return props;
+        }
+
+        private String _getPrefix(Optional<String> parent,String type) {
+            return parent.map(s -> s.concat(".").concat(type)).orElse(type);
         }
 
         /**
          * get parent entity field name for child nested entity
+         *
          * @param parentEntity
          * @param nestedEntity
          * @return
          */
-        public Optional<Property> nestedEntityFieldName(EntityType parentEntity, EntityType nestedEntity) {
-            return $properties(parentEntity).stream().filter(p->p.getType().equals(nestedEntity.geteType())).findFirst();
+        public List<Property> nestedEntityFieldName(EntityType parentEntity, EntityType nestedEntity) {
+            return $properties(parentEntity).stream().filter(p -> p.getType().equals(nestedEntity.geteType())).collect(Collectors.toList());
         }
 
         /**
@@ -989,7 +1037,6 @@ public class Ontology {
 
             return Optional.empty();
         }
-
 
 
         public enum NodeType {

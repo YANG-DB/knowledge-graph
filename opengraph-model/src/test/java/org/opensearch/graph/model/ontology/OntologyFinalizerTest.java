@@ -8,23 +8,34 @@ import org.junit.Test;
 import java.io.InputStream;
 
 public class OntologyFinalizerTest extends TestCase {
-    private ObjectMapper mapper = new ObjectMapper();
-    private Ontology.Accessor accessor;
     private Ontology ontology;
+    private Ontology doubleNestedOnt;
 
     @Override
     public void setUp() throws Exception {
-        InputStream stream = Thread.currentThread().getContextClassLoader().getResourceAsStream("OntologyJsons/Dragons_Ontology_with_nesting.json");
-        ontology = new ObjectMapper().readValue(stream, Ontology.class);
-        accessor = new Ontology.Accessor(ontology);
+        ontology = new ObjectMapper().readValue(Thread.currentThread().getContextClassLoader().getResourceAsStream("OntologyJsons/Dragons_Ontology_with_nesting.json"), Ontology.class);
+        doubleNestedOnt = new ObjectMapper().readValue(Thread.currentThread().getContextClassLoader().getResourceAsStream("OntologyJsons/Dragons_Ontology_with_double_nesting.json"), Ontology.class);
     }
 
     @Test
-    public void testOntologyFinalizer() {
-        Assert.assertEquals(14,ontology.getProperties().size());
+    public void testNestedOntologyFinalizer() {
+        Assert.assertEquals(14, ontology.getProperties().size());
         Ontology finalize = OntologyFinalizer.finalize(ontology);
-        Assert.assertEquals(15,finalize.getProperties().size());
+        Assert.assertEquals(15, finalize.getProperties().size());
         Assert.assertTrue(finalize.getProperties()
-                .contains(new Property.NestedProperty("origin",new Property("name","name","string"))));
+                .contains(new Property.NestedProperty("origin", new Property("name", "name", "string"))));
+    }
+
+    @Test
+    public void testDoubleNestedOntologyFinalizer() {
+        Assert.assertEquals(14, ontology.getProperties().size());
+        Ontology finalize = OntologyFinalizer.finalize(doubleNestedOnt);
+        Assert.assertEquals(20, finalize.getProperties().size());
+        Assert.assertTrue(finalize.getProperties()
+                .contains(new Property.NestedProperty("origin", new Property("name", "name", "string"))));
+        Assert.assertTrue(finalize.getProperties()
+                .contains(new Property.NestedProperty("dragons", new Property("name", "name", "string"))));
+        Assert.assertTrue(finalize.getProperties()
+                .contains(new Property.NestedProperty("dragons.origin", new Property("name", "name", "string"))));
     }
 }
