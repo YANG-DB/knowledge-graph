@@ -3,6 +3,7 @@ package org.opensearch.graph.model.ontology;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import junit.framework.TestCase;
 import org.junit.Assert;
+import org.junit.Ignore;
 import org.junit.Test;
 
 import java.io.InputStream;
@@ -253,6 +254,20 @@ public class OntologyAccessorTest extends TestCase {
         Assert.assertEquals(2, accessor.nested$("Person").size());
         Assert.assertEquals("Kingdom", accessor.nested$("Person").get(0).geteType());
         Assert.assertEquals("Dragon", accessor.nested$("Person").get(1).geteType());
+    }
+
+    @Test
+    @Ignore("Under construction")
+    public void testNestedParent() {
+/*
+        Assert.assertFalse(accessor.nestedParent("Dragon", "person.origin.name").isPresent());
+        Assert.assertFalse(accessor.nestedParent("Dragon", "dragons.origin.name").isPresent());
+        Assert.assertFalse(accessor.nestedParent("Person", "dragons.origin.name").isPresent());
+        Assert.assertFalse(accessor.nestedParent("Kingdom", "origin.name").isPresent());
+
+        Assert.assertTrue(accessor.nestedParent("Kingdom", "dragons.origin.name").isPresent());
+        Assert.assertEquals("Dragons",accessor.nestedParent("Kingdom", "dragons.origin.name").get().geteType());
+*/
     }
 
     @Test

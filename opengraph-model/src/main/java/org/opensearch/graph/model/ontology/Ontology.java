@@ -689,6 +689,18 @@ public class Ontology {
                     .collect(Collectors.toList());
 
         }
+        /**
+         * returns parents of nested entity type according to its relevant location in the property name - for example
+         * the pType a.b.c.d with the given eType c => will return the entity b
+         * the pType a.b.c.d with the given eType b => will return the entity a
+         *
+         * @param eType
+         * @param pType
+         * @return
+         */
+        public Optional<EntityType> nestedParent(String eType, String pType) {
+            return Optional.empty();
+        }
 
         /**
          * for a parent entity, find the nested entity that the given propertyKey belongs to

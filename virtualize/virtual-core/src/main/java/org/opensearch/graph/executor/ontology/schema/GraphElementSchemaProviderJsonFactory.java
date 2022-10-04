@@ -47,6 +47,7 @@ import java.util.*;
 import java.util.stream.Collectors;
 
 import static org.opensearch.graph.model.schema.MappingIndexType.*;
+import static org.opensearch.graph.model.schema.PartitionType.EMBEDDED;
 import static org.opensearch.graph.unipop.schemaProviders.GraphEdgeSchema.Application.endA;
 import static java.util.stream.Stream.concat;
 
@@ -291,17 +292,36 @@ public class GraphElementSchemaProviderJsonFactory implements GraphElementSchema
                 Optional<Entity> providerEntity = indexProvider.getEntity(property.getType()).isPresent() ?
                         indexProvider.getEntity(property.getType()) :
                         indexProvider.getEntity(((Property.NestedProperty) property).getContainerType());
-                if (providerEntity.isPresent() && valueOf(providerEntity.get().getPartition().toUpperCase()).equals(NESTED)) {
-                    if (providerEntity.get().hasProperties()) {
-                        propertySchema.addIndexSchema(new GraphElementPropertySchema.NestedIndexingSchema.Impl(providerEntity.get().getProps().getValues().get(0)));
-                    } else {
-                        propertySchema.addIndexSchema(new GraphElementPropertySchema.NestedIndexingSchema.Impl(mappingName));
-                    }
+                if (providerEntity.isPresent() ) {
+                    //if provider entity is nested - add an appropriate index schems
+                    checkIfNestedAndAddIndexSchema(providerEntity.get(),property,mappingName).forEach(propertySchema::addIndexSchema);
                 }
             }
 
             return Optional.of(propertySchema);
         }
+    }
+
+
+    private List<GraphElementPropertySchema.IndexingSchema> checkIfNestedAndAddIndexSchema(Entity providerEntity, Property property, String mappingName) {
+        List<GraphElementPropertySchema.IndexingSchema> schemas = new ArrayList<>();
+        if(MappingIndexType.valueOf(providerEntity.getPartition().toUpperCase()).equals(NESTED)) {
+            if (providerEntity.hasProperties()) {
+                schemas.add(new GraphElementPropertySchema.NestedIndexingSchema.Impl(providerEntity.getProps().getValues().get(0)));
+            } else {
+                schemas.add( new GraphElementPropertySchema.NestedIndexingSchema.Impl(mappingName));
+            }
+            //if provider entity is an embedded one - seek its container to verify it is not nested itself
+        } else if(PartitionType.valueOf(providerEntity.getMapping().toUpperCase()).equals(EMBEDDED)) {
+            Optional<EntityType> parent = accessor.nestedParent(providerEntity.getType().getName(),property.getpType());
+
+            if(!parent.isPresent()) return schemas;
+            if(!indexProvider.getEntity(property.getType()).isPresent()) return schemas;
+
+            // check is the entity nested
+            checkIfNestedAndAddIndexSchema(indexProvider.getEntity(property.getType()).get(),property,mappingName);
+        }
+        return schemas;
     }
 
 
