@@ -281,27 +281,21 @@ public class GraphElementSchemaProviderJsonFactory implements GraphElementSchema
                     property.getType(),
                     new ArrayList<>());
 
-            switch (property.getType()) {
-                case TEXT:
-                    propertySchema.addIndexSchema(new GraphElementPropertySchema.ExactIndexingSchema.Impl(property.getpType() + "." + KEYWORD));
-                    break;
+            if (TEXT.equals(property.getType())) {
+                propertySchema.addIndexSchema(new GraphElementPropertySchema.ExactIndexingSchema.Impl(property.getpType() + "." + KEYWORD));
             }
-            switch (mappingIndexType) {
-                case NESTED:
-                    propertySchema.addIndexSchema(new GraphElementPropertySchema.NestedIndexingSchema.Impl(mappingName));
-                    break;
-            }
-            //cascading nested fields - for derivative entities
-            if (accessor.isNestedField(entityType.geteType(), propertyKey)) {
-                Optional<EntityType> nestedEntity = accessor.getNestedEntity(entityType.geteType(), propertyKey);
-                if (nestedEntity.isPresent()) {
-                    Optional<Entity> providerEntity = indexProvider.getEntity(nestedEntity.get().geteType());
-                    if (providerEntity.isPresent() && valueOf(providerEntity.get().getPartition().toUpperCase()).equals(NESTED)) {
-                        if (providerEntity.get().hasProperties()) {
-                            propertySchema.addIndexSchema(new GraphElementPropertySchema.NestedIndexingSchema.Impl(providerEntity.get().getProps().getValues().get(0)));
-                        } else {
-                            propertySchema.addIndexSchema(new GraphElementPropertySchema.NestedIndexingSchema.Impl(mappingName));
-                        }
+            if (mappingIndexType == NESTED) {
+                propertySchema.addIndexSchema(new GraphElementPropertySchema.NestedIndexingSchema.Impl(mappingName));
+            } else if (property instanceof Property.NestedProperty) {
+                //cascading nested fields - for derivative entities
+                Optional<Entity> providerEntity = indexProvider.getEntity(property.getType()).isPresent() ?
+                        indexProvider.getEntity(property.getType()) :
+                        indexProvider.getEntity(((Property.NestedProperty) property).getContainerType());
+                if (providerEntity.isPresent() && valueOf(providerEntity.get().getPartition().toUpperCase()).equals(NESTED)) {
+                    if (providerEntity.get().hasProperties()) {
+                        propertySchema.addIndexSchema(new GraphElementPropertySchema.NestedIndexingSchema.Impl(providerEntity.get().getProps().getValues().get(0)));
+                    } else {
+                        propertySchema.addIndexSchema(new GraphElementPropertySchema.NestedIndexingSchema.Impl(mappingName));
                     }
                 }
             }

@@ -33,6 +33,8 @@ import org.opensearch.graph.model.resourceInfo.GraphError;
 import org.opensearch.graph.model.schema.BaseTypeElement;
 
 import java.util.*;
+import java.util.stream.Collectors;
+import java.util.stream.StreamSupport;
 
 import static org.opensearch.graph.unipop.schemaProviders.GraphEdgeSchema.Application.endB;
 
@@ -110,7 +112,9 @@ public interface GraphElementSchemaProvider {
                     .toJavaMap(grouping -> new Tuple2<>(grouping._1().getName(), grouping._2().toJavaList()));
 
             this.edgeSchemas = complementEdgeSchemas(edgeSchemas);
-
+            
+            propertyNameSchemas = complementPropertiesSchema(propertyNameSchemas,vertexSchemas,edgeSchemas);
+            
             this.propertyNameSchemas = Stream.ofAll(propertyNameSchemas)
                     .toJavaMap(propertySchema -> new Tuple2<>(propertySchema.getName(), propertySchema));
 
@@ -140,6 +144,28 @@ public interface GraphElementSchemaProvider {
                     Stream.ofAll(this.propertyPTypeSchemas.values())
                     .map(GraphElementPropertySchema::getpType)
                     .toJavaSet();
+        }
+
+        /**
+         * unify properties schema
+         * @param propertyNameSchemas
+         * @param vertexSchemas
+         * @param edgeSchemas
+         * @return
+         */
+        private Iterable<GraphElementPropertySchema> complementPropertiesSchema(Iterable<GraphElementPropertySchema> propertyNameSchemas, Iterable<GraphVertexSchema> vertexSchemas, Iterable<GraphEdgeSchema> edgeSchemas) {
+            List<GraphElementPropertySchema> unifiedPropertiesSchema = StreamSupport.stream(propertyNameSchemas.spliterator(),false).collect(Collectors.toList());
+            //unify all vertex properties
+            unifiedPropertiesSchema.addAll(StreamSupport.stream(vertexSchemas.spliterator(),false)
+                    .flatMap(e->StreamSupport.stream(e.getProperties().spliterator(),false))
+                    .collect(Collectors.toList()));
+
+            //unify all edges properties
+            unifiedPropertiesSchema.addAll(StreamSupport.stream(edgeSchemas.spliterator(),false)
+                    .flatMap(e->StreamSupport.stream(e.getProperties().spliterator(),false))
+                    .collect(Collectors.toList()));
+
+            return unifiedPropertiesSchema;
         }
         //endregion
 

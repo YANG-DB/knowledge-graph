@@ -41,7 +41,8 @@ public class WhereClauseNodeCypherTranslator implements CypherElementTranslatorS
     public void apply(Where where, AsgQuery query, CypherStrategyContext context) {
         final com.bpodgursky.jbool_expressions.Expression c = CypherUtils.reWrite(where.expression());
         strategies.forEach(s->{
-            if(s.isApply(c)) s.apply(Optional.empty(), c, query, context);
+            if(s.isApply(c))
+                s.apply(Optional.empty(), c, query, context);
         });
     }
 

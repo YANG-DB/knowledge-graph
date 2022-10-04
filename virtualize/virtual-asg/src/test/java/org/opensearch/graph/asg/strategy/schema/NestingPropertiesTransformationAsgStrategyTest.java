@@ -58,12 +58,16 @@ public class NestingPropertiesTransformationAsgStrategyTest {
                                         )),
                                         new GraphElementPropertySchema.Impl("dragons","dragons" , "Dragon", Collections.singletonList(
                                                 //this is the nested "path" section
-                                                new GraphElementPropertySchema.ExactIndexingSchema.Impl("dragons")
+                                                new GraphElementPropertySchema.NestedIndexingSchema.Impl("dragons")
                                         )),
-                                        new GraphElementPropertySchema.Impl("dragons.name","dragons.name" , "text", Collections.singletonList(
-                                                new GraphElementPropertySchema.ExactIndexingSchema.Impl("dragons.name.keyword")
+                                        new GraphElementPropertySchema.Impl("dragons.name","dragons.name" , "text", Arrays.asList(
+                                                new GraphElementPropertySchema.ExactIndexingSchema.Impl("dragons.name.keyword"),
+                                                new GraphElementPropertySchema.NestedIndexingSchema.Impl("dragons")
                                         )),
-                                        new GraphElementPropertySchema.Impl("dragons.age", "dragons.age", "int",Collections.emptyList()))
+                                        new GraphElementPropertySchema.Impl("dragons.age", "dragons.age", "int",Collections.singletonList(
+                                                //this is the nested "path" section
+                                                new GraphElementPropertySchema.NestedIndexingSchema.Impl("dragons")
+                                        )))
                         ),
                         new GraphVertexSchema.Impl(
                                 Type.of("Dragon"),
@@ -91,7 +95,7 @@ public class NestingPropertiesTransformationAsgStrategyTest {
                         )),
                         new GraphElementPropertySchema.Impl("dragons","dragons" , "Dragon", Collections.singletonList(
                                 //this is the nested "path" section
-                                new GraphElementPropertySchema.ExactIndexingSchema.Impl("dragons")
+                                new GraphElementPropertySchema.NestedIndexingSchema.Impl("dragons")
                         ))
                 )
         );

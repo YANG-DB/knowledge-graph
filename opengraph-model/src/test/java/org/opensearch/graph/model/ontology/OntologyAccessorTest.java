@@ -232,6 +232,18 @@ public class OntologyAccessorTest extends TestCase {
         Assert.assertTrue(accessor.generateCascadingElementFields("Person").stream().anyMatch(p->p.getpType().equals("dragons.origin")));
         Assert.assertTrue(accessor.generateCascadingElementFields("Person").stream().anyMatch(p->p.getpType().equals("dragons.origin.name")));
 
+        Assert.assertTrue(accessor.generateCascadingElementFields("Person")
+                .stream().anyMatch(p->p.equals(new Property.NestedProperty("origin.name","origin.name","string","Kingdom"))));
+        Assert.assertTrue(accessor.generateCascadingElementFields("Person")
+                .stream().anyMatch(p->p.equals(new Property.NestedProperty("dragons.name","dragons.name","string","Dragon"))));
+        Assert.assertTrue(accessor.generateCascadingElementFields("Person")
+                .stream().anyMatch(p->p.equals(new Property.NestedProperty("dragons.origin","dragons.origin","Kingdom","Dragon"))));
+        Assert.assertTrue(accessor.generateCascadingElementFields("Person")
+                .stream().anyMatch(p->p.equals(new Property.NestedProperty("dragons.origin.name","dragons.origin.name","string","Kingdom"))));
+
+        Assert.assertTrue(accessor.generateCascadingElementFields("Dragon")
+                .stream().anyMatch(p->p.equals(new Property.NestedProperty("origin.name","origin.name","string","Kingdom"))));
+
 
     }
     @Test
@@ -263,8 +275,18 @@ public class OntologyAccessorTest extends TestCase {
         Assert.assertFalse(accessor.cascadingFieldNameOrType("Person","origin.").isPresent());
         Assert.assertFalse(accessor.cascadingFieldNameOrType("Person","origin.bla").isPresent());
         Assert.assertTrue(accessor.cascadingFieldNameOrType("Person","origin.name").isPresent());
+
         Assert.assertTrue(accessor.cascadingFieldNameOrType("Person","origin.name")
-                .get().equals(new Property.NestedProperty("origin.name","origin.name","string")));
+                .get().equals(new Property.NestedProperty("origin.name","origin.name","string","Kingdom")));
+        Assert.assertTrue(accessor.cascadingFieldNameOrType("Person","dragons.name")
+                .get().equals(new Property.NestedProperty("dragons.name","dragons.name","string","Dragon")));
+        Assert.assertTrue(accessor.cascadingFieldNameOrType("Person","dragons.origin")
+                .get().equals(new Property.NestedProperty("dragons.origin","dragons.origin","Kingdom","Dragon")));
+        Assert.assertTrue(accessor.cascadingFieldNameOrType("Person","dragons.origin.name")
+                .get().equals(new Property.NestedProperty("dragons.origin.name","dragons.origin.name","string","Kingdom")));
+
+        Assert.assertTrue(accessor.cascadingFieldNameOrType("Dragon","origin.name")
+                .get().equals(new Property.NestedProperty("origin.name","origin.name","string","Kingdom")));
     }
 
     @Test
@@ -276,8 +298,19 @@ public class OntologyAccessorTest extends TestCase {
         Assert.assertFalse(accessor.cascadingFieldPType("Person","origin.").isPresent());
         Assert.assertFalse(accessor.cascadingFieldPType("Person","origin.bla").isPresent());
         Assert.assertTrue(accessor.cascadingFieldPType("Person","origin.name").isPresent());
+
         Assert.assertTrue(accessor.cascadingFieldPType("Person","origin.name")
-                .get().equals(new Property.NestedProperty("origin.name","origin.name","string")));
+                .get().equals(new Property.NestedProperty("origin.name","origin.name","string","Kingdom")));
+        Assert.assertTrue(accessor.cascadingFieldPType("Person","dragons.name")
+                .get().equals(new Property.NestedProperty("dragons.name","dragons.name","string","Dragon")));
+        Assert.assertTrue(accessor.cascadingFieldPType("Person","dragons.origin")
+                .get().equals(new Property.NestedProperty("dragons.origin","dragons.origin","Kingdom","Dragon")));
+        Assert.assertTrue(accessor.cascadingFieldPType("Person","dragons.origin.name")
+                .get().equals(new Property.NestedProperty("dragons.origin.name","dragons.origin.name","string","Kingdom")));
+
+        Assert.assertTrue(accessor.cascadingFieldPType("Dragon","origin.name")
+                .get().equals(new Property.NestedProperty("origin.name","origin.name","string","Kingdom")));
+
     }
 
 

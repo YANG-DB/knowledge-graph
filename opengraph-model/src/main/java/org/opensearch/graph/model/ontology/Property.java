@@ -241,22 +241,44 @@ public class Property {
     }
 
     public static class NestedProperty extends Property {
+        private String containerType;
 
         public NestedProperty(String name, String pType, String type) {
-            super(name,pType,type);
+            super(name, pType, type);
         }
-        public NestedProperty(String prefix, Property property) {
-            super(prefix + "." + property.name, prefix + "." + property.pType, property.type);
+
+        public NestedProperty(String name, String pType, String type, String containerType) {
+            super(name, pType, type);
+            this.containerType = containerType;
+        }
+
+
+        public NestedProperty(String prefix, Property property, String containerType) {
+            this(prefix + "." + property.name, prefix + "." + property.pType, property.type, containerType);
+        }
+
+        public String getContainerType() {
+            return containerType;
         }
 
         @Override
         public boolean equals(Object o) {
-            return super.equals(o);
+            if (this == o) return true;
+            if (o == null || getClass() != o.getClass()) return false;
+            if (!super.equals(o)) return false;
+            NestedProperty that = (NestedProperty) o;
+            return Objects.equals(containerType, that.containerType);
         }
 
         @Override
         public int hashCode() {
-            return super.hashCode();
+            return Objects.hash(super.hashCode(), containerType);
+        }
+
+        @Override
+        public String toString() {
+            return String.format("NestedProperty [pType = %s, name = %s, type = %s, container = %s ]", this.getpType(), this.getName(), this.getType(), this.containerType);
+
         }
     }
 
