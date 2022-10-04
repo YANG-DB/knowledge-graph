@@ -543,12 +543,12 @@
     {
       "pType": "code",
       "name": "code",
-      "type": "text"
+      "type": "int"
     },
     {
       "pType": "statusCode",
       "name": "statusCode",
-      "type": "text"
+      "type": "int"
     },
     {
       "pType": "message",

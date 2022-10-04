@@ -27,7 +27,7 @@ package org.opensearch.graph.asg.strategy;
 import com.google.inject.Inject;
 import org.opensearch.graph.asg.strategy.constraint.*;
 import org.opensearch.graph.asg.strategy.propertyGrouping.*;
-import org.opensearch.graph.asg.strategy.schema.ExactConstraintTransformationAsgStrategy;
+import org.opensearch.graph.asg.strategy.schema.MultiConstraintTransformationAsgStrategy;
 import org.opensearch.graph.asg.strategy.schema.LikeAnyConstraintTransformationAsgStrategy;
 import org.opensearch.graph.asg.strategy.schema.LikeConstraintTransformationAsgStrategy;
 import org.opensearch.graph.asg.strategy.schema.NestingPropertiesTransformationAsgStrategy;
@@ -71,7 +71,7 @@ public class M2AsgStrategyRegistrar  implements AsgStrategyRegistrar {
                 new RedundantLikeAnyConstraintAsgStrategy(),
                 new AggFilterTransformationAsgStrategy(),
                 new LikeToEqTransformationAsgStrategy(),
-                new ExactConstraintTransformationAsgStrategy(this.ontologyProvider, this.schemaProviderFactory),
+                new MultiConstraintTransformationAsgStrategy(this.ontologyProvider, this.schemaProviderFactory),
                 new LikeConstraintTransformationAsgStrategy(this.ontologyProvider, this.schemaProviderFactory),
                 new LikeAnyConstraintTransformationAsgStrategy(this.ontologyProvider, this.schemaProviderFactory),
                 new NestingPropertiesTransformationAsgStrategy(this.schemaProviderFactory),

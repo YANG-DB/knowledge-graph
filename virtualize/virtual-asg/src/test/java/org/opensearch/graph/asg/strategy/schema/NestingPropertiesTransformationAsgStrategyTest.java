@@ -120,7 +120,7 @@ public class NestingPropertiesTransformationAsgStrategyTest {
         };
 
         nestingStrategy = new NestingPropertiesTransformationAsgStrategy(schemaProviderFactory);
-        exactStrategy = new ExactConstraintTransformationAsgStrategy(ontologyProvider, schemaProviderFactory);
+        exactStrategy = new MultiConstraintTransformationAsgStrategy(ontologyProvider, schemaProviderFactory);
         context = new AsgStrategyContext(new Ontology.Accessor(ontology));
     }
     //endregion

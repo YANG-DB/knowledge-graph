@@ -46,9 +46,9 @@ import java.util.Set;
 
 import static org.opensearch.graph.unipop.schemaProviders.GraphElementPropertySchema.IndexingSchema.Type.exact;
 
-public class ExactConstraintTransformationAsgStrategy implements AsgStrategy {
+public class MultiConstraintTransformationAsgStrategy implements AsgStrategy {
     //region Constructors
-    public ExactConstraintTransformationAsgStrategy(
+    public MultiConstraintTransformationAsgStrategy(
             OntologyProvider ontologyProvider,
             GraphElementSchemaProviderFactory schemaProviderFactory) {
         this.ontologyProvider = ontologyProvider;

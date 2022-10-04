@@ -1,8 +1,8 @@
-package org.opensearch.graph.dispatcher.descriptors;
+package org.opensearch.graph.model;
 
 /*-
  * #%L
- * opengraph-core
+ * opengraph-model
  * %%
  * Copyright (C) 2016 - 2022 org.opensearch
  * %%
@@ -20,20 +20,12 @@ package org.opensearch.graph.dispatcher.descriptors;
  * #L%
  */
 
+import java.util.Optional;
+import java.util.StringJoiner;
 
-
-
-
-
-
-import org.opensearch.graph.model.validation.ValidationResult;
-import org.opensearch.graph.model.descriptors.Descriptor;
-
-public class QueryValidationDescriptor implements Descriptor<ValidationResult> {
-    //region Descriptor Implementation
-    @Override
-    public String describe(ValidationResult context) {
-        return String.valueOf(context.valid());
-    }
-    //endregion
+/**
+ * printable marker interface
+ */
+public interface Printable {
+    void print(StringJoiner joiner);
 }
