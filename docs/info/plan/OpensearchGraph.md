@@ -6,8 +6,6 @@ This document represents the roadmap for integrating and developing graph capabi
 
  - Opensearch-Graph enables executing (visual) graph queries against any set of opensearch indices and projecting the results.
 
- - Opensearch-Graph has a matured production deployments in various domains mostly in the intelligence community
-
 **Including**
 
 ### Physical Ontology Support
@@ -36,14 +34,15 @@ A Gremlin fork over opensearch is used to graph-traverse in one of the largest o
 ![](../img/execution-info.png)
 
 As true for so many databases, opensearch-graph follows the common practices of the fields:
-From parsing the query to an abstract syntax tree during which validations and logical schema query rewrites are preformed, moving on to a dynamic algorithm for Cost Based Optimizer for selecting the most efficient execution plan over the data, using stochastic sketches to materialize efficient statistical information such as cardinality and quantiles.
+
+From parsing the query to an abstract syntax tree during which validations and logical schema query rewrites are preformed, moving on to a dynamic algorithm for Cost Based Optimizer for selecting the most efficient execution plan over the data,
+using stochastic sketches to materialize efficient statistical information such as cardinality and quantiles.
 All these and many more will ensure that the sophisticated and well-structured codebase will take advantage of the most modern and reliable techniques and algorithms to promise the best performance available.
 
 ### Open Architecture – build for scalability and extensibility
 ![](../img/unipop-traversal.png)
 Built with openness and extensibility in mind, opensearch-graph offers a configurable layered architecture that allows plugin and replace almost any part of the execution chain.
 Using a modern IOC container with a supervised module system which allows high level of control over execution and behavior.
-Using the battle proven Unipop traversal execution engine to allow generic graph query execution over potentially any tinkerpop enabled repository – opensearch-graph is in fact a virtualized graph query engine.
 
 ------------------------------------------------------------------------------------------------
 
@@ -51,28 +50,28 @@ Using the battle proven Unipop traversal execution engine to allow generic graph
 ------------------------------------------------------------------------------------------------
 
 
-## The Knowledge Plain   
-![](../img/knowledge-plain.png)
+## The Knowledge Plane
+![](../img/knowledge-plane.png)
 
-The existing **control** Plain and **data** Plain are the traditional elements which allow to store, manage and retrieve the data.
+The existing **control** plane and **data** plane are the traditional elements which allow to store, manage and retrieve the data.
 They are in daily use and help the customers to govern and use their data.
-In most cases - the data Plain gives a superficial projection of the real knowledge of data:
+In most cases - the data plane gives a superficial projection of the real knowledge of data:
  - Only query the exact format that was ingested 
  - Unstructured data can be utilized only for very naive use-cases
  - Rules and Alerts needs to be manages and examined out of scope
  - Fusion/Correlation of similar data concerns need to be done out of scope
  - Anomaly detections and data quality measurements is also done out of scope
 
-With all these important and common use cases out of scope for both the manage and data Plain - the creation of a knowledge Plain is necessary evolution.
+With all these important and common use cases out of scope for both the manage and data plane - the creation of a knowledge plane is necessary evolution.
 
-The **Knowledge Plan** is an abstract level that is residing on top of the data and management plans. This Plain is responsible for
+The **Knowledge Plan** is an abstract level that is residing on top of the data and management plans. This plane is responsible for
  1) **Using an Ontology to Describe & Understanding the customer data**
  2) **Infer schema from unstructured data according to context**
  3) **Fuse & correlate ingested data into meaningful insights** 
  4) **Allow creations of SLO/KPI to measure the data & service quality**
  5) **Automatically identify anomalies on the flowing data stream**
 
-These capabilities will be an integrative part of the knowledge Plain - allowing the customer to interact with the logical
+These capabilities will be an integrative part of the knowledge plane - allowing the customer to interact with the logical
 level of its domain entities and be unaware of the hidden complexities of the ingestion tier and the physical structure.
 
 **_Main Components of the Knowledge Plan_**
@@ -95,25 +94,53 @@ The query language allows simple and direct expression of the logical concerns i
 The query language grammar and operators are driven towards reflecting the domain taxonomy with a clear understanding that
 many performance and optimization concerns are ignored for this reason (these are pushed down to the engine to auto-optimize).
 
-### Domain Specific Visualization
+### Domain Specific Visualization - UX Widget
 Visualize the specific user-domain in his own symbols and specific infographic depiction.
 ![](../img/domain-specific-visualization.png)
+Such user experience driven capability that reflects the inherited graph nature of the domain will simplify and allow better usage of the engine capabilities.
+The non-expert customer will be given a first-hand experience with graph based queries, which will allow him to easily translate his verbal queries.
 
 
-### Results visualization and exploration
+### Results visualization and exploration - UX Widget
 ![](../img/data-exploration.png)
-...
+The same concept with the queries' visualization will be reflected in the results' visualization. Users will visually be able to explore and understand in the most immediate manner
+the actual logical domain structure and relationship.
 
-...
+The results will also allow interactive exploration of the domain entities by continuing the traversing of the presented entities using a graph explorer.
+The results' visualization will also allow to create faceting filtering on top of the presented entities to further dice and intersect the data.
 
 
-### Assets Discovery & Catalog Services
-The Knowledge Plain will auto describe and build the catalog resources that compose the customer's 
-...
+### Catalog Insight
+![](../img/insight.png)
 
-...
+The catalog insight component will allow to observe the different domain-metadata entities and relationships composition and display insightful information on top 
+of the metadata exploration.
 
-...
+Such insight information includes:
+ - Amount of elements of each type
+ - Amount of relations between different domain elements and their variance
+ - Variance of elements with respect to top common categories (such as geography variance in person's place of birth field)
+ - Time-line describing the ingestion time for each selected domain entity
+ - Histogram scale for categorical related measurements such as connectivity between similar entities groups  
+ - Histogram scale for long tail related measurements such as graph entity's degree
+ - Cloud heat map of major centrality components
+
+
+### Assets Discovery & Catalog Services 
+![](../img/resource-discovery.png)
+
+The Knowledge plane will auto describe and build the catalog resources that compose the customer's entire assets
+
+**_Let's consider the observability knowledge domain - our main assets categories will compose of something like:_**
+
+- Physical based components  
+- Cloud based components  
+- Service based components  
+- Software based components  
+
+This phase is done using the ingested logs data and being able to analyze the logs structure and content and populate the discovery matrix.
+This discovery panel will also be time aware - it will be able to present the timely evolution of the customer's resources and see how specific
+categories of elements have changed over time.
 
 
 ### PKI and SLO/SLA 
@@ -121,6 +148,34 @@ The Knowledge Plain will auto describe and build the catalog resources that comp
 Defining and governance for desired behavior is a crucial feature of modern systems.
 Both data quality and functioning operations are a mandatory requirement from almost every data-monitoring & observability system.  
 
+**_Let's consider the observability knowledge domain - our SLO / SLA / PKI will be composed of the following:_**
+
+SLOs are meant to capture high-level business objectives and help reduce alerts. We need easily define SLO and to provide automatic tracking of the SLO, and reports each violation on the Incidents page.
+
+#### What do we want to measure and observer
+ - **Requests** is about rate, latency, and error. Each Anomaly is verified with a range of standard deviation and percentage deviation.
+ - **Resource** section is about CPU, Memory, Disk, Network, 
+
+Resources like disk have I/O rate ps metrics (bytes read/write), so we have the ability to track anomalies with respect to these measurements.
+
+**Health observation** is mostly about all the failure incidents in various domains - organize the domain rules by groups and within each group, the user can edit each individual rule.
+![](../img/rate-measurement.png)
+
+### Incident Managements / Research
+Once a violation of SLO or some alert rule was fired - they will both be present in the Incident management panel.
+The incident panel will allow to further investigate and drill down into the incident and verify what is the root cause.
+
+**These include**:
+ - Log-Level research   - start from a single error / alert log 
+ - Trace-Level research - start from a trace that is indicated as anomaly 
+ - SLO research         - start from a mis-behaving service / resource
+
+Each of these research entry point will have the capability to drill down (into specific log or resource)
+or zoom out from a single log to its containing span, initiating service/host and ect. 
+
+Graph query capability will also be available here to further investigate.
+
+![](../img/trace-research.png)
 
 ### ML/AI Insight
 **Knowledge Graph Neural Networks  -** 
@@ -166,13 +221,25 @@ In other words, we start with a question. These questions can range from asking 
 
 **Data Fusion** 
 
-...
-
-...
-
+See [Ingestion Normalization](IngestionNormalization.md)
 
 **Data Correlation** 
 
-...
+**_Let's consider the observability knowledge domain - we can offer the following correlations:_**
 
-...
+**1. Correlate Metrics**
+
+Metrics can be correlated by their abnormal behavior. If two metrics are independent, the probability that they will have overlapping anomalies gets lower. Therefore two or more metrics that have abnormal similarity, are often correlated by the occurrence of a particular incident.
+
+**2. Correlate Logs**
+
+Logs are normally long semi-structured strings. These are generally machine, app or service generated. More or less every log generated has a timestamp associated with it. Hence, the time-based semi-structural nature of logs make them a good candidate for pattern matching and correlation.
+
+**3. Correlate Logs to Metrics**
+
+Logs to Metrics correlation are useful to link between a logged incident and a set of recorded metrics. This correlation can be made based of time-stamp when the log was generated and looking at metric anomalies that happened during the same time-stamp window.
+
+**4. Correlate Logs and Traces**
+
+The connection between log and traces can be made by adding trace id, environment, service and version values in logs. Thereby making it easier to link already structured traces and semi-structured logs.
+

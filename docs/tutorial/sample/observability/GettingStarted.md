@@ -11,8 +11,8 @@ We currently have two options doing so:
 In our example we are following the second option since current customer already have existing indices with pre-configured mapping
 For simplicity we have provided the Observability index provider configuration file which is the product of this reverse constructions.
 
-Please create the index templates using the generation API which accepts the index-provider configuration and generates the
-index template mapping accordingly.
+Please create the index templates using the attached mapping template which are in correlation with the index-provider configuration and reflects the
+actual index structure accordingly.
 
 Once the index templates mapping is created we can create the 3 relevant indices and start ingesting observability data.
 
