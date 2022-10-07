@@ -37,8 +37,8 @@ import org.opensearch.graph.test.framework.index.GlobalSearchEmbeddedNode;
 import org.opensearch.graph.test.framework.index.MappingFileConfigurer;
 import org.opensearch.graph.test.framework.index.SearchEmbeddedNode;
 import org.opensearch.graph.test.framework.populator.SearchEngineDataPopulator;
-import org.opensearch.graph.unipop.schemaProviders.*;
-import org.opensearch.graph.unipop.schemaProviders.indexPartitions.StaticIndexPartitions;
+import org.opensearch.graph.unipop.schema.providers.*;
+import org.opensearch.graph.unipop.schema.providers.indexPartitions.StaticIndexPartitions;
 
 import java.nio.file.Paths;
 import java.util.*;

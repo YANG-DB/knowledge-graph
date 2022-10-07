@@ -45,7 +45,7 @@ import org.opensearch.graph.unipop.controller.search.SearchOrderProviderFactory;
 import org.opensearch.graph.unipop.converter.SearchHitScrollIterable;
 import org.opensearch.graph.unipop.predicates.SelectP;
 import org.opensearch.graph.unipop.promise.TraversalConstraint;
-import org.opensearch.graph.unipop.schemaProviders.GraphElementSchemaProvider;
+import org.opensearch.graph.unipop.schema.providers.GraphElementSchemaProvider;
 import javaslang.collection.Stream;
 import org.apache.tinkerpop.gremlin.process.traversal.step.util.HasContainer;
 import org.apache.tinkerpop.gremlin.structure.Edge;

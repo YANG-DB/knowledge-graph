@@ -13,7 +13,7 @@ import org.opensearch.graph.unipop.promise.Constraint;
 import org.opensearch.graph.unipop.promise.Promise;
 import org.opensearch.graph.unipop.promise.TraversalConstraint;
 import org.opensearch.graph.unipop.promise.TraversalPromise;
-import org.opensearch.graph.unipop.schemaProviders.EmptyGraphElementSchemaProvider;
+import org.opensearch.graph.unipop.schema.providers.EmptyGraphElementSchemaProvider;
 import org.opensearch.graph.unipop.structure.SearchUniGraph;
 import org.opensearch.graph.unipop.structure.promise.PromiseVertex;
 import org.apache.tinkerpop.gremlin.process.traversal.Traversal;

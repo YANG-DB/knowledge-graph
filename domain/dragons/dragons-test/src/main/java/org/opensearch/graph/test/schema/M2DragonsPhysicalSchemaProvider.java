@@ -23,9 +23,8 @@ package org.opensearch.graph.test.schema;
 
 
 import org.opensearch.graph.model.GlobalConstants;
-import org.opensearch.graph.model.schema.BaseTypeElement;
-import org.opensearch.graph.unipop.schemaProviders.*;
-import org.opensearch.graph.unipop.schemaProviders.indexPartitions.StaticIndexPartitions;
+import org.opensearch.graph.unipop.schema.providers.*;
+import org.opensearch.graph.unipop.schema.providers.indexPartitions.StaticIndexPartitions;
 import javaslang.collection.Stream;
 import org.apache.tinkerpop.gremlin.process.traversal.dsl.graph.__;
 import org.apache.tinkerpop.gremlin.structure.Direction;
@@ -36,7 +35,7 @@ import java.util.Collections;
 import java.util.Optional;
 
 import static org.opensearch.graph.model.schema.BaseTypeElement.*;
-import static org.opensearch.graph.unipop.schemaProviders.GraphEdgeSchema.Application.endA;
+import static org.opensearch.graph.unipop.schema.providers.GraphEdgeSchema.Application.endA;
 import static org.opensearch.graph.test.data.DragonsOntology.FIRE;
 
 /**

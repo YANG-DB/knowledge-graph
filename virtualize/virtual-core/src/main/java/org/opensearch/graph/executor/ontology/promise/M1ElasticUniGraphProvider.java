@@ -40,7 +40,7 @@ import org.opensearch.graph.unipop.controller.promise.PromiseVertexController;
 import org.opensearch.graph.unipop.controller.promise.PromiseVertexFilterController;
 import org.opensearch.graph.unipop.controller.search.SearchOrderProviderFactory;
 import org.opensearch.graph.unipop.process.traversal.strategy.StandardStrategyProvider;
-import org.opensearch.graph.unipop.schemaProviders.GraphElementSchemaProvider;
+import org.opensearch.graph.unipop.schema.providers.GraphElementSchemaProvider;
 import org.opensearch.graph.unipop.structure.SearchUniGraph;
 import org.opensearch.client.Client;
 import org.unipop.configuration.UniGraphConfiguration;

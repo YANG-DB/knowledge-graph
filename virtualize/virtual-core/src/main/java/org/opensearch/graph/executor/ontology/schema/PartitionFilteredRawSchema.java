@@ -27,7 +27,7 @@ package org.opensearch.graph.executor.ontology.schema;
 import com.google.inject.Inject;
 import com.google.inject.Provider;
 import com.google.inject.name.Named;
-import org.opensearch.graph.unipop.schemaProviders.indexPartitions.IndexPartitions;
+import org.opensearch.graph.unipop.schema.providers.indexPartitions.IndexPartitions;
 import javaslang.collection.Stream;
 import org.opensearch.client.Client;
 

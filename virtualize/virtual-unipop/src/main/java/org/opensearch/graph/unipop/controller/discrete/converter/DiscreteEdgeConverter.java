@@ -33,9 +33,9 @@ import org.opensearch.graph.unipop.controller.utils.idProvider.HashEdgeIdProvide
 import org.opensearch.graph.unipop.controller.utils.idProvider.SimpleEdgeIdProvider;
 import org.opensearch.graph.unipop.controller.utils.map.MapHelper;
 import org.opensearch.graph.unipop.controller.utils.traversal.TraversalValuesByKeyProvider;
-import org.opensearch.graph.unipop.schemaProviders.GraphEdgeSchema;
-import org.opensearch.graph.unipop.schemaProviders.GraphElementPropertySchema;
-import org.opensearch.graph.unipop.schemaProviders.GraphRedundantPropertySchema;
+import org.opensearch.graph.unipop.schema.providers.GraphEdgeSchema;
+import org.opensearch.graph.unipop.schema.providers.GraphElementPropertySchema;
+import org.opensearch.graph.unipop.schema.providers.GraphRedundantPropertySchema;
 import org.opensearch.graph.unipop.structure.discrete.DiscreteEdge;
 import org.opensearch.graph.unipop.structure.discrete.DiscreteVertex;
 import javaslang.collection.Stream;

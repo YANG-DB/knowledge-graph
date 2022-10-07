@@ -33,11 +33,9 @@ import org.opensearch.graph.model.ontology.Ontology;
 import org.opensearch.graph.model.query.entity.EEntityBase;
 import org.opensearch.graph.model.query.entity.ETyped;
 import org.opensearch.graph.model.query.properties.*;
-import org.opensearch.graph.unipop.schemaProviders.GraphElementPropertySchema;
+import org.opensearch.graph.unipop.schema.providers.GraphElementPropertySchema;
 
-import java.util.List;
 import java.util.Optional;
-import java.util.stream.Collectors;
 
 public class NestingPropertiesTransformationAsgStrategy implements AsgStrategy {
 
@@ -68,7 +66,7 @@ public class NestingPropertiesTransformationAsgStrategy implements AsgStrategy {
 
         //if eProp is referring to a nested entity - wrap as a nested eProp with the appropriate 'path' field
         //check is this prop actually regarded as child mapping in the schema definition
-        Optional<GraphElementPropertySchema> propertySchema = schemaProviderFactory.get(ontologyAccessor.get()).getPropertySchema(eProp.getpType());
+        Optional<GraphElementPropertySchema> propertySchema = schemaProviderFactory.get(ontologyAccessor.get()).getPropertySchema(eProp.getpType(), eType.geteType() );
         if(propertySchema.isPresent()) {
             if(propertySchema.get().getIndexingSchema(GraphElementPropertySchema.IndexingSchema.Type.nested).isPresent()) {
                 String path = propertySchema.get().getIndexingSchema(GraphElementPropertySchema.IndexingSchema.Type.nested).get().getName();

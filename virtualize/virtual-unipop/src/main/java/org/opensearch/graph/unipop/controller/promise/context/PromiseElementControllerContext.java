@@ -21,18 +21,13 @@ package org.opensearch.graph.unipop.controller.promise.context;
  */
 
 
-
-
-
-import org.opensearch.graph.unipop.controller.common.context.ElementControllerContext;
-import org.opensearch.graph.unipop.promise.*;
-import org.opensearch.graph.unipop.schemaProviders.*;
-import org.opensearch.graph.unipop.promise.Promise;
-import org.opensearch.graph.unipop.promise.TraversalConstraint;
-import org.opensearch.graph.unipop.structure.ElementType;
 import javaslang.collection.Stream;
 import org.apache.tinkerpop.gremlin.process.traversal.step.util.HasContainer;
-import org.opensearch.graph.unipop.schemaProviders.GraphElementSchemaProvider;
+import org.opensearch.graph.unipop.controller.common.context.ElementControllerContext;
+import org.opensearch.graph.unipop.promise.Promise;
+import org.opensearch.graph.unipop.promise.TraversalConstraint;
+import org.opensearch.graph.unipop.schema.providers.GraphElementSchemaProvider;
+import org.opensearch.graph.unipop.structure.ElementType;
 import org.unipop.query.StepDescriptor;
 import org.unipop.structure.UniGraph;
 

@@ -101,6 +101,8 @@ public class GlobalConstants {
 
     public static class EdgeSchema {
         public static String DIRECTION = "direction";
+        public static String DIRECTION_IN = "in";
+        public static String DIRECTION_OUT = "out";
 
         public static String SOURCE = "entityA";//formally was source
         public static String SOURCE_ID = "entityA.id";//formally was source.id
@@ -111,5 +113,9 @@ public class GlobalConstants {
         public static String DEST_ID = "entityB.id";//formally was target.id
         public static String DEST_TYPE = "entityB.type";//formally was target.type
         public static String DEST_NAME = "entityB.name";//formally was target.name
+    }
+
+    public static class Mapping {
+        public static final String KEYWORD = "keyword";
     }
 }

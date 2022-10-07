@@ -30,7 +30,7 @@ import org.opensearch.graph.dispatcher.provision.CursorRuntimeProvision;
 import org.opensearch.graph.dispatcher.resource.QueryResource;
 import org.opensearch.graph.model.ontology.Ontology;
 import org.opensearch.graph.model.transport.cursor.CreateCursorRequest;
-import org.opensearch.graph.unipop.schemaProviders.GraphElementSchemaProvider;
+import org.opensearch.graph.unipop.schema.providers.GraphElementSchemaProvider;
 import org.apache.tinkerpop.gremlin.process.traversal.Path;
 import org.apache.tinkerpop.gremlin.process.traversal.Traversal;
 import org.opensearch.client.Client;

@@ -32,10 +32,10 @@ import org.opensearch.graph.executor.ontology.GraphElementSchemaProviderFactory;
 import org.opensearch.graph.model.ontology.Ontology;
 import org.opensearch.graph.model.transport.ContentResponse;
 import org.opensearch.graph.model.transport.ContentResponse.Builder;
-import org.opensearch.graph.unipop.schemaProviders.GraphEdgeSchema;
-import org.opensearch.graph.unipop.schemaProviders.GraphElementConstraint;
-import org.opensearch.graph.unipop.schemaProviders.GraphElementSchemaProvider;
-import org.opensearch.graph.unipop.schemaProviders.GraphVertexSchema;
+import org.opensearch.graph.unipop.schema.providers.GraphEdgeSchema;
+import org.opensearch.graph.unipop.schema.providers.GraphElementConstraint;
+import org.opensearch.graph.unipop.schema.providers.GraphElementSchemaProvider;
+import org.opensearch.graph.unipop.schema.providers.GraphVertexSchema;
 import javaslang.collection.Stream;
 
 import java.util.List;

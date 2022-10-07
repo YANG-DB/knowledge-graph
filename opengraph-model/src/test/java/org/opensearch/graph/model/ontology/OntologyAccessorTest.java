@@ -257,28 +257,27 @@ public class OntologyAccessorTest extends TestCase {
     }
 
     @Test
-    @Ignore("Under construction")
     public void testNestedParent() {
-/*
+        accessor = new Ontology.Accessor(OntologyFinalizer.finalize(accessor.get()));
+        Assert.assertFalse(accessor.nestedParent("Dragon", "dragons").isPresent());
         Assert.assertFalse(accessor.nestedParent("Dragon", "person.origin.name").isPresent());
         Assert.assertFalse(accessor.nestedParent("Dragon", "dragons.origin.name").isPresent());
         Assert.assertFalse(accessor.nestedParent("Person", "dragons.origin.name").isPresent());
         Assert.assertFalse(accessor.nestedParent("Kingdom", "origin.name").isPresent());
 
         Assert.assertTrue(accessor.nestedParent("Kingdom", "dragons.origin.name").isPresent());
-        Assert.assertEquals("Dragons",accessor.nestedParent("Kingdom", "dragons.origin.name").get().geteType());
-*/
+        Assert.assertEquals("Dragon",accessor.nestedParent("Kingdom", "dragons.origin.name").get().geteType());
     }
 
     @Test
     public void testGetNestedEntity() {
-        Assert.assertFalse(accessor.getNestedEntity("Dragon", "name").isPresent());
-        Assert.assertFalse(accessor.getNestedEntity("Dragon", "id").isPresent());
-        Assert.assertFalse(accessor.getNestedEntity("Person", "name").isPresent());
-        Assert.assertFalse(accessor.getNestedEntity("Person", "id").isPresent());
-        Assert.assertFalse(accessor.getNestedEntity("Person", "origin").isPresent());
-        Assert.assertTrue(accessor.getNestedEntity("Person", "origin.name").isPresent());
-        Assert.assertEquals("Kingdom", accessor.getNestedEntity("Person", "origin.name").get().geteType());
+        Assert.assertFalse(accessor.nestedEntity("Dragon", "name").isPresent());
+        Assert.assertFalse(accessor.nestedEntity("Dragon", "id").isPresent());
+        Assert.assertFalse(accessor.nestedEntity("Person", "name").isPresent());
+        Assert.assertFalse(accessor.nestedEntity("Person", "id").isPresent());
+        Assert.assertFalse(accessor.nestedEntity("Person", "origin").isPresent());
+        Assert.assertTrue(accessor.nestedEntity("Person", "origin.name").isPresent());
+        Assert.assertEquals("Kingdom", accessor.nestedEntity("Person", "origin.name").get().geteType());
     }
 
     @Test

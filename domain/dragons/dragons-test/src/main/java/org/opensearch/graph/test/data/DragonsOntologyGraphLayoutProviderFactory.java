@@ -25,8 +25,8 @@ package org.opensearch.graph.test.data;
 import com.jayway.jsonpath.JsonPath;
 import org.opensearch.graph.executor.ontology.GraphLayoutProviderFactory;
 import org.opensearch.graph.model.ontology.Ontology;
-import org.opensearch.graph.unipop.schemaProviders.GraphLayoutProvider;
-import org.opensearch.graph.unipop.schemaProviders.GraphRedundantPropertySchema;
+import org.opensearch.graph.unipop.schema.providers.GraphLayoutProvider;
+import org.opensearch.graph.unipop.schema.providers.GraphRedundantPropertySchema;
 import net.minidev.json.JSONArray;
 
 import javax.inject.Inject;

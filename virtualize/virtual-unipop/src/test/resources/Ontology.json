@@ -1,0 +1,70 @@
+{
+  "ont": "Ontology",
+  "entityTypes": [
+    {
+      "eType": "Outer",
+      "name": "Outer",
+      "properties": [
+        "primitive",
+        "text",
+        "a",
+        "b",
+        "c"
+      ]
+    },
+    {
+      "eType": "A",
+      "name": "A",
+      "properties": [
+        "primitive",
+        "text",
+        "b",
+        "c"
+      ]
+    },
+    {
+      "eType": "B",
+      "name": "B",
+      "properties": [
+        "primitive",
+        "text",
+        "c"
+      ]
+    },
+    {
+      "eType": "C",
+      "name": "C",
+      "properties": [
+        "primitive",
+        "text"
+      ]
+    }
+  ],
+  "properties": [
+    {
+      "pType": "primitive",
+      "name": "primitive",
+      "type": "int"
+    },
+    {
+      "pType": "text",
+      "name": "text",
+      "type": "text"
+    },
+    {
+      "pType": "a",
+      "name": "a",
+      "type": "A"
+    },
+    {
+      "pType": "b",
+      "name": "b",
+      "type": "B"
+    },
+    {
+      "pType": "c",
+      "name": "c",
+      "type": "C"
+    }
+  ]
+}

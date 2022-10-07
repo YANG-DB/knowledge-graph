@@ -4,7 +4,6 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.typesafe.config.Config;
 import org.junit.Assert;
 import org.junit.Before;
-import org.junit.Ignore;
 import org.junit.Test;
 import org.mockito.Mockito;
 import org.opensearch.graph.dispatcher.ontology.IndexProviderFactory;
@@ -14,11 +13,11 @@ import org.opensearch.graph.executor.ontology.OntologyGraphElementSchemaProvider
 import org.opensearch.graph.model.ontology.Ontology;
 import org.opensearch.graph.model.ontology.OntologyFinalizer;
 import org.opensearch.graph.model.schema.IndexProvider;
-import org.opensearch.graph.unipop.schemaProviders.GraphEdgeSchema;
-import org.opensearch.graph.unipop.schemaProviders.GraphElementPropertySchema;
-import org.opensearch.graph.unipop.schemaProviders.GraphElementSchemaProvider;
-import org.opensearch.graph.unipop.schemaProviders.GraphVertexSchema;
-import org.opensearch.graph.unipop.schemaProviders.indexPartitions.StaticIndexPartitions;
+import org.opensearch.graph.unipop.schema.providers.GraphEdgeSchema;
+import org.opensearch.graph.unipop.schema.providers.GraphElementPropertySchema;
+import org.opensearch.graph.unipop.schema.providers.GraphElementSchemaProvider;
+import org.opensearch.graph.unipop.schema.providers.GraphVertexSchema;
+import org.opensearch.graph.unipop.schema.providers.indexPartitions.StaticIndexPartitions;
 
 import java.io.InputStream;
 import java.util.Arrays;
@@ -92,12 +91,12 @@ public class GraphElementOntologySchemaProviderFactoryTest {
         GraphElementSchemaProviderFactory jsonFactory = getFactory();
         GraphElementSchemaProvider schemaProvider = jsonFactory.get(ontology);
         Assert.assertNotNull(schemaProvider);
-        Iterable<GraphElementPropertySchema> propertySchemas = schemaProvider.getPropertyByNameSchemas();
+        Iterable<GraphElementPropertySchema> propertySchemas = schemaProvider.getVertexPropertySchemas();
         Assert.assertTrue(propertySchemas.iterator().hasNext());
         List<GraphElementPropertySchema> properties = StreamSupport.stream(propertySchemas.spliterator(), false)
                 .collect(Collectors.toList());
 
-        Assert.assertEquals(37, properties.size());
+        Assert.assertEquals(49, properties.size());
         Assert.assertEquals(1, properties.stream().filter(p -> p.getType().equals("Profession")).count());
         Assert.assertEquals(6, properties.stream().filter(p -> p.getName().startsWith("profession.")).count());
 

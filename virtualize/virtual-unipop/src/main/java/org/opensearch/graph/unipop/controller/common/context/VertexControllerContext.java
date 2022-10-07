@@ -27,7 +27,7 @@ package org.opensearch.graph.unipop.controller.common.context;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import org.opensearch.graph.unipop.promise.TraversalConstraint;
-import org.opensearch.graph.unipop.schemaProviders.GraphElementSchemaProvider;
+import org.opensearch.graph.unipop.schema.providers.GraphElementSchemaProvider;
 import org.opensearch.graph.unipop.structure.ElementType;
 import org.apache.tinkerpop.gremlin.process.traversal.step.util.HasContainer;
 import org.apache.tinkerpop.gremlin.structure.Direction;

@@ -36,9 +36,9 @@ import org.opensearch.graph.model.query.entity.EEntityBase;
 import org.opensearch.graph.model.query.entity.ETyped;
 import org.opensearch.graph.model.query.entity.EUntyped;
 import org.opensearch.graph.model.query.properties.*;
-import org.opensearch.graph.unipop.schemaProviders.*;
-import org.opensearch.graph.unipop.schemaProviders.indexPartitions.IndexPartitions;
-import org.opensearch.graph.unipop.schemaProviders.indexPartitions.TimeSeriesIndexPartitions;
+import org.opensearch.graph.unipop.schema.providers.*;
+import org.opensearch.graph.unipop.schema.providers.indexPartitions.IndexPartitions;
+import org.opensearch.graph.unipop.schema.providers.indexPartitions.TimeSeriesIndexPartitions;
 import javaslang.collection.Stream;
 
 import java.util.*;
@@ -142,8 +142,9 @@ public class EBaseStatisticsProvider implements StatisticsProvider {
 
             GraphElementPropertySchema graphElementPropertySchema;
             if (relProp instanceof RedundantRelProp){
-                graphElementPropertySchema = graphEdgeSchema.getEndB().get().getRedundantProperty(graphElementSchemaProvider.getPropertySchema(property.getName()).get()).get();
-            }else {
+                graphElementPropertySchema = graphEdgeSchema.getEndB().get()
+                        .getRedundantProperty(graphElementSchemaProvider.getPropertySchema(property.getName(),graphEdgeSchema.getEndB().get().getLabel().get() ).get()).get();
+            } else {
                 graphElementPropertySchema = graphEdgeSchema.getProperty(property).get();
             }
 

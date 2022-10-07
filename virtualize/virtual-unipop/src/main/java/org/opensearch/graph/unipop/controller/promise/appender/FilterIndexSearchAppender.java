@@ -28,7 +28,7 @@ import org.opensearch.graph.unipop.controller.common.appender.SearchAppender;
 import org.opensearch.graph.unipop.controller.common.context.VertexControllerContext;
 import org.opensearch.graph.unipop.controller.search.SearchBuilder;
 import org.opensearch.graph.unipop.promise.IdPromise;
-import org.opensearch.graph.unipop.schemaProviders.indexPartitions.IndexPartitions;
+import org.opensearch.graph.unipop.schema.providers.indexPartitions.IndexPartitions;
 import org.opensearch.graph.unipop.structure.promise.PromiseVertex;
 import javaslang.collection.Stream;
 

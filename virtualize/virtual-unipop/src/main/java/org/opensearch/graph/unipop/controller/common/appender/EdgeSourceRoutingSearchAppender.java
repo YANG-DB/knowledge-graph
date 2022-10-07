@@ -27,10 +27,10 @@ package org.opensearch.graph.unipop.controller.common.appender;
 import org.opensearch.graph.unipop.controller.common.context.VertexControllerContext;
 import org.opensearch.graph.unipop.controller.search.SearchBuilder;
 import org.opensearch.graph.unipop.controller.utils.traversal.TraversalValuesByKeyProvider;
-import org.opensearch.graph.unipop.schemaProviders.GraphEdgeSchema;
-import org.opensearch.graph.unipop.schemaProviders.GraphElementPropertySchema;
-import org.opensearch.graph.unipop.schemaProviders.GraphRedundantPropertySchema;
-import org.opensearch.graph.unipop.schemaProviders.GraphVertexSchema;
+import org.opensearch.graph.unipop.schema.providers.GraphEdgeSchema;
+import org.opensearch.graph.unipop.schema.providers.GraphElementPropertySchema;
+import org.opensearch.graph.unipop.schema.providers.GraphRedundantPropertySchema;
+import org.opensearch.graph.unipop.schema.providers.GraphVertexSchema;
 import javaslang.collection.Stream;
 import org.apache.tinkerpop.gremlin.structure.T;
 

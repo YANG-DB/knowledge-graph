@@ -8,8 +8,7 @@ import org.opensearch.graph.unipop.controller.promise.PromiseElementVertexContro
 import org.opensearch.graph.unipop.controller.search.SearchOrderProvider;
 import org.opensearch.graph.unipop.controller.search.SearchOrderProviderFactory;
 import org.opensearch.graph.unipop.promise.*;
-import org.opensearch.graph.unipop.promise.*;
-import org.opensearch.graph.unipop.schemaProviders.EmptyGraphElementSchemaProvider;
+import org.opensearch.graph.unipop.schema.providers.EmptyGraphElementSchemaProvider;
 import org.opensearch.graph.unipop.structure.promise.PromiseVertex;
 import javaslang.collection.Stream;
 import org.apache.tinkerpop.gremlin.process.traversal.P;

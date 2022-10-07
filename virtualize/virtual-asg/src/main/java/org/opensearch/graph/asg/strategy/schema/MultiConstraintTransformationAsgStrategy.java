@@ -35,16 +35,16 @@ import org.opensearch.graph.model.query.entity.ETyped;
 import org.opensearch.graph.model.query.properties.*;
 import org.opensearch.graph.model.query.properties.constraint.ConstraintOp;
 import org.opensearch.graph.model.query.properties.projection.IdentityProjection;
-import org.opensearch.graph.unipop.schemaProviders.GraphElementPropertySchema;
-import org.opensearch.graph.unipop.schemaProviders.GraphElementSchemaProvider;
-import org.opensearch.graph.unipop.schemaProviders.GraphVertexSchema;
+import org.opensearch.graph.unipop.schema.providers.GraphElementPropertySchema;
+import org.opensearch.graph.unipop.schema.providers.GraphElementSchemaProvider;
+import org.opensearch.graph.unipop.schema.providers.GraphVertexSchema;
 import javaslang.collection.Stream;
 
 import java.util.ArrayList;
 import java.util.Optional;
 import java.util.Set;
 
-import static org.opensearch.graph.unipop.schemaProviders.GraphElementPropertySchema.IndexingSchema.Type.exact;
+import static org.opensearch.graph.unipop.schema.providers.GraphElementPropertySchema.IndexingSchema.Type.exact;
 
 public class MultiConstraintTransformationAsgStrategy implements AsgStrategy {
     //region Constructors

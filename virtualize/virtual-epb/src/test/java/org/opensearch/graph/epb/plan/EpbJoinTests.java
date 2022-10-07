@@ -30,12 +30,11 @@ import org.opensearch.graph.model.execution.plan.descriptors.PlanWithCostDescrip
 import org.opensearch.graph.model.execution.plan.entity.EntityJoinOp;
 import org.opensearch.graph.model.ontology.Ontology;
 import org.opensearch.graph.model.query.Rel;
-import org.opensearch.graph.model.schema.BaseTypeElement;
 import org.opensearch.graph.unipop.controller.utils.traversal.TraversalValuesByKeyProvider;
-import org.opensearch.graph.unipop.schemaProviders.*;
-import org.opensearch.graph.unipop.schemaProviders.indexPartitions.IndexPartitions;
-import org.opensearch.graph.unipop.schemaProviders.indexPartitions.StaticIndexPartitions;
-import org.opensearch.graph.unipop.schemaProviders.indexPartitions.TimeSeriesIndexPartitions;
+import org.opensearch.graph.unipop.schema.providers.*;
+import org.opensearch.graph.unipop.schema.providers.indexPartitions.IndexPartitions;
+import org.opensearch.graph.unipop.schema.providers.indexPartitions.StaticIndexPartitions;
+import org.opensearch.graph.unipop.schema.providers.indexPartitions.TimeSeriesIndexPartitions;
 import javaslang.collection.Stream;
 import org.apache.tinkerpop.gremlin.process.traversal.dsl.graph.__;
 import org.apache.tinkerpop.gremlin.structure.Direction;

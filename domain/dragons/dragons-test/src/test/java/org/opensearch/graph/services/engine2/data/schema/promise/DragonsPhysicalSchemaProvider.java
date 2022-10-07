@@ -1,9 +1,11 @@
 package org.opensearch.graph.services.engine2.data.schema.promise;
 
 import org.opensearch.graph.model.GlobalConstants;
-import org.opensearch.graph.model.schema.BaseTypeElement;
-import org.opensearch.graph.unipop.schemaProviders.*;
-import org.opensearch.graph.unipop.schemaProviders.indexPartitions.StaticIndexPartitions;
+import org.opensearch.graph.unipop.schema.providers.GraphEdgeSchema;
+import org.opensearch.graph.unipop.schema.providers.GraphElementSchemaProvider;
+import org.opensearch.graph.unipop.schema.providers.GraphRedundantPropertySchema;
+import org.opensearch.graph.unipop.schema.providers.GraphVertexSchema;
+import org.opensearch.graph.unipop.schema.providers.indexPartitions.StaticIndexPartitions;
 import org.apache.tinkerpop.gremlin.structure.Direction;
 
 import java.util.Arrays;

@@ -1,0 +1,122 @@
+{
+  "ontology":"Observability",
+  "entities": [
+    {
+      "type": "Span",
+      "partition": "static",
+      "mapping":"Index",
+      "props": {
+        "values": ["observability-spans"]
+      } ,
+       "nested": [
+             {
+               "type": "Event",
+               "mapping":"child",
+               "partition":"nested",
+               "props": {
+                   "values": ["events"]
+                 }
+             }
+         ]
+    },
+    {
+      "type": "Log",
+      "partition": "static",
+      "mapping":"Index",
+      "props": {
+        "values": ["observability-logs"]
+      }
+    },
+    {
+      "type": "Event",
+      "partition": "static",
+      "mapping": "Embedded",
+      "props": {
+        "values": [
+          "observability-logs"
+        ]
+      }
+    },
+   {
+      "type": "Geo",
+      "partition": "static",
+      "mapping":"Embedded",
+      "props": {
+        "values": ["observability-logs"]
+      }
+    },
+   {
+      "type": "Geo",
+      "partition": "static",
+      "mapping":"Embedded",
+      "props": {
+        "values": ["observability-logs"]
+      }
+    },
+    {
+      "type": "Machine",
+      "partition": "static",
+      "mapping":"Embedded",
+      "props": {
+        "values": ["observability-logs"]
+      }
+    },
+    {
+      "type": "Attributes",
+      "partition": "static",
+      "mapping":"Embedded",
+      "props": {
+        "values": ["observability-spans"]
+      }
+    },
+    {
+      "type": "InstrumentationLibrary",
+      "partition": "static",
+      "mapping":"Embedded",
+      "props": {
+        "values": ["observability-spans"]
+      }
+    },
+    {
+      "type": "Links",
+      "partition": "static",
+      "mapping":"Embedded",
+      "props": {
+        "values": ["observability-spans"]
+      }
+    },
+    {
+      "type": "Resources",
+      "partition": "static",
+      "mapping":"Embedded",
+      "props": {
+        "values": ["observability-spans"]
+      }
+    },
+    {
+      "type": "Status",
+      "partition": "static",
+      "mapping":"Embedded",
+      "props": {
+        "values": ["observability-spans"]
+      }
+     },
+    {
+      "type": "SpanContent",
+      "partition": "static",
+      "mapping":"Embedded",
+      "props": {
+        "values": ["observability-spans"]
+      }
+     },
+    {
+      "type": "TraceGroupFields",
+      "partition": "static",
+      "mapping":"Embedded",
+      "props": {
+        "values": ["observability-spans"]
+      }
+     }
+   ],
+  "relations":[]
+}

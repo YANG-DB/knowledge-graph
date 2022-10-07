@@ -28,8 +28,8 @@ import com.google.inject.Inject;
 import com.google.inject.name.Named;
 import org.opensearch.graph.executor.ontology.GraphElementSchemaProviderFactory;
 import org.opensearch.graph.model.ontology.Ontology;
-import org.opensearch.graph.unipop.schemaProviders.GraphElementSchemaProvider;
-import org.opensearch.graph.unipop.schemaProviders.logging.LoggingGraphElementSchemaProvider;
+import org.opensearch.graph.unipop.schema.providers.GraphElementSchemaProvider;
+import org.opensearch.graph.unipop.schema.providers.logging.LoggingGraphElementSchemaProvider;
 import org.slf4j.Logger;
 
 public class LoggingGraphElementSchemaProviderFactory implements GraphElementSchemaProviderFactory {

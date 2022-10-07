@@ -30,7 +30,7 @@ import org.opensearch.graph.unipop.controller.search.AggregationBuilder;
 import org.opensearch.graph.unipop.controller.search.QueryBuilder;
 import org.opensearch.graph.unipop.controller.utils.traversal.TraversalQueryTranslator;
 import org.opensearch.graph.unipop.controller.utils.traversal.TraversalValuesByKeyProvider;
-import org.opensearch.graph.unipop.schemaProviders.GraphEdgeSchema;
+import org.opensearch.graph.unipop.schema.providers.GraphEdgeSchema;
 import javaslang.collection.Stream;
 import org.apache.tinkerpop.gremlin.process.traversal.Traversal;
 import org.apache.tinkerpop.gremlin.process.traversal.dsl.graph.__;

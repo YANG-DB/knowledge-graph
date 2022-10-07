@@ -4,7 +4,7 @@ import com.google.inject.Inject;
 import org.opensearch.graph.executor.ontology.GraphElementSchemaProviderFactory;
 import org.opensearch.graph.executor.ontology.schema.RawSchema;
 import org.opensearch.graph.model.ontology.Ontology;
-import org.opensearch.graph.unipop.schemaProviders.GraphElementSchemaProvider;
+import org.opensearch.graph.unipop.schema.providers.GraphElementSchemaProvider;
 import com.typesafe.config.Config;
 
 import java.util.HashMap;

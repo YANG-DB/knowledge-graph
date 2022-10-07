@@ -30,7 +30,6 @@ import org.opensearch.graph.model.resourceInfo.GraphError;
 import javaslang.Tuple;
 import javaslang.Tuple2;
 import javaslang.collection.Stream;
-import org.opensearch.graph.model.schema.Entity;
 
 import java.awt.geom.Point2D;
 import java.lang.reflect.Array;
@@ -39,8 +38,6 @@ import java.util.*;
 import java.util.function.Supplier;
 import java.util.stream.Collectors;
 import java.util.stream.StreamSupport;
-
-import static java.util.stream.Stream.*;
 
 /**
  * Created by benishue on 22-Feb-17.
@@ -691,25 +688,50 @@ public class Ontology {
         }
         /**
          * returns parents of nested entity type according to its relevant location in the property name - for example
+         * the pType a.b.c.d with the given eType a => will return empty (a has no parent entity)
          * the pType a.b.c.d with the given eType c => will return the entity b
          * the pType a.b.c.d with the given eType b => will return the entity a
          *
          * @param eType
-         * @param pType
+         * @param propertyKey
          * @return
          */
-        public Optional<EntityType> nestedParent(String eType, String pType) {
-            return Optional.empty();
+        public Optional<EntityType> nestedParent(String eType, String propertyKey) {
+            if(!entity(eType).isPresent() || !pNameOrType(propertyKey).isPresent())
+                return Optional.empty();
+
+            //take the longest sub-string to match the property
+            Optional<String> nestedPropertyName = cascadingElementFieldsPType(eType).stream()
+                    .filter(propertyKey::contains).min((o1, o2) -> o2.length() - o1.length());
+            if(!nestedPropertyName.isPresent())
+                return Optional.empty();
+
+            if(nestedPropertyName.get().equals(propertyKey))
+                return Optional.empty();
+
+            //since the field is combined of cascading entities - we take the last one which is an actual field
+            String subProperty = propertyKey.substring(0,propertyKey.indexOf(nestedPropertyName.get())-1);
+            String[] array = subProperty.split("\\.");
+            if (array.length < 2)
+                return Optional.empty();
+
+            Optional<Property> original = pName(array[array.length - 2]);
+            if (!original.isPresent())
+                return Optional.empty();
+
+            return entity(original.get().getType());
         }
 
         /**
          * for a parent entity, find the nested entity that the given propertyKey belongs to
-         *
+         * for example parent a that has property named b will return empty (b doesn't belong to a nested entity of a)
+         * for example parent a that has property named b.c will return the entity b
+         * for example parent a that has property named b.c.d will return the entity c
          * @param parentEntity
          * @param propertyKey
          * @return
          */
-        public Optional<EntityType> getNestedEntity(String parentEntity, String propertyKey) {
+        public Optional<EntityType> nestedEntity(String parentEntity, String propertyKey) {
             if (!cascadingFieldNameOrType(parentEntity, propertyKey).isPresent())
                 return Optional.empty();
 

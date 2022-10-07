@@ -15,10 +15,10 @@ import org.opensearch.graph.model.query.properties.*;
 import org.opensearch.graph.model.query.properties.constraint.Constraint;
 import org.opensearch.graph.model.query.properties.constraint.ConstraintOp;
 import org.opensearch.graph.model.schema.BaseTypeElement.Type;
-import org.opensearch.graph.unipop.schemaProviders.GraphElementConstraint;
-import org.opensearch.graph.unipop.schemaProviders.GraphElementPropertySchema;
-import org.opensearch.graph.unipop.schemaProviders.GraphElementSchemaProvider;
-import org.opensearch.graph.unipop.schemaProviders.GraphVertexSchema;
+import org.opensearch.graph.unipop.schema.providers.GraphElementConstraint;
+import org.opensearch.graph.unipop.schema.providers.GraphElementPropertySchema;
+import org.opensearch.graph.unipop.schema.providers.GraphElementSchemaProvider;
+import org.opensearch.graph.unipop.schema.providers.GraphVertexSchema;
 
 import java.util.*;
 

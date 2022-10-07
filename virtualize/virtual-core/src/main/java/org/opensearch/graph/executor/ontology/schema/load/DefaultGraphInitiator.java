@@ -36,7 +36,7 @@ import org.opensearch.graph.executor.ontology.schema.RawSchema;
 import org.opensearch.graph.model.ontology.Ontology;
 import org.opensearch.graph.model.resourceInfo.GraphError;
 import org.opensearch.graph.model.schema.IndexProvider;
-import org.opensearch.graph.unipop.schemaProviders.GraphElementSchemaProvider;
+import org.opensearch.graph.unipop.schema.providers.GraphElementSchemaProvider;
 import javaslang.Tuple2;
 import javaslang.collection.Stream;
 import org.opensearch.action.admin.indices.delete.DeleteIndexRequest;

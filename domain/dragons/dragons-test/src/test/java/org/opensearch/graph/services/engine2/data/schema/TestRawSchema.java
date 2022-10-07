@@ -1,7 +1,7 @@
 package org.opensearch.graph.services.engine2.data.schema;
 
 import org.opensearch.graph.executor.ontology.schema.RawSchema;
-import org.opensearch.graph.unipop.schemaProviders.indexPartitions.IndexPartitions;
+import org.opensearch.graph.unipop.schema.providers.indexPartitions.IndexPartitions;
 
 import java.util.Collections;
 import java.util.List;

@@ -1,0 +1,60 @@
+{
+  "ontology":"Ontology",
+  "entities": [
+    {
+      "type": "Outer",
+      "partition": "static",
+      "mapping": "Index",
+      "props": {
+        "values": [
+          "outer-index"
+        ]
+      }
+    },
+    {
+      "type": "A",
+      "partition": "static",
+      "mapping":"Embedded",
+      "props": {
+        "values": ["a-index"]
+      } ,
+      "nested": [
+        {
+          "type": "B",
+          "mapping":"child",
+          "partition":"nested",
+          "props": {
+            "values": ["b"]
+          } ,
+          "nested": [
+            {
+              "type": "C",
+              "mapping":"child",
+              "partition":"nested",
+              "props": {
+                "values": ["c"]
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "type": "B",
+      "partition": "static",
+      "mapping":"Embedded",
+      "props": {
+        "values": ["index-b"]
+      }
+    },
+    {
+      "type": "C",
+      "partition": "static",
+      "mapping":"Embedded",
+      "props": {
+        "values": ["index-c"]
+      }
+    }
+  ],
+  "relations":[]
+}

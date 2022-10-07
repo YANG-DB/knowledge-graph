@@ -28,8 +28,8 @@ import org.opensearch.graph.model.GlobalConstants;
 import org.opensearch.graph.unipop.controller.common.context.VertexControllerContext;
 import org.opensearch.graph.unipop.controller.search.SearchBuilder;
 import org.opensearch.graph.unipop.controller.utils.ElementUtil;
-import org.opensearch.graph.unipop.schemaProviders.GraphVertexSchema;
-import org.opensearch.graph.unipop.schemaProviders.indexPartitions.IndexPartitions;
+import org.opensearch.graph.unipop.schema.providers.GraphVertexSchema;
+import org.opensearch.graph.unipop.schema.providers.indexPartitions.IndexPartitions;
 import javaslang.collection.Stream;
 import org.apache.tinkerpop.gremlin.structure.T;
 

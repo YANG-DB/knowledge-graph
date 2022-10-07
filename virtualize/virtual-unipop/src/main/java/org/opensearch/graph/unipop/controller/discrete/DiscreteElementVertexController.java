@@ -28,7 +28,6 @@ import com.codahale.metrics.MetricRegistry;
 import org.opensearch.graph.dispatcher.provision.ScrollProvisioning;
 import org.opensearch.graph.unipop.controller.OpensearchGraphConfiguration;
 import org.opensearch.graph.unipop.controller.common.appender.*;
-import org.opensearch.graph.unipop.controller.common.appender.*;
 import org.opensearch.graph.unipop.controller.common.context.CompositeControllerContext;
 import org.opensearch.graph.unipop.controller.common.converter.ElementConverter;
 import org.opensearch.graph.unipop.controller.discrete.context.DiscreteElementControllerContext;
@@ -41,7 +40,7 @@ import org.opensearch.graph.unipop.controller.utils.traversal.TraversalHasStepFi
 import org.opensearch.graph.unipop.converter.SearchHitScrollIterable;
 import org.opensearch.graph.unipop.predicates.SelectP;
 import org.opensearch.graph.unipop.promise.TraversalConstraint;
-import org.opensearch.graph.unipop.schemaProviders.GraphElementSchemaProvider;
+import org.opensearch.graph.unipop.schema.providers.GraphElementSchemaProvider;
 import org.opensearch.graph.unipop.structure.ElementType;
 import javaslang.collection.Stream;
 import org.apache.tinkerpop.gremlin.process.traversal.Compare;

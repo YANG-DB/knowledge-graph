@@ -4,7 +4,7 @@ import org.opensearch.graph.model.GlobalConstants;
 import org.opensearch.graph.unipop.controller.promise.context.PromiseElementControllerContext;
 import org.opensearch.graph.unipop.controller.search.SearchBuilder;
 import org.opensearch.graph.unipop.promise.Constraint;
-import org.opensearch.graph.unipop.schemaProviders.EmptyGraphElementSchemaProvider;
+import org.opensearch.graph.unipop.schema.providers.EmptyGraphElementSchemaProvider;
 import org.opensearch.graph.unipop.structure.ElementType;
 import org.apache.tinkerpop.gremlin.process.traversal.Step;
 import org.apache.tinkerpop.gremlin.process.traversal.Traversal;
