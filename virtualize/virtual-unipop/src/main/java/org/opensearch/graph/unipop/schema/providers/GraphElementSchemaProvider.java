@@ -25,6 +25,7 @@ import javaslang.Tuple2;
 import javaslang.collection.Stream;
 import org.apache.tinkerpop.gremlin.structure.Direction;
 import org.opensearch.graph.model.schema.BaseTypeElement;
+import org.opensearch.graph.unipop.schema.providers.indexPartitions.NestedIndexPartitions;
 
 import java.util.*;
 import java.util.stream.Collectors;
@@ -132,7 +133,7 @@ public interface GraphElementSchemaProvider {
             vertexSchemas.getNestedSchemas().forEach(nested->
                 nested.getProperties().forEach(np->
                     this.getPropertySchema(np.getpType(), nested.getLabel().getName())
-                            .ifPresent(p->p.addIndexSchemas(np.getIndexingSchemes()))
+                            .ifPresent(p->p.addIndexSchemas(np.getIndexingSchemes(),index->index instanceof NestedIndexPartitions))
                 )
             );
             return StreamSupport.stream(vertexSchemas.getProperties().spliterator(),false).collect(Collectors.toList());

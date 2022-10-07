@@ -33,6 +33,8 @@ import org.opensearch.graph.model.ontology.Property;
 import java.util.Collections;
 import java.util.Map;
 import java.util.Optional;
+import java.util.function.Predicate;
+import java.util.stream.StreamSupport;
 
 public interface GraphElementPropertySchema {
     String getName();
@@ -45,7 +47,7 @@ public interface GraphElementPropertySchema {
 
     GraphElementPropertySchema addIndexSchema(IndexingSchema indexingSchema);
 
-    GraphElementPropertySchema addIndexSchemas(Iterable<IndexingSchema> indexingSchemes);
+    GraphElementPropertySchema addIndexSchemas(Iterable<IndexingSchema> indexingSchemes, Predicate<IndexingSchema> predicate);
 
     interface IndexingSchema {
         enum Type {
@@ -203,13 +205,16 @@ public interface GraphElementPropertySchema {
 
         @Override
         public GraphElementPropertySchema addIndexSchema(IndexingSchema indexingSchema) {
-            this.indexingSchemes.put(indexingSchema.getType(),indexingSchema);
+            //only put new type of index schema as for not to override existing ones
+            this.indexingSchemes.putIfAbsent(indexingSchema.getType(),indexingSchema);
             return this;
         }
 
         @Override
-        public GraphElementPropertySchema addIndexSchemas(Iterable<IndexingSchema> indexingSchemes) {
-            indexingSchemes.forEach(this::addIndexSchema);
+        public GraphElementPropertySchema addIndexSchemas(Iterable<IndexingSchema> indexingSchemes,Predicate<IndexingSchema> predicate) {
+            StreamSupport.stream(indexingSchemes.spliterator(),false)
+                    .filter(predicate::test)
+                    .forEach(index->this.indexingSchemes.put(index.getType(),index));
             return this;
         }
 

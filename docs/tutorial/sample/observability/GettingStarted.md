@@ -60,4 +60,4 @@ Expected result 4 span documents
 ``````
 Match (s:Span) where s.events.attributes.`exception@type`="ProgrammingError" return *
 ``````
-FIX (Expected result 2 span documents)
+Expected result 2 span documents

@@ -42,6 +42,7 @@ import static org.opensearch.graph.model.GlobalConstants.Mapping.KEYWORD;
 import static org.opensearch.graph.model.GlobalConstants.Scalars.TEXT;
 import static org.opensearch.graph.model.schema.MappingIndexType.*;
 import static org.opensearch.graph.model.schema.PartitionType.EMBEDDED;
+import static org.opensearch.graph.unipop.schema.providers.GraphElementPropertySchema.IndexingSchema.Type.nested;
 
 public interface GraphVertexSchemaUtils {
 
@@ -190,10 +191,11 @@ public interface GraphVertexSchemaUtils {
             List<Property> properties = accessor.nestedEntityFieldName(accessor.$entity$(vertexSchema.getLabel().getName()),
                     accessor.$entity$(nestedSchema.getLabel().getName()));
 
+            //only replace nested index-schema for fields that are cascading from the nesting entities for this parent entity
             if(!properties.isEmpty()) {
                 nestedSchema.getProperties().forEach(nestedProp ->
                         vertexSchema.getProperty(properties.get(0).getpType() + "." + nestedProp.getName())
-                                .map(p -> p.addIndexSchemas(nestedProp.getIndexingSchemes())));
+                                .map(p -> p.addIndexSchemas(nestedProp.getIndexingSchemes(),i->i.getType().equals(nested))));
             }
         });
 
