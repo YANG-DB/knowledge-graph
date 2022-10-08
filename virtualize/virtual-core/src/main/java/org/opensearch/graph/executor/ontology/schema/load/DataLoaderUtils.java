@@ -209,7 +209,11 @@ public interface DataLoaderUtils {
                     try {
                         return sdf.format(new Date(value.toString()));
                     } catch (Throwable e1) {
-                        return sdf.format(parser.parseDate(value.toString()));
+                        try {
+                            return sdf.format(parser.parseDate(value.toString()));
+                        } catch (Throwable e2) {
+                            return new Date(Long.parseLong(value.toString()));
+                        }
                     }
                 }
             case "geo":
@@ -270,7 +274,8 @@ public interface DataLoaderUtils {
                             parser.parseDate(value.toString());
                             return true;
                         } catch (Throwable err) {
-                            return false;
+                            new Date(Long.parseLong(value.toString()));
+                            return true;
                         }
                     }
 

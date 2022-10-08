@@ -83,7 +83,7 @@ The next svg file (result of the visualization API call) visualize our Dragons o
 Since we have a logical file representing the ontology - we would like to make use of it to generate the appropriate
 elasticsearch index template and actual indexes so that we can upload the graph data.
 
-This part is done using the next REST API : http://localhost:8888/swagger#/operations/init/get_load_ontology__id__init 
+This part is done using the next REST API : http://localhost:8888/swagger#/operations/{Dragons}/init/ 
 
 This is the swagger screen:
 
