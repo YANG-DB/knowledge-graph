@@ -21,6 +21,7 @@ package org.opensearch.graph.model.ontology;
  */
 
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.google.common.collect.Iterables;
@@ -43,7 +44,7 @@ import java.util.stream.StreamSupport;
  * Created by benishue on 22-Feb-17.
  */
 @JsonInclude(JsonInclude.Include.NON_NULL)
-@JsonIgnoreProperties({"primitiveTypes"})
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class Ontology {
     public Ontology(Ontology source) {
         this();
@@ -187,6 +188,7 @@ public class Ontology {
     private List<Property> metadata;
     private List<EnumeratedType> enumeratedTypes;
     private List<CompositeType> compositeTypes;
+    @JsonIgnoreProperties
     private List<PrimitiveType> primitiveTypes;
     //endregion
 
