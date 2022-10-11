@@ -2,13 +2,15 @@ package org.opensearch.graph.executor;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.typesafe.config.Config;
-import org.junit.Ignore;
+import org.junit.*;
 import org.opensearch.graph.dispatcher.ontology.IndexProviderFactory;
 import org.opensearch.graph.dispatcher.ontology.OntologyProvider;
 import org.opensearch.graph.executor.opensearch.OpensearchIndexProviderMappingFactoryIT;
 import org.opensearch.graph.executor.ontology.schema.*;
 import org.opensearch.graph.model.ontology.Ontology;
+import org.opensearch.graph.model.ontology.OntologyFinalizer;
 import org.opensearch.graph.model.schema.IndexProvider;
+import org.opensearch.graph.model.schema.SchemaValidator;
 import org.opensearch.graph.test.framework.index.SearchEmbeddedNode;
 import org.opensearch.graph.test.framework.index.GlobalSearchEmbeddedNode;
 import org.opensearch.graph.unipop.schema.providers.GraphElementSchemaProvider;
@@ -16,13 +18,12 @@ import org.opensearch.graph.unipop.schema.providers.indexPartitions.IndexPartiti
 import org.opensearch.graph.test.BaseSuiteMarker;
 import org.opensearch.client.Client;
 import org.jooby.Jooby;
-import org.junit.AfterClass;
-import org.junit.BeforeClass;
 import org.junit.runner.RunWith;
 import org.junit.runners.Suite;
 import org.mockito.Mockito;
 import org.opensearch.cluster.ClusterName;
 
+import java.io.IOException;
 import java.io.InputStream;
 import java.util.List;
 import java.util.Optional;
@@ -39,6 +40,7 @@ import static org.mockito.Mockito.when;
  */
 @RunWith(Suite.class)
 @Suite.SuiteClasses({
+        DragonsSchemaValidationIT.class,
         GraphInitiatorIT.class,
         IndexProviderBasedGraphLoaderIT.class,
         IndexProviderBasedCSVLoaderIT.class,
@@ -62,31 +64,7 @@ public class TestSuiteIndexProviderSuite implements BaseSuiteMarker {
 
     public static void setUpInternal() throws Exception {
         client = SearchEmbeddedNode.getClient();
-        InputStream providerNestedStream = Thread.currentThread().getContextClassLoader().getResourceAsStream("schema/DragonsIndexProviderNested.conf");
-        InputStream providerEmbeddedStream = Thread.currentThread().getContextClassLoader().getResourceAsStream("schema/DragonsIndexProviderEmbedded.conf");
-        InputStream providerSingleIndexStream = Thread.currentThread().getContextClassLoader().getResourceAsStream("schema/DragonsSingleIndexProvider.conf");
-        InputStream ontologyStream = Thread.currentThread().getContextClassLoader().getResourceAsStream("schema/Dragons.json");
-
-        nestedProvider = mapper.readValue(providerNestedStream, IndexProvider.class);
-        embeddedProvider = mapper.readValue(providerEmbeddedStream, IndexProvider.class);
-        singleIndexProvider = mapper.readValue(providerSingleIndexStream, IndexProvider.class);
-        ontology = mapper.readValue(ontologyStream, Ontology.class);
-
-
-        nestedProviderIfc = Mockito.mock(IndexProviderFactory.class);
-        when(nestedProviderIfc.get(any())).thenAnswer(invocationOnMock -> Optional.of(nestedProvider));
-
-        embeddedProviderIfc = Mockito.mock(IndexProviderFactory.class);
-        when(embeddedProviderIfc.get(any())).thenAnswer(invocationOnMock -> Optional.of(embeddedProvider));
-
-        singleIndexProviderFactory = Mockito.mock(IndexProviderFactory.class);
-        when(singleIndexProviderFactory.get(any())).thenAnswer(invocationOnMock -> Optional.of(singleIndexProvider));
-
-        ontologyProvider = Mockito.mock(OntologyProvider.class);
-        when(ontologyProvider.get(any())).thenAnswer(invocationOnMock -> Optional.of(ontology));
-
-        config = Mockito.mock(Config.class);
-        when(config.getString(any())).thenAnswer(invocationOnMock -> "Dragons");
+        setupSchema();
 
         GraphElementSchemaProvider nestedSchemaProvider = new GraphElementSchemaProviderJsonFactory(config, nestedProviderIfc, ontologyProvider).get(ontology);
         GraphElementSchemaProvider embeddedSchemaProvider = new GraphElementSchemaProviderJsonFactory(config, embeddedProviderIfc, ontologyProvider).get(ontology);
@@ -195,6 +173,34 @@ public class TestSuiteIndexProviderSuite implements BaseSuiteMarker {
         };
     }
 
+    public static void setupSchema() throws IOException {
+        InputStream providerNestedStream = Thread.currentThread().getContextClassLoader().getResourceAsStream("schema/DragonsIndexProviderNested.conf");
+        InputStream providerEmbeddedStream = Thread.currentThread().getContextClassLoader().getResourceAsStream("schema/DragonsIndexProviderEmbedded.conf");
+        InputStream providerSingleIndexStream = Thread.currentThread().getContextClassLoader().getResourceAsStream("schema/DragonsSingleIndexProvider.conf");
+        InputStream ontologyStream = Thread.currentThread().getContextClassLoader().getResourceAsStream("schema/Dragons.json");
+
+        nestedProvider = mapper.readValue(providerNestedStream, IndexProvider.class);
+        embeddedProvider = mapper.readValue(providerEmbeddedStream, IndexProvider.class);
+        singleIndexProvider = mapper.readValue(providerSingleIndexStream, IndexProvider.class);
+        ontology = OntologyFinalizer.finalize( mapper.readValue(ontologyStream, Ontology.class));
+
+
+        nestedProviderIfc = Mockito.mock(IndexProviderFactory.class);
+        when(nestedProviderIfc.get(any())).thenAnswer(invocationOnMock -> Optional.of(nestedProvider));
+
+        embeddedProviderIfc = Mockito.mock(IndexProviderFactory.class);
+        when(embeddedProviderIfc.get(any())).thenAnswer(invocationOnMock -> Optional.of(embeddedProvider));
+
+        singleIndexProviderFactory = Mockito.mock(IndexProviderFactory.class);
+        when(singleIndexProviderFactory.get(any())).thenAnswer(invocationOnMock -> Optional.of(singleIndexProvider));
+
+        ontologyProvider = Mockito.mock(OntologyProvider.class);
+        when(ontologyProvider.get(any())).thenAnswer(invocationOnMock -> Optional.of(ontology));
+
+        config = Mockito.mock(Config.class);
+        when(config.getString(any())).thenAnswer(invocationOnMock -> "Dragons");
+    }
+
     @BeforeClass
     public static void setup() throws Exception {
         init(true);
@@ -217,6 +223,7 @@ public class TestSuiteIndexProviderSuite implements BaseSuiteMarker {
     private static org.opensearch.client.core.MainResponse getDefaultInfo() {
         return new org.opensearch.client.core.MainResponse(GRAPH_TEST_OPENSEARCH, null, ClusterName.DEFAULT.toString(),null);
     }
+
 
     @AfterClass
     public static void tearDown() throws Exception {

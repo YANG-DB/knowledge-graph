@@ -50,7 +50,7 @@ public class VoidGraphInitiator implements GraphInitiator {
     }
 
     @Override
-    public long createTemplate(String ontology, String schemaProvider) {
+    public long createTemplate(String ontology, String schemaProviderName) {
         return 0;
     }
 
@@ -60,7 +60,7 @@ public class VoidGraphInitiator implements GraphInitiator {
     }
 
     @Override
-    public long createIndices(String ontology, String schemaProvider)  {
+    public long createIndices(String ontology, String schemaProviderName)  {
         return 0;
     }
 

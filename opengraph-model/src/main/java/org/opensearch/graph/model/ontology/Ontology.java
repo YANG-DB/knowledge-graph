@@ -688,6 +688,20 @@ public class Ontology {
                     .collect(Collectors.toList());
 
         }
+
+        /**
+         * returns nested entity names that belong to a given entity
+         *
+         * @param eType
+         * @return
+         */
+        public List<String> nested(String eType) {
+            if (!entity(eType).isPresent()) return Collections.emptyList();
+            return entity$(eType).fields().stream()
+                    .filter(f->!primitiveType(f).isPresent())
+                    .collect(Collectors.toList());
+
+        }
         /**
          * returns parents of nested entity type according to its relevant location in the property name - for example
          * the pType a.b.c.d with the given eType a => will return empty (a has no parent entity)

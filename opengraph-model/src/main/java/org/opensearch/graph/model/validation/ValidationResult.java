@@ -26,9 +26,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import javaslang.collection.Stream;
 import org.opensearch.graph.model.Printable;
 
-import java.util.Arrays;
-import java.util.Optional;
-import java.util.StringJoiner;
+import java.util.*;
 
 /**
  * Created by lior.perry on 5/29/2017.
@@ -95,4 +93,28 @@ public class ValidationResult {
     @JsonProperty("errors")
     private Iterable<String> errors;
     //endregion
+
+    public static class ValidationResults {
+        private List<ValidationResult> validations = new ArrayList<>();
+
+        public ValidationResults() {
+        }
+
+        public ValidationResults( List<ValidationResult> validations) {
+            this.validations = validations;
+        }
+
+        public boolean isValid() {
+            return getValidations().isEmpty();
+        }
+
+        public List<ValidationResult> getValidations() {
+            return validations;
+        }
+
+        public ValidationResults with(ValidationResult validation) {
+            this.validations.add(validation);
+            return this;
+        }
+    }
 }

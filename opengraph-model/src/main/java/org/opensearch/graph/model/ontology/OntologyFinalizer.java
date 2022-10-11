@@ -62,10 +62,10 @@ public class OntologyFinalizer {
                     ontology.getProperties().addAll(accessor.generateCascadingElementFields(entityType.geteType()));
                     // add metadata fields
                     if (entityType.fields().stream().noneMatch(p -> p.equals(ID_FIELD_PTYPE))) {
-                        entityType.getProperties().add(ID_FIELD_PTYPE);
+                        entityType.getMetadata().add(ID_FIELD_PTYPE);
                     }
                     if (entityType.fields().stream().noneMatch(p -> p.equals(TYPE_FIELD_PTYPE))) {
-                        entityType.getProperties().add(TYPE_FIELD_PTYPE);
+                        entityType.getMandatory().add(TYPE_FIELD_PTYPE);
                     }
                 });
 
@@ -75,10 +75,10 @@ public class OntologyFinalizer {
                     ontology.getProperties().addAll(accessor.generateCascadingElementFields(relationshipType.getrType()));
                     // add metadata fields
                     if (relationshipType.fields().stream().noneMatch(p -> p.equals(ID_FIELD_PTYPE))) {
-                        relationshipType.getProperties().add(ID_FIELD_PTYPE);
+                        relationshipType.getMetadata().add(ID_FIELD_PTYPE);
                     }
                     if (relationshipType.fields().stream().noneMatch(p -> p.equals(TYPE_FIELD_PTYPE))) {
-                        relationshipType.getProperties().add(TYPE_FIELD_PTYPE);
+                        relationshipType.getMetadata().add(TYPE_FIELD_PTYPE);
                     }
                 });
 
