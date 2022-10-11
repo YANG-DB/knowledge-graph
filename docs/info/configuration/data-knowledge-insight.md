@@ -1,6 +1,10 @@
 # Driving Knowledge from Data
 
-### Introducation
+### Introduction
+This document will describe the recent years transition that data companies are going threw - the evolution
+                                    
+                  Data --> Knowledge --> Insight
+
 Databases and data management technologies today are capable of handling the requirements of most organizations.
 
 Data can power insights and applications but, that's not really possible without governance and metadata.
