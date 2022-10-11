@@ -24,7 +24,23 @@ import java.util.stream.Collectors;
 
 public class OpensearchIndexProviderMappingFactoryIT extends BaseModuleInjectionIT implements BaseITMarker {
 
+    public static final String INDEX_SETTING_WITH_SORTING = "{\"index.number_of_replicas\":\"1\",\"index.number_of_shards\":\"3\",\"index.sort.field\":\"id\",\"index.sort.order\":\"asc\"}";
     public static final String INDEX_SETTING = "{\"index.number_of_replicas\":\"1\",\"index.number_of_shards\":\"3\"}";
+    public static final String GUILD_MAPPING = "{\"guild\":{\"mappings\":{\"properties\":{\"description\":{\"type\":\"text\",\"fields\":{\"keyword\":{\"type\":\"keyword\"}}},\"establishDate\":{\"type\":\"date\",\"format\":\"epoch_millis||strict_date_optional_time||yyyy-MM-dd HH:mm:ss.SSS\"},\"iconId\":{\"type\":\"keyword\"},\"id\":{\"type\":\"keyword\"},\"name\":{\"type\":\"text\",\"fields\":{\"keyword\":{\"type\":\"keyword\"}}},\"type\":{\"type\":\"keyword\"},\"url\":{\"type\":\"keyword\"}}}}}";
+    public static final String REGISTERD_IN_MAPPING = "{\"registeredin\":{\"mappings\":{\"properties\":{\"direction\":{\"type\":\"keyword\"},\"entityA\":{\"properties\":{\"id\":{\"type\":\"keyword\"},\"type\":{\"type\":\"keyword\"}}},\"entityB\":{\"properties\":{\"id\":{\"type\":\"keyword\"},\"type\":{\"type\":\"keyword\"}}},\"id\":{\"type\":\"keyword\"},\"startDate\":{\"type\":\"date\",\"format\":\"epoch_millis||strict_date_optional_time||yyyy-MM-dd HH:mm:ss.SSS\"},\"type\":{\"type\":\"keyword\"}}}}}";
+    public static final String ORIGINATED_IN_MAPPING = "{\"originatedin\":{\"mappings\":{\"properties\":{\"direction\":{\"type\":\"keyword\"},\"entityA\":{\"properties\":{\"id\":{\"type\":\"keyword\"},\"type\":{\"type\":\"keyword\"}}},\"entityB\":{\"properties\":{\"id\":{\"type\":\"keyword\"},\"type\":{\"type\":\"keyword\"}}},\"id\":{\"type\":\"keyword\"},\"startDate\":{\"type\":\"date\",\"format\":\"epoch_millis||strict_date_optional_time||yyyy-MM-dd HH:mm:ss.SSS\"},\"type\":{\"type\":\"keyword\"}}}}}";
+    public static final String MEMBER_OF_MAPPING = "{\"memberof\":{\"mappings\":{\"properties\":{\"direction\":{\"type\":\"keyword\"},\"endDate\":{\"type\":\"date\",\"format\":\"epoch_millis||strict_date_optional_time||yyyy-MM-dd HH:mm:ss.SSS\"},\"entityA\":{\"properties\":{\"id\":{\"type\":\"keyword\"},\"type\":{\"type\":\"keyword\"}}},\"entityB\":{\"properties\":{\"id\":{\"type\":\"keyword\"},\"type\":{\"type\":\"keyword\"}}},\"id\":{\"type\":\"keyword\"},\"startDate\":{\"type\":\"date\",\"format\":\"epoch_millis||strict_date_optional_time||yyyy-MM-dd HH:mm:ss.SSS\"},\"type\":{\"type\":\"keyword\"}}}}}";
+    public static final String KNOW_MAPPING = "{\"know\":{\"mappings\":{\"properties\":{\"direction\":{\"type\":\"keyword\"},\"entityA\":{\"properties\":{\"id\":{\"type\":\"keyword\"},\"type\":{\"type\":\"keyword\"}}},\"entityB\":{\"properties\":{\"id\":{\"type\":\"keyword\"},\"type\":{\"type\":\"keyword\"}}},\"id\":{\"type\":\"keyword\"},\"startDate\":{\"type\":\"date\",\"format\":\"epoch_millis||strict_date_optional_time||yyyy-MM-dd HH:mm:ss.SSS\"},\"type\":{\"type\":\"keyword\"}}}}}";
+    public static final String OWN_MAPPING = "{\"own\":{\"mappings\":{\"properties\":{\"direction\":{\"type\":\"keyword\"},\"endDate\":{\"type\":\"date\",\"format\":\"epoch_millis||strict_date_optional_time||yyyy-MM-dd HH:mm:ss.SSS\"},\"entityA\":{\"properties\":{\"firstName\":{\"type\":\"text\",\"fields\":{\"keyword\":{\"type\":\"keyword\"}}},\"id\":{\"type\":\"keyword\"},\"name\":{\"type\":\"text\",\"fields\":{\"keyword\":{\"type\":\"keyword\"}}},\"type\":{\"type\":\"keyword\"}}},\"entityB\":{\"properties\":{\"id\":{\"type\":\"keyword\"},\"name\":{\"type\":\"text\",\"fields\":{\"keyword\":{\"type\":\"keyword\"}}},\"type\":{\"type\":\"keyword\"}}},\"id\":{\"type\":\"keyword\"},\"startDate\":{\"type\":\"date\",\"format\":\"epoch_millis||strict_date_optional_time||yyyy-MM-dd HH:mm:ss.SSS\"},\"type\":{\"type\":\"keyword\"}}}}}";
+    public static final String SUBJECT_OF_MAPPING = "{\"subjectof\":{\"mappings\":{\"properties\":{\"direction\":{\"type\":\"keyword\"},\"entityA\":{\"properties\":{\"id\":{\"type\":\"keyword\"},\"type\":{\"type\":\"keyword\"}}},\"entityB\":{\"properties\":{\"id\":{\"type\":\"keyword\"},\"type\":{\"type\":\"keyword\"}}},\"id\":{\"type\":\"keyword\"},\"startDate\":{\"type\":\"date\",\"format\":\"epoch_millis||strict_date_optional_time||yyyy-MM-dd HH:mm:ss.SSS\"},\"type\":{\"type\":\"keyword\"}}}}}";
+    public static final String PEOPLE_MAPPING = "{\"people\":{\"mappings\":{\"properties\":{\"Profession\":{\"type\":\"nested\",\"properties\":{\"certification\":{\"type\":\"keyword\"},\"experience\":{\"type\":\"keyword\"},\"id\":{\"type\":\"keyword\"},\"name\":{\"type\":\"text\",\"fields\":{\"keyword\":{\"type\":\"keyword\"}}},\"salary\":{\"type\":\"integer\"},\"type\":{\"type\":\"keyword\"}}},\"birthDate\":{\"type\":\"date\",\"format\":\"epoch_millis||strict_date_optional_time||yyyy-MM-dd HH:mm:ss.SSS\"},\"deathDate\":{\"type\":\"keyword\"},\"firstName\":{\"type\":\"text\",\"fields\":{\"keyword\":{\"type\":\"keyword\"}}},\"gender\":{\"type\":\"keyword\"},\"height\":{\"type\":\"integer\"},\"id\":{\"type\":\"keyword\"},\"lastName\":{\"type\":\"text\",\"fields\":{\"keyword\":{\"type\":\"keyword\"}}},\"name\":{\"type\":\"text\",\"fields\":{\"keyword\":{\"type\":\"keyword\"}}},\"type\":{\"type\":\"keyword\"}}}}}";
+    public static final String HORSE_MAPPING = "{\"horse\":{\"mappings\":{\"properties\":{\"distance\":{\"type\":\"integer\"},\"id\":{\"type\":\"keyword\"},\"maxSpeed\":{\"type\":\"integer\"},\"name\":{\"type\":\"text\",\"fields\":{\"keyword\":{\"type\":\"keyword\"}}},\"type\":{\"type\":\"keyword\"},\"weight\":{\"type\":\"integer\"}}}}}";
+    public static final String DRAGON_MAPPING = "{\"dragon\":{\"mappings\":{\"properties\":{\"birthDate\":{\"type\":\"date\",\"format\":\"epoch_millis||strict_date_optional_time||yyyy-MM-dd HH:mm:ss.SSS\"},\"color\":{\"type\":\"keyword\"},\"gender\":{\"type\":\"keyword\"},\"id\":{\"type\":\"keyword\"},\"name\":{\"type\":\"text\",\"fields\":{\"keyword\":{\"type\":\"keyword\"}}},\"power\":{\"type\":\"integer\"},\"type\":{\"type\":\"keyword\"}}}}}";
+    public static final String KINGDOM_MAPPING = "{\"kingdom\":{\"mappings\":{\"properties\":{\"funds\":{\"type\":\"float\"},\"id\":{\"type\":\"keyword\"},\"independenceDay\":{\"type\":\"keyword\"},\"king\":{\"type\":\"text\",\"fields\":{\"keyword\":{\"type\":\"keyword\"}}},\"name\":{\"type\":\"text\",\"fields\":{\"keyword\":{\"type\":\"keyword\"}}},\"queen\":{\"type\":\"text\",\"fields\":{\"keyword\":{\"type\":\"keyword\"}}},\"type\":{\"type\":\"keyword\"}}}}}";
+    public static final String FIRE_MAPPING_RESPONSE = "{mappings={properties={date={type=date, format=epoch_millis||strict_date_optional_time||yyyy-MM-dd HH:mm:ss.SSS}, direction={type=keyword}, entityA={properties={color={type=keyword}, id={type=keyword}, name={type=text, fields={keyword={type=keyword}}}, type={type=keyword}}}, entityB={properties={color={type=keyword}, id={type=keyword}, name={type=text, fields={keyword={type=keyword}}}, type={type=keyword}}}, id={type=keyword}, temperature={type=integer}, type={type=keyword}}}}";
+    public static final String FREEZE_MAPPING_RESPONSE = "{mappings={properties={date={type=date, format=epoch_millis||strict_date_optional_time||yyyy-MM-dd HH:mm:ss.SSS}, direction={type=keyword}, entityA={properties={id={type=keyword}, name={type=text, fields={keyword={type=keyword}}}, type={type=keyword}}}, entityB={properties={id={type=keyword}, name={type=text, fields={keyword={type=keyword}}}, type={type=keyword}}}, id={type=keyword}, temperature={type=integer}, type={type=keyword}}}}";
+    public static final String PROJECTION_MAPPING = "{\"projection\":{\"properties\":{\"Profession\":{\"type\":\"nested\",\"properties\":{\"name\":{\"type\":\"text\",\"fields\":{\"keyword\":{\"type\":\"keyword\"}}},\"id\":{\"type\":\"keyword\"},\"tag\":{\"type\":\"keyword\"},\"type\":{\"type\":\"keyword\"},\"experience\":{\"type\":\"keyword\"},\"salary\":{\"type\":\"integer\"},\"certification\":{\"type\":\"keyword\"}}},\"Kingdom\":{\"type\":\"nested\",\"properties\":{\"independenceDay\":{\"type\":\"keyword\"},\"king\":{\"type\":\"text\",\"fields\":{\"keyword\":{\"type\":\"keyword\"}}},\"queen\":{\"type\":\"text\",\"fields\":{\"keyword\":{\"type\":\"keyword\"}}},\"name\":{\"type\":\"text\",\"fields\":{\"keyword\":{\"type\":\"keyword\"}}},\"funds\":{\"type\":\"float\"},\"id\":{\"type\":\"keyword\"},\"tag\":{\"type\":\"keyword\"},\"type\":{\"type\":\"keyword\"}}},\"Horse\":{\"type\":\"nested\",\"properties\":{\"distance\":{\"type\":\"integer\"},\"name\":{\"type\":\"text\",\"fields\":{\"keyword\":{\"type\":\"keyword\"}}},\"weight\":{\"type\":\"integer\"},\"id\":{\"type\":\"keyword\"},\"tag\":{\"type\":\"keyword\"},\"maxSpeed\":{\"type\":\"integer\"},\"type\":{\"type\":\"keyword\"},\"OriginatedIn\":{\"type\":\"nested\",\"properties\":{\"entityB.type\":{\"type\":\"keyword\"},\"id\":{\"type\":\"keyword\"},\"tag\":{\"type\":\"keyword\"},\"entityB.id\":{\"type\":\"keyword\"},\"type\":{\"type\":\"keyword\"},\"startDate\":{\"format\":\"epoch_millis||strict_date_optional_time||yyyy-MM-dd HH:mm:ss.SSS\",\"type\":\"date\"}}},\"RegisteredIn\":{\"type\":\"nested\",\"properties\":{\"entityB.type\":{\"type\":\"keyword\"},\"id\":{\"type\":\"keyword\"},\"tag\":{\"type\":\"keyword\"},\"entityB.id\":{\"type\":\"keyword\"},\"type\":{\"type\":\"keyword\"},\"startDate\":{\"format\":\"epoch_millis||strict_date_optional_time||yyyy-MM-dd HH:mm:ss.SSS\",\"type\":\"date\"}}}}},\"Guild\":{\"type\":\"nested\",\"properties\":{\"iconId\":{\"type\":\"keyword\"},\"name\":{\"type\":\"text\",\"fields\":{\"keyword\":{\"type\":\"keyword\"}}},\"description\":{\"type\":\"text\",\"fields\":{\"keyword\":{\"type\":\"keyword\"}}},\"id\":{\"type\":\"keyword\"},\"tag\":{\"type\":\"keyword\"},\"type\":{\"type\":\"keyword\"},\"establishDate\":{\"format\":\"epoch_millis||strict_date_optional_time||yyyy-MM-dd HH:mm:ss.SSS\",\"type\":\"date\"},\"url\":{\"type\":\"keyword\"},\"RegisteredIn\":{\"type\":\"nested\",\"properties\":{\"entityB.type\":{\"type\":\"keyword\"},\"id\":{\"type\":\"keyword\"},\"tag\":{\"type\":\"keyword\"},\"entityB.id\":{\"type\":\"keyword\"},\"type\":{\"type\":\"keyword\"},\"startDate\":{\"format\":\"epoch_millis||strict_date_optional_time||yyyy-MM-dd HH:mm:ss.SSS\",\"type\":\"date\"}}}}},\"Person\":{\"type\":\"nested\",\"properties\":{\"lastName\":{\"type\":\"text\",\"fields\":{\"keyword\":{\"type\":\"keyword\"}}},\"HasProfession\":{\"type\":\"nested\",\"properties\":{\"entityB.type\":{\"type\":\"keyword\"},\"id\":{\"type\":\"keyword\"},\"tag\":{\"type\":\"keyword\"},\"entityB.id\":{\"type\":\"keyword\"},\"type\":{\"type\":\"keyword\"}}},\"gender\":{\"type\":\"keyword\"},\"Own\":{\"type\":\"nested\",\"properties\":{\"entityB.type\":{\"type\":\"keyword\"},\"endDate\":{\"format\":\"epoch_millis||strict_date_optional_time||yyyy-MM-dd HH:mm:ss.SSS\",\"type\":\"date\"},\"id\":{\"type\":\"keyword\"},\"tag\":{\"type\":\"keyword\"},\"entityB.id\":{\"type\":\"keyword\"},\"type\":{\"type\":\"keyword\"},\"startDate\":{\"format\":\"epoch_millis||strict_date_optional_time||yyyy-MM-dd HH:mm:ss.SSS\",\"type\":\"date\"}}},\"Know\":{\"type\":\"nested\",\"properties\":{\"entityB.type\":{\"type\":\"keyword\"},\"id\":{\"type\":\"keyword\"},\"tag\":{\"type\":\"keyword\"},\"entityB.id\":{\"type\":\"keyword\"},\"type\":{\"type\":\"keyword\"},\"startDate\":{\"format\":\"epoch_millis||strict_date_optional_time||yyyy-MM-dd HH:mm:ss.SSS\",\"type\":\"date\"}}},\"type\":{\"type\":\"keyword\"},\"birthDate\":{\"format\":\"epoch_millis||strict_date_optional_time||yyyy-MM-dd HH:mm:ss.SSS\",\"type\":\"date\"},\"OriginatedIn\":{\"type\":\"nested\",\"properties\":{\"entityB.type\":{\"type\":\"keyword\"},\"id\":{\"type\":\"keyword\"},\"tag\":{\"type\":\"keyword\"},\"entityB.id\":{\"type\":\"keyword\"},\"type\":{\"type\":\"keyword\"},\"startDate\":{\"format\":\"epoch_millis||strict_date_optional_time||yyyy-MM-dd HH:mm:ss.SSS\",\"type\":\"date\"}}},\"firstName\":{\"type\":\"text\",\"fields\":{\"keyword\":{\"type\":\"keyword\"}}},\"MemberOf\":{\"type\":\"nested\",\"properties\":{\"entityB.type\":{\"type\":\"keyword\"},\"endDate\":{\"format\":\"epoch_millis||strict_date_optional_time||yyyy-MM-dd HH:mm:ss.SSS\",\"type\":\"date\"},\"id\":{\"type\":\"keyword\"},\"tag\":{\"type\":\"keyword\"},\"entityB.id\":{\"type\":\"keyword\"},\"type\":{\"type\":\"keyword\"},\"startDate\":{\"format\":\"epoch_millis||strict_date_optional_time||yyyy-MM-dd HH:mm:ss.SSS\",\"type\":\"date\"}}},\"deathDate\":{\"type\":\"keyword\"},\"name\":{\"type\":\"text\",\"fields\":{\"keyword\":{\"type\":\"keyword\"}}},\"SubjectOf\":{\"type\":\"nested\",\"properties\":{\"entityB.type\":{\"type\":\"keyword\"},\"id\":{\"type\":\"keyword\"},\"tag\":{\"type\":\"keyword\"},\"entityB.id\":{\"type\":\"keyword\"},\"type\":{\"type\":\"keyword\"},\"startDate\":{\"format\":\"epoch_millis||strict_date_optional_time||yyyy-MM-dd HH:mm:ss.SSS\",\"type\":\"date\"}}},\"id\":{\"type\":\"keyword\"},\"tag\":{\"type\":\"keyword\"},\"height\":{\"type\":\"integer\"}}},\"Dragon\":{\"type\":\"nested\",\"properties\":{\"gender\":{\"type\":\"keyword\"},\"color\":{\"type\":\"keyword\"},\"Fire\":{\"type\":\"nested\",\"properties\":{\"date\":{\"format\":\"epoch_millis||strict_date_optional_time||yyyy-MM-dd HH:mm:ss.SSS\",\"type\":\"date\"},\"entityB.type\":{\"type\":\"keyword\"},\"temperature\":{\"type\":\"integer\"},\"id\":{\"type\":\"keyword\"},\"tag\":{\"type\":\"keyword\"},\"entityB.id\":{\"type\":\"keyword\"},\"type\":{\"type\":\"keyword\"}}},\"name\":{\"type\":\"text\",\"fields\":{\"keyword\":{\"type\":\"keyword\"}}},\"id\":{\"type\":\"keyword\"},\"tag\":{\"type\":\"keyword\"},\"power\":{\"type\":\"integer\"},\"type\":{\"type\":\"keyword\"},\"birthDate\":{\"format\":\"epoch_millis||strict_date_optional_time||yyyy-MM-dd HH:mm:ss.SSS\",\"type\":\"date\"},\"Freeze\":{\"type\":\"nested\",\"properties\":{\"date\":{\"format\":\"epoch_millis||strict_date_optional_time||yyyy-MM-dd HH:mm:ss.SSS\",\"type\":\"date\"},\"entityB.type\":{\"type\":\"keyword\"},\"temperature\":{\"type\":\"integer\"},\"id\":{\"type\":\"keyword\"},\"tag\":{\"type\":\"keyword\"},\"entityB.id\":{\"type\":\"keyword\"},\"type\":{\"type\":\"keyword\"}}},\"OriginatedIn\":{\"type\":\"nested\",\"properties\":{\"entityB.type\":{\"type\":\"keyword\"},\"id\":{\"type\":\"keyword\"},\"tag\":{\"type\":\"keyword\"},\"entityB.id\":{\"type\":\"keyword\"},\"type\":{\"type\":\"keyword\"},\"startDate\":{\"format\":\"epoch_millis||strict_date_optional_time||yyyy-MM-dd HH:mm:ss.SSS\",\"type\":\"date\"}}}}},\"queryId\":{\"type\":\"keyword\"},\"cursorId\":{\"type\":\"keyword\"},\"timestamp\":{\"format\":\"epoch_millis||strict_date_optional_time||yyyy-MM-dd HH:mm:ss.SSS\",\"type\":\"date\"}}}}";
+    private static final String PEOPLE_EMBEDDED_MAPPING = "{\"people\":{\"mappings\":{\"properties\":{\"certification\":{\"type\":\"keyword\"},\"experience\":{\"type\":\"keyword\"},\"id\":{\"type\":\"keyword\"},\"name\":{\"type\":\"text\",\"fields\":{\"keyword\":{\"type\":\"keyword\"}}},\"salary\":{\"type\":\"integer\"},\"type\":{\"type\":\"keyword\"}}}}}";
 
     @Test
     public void testGenerateNestedMapping() {
@@ -58,7 +74,7 @@ public class OpensearchIndexProviderMappingFactoryIT extends BaseModuleInjection
                     response = TestSuiteIndexProviderSuite.client.admin().indices().getTemplates(new GetIndexTemplatesRequest().names("horse")).actionGet();
                     Assert.assertEquals(1,response.getIndexTemplates().size());
                     Assert.assertEquals("horse",response.getIndexTemplates().get(0).name());
-                    Assert.assertEquals(INDEX_SETTING,response.getIndexTemplates().get(0).settings().toString());
+                    Assert.assertEquals(INDEX_SETTING_WITH_SORTING,response.getIndexTemplates().get(0).settings().toString());
                     Assert.assertEquals("{\"Horse\":{\"properties\":{\"distance\":{\"type\":\"integer\"},\"name\":{\"type\":\"text\",\"fields\":{\"keyword\":{\"type\":\"keyword\"}}},\"weight\":{\"type\":\"integer\"},\"id\":{\"type\":\"keyword\"},\"maxSpeed\":{\"type\":\"integer\"},\"type\":{\"type\":\"keyword\"}}}}",response.getIndexTemplates().get(0).mappings().get("Horse").toString());
                     break;
                 case "dragon":
@@ -67,7 +83,7 @@ public class OpensearchIndexProviderMappingFactoryIT extends BaseModuleInjection
                     response = TestSuiteIndexProviderSuite.client.admin().indices().getTemplates(new GetIndexTemplatesRequest().names("dragon")).actionGet();
                     Assert.assertEquals(1,response.getIndexTemplates().size());
                     Assert.assertEquals("dragon",response.getIndexTemplates().get(0).name());
-                    Assert.assertEquals(INDEX_SETTING,response.getIndexTemplates().get(0).settings().toString());
+                    Assert.assertEquals(INDEX_SETTING_WITH_SORTING,response.getIndexTemplates().get(0).settings().toString());
                     Assert.assertEquals("{\"Dragon\":{\"properties\":{\"gender\":{\"type\":\"keyword\"},\"color\":{\"type\":\"keyword\"},\"name\":{\"type\":\"text\",\"fields\":{\"keyword\":{\"type\":\"keyword\"}}},\"id\":{\"type\":\"keyword\"},\"power\":{\"type\":\"integer\"},\"type\":{\"type\":\"keyword\"},\"birthDate\":{\"format\":\"epoch_millis||strict_date_optional_time||yyyy-MM-dd HH:mm:ss.SSS\",\"type\":\"date\"}}}}",response.getIndexTemplates().get(0).mappings().get("Dragon").toString());
                     break;
                 case "kingdoms":
@@ -76,7 +92,7 @@ public class OpensearchIndexProviderMappingFactoryIT extends BaseModuleInjection
                     response = TestSuiteIndexProviderSuite.client.admin().indices().getTemplates(new GetIndexTemplatesRequest().names("kingdom")).actionGet();
                     Assert.assertEquals(1,response.getIndexTemplates().size());
                     Assert.assertEquals("kingdom",response.getIndexTemplates().get(0).name());
-                    Assert.assertEquals(INDEX_SETTING,response.getIndexTemplates().get(0).settings().toString());
+                    Assert.assertEquals(INDEX_SETTING_WITH_SORTING,response.getIndexTemplates().get(0).settings().toString());
                     Assert.assertEquals("{\"Kingdom\":{\"properties\":{\"independenceDay\":{\"type\":\"keyword\"},\"king\":{\"type\":\"text\",\"fields\":{\"keyword\":{\"type\":\"keyword\"}}},\"queen\":{\"type\":\"text\",\"fields\":{\"keyword\":{\"type\":\"keyword\"}}},\"name\":{\"type\":\"text\",\"fields\":{\"keyword\":{\"type\":\"keyword\"}}},\"funds\":{\"type\":\"float\"},\"id\":{\"type\":\"keyword\"},\"type\":{\"type\":\"keyword\"}}}}",response.getIndexTemplates().get(0).mappings().get("Kingdom").toString());
                     break;
                 case "guilds":
@@ -85,7 +101,7 @@ public class OpensearchIndexProviderMappingFactoryIT extends BaseModuleInjection
                     response = TestSuiteIndexProviderSuite.client.admin().indices().getTemplates(new GetIndexTemplatesRequest().names("guild")).actionGet();
                     Assert.assertEquals(1,response.getIndexTemplates().size());
                     Assert.assertEquals("guild",response.getIndexTemplates().get(0).name());
-                    Assert.assertEquals(INDEX_SETTING,response.getIndexTemplates().get(0).settings().toString());
+                    Assert.assertEquals(INDEX_SETTING_WITH_SORTING,response.getIndexTemplates().get(0).settings().toString());
                     Assert.assertEquals("{\"Guild\":{\"properties\":{\"iconId\":{\"type\":\"keyword\"},\"name\":{\"type\":\"text\",\"fields\":{\"keyword\":{\"type\":\"keyword\"}}},\"description\":{\"type\":\"text\",\"fields\":{\"keyword\":{\"type\":\"keyword\"}}},\"id\":{\"type\":\"keyword\"},\"type\":{\"type\":\"keyword\"},\"establishDate\":{\"format\":\"epoch_millis||strict_date_optional_time||yyyy-MM-dd HH:mm:ss.SSS\",\"type\":\"date\"},\"url\":{\"type\":\"keyword\"}}}}",response.getIndexTemplates().get(0).mappings().get("Guild").toString());
                     break;
                 case "Own":
@@ -93,7 +109,7 @@ public class OpensearchIndexProviderMappingFactoryIT extends BaseModuleInjection
                     response = TestSuiteIndexProviderSuite.client.admin().indices().getTemplates(new GetIndexTemplatesRequest().names("own")).actionGet();
                     Assert.assertEquals(1,response.getIndexTemplates().size());
                     Assert.assertEquals("own",response.getIndexTemplates().get(0).name());
-                    Assert.assertEquals(INDEX_SETTING,response.getIndexTemplates().get(0).settings().toString());
+                    Assert.assertEquals(INDEX_SETTING_WITH_SORTING,response.getIndexTemplates().get(0).settings().toString());
                     Assert.assertEquals("{\"Own\":{\"properties\":{\"entityA\":{\"properties\":{\"firstName\":{\"type\":\"text\",\"fields\":{\"keyword\":{\"type\":\"keyword\"}}},\"name\":{\"type\":\"text\",\"fields\":{\"keyword\":{\"type\":\"keyword\"}}},\"id\":{\"type\":\"keyword\"},\"type\":{\"type\":\"keyword\"}}},\"entityB\":{\"properties\":{\"name\":{\"type\":\"text\",\"fields\":{\"keyword\":{\"type\":\"keyword\"}}},\"id\":{\"type\":\"keyword\"},\"type\":{\"type\":\"keyword\"}}},\"endDate\":{\"format\":\"epoch_millis||strict_date_optional_time||yyyy-MM-dd HH:mm:ss.SSS\",\"type\":\"date\"},\"id\":{\"type\":\"keyword\"},\"type\":{\"type\":\"keyword\"},\"startDate\":{\"format\":\"epoch_millis||strict_date_optional_time||yyyy-MM-dd HH:mm:ss.SSS\",\"type\":\"date\"},\"direction\":{\"type\":\"keyword\"}}}}",response.getIndexTemplates().get(0).mappings().get("Own").toString());
                     break;
                 case "Know":
@@ -101,7 +117,7 @@ public class OpensearchIndexProviderMappingFactoryIT extends BaseModuleInjection
                     response = TestSuiteIndexProviderSuite.client.admin().indices().getTemplates(new GetIndexTemplatesRequest().names("know")).actionGet();
                     Assert.assertEquals(1,response.getIndexTemplates().size());
                     Assert.assertEquals("know",response.getIndexTemplates().get(0).name());
-                    Assert.assertEquals(INDEX_SETTING,response.getIndexTemplates().get(0).settings().toString());
+                    Assert.assertEquals(INDEX_SETTING_WITH_SORTING,response.getIndexTemplates().get(0).settings().toString());
                     Assert.assertEquals("{\"Know\":{\"properties\":{\"entityA\":{\"properties\":{\"id\":{\"type\":\"keyword\"},\"type\":{\"type\":\"keyword\"}}},\"entityB\":{\"properties\":{\"id\":{\"type\":\"keyword\"},\"type\":{\"type\":\"keyword\"}}},\"id\":{\"type\":\"keyword\"},\"type\":{\"type\":\"keyword\"},\"startDate\":{\"format\":\"epoch_millis||strict_date_optional_time||yyyy-MM-dd HH:mm:ss.SSS\",\"type\":\"date\"},\"direction\":{\"type\":\"keyword\"}}}}",response.getIndexTemplates().get(0).mappings().get("Know").toString());
                     break;
                 case "memberof":
@@ -109,7 +125,7 @@ public class OpensearchIndexProviderMappingFactoryIT extends BaseModuleInjection
                     response = TestSuiteIndexProviderSuite.client.admin().indices().getTemplates(new GetIndexTemplatesRequest().names("memberof")).actionGet();
                     Assert.assertEquals(1,response.getIndexTemplates().size());
                     Assert.assertEquals(index.toLowerCase(),response.getIndexTemplates().get(0).name());
-                    Assert.assertEquals(INDEX_SETTING,response.getIndexTemplates().get(0).settings().toString());
+                    Assert.assertEquals(INDEX_SETTING_WITH_SORTING,response.getIndexTemplates().get(0).settings().toString());
                     Assert.assertEquals("{\"MemberOf\":{\"properties\":{\"entityA\":{\"properties\":{\"id\":{\"type\":\"keyword\"},\"type\":{\"type\":\"keyword\"}}},\"entityB\":{\"properties\":{\"id\":{\"type\":\"keyword\"},\"type\":{\"type\":\"keyword\"}}},\"endDate\":{\"format\":\"epoch_millis||strict_date_optional_time||yyyy-MM-dd HH:mm:ss.SSS\",\"type\":\"date\"},\"id\":{\"type\":\"keyword\"},\"type\":{\"type\":\"keyword\"},\"startDate\":{\"format\":\"epoch_millis||strict_date_optional_time||yyyy-MM-dd HH:mm:ss.SSS\",\"type\":\"date\"},\"direction\":{\"type\":\"keyword\"}}}}",response.getIndexTemplates().get(0).mappings().get("MemberOf").toString());
                     break;
                 case "originatedin":
@@ -117,7 +133,7 @@ public class OpensearchIndexProviderMappingFactoryIT extends BaseModuleInjection
                     response = TestSuiteIndexProviderSuite.client.admin().indices().getTemplates(new GetIndexTemplatesRequest().names("originatedin")).actionGet();
                     Assert.assertEquals(1,response.getIndexTemplates().size());
                     Assert.assertEquals(index.toLowerCase(),response.getIndexTemplates().get(0).name());
-                    Assert.assertEquals(INDEX_SETTING,response.getIndexTemplates().get(0).settings().toString());
+                    Assert.assertEquals(INDEX_SETTING_WITH_SORTING,response.getIndexTemplates().get(0).settings().toString());
                     Assert.assertEquals("{\"OriginatedIn\":{\"properties\":{\"entityA\":{\"properties\":{\"id\":{\"type\":\"keyword\"},\"type\":{\"type\":\"keyword\"}}},\"entityB\":{\"properties\":{\"id\":{\"type\":\"keyword\"},\"type\":{\"type\":\"keyword\"}}},\"id\":{\"type\":\"keyword\"},\"type\":{\"type\":\"keyword\"},\"startDate\":{\"format\":\"epoch_millis||strict_date_optional_time||yyyy-MM-dd HH:mm:ss.SSS\",\"type\":\"date\"},\"direction\":{\"type\":\"keyword\"}}}}",response.getIndexTemplates().get(0).mappings().get("OriginatedIn").toString());
                     break;
                 case "subjectof":
@@ -125,7 +141,7 @@ public class OpensearchIndexProviderMappingFactoryIT extends BaseModuleInjection
                     response = TestSuiteIndexProviderSuite.client.admin().indices().getTemplates(new GetIndexTemplatesRequest().names("subjectof")).actionGet();
                     Assert.assertEquals(1,response.getIndexTemplates().size());
                     Assert.assertEquals(index.toLowerCase(),response.getIndexTemplates().get(0).name());
-                    Assert.assertEquals(INDEX_SETTING,response.getIndexTemplates().get(0).settings().toString());
+                    Assert.assertEquals(INDEX_SETTING_WITH_SORTING,response.getIndexTemplates().get(0).settings().toString());
                     Assert.assertEquals("{\"SubjectOf\":{\"properties\":{\"entityA\":{\"properties\":{\"id\":{\"type\":\"keyword\"},\"type\":{\"type\":\"keyword\"}}},\"entityB\":{\"properties\":{\"id\":{\"type\":\"keyword\"},\"type\":{\"type\":\"keyword\"}}},\"id\":{\"type\":\"keyword\"},\"type\":{\"type\":\"keyword\"},\"startDate\":{\"format\":\"epoch_millis||strict_date_optional_time||yyyy-MM-dd HH:mm:ss.SSS\",\"type\":\"date\"},\"direction\":{\"type\":\"keyword\"}}}}",response.getIndexTemplates().get(0).mappings().get("SubjectOf").toString());
                     break;
                 case "registeredin":
@@ -133,7 +149,7 @@ public class OpensearchIndexProviderMappingFactoryIT extends BaseModuleInjection
                     response = TestSuiteIndexProviderSuite.client.admin().indices().getTemplates(new GetIndexTemplatesRequest().names("registeredin")).actionGet();
                     Assert.assertEquals(1,response.getIndexTemplates().size());
                     Assert.assertEquals(index.toLowerCase(),response.getIndexTemplates().get(0).name());
-                    Assert.assertEquals(INDEX_SETTING,response.getIndexTemplates().get(0).settings().toString());
+                    Assert.assertEquals(INDEX_SETTING_WITH_SORTING,response.getIndexTemplates().get(0).settings().toString());
                     Assert.assertEquals("{\"RegisteredIn\":{\"properties\":{\"entityA\":{\"properties\":{\"id\":{\"type\":\"keyword\"},\"type\":{\"type\":\"keyword\"}}},\"entityB\":{\"properties\":{\"id\":{\"type\":\"keyword\"},\"type\":{\"type\":\"keyword\"}}},\"id\":{\"type\":\"keyword\"},\"type\":{\"type\":\"keyword\"},\"startDate\":{\"format\":\"epoch_millis||strict_date_optional_time||yyyy-MM-dd HH:mm:ss.SSS\",\"type\":\"date\"},\"direction\":{\"type\":\"keyword\"}}}}",response.getIndexTemplates().get(0).mappings().get("RegisteredIn").toString());
                     break;
                 case "Fire":
@@ -141,7 +157,7 @@ public class OpensearchIndexProviderMappingFactoryIT extends BaseModuleInjection
                     response = TestSuiteIndexProviderSuite.client.admin().indices().getTemplates(new GetIndexTemplatesRequest().names("fire")).actionGet();
                     Assert.assertEquals(1,response.getIndexTemplates().size());
                     Assert.assertEquals(index.toLowerCase(),response.getIndexTemplates().get(0).name());
-                    Assert.assertEquals(INDEX_SETTING,response.getIndexTemplates().get(0).settings().toString());
+                    Assert.assertEquals(INDEX_SETTING_WITH_SORTING,response.getIndexTemplates().get(0).settings().toString());
                     Assert.assertEquals("{\"Fire\":{\"properties\":{\"date\":{\"format\":\"epoch_millis||strict_date_optional_time||yyyy-MM-dd HH:mm:ss.SSS\",\"type\":\"date\"},\"entityA\":{\"properties\":{\"color\":{\"type\":\"keyword\"},\"name\":{\"type\":\"text\",\"fields\":{\"keyword\":{\"type\":\"keyword\"}}},\"id\":{\"type\":\"keyword\"},\"type\":{\"type\":\"keyword\"}}},\"entityB\":{\"properties\":{\"color\":{\"type\":\"keyword\"},\"name\":{\"type\":\"text\",\"fields\":{\"keyword\":{\"type\":\"keyword\"}}},\"id\":{\"type\":\"keyword\"},\"type\":{\"type\":\"keyword\"}}},\"temperature\":{\"type\":\"integer\"},\"id\":{\"type\":\"keyword\"},\"type\":{\"type\":\"keyword\"},\"direction\":{\"type\":\"keyword\"}}}}",response.getIndexTemplates().get(0).mappings().get("Fire").toString());
                     break;
                 case "Freeze":
@@ -149,7 +165,7 @@ public class OpensearchIndexProviderMappingFactoryIT extends BaseModuleInjection
                     response = TestSuiteIndexProviderSuite.client.admin().indices().getTemplates(new GetIndexTemplatesRequest().names("freeze")).actionGet();
                     Assert.assertEquals(1,response.getIndexTemplates().size());
                     Assert.assertEquals(index.toLowerCase(),response.getIndexTemplates().get(0).name());
-                    Assert.assertEquals(INDEX_SETTING,response.getIndexTemplates().get(0).settings().toString());
+                    Assert.assertEquals(INDEX_SETTING_WITH_SORTING,response.getIndexTemplates().get(0).settings().toString());
                     Assert.assertEquals("{\"Freeze\":{\"properties\":{\"date\":{\"format\":\"epoch_millis||strict_date_optional_time||yyyy-MM-dd HH:mm:ss.SSS\",\"type\":\"date\"},\"entityA\":{\"properties\":{\"name\":{\"type\":\"text\",\"fields\":{\"keyword\":{\"type\":\"keyword\"}}},\"id\":{\"type\":\"keyword\"},\"type\":{\"type\":\"keyword\"}}},\"entityB\":{\"properties\":{\"name\":{\"type\":\"text\",\"fields\":{\"keyword\":{\"type\":\"keyword\"}}},\"id\":{\"type\":\"keyword\"},\"type\":{\"type\":\"keyword\"}}},\"temperature\":{\"type\":\"integer\"},\"id\":{\"type\":\"keyword\"},\"type\":{\"type\":\"keyword\"},\"direction\":{\"type\":\"keyword\"}}}}",response.getIndexTemplates().get(0).mappings().get("Freeze").toString());
                     break;
                 default:
@@ -182,8 +198,8 @@ public class OpensearchIndexProviderMappingFactoryIT extends BaseModuleInjection
                     response = TestSuiteIndexProviderSuite.client.admin().indices().getTemplates(new GetIndexTemplatesRequest().names("people")).actionGet();
                     Assert.assertEquals(1,response.getIndexTemplates().size());
                     Assert.assertEquals("people",response.getIndexTemplates().get(0).name());
-                    Assert.assertEquals(INDEX_SETTING,response.getIndexTemplates().get(0).settings().toString());
-                    Assert.assertEquals("{\"Person\":{\"properties\":{\"firstName\":{\"type\":\"text\",\"fields\":{\"keyword\":{\"type\":\"keyword\"}}},\"lastName\":{\"type\":\"text\",\"fields\":{\"keyword\":{\"type\":\"keyword\"}}},\"Profession\":{\"properties\":{\"name\":{\"type\":\"text\",\"fields\":{\"keyword\":{\"type\":\"keyword\"}}},\"id\":{\"type\":\"keyword\"},\"type\":{\"type\":\"keyword\"},\"experience\":{\"type\":\"keyword\"},\"salary\":{\"type\":\"integer\"},\"certification\":{\"type\":\"keyword\"}}},\"gender\":{\"type\":\"keyword\"},\"deathDate\":{\"type\":\"keyword\"},\"name\":{\"type\":\"text\",\"fields\":{\"keyword\":{\"type\":\"keyword\"}}},\"id\":{\"type\":\"keyword\"},\"type\":{\"type\":\"keyword\"},\"birthDate\":{\"format\":\"epoch_millis||strict_date_optional_time||yyyy-MM-dd HH:mm:ss.SSS\",\"type\":\"date\"},\"height\":{\"type\":\"integer\"}}}}",response.getIndexTemplates().get(0).mappings().get("Person").toString());
+                    Assert.assertEquals(INDEX_SETTING_WITH_SORTING  ,response.getIndexTemplates().get(0).settings().toString());
+                    Assert.assertEquals("{\"Person\":{\"properties\":{\"firstName\":{\"type\":\"text\",\"fields\":{\"keyword\":{\"type\":\"keyword\"}}},\"lastName\":{\"type\":\"text\",\"fields\":{\"keyword\":{\"type\":\"keyword\"}}},\"Profession\":{\"properties\":{\"name\":{\"type\":\"text\",\"fields\":{\"keyword\":{\"type\":\"keyword\"}}},\"id\":{\"type\":\"keyword\"},\"type\":{\"type\":\"keyword\"},\"experience\":{\"type\":\"keyword\"},\"salary\":{\"type\":\"integer\"},\"certification\":{\"type\":\"keyword\"}}},\"gender\":{\"type\":\"keyword\"},\"deathDate\":{\"type\":\"keyword\"},\"name\":{\"type\":\"text\",\"fields\":{\"keyword\":{\"type\":\"keyword\"}}},\"id\":{\"type\":\"keyword\"},\"type\":{\"type\":\"keyword\"},\"birthDate\":{\"format\":\"epoch_millis||strict_date_optional_time||yyyy-MM-dd HH:mm:ss.SSS\",\"type\":\"date\"},\"height\":{\"type\":\"integer\"}}}}",response.getIndexTemplates().get(0).mappings().toString());
                     break;
                 case "horse":
                 case "horses":
@@ -191,7 +207,7 @@ public class OpensearchIndexProviderMappingFactoryIT extends BaseModuleInjection
                     response = TestSuiteIndexProviderSuite.client.admin().indices().getTemplates(new GetIndexTemplatesRequest().names("horse")).actionGet();
                     Assert.assertEquals(1,response.getIndexTemplates().size());
                     Assert.assertEquals("horse",response.getIndexTemplates().get(0).name());
-                    Assert.assertEquals(INDEX_SETTING,response.getIndexTemplates().get(0).settings().toString());
+                    Assert.assertEquals(INDEX_SETTING_WITH_SORTING,response.getIndexTemplates().get(0).settings().toString());
                     Assert.assertEquals("{\"Horse\":{\"properties\":{\"distance\":{\"type\":\"integer\"},\"name\":{\"type\":\"text\",\"fields\":{\"keyword\":{\"type\":\"keyword\"}}},\"weight\":{\"type\":\"integer\"},\"id\":{\"type\":\"keyword\"},\"maxSpeed\":{\"type\":\"integer\"},\"type\":{\"type\":\"keyword\"}}}}",response.getIndexTemplates().get(0).mappings().get("Horse").toString());
                     break;
                 case "dragon":
@@ -200,7 +216,7 @@ public class OpensearchIndexProviderMappingFactoryIT extends BaseModuleInjection
                     response = TestSuiteIndexProviderSuite.client.admin().indices().getTemplates(new GetIndexTemplatesRequest().names("dragon")).actionGet();
                     Assert.assertEquals(1,response.getIndexTemplates().size());
                     Assert.assertEquals("dragon",response.getIndexTemplates().get(0).name());
-                    Assert.assertEquals(INDEX_SETTING,response.getIndexTemplates().get(0).settings().toString());
+                    Assert.assertEquals(INDEX_SETTING_WITH_SORTING,response.getIndexTemplates().get(0).settings().toString());
                     Assert.assertEquals("{\"Dragon\":{\"properties\":{\"gender\":{\"type\":\"keyword\"},\"color\":{\"type\":\"keyword\"},\"name\":{\"type\":\"text\",\"fields\":{\"keyword\":{\"type\":\"keyword\"}}},\"id\":{\"type\":\"keyword\"},\"power\":{\"type\":\"integer\"},\"type\":{\"type\":\"keyword\"},\"birthDate\":{\"format\":\"epoch_millis||strict_date_optional_time||yyyy-MM-dd HH:mm:ss.SSS\",\"type\":\"date\"}}}}",response.getIndexTemplates().get(0).mappings().get("Dragon").toString());
                     break;
                 case "kingdoms":
@@ -209,7 +225,7 @@ public class OpensearchIndexProviderMappingFactoryIT extends BaseModuleInjection
                     response = TestSuiteIndexProviderSuite.client.admin().indices().getTemplates(new GetIndexTemplatesRequest().names("kingdom")).actionGet();
                     Assert.assertEquals(1,response.getIndexTemplates().size());
                     Assert.assertEquals("kingdom",response.getIndexTemplates().get(0).name());
-                    Assert.assertEquals(INDEX_SETTING,response.getIndexTemplates().get(0).settings().toString());
+                    Assert.assertEquals(INDEX_SETTING_WITH_SORTING,response.getIndexTemplates().get(0).settings().toString());
                     Assert.assertEquals("{\"Kingdom\":{\"properties\":{\"independenceDay\":{\"type\":\"keyword\"},\"king\":{\"type\":\"text\",\"fields\":{\"keyword\":{\"type\":\"keyword\"}}},\"queen\":{\"type\":\"text\",\"fields\":{\"keyword\":{\"type\":\"keyword\"}}},\"name\":{\"type\":\"text\",\"fields\":{\"keyword\":{\"type\":\"keyword\"}}},\"funds\":{\"type\":\"float\"},\"id\":{\"type\":\"keyword\"},\"type\":{\"type\":\"keyword\"}}}}",response.getIndexTemplates().get(0).mappings().get("Kingdom").toString());
                     break;
                 case "guilds":
@@ -218,7 +234,7 @@ public class OpensearchIndexProviderMappingFactoryIT extends BaseModuleInjection
                     response = TestSuiteIndexProviderSuite.client.admin().indices().getTemplates(new GetIndexTemplatesRequest().names("guild")).actionGet();
                     Assert.assertEquals(1,response.getIndexTemplates().size());
                     Assert.assertEquals("guild",response.getIndexTemplates().get(0).name());
-                    Assert.assertEquals(INDEX_SETTING,response.getIndexTemplates().get(0).settings().toString());
+                    Assert.assertEquals(INDEX_SETTING_WITH_SORTING,response.getIndexTemplates().get(0).settings().toString());
                     Assert.assertEquals("{\"Guild\":{\"properties\":{\"iconId\":{\"type\":\"keyword\"},\"name\":{\"type\":\"text\",\"fields\":{\"keyword\":{\"type\":\"keyword\"}}},\"description\":{\"type\":\"text\",\"fields\":{\"keyword\":{\"type\":\"keyword\"}}},\"id\":{\"type\":\"keyword\"},\"type\":{\"type\":\"keyword\"},\"establishDate\":{\"format\":\"epoch_millis||strict_date_optional_time||yyyy-MM-dd HH:mm:ss.SSS\",\"type\":\"date\"},\"url\":{\"type\":\"keyword\"}}}}",response.getIndexTemplates().get(0).mappings().get("Guild").toString());
                     break;
                 case "Own":
@@ -226,7 +242,7 @@ public class OpensearchIndexProviderMappingFactoryIT extends BaseModuleInjection
                     response = TestSuiteIndexProviderSuite.client.admin().indices().getTemplates(new GetIndexTemplatesRequest().names("own")).actionGet();
                     Assert.assertEquals(1,response.getIndexTemplates().size());
                     Assert.assertEquals("own",response.getIndexTemplates().get(0).name());
-                    Assert.assertEquals("{\"index.number_of_replicas\":\"1\",\"index.number_of_shards\":\"3\",\"index.sort.field\":\"id\",\"index.sort.order\":\"asc\"}",response.getIndexTemplates().get(0).settings().toString());
+                    Assert.assertEquals(INDEX_SETTING_WITH_SORTING,response.getIndexTemplates().get(0).settings().toString());
                     Assert.assertEquals("{\"Own\":{\"properties\":{\"entityA\":{\"properties\":{\"firstName\":{\"type\":\"text\",\"fields\":{\"keyword\":{\"type\":\"keyword\"}}},\"name\":{\"type\":\"text\",\"fields\":{\"keyword\":{\"type\":\"keyword\"}}},\"id\":{\"type\":\"keyword\"},\"type\":{\"type\":\"keyword\"}}},\"entityB\":{\"properties\":{\"name\":{\"type\":\"text\",\"fields\":{\"keyword\":{\"type\":\"keyword\"}}},\"id\":{\"type\":\"keyword\"},\"type\":{\"type\":\"keyword\"}}},\"endDate\":{\"format\":\"epoch_millis||strict_date_optional_time||yyyy-MM-dd HH:mm:ss.SSS\",\"type\":\"date\"},\"id\":{\"type\":\"keyword\"},\"type\":{\"type\":\"keyword\"},\"startDate\":{\"format\":\"epoch_millis||strict_date_optional_time||yyyy-MM-dd HH:mm:ss.SSS\",\"type\":\"date\"},\"direction\":{\"type\":\"keyword\"}}}}",response.getIndexTemplates().get(0).mappings().get("Own").toString());
                     break;
                 case "Know":
@@ -234,7 +250,7 @@ public class OpensearchIndexProviderMappingFactoryIT extends BaseModuleInjection
                     response = TestSuiteIndexProviderSuite.client.admin().indices().getTemplates(new GetIndexTemplatesRequest().names("know")).actionGet();
                     Assert.assertEquals(1,response.getIndexTemplates().size());
                     Assert.assertEquals("know",response.getIndexTemplates().get(0).name());
-                    Assert.assertEquals(INDEX_SETTING,response.getIndexTemplates().get(0).settings().toString());
+                    Assert.assertEquals(INDEX_SETTING_WITH_SORTING,response.getIndexTemplates().get(0).settings().toString());
                     Assert.assertEquals("{\"Know\":{\"properties\":{\"entityA\":{\"properties\":{\"id\":{\"type\":\"keyword\"},\"type\":{\"type\":\"keyword\"}}},\"entityB\":{\"properties\":{\"id\":{\"type\":\"keyword\"},\"type\":{\"type\":\"keyword\"}}},\"id\":{\"type\":\"keyword\"},\"type\":{\"type\":\"keyword\"},\"startDate\":{\"format\":\"epoch_millis||strict_date_optional_time||yyyy-MM-dd HH:mm:ss.SSS\",\"type\":\"date\"},\"direction\":{\"type\":\"keyword\"}}}}",response.getIndexTemplates().get(0).mappings().get("Know").toString());
                     break;
                 case "memberof":
@@ -242,7 +258,7 @@ public class OpensearchIndexProviderMappingFactoryIT extends BaseModuleInjection
                     response = TestSuiteIndexProviderSuite.client.admin().indices().getTemplates(new GetIndexTemplatesRequest().names("memberof")).actionGet();
                     Assert.assertEquals(1,response.getIndexTemplates().size());
                     Assert.assertEquals(index.toLowerCase(),response.getIndexTemplates().get(0).name());
-                    Assert.assertEquals(INDEX_SETTING,response.getIndexTemplates().get(0).settings().toString());
+                    Assert.assertEquals(INDEX_SETTING_WITH_SORTING,response.getIndexTemplates().get(0).settings().toString());
                     Assert.assertEquals("{\"MemberOf\":{\"properties\":{\"entityA\":{\"properties\":{\"id\":{\"type\":\"keyword\"},\"type\":{\"type\":\"keyword\"}}},\"entityB\":{\"properties\":{\"id\":{\"type\":\"keyword\"},\"type\":{\"type\":\"keyword\"}}},\"endDate\":{\"format\":\"epoch_millis||strict_date_optional_time||yyyy-MM-dd HH:mm:ss.SSS\",\"type\":\"date\"},\"id\":{\"type\":\"keyword\"},\"type\":{\"type\":\"keyword\"},\"startDate\":{\"format\":\"epoch_millis||strict_date_optional_time||yyyy-MM-dd HH:mm:ss.SSS\",\"type\":\"date\"},\"direction\":{\"type\":\"keyword\"}}}}",response.getIndexTemplates().get(0).mappings().get("MemberOf").toString());
                     break;
                 case "originatedin":
@@ -250,7 +266,7 @@ public class OpensearchIndexProviderMappingFactoryIT extends BaseModuleInjection
                     response = TestSuiteIndexProviderSuite.client.admin().indices().getTemplates(new GetIndexTemplatesRequest().names("originatedin")).actionGet();
                     Assert.assertEquals(1,response.getIndexTemplates().size());
                     Assert.assertEquals(index.toLowerCase(),response.getIndexTemplates().get(0).name());
-                    Assert.assertEquals(INDEX_SETTING,response.getIndexTemplates().get(0).settings().toString());
+                    Assert.assertEquals(INDEX_SETTING_WITH_SORTING,response.getIndexTemplates().get(0).settings().toString());
                     Assert.assertEquals("{\"OriginatedIn\":{\"properties\":{\"entityA\":{\"properties\":{\"id\":{\"type\":\"keyword\"},\"type\":{\"type\":\"keyword\"}}},\"entityB\":{\"properties\":{\"id\":{\"type\":\"keyword\"},\"type\":{\"type\":\"keyword\"}}},\"id\":{\"type\":\"keyword\"},\"type\":{\"type\":\"keyword\"},\"startDate\":{\"format\":\"epoch_millis||strict_date_optional_time||yyyy-MM-dd HH:mm:ss.SSS\",\"type\":\"date\"},\"direction\":{\"type\":\"keyword\"}}}}",response.getIndexTemplates().get(0).mappings().get("OriginatedIn").toString());
                     break;
                 case "subjectof":
@@ -258,7 +274,7 @@ public class OpensearchIndexProviderMappingFactoryIT extends BaseModuleInjection
                     response = TestSuiteIndexProviderSuite.client.admin().indices().getTemplates(new GetIndexTemplatesRequest().names("subjectof")).actionGet();
                     Assert.assertEquals(1,response.getIndexTemplates().size());
                     Assert.assertEquals(index.toLowerCase(),response.getIndexTemplates().get(0).name());
-                    Assert.assertEquals(INDEX_SETTING,response.getIndexTemplates().get(0).settings().toString());
+                    Assert.assertEquals(INDEX_SETTING_WITH_SORTING,response.getIndexTemplates().get(0).settings().toString());
                     Assert.assertEquals("{\"SubjectOf\":{\"properties\":{\"entityA\":{\"properties\":{\"id\":{\"type\":\"keyword\"},\"type\":{\"type\":\"keyword\"}}},\"entityB\":{\"properties\":{\"id\":{\"type\":\"keyword\"},\"type\":{\"type\":\"keyword\"}}},\"id\":{\"type\":\"keyword\"},\"type\":{\"type\":\"keyword\"},\"startDate\":{\"format\":\"epoch_millis||strict_date_optional_time||yyyy-MM-dd HH:mm:ss.SSS\",\"type\":\"date\"},\"direction\":{\"type\":\"keyword\"}}}}",response.getIndexTemplates().get(0).mappings().get("SubjectOf").toString());
                     break;
                 case "registeredin":
@@ -266,7 +282,7 @@ public class OpensearchIndexProviderMappingFactoryIT extends BaseModuleInjection
                     response = TestSuiteIndexProviderSuite.client.admin().indices().getTemplates(new GetIndexTemplatesRequest().names("registeredin")).actionGet();
                     Assert.assertEquals(1,response.getIndexTemplates().size());
                     Assert.assertEquals(index.toLowerCase(),response.getIndexTemplates().get(0).name());
-                    Assert.assertEquals(INDEX_SETTING,response.getIndexTemplates().get(0).settings().toString());
+                    Assert.assertEquals(INDEX_SETTING_WITH_SORTING,response.getIndexTemplates().get(0).settings().toString());
                     Assert.assertEquals("{\"RegisteredIn\":{\"properties\":{\"entityA\":{\"properties\":{\"id\":{\"type\":\"keyword\"},\"type\":{\"type\":\"keyword\"}}},\"entityB\":{\"properties\":{\"id\":{\"type\":\"keyword\"},\"type\":{\"type\":\"keyword\"}}},\"id\":{\"type\":\"keyword\"},\"type\":{\"type\":\"keyword\"},\"startDate\":{\"format\":\"epoch_millis||strict_date_optional_time||yyyy-MM-dd HH:mm:ss.SSS\",\"type\":\"date\"},\"direction\":{\"type\":\"keyword\"}}}}",response.getIndexTemplates().get(0).mappings().get("RegisteredIn").toString());
                     break;
                 case "Fire":
@@ -274,7 +290,7 @@ public class OpensearchIndexProviderMappingFactoryIT extends BaseModuleInjection
                     response = TestSuiteIndexProviderSuite.client.admin().indices().getTemplates(new GetIndexTemplatesRequest().names("fire")).actionGet();
                     Assert.assertEquals(1,response.getIndexTemplates().size());
                     Assert.assertEquals(index.toLowerCase(),response.getIndexTemplates().get(0).name());
-                    Assert.assertEquals(INDEX_SETTING,response.getIndexTemplates().get(0).settings().toString());
+                    Assert.assertEquals(INDEX_SETTING_WITH_SORTING,response.getIndexTemplates().get(0).settings().toString());
                     Assert.assertEquals("{\"Fire\":{\"properties\":{\"date\":{\"format\":\"epoch_millis||strict_date_optional_time||yyyy-MM-dd HH:mm:ss.SSS\",\"type\":\"date\"},\"entityA\":{\"properties\":{\"color\":{\"type\":\"keyword\"},\"name\":{\"type\":\"text\",\"fields\":{\"keyword\":{\"type\":\"keyword\"}}},\"id\":{\"type\":\"keyword\"},\"type\":{\"type\":\"keyword\"}}},\"entityB\":{\"properties\":{\"color\":{\"type\":\"keyword\"},\"name\":{\"type\":\"text\",\"fields\":{\"keyword\":{\"type\":\"keyword\"}}},\"id\":{\"type\":\"keyword\"},\"type\":{\"type\":\"keyword\"}}},\"temperature\":{\"type\":\"integer\"},\"id\":{\"type\":\"keyword\"},\"type\":{\"type\":\"keyword\"},\"direction\":{\"type\":\"keyword\"}}}}",response.getIndexTemplates().get(0).mappings().get("Fire").toString());
                     break;
                 case "Freeze":
@@ -282,7 +298,7 @@ public class OpensearchIndexProviderMappingFactoryIT extends BaseModuleInjection
                     response = TestSuiteIndexProviderSuite.client.admin().indices().getTemplates(new GetIndexTemplatesRequest().names("freeze")).actionGet();
                     Assert.assertEquals(1,response.getIndexTemplates().size());
                     Assert.assertEquals(index.toLowerCase(),response.getIndexTemplates().get(0).name());
-                    Assert.assertEquals(INDEX_SETTING,response.getIndexTemplates().get(0).settings().toString());
+                    Assert.assertEquals(INDEX_SETTING_WITH_SORTING,response.getIndexTemplates().get(0).settings().toString());
                     Assert.assertEquals("{\"Freeze\":{\"properties\":{\"date\":{\"format\":\"epoch_millis||strict_date_optional_time||yyyy-MM-dd HH:mm:ss.SSS\",\"type\":\"date\"},\"entityA\":{\"properties\":{\"name\":{\"type\":\"text\",\"fields\":{\"keyword\":{\"type\":\"keyword\"}}},\"id\":{\"type\":\"keyword\"},\"type\":{\"type\":\"keyword\"}}},\"entityB\":{\"properties\":{\"name\":{\"type\":\"text\",\"fields\":{\"keyword\":{\"type\":\"keyword\"}}},\"id\":{\"type\":\"keyword\"},\"type\":{\"type\":\"keyword\"}}},\"temperature\":{\"type\":\"integer\"},\"id\":{\"type\":\"keyword\"},\"type\":{\"type\":\"keyword\"},\"direction\":{\"type\":\"keyword\"}}}}",response.getIndexTemplates().get(0).mappings().get("Freeze").toString());
                     break;
                 default:
@@ -308,7 +324,7 @@ public class OpensearchIndexProviderMappingFactoryIT extends BaseModuleInjection
                     Assert.assertEquals(1,response.getIndexTemplates().size());
                     Assert.assertEquals("projection",response.getIndexTemplates().get(0).name());
                     Assert.assertEquals(INDEX_SETTING,response.getIndexTemplates().get(0).settings().toString());
-                    Assert.assertEquals("{\"projection\":{\"properties\":{\"Profession\":{\"type\":\"nested\",\"properties\":{\"name\":{\"type\":\"text\",\"fields\":{\"keyword\":{\"type\":\"keyword\"}}},\"id\":{\"type\":\"keyword\"},\"tag\":{\"type\":\"keyword\"},\"type\":{\"type\":\"keyword\"},\"experience\":{\"type\":\"keyword\"},\"salary\":{\"type\":\"integer\"},\"certification\":{\"type\":\"keyword\"}}},\"Kingdom\":{\"type\":\"nested\",\"properties\":{\"independenceDay\":{\"type\":\"keyword\"},\"king\":{\"type\":\"text\",\"fields\":{\"keyword\":{\"type\":\"keyword\"}}},\"queen\":{\"type\":\"text\",\"fields\":{\"keyword\":{\"type\":\"keyword\"}}},\"name\":{\"type\":\"text\",\"fields\":{\"keyword\":{\"type\":\"keyword\"}}},\"funds\":{\"type\":\"float\"},\"id\":{\"type\":\"keyword\"},\"tag\":{\"type\":\"keyword\"},\"type\":{\"type\":\"keyword\"}}},\"Horse\":{\"type\":\"nested\",\"properties\":{\"distance\":{\"type\":\"integer\"},\"name\":{\"type\":\"text\",\"fields\":{\"keyword\":{\"type\":\"keyword\"}}},\"weight\":{\"type\":\"integer\"},\"id\":{\"type\":\"keyword\"},\"tag\":{\"type\":\"keyword\"},\"maxSpeed\":{\"type\":\"integer\"},\"type\":{\"type\":\"keyword\"},\"OriginatedIn\":{\"type\":\"nested\",\"properties\":{\"entityB.type\":{\"type\":\"keyword\"},\"id\":{\"type\":\"keyword\"},\"tag\":{\"type\":\"keyword\"},\"entityB.id\":{\"type\":\"keyword\"},\"type\":{\"type\":\"keyword\"},\"startDate\":{\"format\":\"epoch_millis||strict_date_optional_time||yyyy-MM-dd HH:mm:ss.SSS\",\"type\":\"date\"}}},\"RegisteredIn\":{\"type\":\"nested\",\"properties\":{\"entityB.type\":{\"type\":\"keyword\"},\"id\":{\"type\":\"keyword\"},\"tag\":{\"type\":\"keyword\"},\"entityB.id\":{\"type\":\"keyword\"},\"type\":{\"type\":\"keyword\"},\"startDate\":{\"format\":\"epoch_millis||strict_date_optional_time||yyyy-MM-dd HH:mm:ss.SSS\",\"type\":\"date\"}}}}},\"Guild\":{\"type\":\"nested\",\"properties\":{\"iconId\":{\"type\":\"keyword\"},\"name\":{\"type\":\"text\",\"fields\":{\"keyword\":{\"type\":\"keyword\"}}},\"description\":{\"type\":\"text\",\"fields\":{\"keyword\":{\"type\":\"keyword\"}}},\"id\":{\"type\":\"keyword\"},\"tag\":{\"type\":\"keyword\"},\"type\":{\"type\":\"keyword\"},\"establishDate\":{\"format\":\"epoch_millis||strict_date_optional_time||yyyy-MM-dd HH:mm:ss.SSS\",\"type\":\"date\"},\"url\":{\"type\":\"keyword\"},\"RegisteredIn\":{\"type\":\"nested\",\"properties\":{\"entityB.type\":{\"type\":\"keyword\"},\"id\":{\"type\":\"keyword\"},\"tag\":{\"type\":\"keyword\"},\"entityB.id\":{\"type\":\"keyword\"},\"type\":{\"type\":\"keyword\"},\"startDate\":{\"format\":\"epoch_millis||strict_date_optional_time||yyyy-MM-dd HH:mm:ss.SSS\",\"type\":\"date\"}}}}},\"Person\":{\"type\":\"nested\",\"properties\":{\"lastName\":{\"type\":\"text\",\"fields\":{\"keyword\":{\"type\":\"keyword\"}}},\"HasProfession\":{\"type\":\"nested\",\"properties\":{\"entityB.type\":{\"type\":\"keyword\"},\"id\":{\"type\":\"keyword\"},\"tag\":{\"type\":\"keyword\"},\"entityB.id\":{\"type\":\"keyword\"}}},\"gender\":{\"type\":\"keyword\"},\"Own\":{\"type\":\"nested\",\"properties\":{\"entityB.type\":{\"type\":\"keyword\"},\"endDate\":{\"format\":\"epoch_millis||strict_date_optional_time||yyyy-MM-dd HH:mm:ss.SSS\",\"type\":\"date\"},\"id\":{\"type\":\"keyword\"},\"tag\":{\"type\":\"keyword\"},\"entityB.id\":{\"type\":\"keyword\"},\"type\":{\"type\":\"keyword\"},\"startDate\":{\"format\":\"epoch_millis||strict_date_optional_time||yyyy-MM-dd HH:mm:ss.SSS\",\"type\":\"date\"}}},\"Know\":{\"type\":\"nested\",\"properties\":{\"entityB.type\":{\"type\":\"keyword\"},\"id\":{\"type\":\"keyword\"},\"tag\":{\"type\":\"keyword\"},\"entityB.id\":{\"type\":\"keyword\"},\"type\":{\"type\":\"keyword\"},\"startDate\":{\"format\":\"epoch_millis||strict_date_optional_time||yyyy-MM-dd HH:mm:ss.SSS\",\"type\":\"date\"}}},\"type\":{\"type\":\"keyword\"},\"birthDate\":{\"format\":\"epoch_millis||strict_date_optional_time||yyyy-MM-dd HH:mm:ss.SSS\",\"type\":\"date\"},\"OriginatedIn\":{\"type\":\"nested\",\"properties\":{\"entityB.type\":{\"type\":\"keyword\"},\"id\":{\"type\":\"keyword\"},\"tag\":{\"type\":\"keyword\"},\"entityB.id\":{\"type\":\"keyword\"},\"type\":{\"type\":\"keyword\"},\"startDate\":{\"format\":\"epoch_millis||strict_date_optional_time||yyyy-MM-dd HH:mm:ss.SSS\",\"type\":\"date\"}}},\"firstName\":{\"type\":\"text\",\"fields\":{\"keyword\":{\"type\":\"keyword\"}}},\"MemberOf\":{\"type\":\"nested\",\"properties\":{\"entityB.type\":{\"type\":\"keyword\"},\"endDate\":{\"format\":\"epoch_millis||strict_date_optional_time||yyyy-MM-dd HH:mm:ss.SSS\",\"type\":\"date\"},\"id\":{\"type\":\"keyword\"},\"tag\":{\"type\":\"keyword\"},\"entityB.id\":{\"type\":\"keyword\"},\"type\":{\"type\":\"keyword\"},\"startDate\":{\"format\":\"epoch_millis||strict_date_optional_time||yyyy-MM-dd HH:mm:ss.SSS\",\"type\":\"date\"}}},\"deathDate\":{\"type\":\"keyword\"},\"name\":{\"type\":\"text\",\"fields\":{\"keyword\":{\"type\":\"keyword\"}}},\"SubjectOf\":{\"type\":\"nested\",\"properties\":{\"entityB.type\":{\"type\":\"keyword\"},\"id\":{\"type\":\"keyword\"},\"tag\":{\"type\":\"keyword\"},\"entityB.id\":{\"type\":\"keyword\"},\"type\":{\"type\":\"keyword\"},\"startDate\":{\"format\":\"epoch_millis||strict_date_optional_time||yyyy-MM-dd HH:mm:ss.SSS\",\"type\":\"date\"}}},\"id\":{\"type\":\"keyword\"},\"tag\":{\"type\":\"keyword\"},\"height\":{\"type\":\"integer\"}}},\"Dragon\":{\"type\":\"nested\",\"properties\":{\"gender\":{\"type\":\"keyword\"},\"color\":{\"type\":\"keyword\"},\"Fire\":{\"type\":\"nested\",\"properties\":{\"date\":{\"format\":\"epoch_millis||strict_date_optional_time||yyyy-MM-dd HH:mm:ss.SSS\",\"type\":\"date\"},\"entityB.type\":{\"type\":\"keyword\"},\"temperature\":{\"type\":\"integer\"},\"id\":{\"type\":\"keyword\"},\"tag\":{\"type\":\"keyword\"},\"entityB.id\":{\"type\":\"keyword\"},\"type\":{\"type\":\"keyword\"}}},\"name\":{\"type\":\"text\",\"fields\":{\"keyword\":{\"type\":\"keyword\"}}},\"id\":{\"type\":\"keyword\"},\"tag\":{\"type\":\"keyword\"},\"power\":{\"type\":\"integer\"},\"type\":{\"type\":\"keyword\"},\"birthDate\":{\"format\":\"epoch_millis||strict_date_optional_time||yyyy-MM-dd HH:mm:ss.SSS\",\"type\":\"date\"},\"Freeze\":{\"type\":\"nested\",\"properties\":{\"date\":{\"format\":\"epoch_millis||strict_date_optional_time||yyyy-MM-dd HH:mm:ss.SSS\",\"type\":\"date\"},\"entityB.type\":{\"type\":\"keyword\"},\"temperature\":{\"type\":\"integer\"},\"id\":{\"type\":\"keyword\"},\"tag\":{\"type\":\"keyword\"},\"entityB.id\":{\"type\":\"keyword\"},\"type\":{\"type\":\"keyword\"}}},\"OriginatedIn\":{\"type\":\"nested\",\"properties\":{\"entityB.type\":{\"type\":\"keyword\"},\"id\":{\"type\":\"keyword\"},\"tag\":{\"type\":\"keyword\"},\"entityB.id\":{\"type\":\"keyword\"},\"type\":{\"type\":\"keyword\"},\"startDate\":{\"format\":\"epoch_millis||strict_date_optional_time||yyyy-MM-dd HH:mm:ss.SSS\",\"type\":\"date\"}}}}},\"queryId\":{\"type\":\"keyword\"},\"cursorId\":{\"type\":\"keyword\"},\"timestamp\":{\"format\":\"epoch_millis||strict_date_optional_time||yyyy-MM-dd HH:mm:ss.SSS\",\"type\":\"date\"}}}}",response.getIndexTemplates().get(0).mappings().get("projection").toString());
+                    Assert.assertEquals(PROJECTION_MAPPING,response.getIndexTemplates().get(0).mappings().get("projection").toString());
                     break;
                 case "ontology":
                 case "Ontology":
@@ -349,19 +365,19 @@ public class OpensearchIndexProviderMappingFactoryIT extends BaseModuleInjection
             switch (index._2) {
                 case "Projection":
                 case "projection":
-                    Assert.assertEquals("{\"own\":{\"mappings\":{\"Own\":{\"properties\":{\"direction\":{\"type\":\"keyword\"},\"endDate\":{\"type\":\"date\",\"format\":\"epoch_millis||strict_date_optional_time||yyyy-MM-dd HH:mm:ss.SSS\"},\"entityA\":{\"properties\":{\"firstName\":{\"type\":\"text\",\"fields\":{\"keyword\":{\"type\":\"keyword\"}}},\"id\":{\"type\":\"keyword\"},\"name\":{\"type\":\"text\",\"fields\":{\"keyword\":{\"type\":\"keyword\"}}},\"type\":{\"type\":\"keyword\"}}},\"entityB\":{\"properties\":{\"id\":{\"type\":\"keyword\"},\"name\":{\"type\":\"text\",\"fields\":{\"keyword\":{\"type\":\"keyword\"}}},\"type\":{\"type\":\"keyword\"}}},\"id\":{\"type\":\"keyword\"},\"startDate\":{\"type\":\"date\",\"format\":\"epoch_millis||strict_date_optional_time||yyyy-MM-dd HH:mm:ss.SSS\"},\"type\":{\"type\":\"keyword\"}}}}}}",response.toString());
+                    Assert.assertEquals(OWN_MAPPING,response.toString());
                     break;
                 case "Own":
                 case "own":
-                    Assert.assertEquals("{\"own\":{\"mappings\":{\"Own\":{\"properties\":{\"direction\":{\"type\":\"keyword\"},\"endDate\":{\"type\":\"date\",\"format\":\"epoch_millis||strict_date_optional_time||yyyy-MM-dd HH:mm:ss.SSS\"},\"entityA\":{\"properties\":{\"firstName\":{\"type\":\"text\",\"fields\":{\"keyword\":{\"type\":\"keyword\"}}},\"id\":{\"type\":\"keyword\"},\"name\":{\"type\":\"text\",\"fields\":{\"keyword\":{\"type\":\"keyword\"}}},\"type\":{\"type\":\"keyword\"}}},\"entityB\":{\"properties\":{\"id\":{\"type\":\"keyword\"},\"name\":{\"type\":\"text\",\"fields\":{\"keyword\":{\"type\":\"keyword\"}}},\"type\":{\"type\":\"keyword\"}}},\"id\":{\"type\":\"keyword\"},\"startDate\":{\"type\":\"date\",\"format\":\"epoch_millis||strict_date_optional_time||yyyy-MM-dd HH:mm:ss.SSS\"},\"type\":{\"type\":\"keyword\"}}}}}}",response.toString());
+                    Assert.assertEquals(OWN_MAPPING,response.toString());
                     break;
                 case "Know":
                 case "know":
-                    Assert.assertEquals("{\"know\":{\"mappings\":{\"Know\":{\"properties\":{\"direction\":{\"type\":\"keyword\"},\"entityA\":{\"properties\":{\"id\":{\"type\":\"keyword\"},\"type\":{\"type\":\"keyword\"}}},\"entityB\":{\"properties\":{\"id\":{\"type\":\"keyword\"},\"type\":{\"type\":\"keyword\"}}},\"id\":{\"type\":\"keyword\"},\"startDate\":{\"type\":\"date\",\"format\":\"epoch_millis||strict_date_optional_time||yyyy-MM-dd HH:mm:ss.SSS\"},\"type\":{\"type\":\"keyword\"}}}}}}",response.toString());
+                    Assert.assertEquals(KNOW_MAPPING,response.toString());
                     break;
                 case "memberOf":
                 case "memberof":
-                    Assert.assertEquals("{\"memberof\":{\"mappings\":{\"MemberOf\":{\"properties\":{\"direction\":{\"type\":\"keyword\"},\"endDate\":{\"type\":\"date\",\"format\":\"epoch_millis||strict_date_optional_time||yyyy-MM-dd HH:mm:ss.SSS\"},\"entityA\":{\"properties\":{\"id\":{\"type\":\"keyword\"},\"type\":{\"type\":\"keyword\"}}},\"entityB\":{\"properties\":{\"id\":{\"type\":\"keyword\"},\"type\":{\"type\":\"keyword\"}}},\"id\":{\"type\":\"keyword\"},\"startDate\":{\"type\":\"date\",\"format\":\"epoch_millis||strict_date_optional_time||yyyy-MM-dd HH:mm:ss.SSS\"},\"type\":{\"type\":\"keyword\"}}}}}}",response.toString());
+                    Assert.assertEquals(MEMBER_OF_MAPPING,response.toString());
                     break;
                 case "idx_fire_500":
                 case "idx_fire_1000":
@@ -372,7 +388,7 @@ public class OpensearchIndexProviderMappingFactoryIT extends BaseModuleInjection
                     try {
                         Map map = TestSuiteIndexProviderSuite.mapper.readValue(response.toString(), Map.class);
                         Assert.assertNotNull(map.get(index._2));
-                        Assert.assertEquals("{mappings={Fire={properties={date={type=date, format=epoch_millis||strict_date_optional_time||yyyy-MM-dd HH:mm:ss.SSS}, direction={type=keyword}, entityA={properties={color={type=keyword}, id={type=keyword}, name={type=text, fields={keyword={type=keyword}}}, type={type=keyword}}}, entityB={properties={color={type=keyword}, id={type=keyword}, name={type=text, fields={keyword={type=keyword}}}, type={type=keyword}}}, id={type=keyword}, temperature={type=integer}, type={type=keyword}}}}}",map.get(index._2).toString());
+                        Assert.assertEquals(FIRE_MAPPING_RESPONSE,map.get(index._2).toString());
                     } catch (IOException e) {
                         Assert.fail("Not expecting non registered type "+ index);
                     }
@@ -385,44 +401,44 @@ public class OpensearchIndexProviderMappingFactoryIT extends BaseModuleInjection
                 case "freeze":
                     try {
                         Map map = TestSuiteIndexProviderSuite.mapper.readValue(response.toString(), Map.class);
-                        Assert.assertEquals("{mappings={Freeze={properties={date={type=date, format=epoch_millis||strict_date_optional_time||yyyy-MM-dd HH:mm:ss.SSS}, direction={type=keyword}, entityA={properties={id={type=keyword}, name={type=text, fields={keyword={type=keyword}}}, type={type=keyword}}}, entityB={properties={id={type=keyword}, name={type=text, fields={keyword={type=keyword}}}, type={type=keyword}}}, id={type=keyword}, temperature={type=integer}, type={type=keyword}}}}}",map.get(index._2).toString());
+                        Assert.assertEquals(FREEZE_MAPPING_RESPONSE,map.get(index._2).toString());
                     } catch (IOException e) {
                         Assert.fail("Not expecting non registered type "+ index);
                     }
                     break;
                 case "originatedIn":
                 case "originatedin":
-                    Assert.assertEquals("{\"originatedin\":{\"mappings\":{\"OriginatedIn\":{\"properties\":{\"direction\":{\"type\":\"keyword\"},\"entityA\":{\"properties\":{\"id\":{\"type\":\"keyword\"},\"type\":{\"type\":\"keyword\"}}},\"entityB\":{\"properties\":{\"id\":{\"type\":\"keyword\"},\"type\":{\"type\":\"keyword\"}}},\"id\":{\"type\":\"keyword\"},\"startDate\":{\"type\":\"date\",\"format\":\"epoch_millis||strict_date_optional_time||yyyy-MM-dd HH:mm:ss.SSS\"},\"type\":{\"type\":\"keyword\"}}}}}}",response.toString());
+                    Assert.assertEquals(ORIGINATED_IN_MAPPING,response.toString());
                     break;
                 case "subjectOf":
                 case "subjectof":
-                    Assert.assertEquals("{\"subjectof\":{\"mappings\":{\"SubjectOf\":{\"properties\":{\"direction\":{\"type\":\"keyword\"},\"entityA\":{\"properties\":{\"id\":{\"type\":\"keyword\"},\"type\":{\"type\":\"keyword\"}}},\"entityB\":{\"properties\":{\"id\":{\"type\":\"keyword\"},\"type\":{\"type\":\"keyword\"}}},\"id\":{\"type\":\"keyword\"},\"startDate\":{\"type\":\"date\",\"format\":\"epoch_millis||strict_date_optional_time||yyyy-MM-dd HH:mm:ss.SSS\"},\"type\":{\"type\":\"keyword\"}}}}}}",response.toString());
+                    Assert.assertEquals(SUBJECT_OF_MAPPING,response.toString());
                     break;
                 case "registeredIn":
                 case "registeredin":
-                    Assert.assertEquals("{\"registeredin\":{\"mappings\":{\"RegisteredIn\":{\"properties\":{\"direction\":{\"type\":\"keyword\"},\"entityA\":{\"properties\":{\"id\":{\"type\":\"keyword\"},\"type\":{\"type\":\"keyword\"}}},\"entityB\":{\"properties\":{\"id\":{\"type\":\"keyword\"},\"type\":{\"type\":\"keyword\"}}},\"id\":{\"type\":\"keyword\"},\"startDate\":{\"type\":\"date\",\"format\":\"epoch_millis||strict_date_optional_time||yyyy-MM-dd HH:mm:ss.SSS\"},\"type\":{\"type\":\"keyword\"}}}}}}",response.toString());
+                    Assert.assertEquals(REGISTERD_IN_MAPPING,response.toString());
                     break;
                 case "person":
                 case "people":
-                    Assert.assertEquals("{\"people\":{\"mappings\":{\"Person\":{\"properties\":{\"Profession\":{\"type\":\"nested\",\"properties\":{\"certification\":{\"type\":\"keyword\"},\"experience\":{\"type\":\"keyword\"},\"id\":{\"type\":\"keyword\"},\"name\":{\"type\":\"text\",\"fields\":{\"keyword\":{\"type\":\"keyword\"}}},\"salary\":{\"type\":\"integer\"},\"type\":{\"type\":\"keyword\"}}},\"birthDate\":{\"type\":\"date\",\"format\":\"epoch_millis||strict_date_optional_time||yyyy-MM-dd HH:mm:ss.SSS\"},\"deathDate\":{\"type\":\"keyword\"},\"firstName\":{\"type\":\"text\",\"fields\":{\"keyword\":{\"type\":\"keyword\"}}},\"gender\":{\"type\":\"keyword\"},\"height\":{\"type\":\"integer\"},\"id\":{\"type\":\"keyword\"},\"lastName\":{\"type\":\"text\",\"fields\":{\"keyword\":{\"type\":\"keyword\"}}},\"name\":{\"type\":\"text\",\"fields\":{\"keyword\":{\"type\":\"keyword\"}}},\"type\":{\"type\":\"keyword\"}}}}}}",response.toString());
+                    Assert.assertEquals(PEOPLE_MAPPING,response.toString());
                     break;
                 case "Horse":
                 case "horse":
                 case "horses":
-                    Assert.assertEquals("{\"horse\":{\"mappings\":{\"properties\":{\"distance\":{\"type\":\"integer\"},\"id\":{\"type\":\"keyword\"},\"maxSpeed\":{\"type\":\"integer\"},\"name\":{\"type\":\"text\",\"fields\":{\"keyword\":{\"type\":\"keyword\"}}},\"type\":{\"type\":\"keyword\"},\"weight\":{\"type\":\"integer\"}}}}}",response.toString());
+                    Assert.assertEquals(HORSE_MAPPING,response.toString());
                     break;
                 case "Dragon":
                 case "dragon":
                 case "dragons":
-                    Assert.assertEquals("{\"dragon\":{\"mappings\":{\"Dragon\":{\"properties\":{\"birthDate\":{\"type\":\"date\",\"format\":\"epoch_millis||strict_date_optional_time||yyyy-MM-dd HH:mm:ss.SSS\"},\"color\":{\"type\":\"keyword\"},\"gender\":{\"type\":\"keyword\"},\"id\":{\"type\":\"keyword\"},\"name\":{\"type\":\"text\",\"fields\":{\"keyword\":{\"type\":\"keyword\"}}},\"power\":{\"type\":\"integer\"},\"type\":{\"type\":\"keyword\"}}}}}}",response.toString());
+                    Assert.assertEquals(DRAGON_MAPPING,response.toString());
                     break;
                 case "kingdom":
                 case "kingdoms":
-                    Assert.assertEquals("{\"kingdom\":{\"mappings\":{\"Kingdom\":{\"properties\":{\"funds\":{\"type\":\"float\"},\"id\":{\"type\":\"keyword\"},\"independenceDay\":{\"type\":\"keyword\"},\"king\":{\"type\":\"text\",\"fields\":{\"keyword\":{\"type\":\"keyword\"}}},\"name\":{\"type\":\"text\",\"fields\":{\"keyword\":{\"type\":\"keyword\"}}},\"queen\":{\"type\":\"text\",\"fields\":{\"keyword\":{\"type\":\"keyword\"}}},\"type\":{\"type\":\"keyword\"}}}}}}",response.toString());
+                    Assert.assertEquals(KINGDOM_MAPPING,response.toString());
                     break;
                 case "guild":
                 case "guilds":
-                    Assert.assertEquals("{\"guild\":{\"mappings\":{\"Guild\":{\"properties\":{\"description\":{\"type\":\"text\",\"fields\":{\"keyword\":{\"type\":\"keyword\"}}},\"establishDate\":{\"type\":\"date\",\"format\":\"epoch_millis||strict_date_optional_time||yyyy-MM-dd HH:mm:ss.SSS\"},\"iconId\":{\"type\":\"keyword\"},\"id\":{\"type\":\"keyword\"},\"name\":{\"type\":\"text\",\"fields\":{\"keyword\":{\"type\":\"keyword\"}}},\"type\":{\"type\":\"keyword\"},\"url\":{\"type\":\"keyword\"}}}}}}",response.toString());
+                    Assert.assertEquals(GUILD_MAPPING,response.toString());
                     break;
                 default:
                     Assert.fail("Not expecting non registered type "+ index);
@@ -457,15 +473,15 @@ public class OpensearchIndexProviderMappingFactoryIT extends BaseModuleInjection
             switch (index._2) {
                 case "Own":
                 case "own":
-                    Assert.assertEquals("{\"own\":{\"mappings\":{\"Own\":{\"properties\":{\"direction\":{\"type\":\"keyword\"},\"endDate\":{\"type\":\"date\",\"format\":\"epoch_millis||strict_date_optional_time||yyyy-MM-dd HH:mm:ss.SSS\"},\"entityA\":{\"properties\":{\"firstName\":{\"type\":\"text\",\"fields\":{\"keyword\":{\"type\":\"keyword\"}}},\"id\":{\"type\":\"keyword\"},\"name\":{\"type\":\"text\",\"fields\":{\"keyword\":{\"type\":\"keyword\"}}},\"type\":{\"type\":\"keyword\"}}},\"entityB\":{\"properties\":{\"id\":{\"type\":\"keyword\"},\"name\":{\"type\":\"text\",\"fields\":{\"keyword\":{\"type\":\"keyword\"}}},\"type\":{\"type\":\"keyword\"}}},\"id\":{\"type\":\"keyword\"},\"startDate\":{\"type\":\"date\",\"format\":\"epoch_millis||strict_date_optional_time||yyyy-MM-dd HH:mm:ss.SSS\"},\"type\":{\"type\":\"keyword\"}}}}}}",response.toString());
+                    Assert.assertEquals(OWN_MAPPING,response.toString());
                     break;
                 case "Know":
                 case "know":
-                    Assert.assertEquals("{\"know\":{\"mappings\":{\"Know\":{\"properties\":{\"direction\":{\"type\":\"keyword\"},\"entityA\":{\"properties\":{\"id\":{\"type\":\"keyword\"},\"type\":{\"type\":\"keyword\"}}},\"entityB\":{\"properties\":{\"id\":{\"type\":\"keyword\"},\"type\":{\"type\":\"keyword\"}}},\"id\":{\"type\":\"keyword\"},\"startDate\":{\"type\":\"date\",\"format\":\"epoch_millis||strict_date_optional_time||yyyy-MM-dd HH:mm:ss.SSS\"},\"type\":{\"type\":\"keyword\"}}}}}}",response.toString());
+                    Assert.assertEquals(KNOW_MAPPING,response.toString());
                     break;
                 case "memberOf":
                 case "memberof":
-                    Assert.assertEquals("{\"memberof\":{\"mappings\":{\"MemberOf\":{\"properties\":{\"direction\":{\"type\":\"keyword\"},\"endDate\":{\"type\":\"date\",\"format\":\"epoch_millis||strict_date_optional_time||yyyy-MM-dd HH:mm:ss.SSS\"},\"entityA\":{\"properties\":{\"id\":{\"type\":\"keyword\"},\"type\":{\"type\":\"keyword\"}}},\"entityB\":{\"properties\":{\"id\":{\"type\":\"keyword\"},\"type\":{\"type\":\"keyword\"}}},\"id\":{\"type\":\"keyword\"},\"startDate\":{\"type\":\"date\",\"format\":\"epoch_millis||strict_date_optional_time||yyyy-MM-dd HH:mm:ss.SSS\"},\"type\":{\"type\":\"keyword\"}}}}}}",response.toString());
+                    Assert.assertEquals(MEMBER_OF_MAPPING,response.toString());
                     break;
                 case "idx_fire_500":
                 case "idx_fire_1000":
@@ -475,7 +491,7 @@ public class OpensearchIndexProviderMappingFactoryIT extends BaseModuleInjection
                 case "fire":
                     try {
                         Map map = TestSuiteIndexProviderSuite.mapper.readValue(response.toString(), Map.class);
-                        Assert.assertEquals("{mappings={Fire={properties={date={type=date, format=epoch_millis||strict_date_optional_time||yyyy-MM-dd HH:mm:ss.SSS}, direction={type=keyword}, entityA={properties={color={type=keyword}, id={type=keyword}, name={type=text, fields={keyword={type=keyword}}}, type={type=keyword}}}, entityB={properties={color={type=keyword}, id={type=keyword}, name={type=text, fields={keyword={type=keyword}}}, type={type=keyword}}}, id={type=keyword}, temperature={type=integer}, type={type=keyword}}}}}",map.get(index._2).toString());
+                        Assert.assertEquals(FIRE_MAPPING_RESPONSE,map.get(index._2).toString());
                     } catch (IOException e) {
                         Assert.fail("Not expecting non registered type "+ index);
                     }
@@ -488,42 +504,42 @@ public class OpensearchIndexProviderMappingFactoryIT extends BaseModuleInjection
                 case "freeze":
                     try {
                         Map map = TestSuiteIndexProviderSuite.mapper.readValue(response.toString(), Map.class);
-                        Assert.assertEquals("{mappings={Freeze={properties={date={type=date, format=epoch_millis||strict_date_optional_time||yyyy-MM-dd HH:mm:ss.SSS}, direction={type=keyword}, entityA={properties={id={type=keyword}, name={type=text, fields={keyword={type=keyword}}}, type={type=keyword}}}, entityB={properties={id={type=keyword}, name={type=text, fields={keyword={type=keyword}}}, type={type=keyword}}}, id={type=keyword}, temperature={type=integer}, type={type=keyword}}}}}",map.get(index._2).toString());
+                        Assert.assertEquals(FREEZE_MAPPING_RESPONSE,map.get(index._2).toString());
                     } catch (IOException e) {
                         Assert.fail("Not expecting non registered type "+ index);
                     }
                     break;
                 case "originatedIn":
                 case "originatedin":
-                    Assert.assertEquals("{\"originatedin\":{\"mappings\":{\"OriginatedIn\":{\"properties\":{\"direction\":{\"type\":\"keyword\"},\"entityA\":{\"properties\":{\"id\":{\"type\":\"keyword\"},\"type\":{\"type\":\"keyword\"}}},\"entityB\":{\"properties\":{\"id\":{\"type\":\"keyword\"},\"type\":{\"type\":\"keyword\"}}},\"id\":{\"type\":\"keyword\"},\"startDate\":{\"type\":\"date\",\"format\":\"epoch_millis||strict_date_optional_time||yyyy-MM-dd HH:mm:ss.SSS\"},\"type\":{\"type\":\"keyword\"}}}}}}",response.toString());
+                    Assert.assertEquals(ORIGINATED_IN_MAPPING,response.toString());
                     break;
                 case "subjectOf":
                 case "subjectof":
-                    Assert.assertEquals("{\"subjectof\":{\"mappings\":{\"SubjectOf\":{\"properties\":{\"direction\":{\"type\":\"keyword\"},\"entityA\":{\"properties\":{\"id\":{\"type\":\"keyword\"},\"type\":{\"type\":\"keyword\"}}},\"entityB\":{\"properties\":{\"id\":{\"type\":\"keyword\"},\"type\":{\"type\":\"keyword\"}}},\"id\":{\"type\":\"keyword\"},\"startDate\":{\"type\":\"date\",\"format\":\"epoch_millis||strict_date_optional_time||yyyy-MM-dd HH:mm:ss.SSS\"},\"type\":{\"type\":\"keyword\"}}}}}}",response.toString());
+                    Assert.assertEquals(SUBJECT_OF_MAPPING,response.toString());
                     break;
                 case "registeredIn":
                 case "registeredin":
-                    Assert.assertEquals("{\"registeredin\":{\"mappings\":{\"RegisteredIn\":{\"properties\":{\"direction\":{\"type\":\"keyword\"},\"entityA\":{\"properties\":{\"id\":{\"type\":\"keyword\"},\"type\":{\"type\":\"keyword\"}}},\"entityB\":{\"properties\":{\"id\":{\"type\":\"keyword\"},\"type\":{\"type\":\"keyword\"}}},\"id\":{\"type\":\"keyword\"},\"startDate\":{\"type\":\"date\",\"format\":\"epoch_millis||strict_date_optional_time||yyyy-MM-dd HH:mm:ss.SSS\"},\"type\":{\"type\":\"keyword\"}}}}}}",response.toString());
+                    Assert.assertEquals(REGISTERD_IN_MAPPING,response.toString());
                     break;
                 case "person":
                 case "people":
-                    Assert.assertEquals("{\"people\":{\"mappings\":{\"Person\":{\"properties\":{\"Profession\":{\"properties\":{\"certification\":{\"type\":\"keyword\"},\"experience\":{\"type\":\"keyword\"},\"id\":{\"type\":\"keyword\"},\"name\":{\"type\":\"text\",\"fields\":{\"keyword\":{\"type\":\"keyword\"}}},\"salary\":{\"type\":\"integer\"},\"type\":{\"type\":\"keyword\"}}},\"birthDate\":{\"type\":\"date\",\"format\":\"epoch_millis||strict_date_optional_time||yyyy-MM-dd HH:mm:ss.SSS\"},\"deathDate\":{\"type\":\"keyword\"},\"firstName\":{\"type\":\"text\",\"fields\":{\"keyword\":{\"type\":\"keyword\"}}},\"gender\":{\"type\":\"keyword\"},\"height\":{\"type\":\"integer\"},\"id\":{\"type\":\"keyword\"},\"lastName\":{\"type\":\"text\",\"fields\":{\"keyword\":{\"type\":\"keyword\"}}},\"name\":{\"type\":\"text\",\"fields\":{\"keyword\":{\"type\":\"keyword\"}}},\"type\":{\"type\":\"keyword\"}}}}}}",response.toString());
+                    Assert.assertEquals(PEOPLE_EMBEDDED_MAPPING,response.toString());
                     break;
                 case "horse":
                 case "horses":
-                    Assert.assertEquals("{\"horse\":{\"mappings\":{\"properties\":{\"distance\":{\"type\":\"integer\"},\"id\":{\"type\":\"keyword\"},\"maxSpeed\":{\"type\":\"integer\"},\"name\":{\"type\":\"text\",\"fields\":{\"keyword\":{\"type\":\"keyword\"}}},\"type\":{\"type\":\"keyword\"},\"weight\":{\"type\":\"integer\"}}}}}",response.toString());
+                    Assert.assertEquals(HORSE_MAPPING,response.toString());
                     break;
                 case "dragon":
                 case "dragons":
-                    Assert.assertEquals("{\"dragon\":{\"mappings\":{\"Dragon\":{\"properties\":{\"birthDate\":{\"type\":\"date\",\"format\":\"epoch_millis||strict_date_optional_time||yyyy-MM-dd HH:mm:ss.SSS\"},\"color\":{\"type\":\"keyword\"},\"gender\":{\"type\":\"keyword\"},\"id\":{\"type\":\"keyword\"},\"name\":{\"type\":\"text\",\"fields\":{\"keyword\":{\"type\":\"keyword\"}}},\"power\":{\"type\":\"integer\"},\"type\":{\"type\":\"keyword\"}}}}}}",response.toString());
+                    Assert.assertEquals(DRAGON_MAPPING,response.toString());
                     break;
                 case "kingdom":
                 case "kingdoms":
-                    Assert.assertEquals("{\"kingdom\":{\"mappings\":{\"Kingdom\":{\"properties\":{\"funds\":{\"type\":\"float\"},\"id\":{\"type\":\"keyword\"},\"independenceDay\":{\"type\":\"keyword\"},\"king\":{\"type\":\"text\",\"fields\":{\"keyword\":{\"type\":\"keyword\"}}},\"name\":{\"type\":\"text\",\"fields\":{\"keyword\":{\"type\":\"keyword\"}}},\"queen\":{\"type\":\"text\",\"fields\":{\"keyword\":{\"type\":\"keyword\"}}},\"type\":{\"type\":\"keyword\"}}}}}}",response.toString());
+                    Assert.assertEquals(KINGDOM_MAPPING,response.toString());
                     break;
                 case "guild":
                 case "guilds":
-                    Assert.assertEquals("{\"guild\":{\"mappings\":{\"Guild\":{\"properties\":{\"description\":{\"type\":\"text\",\"fields\":{\"keyword\":{\"type\":\"keyword\"}}},\"establishDate\":{\"type\":\"date\",\"format\":\"epoch_millis||strict_date_optional_time||yyyy-MM-dd HH:mm:ss.SSS\"},\"iconId\":{\"type\":\"keyword\"},\"id\":{\"type\":\"keyword\"},\"name\":{\"type\":\"text\",\"fields\":{\"keyword\":{\"type\":\"keyword\"}}},\"type\":{\"type\":\"keyword\"},\"url\":{\"type\":\"keyword\"}}}}}}",response.toString());
+                    Assert.assertEquals(GUILD_MAPPING,response.toString());
                     break;
                 default:
                     Assert.fail("Not expecting non registered type "+ index);

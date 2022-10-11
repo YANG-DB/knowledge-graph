@@ -40,10 +40,10 @@ import static org.mockito.Mockito.when;
  */
 @RunWith(Suite.class)
 @Suite.SuiteClasses({
-        DragonsSchemaValidationIT.class,
-        GraphInitiatorIT.class,
-        IndexProviderBasedGraphLoaderIT.class,
-        IndexProviderBasedCSVLoaderIT.class,
+//        DragonsSchemaValidationIT.class,
+//        GraphInitiatorIT.class,
+//        IndexProviderBasedGraphLoaderIT.class,
+//        IndexProviderBasedCSVLoaderIT.class,
         OpensearchIndexProviderMappingFactoryIT.class
 })
 @Ignore("Migrate to OS")
