@@ -57,7 +57,7 @@ public class EntityType implements BaseElement {
     }
 
     public EntityType(String type, String name, List<String> properties, List<String> metadata) {
-        this(type, name, properties, metadata, Collections.emptyList(), Collections.emptyList());
+        this(type, name, properties, metadata, new ArrayList<>(), new ArrayList<>());
     }
 
     public EntityType(String type, String name, List<String> properties, List<String> metadata, List<String> mandatory, List<String> parentType) {
@@ -70,11 +70,11 @@ public class EntityType implements BaseElement {
     }
 
     public EntityType(String type, String name, List<String> properties) {
-        this(type, name, properties, Collections.emptyList());
+        this(type, name, properties, new ArrayList<>());
     }
 
     public List<String> getMetadata() {
-        return metadata != null ? metadata : Collections.emptyList();
+        return metadata;
     }
 
     public void setMetadata(List<String> metadata) {
@@ -104,7 +104,7 @@ public class EntityType implements BaseElement {
     }
 
     public List<String> getProperties() {
-        return properties != null ? properties : Collections.emptyList();
+        return properties ;
     }
 
     @JsonIgnore
@@ -128,7 +128,7 @@ public class EntityType implements BaseElement {
     }
 
     public List<String> getParentType() {
-        return parentType != null ? parentType : Collections.emptyList();
+        return parentType ;
     }
 
     public void setParentType(List<String> parentType) {
@@ -136,7 +136,7 @@ public class EntityType implements BaseElement {
     }
 
     public List<String> getMandatory() {
-        return mandatory != null ? mandatory : Collections.emptyList();
+        return mandatory ;
     }
 
     public void setMandatory(List<String> mandatory) {

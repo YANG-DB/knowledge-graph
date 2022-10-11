@@ -65,7 +65,7 @@ public class OntologyFinalizer {
                         entityType.getMetadata().add(ID_FIELD_PTYPE);
                     }
                     if (entityType.fields().stream().noneMatch(p -> p.equals(TYPE_FIELD_PTYPE))) {
-                        entityType.getMandatory().add(TYPE_FIELD_PTYPE);
+                        entityType.getMetadata().add(TYPE_FIELD_PTYPE);
                     }
                 });
 

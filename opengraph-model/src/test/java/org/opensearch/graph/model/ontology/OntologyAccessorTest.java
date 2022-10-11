@@ -261,8 +261,8 @@ public class OntologyAccessorTest extends TestCase {
         Assert.assertEquals(0, accessor.nested$("Kingdom").size());
         Assert.assertEquals(1, accessor.nested$("Dragon").size());
         Assert.assertEquals(2, accessor.nested$("Person").size());
-        Assert.assertEquals("Kingdom", accessor.nested$("Person").get(0));
-        Assert.assertEquals("Dragon", accessor.nested$("Person").get(1));
+        Assert.assertEquals("Kingdom", accessor.nested$("Person").get(0).getName());
+        Assert.assertEquals("Dragon", accessor.nested$("Person").get(1).getName());
     }
 
     @Test

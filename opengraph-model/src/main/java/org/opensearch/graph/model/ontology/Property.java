@@ -138,7 +138,7 @@ public class Property {
     private String pType;
     private String name;
     private String type;
-    private List<SearchType> searchType = Collections.emptyList();
+    private List<SearchType> searchType = new ArrayList<>();
     //endregion
 
     //region Builder

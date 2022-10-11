@@ -34,6 +34,10 @@ public class PrimitiveType {
     private String type;
     private Class javaType;
 
+    //Jackson originated
+    public PrimitiveType() {
+    }
+
     public PrimitiveType(String type, Class javaType) {
         this.type = type;
         this.javaType = javaType;
