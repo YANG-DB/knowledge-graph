@@ -109,7 +109,7 @@ public class MultiConstraintTransformationAsgStrategy implements AsgStrategy {
 
             Optional<GraphElementPropertySchema.ExactIndexingSchema> exactIndexingSchema = propertySchema.get().getIndexingSchema(exact);
             if (!exactIndexingSchema.isPresent()) {
-                return;
+                continue;
             }
 
             String exactName = exactIndexingSchema.get().getName();

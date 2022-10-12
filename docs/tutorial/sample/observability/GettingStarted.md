@@ -61,3 +61,8 @@ Expected result 4 span documents
 Match (s:Span) where s.events.attributes.`exception@type`="ProgrammingError" return *
 ``````
 Expected result 2 span documents
+
+``````
+Match (s:Span) where s.durationInNanos > 300000  AND s.events.attributes.`exception@type`="ProgrammingError" return *
+``````
+Expected result 1 span documents
