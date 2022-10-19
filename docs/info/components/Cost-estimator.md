@@ -21,13 +21,13 @@ The process of collecting statistical information about elements of the graph �
 In a non-native graph DB that its storage mechanism is based on a document store.
 The graph elements – both node & edges are stored in a document. we need to calculate the histogram (distribution) for every property in the graph.
 
-In a document store like elasticsearch there is an additional level of abstraction for the document location and partitioning:
+In a document store like opensearch there is an additional level of abstraction for the document location and partitioning:
 
 * Indices – indicate the “table” (index) that holds all the “records” of a given type
 
 * Shard – The table’s (index) “partition” factor that partitions the data according to some column (mostly time based)
 
-* Mappings – mappings is Elasticsearch’s schema index structure, we use it to label the graph elements with a distinct type (each type can have named properties).
+* Mappings – mappings is opensearch’s schema index structure, we use it to label the graph elements with a distinct type (each type can have named properties).
 
 ### Types of statistical estimators:
 

@@ -24,27 +24,56 @@ Gremlin is an imperative graph traversal language
 [Gremlin](https://tinkerpop.apache.org/gremlin.html) is the graph traversal language of Apache TinkerPop.
 Gremlin is an imperative, functional, data-flow language that enables users to succinctly express complex traversals on (or queries of) their application's property graph.
 
-
 Every Gremlin traversal is composed of a sequence of (potentially nested) steps.
-A step performs an atomic operation on the data stream, Every step is either a map-step (transforming the objects in the stream),
-a filter-step (removing objects from the stream), or a sideEffect-step (computing statistics about the stream).
+A step performs an atomic operation on the data stream, Every step is either a 
+ - **map-step** transforming the objects in the stream
+ - **filter-step** removing objects from the stream
+ - **sideEffect-step** computing statistics about the stream
 
 The Gremlin step library extends on these 3-fundamental operations to provide users a rich collection of steps that they can compose in order to ask any conceivable question they may have of their data for Gremlin is Turing Complete.
-
-### Example:
-
-_** What is the distribution of job titles amongst Gremlin's collaborators?**_
-```java
-g.V().has("name","gremlin").as("a").
-    out("created").in("created").
-    where(neq("a")).
-    groupCount().by("title")
-```
 
 ## Unipop in Opensearch Graph Component
 
 Unipop is used as the underlying traversing engine that operates against the opensearch database. 
 
-It is used by [Virtual-Unipop](../../../virtualize/virtual-unipop) to generate a specialized traversal component that abstracts the storage engine with its proprietary DSL query langauge.
-Therefore allowing them to be agnostic to how the data is stored and how to query the data, and reduce this complexity to be pushed downwards to the traversal layer.
+
+### GREMLIN STEPS (INSTRUCTION SET)
+The following traversal is a Gremlin traversal in the Gremlin-Java8 dialect.
+[Gremlin-Intro ](http://tinkerpop.apache.org/docs/current/reference/#intro)
+
+```javascript
+g.V().as("a").out("knows").as("b").select("a","b").by("name").by("age")
+```
+
+A string representation of the traversal above :
+
+```javascript
+[GraphStep([],vertex)@[a], VertexStep(OUT,[knows],vertex)@[b], SelectStep([a, b],[value(name), value(age)])]
+```
+
+The “steps” are the primitives of the Gremlin graph traversal machine. They are the parameterized instructions that the machine ultimately executes.
+
+The Gremlin instruction set is approximately 30 steps. These steps are sufficient to provide general purpose computing and what is typically required to express the common motifs of any graph traversal query.
+
+### GREMLIN VM
+The Gremlin graph traversal machine can execute on a single machine or across a multi-machine compute cluster. Execution agnosticism allows Gremlin to run over both graph databases (OLTP) and graph processors (OLAP).
+
+**Unipop Components**:
+
+ - **Graph**: maintains a set of vertices and edges, and access to database functions such as transactions.
+ - **Element**: maintains a collection of properties and a string label denoting the element type.
+   - **Vertex**: extends Element and maintains a set of incoming and outgoing edges.
+   - **Edge**: extends Element and maintains an incoming and outgoing vertex.
+
+ - **Property<V>**: a string key associated with a V value.
+ - **VertexProperty<V>**: a string key associated with a V value as well as a collection of Property<U> properties (vertices only)
+
+**Traversal Components**:
+
+ - **TraversalSource**: a generator of traversals for a particular graph, domain specific language (DSL), and execution engine.
+   -  **Traversal<S,E>**: a functional data flow process transforming objects of type S into object of type E.
+   -  **GraphTraversal**: a traversal DSL that is oriented towards the semantics of the raw graph (i.e. vertices, edges, etc.).
+
+[Unipop](../../../unipop-core) is used by [Virtual-Unipop](../../../virtualize/virtual-unipop) to generate a specialized traversal component that abstracts the storage engine with its proprietary DSL query langauge.
+Therefore, allowing them to be agnostic to how the data is stored and how to query the data, and reduce this complexity to be pushed downwards to the traversal layer.
 

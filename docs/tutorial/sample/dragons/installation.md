@@ -19,7 +19,7 @@ The docker-compose guide is available in the documentation folder as well...
 
 The following tool are necessary for the tutorial process and for general usage and evaluation of this framework
 
-- Elastcsearch  ( https://www.elastic.co/downloads/past-releases/elasticsearch-6-5-4 )
+- Elastcsearch  ( https://www.elastic.co/downloads/past-releases/opensearch-6-5-4 )
 - Kibana        (https://www.elastic.co/downloads/past-releases/kibana-6-5-4)
 - Cerebro       (https://github.com/lmenezes/cerebro/releases)
 - OpenGraph        (https://github.com/YANG-DB/yang-db/releases/download/v0.5/dragon.tar)
@@ -29,29 +29,29 @@ The following tool are necessary for the tutorial process and for general usage 
 
 ---
 
-### Running elasticsearch
+### Running opensearch
 
-This is simple & easy - just go to the installation folder / bin and run the elasticsearch.sh executable
+This is simple & easy - just go to the installation folder / bin and run the opensearch.sh executable
 Configuration of the cluster is also needed in order to allow OpenGraph to access the demo default cluster, just edit the
 
 
-elasticsearch.yml file in the config folder and add the following line:
+opensearch.yml file in the config folder and add the following line:
 
      cluster.name: Dragons   # the culster name
      xpack.ml.enabled: false # disable xpack which is uder payed license
 
-Once this is done you can run the elasticsearch server - ports 9200 & 9300 must be avialable...
+Once this is done you can run the opensearch server - ports 9200 & 9300 must be avialable...
 
 ---
 ### Running kibana
 
 Again - this is easy to execute, just go to the bin folder under the installation location and run the kibana executable
-The kibana should be able to connect to the running elasticsearch server via 9200 port
+The kibana should be able to connect to the running opensearch server via 9200 port
 
 ---
 ### Running Cerebro
 
-Cerebro is an open source management tool for elasticsearch server which simplify the usage and maintenance of elasticsearch cluster
+Cerebro is an open source management tool for opensearch server which simplify the usage and maintenance of opensearch cluster
 It has a web ui that uses port 9000 to connect to the elastic server, running it is done using the cerebro executable that resided
 in the bin folder under the installation location.
 
@@ -61,7 +61,7 @@ in the bin folder under the installation location.
 ---
 ### Running OpenGraph
 
-**OpenGraph is a graph execution engine on top of elasticsearch, it has a REST API interface that allows interacting with it.**
+**OpenGraph is a graph execution engine on top of opensearch, it has a REST API interface that allows interacting with it.**
 
 Running OpenGraph from its installation folder (after un-tar the downloaded artifact) is simple, it is done via the
 start-service.sh script in the installation folder.
@@ -71,12 +71,12 @@ start-service.sh script in the installation folder.
 When one needs to configure the OpenGraph server he should open the application.conf file under the config folder.
 The default configuration for the demo is named Dragons and is wrapped around a game of thrones dats scenario.
 
-The OpenGraph artifact has a in-process embedded elasticsearch server which - in our case, need to be disabled from loading
-since we are using an external elasticsearch server .
+The OpenGraph artifact has a in-process embedded opensearch server which - in our case, need to be disabled from loading
+since we are using an external opensearch server .
 
-Disabling the in-process elasticsearch in the application.conf
+Disabling the in-process opensearch in the application.conf
 
-_This should be the final configuration for the elasticsearch connection_
+_This should be the final configuration for the opensearch connection_
 
         ...
         opensearch.embedded = false

@@ -6,7 +6,7 @@ The fundamental idea behind this structure is the abstraction and compartmentali
 concerns.
 
 The project is boundeled as a multi-modules maven project which includes 5 main core modules and 10 specific utilities modules dedicated 
-to enable functionality over elasticsearch storage layer.
+to enable functionality over opensearch storage layer.
 
 -------------
  
@@ -26,7 +26,7 @@ The software building block used in this project are dominating open source libr
 
 #### Indexing store libraries
  - Lucene   - https://github.com/apache/lucene-solr
- - Elasticsearch - https://github.com/elastic/elasticsearch
+ - opensearch - https://github.com/elastic/opensearch
  
 #### MVC Web libraries
  - jooby  - https://github.com/jooby-project/jooby
@@ -52,12 +52,12 @@ The 5 core modules:
  - open-graph-statistics  :  statistics related components that are capable of creating a cost based index API that would help the query planning in determining optimal execution      
 
 ##### Domain Specific modules
-These modules are the basic "plug-able" parts of the software allowing all the existing core functionality against elasticsearch - the default storage & indexing layer
+These modules are the basic "plug-able" parts of the software allowing all the existing core functionality against opensearch - the default storage & indexing layer
 
 -  **open-graph-dv (Data Virtualization)**
-    - open-graph-dv-asg :   the specific ASG behavior that is elasticsearch storage aware 
-    - open-graph-dv-core :  the specific core behavior that is elasticsearch storage aware 
-    - open-graph-dv-epb :   execution plan builder based on elasticsearch strong indexing and (statistics) counting capabilities 
+    - open-graph-dv-asg :   the specific ASG behavior that is opensearch storage aware 
+    - open-graph-dv-core :  the specific core behavior that is opensearch storage aware 
+    - open-graph-dv-epb :   execution plan builder based on opensearch strong indexing and (statistics) counting capabilities 
     - open-graph-dv-gta :   graph traversal extender which translates the cost revised execution plan into a physical execution plan (based on tinkerpop graph traversal) 
     - open-graph-dv-unipop :  tinkerpop drivers adaptation for graph traversal over elasticserch with specific changes introduced for performance 
     - open-graph-dv-stat :  statistical calculation module enabling the usage of dynamic execution planning and modeling based on pre-calculated cardinality statistics

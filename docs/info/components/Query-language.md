@@ -87,7 +87,7 @@ Example
 
 Query as a json document:
 
-```
+```json
 {
   "name": "Q1",
   "elements": [
@@ -123,7 +123,7 @@ Query as a json document:
 ```
 
 Additional simple string representation:
-```
+```text
     Start [0]: EConcrete [1]: Rel [2]: ETyped [3]
 ```
 Each v1 query has a name and a (linked) list of elements which are labeled with :
@@ -132,7 +132,7 @@ Each v1 query has a name and a (linked) list of elements which are labeled with 
 
 
 Additional Query with quantifier and property constraint 
-```
+```json
 {
   "name": "Q10",
   "elements": [
@@ -185,6 +185,6 @@ Additional Query with quantifier and property constraint
 ```
 Additional simple string representation:
 
-```
+```test
    Start [0]: ETyped [1]: Quant1 [2]:{3|4}: EProp [3]: Rel [4]: ETyped [5]
 ```

@@ -5,7 +5,8 @@ Once the engine has started - please open the swagger API page file
    
     http://localhost:8888/swagger
     http://localhost:8888/redocly/redocly
-
+    
+![Swagger API](../img/swagger-API.png)
 
 OpenGraph has multiple API endpoints that serve different purposes:
 
@@ -13,6 +14,8 @@ OpenGraph has multiple API endpoints that serve different purposes:
 Allows to query the version & configuration info.
 
 Allows to initiate a DB sequencer used to generate unique ids to the newly generated graph elements. 
+
+![Management API](../img/manage-api.png)
 
 ### Catalog
 Allows insert & query information regarding the catalog & schema - ontology & indices.
@@ -35,6 +38,8 @@ The creation of logical ontologies inside the schema model is done here.
     [POST] http://localhost:8888/opengraph/catalog/sql
 
 
+![Catalog API](../img/catalog-api.png)
+
 ### Query
 
 This is the main query API used to question the Data held by the engine. 
@@ -51,14 +56,18 @@ Each query (in any language) is verified and translated into intermediate langua
 
 Once a query was created, it needs to define a cursor resource - which is a view on the query results.
 
-##### Cursor
-The view (projection) can be of multiple types:
+![Query API](../img/query-api.png)
 
- - Paths (Assignments)
- - Graph 
- - Table (CSV)
+### Cursor - types
+The cursor API is the resource which is responsible to fetch the actual data in bulks (pages) and project the results in the requested view.
+
+ - Paths  (Assignments - view the data as a list of assignments)
+ - Graph  (View the data as a subgraph)
+ - Table  (View the data as a table)
 
 Each of the cursors is the responsible for the data fetching, the page resource is the data holder .
+
+![Cursor API](../img/cursor-api.png)
 
 ### Plan
 
@@ -66,15 +75,7 @@ The plan API enables the user to understand the execution path taken for the que
 
 It is also possible to get the generated traversal used to traverse the data - tinkerpop graph traversal
 
-### Cursor
-
-The cursor API is the resource which is responsible to fetch the actual data in bulks (pages) and project the results in the requested view.
-
-- Paths - view the data as a list of assignments.
-
-- Graph - view the data as a subgraph.
-
-- Table - view the data as a table (csv)
+![Plan API](../img/plan-api.png)
 
 ### Page
 
@@ -82,11 +83,15 @@ The page holds the results in the projected pattern, each page holds a constant 
 When fetching the last page it can return a lower number or results or zero elements signaling all the elements
 matching the query fetched pattern .
 
+![Page API](../img/page-api.png)
+
 ### Data
 
 This is the actual data structure.
 
 _nextPageData/_ API allows fetching the next page while allowing deletion of the former page is needed.
+
+![Data API](../img/data-api.png)
 
 ### GraphApi
 This is the standard graph api that is used to ask a set of typical graph queries and operations against the DB
@@ -95,11 +100,12 @@ This is the standard graph api that is used to ask a set of typical graph querie
  - get a specific vertex including its properties
  - get a specific vertex including its properties & neighbors
  
-   
 
 ### Dashboard
 
 This API allows viewing statistical information regarding the amount of graph elements, types and creation times
+
+![Dashboard API](../img/dashboard-api.png)
 
 ### Init
 
@@ -107,6 +113,7 @@ This API is used to generate the physical schema according to the index provider
 logical schema.
 
 This API enables both the creation of the indices mapping templates as well as the actual indices.
+
 ### Load
 This API is used for initialization of the indices according to the physical ontology;
 
@@ -114,6 +121,10 @@ This API is used for initialization of the indices according to the physical ont
 - drop will drop the tables
 - load will load a logical graph model into the DB according to the logical ontology
 
+![Load API](../img/load-api.png)
+
 ### Upload
 
 - upload will load a file/zipfile containing logical graph model into the DB according to the logical ontology
+
+![Upload API](../img/upload-api.png)

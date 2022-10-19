@@ -13,7 +13,7 @@ The store will implement the index provider instructions according to its store 
 Opensearch offers the index data structure as its main indexing facility that represents a document class
 in general this is a virtual concept which has diverse meaning over the years - see documentation
 - https://www.elastic.co/blog/index-vs-type
-- https://medium.com/@mena.meseha/understand-the-parent-child-relationship-in-elasticsearch-3c9a5a57f202)
+- https://medium.com/@mena.meseha/understand-the-parent-child-relationship-in-opensearch-3c9a5a57f202)
 
 ### Entity-Relation-Hierarchy
 We can clearly define the notion of entity that is coupled with the notion of an index, this notion can be expanded using
@@ -151,14 +151,14 @@ based on the joining hasProfession index keys.
 Since opensearch flattens the object's internal structure - this solution fails for the one->many type of relationships.
 On such case the nesting type of mapping will be selected.
 
-see - [https://www.elastic.co/guide/en/elasticsearch/reference/current/object.html]()
+see - [https://www.elastic.co/guide/en/opensearch/reference/current/object.html]()
 
 * **Nesting**
 
 Nesting is a similar case to the embedding option but it is selected for the case of the relation being one to many. Due to the nature of
 object field mapping in opensearch, has no concept of inner objects. Therefore, it flattens object hierarchies into a simple list of field names and values.
 
-see - [https://www.elastic.co/guide/en/elasticsearch/reference/current/nested.html]()
+see - [https://www.elastic.co/guide/en/opensearch/reference/current/nested.html]()
 
 The nesting mapping of the relationship will look very similar to the embedded nature with the additional penalty of document storage per relation.
 

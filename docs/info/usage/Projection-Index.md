@@ -5,7 +5,7 @@
 Match (p1:Person)-[o:Own]->(d2:Dragon )  return *
 ```
 
-Elasticsearch query DSL that fetch the amount of (p1) persons in projected results
+opensearch query DSL that fetch the amount of (p1) persons in projected results
 ```
 {
   "query": {

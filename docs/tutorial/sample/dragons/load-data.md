@@ -1,5 +1,5 @@
 ## Loading Sample Data
-So we've completed installing the ontology and generating the physical elasticsearch schema (see create-ontology tutorial)
+So we've completed installing the ontology and generating the physical opensearch schema (see create-ontology tutorial)
 And now we would like to load some data.
 
 Since this ontology is the base demo ontology we have prepared a data generator to create volumes of data to load and review many of the

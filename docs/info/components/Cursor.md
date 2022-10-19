@@ -29,8 +29,8 @@ The cursor is responsible for fetching the data using the [TraversalCursorContex
 This Traversal Context is composed of the next elements:
 
  - Client - an opensearch client that performs the actual DSL against the database,
- - GraphElementSchemaProvider  - a physical schema provider that knows the physical structure of the logical entities in the store [index-provider](index-provider.md),
- - OntologyProvider - a logical ontology provider that knows the logical domain entities and relationships [Ontology](ontology.md) ,
+ - GraphElementSchemaProvider  - a physical schema provider that knows the physical structure of the logical entities in the store [index-provider](Index-provider.md),
+ - OntologyProvider - a logical ontology provider that knows the logical domain entities and relationships [Ontology](Ontology.md) ,
  - Traversal - a graph traversal component that allows traversing the physical graph using the Unipop framework [Unipop]()
 
 The traversal is a mechanism the abstracts the technicality of how to featch and traverse the data in the specific form that is proprietary

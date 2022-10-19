@@ -1,5 +1,5 @@
 ### Abstract
-open-graph is a graph query engine. It is based on elasticsearch as the
+open-graph is a graph query engine. It is based on opensearch as the
 physical graph storage layer and the tinkerpop graph traversing framework.
 
 * ## Preference
@@ -23,8 +23,8 @@ it’s all about relationships.
 * Cost based optimizer to enable fast and efficient graph search
 * Customized graph schema definition and enforcement
 * Paging and customized Results Projection
-* Highly scalable using elasticsearch robust scaling facilities
-* Highly searchable using elasticsearch search abilities
+* Highly scalable using opensearch robust scaling facilities
+* Highly searchable using opensearch search abilities
 * Extendable which allows customization in multiple features
 
 ## Highlight
@@ -37,10 +37,10 @@ It was taken into consideration that the data variety is vast and therefore the
 graph physical model takes into consideration multiple schema constraints.
 
 
-Utilizing **elasticsearch** both as an internal search engine and as graph
+Utilizing **opensearch** both as an internal search engine and as graph
 repository gives an improved performance and maintaining abilities.
 
-Over elasticsearch’s API we developed a database with query engine,
+Over opensearch’s API we developed a database with query engine,
 
 
 optimized cost based execution planner and a traversing execution driver.
@@ -48,6 +48,7 @@ optimized cost based execution planner and a traversing execution driver.
 _We take pride in doing so with a small and excellent team of highly
 innovative and creative engineers._
 
+![Highlight](img/highlights.jpeg)
 
 ## Graph Query Process break down
 
@@ -61,6 +62,7 @@ distinct purpose
 * Executor – Executed the Physical Plan
 * Results projector – Projects the results back to logical
 
+![AstTo](img/AsgToQuery.jpeg)
 
 ### Graph Query Language
 
@@ -69,6 +71,7 @@ We are using a proprietary Graph traversal language called V
 This is a logical high-level (property) graph query language which has an
 emphasis on query patterns, and visual attributes.
 
+![V1QL](img/V1QL-Sample.png)
 
 ### Execution Plan Building
 
@@ -86,6 +89,8 @@ the **Tinkerpop language**
 This step allows us to describe the query as a set of generic low level graph
 traversing instruction.
 
+![Traverser](img/traversers.jpeg)
+
 #### Step buffering
 
 Buffering is a paging technic that allows each step to buffer results until a
@@ -96,9 +101,9 @@ the input vertices being filtered out, In such cases we would like to continue
 fetching results from the datastore until the bulk size is reached.
 
 
-#### Elasticsearch storage
+#### opensearch storage
 
-Elasticsearch stores the graph elements as documents while defining what type of graph element
+opensearch stores the graph elements as documents while defining what type of graph element
 the index will store.
 
 Each index holds a single type of mapping (elastic 6) meaning vertices index will contain the
@@ -107,6 +112,8 @@ properties.
 
 A catalog of types to indices mapping is maintained and the mapping of properties to physical
 types is also used to optimize pushdown of predicates to the DB search API itself.
+
+![Indices](img/Indices.jpeg)
 
 
 #### Project open-graph Links
