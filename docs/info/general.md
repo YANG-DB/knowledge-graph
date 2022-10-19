@@ -67,7 +67,7 @@ distinct purpose
 We are using a proprietary Graph traversal language called V
 
 This is a logical high-level (property) graph query language which has an
-emphasize on query patterns, and visual attributes.
+emphasis on query patterns, and visual attributes.
 
 
 ### Execution Plan Building

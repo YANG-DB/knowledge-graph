@@ -51,7 +51,7 @@ Each query (in any language) is verified and translated into intermediate langua
 
 Once a query was created, it needs to define a cursor resource - which is a view on the query results.
 
-#####Cursor
+##### Cursor
 The view (projection) can be of multiple types:
 
  - Paths (Assignments)

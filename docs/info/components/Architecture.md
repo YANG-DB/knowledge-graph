@@ -49,6 +49,7 @@ The 5 core modules:
  - open-graph-core  :  containing the core functionality common to all generic parts such as Query planning, Transformations, Schema provider, Drivers and more     
  - unipop-core  : tinkerpop drivers adaptation for execution of graph traversal over elasticserch (forked from https://github.com/unipop-graph/unipop)     
  - open-graph-services  :  containing the core services & controllers wrapping the Web / TCP endpoints and delivering deep traceability and logging      
+ - open-graph-statistics  :  statistics related components that are capable of creating a cost based index API that would help the query planning in determining optimal execution      
 
 ##### Domain Specific modules
 These modules are the basic "plug-able" parts of the software allowing all the existing core functionality against elasticsearch - the default storage & indexing layer
@@ -94,9 +95,9 @@ We can see here the code snippet taken from the knowledge assembly distribution 
     ]
 ```
 
-  We can observe that many modules are functional specific that offer a distinct funtional behavior and can be added/removed to add/remove functionality as needed.
+We can observe that many modules are functional specific that offer a distinct funtional behavior and can be added/removed to add/remove functionality as needed.
   
-**Specific Funtional Modules**
+**Specific Functional Modules**
   -   GraphQLModule - enabling graphql query support
   -   AsgGraphQLModule - enabling graphql ASG query translation & rewrite
   
