@@ -36,22 +36,59 @@ The software building block used in this project are dominating open source libr
 Additional Libraries can be found in the project's pom.xml
 
 -------------
-#### Architecture Layers
+
+## Architecture
+As in many complex software components, the engineering approach for development of this Graph engine is based on the following
+concepts and patterns:
+
+- Single Responsibility
+- Separation of concerns
+- Design to Interface
+- Clear definition of domain boundaries
+- Implement Model View Control paradigm [MVC](https://martinfowler.com/eaaDev/uiArchs.html)
+
+These concepts and many others help reduce complexity and keep the code focus as possible on the real inherent complexities.
+
+### Plugin Architecture
+The project is developed with the Plugin-Architecture in mind, this concept is focused on the next elements
+- Extendability - Easily extend functionality by simply adding a new plugin
+- Configurability - Change basic behavior by replacing plugin or changing plugin loading configuration
+- Dependency Injection - Allow for plugins to be depended on one another using Dependency Injection
+
+These capabilities are a root concept of many open source extensible projects (opensearch for example) and makes use of
+google guice dependency injections platform [Guice](https://github.com/google/guice)
+
+### Modules and structure
+
+The project is a monolith composed of multiple modules (components)
+The project uses Maven project build,management and dependency system.
+
+There are **3 conceptual layers** of modules that the project is composed of:
+- **Core layer** - which the main generic entities and models are defined
+- **Virtual layer** - which the specific functionality implementing and extending the core layer
+- **Service layer** - which compose these two layers and defines the **Model View Control** access to the API
+
+### Architecture Layers
 The project structure is designed with the purpose of adding plugin as free as possible - hence the term open architecture.
+For this to be possible an effort was made to modularize the functional parts of the software to allow clear and direct extensibility.
 
-For this to be possible a great effort was made to modularize the functional parts of the software to allow clear and direct extensibility by anyone 
-with understanding of the structure and funtional flow of the execution.
+Essentially there are 3 layers that compose the general architecture:
 
-##### Core modules
+### The Service Layer
+The Service Layer is the module which is responsible for running the Graph Query Engine. 
+- open-graph-services  :  containing the core services & controllers wrapping the Web / TCP endpoints and delivering deep traceability and logging
+
+##### The Core Layer
 The 5 core modules:
  - open-graph-model :  representing the data model elements (classes) used to query, profile, analyze, process and project the data     
  - open-graph-asg :    containing the Abstract Syntax's Graph that is transformed from the query and is validated and rewritten according to rule based semantics.      
  - open-graph-core  :  containing the core functionality common to all generic parts such as Query planning, Transformations, Schema provider, Drivers and more     
  - unipop-core  : tinkerpop drivers adaptation for execution of graph traversal over elasticserch (forked from https://github.com/unipop-graph/unipop)     
- - open-graph-services  :  containing the core services & controllers wrapping the Web / TCP endpoints and delivering deep traceability and logging      
  - open-graph-statistics  :  statistics related components that are capable of creating a cost based index API that would help the query planning in determining optimal execution      
 
-##### Domain Specific modules
+##### The Virtualization Specific Layer
+
+##### The Domain Specific Layer
 These modules are the basic "plug-able" parts of the software allowing all the existing core functionality against opensearch - the default storage & indexing layer
 
 -  **open-graph-dv (Data Virtualization)**

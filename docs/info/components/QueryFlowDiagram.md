@@ -4,44 +4,21 @@ This document explains and describes the entire flow in-which a query is accepte
 dispatch to the underlying database engine, and until the results are transformed and projected into the logical schematic 
 structure and the specific query instructions (specific fields and aliases)
 
-## Architecture
-As in many complex software components, the engineering approach for development of this Graph engine is based on the following 
-concepts and patterns:
-
- - Single Responsibility
- - Separation of concerns
- - Design to Interface 
- - Clear definition of domain boundaries
- - Implement Model View Control paradigm [MVC](https://martinfowler.com/eaaDev/uiArchs.html) 
-
-These concepts and many others help reduce complexity and keep the code focus as possible on the real inherent complexities.
-
-### Plugin Architecture
-The project is developed with the Plugin-Architecture in mind, this concept is focused on the next elements
- - Extendability - Easily extend functionality by simply adding a new plugin
- - Configurability - Change basic behavior by replacing plugin or changing plugin loading configuration
- - Dependency Injection - Allow for plugins to be depended on one another using Dependency Injection
-
-These capabilities are a root concept of many open source extensible projects (opensearch for example) and makes use of
-google guice dependency injections platform [Guice](https://github.com/google/guice) 
-
-### Modules and structure
+### Architecture
 
 The project is a monolith composed of multiple modules (components)
 The project uses Maven project build,management and dependency system.
 
-There are 3 layers of modules that the project is composed of:
- - Core layer - which the main generic entities and models are defined
- - Virtual layer - which the specific functionality implementing and extending the core layer 
- - Service layer - which compose these two layers and defines the **Model View Control** access to the API  
+There are **3 conceptual layers** of modules that the project is composed of:
+- **Core layer** - which the main generic entities and models are defined
+- **Virtual layer** - which the specific functionality implementing and extending the core layer
+- **Service layer** - which compose these two layers and defines the **Model View Control** access to the API
 
 For additional details go to [architecture](Architecture.md)
 
-## The Service Layer  
-The Service Layer is the module which is responsible for running the Graph Query Engine.
+### Graph Runner
+The graph runner is a component that resides on the service layer. It's main class is [GraphRunner](../../../opengraph-services/src/main/java/org/opensearch/graph/services/GraphRunner.java) 
 
-### Runner
-This is main class is [GraphRunner](../../../opengraph-services/src/main/java/org/opensearch/graph/services/GraphRunner.java) 
 It is responsible for the following parts:
 
  - reading the configuration files [Configuration Folder](../../../opengraph-services/src/test/conf) 
