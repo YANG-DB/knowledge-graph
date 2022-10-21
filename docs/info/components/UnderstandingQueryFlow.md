@@ -6,6 +6,8 @@ This document explains and describes the end to end flow. It includes
 - query is used to build an execution plan 
 - plan is executed and results are returned 
 
+![](../img/AsgToQuery.jpeg)
+
 These steps include the dispatch to the underlying database engine, and until the results are transformed and projected into the logical schematic 
 structure and the specific query instructions (specific fields and aliases)
 
@@ -20,7 +22,7 @@ There are **4 conceptual layers** of modules that the project is composed of:
 - **Service layer** - which compose these two layers and defines the **Model View Control** access to the API
 - **Domain layer** -  which contains the domain specific modules including specific configuration and add-ons
 
-For additional details please visit [architecture](Architecture.md)
+For additional details please visit [architecture](../Architecture.md)
 
 ### Graph Runner - 
 

@@ -22,3 +22,8 @@ In every database engine there is a similar component which is responsible for t
 As shown above the 4 steps of the ASG flow are 
 
 1) accept the textual representation of the query
+2) verify the correctness of the query (both structural and content)
+3) generate the abstract syntax graph of objects
+4) optimize the objects graph according to different strategies
+
+### Query Validation

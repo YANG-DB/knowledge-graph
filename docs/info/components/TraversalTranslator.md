@@ -6,7 +6,7 @@ functionality with specific rules and strategies.
 
 ## Plan Translator
 
-As mentioned in the execution plan builder document [EPB](EPB-ExecutionPlanBuilder.md) the logical plan is being translated 
+As mentioned in the execution plan builder document [Execution Plan Builder ](Execution-planner.md) the logical plan is being translated 
 into a Unipop traverser.
 
 The interface the takes care of this translation is [Plan Traversal Translator](../../../opengraph-core/src/main/java/org/opensearch/graph/dispatcher/gta/PlanTraversalTranslator.java)

@@ -69,6 +69,8 @@ There are **4 conceptual layers** of modules that the project is composed of:
 The project structure is designed with the purpose of adding plugin as free as possible - hence the term pluggable architecture.
 For this to be possible an effort was made to modularize the functional parts of the software to allow clear and direct extensibility.
 
+![](img/LayeredArchitecture.png)
+
 ### The Core Layer
 Here the main generic entities and models are defined, the default behavior and functionality and the engine's core fundamental parts.
 

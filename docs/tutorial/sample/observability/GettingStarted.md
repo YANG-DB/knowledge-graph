@@ -17,7 +17,7 @@ actual index structure accordingly.
 Once the index templates mapping is created we can create the 3 relevant indices and start ingesting observability data.
 
 
-## Data Fabrication
+## Data Loading
 Once our indices are created we can proceed and start loading sample datasets to our indices. 
 
 We will load 3 type of datasets:
@@ -25,44 +25,5 @@ We will load 3 type of datasets:
  - Logs
  - Services
 
-Please follow the instruction in the [data-fabrication](data-fabrication.md) document
+Please follow the instruction in the [data-loading](DataLoading.md) document
 
-
-## Sample Queries
-
-### Logs
-``````
-Match (l:Log) where l.machine.os ="win 7" return * 
-``````
-Expected result 2814 logs documents
-
-``````
-Match (l:Log) where l.machine.os ="ios" return * 
-``````
-Expected result 2737 logs documents
-
-
-### Spans
-``````
-Match (s:Span) where s.status.code=2 return * 
-``````
-Expected result 41 span documents
-
-``````
-Match (s:Span) where s.attributes.component="mysql" return *
-``````
-FIX ()
-``````
-Match (s:Span) where s.events.name="exception" return *
-``````
-Expected result 4 span documents
-
-``````
-Match (s:Span) where s.events.attributes.`exception@type`="ProgrammingError" return *
-``````
-Expected result 2 span documents
-
-``````
-Match (s:Span) where s.durationInNanos > 3000000  AND s.events.attributes.`exception@type`="ProgrammingError" return *
-``````
-Expected result 1 span documents

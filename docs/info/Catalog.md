@@ -74,7 +74,7 @@ tables - such as executed queries and job schedules.
 **Example**
 
 Let's examine the next inventory schema:
-![](../img/inventory-system-er-diagram.jpg)
+![](img/inventory-system-er-diagram.jpg)
 
 Here we can see that every table can be represented as a domain entity with relations to other entities.
 

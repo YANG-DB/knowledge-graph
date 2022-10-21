@@ -115,10 +115,3 @@ types is also used to optimize pushdown of predicates to the DB search API itsel
 
 ![Indices](img/Indices.jpeg)
 
-
-#### Project open-graph Links
-
-* https://github.com/YANG-DB/yang-db/
-* https://github.com/YANG-DB/yang-db/wiki
-* https://github.com/YANG-DB/website
-* https://hub.docker.com/r/yangdb/yang.db
