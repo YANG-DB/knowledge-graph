@@ -51,4 +51,4 @@ Cursors may be used for different purposes and therefor must have different type
 - Count Cursor
 - Projection Cursor
 
-....
+### Traversal Cursor

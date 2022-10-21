@@ -1,22 +1,29 @@
-# Query Flow Diagram
+# Understanding the Query Flow 
 
-This document explains and describes the entire flow in-which a query is accepted from the user threw its 
-dispatch to the underlying database engine, and until the results are transformed and projected into the logical schematic 
+This document explains and describes the end to end flow. It includes 
+- a query is accepted from the user  
+- query is translated and transformed 
+- query is used to build an execution plan 
+- plan is executed and results are returned 
+
+These steps include the dispatch to the underlying database engine, and until the results are transformed and projected into the logical schematic 
 structure and the specific query instructions (specific fields and aliases)
 
-### Architecture
+### Architecture - introduction
 
 The project is a monolith composed of multiple modules (components)
 The project uses Maven project build,management and dependency system.
 
-There are **3 conceptual layers** of modules that the project is composed of:
+There are **4 conceptual layers** of modules that the project is composed of:
 - **Core layer** - which the main generic entities and models are defined
 - **Virtual layer** - which the specific functionality implementing and extending the core layer
 - **Service layer** - which compose these two layers and defines the **Model View Control** access to the API
+- **Domain layer** -  which contains the domain specific modules including specific configuration and add-ons
 
-For additional details go to [architecture](Architecture.md)
+For additional details please visit [architecture](Architecture.md)
 
-### Graph Runner
+### Graph Runner - 
+
 The graph runner is a component that resides on the service layer. It's main class is [GraphRunner](../../../opengraph-services/src/main/java/org/opensearch/graph/services/GraphRunner.java) 
 
 It is responsible for the following parts:
@@ -28,7 +35,7 @@ Another essential component is the [GraphApp](../../../opengraph-services/src/ma
 This component is responsible for connecting the web container lifecycle to the Graph Engine's and registering the Http Endpoints
 with the containers so that it will expose them externally.
 
-### API
+### API - introduction
 
 Once the Graph Engine is loaded and started it exposes the next HTTP endpoints (using jooby as the web server container)
 
@@ -38,40 +45,46 @@ Once the Graph Engine is loaded and started it exposes the next HTTP endpoints (
  - Graph API
  - Dashboard API
 
+In general this API is following the [REST](https://en.wikipedia.org/wiki/Representational_state_transfer) convention for Resources
+
 For this document we will focus on the Query API, additional information can be found under [API](Api.md)
-In general this API is following the [REST](https://en.wikipedia.org/wiki/Representational_state_transfer) convention for Resources 
 
-#### RESTFULL API
+#### Query Resource - RESTFULL API
 
-Main resources from the REST point of view are:
+The Main resources that compose the core of the query process :
 
- - Query
-   - Cursor
-     - Page
-       - Data
+ - **Query**
+   - **Cursor**
+     - **Page**
+       - **Data**
 
- This structure allows the interaction with the server in the following way:
+ This hierarchy structure allows the interaction with the server in the following way:
  
  1) A user sends a POST request to a Query url: http://localhost/opengraph/query/
+
+  Once the request has arrived it is sent to the query controller for further processing:
     1.1) Query Resource (with auto generated ID) is created
     1.2) Cursor Resource (with auto generated ID) is created : http://localhost/opengraph/query/{queryID}/cursor
     1.3) Page Resource (with auto generated ID) is created : http://localhost/opengraph/query/{queryID}/cursor/{cursorID}/page
     1.4) Data Resource (with auto generated ID) is created : http://localhost/opengraph/query/{queryID}/cursor/{cursorID}/page/{pageId}/Data
 
-It is clear that the query is actually a container for the cursors resources, the cursor is a container for the page resources and the page is a container for the resulting data.
+We can observe that the query is actually a container for the cursors resources, the cursor is a container for the page resources and the page is a container for the resulting data.
 More on this structure and interaction later...
-
  
 #### Query API
-The Query API has multiple API's for sending a query - they differ in
+The Query API has multiple endpoints for sending a query - they differ in
  - Query language Type
  - Query response type returned (Data / Cursor / Future)
 
 The software component responsible for receiving the Http request and initiating the flow is the [QueryController](../../../opengraph-services/src/main/java/org/opensearch/graph/services/controllers/QueryController.java)
+
 In order to inform the web container of the supported endpoints - it must be registered under the Registration mechanism mentioned above [GraphApp](../../../opengraph-services/src/main/java/org/opensearch/graph/services/GraphApp.java)
 Basically all the controllers which want to execute some logic when an HTTP request arrive must be registered in a similar manner. 
 
-Specifically this interface is implemented by the Standard Query Controller which implements all the required functionality [StandardQueryController](../../../opengraph-services/src/main/java/org/opensearch/graph/services/controllers/StandardQueryController.java) 
+Specifically **_QueryController_** interface is implemented by the Standard Query Controller which implements all the required functionality [StandardQueryController](../../../opengraph-services/src/main/java/org/opensearch/graph/services/controllers/StandardQueryController.java) 
+
+All the basic (default) controllers are implemented in the service module, if we want to extend them - it is done by adding a domain specific module and
+registering this module within the configuration file - for additional info on configuration please visit [Configuration](Configuration.md)
 
 #### Query Driver
 In this architecture, each controller is coupled with a matching driver which is responsible for the actual details of the task it is given.

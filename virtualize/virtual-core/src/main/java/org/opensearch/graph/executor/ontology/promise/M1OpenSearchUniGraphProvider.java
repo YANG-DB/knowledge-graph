@@ -1,4 +1,4 @@
-package org.opensearch.graph.executor.ontology.discrete;
+package org.opensearch.graph.executor.ontology.promise;
 
 /*-
  * #%L
@@ -32,10 +32,12 @@ import org.opensearch.graph.executor.ontology.UniGraphProvider;
 import org.opensearch.graph.model.ontology.Ontology;
 import org.opensearch.graph.unipop.controller.OpensearchGraphConfiguration;
 import org.opensearch.graph.unipop.controller.common.ElementController;
-import org.opensearch.graph.unipop.controller.common.logging.LoggingReduceController;
 import org.opensearch.graph.unipop.controller.common.logging.LoggingSearchController;
 import org.opensearch.graph.unipop.controller.common.logging.LoggingSearchVertexController;
-import org.opensearch.graph.unipop.controller.discrete.*;
+import org.opensearch.graph.unipop.controller.promise.PromiseElementEdgeController;
+import org.opensearch.graph.unipop.controller.promise.PromiseElementVertexController;
+import org.opensearch.graph.unipop.controller.promise.PromiseVertexController;
+import org.opensearch.graph.unipop.controller.promise.PromiseVertexFilterController;
 import org.opensearch.graph.unipop.controller.search.SearchOrderProviderFactory;
 import org.opensearch.graph.unipop.process.traversal.strategy.StandardStrategyProvider;
 import org.opensearch.graph.unipop.schema.providers.GraphElementSchemaProvider;
@@ -49,22 +51,24 @@ import org.unipop.structure.UniGraph;
 
 import java.util.Set;
 
-public class M1ElasticUniGraphProvider implements UniGraphProvider {
+public class M1OpenSearchUniGraphProvider implements UniGraphProvider {
     //region Constructors
+
     @Inject
-    public M1ElasticUniGraphProvider(
+    private MetricRegistry metricRegistry;
+
+    @Inject
+    public M1OpenSearchUniGraphProvider(
             Client client,
             OpensearchGraphConfiguration opensearchGraphConfiguration,
             UniGraphConfiguration uniGraphConfiguration,
             GraphElementSchemaProviderFactory schemaProviderFactory,
-            SearchOrderProviderFactory orderProvider,
-            MetricRegistry metricRegistry) {
+            SearchOrderProviderFactory orderProviderFactory) {
         this.client = client;
         this.opensearchGraphConfiguration = opensearchGraphConfiguration;
         this.uniGraphConfiguration = uniGraphConfiguration;
         this.schemaProviderFactory = schemaProviderFactory;
-        this.orderProvider = orderProvider;
-        this.metricRegistry = metricRegistry;
+        this.orderProviderFactory = orderProviderFactory;
     }
     //endregion
 
@@ -72,46 +76,38 @@ public class M1ElasticUniGraphProvider implements UniGraphProvider {
     public UniGraph getGraph(Ontology ontology) throws Exception {
         return new SearchUniGraph(
                 this.uniGraphConfiguration,
-                controllerManagerFactory(this.schemaProviderFactory.get(ontology), this.metricRegistry),
+                controllerManagerFactory(schemaProviderFactory.get(ontology)),
                 new StandardStrategyProvider());
     }
 
     //region Private Methods
-
     /**
      * default controller Manager
-     *
      * @return
      */
-    private ControllerManagerFactory controllerManagerFactory(GraphElementSchemaProvider schemaProvider, MetricRegistry metricRegistry) {
+    private ControllerManagerFactory controllerManagerFactory(GraphElementSchemaProvider schemaProvider) {
         return uniGraph -> new ControllerManager() {
             @Override
             public Set<UniQueryController> getControllers() {
                 return ImmutableSet.of(
                         new ElementController(
                                 new LoggingSearchController(
-                                        new DiscreteElementVertexController(client, opensearchGraphConfiguration, uniGraph, schemaProvider, orderProvider,metricRegistry ),
+                                        new PromiseElementVertexController(client, opensearchGraphConfiguration, uniGraph, schemaProvider, orderProviderFactory,metricRegistry),
                                         metricRegistry),
-                                null
-                        ),
+                                new LoggingSearchController(
+                                        new PromiseElementEdgeController(client, opensearchGraphConfiguration, uniGraph, schemaProvider,metricRegistry),
+                                        metricRegistry)),
                         new LoggingSearchVertexController(
-                                new DiscreteVertexController(client, opensearchGraphConfiguration, uniGraph, schemaProvider, orderProvider,
-                                        metricRegistry),
+                                new PromiseVertexController(client, opensearchGraphConfiguration, uniGraph, schemaProvider,metricRegistry),
                                 metricRegistry),
                         new LoggingSearchVertexController(
-                                new DiscreteVertexFilterController(client, opensearchGraphConfiguration, uniGraph, schemaProvider, orderProvider,
-                                        metricRegistry),
-                                metricRegistry),
-                        new LoggingReduceController(
-                                new DiscreteElementReduceController(client, opensearchGraphConfiguration, uniGraph, schemaProvider,
-                                        metricRegistry),
+                                new PromiseVertexFilterController(client, opensearchGraphConfiguration, uniGraph, schemaProvider, orderProviderFactory,metricRegistry),
                                 metricRegistry)
                 );
             }
 
             @Override
             public void close() {
-
             }
         };
     }
@@ -122,7 +118,6 @@ public class M1ElasticUniGraphProvider implements UniGraphProvider {
     private final OpensearchGraphConfiguration opensearchGraphConfiguration;
     private final UniGraphConfiguration uniGraphConfiguration;
     private final GraphElementSchemaProviderFactory schemaProviderFactory;
-    private SearchOrderProviderFactory orderProvider;
-    private MetricRegistry metricRegistry;
+    private final SearchOrderProviderFactory orderProviderFactory;
     //endregion
 }

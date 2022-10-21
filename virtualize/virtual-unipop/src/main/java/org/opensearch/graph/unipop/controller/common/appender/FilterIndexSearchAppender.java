@@ -69,7 +69,7 @@ public class FilterIndexSearchAppender implements SearchAppender<VertexControlle
                 Stream.ofAll(vertexSchema.getIndexPartitions().get().getPartitions())
                         .filter(partition -> partition instanceof IndexPartitions.Partition.Range)
                         .map(partition -> (IndexPartitions.Partition.Range) partition)
-                        .<Comparable>sortBy(partition -> (Comparable) partition.getTo())
+                        .<Comparable>sortBy(partition -> partition.getTo())
                         .toJavaList();
 
         Iterable<IndexPartitions.Partition.Range> relevantRangePartitions = rangePartitions;
