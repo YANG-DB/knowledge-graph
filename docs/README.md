@@ -31,10 +31,15 @@
 7) **Miscellaneous**
    1) General [Strategies](info/components/StrategiesMechanisms.md)
 
+8) **Functionality**
+   1) [Parameterize Constraints Query](info/functionality/ParameterizedConstraints.md)
+   2) [Query Projections](info/functionality/QueryResultProjection.md)
 
 9) **Planned Roadmap**:
    1) Ingestion, Fusion and Normalization [Ingestion](info/roadmap/IngestionNormalization.md)
    2) User Experience & ML future [UX Future](info/roadmap/OpensearchGraph.md)
+   3) [Knowledge Deck](info/KnowledgeGraphDeck.md)
+   4) [Development future threads](info/roadmap/DevelopmentThreads.md)
 
 ---- 
 
