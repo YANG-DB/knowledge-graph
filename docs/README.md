@@ -43,8 +43,12 @@
 
 ---- 
 
+## Getting Started
+1) Setting up the development environment 
+1) Using containers for development and tests 
+
 ## Tutorials
-8) **Dragons Tutorial**:
+10) **Dragons Tutorial**:
      1) Installation the Dragons domain [Dragons](tutorial/sample/dragons/installation.md)
      2) Creating the ontology and schema [Init Schema](tutorial/sample/dragons/create-ontology.md)
      3) UpLoading data into the graph [Data](tutorial/sample/dragons/load-data.md)
@@ -53,7 +57,7 @@
      6) Additional Queries [More Queries](tutorial/sample/dragons/queries/Queries.md)
  
 
-9) **Observability Tutorial**:
+11) **Observability Tutorial**:
      1) Observability work-plan [planning](info/roadmap/ObservabilityIntegration.md) 
      2) Getting started with [Observability](tutorial/sample/observability/GettingStarted.md) 
      3) Data Loading [Data](tutorial/sample/observability/DataLoading.md) 
