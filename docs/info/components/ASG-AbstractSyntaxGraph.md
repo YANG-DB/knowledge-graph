@@ -144,5 +144,10 @@ Verify all elements have a tag - if not create one for them
  - **AsgNamedParametersStrategy**
 Handle parameterized constraint (ParameterizedConstraint) in which it replaces each parameterized value with the appropriate matched pattern
 
+ - **UntypedInferTypeLeftSideRelationAsgStrategy**
+This strategy infers the actual concrete type according to the ontology and if this type is not explicitly defined in the actual query - it adds it explicitly 
+so that the execution planner can have better cost approximations for the specific types it should consider for pricing of the query. 
 
-
+ - **RelationPatternRangeAsgStrategy**
+This strategy finds relation pattern of the type (a:A)-[r:R 1..4]-(b:B) which it states how many steps the query is allowed to traverse.
+It than replaces this 
