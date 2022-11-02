@@ -3,9 +3,9 @@
 1) Introduction and general information [General information](info/General.md)
 2) Catalog, the use case for data management [Catalog](info/Catalog.md)
 3) Architecture Overview [Architecture](info/Architecture.md)
+4) Representing relations inside Opensearch [Relations](info/components/OpensearchRelationships.md)
 
-
-4) **Components**:
+5) **Components**:
    1) The [Ontology](info/components/Ontology.md) 
    2) The intermediate [Query Language](info/components/Query-language.md) 
    3) The **_RESTFULL_** API structure [API](info/components/Api.md) 
