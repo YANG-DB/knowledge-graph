@@ -145,4 +145,23 @@ Another drawback is the "distance" the documents are compared to the nested mapp
 
 ### Applicative Joins
 
-With a 
+With a similar notion to the relational DB, applicative joins are joins that are not performed as part of the core DSL.
+This use case includes the two sides of the relationship and a mapping index where each document contains the two ids of the participating sides.
+Using this join is subject to lower performance in compare with the prior cases where the locality of the relationships played an important role.
+
+This is a common case for many to many mapping between entities.
+
+### Joins using Unipop
+Using the Graph Traversal Unipop framework allows this applicative to be implemented. The unipop framework is based on Tinkerpop graph traversing framework and uses Gremlin
+Language for the instruction of executing the actual walking across entities and relations.
+
+Internally join is implemented using a hash-block function that takes a block of ids from one side of the relation and filtering it against the relationship index (for the specific side it came from).
+The returned documents have the matching other side and will be taken to be sent as a block of ids to the other side index thereby getting the full details of the step (Source-entity <-> Target-entity)
+
+Since the filter operation against the relation index may not yield with the same block size - this operation repeats until the block size amount is reached.
+
+**Filtering** for additional properties other than the join keys may also take place during this operation and this is down within the same query to efficiently push down
+the predicates into the search engine itself...
+
+For additional details please check [Unipop](Unipop.md) and [Unipop-Step-Controller](UnipopStepController.md)
+
