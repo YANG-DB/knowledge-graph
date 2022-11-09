@@ -43,9 +43,9 @@ import org.opensearch.graph.model.query.entity.EUntyped;
 import org.opensearch.graph.model.query.properties.*;
 import org.opensearch.graph.model.query.properties.projection.CalculatedFieldProjection;
 import org.opensearch.graph.model.resourceInfo.GraphError;
-import org.opensearch.graph.unipop.schemaProviders.GraphEdgeSchema;
-import org.opensearch.graph.unipop.schemaProviders.GraphElementSchemaProvider;
-import org.opensearch.graph.unipop.schemaProviders.GraphRedundantPropertySchema;
+import org.opensearch.graph.unipop.schema.providers.GraphEdgeSchema;
+import org.opensearch.graph.unipop.schema.providers.GraphElementSchemaProvider;
+import org.opensearch.graph.unipop.schema.providers.GraphRedundantPropertySchema;
 import javaslang.collection.Stream;
 
 import java.util.ArrayList;
@@ -140,7 +140,7 @@ public class RedundantSelectionFilterPlanExtensionStrategy implements PlanExtens
                     .toJavaList()
                     .forEach(p -> {
                 Optional<GraphRedundantPropertySchema> redundantVertexProperty = endSchema
-                        .getRedundantProperty(schemaProvider.getPropertySchema($ont.pType$(p.getpType()).getName()).get());
+                        .getRedundantProperty(schemaProvider.getPropertySchema($ont.pType$(p.getpType()).getName(),endSchema.getLabel().get() ).get());
                 if (redundantVertexProperty.isPresent()) {
                     RelProp relProp = RedundantSelectionRelProp.of(
                             maxEnum.addAndGet(1),

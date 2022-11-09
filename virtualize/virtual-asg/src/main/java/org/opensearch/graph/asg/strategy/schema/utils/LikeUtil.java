@@ -28,7 +28,7 @@ import org.opensearch.graph.model.query.properties.EProp;
 import org.opensearch.graph.model.query.properties.SchematicEProp;
 import org.opensearch.graph.model.query.properties.constraint.Constraint;
 import org.opensearch.graph.model.query.properties.constraint.ConstraintOp;
-import org.opensearch.graph.unipop.schemaProviders.GraphElementPropertySchema;
+import org.opensearch.graph.unipop.schema.providers.GraphElementPropertySchema;
 import javaslang.collection.Stream;
 
 import java.util.ArrayList;
@@ -36,8 +36,8 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
 
-import static org.opensearch.graph.unipop.schemaProviders.GraphElementPropertySchema.IndexingSchema.Type.exact;
-import static org.opensearch.graph.unipop.schemaProviders.GraphElementPropertySchema.IndexingSchema.Type.ngrams;
+import static org.opensearch.graph.unipop.schema.providers.GraphElementPropertySchema.IndexingSchema.Type.exact;
+import static org.opensearch.graph.unipop.schema.providers.GraphElementPropertySchema.IndexingSchema.Type.ngrams;
 
 public class LikeUtil {
     public static Iterable<EProp> applyWildcardRules(EProp eProp, GraphElementPropertySchema propertySchema) {

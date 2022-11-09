@@ -50,7 +50,7 @@ public class M1AsgStrategyRegistrar implements AsgStrategyRegistrar {
     @Override
     public Iterable<AsgStrategy> register() {
         return Arrays.asList(
-                new DefaultETagAsgStrategy(this.ontologyProvider),
+                new DefaultETagAsgStrategy(),
                 new AsgNamedParametersStrategy(),
                 new UntypedInferTypeLeftSideRelationAsgStrategy(),
                 new RelationPatternRangeAsgStrategy(),
@@ -68,7 +68,6 @@ public class M1AsgStrategyRegistrar implements AsgStrategyRegistrar {
                 new AggFilterTransformationAsgStrategy(),
                 new LikeToEqTransformationAsgStrategy(),
                 new RedundantInSetConstraintAsgStrategy(),
-                new RedundantInRangeConstraintAsgStrategy(),
                 new RedundantPropGroupAsgStrategy(),
                 new DefaultSelectionAsgStrategy(this.ontologyProvider)
         );

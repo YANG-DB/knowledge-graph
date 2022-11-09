@@ -1,5 +1,5 @@
 <component name="ProjectRunConfigurationManager">
-  <configuration default="false" name="opensearch-runner" type="Application" factoryName="Application">
+  <configuration default="false" name="opensearch-observability-runner" type="Application" factoryName="Application">
     <option name="INCLUDE_PROVIDED_SCOPE" value="true" />
     <option name="MAIN_CLASS_NAME" value="org.opensearch.graph.services.GraphRunner" />
     <module name="observability-assembly" />

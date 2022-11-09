@@ -27,15 +27,21 @@ package org.opensearch.graph.model.query.properties;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonInclude;
+import org.opensearch.graph.model.Printable;
+import org.opensearch.graph.model.execution.plan.descriptors.AsgQueryDescriptor;
+import org.opensearch.graph.model.execution.plan.descriptors.QueryDescriptor;
 import org.opensearch.graph.model.query.EBase;
 import org.opensearch.graph.model.query.properties.constraint.Constraint;
 import org.opensearch.graph.model.query.properties.projection.Projection;
+
+import java.util.Optional;
+import java.util.StringJoiner;
 
 /**
  * Created by moti on 5/17/2017.
  */
 @JsonInclude(JsonInclude.Include.NON_EMPTY)
-public abstract class BaseProp extends EBase{
+public abstract class BaseProp extends EBase implements Printable {
     //region Consructors
     public BaseProp() {
 
@@ -99,6 +105,11 @@ public abstract class BaseProp extends EBase{
 
     @Override
     public abstract EBase clone();
+
+    @Override
+    public void print(StringJoiner joiner) {
+        QueryDescriptor.shortLabel(this,joiner,true);
+    }
 
     @Override
     public int hashCode() {

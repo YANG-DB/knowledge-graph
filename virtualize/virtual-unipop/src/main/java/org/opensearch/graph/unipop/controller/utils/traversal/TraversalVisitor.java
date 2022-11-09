@@ -25,7 +25,7 @@ package org.opensearch.graph.unipop.controller.utils.traversal;
 
 
 import org.opensearch.graph.unipop.step.BoostingStepWrapper;
-import org.opensearch.graph.unipop.step.NestedStepWrapper;
+import org.opensearch.graph.unipop.step.NestingStepWrapper;
 import javaslang.collection.Stream;
 import org.apache.tinkerpop.gremlin.process.traversal.Step;
 import org.apache.tinkerpop.gremlin.process.traversal.Traversal;
@@ -59,8 +59,8 @@ public class TraversalVisitor<TReturn> {
             visitTraversalFilterStep((TraversalFilterStep) o);
         } else if(o.getClass() == BoostingStepWrapper.class){
           visitBoostingStep((BoostingStepWrapper) o);
-        } else if(o.getClass() == NestedStepWrapper.class){
-          visitNestedStep((NestedStepWrapper) o);
+        } else if(o.getClass() == NestingStepWrapper.class){
+          visitNestedStep((NestingStepWrapper) o);
         } else {
             //TODO: allow configurable behavior for unsupported or unexpected elements
             throw new UnsupportedOperationException(o.getClass() + " is not supported in promise conditions");
@@ -74,7 +74,7 @@ public class TraversalVisitor<TReturn> {
         return null;
     }
 
-    protected TReturn visitNestedStep(NestedStepWrapper o) {
+    protected TReturn visitNestedStep(NestingStepWrapper o) {
         visitRecursive(o.getInnerStep());
         return null;
     }

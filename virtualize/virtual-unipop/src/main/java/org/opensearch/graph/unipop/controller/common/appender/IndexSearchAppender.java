@@ -28,10 +28,10 @@ import org.opensearch.graph.unipop.controller.common.context.ElementControllerCo
 import org.opensearch.graph.unipop.controller.search.SearchBuilder;
 import org.opensearch.graph.unipop.controller.utils.traversal.TraversalValuesByKeyProvider;
 import org.opensearch.graph.unipop.promise.TraversalConstraint;
-import org.opensearch.graph.unipop.schemaProviders.GraphEdgeSchema;
-import org.opensearch.graph.unipop.schemaProviders.GraphElementSchemaProvider;
-import org.opensearch.graph.unipop.schemaProviders.GraphVertexSchema;
-import org.opensearch.graph.unipop.schemaProviders.indexPartitions.IndexPartitions;
+import org.opensearch.graph.unipop.schema.providers.GraphEdgeSchema;
+import org.opensearch.graph.unipop.schema.providers.GraphElementSchemaProvider;
+import org.opensearch.graph.unipop.schema.providers.GraphVertexSchema;
+import org.opensearch.graph.unipop.schema.providers.indexPartitions.IndexPartitions;
 import org.opensearch.graph.unipop.structure.ElementType;
 import javaslang.collection.Stream;
 import org.apache.tinkerpop.gremlin.process.traversal.Traversal;

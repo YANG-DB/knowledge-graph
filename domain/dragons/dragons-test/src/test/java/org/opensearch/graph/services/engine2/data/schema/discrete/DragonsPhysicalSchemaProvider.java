@@ -1,10 +1,9 @@
 package org.opensearch.graph.services.engine2.data.schema.discrete;
 
 import org.opensearch.graph.model.GlobalConstants;
-import org.opensearch.graph.model.schema.BaseTypeElement;
-import org.opensearch.graph.unipop.schemaProviders.*;
-import org.opensearch.graph.unipop.schemaProviders.indexPartitions.IndexPartitions;
-import org.opensearch.graph.unipop.schemaProviders.indexPartitions.StaticIndexPartitions;
+import org.opensearch.graph.unipop.schema.providers.*;
+import org.opensearch.graph.unipop.schema.providers.indexPartitions.IndexPartitions;
+import org.opensearch.graph.unipop.schema.providers.indexPartitions.StaticIndexPartitions;
 import javaslang.collection.Stream;
 import org.apache.tinkerpop.gremlin.process.traversal.dsl.graph.__;
 import org.apache.tinkerpop.gremlin.structure.Direction;
@@ -128,7 +127,7 @@ public class DragonsPhysicalSchemaProvider implements GraphElementSchemaProvider
     }
 
     @Override
-    public Optional<GraphElementPropertySchema> getPropertySchema(String name) {
+    public Optional<GraphElementPropertySchema> getPropertySchema(String name, String contextEntity) {
         return Optional.empty();
     }
 
@@ -149,6 +148,11 @@ public class DragonsPhysicalSchemaProvider implements GraphElementSchemaProvider
 
     @Override
     public Iterable<String> getPropertyNames() {
+        return Collections.emptyList();
+    }
+
+    @Override
+    public Iterable<String> getPropertyPTypes() {
         return Collections.emptyList();
     }
 

@@ -29,7 +29,7 @@ import org.opensearch.graph.unipop.controller.promise.appender.SearchQueryAppend
 import org.opensearch.graph.unipop.controller.search.AggregationBuilder;
 import org.opensearch.graph.unipop.controller.search.QueryBuilder;
 import org.opensearch.graph.unipop.controller.utils.traversal.TraversalValuesByKeyProvider;
-import org.opensearch.graph.unipop.schemaProviders.GraphEdgeSchema;
+import org.opensearch.graph.unipop.schema.providers.GraphEdgeSchema;
 import javaslang.collection.Stream;
 import org.apache.tinkerpop.gremlin.structure.T;
 

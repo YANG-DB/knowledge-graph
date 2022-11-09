@@ -39,6 +39,18 @@ public class GlobalConstants {
     public static final String RAW = "raw";
     public static final String TYPE = "type";
 
+    public static class Scalars {
+        public static final String STRING = "string"; //represents keyword
+        public static final String TEXT = "text";
+        public static final String DATE = "date";
+        public static final String LONG = "long";
+        public static final String INT = "int";
+        public static final String FLOAT = "float";
+        public static final String DOUBLE = "double";
+        public static final String GEO = "geo_point";
+
+
+    }
     public static class ProjectionConfigs {
         public static final String PROJECTION = "projection";
         public static final String TAG = "tag";
@@ -89,6 +101,8 @@ public class GlobalConstants {
 
     public static class EdgeSchema {
         public static String DIRECTION = "direction";
+        public static String DIRECTION_IN = "in";
+        public static String DIRECTION_OUT = "out";
 
         public static String SOURCE = "entityA";//formally was source
         public static String SOURCE_ID = "entityA.id";//formally was source.id
@@ -99,5 +113,9 @@ public class GlobalConstants {
         public static String DEST_ID = "entityB.id";//formally was target.id
         public static String DEST_TYPE = "entityB.type";//formally was target.type
         public static String DEST_NAME = "entityB.name";//formally was target.name
+    }
+
+    public static class Mapping {
+        public static final String KEYWORD = "keyword";
     }
 }

@@ -168,13 +168,16 @@ public interface CypherUtils {
 
     }
     static List<org.opencypher.v9_0.expressions.Variable> var(org.opencypher.v9_0.expressions.Expression expression) {
-        return
-                expression!=null ? asJavaCollectionConverter(expression.subExpressions()).asJavaCollection().stream()
-                .filter(v -> org.opencypher.v9_0.expressions.Variable.class.isAssignableFrom(v.getClass()))
-                .collect(Collectors.toList()).stream()
-                .map(p-> ((org.opencypher.v9_0.expressions.Variable) p))
-                .collect(Collectors.toList()) : Collections.emptyList();
+        if (expression==null) return Collections.emptyList();
 
+        if(org.opencypher.v9_0.expressions.Variable.class.isAssignableFrom(expression.getClass()))
+                        return Collections.singletonList((org.opencypher.v9_0.expressions.Variable) expression);
+
+        return asJavaCollectionConverter(expression.subExpressions()).asJavaCollection().stream()
+                    .filter(v -> org.opencypher.v9_0.expressions.Variable.class.isAssignableFrom(v.getClass()))
+                    .collect(Collectors.toList()).stream()
+                    .map(p-> ((org.opencypher.v9_0.expressions.Variable) p))
+                    .collect(Collectors.toList());
     }
 
     static List<org.opencypher.v9_0.expressions.Literal> literal(org.opencypher.v9_0.expressions.Expression expression) {

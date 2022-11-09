@@ -155,7 +155,7 @@
   <logger name="org.unipop" additivity="false"/>
   <logger name="org.opensearch.graph.dispatcher.resource" additivity="false"/>
   <logger name="org.opensearch.graph.executor.opensearch.logging.LoggingClient.Verbose" additivity="true"/>
-  <logger name="org.opensearch.graph.unipop.schemaProviders.GraphElementSchemaProvider.Verbose" additivity="false"/>
+  <logger name="org.opensearch.graph.unipop.schema.providers.GraphElementSchemaProvider.Verbose" additivity="false"/>
   <!-- Ignore loggers -->
 
   <!-- es error logger -->

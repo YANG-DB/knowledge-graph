@@ -22,19 +22,12 @@ package org.opensearch.graph.dragons.schema;
 
 
 
-import com.fasterxml.jackson.databind.ObjectMapper;
 import com.jayway.jsonpath.JsonPath;
-import com.typesafe.config.Config;
 import org.opensearch.graph.executor.ontology.GraphLayoutProviderFactory;
 import org.opensearch.graph.model.ontology.Ontology;
-import org.opensearch.graph.model.ontology.OntologyFinalizer;
-import org.opensearch.graph.unipop.schemaProviders.GraphElementPropertySchema;
-import org.opensearch.graph.unipop.schemaProviders.GraphLayoutProvider;
-import org.opensearch.graph.unipop.schemaProviders.GraphRedundantPropertySchema;
-import javaslang.Tuple2;
-import javaslang.collection.Stream;
+import org.opensearch.graph.unipop.schema.providers.GraphLayoutProvider;
+import org.opensearch.graph.unipop.schema.providers.GraphRedundantPropertySchema;
 import net.minidev.json.JSONArray;
-import org.apache.commons.io.FilenameUtils;
 import org.apache.commons.io.IOUtils;
 
 import javax.inject.Inject;
@@ -46,8 +39,6 @@ import java.nio.file.Paths;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Optional;
-
-import static org.opensearch.graph.model.Utils.readJsonFile;
 
 /**
  * Created by lior.perry on 6/4/2017.

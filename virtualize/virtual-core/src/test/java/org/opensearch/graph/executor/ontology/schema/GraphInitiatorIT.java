@@ -25,7 +25,7 @@ public class GraphInitiatorIT implements BaseITMarker {
 
 
     @Test
-    public void testSchema() throws IOException {
+    public void testSchema()  {
         Set<String> strings = Arrays.asList("idx_fire_500","idx_freeze_2000","idx_fire_1500","idx_freeze_1000","own","subjectof","dragon","idx_freeze_1500","idx_fire_2000","kingdom","people","idx_fire_1000","horse","guild","idx_freeze_500","know","registeredin","originatedin","memberof").stream().collect(Collectors.toSet());
         Assert.assertEquals(strings,StreamSupport.stream(nestedSchema.indices().spliterator(),false).collect(Collectors.toSet()));
     }
@@ -45,7 +45,7 @@ public class GraphInitiatorIT implements BaseITMarker {
         when(idGeneratorDriver.getNext(anyString(),anyInt()))
                 .thenAnswer(invocationOnMock -> new Range(0,1000));
         GraphInitiator initiator = new DefaultGraphInitiator(config,client,nestedProviderIfc,ontologyProvider,nestedSchema);
-        Assert.assertEquals(14,initiator.createTemplate("Dragons",mapper.writeValueAsString(nestedProvider)));
+        Assert.assertEquals(14,initiator.createTemplate("Dragons",nestedProvider.getOntology()));
     }
 
     @Test
@@ -55,7 +55,7 @@ public class GraphInitiatorIT implements BaseITMarker {
         when(idGeneratorDriver.getNext(anyString(),anyInt()))
                 .thenAnswer(invocationOnMock -> new Range(0,1000));
         GraphInitiator initiator = new DefaultGraphInitiator(config,client,nestedProviderIfc,ontologyProvider,nestedSchema);
-        Assert.assertEquals(13,initiator.createIndices("Dragons",mapper.writeValueAsString(nestedProvider)));
+        Assert.assertEquals(13,initiator.createIndices("Dragons",nestedProvider.getOntology()));
     }
 
     @Test

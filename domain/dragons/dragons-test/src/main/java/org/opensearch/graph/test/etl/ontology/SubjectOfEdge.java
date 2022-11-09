@@ -25,7 +25,7 @@ package org.opensearch.graph.test.etl.ontology;
 import org.opensearch.graph.model.execution.plan.Direction;
 import org.opensearch.graph.test.etl.*;
 import org.opensearch.graph.test.scenario.ETLUtils;
-import org.opensearch.graph.unipop.schemaProviders.indexPartitions.IndexPartitions;
+import org.opensearch.graph.unipop.schema.providers.indexPartitions.IndexPartitions;
 import javaslang.collection.Stream;
 
 import java.io.IOException;

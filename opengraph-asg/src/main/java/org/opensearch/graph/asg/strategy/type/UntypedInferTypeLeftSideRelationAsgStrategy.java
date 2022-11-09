@@ -43,6 +43,10 @@ import java.util.stream.StreamSupport;
 
 import static org.opensearch.graph.model.GlobalConstants._ALL;
 
+/**
+ * This strategy infers the actual concrete type according to the ontology and if this type is not explicitly defined in the actual query - it adds it explicitly
+ * so that the execution planner can have better cost approximations for the specific types it should consider for pricing of the query.
+ */
 public class UntypedInferTypeLeftSideRelationAsgStrategy implements AsgStrategy {
 
     @Override

@@ -9,9 +9,9 @@ package org.opensearch.graph.model.validation;
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- * 
+ *
  *      http://www.apache.org/licenses/LICENSE-2.0
- * 
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -21,16 +21,12 @@ package org.opensearch.graph.model.validation;
  */
 
 
-
-
-
-
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import javaslang.collection.Stream;
+import org.opensearch.graph.model.Printable;
 
-import java.util.Arrays;
-import java.util.StringJoiner;
+import java.util.*;
 
 /**
  * Created by lior.perry on 5/29/2017.
@@ -41,13 +37,19 @@ public class ValidationResult {
 
     public static String print(Object... elements) {
         StringJoiner joiner = new StringJoiner(":", "[", "]");
-        Arrays.asList(elements).forEach(element -> joiner.add(element.toString()));
+        for (Object element : elements) {
+            if (Printable.class.isAssignableFrom(element.getClass()))
+                ((Printable) element).print(joiner);
+            else
+                joiner.add(element.toString());
+        }
         return joiner.toString();
     }
 
     //region Constructors
 
-    public ValidationResult() {}
+    public ValidationResult() {
+    }
 
     public ValidationResult(boolean valid, String validator, String... errors) {
         this(valid, validator, Stream.of(errors));
@@ -91,4 +93,28 @@ public class ValidationResult {
     @JsonProperty("errors")
     private Iterable<String> errors;
     //endregion
+
+    public static class ValidationResults {
+        private List<ValidationResult> validations = new ArrayList<>();
+
+        public ValidationResults() {
+        }
+
+        public ValidationResults( List<ValidationResult> validations) {
+            this.validations = validations;
+        }
+
+        public boolean isValid() {
+            return getValidations().isEmpty();
+        }
+
+        public List<ValidationResult> getValidations() {
+            return validations;
+        }
+
+        public ValidationResults with(ValidationResult validation) {
+            this.validations.add(validation);
+            return this;
+        }
+    }
 }

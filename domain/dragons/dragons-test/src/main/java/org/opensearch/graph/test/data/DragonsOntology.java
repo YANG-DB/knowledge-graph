@@ -22,6 +22,7 @@ package org.opensearch.graph.test.data;
 
 
 
+import org.opensearch.graph.model.GlobalConstants;
 import org.opensearch.graph.model.Utils;
 import org.opensearch.graph.model.ontology.*;
 import org.apache.commons.io.IOUtils;
@@ -40,10 +41,10 @@ import static java.util.Collections.emptyList;
 
 public class DragonsOntology {
 
-    public static final String DATE_TYPE = "date";
-    public static final String INT = "int";
-    public static final String STRING = "string";
-    public static final String FLOAT = "float";
+    public static final String DATE_TYPE =  GlobalConstants.Scalars.DATE;
+    public static final String INT =  GlobalConstants.Scalars.INT;
+    public static final String STRING = GlobalConstants.Scalars.STRING;
+    public static final String FLOAT =  GlobalConstants.Scalars.FLOAT;
     public static final String CM = "cm";
 
 

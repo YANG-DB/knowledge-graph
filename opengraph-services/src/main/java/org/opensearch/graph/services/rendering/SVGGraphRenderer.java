@@ -49,7 +49,7 @@ public interface SVGGraphRenderer {
                 node.add(
                         Color.named(node.name().toString()),
                         Style.lineWidth(2), Style.FILLED));
-        return Graphviz.fromGraph(g).width(1200).render(Format.SVG_STANDALONE)
+        return Graphviz.fromGraph(g).width(4800).render(Format.SVG_STANDALONE)
                 .toFile(File.createTempFile("illustrateGraph_"+name,".svg"));
 
     }

@@ -28,12 +28,12 @@ package org.opensearch.graph.model.asgQuery;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import org.opensearch.graph.model.Next;
+import org.opensearch.graph.model.Printable;
+import org.opensearch.graph.model.execution.plan.descriptors.AsgQueryDescriptor;
+import org.opensearch.graph.model.execution.plan.descriptors.QueryDescriptor;
 import org.opensearch.graph.model.query.EBase;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-import java.util.Objects;
+import java.util.*;
 import java.util.stream.Collectors;
 
 /**
@@ -41,7 +41,7 @@ import java.util.stream.Collectors;
  */
 @JsonIgnoreProperties(ignoreUnknown = true)
 //@JsonIdentityInfo(generator=ObjectIdGenerators.PropertyGenerator.class, property="id")
-public class AsgEBase<T extends EBase> implements Next<List<AsgEBase<? extends EBase>>> {
+public class AsgEBase<T extends EBase> implements Next<List<AsgEBase<? extends EBase>>>, Printable {
 
 
 
@@ -269,10 +269,15 @@ public class AsgEBase<T extends EBase> implements Next<List<AsgEBase<? extends E
     @Override
     public String toString() {
         //some 'non-educated-developers' recklessly create AsgEBasePlanOp (during tests) without giving them appropriate AsgEbase
-        // therefore NPE - why ????
+        // therefore NPE - protection !!!
         if(eBase!=null)
             return "Asg(" + this.eBase.toString() + ")";
         return "";
+    }
+
+    @Override
+    public void print(StringJoiner joiner) {
+        AsgQueryDescriptor.shortLabel(this,joiner,true);
     }
     //endregion
 

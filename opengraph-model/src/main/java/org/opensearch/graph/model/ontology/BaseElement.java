@@ -37,8 +37,11 @@ public interface BaseElement {
     List<String> fields();
     List<String> getProperties();
 
+    boolean containsProperty(String key);
+    boolean containsMetadata(String key);
 
-    @JsonIgnore
+
+        @JsonIgnore
     static String idFieldName(List<String> values) {
         StringJoiner joiner = new StringJoiner("_");
         values.forEach(joiner::add);

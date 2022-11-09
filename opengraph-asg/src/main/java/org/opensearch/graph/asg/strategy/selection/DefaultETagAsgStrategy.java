@@ -36,17 +36,14 @@ import org.opensearch.common.Strings;
 
 import static org.opensearch.graph.model.execution.plan.descriptors.QueryDescriptor.describe;
 
+/**
+ * Verify all elements have a tag - if not create one for them
+ */
 public class DefaultETagAsgStrategy implements AsgStrategy {
-    //region Constructors
-    public DefaultETagAsgStrategy(OntologyProvider ontologyProvider) {
-        this.ontologyProvider = ontologyProvider;
-    }
-    //endregion
 
     //region AsgStrategy Implementation
     @Override
     public void apply(AsgQuery query, AsgStrategyContext context) {
-        Ontology.Accessor ont = new Ontology.Accessor(this.ontologyProvider.get(query.getOnt()).get());
         AsgQueryUtil.elements(query, element->(element.geteBase() instanceof Tagged)).forEach(e-> {
             if(Strings.isEmpty(((Tagged)e.geteBase()).geteTag())){
                 //if no tag exists - create one based on the entity description
@@ -56,7 +53,4 @@ public class DefaultETagAsgStrategy implements AsgStrategy {
     }
     //endregion
 
-    //region Fields
-    private OntologyProvider ontologyProvider;
-    //endregion
 }

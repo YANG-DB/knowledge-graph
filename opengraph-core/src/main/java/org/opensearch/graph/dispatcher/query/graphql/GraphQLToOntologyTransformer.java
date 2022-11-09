@@ -275,7 +275,7 @@ public class GraphQLToOntologyTransformer implements OntologyTransformerIfc<Stri
         populateObjectTypes(graphQLSchema);
 
         //transform
-        Ontology.OntologyBuilder builder = Ontology.OntologyBuilder.anOntology();
+        Ontology.OntologyBuilder builder = Ontology.OntologyBuilder.anOntology("ont");
         interfaces(graphQLSchema, builder);
         entities(graphQLSchema, builder);
         relations(graphQLSchema, builder);

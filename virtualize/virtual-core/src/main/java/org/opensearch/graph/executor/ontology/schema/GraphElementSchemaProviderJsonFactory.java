@@ -9,9 +9,9 @@ package org.opensearch.graph.executor.ontology.schema;
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- * 
+ *
  *      http://www.apache.org/licenses/LICENSE-2.0
- * 
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -21,63 +21,65 @@ package org.opensearch.graph.executor.ontology.schema;
  */
 
 
-
-
-
 import com.google.inject.Inject;
 import com.typesafe.config.Config;
-import org.opensearch.graph.dispatcher.ontology.IndexProviderFactory;
-import org.opensearch.graph.dispatcher.ontology.OntologyProvider;
-import org.opensearch.graph.model.ontology.*;
-import org.opensearch.graph.model.schema.BaseTypeElement.Type;
-import org.opensearch.graph.model.schema.MappingIndexType;
-import org.opensearch.graph.executor.ontology.GraphElementSchemaProviderFactory;
-import org.opensearch.graph.model.GlobalConstants;
-import org.opensearch.graph.model.resourceInfo.GraphError;
-import org.opensearch.graph.model.schema.*;
-import org.opensearch.graph.unipop.schemaProviders.*;
-import org.opensearch.graph.unipop.schemaProviders.indexPartitions.IndexPartitions;
-import org.opensearch.graph.unipop.schemaProviders.indexPartitions.NestedIndexPartitions;
-import org.opensearch.graph.unipop.schemaProviders.indexPartitions.StaticIndexPartitions;
-import org.opensearch.graph.unipop.schemaProviders.indexPartitions.TimeSeriesIndexPartitions;
 import javaslang.collection.Stream;
 import org.apache.tinkerpop.gremlin.process.traversal.dsl.graph.__;
 import org.apache.tinkerpop.gremlin.structure.Direction;
 import org.apache.tinkerpop.gremlin.structure.T;
+import org.opensearch.graph.dispatcher.ontology.IndexProviderFactory;
+import org.opensearch.graph.dispatcher.ontology.OntologyProvider;
+import org.opensearch.graph.executor.ontology.GraphElementSchemaProviderFactory;
+import org.opensearch.graph.model.GlobalConstants;
+import org.opensearch.graph.model.ontology.EPair;
+import org.opensearch.graph.model.ontology.Ontology;
+import org.opensearch.graph.model.ontology.RelationshipType;
+import org.opensearch.graph.model.resourceInfo.GraphError;
+import org.opensearch.graph.model.schema.BaseTypeElement.Type;
+import org.opensearch.graph.model.schema.IndexProvider;
+import org.opensearch.graph.model.schema.MappingIndexType;
+import org.opensearch.graph.model.schema.Redundant;
+import org.opensearch.graph.model.schema.Relation;
+import org.opensearch.graph.unipop.schema.providers.*;
+import org.opensearch.graph.unipop.schema.providers.indexPartitions.IndexPartitions;
+import org.opensearch.graph.unipop.schema.providers.indexPartitions.NestedIndexPartitions;
+import org.opensearch.graph.unipop.schema.providers.indexPartitions.StaticIndexPartitions;
+import org.opensearch.graph.unipop.schema.providers.indexPartitions.TimeBasedIndexPartitions;
 
-import java.text.SimpleDateFormat;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
-import static org.opensearch.graph.unipop.schemaProviders.GraphEdgeSchema.Application.endA;
 import static java.util.stream.Stream.concat;
+import static org.opensearch.graph.model.GlobalConstants.ASSEMBLY;
+import static org.opensearch.graph.model.schema.MappingIndexType.valueOf;
+import static org.opensearch.graph.unipop.schema.providers.GraphEdgeSchema.Application.endA;
+import static org.opensearch.graph.unipop.schema.providers.GraphVertexSchemaUtils.generateGraphVertexSchema;
 
 public class GraphElementSchemaProviderJsonFactory implements GraphElementSchemaProviderFactory {
 
-    public static final String KEYWORD = "keyword";
-    public static final String TEXT = "text";
-    public static final String _ID = GlobalConstants._ID;
-
-    public static final String ID = "id";
+    public static final String ID = GlobalConstants.ID;
     public static final String ENTITY_A = GlobalConstants.EdgeSchema.SOURCE;
     public static final String ENTITY_A_ID = GlobalConstants.EdgeSchema.SOURCE_ID;
     public static final String ENTITY_B = GlobalConstants.EdgeSchema.DEST;
     public static final String ENTITY_B_ID = GlobalConstants.EdgeSchema.DEST_ID;
     public static final String DIRECTION = GlobalConstants.EdgeSchema.DIRECTION;
-    public static final String OUT = "out";
-    public static final String IN = "in";
+    public static final String OUT = GlobalConstants.EdgeSchema.DIRECTION_OUT;
+    public static final String IN = GlobalConstants.EdgeSchema.DIRECTION_IN;
 
     private IndexProvider indexProvider;
     private Ontology.Accessor accessor;
 
     @Inject
     public GraphElementSchemaProviderJsonFactory(Config config, IndexProviderFactory indexProvider, OntologyProvider ontologyProvider) {
-        String assembly = config.getString("assembly");
+        String assembly = config.getString(ASSEMBLY);
 
         this.accessor = new Ontology.Accessor(ontologyProvider.get(assembly).orElseThrow(() ->
                 new GraphError.GraphErrorException(new GraphError("No Ontology present for assembly", "No Ontology present for assembly" + assembly))));
 
-        //if no index provider found with assembly name - generate default one accoring to ontology and simple Static Index Partitioning strategy
+        //if no index provider found with assembly name - generate default one according to ontology and simple Static Index Partitioning strategy
         this.indexProvider = indexProvider.get(assembly).orElseGet(() ->
                 IndexProvider.Builder.generate(accessor.get()));
 
@@ -108,7 +110,7 @@ public class GraphElementSchemaProviderJsonFactory implements GraphElementSchema
     }
 
     private List<GraphEdgeSchema> generateGraphEdgeSchema(Relation r) {
-        MappingIndexType type = MappingIndexType.valueOf(r.getPartition().toUpperCase());
+        MappingIndexType type = valueOf(r.getPartition().toUpperCase());
         switch (type) {
             case UNIFIED:
                 //todo verify correctness
@@ -134,44 +136,8 @@ public class GraphElementSchemaProviderJsonFactory implements GraphElementSchema
 
     private List<GraphVertexSchema> getVertexSchemas() {
         return indexProvider.getEntities().stream()
-                .flatMap(e -> generateGraphVertexSchema(e).stream())
+                .flatMap(e -> generateGraphVertexSchema(accessor, indexProvider, e).stream())
                 .collect(Collectors.toList());
-    }
-
-    private List<GraphVertexSchema> generateGraphVertexSchema( Entity e) {
-        MappingIndexType type = MappingIndexType.valueOf(e.getPartition().toUpperCase());
-        switch (type) {
-            case UNIFIED:
-            case STATIC:
-                //todo verify correctness
-                return e.getProps().getValues().stream()
-                        .map(v -> new GraphVertexSchema.Impl(
-                                e.getType(),
-                                new StaticIndexPartitions(v),
-                                getGraphElementPropertySchemas(e.getType().getName())))
-                        .collect(Collectors.toList());
-            case NESTED:
-                return e.getProps().getValues().stream()
-                        .map(v -> new GraphVertexSchema.Impl(
-                                e.getType(),
-                                new NestedIndexPartitions(v),
-                                getGraphElementPropertySchemas(e.getType().getName())))
-                        .collect(Collectors.toList());
-            case TIME:
-                return e.getProps().getValues().stream()
-                        .map(v -> new GraphVertexSchema.Impl(
-                                e.getType(),
-                                new TimeBasedIndexPartitions(e.getProps()),
-                                getGraphElementPropertySchemas(e.getType().getName())))
-                        .collect(Collectors.toList());
-        }
-        //default - when other partition type is declared
-        String v = e.getProps().getValues().isEmpty() ? e.getType().getName() : e.getProps().getValues().get(0);
-        return Collections.singletonList(
-                new GraphVertexSchema.Impl(
-                        e.getType(),
-                        new StaticIndexPartitions(v),
-                        getGraphElementPropertySchemas(e.getType().getName())));
     }
 
 
@@ -180,7 +146,7 @@ public class GraphElementSchemaProviderJsonFactory implements GraphElementSchema
         return relation.map(RelationshipType::getePairs);
     }
 
-    private List<GraphEdgeSchema> generateGraphEdgeSchema( Relation r, Type v, IndexPartitions partitions) {
+    private List<GraphEdgeSchema> generateGraphEdgeSchema(Relation r, Type v, IndexPartitions partitions) {
         Optional<List<EPair>> pairs = getEdgeSchemaOntologyPairs(v.getName());
 
         if (!pairs.isPresent())
@@ -241,44 +207,23 @@ public class GraphElementSchemaProviderJsonFactory implements GraphElementSchema
 
     private void validateSchema(List<EPair> pairList) {
         pairList.forEach(pair -> {
-            if ( !(accessor.$element(pair.geteTypeA()).isPresent()) || !(accessor.$element(pair.geteTypeB()).isPresent()))
+            if (!(accessor.$element(pair.geteTypeA()).isPresent()) || !(accessor.$element(pair.geteTypeB()).isPresent()))
                 throw new GraphError.GraphErrorException(new GraphError("Schema generation exception", " Pair containing " + pair.toString() + " was not matched against the current ontology"));
         });
     }
-
-    private List<GraphElementPropertySchema> getGraphElementPropertySchemas(String type) {
-        EntityType entityType = accessor.entity$(type);
-        List<GraphElementPropertySchema> elementPropertySchemas = new ArrayList<>();
-        accessor.cascadingElementFieldsPType(entityType.geteType())
-                .forEach(v -> {
-                    Property property = accessor.$pType(entityType.geteType(), v).get();
-                    switch (property.getType()) {
-                        case TEXT:
-                            elementPropertySchemas.add(new GraphElementPropertySchema.Impl(v, property.getType(),
-                                    //todo add all types of possible analyzers - such as ngram ...
-                                    Arrays.asList(new GraphElementPropertySchema.ExactIndexingSchema.Impl(v + "." + KEYWORD))));
-                            break;
-                        default:
-                            elementPropertySchemas.add(new GraphElementPropertySchema.Impl(v, property.getType()));
-                    }
-                });
-
-        return elementPropertySchemas;
-    }
-
 
     private List<GraphRedundantPropertySchema> getGraphRedundantPropertySchemas(String entitySide, String entityType, Relation rel) {
         List<GraphRedundantPropertySchema> redundantPropertySchemas = new ArrayList<>();
         //verify ontology
         accessor.$element(entityType)
-                    .orElseThrow(() -> new GraphError.GraphErrorException(new GraphError("Schema generation exception","No Element in Ontology "+entityType)))
+                .orElseThrow(() -> new GraphError.GraphErrorException(new GraphError("Schema generation exception", "No Element in Ontology " + entityType)))
                 .getIdField()
-                  .forEach(field -> {
+                .forEach(field -> {
                     if (!accessor.$element(entityType).get().fields().contains(field))
                         throw new GraphError.GraphErrorException(new GraphError("Schema generation exception", " Element " + entityType + " not containing " + ID + " metadata property "));
-        });
+                });
         validateRedundant(entityType, entitySide, rel.getRedundant());
-        redundantPropertySchemas.add(new GraphRedundantPropertySchema.Impl(ID, String.format("%s.%s", entitySide, ID), "string"));
+        redundantPropertySchemas.add(new GraphRedundantPropertySchema.Impl(ID, String.format("%s.%s", entitySide, ID), "text"));
         //add all RedundantProperty according to schema
         validateRedundant(entityType, entitySide, rel.getRedundant());
         rel.getRedundant()
@@ -298,87 +243,4 @@ public class GraphElementSchemaProviderJsonFactory implements GraphElementSchema
                         throw new GraphError.GraphErrorException(new GraphError("Schema generation exception", " Entity " + entityType + " not containing " + r.getName() + " property (as redundant ) "));
                 });
     }
-
-    /**
-     * new GraphEdgeSchema.Impl(
-     * "fire",
-     * new GraphElementConstraint.Impl(__.has(T.label, "fire")),
-     * Optional.of(new GraphEdgeSchema.End.Impl(
-     * Collections.singletonList(GlobalConstants.EdgeSchema.SOURCE_ID),
-     * Optional.of("Dragon"),
-     * Arrays.asList(
-     * new GraphRedundantPropertySchema.Impl("id", GlobalConstants.EdgeSchema.DEST_ID, "string"),
-     * new GraphRedundantPropertySchema.Impl("type", GlobalConstants.EdgeSchema.DEST_TYPE, "string")
-     * ))),
-     * Optional.of(new GraphEdgeSchema.End.Impl(
-     * Collections.singletonList(GlobalConstants.EdgeSchema.DEST_ID),
-     * Optional.of("Dragon"),
-     * Arrays.asList(
-     * new GraphRedundantPropertySchema.Impl("id", GlobalConstants.EdgeSchema.DEST_ID, "string"),
-     * new GraphRedundantPropertySchema.Impl("type", GlobalConstants.EdgeSchema.DEST_TYPE, "string")
-     * ))),
-     * Direction.OUT,
-     * Optional.of(new GraphEdgeSchema.DirectionSchema.Impl(GlobalConstants.EdgeSchema.DIRECTION, "out", "in")),
-     * Optional.empty(),
-     * Optional.of(new StaticIndexPartitions(Collections.singletonList(FIRE.getName().toLowerCase()))),
-     * Collections.emptyList(),
-     * Stream.of(endA).toJavaSet())
-     */
-
-    public static class TimeBasedIndexPartitions implements TimeSeriesIndexPartitions {
-        private Props props;
-        private SimpleDateFormat dateFormat;
-
-        TimeBasedIndexPartitions(Props props) {
-            this.props = props;
-            this.dateFormat = new SimpleDateFormat(getDateFormat());
-        }
-
-
-        @Override
-        public String getDateFormat() {
-            return props.getDateFormat();
-        }
-
-        @Override
-        public String getIndexPrefix() {
-            return props.getPrefix();
-        }
-
-        @Override
-        public String getIndexFormat() {
-            return props.getIndexFormat();
-        }
-
-        @Override
-        public String getTimeField() {
-            return props.getPartitionField();
-        }
-
-        @Override
-        public String getIndexName(Date date) {
-            String format = String.format(getIndexFormat(), dateFormat.format(date));
-            List<String> indices = Stream.ofAll(getPartitions())
-                    .flatMap(Partition::getIndices)
-                    .filter(index -> index.equals(format))
-                    .toJavaList();
-
-            return indices.isEmpty() ? null : indices.get(0);
-        }
-
-        @Override
-        public Optional<String> getPartitionField() {
-            return Optional.of(getTimeField());
-        }
-
-        @Override
-        public Iterable<Partition> getPartitions() {
-            return Collections.singletonList(() -> Stream.ofAll(props.getValues())
-                    .map(p -> String.format(getIndexFormat(), p))
-                    .distinct().sorted()
-                    .toJavaList());
-        }
-    }
-
-
 }

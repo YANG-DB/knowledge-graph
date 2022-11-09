@@ -26,6 +26,7 @@ package org.opensearch.graph.model.ontology;
 
 
 import javaslang.collection.Stream;
+import org.opensearch.graph.model.GlobalConstants;
 
 /**
  * Created by moti on 5/14/2017.
@@ -40,33 +41,44 @@ public class OntologyFinalizer {
 
     /**
      * verify mandatory fields ID,TYPE exist for all entities & relations on the ontology
+     * generate nested fields for all entities & relations
      * @param ontology
      * @return
      */
     public static Ontology finalize(Ontology ontology) {
+        Ontology.Accessor accessor = new Ontology.Accessor(ontology);
+
         if (ontology.getProperties().stream().noneMatch(p -> p.getpType().equals(ID_FIELD_PTYPE)))
-            ontology.getProperties().add(Property.Builder.get().withName(ID_FIELD_NAME).withPType(ID_FIELD_PTYPE).withType("string").build());
+            ontology.getProperties().add(Property.Builder.get().withName(ID_FIELD_NAME).withPType(ID_FIELD_PTYPE)
+                    .withType(GlobalConstants.Scalars.STRING).build());
 
         if (ontology.getProperties().stream().noneMatch(p -> p.getpType().equals(TYPE_FIELD_PTYPE)))
-            ontology.getProperties().add(Property.Builder.get().withName(TYPE_FIELD_PTYPE).withPType(TYPE_FIELD_PTYPE).withType("string").build());
+            ontology.getProperties().add(Property.Builder.get().withName(TYPE_FIELD_PTYPE)
+                    .withPType(TYPE_FIELD_PTYPE).withType(GlobalConstants.Scalars.STRING).build());
 
         Stream.ofAll(ontology.getEntityTypes())
                 .forEach(entityType -> {
+                    // generate nested fields
+                    ontology.getProperties().addAll(accessor.generateCascadingElementFields(entityType.geteType()));
+                    // add metadata fields
                     if (entityType.fields().stream().noneMatch(p -> p.equals(ID_FIELD_PTYPE))) {
-                        entityType.getProperties().add(ID_FIELD_PTYPE);
+                        entityType.getMetadata().add(ID_FIELD_PTYPE);
                     }
                     if (entityType.fields().stream().noneMatch(p -> p.equals(TYPE_FIELD_PTYPE))) {
-                        entityType.getProperties().add(TYPE_FIELD_PTYPE);
+                        entityType.getMetadata().add(TYPE_FIELD_PTYPE);
                     }
                 });
 
         Stream.ofAll(ontology.getRelationshipTypes())
                 .forEach(relationshipType -> {
+                    // generate nested fields
+                    ontology.getProperties().addAll(accessor.generateCascadingElementFields(relationshipType.getrType()));
+                    // add metadata fields
                     if (relationshipType.fields().stream().noneMatch(p -> p.equals(ID_FIELD_PTYPE))) {
-                        relationshipType.getProperties().add(ID_FIELD_PTYPE);
+                        relationshipType.getMetadata().add(ID_FIELD_PTYPE);
                     }
                     if (relationshipType.fields().stream().noneMatch(p -> p.equals(TYPE_FIELD_PTYPE))) {
-                        relationshipType.getProperties().add(TYPE_FIELD_PTYPE);
+                        relationshipType.getMetadata().add(TYPE_FIELD_PTYPE);
                     }
                 });
 

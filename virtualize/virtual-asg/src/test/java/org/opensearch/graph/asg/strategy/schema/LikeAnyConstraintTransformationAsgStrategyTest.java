@@ -14,12 +14,11 @@ import org.opensearch.graph.model.query.properties.SchematicEProp;
 import org.opensearch.graph.model.query.properties.constraint.Constraint;
 import org.opensearch.graph.model.query.properties.constraint.ConstraintOp;
 import org.opensearch.graph.model.query.quant.QuantType;
-import org.opensearch.graph.model.schema.BaseTypeElement;
 import org.opensearch.graph.model.schema.BaseTypeElement.Type;
-import org.opensearch.graph.unipop.schemaProviders.GraphElementConstraint;
-import org.opensearch.graph.unipop.schemaProviders.GraphElementPropertySchema;
-import org.opensearch.graph.unipop.schemaProviders.GraphElementSchemaProvider;
-import org.opensearch.graph.unipop.schemaProviders.GraphVertexSchema;
+import org.opensearch.graph.unipop.schema.providers.GraphElementConstraint;
+import org.opensearch.graph.unipop.schema.providers.GraphElementPropertySchema;
+import org.opensearch.graph.unipop.schema.providers.GraphElementSchemaProvider;
+import org.opensearch.graph.unipop.schema.providers.GraphVertexSchema;
 import org.apache.tinkerpop.gremlin.process.traversal.dsl.graph.__;
 import org.opensearch.graph.asg.strategy.AsgStrategy;
 import org.junit.Assert;
@@ -40,7 +39,7 @@ public class LikeAnyConstraintTransformationAsgStrategyTest {
     //region Setup
     @BeforeClass
     public static void setup() {
-        Ontology ontology = Ontology.OntologyBuilder.anOntology()
+        Ontology ontology = Ontology.OntologyBuilder.anOntology("ont")
                 .withEntityTypes(Collections.singletonList(
                         EntityType.Builder.get().withEType("Person").withName("Person").withProperties(
                                 Collections.singletonList("name")).build()))
@@ -73,7 +72,7 @@ public class LikeAnyConstraintTransformationAsgStrategyTest {
                                 Optional.empty(),
                                 Optional.empty(),
                                 Collections.singletonList(
-                                        new GraphElementPropertySchema.Impl("name", "string", Arrays.asList(
+                                        new GraphElementPropertySchema.Impl("name","name" , "string", Arrays.asList(
                                                 new GraphElementPropertySchema.ExactIndexingSchema.Impl("name.keyword"),
                                                 new GraphElementPropertySchema.NgramsIndexingSchema.Impl("name.ngrams", 10)
                                         ))

@@ -39,6 +39,9 @@ import javaslang.collection.Stream;
 
 import java.util.List;
 
+/**
+ * This strategy groups together different properties that actually belong to a specific Relation into a single group so that this group will be pushed down together to the engine
+ */
 public class RelPropGroupingAsgStrategy implements AsgStrategy {
     // Rel with RelProps e.g., Q190, Q10 on V1
     // AsgStrategy Implementation

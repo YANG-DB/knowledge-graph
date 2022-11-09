@@ -4,11 +4,15 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.typesafe.config.Config;
 import org.opensearch.graph.dispatcher.ontology.IndexProviderFactory;
 import org.opensearch.graph.dispatcher.ontology.OntologyProvider;
+import org.opensearch.graph.executor.ontology.GraphElementSchemaProviderFactory;
 import org.opensearch.graph.model.ontology.Ontology;
 import org.opensearch.graph.model.schema.IndexProvider;
-import org.opensearch.graph.unipop.schemaProviders.GraphEdgeSchema;
-import org.opensearch.graph.unipop.schemaProviders.GraphElementSchemaProvider;
-import org.opensearch.graph.unipop.schemaProviders.indexPartitions.StaticIndexPartitions;
+import org.opensearch.graph.unipop.schema.providers.GraphEdgeSchema;
+import org.opensearch.graph.unipop.schema.providers.GraphElementPropertySchema;
+import org.opensearch.graph.unipop.schema.providers.GraphElementSchemaProvider;
+import org.opensearch.graph.unipop.schema.providers.GraphVertexSchema;
+import org.opensearch.graph.unipop.schema.providers.indexPartitions.NestedIndexPartitions;
+import org.opensearch.graph.unipop.schema.providers.indexPartitions.StaticIndexPartitions;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
@@ -17,12 +21,15 @@ import org.mockito.Mockito;
 import java.io.InputStream;
 import java.util.Arrays;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
 import java.util.stream.StreamSupport;
 
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.when;
+import static org.opensearch.graph.unipop.schema.providers.GraphElementPropertySchema.IndexingSchema.Type.exact;
+import static org.opensearch.graph.unipop.schema.providers.GraphElementPropertySchema.IndexingSchema.Type.nested;
 
 public class GraphElementSchemaProviderJsonFactoryTest {
     private ObjectMapper mapper = new ObjectMapper();
@@ -44,50 +51,196 @@ public class GraphElementSchemaProviderJsonFactoryTest {
         config = Mockito.mock(Config.class);
         when(config.getString(any())).thenAnswer(invocationOnMock -> "Dragons");
 
-        InputStream stream = Thread.currentThread().getContextClassLoader().getResourceAsStream("schema/DragonsIndexProviderNested.conf");
+        InputStream stream = Thread.currentThread().getContextClassLoader().getResourceAsStream("schema/DragonsIndexProviderDeepNested.conf");
         provider = mapper.readValue(stream, IndexProvider.class);
-        stream = Thread.currentThread().getContextClassLoader().getResourceAsStream("schema/Dragons.json");
+        stream = Thread.currentThread().getContextClassLoader().getResourceAsStream("schema/NestedDragons.json");
         ontology = mapper.readValue(stream, Ontology.class);
     }
 
+    private GraphElementSchemaProviderFactory getFactory() {
+        return new GraphElementSchemaProviderJsonFactory(config, providerFactory, ontologyProvider);
+    }
+
     @Test
-    public void testGraphElementSchemaProvider(){
-        GraphElementSchemaProviderJsonFactory jsonFactory = new GraphElementSchemaProviderJsonFactory(config, providerFactory,ontologyProvider);
+    public void testGraphElementSchemaProvider() {
+        GraphElementSchemaProviderFactory jsonFactory = getFactory();
         GraphElementSchemaProvider schemaProvider = jsonFactory.get(ontology);
         Assert.assertNotNull(schemaProvider);
     }
 
     @Test
-    public void testGraphElementSchemaProviderLabel(){
-        GraphElementSchemaProviderJsonFactory jsonFactory = new GraphElementSchemaProviderJsonFactory(config, providerFactory,ontologyProvider);
+    public void testGraphElementEntitySchemaProvider() {
+        GraphElementSchemaProviderFactory jsonFactory = getFactory();
         GraphElementSchemaProvider schemaProvider = jsonFactory.get(ontology);
         Assert.assertNotNull(schemaProvider);
-        Assert.assertEquals(StreamSupport.stream(schemaProvider.getEdgeLabels().spliterator(),false)
-                .collect(Collectors.toSet()),new HashSet<>(Arrays.asList("HasProfession","Freeze","Fire","Own","SubjectOf","OriginatedIn","RegisteredIn","Know","MemberOf")));
-        Assert.assertEquals(StreamSupport.stream(schemaProvider.getVertexLabels().spliterator(),false)
-                .collect(Collectors.toSet()),new HashSet<>(Arrays.asList("Horse","Guild","Person","Dragon","Kingdom","Profession")));
+        Iterable<GraphVertexSchema> person = schemaProvider.getVertexSchemas("Person");
+        Assert.assertTrue(person.iterator().hasNext());
+
+        GraphVertexSchema personSchema = person.iterator().next();
+        Assert.assertEquals("Person", personSchema.getLabel().getName());
+        List<GraphElementPropertySchema> properties = StreamSupport.stream(personSchema.getProperties().spliterator(), false)
+                .collect(Collectors.toList());
+        Assert.assertEquals(24, properties.size());
+        Assert.assertEquals(1, properties.stream().filter(p->p.getType().equals("Profession")).count());
+        Assert.assertEquals(14, properties.stream().filter(p->p.getpType().startsWith("profession.")).count());
+        Assert.assertEquals(7, properties.stream().filter(p->p.getpType().startsWith("profession.guild.")).count());
+
+    }
+    @Test
+    public void testGraphElementEmbeddedProfessionEntitySchemaProvider() {
+        GraphElementSchemaProviderFactory jsonFactory = getFactory();
+        GraphElementSchemaProvider schemaProvider = jsonFactory.get(ontology);
+        Assert.assertNotNull(schemaProvider);
+        Iterable<GraphVertexSchema> profession = schemaProvider.getVertexSchemas("Profession");
+        Assert.assertEquals(2,StreamSupport.stream(profession.spliterator(),false).count());
+
+        Optional<GraphVertexSchema> vertexSchema = StreamSupport.stream(profession.spliterator(), false)
+                .filter(p -> p.getIndexPartitions().isPresent())
+                .filter(p -> p.getIndexPartitions().get() instanceof StaticIndexPartitions)
+                .findFirst();
+        Assert.assertTrue(vertexSchema.isPresent());
+
+        GraphVertexSchema professionSchema = vertexSchema.get();
+        Assert.assertEquals("Profession", professionSchema.getLabel().getName());
+        List<GraphElementPropertySchema> properties = StreamSupport.stream(professionSchema.getProperties().spliterator(), false)
+                .collect(Collectors.toList());
+        Assert.assertEquals(1, properties.stream().filter(p->p.getpType().equals("name")).count());
+
+        GraphElementPropertySchema propertySchema = properties.stream().filter(p -> p.getpType().equals("name")).findFirst().get();
+        Assert.assertFalse(StreamSupport.stream(propertySchema.getIndexingSchemes().spliterator(), false).anyMatch(i->i.getType().equals(nested)));
+    }
+    @Test
+    public void testGraphElementNestedProfessionEntitySchemaProvider() {
+        GraphElementSchemaProviderFactory jsonFactory = getFactory();
+        GraphElementSchemaProvider schemaProvider = jsonFactory.get(ontology);
+        Assert.assertNotNull(schemaProvider);
+        Iterable<GraphVertexSchema> profession = schemaProvider.getVertexSchemas("Profession");
+        Assert.assertEquals(2,StreamSupport.stream(profession.spliterator(),false).count());
+
+        Optional<GraphVertexSchema> vertexSchema = StreamSupport.stream(profession.spliterator(), false)
+                .filter(p -> p.getIndexPartitions().isPresent())
+                .filter(p -> p.getIndexPartitions().get() instanceof NestedIndexPartitions)
+                .findFirst();
+        Assert.assertTrue(vertexSchema.isPresent());
+
+        GraphVertexSchema professionSchema = vertexSchema.get();
+        Assert.assertEquals("Profession", professionSchema.getLabel().getName());
+        List<GraphElementPropertySchema> properties = StreamSupport.stream(professionSchema.getProperties().spliterator(), false)
+                .collect(Collectors.toList());
+        Assert.assertEquals(1, properties.stream().filter(p->p.getpType().equals("name")).count());
+
+        GraphElementPropertySchema propertySchema = properties.stream().filter(p -> p.getpType().equals("name")).findFirst().get();
+        Assert.assertTrue(StreamSupport.stream(propertySchema.getIndexingSchemes().spliterator(), false).anyMatch(i->i.getType().equals(nested)));
+        Assert.assertTrue(StreamSupport.stream(propertySchema.getIndexingSchemes().spliterator(), false).anyMatch(i->i.getName().equals("profession")));
     }
 
     @Test
-    public void testGraphElementSchemaProviderVertex(){
-        GraphElementSchemaProviderJsonFactory jsonFactory = new GraphElementSchemaProviderJsonFactory(config, providerFactory,ontologyProvider);
+    public void testGraphElementCascadedNestedEntitySchemaProvider() {
+        GraphElementSchemaProviderFactory jsonFactory = getFactory();
         GraphElementSchemaProvider schemaProvider = jsonFactory.get(ontology);
         Assert.assertNotNull(schemaProvider);
-        Assert.assertEquals(5, StreamSupport.stream(schemaProvider.getVertexSchemas().spliterator(), false)
-                .filter(p->p.getIndexPartitions().isPresent())
-                .filter(p->p.getIndexPartitions().get() instanceof StaticIndexPartitions)
-                .filter(p->p.getIndexPartitions().get().getPartitions().iterator().hasNext())
+        Iterable<GraphVertexSchema> person = schemaProvider.getVertexSchemas("Person");
+        Assert.assertTrue(person.iterator().hasNext());
+
+        GraphVertexSchema personSchema = person.iterator().next();
+        Assert.assertEquals("Person", personSchema.getLabel().getName());
+        List<GraphElementPropertySchema> properties = StreamSupport.stream(personSchema.getProperties().spliterator(), false)
+                .collect(Collectors.toList());
+        Assert.assertEquals(14, properties.stream().filter(p->p.getpType().startsWith("profession.")).count());
+
+        GraphElementPropertySchema propertySchema = properties.stream().filter(p -> p.getpType().equals("profession.name")).findFirst().get();
+        Assert.assertTrue(StreamSupport.stream(propertySchema.getIndexingSchemes().spliterator(), false).anyMatch(i->i.getType().equals(nested)));
+        Assert.assertTrue(StreamSupport.stream(propertySchema.getIndexingSchemes().spliterator(), false).anyMatch(i->i.getType().equals(exact)));
+        Assert.assertTrue(StreamSupport.stream(propertySchema.getIndexingSchemes().spliterator(), false).anyMatch(i->i.getName().equals("profession")));
+
+        propertySchema = properties.stream().filter(p -> p.getpType().equals("profession.guild")).findFirst().get();
+        Assert.assertTrue(StreamSupport.stream(propertySchema.getIndexingSchemes().spliterator(), false).anyMatch(i->i.getType().equals(nested)));
+        Assert.assertFalse(StreamSupport.stream(propertySchema.getIndexingSchemes().spliterator(), false).anyMatch(i->i.getType().equals(exact)));
+        Assert.assertTrue(StreamSupport.stream(propertySchema.getIndexingSchemes().spliterator(), false).anyMatch(i->i.getName().equals("profession")));
+
+        propertySchema = properties.stream().filter(p -> p.getpType().equals("profession.guild.name")).findFirst().get();
+        Assert.assertTrue(StreamSupport.stream(propertySchema.getIndexingSchemes().spliterator(), false).anyMatch(i->i.getType().equals(nested)));
+        Assert.assertTrue(StreamSupport.stream(propertySchema.getIndexingSchemes().spliterator(), false).anyMatch(i->i.getType().equals(exact)));
+        Assert.assertTrue(StreamSupport.stream(propertySchema.getIndexingSchemes().spliterator(), false).anyMatch(i->i.getName().equals("guild")));
+    }
+    @Test
+    public void testCascadedNestedGraphPropertiesSchemaProvider() {
+        GraphElementSchemaProviderFactory jsonFactory = getFactory();
+        GraphElementSchemaProvider schemaProvider = jsonFactory.get(ontology);
+        Assert.assertNotNull(schemaProvider);
+        List<GraphElementPropertySchema> properties = StreamSupport.stream(schemaProvider.getVertexPropertySchemas().spliterator(), false)
+                .collect(Collectors.toList());
+        Assert.assertEquals(14, properties.stream().filter(p->p.getpType().startsWith("profession.")).count());
+
+        GraphElementPropertySchema propertySchema = properties.stream().filter(p -> p.getpType().equals("profession.name")).findFirst().get();
+        Assert.assertTrue(StreamSupport.stream(propertySchema.getIndexingSchemes().spliterator(), false).anyMatch(i->i.getType().equals(nested)));
+        Assert.assertTrue(StreamSupport.stream(propertySchema.getIndexingSchemes().spliterator(), false).anyMatch(i->i.getType().equals(exact)));
+        Assert.assertTrue(StreamSupport.stream(propertySchema.getIndexingSchemes().spliterator(), false).anyMatch(i->i.getName().equals("profession")));
+
+        propertySchema = properties.stream().filter(p -> p.getpType().equals("profession.guild.name")).findFirst().get();
+        Assert.assertTrue(StreamSupport.stream(propertySchema.getIndexingSchemes().spliterator(), false).anyMatch(i->i.getType().equals(nested)));
+        Assert.assertTrue(StreamSupport.stream(propertySchema.getIndexingSchemes().spliterator(), false).anyMatch(i->i.getType().equals(exact)));
+        Assert.assertTrue(StreamSupport.stream(propertySchema.getIndexingSchemes().spliterator(), false).anyMatch(i->i.getName().equals("guild")));
+    }
+
+
+    @Test
+    public void testGraphElementDeepCascadedNestedEntitySchemaProvider() {
+        GraphElementSchemaProviderFactory jsonFactory = getFactory();
+        GraphElementSchemaProvider schemaProvider = jsonFactory.get(ontology);
+        Assert.assertNotNull(schemaProvider);
+        Iterable<GraphVertexSchema> person = schemaProvider.getVertexSchemas("Person");
+        Assert.assertTrue(person.iterator().hasNext());
+
+        GraphVertexSchema personSchema = person.iterator().next();
+        Assert.assertEquals("Person", personSchema.getLabel().getName());
+        List<GraphElementPropertySchema> properties = StreamSupport.stream(personSchema.getProperties().spliterator(), false)
+                .collect(Collectors.toList());
+        Assert.assertEquals(7, properties.stream().filter(p->p.getpType().startsWith("profession.guild.")).count());
+
+        GraphElementPropertySchema propertySchema = properties.stream().filter(p -> p.getpType().equals("profession.guild.url")).findFirst().get();
+        Assert.assertTrue(StreamSupport.stream(propertySchema.getIndexingSchemes().spliterator(), false).anyMatch(i->i.getType().equals(nested)));
+        Assert.assertFalse(StreamSupport.stream(propertySchema.getIndexingSchemes().spliterator(), false).anyMatch(i->i.getType().equals(exact)));
+        Assert.assertTrue(StreamSupport.stream(propertySchema.getIndexingSchemes().spliterator(), false).anyMatch(i->i.getName().equals("guild")));
+
+        propertySchema = properties.stream().filter(p -> p.getpType().equals("profession.guild.name")).findFirst().get();
+        Assert.assertTrue(StreamSupport.stream(propertySchema.getIndexingSchemes().spliterator(), false).anyMatch(i->i.getType().equals(nested)));
+        Assert.assertTrue(StreamSupport.stream(propertySchema.getIndexingSchemes().spliterator(), false).anyMatch(i->i.getType().equals(exact)));
+        Assert.assertTrue(StreamSupport.stream(propertySchema.getIndexingSchemes().spliterator(), false).anyMatch(i->i.getName().equals("guild")));
+    }
+
+
+    @Test
+    public void testGraphElementSchemaProviderLabel() {
+        GraphElementSchemaProviderFactory jsonFactory = getFactory();
+        GraphElementSchemaProvider schemaProvider = jsonFactory.get(ontology);
+        Assert.assertNotNull(schemaProvider);
+        Assert.assertEquals(StreamSupport.stream(schemaProvider.getEdgeLabels().spliterator(), false)
+                .collect(Collectors.toSet()), new HashSet<>(Arrays.asList("HasProfession", "Freeze", "Fire", "Own", "SubjectOf", "OriginatedIn", "RegisteredIn", "Know", "MemberOf")));
+        Assert.assertEquals(StreamSupport.stream(schemaProvider.getVertexLabels().spliterator(), false)
+                .collect(Collectors.toSet()), new HashSet<>(Arrays.asList("Horse", "Guild", "Person", "Dragon", "Kingdom", "Profession")));
+    }
+
+    @Test
+    public void testGraphElementSchemaProviderVertex() {
+        GraphElementSchemaProviderFactory jsonFactory = getFactory();
+        GraphElementSchemaProvider schemaProvider = jsonFactory.get(ontology);
+        Assert.assertNotNull(schemaProvider);
+        Assert.assertEquals(6, StreamSupport.stream(schemaProvider.getVertexSchemas().spliterator(), false)
+                .filter(p -> p.getIndexPartitions().isPresent())
+                .filter(p -> p.getIndexPartitions().get() instanceof StaticIndexPartitions)
+                .filter(p -> p.getIndexPartitions().get().getPartitions().iterator().hasNext())
                 .count());
     }
 
     @Test
-    public void testGraphEdgeSchemaImpl(){
-        GraphElementSchemaProviderJsonFactory jsonFactory = new GraphElementSchemaProviderJsonFactory(config, providerFactory,ontologyProvider);
+    public void testGraphEdgeSchemaImpl() {
+        GraphElementSchemaProviderFactory jsonFactory = getFactory();
         GraphElementSchemaProvider schemaProvider = jsonFactory.get(ontology);
         Assert.assertNotNull(schemaProvider);
-        Assert.assertEquals( 26,StreamSupport.stream(schemaProvider.getEdgeSchemas().spliterator(),false).count());
-        Arrays.asList("HasProfession","Freeze", "Fire", "Own", "SubjectOf", "OriginatedIn", "RegisteredIn", "Know", "MemberOf")
-                .forEach(label->{
+        Assert.assertEquals(28, StreamSupport.stream(schemaProvider.getEdgeSchemas().spliterator(), false).count());
+        Arrays.asList("HasProfession", "Freeze", "Fire", "Own", "SubjectOf", "OriginatedIn", "RegisteredIn", "Know", "MemberOf")
+                .forEach(label -> {
                     Iterable<GraphEdgeSchema> edgeSchemas = schemaProvider.getEdgeSchemas(label);
                     Assert.assertNotNull(edgeSchemas);
                     GraphEdgeSchema schema = edgeSchemas.iterator().next();
@@ -158,19 +311,19 @@ public class GraphElementSchemaProviderJsonFactoryTest {
                             break;
 
                         default:
-                            Assert.assertTrue("No other Edge label should exist",false);
+                            Assert.assertTrue("No other Edge label should exist", false);
                     }
                 });
     }
 
     @Test
-    public void testGraphElementSchemaProviderEdge(){
-        GraphElementSchemaProviderJsonFactory jsonFactory = new GraphElementSchemaProviderJsonFactory(config, providerFactory,ontologyProvider);
+    public void testGraphElementSchemaProviderEdge() {
+        GraphElementSchemaProviderFactory jsonFactory = getFactory();
         GraphElementSchemaProvider schemaProvider = jsonFactory.get(ontology);
         Assert.assertNotNull(schemaProvider);
-        Assert.assertEquals(26, StreamSupport.stream(schemaProvider.getEdgeSchemas().spliterator(), false)
-                .filter(p->p.getIndexPartitions().isPresent())
-                .filter(p->p.getIndexPartitions().get().getPartitions().iterator().hasNext())
+        Assert.assertEquals(28, StreamSupport.stream(schemaProvider.getEdgeSchemas().spliterator(), false)
+                .filter(p -> p.getIndexPartitions().isPresent())
+                .filter(p -> p.getIndexPartitions().get().getPartitions().iterator().hasNext())
                 .count());
         schemaProvider.getEdgeSchemas().forEach(schema -> {
             switch (schema.getLabel().getName()) {
@@ -199,7 +352,7 @@ public class GraphElementSchemaProviderJsonFactoryTest {
                     Assert.assertEquals(schemaProvider.getEdgeSchemas("Know").spliterator().estimateSize(), 2);
                     break;
                 case "MemberOf":
-                    Assert.assertEquals(schemaProvider.getEdgeSchemas("MemberOf").spliterator().estimateSize(), 2);
+                    Assert.assertEquals(schemaProvider.getEdgeSchemas("MemberOf").spliterator().estimateSize(), 4);
                     break;
 
                 default:

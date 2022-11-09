@@ -41,10 +41,7 @@ import org.opensearch.graph.model.execution.plan.entity.EntityOp;
 import org.opensearch.graph.model.ontology.Ontology;
 import org.opensearch.graph.model.ontology.Property;
 import org.opensearch.graph.model.query.entity.*;
-import org.opensearch.graph.model.query.properties.EProp;
-import org.opensearch.graph.model.query.properties.EPropGroup;
-import org.opensearch.graph.model.query.properties.RankingProp;
-import org.opensearch.graph.model.query.properties.SchematicEProp;
+import org.opensearch.graph.model.query.properties.*;
 import org.opensearch.graph.model.query.properties.constraint.WhereByConstraint;
 import org.opensearch.graph.unipop.process.traversal.dsl.graph.__;
 import org.opensearch.graph.unipop.promise.Constraint;
@@ -58,6 +55,7 @@ import org.apache.tinkerpop.gremlin.process.traversal.step.filter.HasStep;
 import org.apache.tinkerpop.gremlin.process.traversal.step.map.EdgeOtherVertexStep;
 import org.apache.tinkerpop.gremlin.process.traversal.step.map.VertexStep;
 import org.apache.tinkerpop.gremlin.structure.T;
+import org.opensearch.graph.unipop.step.NestingStepWrapper;
 
 import java.util.Collections;
 import java.util.List;
@@ -265,6 +263,10 @@ public class EntityFilterOpTranslationStrategy extends PlanOpTranslationStrategy
             GraphTraversal.Admin admin = __.start().asAdmin();
             traversal = admin.addStep(new BoostingStepWrapper<>(traversal.asAdmin().getEndStep(), ((RankingProp) eProp).getBoost()));
         }
+        if(eProp instanceof NestingProp) {
+            GraphTraversal.Admin admin = __.start().asAdmin();
+            traversal = admin.addStep(new NestingStepWrapper(traversal.asAdmin().getEndStep(), ((NestingProp) eProp).getPath()));
+        }
         return traversal;
 
     }
@@ -277,7 +279,7 @@ public class EntityFilterOpTranslationStrategy extends PlanOpTranslationStrategy
     }
 
     private Optional<Property> $property(Ontology.Accessor ont, EEntityBase entity, String pType) {
-        if (entity instanceof Typed && ont.cascadingFieldPName(((Typed) entity).getTyped(), pType).isPresent()) {
+        if (entity instanceof Typed && ont.cascadingFieldNameOrType(((Typed) entity).getTyped(), pType).isPresent()) {
             return ont.$pType(((Typed) entity).getTyped(), pType);
         }
         return ont.$pType(pType);

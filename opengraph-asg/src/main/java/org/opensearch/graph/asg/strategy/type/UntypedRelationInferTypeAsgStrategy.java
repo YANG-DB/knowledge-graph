@@ -47,6 +47,10 @@ import java.util.stream.Collectors;
 import static org.opensearch.graph.model.GlobalConstants._ALL;
 
 
+/**
+ * This strategy replaces the "_all" (none specific relations) statement with each existing type - according to allowed types as they are present in the ancestor type element
+ * This allows better understanding of the requested entities and byi adding these types explicitly the execution planner can have better cost approximations for the specific types it should consider for pricing of the query.
+ */
 public class UntypedRelationInferTypeAsgStrategy implements AsgStrategy {
 
     @Override

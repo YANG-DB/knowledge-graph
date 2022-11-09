@@ -9,9 +9,9 @@ package org.opensearch.graph.model.ontology;
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- * 
+ *
  *      http://www.apache.org/licenses/LICENSE-2.0
- * 
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -19,11 +19,6 @@ package org.opensearch.graph.model.ontology;
  * limitations under the License.
  * #L%
  */
-
-
-
-
-
 
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
@@ -104,7 +99,7 @@ public class Property {
     }
 
     @Override
-    protected Property clone()  {
+    protected Property clone() {
         return new Property(this);
     }
 
@@ -126,11 +121,12 @@ public class Property {
 
     /**
      * check equality by not using the class type
+     *
      * @param source
      * @param other
      * @return
      */
-    public static boolean equal(Property source,Property other) {
+    public static boolean equal(Property source, Property other) {
         return source.pType.equals(other.pType) &&
                 source.name.equals(other.name) &&
                 source.type.equals(other.type);
@@ -142,7 +138,7 @@ public class Property {
     private String pType;
     private String name;
     private String type;
-    private List<SearchType> searchType = Collections.emptyList();
+    private List<SearchType> searchType = new ArrayList<>();
     //endregion
 
     //region Builder
@@ -241,6 +237,48 @@ public class Property {
 
         public static Optional<Property> of(Optional<Property> property) {
             return property.map(MandatoryProperty::new);
+        }
+    }
+
+    public static class NestedProperty extends Property {
+        private String containerType;
+
+        public NestedProperty(String name, String pType, String type) {
+            super(name, pType, type);
+        }
+
+        public NestedProperty(String name, String pType, String type, String containerType) {
+            super(name, pType, type);
+            this.containerType = containerType;
+        }
+
+
+        public NestedProperty(String prefix, Property property, String containerType) {
+            this(prefix + "." + property.name, prefix + "." + property.pType, property.type, containerType);
+        }
+
+        public String getContainerType() {
+            return containerType;
+        }
+
+        @Override
+        public boolean equals(Object o) {
+            if (this == o) return true;
+            if (o == null || getClass() != o.getClass()) return false;
+            if (!super.equals(o)) return false;
+            NestedProperty that = (NestedProperty) o;
+            return Objects.equals(containerType, that.containerType);
+        }
+
+        @Override
+        public int hashCode() {
+            return Objects.hash(super.hashCode(), containerType);
+        }
+
+        @Override
+        public String toString() {
+            return String.format("NestedProperty [pType = %s, name = %s, type = %s, container = %s ]", this.getpType(), this.getName(), this.getType(), this.containerType);
+
         }
     }
 

@@ -39,6 +39,9 @@ import java.util.List;
 
 import static org.opensearch.graph.model.query.properties.constraint.ConstraintOp.ignorableConstraints;
 
+/**
+ * this strategy replaces the inSet predicate with an equal predicate in case the number of operand in the expression is one
+ */
 public class RedundantInSetConstraintAsgStrategy implements AsgStrategy {
     //region AsgStrategy Implementation
     @Override

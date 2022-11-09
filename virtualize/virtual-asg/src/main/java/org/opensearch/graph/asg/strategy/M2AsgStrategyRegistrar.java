@@ -26,15 +26,13 @@ package org.opensearch.graph.asg.strategy;
 
 import com.google.inject.Inject;
 import org.opensearch.graph.asg.strategy.constraint.*;
-import org.opensearch.graph.asg.strategy.schema.ExactConstraintTransformationAsgStrategy;
+import org.opensearch.graph.asg.strategy.propertyGrouping.*;
+import org.opensearch.graph.asg.strategy.schema.MultiConstraintTransformationAsgStrategy;
 import org.opensearch.graph.asg.strategy.schema.LikeAnyConstraintTransformationAsgStrategy;
 import org.opensearch.graph.asg.strategy.schema.LikeConstraintTransformationAsgStrategy;
+import org.opensearch.graph.asg.strategy.schema.NestingPropertiesTransformationAsgStrategy;
 import org.opensearch.graph.dispatcher.ontology.OntologyProvider;
 import org.opensearch.graph.executor.ontology.GraphElementSchemaProviderFactory;
-import org.opensearch.graph.asg.strategy.propertyGrouping.EPropGroupingAsgStrategy;
-import org.opensearch.graph.asg.strategy.propertyGrouping.HQuantPropertiesGroupingAsgStrategy;
-import org.opensearch.graph.asg.strategy.propertyGrouping.Quant1PropertiesGroupingAsgStrategy;
-import org.opensearch.graph.asg.strategy.propertyGrouping.RelPropGroupingAsgStrategy;
 import org.opensearch.graph.asg.strategy.selection.DefaultETagAsgStrategy;
 import org.opensearch.graph.asg.strategy.selection.DefaultSelectionAsgStrategy;
 import org.opensearch.graph.asg.strategy.type.RelationPatternRangeAsgStrategy;
@@ -58,7 +56,7 @@ public class M2AsgStrategyRegistrar  implements AsgStrategyRegistrar {
     @Override
     public Iterable<AsgStrategy> register() {
         return Arrays.asList(
-                new DefaultETagAsgStrategy(this.ontologyProvider),
+                new DefaultETagAsgStrategy(),
                 new AsgNamedParametersStrategy(),
                 new UntypedInferTypeLeftSideRelationAsgStrategy(),
                 new RelationPatternRangeAsgStrategy(),
@@ -73,11 +71,11 @@ public class M2AsgStrategyRegistrar  implements AsgStrategyRegistrar {
                 new RedundantLikeAnyConstraintAsgStrategy(),
                 new AggFilterTransformationAsgStrategy(),
                 new LikeToEqTransformationAsgStrategy(),
-                new ExactConstraintTransformationAsgStrategy(this.ontologyProvider, this.schemaProviderFactory),
+                new MultiConstraintTransformationAsgStrategy(this.ontologyProvider, this.schemaProviderFactory),
                 new LikeConstraintTransformationAsgStrategy(this.ontologyProvider, this.schemaProviderFactory),
                 new LikeAnyConstraintTransformationAsgStrategy(this.ontologyProvider, this.schemaProviderFactory),
+                new NestingPropertiesTransformationAsgStrategy(this.schemaProviderFactory),
                 new RedundantInSetConstraintAsgStrategy(),
-                new RedundantInRangeConstraintAsgStrategy(),
                 new RedundantPropGroupAsgStrategy(),
                 new DefaultSelectionAsgStrategy(this.ontologyProvider)
         );

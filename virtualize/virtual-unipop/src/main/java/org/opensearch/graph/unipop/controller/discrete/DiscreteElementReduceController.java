@@ -27,7 +27,6 @@ package org.opensearch.graph.unipop.controller.discrete;
 import com.codahale.metrics.MetricRegistry;
 import org.opensearch.graph.unipop.controller.OpensearchGraphConfiguration;
 import org.opensearch.graph.unipop.controller.common.appender.*;
-import org.opensearch.graph.unipop.controller.common.appender.*;
 import org.opensearch.graph.unipop.controller.common.context.CompositeControllerContext;
 import org.opensearch.graph.unipop.controller.discrete.appender.DualEdgeDirectionSearchAppender;
 import org.opensearch.graph.unipop.controller.discrete.context.DiscreteElementControllerContext;
@@ -40,7 +39,7 @@ import org.opensearch.graph.unipop.controller.utils.traversal.TraversalValuesByK
 import org.opensearch.graph.unipop.predicates.SelectP;
 import org.opensearch.graph.unipop.promise.Constraint;
 import org.opensearch.graph.unipop.promise.TraversalConstraint;
-import org.opensearch.graph.unipop.schemaProviders.GraphElementSchemaProvider;
+import org.opensearch.graph.unipop.schema.providers.GraphElementSchemaProvider;
 import org.opensearch.graph.unipop.structure.ElementType;
 import org.opensearch.graph.unipop.structure.discrete.DiscreteVertex;
 import javaslang.collection.Stream;

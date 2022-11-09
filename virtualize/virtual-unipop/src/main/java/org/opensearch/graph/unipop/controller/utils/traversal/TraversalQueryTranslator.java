@@ -29,7 +29,7 @@ import org.opensearch.graph.unipop.controller.search.QueryBuilder;
 import org.opensearch.graph.unipop.controller.search.translation.M1QueryTranslator;
 import org.opensearch.graph.unipop.controller.search.translation.PredicateQueryTranslator;
 import org.opensearch.graph.unipop.step.BoostingStepWrapper;
-import org.opensearch.graph.unipop.step.NestedStepWrapper;
+import org.opensearch.graph.unipop.step.NestingStepWrapper;
 import javaslang.Tuple2;
 import javaslang.collection.Stream;
 import org.apache.tinkerpop.gremlin.process.traversal.Traversal;
@@ -182,8 +182,8 @@ public class TraversalQueryTranslator extends TraversalVisitor<Boolean>{
     }
 
     @Override
-    protected Boolean visitNestedStep(NestedStepWrapper o) {
-        queryBuilder.nested(o.geteType());
+    protected Boolean visitNestedStep(NestingStepWrapper o) {
+        queryBuilder.nested(o.getNestingPath());
         super.visitNestedStep(o);
         return Boolean.TRUE;
     }

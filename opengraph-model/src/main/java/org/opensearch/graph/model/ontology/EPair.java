@@ -21,11 +21,6 @@ package org.opensearch.graph.model.ontology;
  */
 
 
-
-
-
-
-
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonInclude;
@@ -46,31 +41,45 @@ import java.util.Objects;
 @JsonInclude(JsonInclude.Include.NON_EMPTY)
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class EPair {
+    /**
+     * describes the nature of the relationship
+     */
+    public enum RelationType {
+        ONE_TO_ONE,ONE_TO_MANY,MANY_TO_MANY
+    }
     public EPair() {
     }
 
     public EPair(String eTypeA, String eTypeB) {
         this(String.format("%s->%s",eTypeA,eTypeB),eTypeA,eTypeB);
     }
+    public EPair(RelationType type, String eTypeA, String eTypeB) {
+        this(String.format("%s->%s",eTypeA,eTypeB),eTypeA,eTypeB);
+    }
 
-    public EPair(String eTypeA, String sideAIdField, String eTypeB, String sideBIdField) {
-        this(String.format("%s->%s",eTypeA,eTypeB),eTypeA,sideAIdField,eTypeB,sideBIdField);
+    public EPair(RelationType type, String eTypeA, String sideAIdField, String eTypeB, String sideBIdField) {
+        this(String.format("%s->%s",eTypeA,eTypeB),type,eTypeA,sideAIdField,eTypeB,sideBIdField);
     }
 
     public EPair(String name, String eTypeA, String eTypeB) {
+        this(name,RelationType.ONE_TO_ONE, eTypeA,eTypeB);
+    }
+
+    public EPair(String name,RelationType type, String eTypeA, String eTypeB) {
         this.eTypeA = eTypeA;
         this.eTypeB = eTypeB;
+        this.type = type;
         this.name = name;
     }
 
-    public EPair(String name, String eTypeA, String sideAIdField, String eTypeB, String sideBIdField) {
+    public EPair(String name,RelationType type, String eTypeA, String sideAIdField, String eTypeB, String sideBIdField) {
         this.name = name;
+        this.type = type;
         this.eTypeA = eTypeA;
         this.sideAIdField = sideAIdField;
         this.eTypeB = eTypeB;
         this.sideBIdField = sideBIdField;
     }
-
 
     public String getName() {
         return name;
@@ -112,6 +121,14 @@ public class EPair {
         this.sideBIdField = sideBIdField;
     }
 
+    public RelationType getType() {
+        return type;
+    }
+
+    public void setType(RelationType type) {
+        this.type = type;
+    }
+
     @JsonIgnore
     public EPair withSideAIdField(String sideAIdField) {
         this.sideAIdField = sideAIdField;
@@ -124,6 +141,7 @@ public class EPair {
         return this;
     }
 
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -131,6 +149,7 @@ public class EPair {
         EPair ePair = (EPair) o;
         return
                 Objects.equals(name, ePair.name) &&
+                Objects.equals(type, ePair.type) &&
                 Objects.equals(eTypeA, ePair.eTypeA) &&
                 Objects.equals(sideAIdField, ePair.sideAIdField) &
                         Objects.equals(eTypeB, ePair.eTypeB) &
@@ -139,17 +158,17 @@ public class EPair {
 
     @Override
     public int hashCode() {
-        return Objects.hash(name,eTypeA, sideAIdField, eTypeB, sideBIdField);
+        return Objects.hash(name,type,eTypeA, sideAIdField, eTypeB, sideBIdField);
     }
 
     @Override
     public String toString() {
-        return "EPair [name= " + name + ",eTypeA= " + eTypeA + ",sideAId= " + sideAIdField + ", eTypeB = " + eTypeB + ", sideAId = " + sideBIdField + "]";
+        return "EPair [name= " + name + ",type= " + type  + ",eTypeA= " + eTypeA + ",sideAId= " + sideAIdField + ", eTypeB = " + eTypeB + ", sideAId = " + sideBIdField + "]";
     }
 
     @Override
     public EPair clone()  {
-        return new EPair(name,eTypeA,sideAIdField,eTypeB,sideBIdField);
+        return new EPair(name,type,eTypeA,sideAIdField,eTypeB,sideBIdField);
     }
 
     //region Fields
@@ -158,48 +177,6 @@ public class EPair {
     private String sideAIdField = GlobalConstants.EdgeSchema.SOURCE_ID;
     private String eTypeB;
     private String sideBIdField = GlobalConstants.EdgeSchema.DEST_ID;
-
+    private RelationType type = RelationType.ONE_TO_ONE;
     //endregion
-
-    public static final class EPairBuilder {
-        private String name;
-        private String eTypeA;
-        private String eTypeB;
-
-        private EPairBuilder() {
-        }
-
-        public static EPairBuilder anEPair() {
-            return new EPairBuilder();
-        }
-
-        public EPair with(String eTypeA, String eTypeB) {
-            return new EPair(eTypeA, eTypeB);
-        }
-
-        public EPairBuilder withName(String name) {
-            this.name = name;
-            return this;
-        }
-        public EPairBuilder withETypeA(String eTypeA) {
-            this.eTypeA = eTypeA;
-            return this;
-        }
-
-        public EPairBuilder withETypeB(String eTypeB) {
-            this.eTypeB = eTypeB;
-            return this;
-        }
-
-        public EPair build() {
-            if(name!=null)
-                return new EPair(name,eTypeA,eTypeB);
-
-            return new EPair(eTypeA,eTypeB);
-        }
-
-
-    }
-
-
 }

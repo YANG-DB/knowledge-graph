@@ -36,7 +36,7 @@ import org.opensearch.graph.executor.ontology.schema.RawSchema;
 import org.opensearch.graph.model.ontology.Ontology;
 import org.opensearch.graph.model.resourceInfo.GraphError;
 import org.opensearch.graph.model.schema.IndexProvider;
-import org.opensearch.graph.unipop.schemaProviders.GraphElementSchemaProvider;
+import org.opensearch.graph.unipop.schema.providers.GraphElementSchemaProvider;
 import javaslang.Tuple2;
 import javaslang.collection.Stream;
 import org.opensearch.action.admin.indices.delete.DeleteIndexRequest;
@@ -54,7 +54,6 @@ public class DefaultGraphInitiator implements GraphInitiator {
     private IndexProviderFactory indexProviderFactory;
     private final OntologyProvider ontologyProvider;
     private IndexProvider indexProvider;
-    private ObjectMapper objectMapper;
     private EngineIndexProviderMappingFactory mappingFactory;
 
     @Inject
@@ -62,7 +61,6 @@ public class DefaultGraphInitiator implements GraphInitiator {
         this.assembly = config.getString("assembly");
         this.indexProviderFactory = indexProviderFactory;
         this.ontologyProvider = ontologyProvider;
-        this.objectMapper = new ObjectMapper();
         this.client = client;
         this.schema = schema;
         Ontology ont = ontologyProvider.get(assembly)
@@ -103,16 +101,17 @@ public class DefaultGraphInitiator implements GraphInitiator {
     }
 
     @Override
-    public long createTemplate(String ontology, String schemaProvider) {
+    public long createTemplate(String ontology, String schemaProviderName) {
         try {
-            IndexProvider indexProvider = objectMapper.readValue(schemaProvider, IndexProvider.class);
+            IndexProvider indexProvider = indexProviderFactory.get(schemaProviderName)
+                    .orElseThrow(()->new GraphError.GraphErrorException("No Schema provider found",String.format("No schema provider found for name %s", schemaProviderName)));
             mappingFactory.indexProvider(indexProvider)
                     .ontology(ontologyProvider.get(ontology)
                             .orElseThrow(() -> new GraphError.GraphErrorException(new GraphError("No Ontology present for assembly", "No Ontology present for assembly" + ontology))));
             List<Tuple2<String, Boolean>> results = mappingFactory.generateMappings();
             return results.stream().filter(t -> t._2).count();
         } catch (Throwable t) {
-            throw new GraphError.GraphErrorException("Create templates error " + ontology + " with schema " + schemaProvider, t);
+            throw new GraphError.GraphErrorException("Create templates error " + ontology + " with schema " + schemaProviderName, t);
         }
     }
 
@@ -133,9 +132,10 @@ public class DefaultGraphInitiator implements GraphInitiator {
     }
 
     @Override
-    public long createIndices(String ontology, String schemaProvider) {
+    public long createIndices(String ontology, String schemaProviderName) {
         try {
-            IndexProvider indexProvider = objectMapper.readValue(schemaProvider, IndexProvider.class);
+            IndexProvider indexProvider = indexProviderFactory.get(schemaProviderName)
+                    .orElseThrow(()->new GraphError.GraphErrorException("No Schema provider found",String.format("No schema provider found for name %s", schemaProviderName)));
             mappingFactory.indexProvider(indexProvider)
                     .ontology(ontologyProvider.get(ontology)
                             .orElseThrow(() -> new GraphError.GraphErrorException(new GraphError("No Ontology present for assembly", "No Ontology present for assembly" + ontology))));
@@ -145,7 +145,7 @@ public class DefaultGraphInitiator implements GraphInitiator {
             List<Tuple2<Boolean, String>> indices = mappingFactory.createIndices();
             return indices.size();
         } catch (Throwable t) {
-            throw new GraphError.GraphErrorException("Create Indices error " + ontology + " with schema " + schemaProvider, t);
+            throw new GraphError.GraphErrorException("Create Indices error " + ontology + " with schema " + schemaProviderName, t);
         }
     }
 

@@ -46,7 +46,7 @@ import org.opensearch.graph.unipop.predicates.SelectP;
 import org.opensearch.graph.unipop.promise.Constraint;
 import org.opensearch.graph.unipop.promise.Promise;
 import org.opensearch.graph.unipop.promise.TraversalConstraint;
-import org.opensearch.graph.unipop.schemaProviders.GraphElementSchemaProvider;
+import org.opensearch.graph.unipop.schema.providers.GraphElementSchemaProvider;
 import org.opensearch.graph.unipop.structure.ElementType;
 import org.opensearch.graph.unipop.structure.promise.PromiseVertex;
 import javaslang.collection.Stream;

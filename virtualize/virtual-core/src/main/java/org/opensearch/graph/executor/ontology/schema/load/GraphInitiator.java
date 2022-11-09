@@ -60,10 +60,10 @@ public interface GraphInitiator {
      * generate the opensearch index template according to ontology and index schema provider json instructions
      *
      * @param ontology
-     * @param schemaProvider
+     * @param schemaProviderName
      * @return
      */
-    long createTemplate(String ontology, String schemaProvider) ;
+    long createTemplate(String ontology, String schemaProviderName) ;
 
     /**
      * generate the opensearch index template according to ontology and index schema provider json instructions
@@ -76,11 +76,11 @@ public interface GraphInitiator {
     /**
      * create indices according to ontology and index schema provider json instructions
      * @param ontology
-     * @param schemaProvider
+     * @param schemaProviderName
      * @return
      * @throws IOException
      */
-    long createIndices(String ontology, String schemaProvider) ;
+    long createIndices(String ontology, String schemaProviderName) ;
 
    /**
      * create indices according to ontology and index schema provider json instructions

@@ -24,7 +24,7 @@ package org.opensearch.graph.unipop.controller;
 
 
 
-import org.opensearch.graph.unipop.schemaProviders.GraphElementSchemaProvider;
+import org.opensearch.graph.unipop.schema.providers.GraphElementSchemaProvider;
 
 public interface UniGraphElementSchemaProviderFactory {
     GraphElementSchemaProvider getSchemaProvider();

@@ -24,7 +24,7 @@ package org.opensearch.graph.test.schema;
 
 import org.opensearch.graph.executor.ontology.GraphElementSchemaProviderFactory;
 import org.opensearch.graph.model.ontology.Ontology;
-import org.opensearch.graph.unipop.schemaProviders.GraphElementSchemaProvider;
+import org.opensearch.graph.unipop.schema.providers.GraphElementSchemaProvider;
 
 import java.util.HashMap;
 import java.util.Map;

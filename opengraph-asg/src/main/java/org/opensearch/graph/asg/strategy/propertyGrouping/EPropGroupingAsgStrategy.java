@@ -42,13 +42,10 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Optional;
 
+/**
+ * This strategy groups together different properties that actually belong to a specific entity into a single group so that this group will be pushed down together to the engine
+ */
 public class EPropGroupingAsgStrategy implements AsgStrategy {
-    /*
-    region AsgStrategy Implementation
-    The simple case - no Quantifier involved - e.g., Q142 on V1
-    The Entity will have only one EProp child
-    */
-
     @Override
     public void apply(AsgQuery query, AsgStrategyContext context) {
         Stream.ofAll(AsgQueryUtil.elements(query, EEntityBase.class))

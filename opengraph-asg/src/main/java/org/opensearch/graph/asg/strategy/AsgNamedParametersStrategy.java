@@ -51,6 +51,9 @@ import static org.opensearch.graph.model.query.properties.constraint.ConstraintO
 import static org.opensearch.graph.model.query.properties.constraint.NamedParameter.$VAL;
 import static java.util.Collections.singletonMap;
 
+/**
+ * Handle parameterized constraint (ParameterizedConstraint) in which it replaces each parameterized value with the appropriate matched pattern
+ */
 public class AsgNamedParametersStrategy implements AsgStrategy {
 
 

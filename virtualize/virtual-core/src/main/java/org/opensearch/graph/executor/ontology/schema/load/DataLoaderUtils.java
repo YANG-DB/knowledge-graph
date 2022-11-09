@@ -9,9 +9,9 @@ package org.opensearch.graph.executor.ontology.schema.load;
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- * 
+ *
  *      http://www.apache.org/licenses/LICENSE-2.0
- * 
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -19,9 +19,6 @@ package org.opensearch.graph.executor.ontology.schema.load;
  * limitations under the License.
  * #L%
  */
-
-
-
 
 
 import org.opensearch.graph.executor.ontology.schema.RawSchema;
@@ -209,14 +206,23 @@ public interface DataLoaderUtils {
                     try {
                         return sdf.format(new Date(value.toString()));
                     } catch (Throwable e1) {
-                        return sdf.format(parser.parseDate(value.toString()));
+                        try {
+                            return sdf.format(parser.parseDate(value.toString()));
+                        } catch (Throwable e2) {
+                            try {
+                                long time = Long.parseLong(value.toString());
+                                return new Date(time);
+                            } catch (Throwable ignore) {
+                                return value.toString();
+                            }
+                        }
                     }
                 }
             case "geo":
             case "geoValue":
                 return new Point(
-                        Double.valueOf(value.toString().split("[,]")[1]),
-                        Double.valueOf(value.toString().split("[,]")[0]));
+                        Double.parseDouble(value.toString().split("[,]")[1]),
+                        Double.parseDouble(value.toString().split("[,]")[0]));
         }
         return value;
     }
@@ -270,7 +276,13 @@ public interface DataLoaderUtils {
                             parser.parseDate(value.toString());
                             return true;
                         } catch (Throwable err) {
-                            return false;
+                            try {
+                                long time = Long.parseLong(value.toString());
+                                new Date(time);
+                                return true;
+                            } catch (Throwable ignore) {
+                                return false;
+                            }
                         }
                     }
 

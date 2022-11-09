@@ -142,6 +142,43 @@ public class AsgEntityPropertiesValidationStrategyTest {
         Assert.assertFalse(validationResult.valid());
         Assert.assertTrue(Stream.ofAll(validationResult.errors()).toJavaArray(String.class)[0].contains(AsgEntityPropertiesValidatorStrategy.ERROR_1));
     }
+    @Test
+    public void tesValidQuantPropEntityNestedMismatchQuery() {
+        AsgQuery query = AsgQuery.Builder.start("Q1", "Dragons")
+                .next(typed(1, PERSON.type,"p"))
+                .next(ePropGroup(10,
+                        EProp.of(11, FIRST_NAME.type, of(eq, "Moshe")),
+                        EProp.of(11, KINGDOM_PROP.type+"."+NAME.type, of(eq, "Moshe")))
+                )
+                .next(rel(2, OntologyTestUtils.OWN.getrType(), R).below(relProp(10,
+                        RelProp.of(10, START_DATE.type, of(eq, new Date())))))
+                .next(concrete(3, "HorseWithNoName", HORSE.type,"display","eTag"))
+                .next(ePropGroup(12, EProp.of(13, NAME.type, of(eq, "bubu"))))
+                .build();
+
+        AsgEntityPropertiesValidatorStrategy strategy = new AsgEntityPropertiesValidatorStrategy();
+        ValidationResult validationResult = strategy.apply(query, new AsgStrategyContext(new Ontology.Accessor(ontology)));
+        Assert.assertTrue(validationResult.valid());
+    }
+    @Test
+    public void tesNonValidQuantPropEntityNestedMismatchQuery() {
+        AsgQuery query = AsgQuery.Builder.start("Q1", "Dragons")
+                .next(typed(1, PERSON.type,"p"))
+                .next(ePropGroup(10,
+                        EProp.of(11, FIRST_NAME.type, of(eq, "Moshe")),
+                        EProp.of(11, KINGDOM_PROP.type+"."+LAST_NAME.type, of(eq, "Moshe")))
+                )
+                .next(rel(2, OntologyTestUtils.OWN.getrType(), R).below(relProp(10,
+                        RelProp.of(10, START_DATE.type, of(eq, new Date())))))
+                .next(concrete(3, "HorseWithNoName", HORSE.type,"display","eTag"))
+                .next(ePropGroup(12, EProp.of(13, NAME.type, of(eq, "bubu"))))
+                .build();
+
+        AsgEntityPropertiesValidatorStrategy strategy = new AsgEntityPropertiesValidatorStrategy();
+        ValidationResult validationResult = strategy.apply(query, new AsgStrategyContext(new Ontology.Accessor(ontology)));
+        Assert.assertFalse(validationResult.valid());
+        Assert.assertTrue(Stream.ofAll(validationResult.errors()).toJavaArray(String.class)[0].contains(AsgEntityPropertiesValidatorStrategy.ERROR_2));
+    }
 
     @Test
     public void testNotValidPropRelMismatchQuery() {

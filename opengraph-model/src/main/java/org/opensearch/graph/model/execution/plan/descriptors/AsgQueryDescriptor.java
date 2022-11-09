@@ -163,7 +163,7 @@ public class AsgQueryDescriptor implements Descriptor<AsgQuery>, GraphDescriptor
         }
     }
 
-    static String shortLabel(AsgEBase<? extends EBase> e, StringJoiner joiner, boolean printId) {
+    public static String shortLabel(AsgEBase<? extends EBase> e, StringJoiner joiner, boolean printId) {
         final EBase eBase = e.geteBase();
         String id = printId ? Integer.toString(e.geteNum()) : "?";
         if (eBase instanceof QuantBase) {

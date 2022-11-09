@@ -81,9 +81,9 @@ The next svg file (result of the visualization API call) visualize our Dragons o
 
 ### Physical Schema
 Since we have a logical file representing the ontology - we would like to make use of it to generate the appropriate
-elasticsearch index template and actual indexes so that we can upload the graph data.
+opensearch index template and actual indexes so that we can upload the graph data.
 
-This part is done using the next REST API : http://localhost:8888/swagger#/operations/init/get_load_ontology__id__init 
+This part is done using the next REST API : http://localhost:8888/swagger#/operations/{Dragons}/init/ 
 
 This is the swagger screen:
 
@@ -111,4 +111,4 @@ with reasonable defaults and is also may be manually crafted for specific perfor
 _The physical schema part is explained in depth in a separate tutorial..._
 
 ### What's next ?
-Now that we have initiated and created the ontology and the associated indexes in elasticsearch our next tutorial will deal with loading the graph data
+Now that we have initiated and created the ontology and the associated indexes in opensearch our next tutorial will deal with loading the graph data

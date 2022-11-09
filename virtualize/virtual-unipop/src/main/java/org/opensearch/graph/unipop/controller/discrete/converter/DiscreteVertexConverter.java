@@ -27,7 +27,7 @@ package org.opensearch.graph.unipop.controller.discrete.converter;
 import org.opensearch.graph.unipop.controller.common.context.ElementControllerContext;
 import org.opensearch.graph.unipop.controller.common.converter.ElementConverter;
 import org.opensearch.graph.unipop.controller.utils.traversal.TraversalValuesByKeyProvider;
-import org.opensearch.graph.unipop.schemaProviders.GraphVertexSchema;
+import org.opensearch.graph.unipop.schema.providers.GraphVertexSchema;
 import org.opensearch.graph.unipop.structure.discrete.DiscreteVertex;
 import javaslang.Tuple2;
 import javaslang.collection.Stream;

@@ -73,7 +73,9 @@ import org.opensearch.graph.model.query.properties.*;
         @JsonSubTypes.Type(name = "FunctionRelProp", value = FunctionRelProp.class),
         @JsonSubTypes.Type(name = "FunctionEProp", value = FunctionEProp.class),
         @JsonSubTypes.Type(name = "SchematicRankedEProp", value = SchematicRankedEProp.class),
+        @JsonSubTypes.Type(name = "SchematicNestedEProp", value = SchematicNestedEProp.class),
         @JsonSubTypes.Type(name = "ScoreEProp", value = ScoreEProp.class),
+        @JsonSubTypes.Type(name = "NestedEProp", value = NestedEProp.class),
         @JsonSubTypes.Type(name = "CalculatedEProp", value = CalculatedEProp.class)
 })
 @JsonInclude(JsonInclude.Include.NON_EMPTY)

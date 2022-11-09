@@ -41,9 +41,9 @@ import org.opensearch.graph.model.query.properties.EProp;
 import org.opensearch.graph.model.query.properties.EPropGroup;
 import org.opensearch.graph.model.query.properties.SchematicEProp;
 import org.opensearch.graph.unipop.controller.utils.CollectionUtil;
-import org.opensearch.graph.unipop.schemaProviders.GraphElementPropertySchema;
-import org.opensearch.graph.unipop.schemaProviders.GraphElementSchemaProvider;
-import org.opensearch.graph.unipop.schemaProviders.GraphVertexSchema;
+import org.opensearch.graph.unipop.schema.providers.GraphElementPropertySchema;
+import org.opensearch.graph.unipop.schema.providers.GraphElementSchemaProvider;
+import org.opensearch.graph.unipop.schema.providers.GraphVertexSchema;
 import javaslang.collection.Stream;
 import org.opensearch.graph.asg.strategy.AsgElementStrategy;
 import org.opensearch.graph.asg.strategy.AsgStrategy;
@@ -52,7 +52,10 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
-
+/**
+ * This strategy transforms 'like' predicates on fields which have a physical ngram mapping into an explicit schematic predicate
+ *  - SchematicEProp
+ */
 public class LikeConstraintTransformationAsgStrategy implements AsgStrategy, AsgElementStrategy<EPropGroup> {
     //region Constructors
     public LikeConstraintTransformationAsgStrategy(OntologyProvider ontologyProvider, GraphElementSchemaProviderFactory schemaProviderFactory) {

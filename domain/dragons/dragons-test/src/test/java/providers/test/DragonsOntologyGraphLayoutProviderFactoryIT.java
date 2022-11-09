@@ -1,8 +1,8 @@
 package providers.test;
 
 import org.opensearch.graph.model.GlobalConstants;
-import org.opensearch.graph.unipop.schemaProviders.GraphLayoutProvider;
-import org.opensearch.graph.unipop.schemaProviders.GraphRedundantPropertySchema;
+import org.opensearch.graph.unipop.schema.providers.GraphLayoutProvider;
+import org.opensearch.graph.unipop.schema.providers.GraphRedundantPropertySchema;
 import org.opensearch.graph.test.BaseITMarker;
 import org.opensearch.graph.test.data.DragonsOntologyGraphLayoutProviderFactory;
 import org.junit.Assert;

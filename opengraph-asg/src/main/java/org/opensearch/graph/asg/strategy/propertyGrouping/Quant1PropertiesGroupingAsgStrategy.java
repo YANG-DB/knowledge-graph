@@ -44,6 +44,9 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
 
+/**
+ * This strategy groups together different properties that actually belong to a specific entity into a single group so that this group will be pushed down together to the engine
+ */
 public class Quant1PropertiesGroupingAsgStrategy implements AsgStrategy {
     // Vertical AND Quantifier with EProps e.g., Q3-2, Q27-2 on V1
     @Override

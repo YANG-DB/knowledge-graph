@@ -32,7 +32,7 @@ import org.opensearch.graph.executor.ontology.GraphElementSchemaProviderFactory;
 import org.opensearch.graph.executor.resource.PersistantNodeStatusResource;
 import org.opensearch.graph.model.ontology.Ontology;
 import org.opensearch.graph.model.resourceInfo.GraphError;
-import org.opensearch.graph.unipop.schemaProviders.indexPartitions.IndexPartitions;
+import org.opensearch.graph.unipop.schema.providers.indexPartitions.IndexPartitions;
 import org.apache.commons.collections4.IteratorUtils;
 import org.opensearch.action.search.SearchRequestBuilder;
 import org.opensearch.action.search.SearchResponse;

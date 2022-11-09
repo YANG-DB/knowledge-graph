@@ -20,11 +20,6 @@ package org.opensearch.graph.model.execution.plan.descriptors;
  * #L%
  */
 
-
-
-
-
-
 import org.opensearch.graph.model.Below;
 import org.opensearch.graph.model.Container;
 import org.opensearch.graph.model.Next;
@@ -113,7 +108,7 @@ public class QueryDescriptor implements Descriptor<Query>, GraphDescriptor<Query
         return joiner.toString();
     }
 
-    static String shortLabel(EBase e, StringJoiner joiner, boolean printId) {
+    public static String shortLabel(EBase e, StringJoiner joiner, boolean printId) {
         String id = printId ? Integer.toString(e.geteNum()) : "$";
         if (e instanceof QuantBase) {
             List<Integer> next = ((Next<List>) e).getNext();

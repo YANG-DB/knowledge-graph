@@ -23,14 +23,15 @@ import org.opensearch.graph.model.execution.plan.costs.PlanDetailedCost;
 import org.opensearch.graph.model.execution.plan.entity.EntityFilterOp;
 import org.opensearch.graph.model.execution.plan.entity.EntityOp;
 import org.opensearch.graph.model.ontology.Ontology;
+import org.opensearch.graph.model.ontology.Property;
 import org.opensearch.graph.model.query.properties.constraint.Constraint;
 import org.opensearch.graph.model.query.properties.constraint.ConstraintOp;
 import org.opensearch.graph.model.query.entity.EConcrete;
-import org.opensearch.graph.unipop.schemaProviders.GraphEdgeSchema;
-import org.opensearch.graph.unipop.schemaProviders.GraphElementPropertySchema;
-import org.opensearch.graph.unipop.schemaProviders.GraphElementSchemaProvider;
-import org.opensearch.graph.unipop.schemaProviders.GraphRedundantPropertySchema;
-import org.opensearch.graph.unipop.schemaProviders.indexPartitions.StaticIndexPartitions;
+import org.opensearch.graph.unipop.schema.providers.GraphEdgeSchema;
+import org.opensearch.graph.unipop.schema.providers.GraphElementPropertySchema;
+import org.opensearch.graph.unipop.schema.providers.GraphElementSchemaProvider;
+import org.opensearch.graph.unipop.schema.providers.GraphRedundantPropertySchema;
+import org.opensearch.graph.unipop.schema.providers.indexPartitions.StaticIndexPartitions;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Ignore;
@@ -57,7 +58,7 @@ public class BasicPatternCostEstimatorWithStatisticsProviderTest {
     public void setup(){
         graphElementSchemaProvider = mock(GraphElementSchemaProvider.class);
         GraphEdgeSchema graphEdgeSchema = mock(GraphEdgeSchema.class);
-        when(graphEdgeSchema.getProperty(any()))
+        when(graphEdgeSchema.getProperty((Property) any()))
                 .thenAnswer(invocationOnMock -> Optional.of(new GraphElementPropertySchema.Impl(
                         invocationOnMock.getArguments()[0].toString(),
                         invocationOnMock.getArguments()[0].toString())));

@@ -47,6 +47,9 @@ import java.util.Set;
 import static org.opensearch.graph.model.asgQuery.AsgQueryUtil.getEprops;
 import static org.opensearch.graph.model.asgQuery.AsgQueryUtil.getRelProps;
 
+/**
+ * This strategy Transforms multi-value predicate from an array or iterable into a list
+ */
 public class ConstraintIterableTransformationAsgStrategy implements AsgStrategy {
     //region Constructors
     public ConstraintIterableTransformationAsgStrategy() {

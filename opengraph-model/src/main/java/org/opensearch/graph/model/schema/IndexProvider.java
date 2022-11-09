@@ -67,6 +67,10 @@ public class IndexProvider {
                 .flatMap(e -> e.getNested().stream()), entities.stream())
                 .collect(Collectors.toList());
     }
+    @JsonIgnore()
+    public List<Entity> getTopLevelEntities() {
+        return entities;
+    }
 
     @JsonProperty("entities")
     public void setEntities(List<Entity> entities) {
@@ -84,6 +88,11 @@ public class IndexProvider {
     @JsonProperty("relations")
     public void setRelations(List<Relation> relations) {
         this.relations = relations;
+    }
+
+    @JsonIgnore()
+    public List<Relation> getTopLevelRelations() {
+        return relations;
     }
 
     @JsonProperty("ontology")
@@ -118,14 +127,30 @@ public class IndexProvider {
         return this;
     }
 
+
+    @JsonIgnore()
+    public Optional<Entity> getTopLevelEntities(String entityName) {
+        return getTopLevelEntities().stream().filter(e->e.getType().getName().equals(entityName)).findAny();
+    }
+
+    @JsonIgnore
+    public Optional<Entity> entityInContext(String entity, Type parentEntityContext) {
+        if(!getTopLevelEntities(parentEntityContext.getName()).isPresent()) return Optional.empty();
+        return getTopLevelEntities(parentEntityContext.getName()).get().getNested().stream()
+                .filter(e->e.getType().getName().equals(entity)).findAny();
+    }
+
     @JsonIgnore
     public Optional<Entity> getEntity(String label) {
-        Optional<Entity> nest = getEntities().stream().filter(e -> !e.getNested().isEmpty())
+        if(getTopLevelEntities(label).isPresent())
+            return getTopLevelEntities(label);
+
+        Optional<Entity> nest = getEntities().stream()
+                .filter(e -> !e.getNested().isEmpty())
                 .flatMap(e -> e.getNested().stream())
                 .filter(nested -> nested.getType().getName().equals(label))
                 .findAny();
-        if (nest.isPresent())
-            return nest;
+        if (nest.isPresent()) return nest;
 
         return getEntities().stream().filter(e -> e.getType().getName().equals(label)).findAny();
     }
@@ -141,6 +166,7 @@ public class IndexProvider {
 
         return getRelations().stream().filter(e -> e.getType().getName().equals(label)).findAny();
     }
+
 
     public static class Builder {
 

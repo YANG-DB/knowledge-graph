@@ -25,10 +25,10 @@ package org.opensearch.graph.test.scenario;
 import com.jayway.jsonpath.JsonPath;
 import org.opensearch.graph.executor.ontology.PhysicalIndexProviderFactory;
 import org.opensearch.graph.model.ontology.Ontology;
-import org.opensearch.graph.unipop.schemaProviders.PhysicalIndexProvider;
-import org.opensearch.graph.unipop.schemaProviders.indexPartitions.IndexPartitions;
-import org.opensearch.graph.unipop.schemaProviders.indexPartitions.StaticIndexPartitions;
-import org.opensearch.graph.unipop.schemaProviders.indexPartitions.TimeSeriesIndexPartitions;
+import org.opensearch.graph.unipop.schema.providers.PhysicalIndexProvider;
+import org.opensearch.graph.unipop.schema.providers.indexPartitions.IndexPartitions;
+import org.opensearch.graph.unipop.schema.providers.indexPartitions.StaticIndexPartitions;
+import org.opensearch.graph.unipop.schema.providers.indexPartitions.TimeSeriesIndexPartitions;
 import javaslang.collection.Stream;
 import net.minidev.json.JSONArray;
 

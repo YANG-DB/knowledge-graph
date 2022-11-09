@@ -119,7 +119,7 @@ public class RelationshipType implements BaseElement {
     }
 
     public List<String> getMetadata() {
-        return metadata != null ? metadata : Collections.emptyList();
+        return metadata ;
     }
 
     @JsonIgnore
@@ -156,7 +156,7 @@ public class RelationshipType implements BaseElement {
     }
 
     public List<String> getProperties() {
-        return properties != null ? properties : Collections.emptyList();
+        return properties ;
     }
 
     @JsonIgnore
@@ -166,7 +166,7 @@ public class RelationshipType implements BaseElement {
     }
 
     public List<String> getMandatory() {
-        return mandatory != null ? mandatory : Collections.emptyList();
+        return mandatory ;
     }
 
     public void setMandatory(List<String> mandatory) {

@@ -4993,6 +4993,21 @@
                 "exception@stacktrace" : "Traceback most recent call last"
               },
               "droppedAttributesCount" : 0
+            },
+            {
+              "time" : "2021-03-25T17:11:00.020004720Z",
+              "name" : "exception",
+              "attributes" : {
+                "exception@message" : "1050 %2842S01%29: Table  Inventory_Items  already exists",
+                "exception@type" : "Error",
+                "exception@stacktrace" : "Traceback most recent call last"
+              },
+              "droppedAttributesCount" : 0
+            },
+            {
+              "time" : "2021-03-25T17:10:58.023934720Z",
+              "name" : "log",
+              "droppedAttributesCount" : 3
             }
           ],
           "links" : [ ],

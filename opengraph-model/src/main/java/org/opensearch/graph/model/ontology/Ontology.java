@@ -21,10 +21,12 @@ package org.opensearch.graph.model.ontology;
  */
 
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
+import org.opensearch.graph.model.ontology.Property.NestedProperty;
 import org.opensearch.graph.model.resourceInfo.GraphError;
 import javaslang.Tuple;
 import javaslang.Tuple2;
@@ -36,12 +38,13 @@ import java.math.BigDecimal;
 import java.util.*;
 import java.util.function.Supplier;
 import java.util.stream.Collectors;
+import java.util.stream.StreamSupport;
 
 /**
  * Created by benishue on 22-Feb-17.
  */
 @JsonInclude(JsonInclude.Include.NON_NULL)
-@JsonIgnoreProperties({"primitiveTypes"})
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class Ontology {
     public Ontology(Ontology source) {
         this();
@@ -185,6 +188,7 @@ public class Ontology {
     private List<Property> metadata;
     private List<EnumeratedType> enumeratedTypes;
     private List<CompositeType> compositeTypes;
+    @JsonIgnoreProperties
     private List<PrimitiveType> primitiveTypes;
     //endregion
 
@@ -208,8 +212,8 @@ public class Ontology {
             this.compositeTypes = new ArrayList<>();
         }
 
-        public static OntologyBuilder anOntology() {
-            return new OntologyBuilder();
+        public static OntologyBuilder anOntology(String ont) {
+            return new OntologyBuilder().withOnt(ont);
         }
 
         public OntologyBuilder withOnt(String ont) {
@@ -368,6 +372,7 @@ public class Ontology {
 
         /**
          * get entity by its type - return optional with empty if not found
+         *
          * @param eType
          * @return
          */
@@ -377,6 +382,7 @@ public class Ontology {
 
         /**
          * get directive by its name
+         *
          * @param name
          * @return
          */
@@ -386,6 +392,7 @@ public class Ontology {
 
         /**
          * get directive by its name - if not found throws error
+         *
          * @param name
          * @return
          */
@@ -395,7 +402,8 @@ public class Ontology {
         }
 
         /**
-        * get entity by its type - if not found throws error
+         * get entity by its type - if not found throws error
+         *
          * @param eType
          * @return
          */
@@ -406,6 +414,7 @@ public class Ontology {
 
         /**
          * get entity by its name- returns optional with empty if not found
+         *
          * @param entityName
          * @return
          */
@@ -415,6 +424,7 @@ public class Ontology {
 
         /**
          * get entity by its type - throws error if not found
+         *
          * @param entityName
          * @return
          */
@@ -425,6 +435,7 @@ public class Ontology {
 
         /**
          * get entity by its type - returns optional with empty if not found
+         *
          * @param entityName
          * @return
          */
@@ -435,6 +446,7 @@ public class Ontology {
 
         /**
          * get entity's type by its name - throws error if not found
+         *
          * @param entityName
          * @return
          */
@@ -445,6 +457,7 @@ public class Ontology {
 
         /**
          * get relation by its type - returns optional empty if not found
+         *
          * @param rType
          * @return
          */
@@ -453,7 +466,45 @@ public class Ontology {
         }
 
         /**
-        * get relation by its type - returns error not found
+         * get entity/relation properties
+         *
+         * @param elementType
+         * @return
+         */
+        public List<Property> $properties(BaseElement elementType) {
+            return
+                    elementType.getProperties().stream()
+                            .map(this::pType$)
+                            .collect(Collectors.toList());
+        }
+
+        /**
+         * get entity properties
+         *
+         * @param entityType
+         * @return
+         */
+        public List<Property> $properties(EntityType entityType) {
+            return entityType.getProperties().stream()
+                    .map(this::pName$)
+                    .collect(Collectors.toList());
+        }
+
+        /**
+         * get relation properties
+         *
+         * @param relationshipType
+         * @return
+         */
+        public List<Property> $properties(RelationshipType relationshipType) {
+            return relationshipType.getProperties().stream()
+                    .map(this::pName$)
+                    .collect(Collectors.toList());
+        }
+
+        /**
+         * get relation by its type - returns error not found
+         *
          * @param rType
          * @return
          */
@@ -464,6 +515,7 @@ public class Ontology {
 
         /**
          * get relation by its relationName - returns optional empty if not found
+         *
          * @param relationName
          * @return
          */
@@ -473,6 +525,7 @@ public class Ontology {
 
         /**
          * get relation by its relationName - returns error if not found
+         *
          * @param relationName
          * @return
          */
@@ -482,7 +535,8 @@ public class Ontology {
         }
 
         /**
-         *  returns relation type by its name - returns optional empty if not found
+         * returns relation type by its name - returns optional empty if not found
+         *
          * @param relationName
          * @return
          */
@@ -492,7 +546,8 @@ public class Ontology {
         }
 
         /**
-         *  returns relation type by its name - returns error if not found
+         * returns relation type by its name - returns error if not found
+         *
          * @param relationName
          * @return
          */
@@ -502,22 +557,9 @@ public class Ontology {
         }
 
 
-
-        /**
-         * return property for an element (entity/relation) directly under element or in its embedded sub elements
-         * @param elementType
-         * @param pName
-         * @return
-         */
-        public Optional<Property> $pName(String elementType, String pName) {
-            if (cascadingFieldPName(elementType, pName).isPresent()) {
-                return cascadingFieldPName(elementType, pName);
-            }
-            return Optional.ofNullable(this.propertiesByName.get(pName));
-        }
-
         /**
          * returns property by its name - returns optional empty if not found
+         *
          * @param propertyName
          * @return
          */
@@ -525,8 +567,19 @@ public class Ontology {
             return Optional.ofNullable(this.propertiesByName.get(propertyName));
         }
 
-         /**
+        /**
+         * returns property by its name/type - returns optional empty if not found
+         *
+         * @param key
+         * @return
+         */
+        public Optional<Property> pNameOrType(String key) {
+            return Optional.ofNullable(this.propertiesByName.getOrDefault(key, this.propertiesByPtype.get(key)));
+        }
+
+        /**
          * return property (no matter which element it belongs to) - throws exception if not found
+         *
          * @param propertyName
          * @return
          */
@@ -537,6 +590,7 @@ public class Ontology {
 
         /**
          * get property type by name
+         *
          * @param pName
          * @return
          */
@@ -546,6 +600,7 @@ public class Ontology {
 
         /**
          * returns property by its type - optional with value is exists and empty if not
+         *
          * @param pType
          * @return
          */
@@ -555,6 +610,7 @@ public class Ontology {
 
         /**
          * return property type (no matter which element it belongs to) - throws exception if not found
+         *
          * @param pType
          * @return
          */
@@ -566,6 +622,7 @@ public class Ontology {
 
         /**
          * return property for an element (entity/relation) directly under element or in its embedded sub elements
+         *
          * @param elementType
          * @param pType
          * @return
@@ -577,16 +634,29 @@ public class Ontology {
             return Optional.ofNullable(this.propertiesByPtype.get(pType));
         }
 
+        public Iterable<String> pNames() {
+            return this.propertiesByName.keySet();
+        }
+
         /**
-         * returns all properties types
+         * returns all properties types including cascading ones and nested elements
+         *
          * @return
          */
         public Iterable<String> pTypes() {
-            return Stream.ofAll(ontology.getProperties()).map(Property::getpType).toJavaList();
+            Set<String> results = new HashSet<>();
+            results.addAll(StreamSupport.stream(entities().spliterator(), false)
+                    .flatMap(e -> cascadingElementFieldsPType(e.geteType()).stream())
+                    .collect(Collectors.toSet()));
+            results.addAll(StreamSupport.stream(relations().spliterator(), false)
+                    .flatMap(e -> cascadingElementFieldsPType(e.getrType()).stream())
+                    .collect(Collectors.toSet()));
+            return results;
         }
 
         /**
          * returns all entities
+         *
          * @return
          */
         public Iterable<EntityType> entities() {
@@ -595,6 +665,7 @@ public class Ontology {
 
         /**
          * check if ontology contains the next property type as metadata property
+         *
          * @param pType
          * @return
          */
@@ -609,15 +680,91 @@ public class Ontology {
          * @return
          */
         public List<EntityType> nested$(String eType) {
+            if (!entity(eType).isPresent()) return Collections.emptyList();
             return entity$(eType).fields().stream()
-                    .filter(p -> $entity(p).isPresent())
-                    .map(p -> $entity(p).get())
+                    .map(this::pType$)
+                    .filter(p -> $entity(p.getType()).isPresent())
+                    .map(p -> $entity(p.getType()).get())
                     .collect(Collectors.toList());
 
         }
 
         /**
+         * returns nested entity names that belong to a given entity
+         *
+         * @param eType
+         * @return
+         */
+        public List<String> nested(String eType) {
+            if (!entity(eType).isPresent()) return Collections.emptyList();
+            return entity$(eType).fields().stream()
+                    .filter(f->!primitiveType(f).isPresent())
+                    .collect(Collectors.toList());
+
+        }
+        /**
+         * returns parents of nested entity type according to its relevant location in the property name - for example
+         * the pType a.b.c.d with the given eType a => will return empty (a has no parent entity)
+         * the pType a.b.c.d with the given eType c => will return the entity b
+         * the pType a.b.c.d with the given eType b => will return the entity a
+         *
+         * @param eType
+         * @param propertyKey
+         * @return
+         */
+        public Optional<EntityType> nestedParent(String eType, String propertyKey) {
+            if(!entity(eType).isPresent() || !pNameOrType(propertyKey).isPresent())
+                return Optional.empty();
+
+            //take the longest sub-string to match the property
+            Optional<String> nestedPropertyName = cascadingElementFieldsPType(eType).stream()
+                    .filter(propertyKey::contains).min((o1, o2) -> o2.length() - o1.length());
+            if(!nestedPropertyName.isPresent())
+                return Optional.empty();
+
+            if(nestedPropertyName.get().equals(propertyKey))
+                return Optional.empty();
+
+            //since the field is combined of cascading entities - we take the last one which is an actual field
+            String subProperty = propertyKey.substring(0,propertyKey.indexOf(nestedPropertyName.get())-1);
+            String[] array = subProperty.split("\\.");
+            if (array.length < 2)
+                return Optional.empty();
+
+            Optional<Property> original = pName(array[array.length - 2]);
+            if (!original.isPresent())
+                return Optional.empty();
+
+            return entity(original.get().getType());
+        }
+
+        /**
+         * for a parent entity, find the nested entity that the given propertyKey belongs to
+         * for example parent a that has property named b will return empty (b doesn't belong to a nested entity of a)
+         * for example parent a that has property named b.c will return the entity b
+         * for example parent a that has property named b.c.d will return the entity c
+         * @param parentEntity
+         * @param propertyKey
+         * @return
+         */
+        public Optional<EntityType> nestedEntity(String parentEntity, String propertyKey) {
+            if (!cascadingFieldNameOrType(parentEntity, propertyKey).isPresent())
+                return Optional.empty();
+
+            //since the field is combined of cascading entities - we take the last one which is an actual field
+            String[] array = propertyKey.split("\\.");
+            if (array.length < 2) return Optional.empty();
+
+            Optional<Property> original = pName(array[array.length - 1]);
+            if (!original.isPresent())
+                return Optional.empty();
+
+            return nested$(parentEntity).stream().filter(e -> e.containsProperty(original.get().getName())).findFirst();
+        }
+
+        /**
          * returns all properties
+         *
          * @return
          */
         public Set<Property> properties() {
@@ -628,17 +775,25 @@ public class Ontology {
          * returns the cascading field elementType of the entity/relation (a.b.field)
          *
          * @param elementType - entity/relation
-         * @param pName - property cascading name
+         * @param nameOrType  - property cascading name or type
          * @return
          */
-        public Optional<Property> cascadingFieldPName(String elementType, String pName) {
-            if (cascadingElementFieldsPName(elementType).stream().anyMatch(p -> p.equals(pName))) {
+        public Optional<Property> cascadingFieldNameOrType(String elementType, String nameOrType) {
+            if (cascadingElementFieldsPName(elementType).stream().anyMatch(p -> p.equals(nameOrType)) ||
+                    cascadingElementFieldsPType(elementType).stream().anyMatch(p -> p.equals(nameOrType))) {
                 //since the field is combined of cascading entities - we take the last one which is an actual field
-                String[] array = pName.split("\\.");
-                if (array.length == 0) return Optional.empty();
+                String[] array = nameOrType.split("\\.");
+                if (array.length < 2) return Optional.empty();
 
                 Optional<Property> original = pName(array[array.length - 1]);
-                return original.map(property -> new Property(pName, property.getpType(), property.getType()));
+                Optional<Property> eType = $pType(array[array.length - 2]);
+                if (cascadingElementFieldsPName(elementType).stream().anyMatch(p -> p.equals(nameOrType)))
+                    return original.map(property -> new NestedProperty(nameOrType, nameOrType, property.getType(),
+                            eType.isPresent() ? eType.get().getType() : elementType));
+
+                if (cascadingElementFieldsPType(elementType).stream().anyMatch(p -> p.equals(nameOrType)))
+                    return original.map(property -> new NestedProperty(nameOrType, nameOrType, property.getType(),
+                            eType.isPresent() ? eType.get().getType() : elementType));
             }
             return Optional.empty();
         }
@@ -647,19 +802,77 @@ public class Ontology {
          * returns the cascading field elementType of the entity/relation (a.b.field)
          *
          * @param elementType - entity/relation
-         * @param pType - property cascading name
+         * @param pType       - property cascading name
          * @return
          */
         public Optional<Property> cascadingFieldPType(String elementType, String pType) {
             if (cascadingElementFieldsPType(elementType).stream().anyMatch(p -> p.equals(pType))) {
                 //since the field is combined of cascading entities - we take the last one which is an actual field
                 String[] array = pType.split("\\.");
-                if (array.length == 0) return Optional.empty();
+                if (array.length < 2) return Optional.empty();
 
                 Optional<Property> original = pName(array[array.length - 1]);
-                return original.map(property -> new Property(original.get().getName(), pType, property.getType()));
+                Optional<Property> eType = $pType(array[array.length - 2]);
+                return original.map(property -> new NestedProperty(pType, pType, property.getType(),
+                        eType.isPresent() ? eType.get().getType() : elementType));
             }
             return Optional.empty();
+        }
+
+        /**
+         * get all nested properties for an element (entity/relation)
+         *
+         * @param type
+         * @return
+         */
+        public List<Property> generateCascadingElementFields(String type) {
+            if (!$element(type).isPresent()) return Collections.emptyList();
+
+            List<Property> propertyList = new ArrayList<>();
+            //only add primitive type properties to root element
+            propertyList.addAll($properties($element(type).get()).stream()
+                    .filter(p -> !$element(p.getType()).isPresent()).collect(Collectors.toList()));
+            //add all nested properties recursively
+            propertyList.addAll(_generateCascadingElementFields(type,Optional.empty(), type));
+            return propertyList;
+        }
+
+        public List<Property> _generateCascadingElementFields(String context,Optional<String> parent, String type) {
+            if (!$element(type).isPresent()) return Collections.emptyList();
+            return $element(type).get().fields().stream()
+                    .map(this::$pType)
+                    .filter(Optional::isPresent)
+                    .map(Optional::get)
+                    .flatMap(p -> _getNestedPropertyStream(context,parent, p).stream())
+                    .collect(Collectors.toList());
+        }
+
+        private List<Property> _getNestedPropertyStream(String context, Optional<String> parent, Property p) {
+            List<Property> props = new ArrayList<>();
+            if ($element(p.getType()).isPresent()) {
+                //check is this property actually an entity - if so recurse for inner nested elements
+                props.add(new NestedProperty(_getPrefix(parent, p.getpType()), _getPrefix(parent, p.getpType()), p.getType(), context));
+                props.addAll(_generateCascadingElementFields(p.getType(),Optional.of(_getPrefix(parent, p.getpType())), p.getType()));
+            } else if (parent.isPresent()) {
+                // if property not nested element - generate its primitives
+                props.add(new NestedProperty(_getPrefix(parent, p.getpType()), _getPrefix(parent, p.getpType()),p.getType(), context));
+            }
+            return props;
+        }
+
+        private String _getPrefix(Optional<String> parent, String type) {
+            return parent.map(s -> s.concat(".").concat(type)).orElse(type);
+        }
+
+        /**
+         * get parent entity field name for child nested entity
+         *
+         * @param parentEntity
+         * @param nestedEntity
+         * @return
+         */
+        public List<Property> nestedEntityFieldName(EntityType parentEntity, EntityType nestedEntity) {
+            return $properties(parentEntity).stream().filter(p -> p.getType().equals(nestedEntity.geteType())).collect(Collectors.toList());
         }
 
         /**
@@ -674,15 +887,15 @@ public class Ontology {
             return Lists.newArrayList(Iterables.unmodifiableIterable(
                     Iterables.concat($element(type).get().fields(),
                             $element(type).get().fields().stream()
-                                .map(this::pName)
-                                .filter(Optional::isPresent)
-                                .map(Optional::get)
-                                .filter(p -> $element(p.getType()).isPresent())//check is this property actually an entity
-                                .map(p -> cascadingElementFieldsPName(p.getType()).stream()
-                                        .map(e -> p.getName().concat(".").concat(e))
-                                        .collect(Collectors.toList())
+                                    .map(this::pName)
+                                    .filter(Optional::isPresent)
+                                    .map(Optional::get)
+                                    .filter(p -> $element(p.getType()).isPresent())//check is this property actually an entity
+                                    .map(p -> cascadingElementFieldsPName(p.getType()).stream()
+                                            .map(e -> p.getName().concat(".").concat(e))
+                                            .collect(Collectors.toList())
                                     ).flatMap(Collection::stream)
-                            .collect(Collectors.toList()))));
+                                    .collect(Collectors.toList()))));
         }
 
         /**
@@ -697,19 +910,20 @@ public class Ontology {
             return Lists.newArrayList(Iterables.unmodifiableIterable(
                     Iterables.concat($element(type).get().fields(),
                             $element(type).get().fields().stream()
-                                .map(this::$pType)
-                                .filter(Optional::isPresent)
-                                .map(Optional::get)
-                                .filter(p -> $element(p.getType()).isPresent())//check is this property actually an entity
-                                .map(p -> cascadingElementFieldsPType(p.getType()).stream()
-                                        .map(e -> p.getName().concat(".").concat(e))
-                                        .collect(Collectors.toList())
+                                    .map(this::$pType)
+                                    .filter(Optional::isPresent)
+                                    .map(Optional::get)
+                                    .filter(p -> $element(p.getType()).isPresent())//check is this property actually an entity
+                                    .map(p -> cascadingElementFieldsPType(p.getType()).stream()
+                                            .map(e -> p.getName().concat(".").concat(e))
+                                            .collect(Collectors.toList())
                                     ).flatMap(Collection::stream)
-                            .collect(Collectors.toList()))));
+                                    .collect(Collectors.toList()))));
         }
 
         /**
-         * check is the next entity is nested under any other entity
+         * check is the given type is a nested entity under any other entity
+         *
          * @param eType
          * @return
          */
@@ -719,7 +933,24 @@ public class Ontology {
         }
 
         /**
+         * check is the given property for a given entity is a nested field and not a direct field
+         *
+         * @param entity
+         * @param property
+         * @return
+         */
+
+        public boolean isNestedField(String entity, String property) {
+            if (!$element(entity).isPresent()) return false;
+            return !$element(entity).get().containsProperty(property) &&
+                    !$element(entity).get().containsMetadata(property) &&
+                    cascadingFieldPType(entity, property).isPresent();
+        }
+
+
+        /**
          * returns all entities names
+         *
          * @return
          */
         public Iterable<String> eNames() {
@@ -728,6 +959,7 @@ public class Ontology {
 
         /**
          * returns all entities types
+         *
          * @return
          */
         public Iterable<String> eTypes() {
@@ -736,6 +968,7 @@ public class Ontology {
 
         /**
          * get all relations
+         *
          * @return
          */
         public List<RelationshipType> relations() {
@@ -744,6 +977,7 @@ public class Ontology {
 
         /**
          * get all relations that have the source side (side A) of the given entity type
+         *
          * @param eType
          * @return
          */
@@ -753,6 +987,7 @@ public class Ontology {
 
         /**
          * get all relations that have the destination side (side B) of the given entity type
+         *
          * @param eType
          * @return
          */
@@ -762,6 +997,7 @@ public class Ontology {
 
         /**
          * get all relations types
+         *
          * @return
          */
         public Iterable<String> rTypes() {
@@ -770,6 +1006,7 @@ public class Ontology {
 
         /**
          * get all relations names
+         *
          * @return
          */
         public Iterable<String> rNames() {
@@ -778,6 +1015,7 @@ public class Ontology {
 
         /**
          * return primitive type by its type
+         *
          * @param typeName
          * @return
          */
@@ -789,6 +1027,7 @@ public class Ontology {
 
         /**
          * get primitive type by its name
+         *
          * @param typeName
          * @return
          */
@@ -799,6 +1038,7 @@ public class Ontology {
 
         /**
          * returns all enumerations
+         *
          * @return
          */
         public List<EnumeratedType> getEnumeratedTypes() {
@@ -845,11 +1085,12 @@ public class Ontology {
             if (rType(name).isPresent())
                 return Optional.of(Tuple.of(NodeType.RELATION, rType$(name)));
             //property TYPE
-            if (pName(name).isPresent())
-                return Optional.of(Tuple.of(NodeType.PROPERTY, pName$(name).getpType()));
+            if (pNameOrType(name).isPresent())
+                return Optional.of(Tuple.of(NodeType.PROPERTY, pNameOrType(name).get().getpType()));
 
             return Optional.empty();
         }
+
 
         public enum NodeType {
             ENUM, PROPERTY, RELATION, ENTITY
@@ -859,7 +1100,7 @@ public class Ontology {
     }
 
     public enum OntologyPrimitiveType {
-        STRING,
+        STRING,//represents keyword
         TEXT,
         DATE,
         LONG,

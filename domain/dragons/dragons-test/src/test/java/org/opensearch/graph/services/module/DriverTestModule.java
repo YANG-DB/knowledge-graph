@@ -27,7 +27,7 @@ import org.opensearch.graph.model.transport.cursor.CreatePathsCursorRequest;
 import org.opensearch.graph.services.dispatcher.driver.MockDriver;
 import org.opensearch.graph.services.engine2.data.schema.InitialTestDataLoader;
 import org.opensearch.graph.services.engine2.data.schema.discrete.M2DragonsPhysicalSchemaProvider;
-import org.opensearch.graph.unipop.schemaProviders.OntologySchemaProvider;
+import org.opensearch.graph.unipop.schema.providers.OntologySchemaProvider;
 import org.opensearch.client.Client;
 import org.jooby.Env;
 import org.jooby.scope.RequestScoped;

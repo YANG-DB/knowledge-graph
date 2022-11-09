@@ -14,7 +14,7 @@ should be resolved (Join in SQL) and all the patterns are present in a logical f
 
 In the next image we can visualize the simple cypher pattern
     
-    (person)->[likes]- (message) 
+    (person)->[likes]-(message) 
 
 versus the composite and large explicit SQL equivalent query:
 

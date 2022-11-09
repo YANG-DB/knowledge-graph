@@ -25,7 +25,7 @@ package org.opensearch.graph.model.schema;
 
 
 public enum MappingIndexType {
-    //static index
+    //static index - this is the default
     STATIC,
     //common general index - unifies all entities under the same physical index
     UNIFIED,

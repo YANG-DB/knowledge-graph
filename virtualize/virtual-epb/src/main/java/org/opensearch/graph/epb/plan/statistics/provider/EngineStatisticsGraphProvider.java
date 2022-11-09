@@ -33,8 +33,8 @@ import org.opensearch.graph.model.GlobalConstants;
 import org.opensearch.graph.model.query.properties.constraint.Constraint;
 import org.opensearch.graph.model.query.Rel;
 import org.opensearch.graph.unipop.controller.utils.traversal.TraversalValuesByKeyProvider;
-import org.opensearch.graph.unipop.schemaProviders.*;
-import org.opensearch.graph.unipop.schemaProviders.indexPartitions.IndexPartitions;
+import org.opensearch.graph.unipop.schema.providers.*;
+import org.opensearch.graph.unipop.schema.providers.indexPartitions.IndexPartitions;
 import javaslang.Tuple2;
 import javaslang.collection.Stream;
 import org.apache.tinkerpop.gremlin.structure.T;
@@ -49,7 +49,7 @@ public class EngineStatisticsGraphProvider implements GraphStatisticsProvider {
     private static final String ENUM = "enum";
     private static final String INT = "int";
     private static final String FLOAT = "float";
-    private static final String STRING = "string";
+    private static final String STRING = "string";// represents keyword
 
     private static final String FIELD_NAME_TYPE = "type";
     private static final String FIELD_NAME_EDGE = GlobalConstants.EdgeSchema.SOURCE_ID;

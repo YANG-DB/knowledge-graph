@@ -29,7 +29,7 @@ import org.opensearch.graph.unipop.controller.common.context.VertexControllerCon
 import org.opensearch.graph.unipop.controller.search.SearchBuilder;
 import org.opensearch.graph.unipop.controller.utils.ElementUtil;
 import org.opensearch.graph.unipop.controller.utils.traversal.TraversalValuesByKeyProvider;
-import org.opensearch.graph.unipop.schemaProviders.GraphEdgeSchema;
+import org.opensearch.graph.unipop.schema.providers.GraphEdgeSchema;
 import javaslang.collection.Stream;
 import org.apache.tinkerpop.gremlin.structure.T;
 
