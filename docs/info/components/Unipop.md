@@ -77,13 +77,20 @@ Gremlin steps are chained together to produce the actual traversal and are trigg
  - **VertexProperty<V>**: a string key associated with a V value as well as a collection of Property<U> properties (vertices only)
 
 **Traversal Components**:
- - **TraversalSource**: a generator of traversals for a particular graph, domain specific language (DSL), and execution engine.
-   - **Traversal<S,E>**: a functional data flow process transforming objects of type S into object of type E.
+
+- **TraversalSource**: 
+A generator of traversals for a particular graph, domain specific language (DSL), and execution engine.
+  
+**Traversal<S,E>**:
+A functional data flow process transforming objects of type S into object of type E.
     
-   - **GraphTraversal**: a traversal DSL that is oriented towards the semantics of the raw graph (i.e. vertices, edges, etc.).
+**GraphTraversal**:
+A traversal DSL that is oriented towards the semantics of the raw graph (i.e. vertices, edges, etc.).
 
 
-[Unipop](../../../unipop-core) is used by [Virtual-Unipop](../../../virtualize/virtual-unipop) to generate a specialized traversal component that abstracts the storage engine with its proprietary DSL query language.
+[Unipop](../../../unipop-core)
+
+is used by [Virtual-Unipop](../../../virtualize/virtual-unipop) to generate a specialized traversal component that abstracts the storage engine with its proprietary DSL query language.
 Therefore, allowing them to be agnostic to how the data is stored and how to query the data, and reduce this complexity to be pushed downwards to the traversal layer.
 
 
