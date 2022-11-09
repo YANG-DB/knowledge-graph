@@ -74,7 +74,7 @@
         <spatial4j.version>0.7</spatial4j.version>
 
         <!-- owl -->
-        <owlapi.version>4.0.2</owlapi.version>
+        <owlapi.version>5.1.20</owlapi.version>
 
         <!-- rdf4j -->
         <rdf4j.version>3.6.0</rdf4j.version>
