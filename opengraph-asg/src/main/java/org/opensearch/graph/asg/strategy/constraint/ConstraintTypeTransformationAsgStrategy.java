@@ -43,6 +43,9 @@ import static org.opensearch.graph.model.asgQuery.AsgQueryUtil.getEprops;
 import static org.opensearch.graph.model.asgQuery.AsgQueryUtil.getRelProps;
 import static org.opensearch.graph.model.query.properties.constraint.ConstraintOp.*;
 
+/**
+ * This strategy replaces string literals with enumeration ordinal values in case the string literal belongs to an enumeration field.
+ */
 public class ConstraintTypeTransformationAsgStrategy implements AsgStrategy {
     //region Constructors
     public ConstraintTypeTransformationAsgStrategy() {

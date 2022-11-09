@@ -37,6 +37,10 @@ import org.opensearch.graph.unipop.schema.providers.GraphElementPropertySchema;
 
 import java.util.Optional;
 
+/**
+ * This strategy transforms property nested field names (a.b.c.d) into an explicit nested property which reflects the correct physical path of each nested inner
+ * property according to its real mapped name.
+ */
 public class NestingPropertiesTransformationAsgStrategy implements AsgStrategy {
 
     public NestingPropertiesTransformationAsgStrategy( GraphElementSchemaProviderFactory schemaProviderFactory) {

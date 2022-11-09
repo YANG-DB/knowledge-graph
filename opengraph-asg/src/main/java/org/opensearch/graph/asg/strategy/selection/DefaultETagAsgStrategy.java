@@ -36,6 +36,9 @@ import org.opensearch.common.Strings;
 
 import static org.opensearch.graph.model.execution.plan.descriptors.QueryDescriptor.describe;
 
+/**
+ * Verify all elements have a tag - if not create one for them
+ */
 public class DefaultETagAsgStrategy implements AsgStrategy {
 
     //region AsgStrategy Implementation

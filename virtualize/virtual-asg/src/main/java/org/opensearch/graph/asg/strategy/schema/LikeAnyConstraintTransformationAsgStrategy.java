@@ -54,6 +54,9 @@ import java.util.*;
 
 import static org.opensearch.graph.unipop.schema.providers.GraphElementPropertySchema.IndexingSchema.Type.ngrams;
 
+/**
+ * This strategy transforms 'likeAny' predicates on fields which have a physical ngram mapping into an explicit schematic predicate
+ */
 public class LikeAnyConstraintTransformationAsgStrategy implements AsgStrategy, AsgElementStrategy<EPropGroup> {
     //region Constructors
     public LikeAnyConstraintTransformationAsgStrategy(OntologyProvider ontologyProvider, GraphElementSchemaProviderFactory schemaProviderFactory) {

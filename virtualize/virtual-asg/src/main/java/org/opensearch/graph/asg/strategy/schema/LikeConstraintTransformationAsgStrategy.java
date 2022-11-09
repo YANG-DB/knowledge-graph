@@ -52,7 +52,10 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
-
+/**
+ * This strategy transforms 'like' predicates on fields which have a physical ngram mapping into an explicit schematic predicate
+ *  - SchematicEProp
+ */
 public class LikeConstraintTransformationAsgStrategy implements AsgStrategy, AsgElementStrategy<EPropGroup> {
     //region Constructors
     public LikeConstraintTransformationAsgStrategy(OntologyProvider ontologyProvider, GraphElementSchemaProviderFactory schemaProviderFactory) {

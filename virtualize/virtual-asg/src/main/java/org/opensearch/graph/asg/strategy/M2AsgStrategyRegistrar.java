@@ -76,7 +76,6 @@ public class M2AsgStrategyRegistrar  implements AsgStrategyRegistrar {
                 new LikeAnyConstraintTransformationAsgStrategy(this.ontologyProvider, this.schemaProviderFactory),
                 new NestingPropertiesTransformationAsgStrategy(this.schemaProviderFactory),
                 new RedundantInSetConstraintAsgStrategy(),
-                new RedundantInRangeConstraintAsgStrategy(),
                 new RedundantPropGroupAsgStrategy(),
                 new DefaultSelectionAsgStrategy(this.ontologyProvider)
         );

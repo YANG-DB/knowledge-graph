@@ -15,18 +15,16 @@
    7) Execution Planner [ EPB ](info/components/Execution-planner.md) 
    8) Cost Based estimator [ Estimator ](info/components/Cost-estimator.md) 
    9) [ Traversal Translator ](info/components/TraversalTranslator.md) 
- 
 
 5) **Unipop**:
    1) Tinkerpop language and toolkit tutorial [Gremlin](https://kelvinlawrence.net/book/Gremlin-Graph-Guide.html)
-   1) [Unipop](info/components/Unipop.md)
-   1) The Gremlin [Step Controller](info/components/UnipopStepController.md)
+   2) [Unipop](info/components/Unipop.md)
+   3) The Gremlin [Step Controller](info/components/UnipopStepController.md)
 
 
 6) **Configuration**:
    1) Configuration folder [Configuration](info/components/Configuration.md)
    2) Index physical schema config [Index Provider](info/components/Index-provider.md)
-
 
 7) **Miscellaneous**
    1) General [Strategies](info/components/StrategiesMechanisms.md)
@@ -47,8 +45,11 @@
 1) Setting up the development environment 
 1) Using containers for development and tests 
 
+---- 
+
 ## Tutorials
-10) **Dragons Tutorial**:
+10) 
+11) **Dragons Tutorial**:
      1) Installation the Dragons domain [Dragons](tutorial/sample/dragons/installation.md)
      2) Creating the ontology and schema [Init Schema](tutorial/sample/dragons/create-ontology.md)
      3) UpLoading data into the graph [Data](tutorial/sample/dragons/load-data.md)

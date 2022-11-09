@@ -49,6 +49,9 @@ import java.util.List;
 import java.util.Optional;
 import java.util.Set;
 
+/**
+ * This strategy adds all default entity/relation's properties to the query so that they will be part of the results
+ */
 public class DefaultSelectionAsgStrategy implements AsgStrategy {
     //region Constructors
     public DefaultSelectionAsgStrategy(OntologyProvider ontologyProvider) {

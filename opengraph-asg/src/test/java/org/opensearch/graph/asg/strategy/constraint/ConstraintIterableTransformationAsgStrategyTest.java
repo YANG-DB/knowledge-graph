@@ -367,7 +367,7 @@ public class ConstraintIterableTransformationAsgStrategyTest {
         assertThat(expr5, instanceOf(Date.class));
 
 
-        //Lets call now to the Constraint Array Transformation
+        // call the Constraint Array Transformation
         ConstraintIterableTransformationAsgStrategy constraintIterableTransformationAsgStrategy1 = new ConstraintIterableTransformationAsgStrategy();
         constraintIterableTransformationAsgStrategy1.apply(asgQueryWithRelProps2, asgStrategyContext);
 

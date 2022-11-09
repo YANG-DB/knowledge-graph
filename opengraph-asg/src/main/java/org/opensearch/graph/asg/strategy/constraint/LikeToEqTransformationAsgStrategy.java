@@ -34,6 +34,9 @@ import org.opensearch.graph.model.query.properties.EPropGroup;
 import org.opensearch.graph.model.query.properties.constraint.ConstraintOp;
 import javaslang.collection.Stream;
 
+/**
+ * this strategy transforms a like predicate with an exact operand into an equals predicate
+ */
 public class LikeToEqTransformationAsgStrategy implements AsgStrategy {
     //region AsgStrategy Implementation
     @Override

@@ -46,6 +46,14 @@ import java.util.Set;
 
 import static org.opensearch.graph.unipop.schema.providers.GraphElementPropertySchema.IndexingSchema.Type.exact;
 
+/**
+ * This strategy transforms any entity property which are defined as exact match in the mapping schema into such explicit property
+ *
+ * Will be resolved into any one of the following:
+ *  - SchematicEProp
+ *  - SchematicNestedEProp
+ *  - SchematicRankedEProp
+ */
 public class MultiConstraintTransformationAsgStrategy implements AsgStrategy {
     //region Constructors
     public MultiConstraintTransformationAsgStrategy(

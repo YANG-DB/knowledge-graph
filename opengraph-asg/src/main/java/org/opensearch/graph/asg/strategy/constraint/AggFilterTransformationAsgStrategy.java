@@ -31,6 +31,10 @@ import org.opensearch.graph.model.asgQuery.AsgQueryUtil;
 import org.opensearch.graph.model.asgQuery.AsgStrategyContext;
 import org.opensearch.graph.model.query.aggregation.Agg;
 
+/**
+ * This strategy transforms any found aggregation expression into an aggregation constraint expression
+ * --- TODO IMPLEMENT ---
+ */
 public class AggFilterTransformationAsgStrategy implements AsgStrategy {
     //region AsgStrategy Implementation
     @Override

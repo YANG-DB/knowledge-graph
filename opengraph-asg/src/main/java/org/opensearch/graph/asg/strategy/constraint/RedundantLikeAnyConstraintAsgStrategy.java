@@ -39,6 +39,9 @@ import java.util.List;
 
 import static org.opensearch.graph.model.query.properties.constraint.ConstraintOp.ignorableConstraints;
 
+/**
+ * this strategy Transforms likeAny constraint into like with a list of operands as the expression value
+ */
 public class RedundantLikeAnyConstraintAsgStrategy implements AsgStrategy {
     //region AsgStrategy Implementation
     @Override

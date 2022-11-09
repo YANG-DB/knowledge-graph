@@ -55,6 +55,15 @@ import java.util.stream.LongStream;
 
 import static java.util.stream.Stream.concat;
 
+/**
+ * This strategy finds relation pattern of the type (a:A)-[r:R 1..3]-(b:B) which it states how many steps the query is allowed to traverse.
+ * It than replaces this with explicit patterns in which each pattern represents one of the amount of hops allowed to search
+ *  - First a single hop : (a:A)-[r:R]-(b:B)
+ *  - Second two hops : (a:A)-[r1:R]-(b1:B)-[r2:R]-(b2:B)
+ *  - Third three hops : (a:A)-[r1:R]-(b1:B)-[r2:R]-(b2:B)-[r3:R]-(b3:B)
+ * The entire traversal tree is as follows:
+ *  - First single hop OR Second two hops OR Third three hops...
+ */
 public class RelationPatternRangeAsgStrategy implements AsgStrategy {
 
     @Override

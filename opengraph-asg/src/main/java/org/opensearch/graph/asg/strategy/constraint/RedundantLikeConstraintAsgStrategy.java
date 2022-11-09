@@ -40,6 +40,9 @@ import java.util.List;
 
 import static org.opensearch.graph.model.query.properties.constraint.ConstraintOp.ignorableConstraints;
 
+/**
+ * This strategy transforms redundant appearances of a like predicates and unifies it into a single like predicate
+ */
 public class RedundantLikeConstraintAsgStrategy implements AsgStrategy {
     //region ConstraintTransformationAsgStrategyBase Implementation
     @Override

@@ -38,6 +38,9 @@ import javaslang.collection.Stream;
 
 import java.util.List;
 
+/**
+ * This strategy groups together different properties that actually belong to a specific entity into a single group so that this group will be pushed down together to the engine
+ */
 public class HQuantPropertiesGroupingAsgStrategy implements AsgStrategy {
     // Horizontal Quantifier with Bs below
     @Override

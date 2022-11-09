@@ -37,6 +37,9 @@ import org.opensearch.graph.model.query.properties.RelPropGroup;
 import org.opensearch.graph.model.query.quant.QuantType;
 import javaslang.collection.Stream;
 
+/**
+ * this strategy simplifies property groups and deletes intermediate empty inner groups in the group containment hierarchy
+ */
 public class RedundantPropGroupAsgStrategy implements AsgStrategy {
     //region ConstraintTransformationAsgStrategyBase Implementation
     @Override
@@ -60,12 +63,6 @@ public class RedundantPropGroupAsgStrategy implements AsgStrategy {
 
             if (!propGroup.getGroups().isEmpty()) {
                 T childGroup = propGroup.getGroups().get(0);
-                /*if (isSimplePropGroup(childGroup)) {
-                    propGroup.getGroups().remove(childGroup);
-                    propGroup.getGroups().addAll(childGroup.getGroups());
-                    propGroup.getProps().addAll(childGroup.getProps());
-                }*/
-
                 propGroup.getGroups().remove(childGroup);
 
                 propGroup.getGroups().addAll(childGroup.getGroups());
