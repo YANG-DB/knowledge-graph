@@ -140,84 +140,113 @@ Each strategy addresses a different aspect and concern
  - **DefaultETagAsgStrategy** 
 Verify all elements have a tag - if not create one for them 
 
+
+
  - **AsgNamedParametersStrategy**
 Handle parameterized constraint (ParameterizedConstraint) in which it replaces each parameterized value with the appropriate matched pattern
+
+
 
  - **UntypedInferTypeLeftSideRelationAsgStrategy**
 This strategy infers the actual concrete type according to the ontology and if this type is not explicitly defined in the actual query - it adds it explicitly 
 so that the execution planner can have better cost approximations for the specific types it should consider for pricing of the query. 
 
+
+
  - **RelationPatternRangeAsgStrategy**
 This strategy finds relation pattern of the type (a:A)-[r:R 1..3]-(b:B) which it states how many steps the query is allowed to traverse.
 It than replaces this with explicit patterns in which each pattern represents one of the amount of hops allowed to search
- - First a single hop : (a:A)-[r:R]-(b:B)
- - Second two hops : (a:A)-[r1:R]-(b1:B)-[r2:R]-(b2:B)
- - Third three hops : (a:A)-[r1:R]-(b1:B)-[r2:R]-(b2:B)-[r3:R]-(b3:B)
-The entire traversal tree is as follows:
- - First single hop OR Second two hops OR Third three hops... 
+   - First a single hop : (a:A)-[r:R]-(b:B)
+   - Second two hops : (a:A)-[r1:R]-(b1:B)-[r2:R]-(b2:B)
+   - Third three hops : (a:A)-[r1:R]-(b1:B)-[r2:R]-(b2:B)-[r3:R]-(b3:B)
+
+   The entire traversal tree is as follows:
+   - First single hop OR Second two hops OR Third three hops... 
+
+
 
  - **UntypedRelationInferTypeAsgStrategy**
 This strategy replaces the "_all" (none specific relations) statement with each existing type - according to allowed types as they are present in the ancestor type element
 This allows better understanding of the requested entities and byi adding these types explicitly the execution planner can have better cost approximations for the specific types it should consider for pricing of the query. 
 
+
+
  - **EPropGroupingAsgStrategy**
 This strategy groups together different properties that actually belong to a specific entity into a single group so that this group will be pushed down together to the engine  
+
+
 
  - **HQuantPropertiesGroupingAsgStrategy**
 This strategy groups together different properties that actually belong to a specific entity into a single group so that this group will be pushed down together to the engine  
 
+
  - **Quant1PropertiesGroupingAsgStrategy**
 This strategy groups together different properties that actually belong to a specific entity into a single group so that this group will be pushed down together to the engine  
+
 
  - **RelPropGroupingAsgStrategy**
 This strategy groups together different properties that actually belong to a specific Relation into a single group so that this group will be pushed down together to the engine  
 
+
  - **ConstraintTypeTransformationAsgStrategy**
 This strategy replaces string literals with enumeration ordinal values in case the string literal belongs to an enumeration field.
 
+
  - **ConstraintIterableTransformationAsgStrategy**
 This strategy Transforms multi-value predicate from an array or iterable into a list
+
    
  - **RedundantLikeConstraintAsgStrategy**
 This strategy transforms redundant appearances of a like predicates and unifies it into a single like predicate:
- - p1:name like jerry* 
- - p2:name like *mcqueen
- would results into: like jerry*mcqueen
+   - p1:name like jerry* 
+   - p2:name like *mcqueen
+
+   would results into: like jerry*mcqueen
+
 
  - **RedundantLikeAnyConstraintAsgStrategy**
 This strategy Transforms likeAny constraint into like with a list of operands as the expression value
 
+
  - **AggFilterTransformationAsgStrategy**
- - TODO - Not Implemented Yet
-This strategy transforms any found aggregation expression into an aggregation constraint expression
+   - _TODO - Not Implemented Yet_
+
+   This strategy transforms any found aggregation expression into an aggregation constraint expression
    
+
  - **LikeToEqTransformationAsgStrategy**
 This strategy transforms a like predicate with an exact operand into an equals predicate
 
+
  - **MultiConstraintTransformationAsgStrategy**
 This strategy transforms any entity property which are defined as exact match in the mapping schema into such explicit property
-
 Will be resolved into any one of the following:
- - SchematicEProp
- - SchematicNestedEProp
- - SchematicRankedEProp
+   - SchematicEProp
+   - SchematicNestedEProp
+   - SchematicRankedEProp
+
 
  - **LikeConstraintTransformationAsgStrategy**
 This strategy transforms like predicates on fields which have a physical ngram mapping into an explicit predicate
- - SchematicEProp
+   - SchematicEProp
+
 
  - **LikeAnyConstraintTransformationAsgStrategy**
 This strategy transforms 'likeAny' predicates on fields which have a physical ngram mapping into an explicit schematic predicate
    
+
  - **NestingPropertiesTransformationAsgStrategy**
 This strategy transforms property nested field names (a.b.c.d) into an explicit nested property which reflects the correct physical path of each nested inner 
 property according to its real mapped name.
 
+
  - **RedundantInSetConstraintAsgStrategy**
 This strategy replaces the inSet predicate with an equal predicate in case the number of operand in the expression is one
 
+
  - **RedundantPropGroupAsgStrategy**
 This strategy simplifies property groups and deletes intermediate empty inner groups in the group containment hierarchy
+
 
  - **DefaultSelectionAsgStrategy**
 This strategy adds all default entity/relation properties to the query so that they will be part of the results

@@ -1,5 +1,7 @@
 # Knowledge Graph
 
+[Overview & Roadmap](info/roadmap/OpensearchGraph.md)
+
 1) Introduction and general information [General information](info/General.md)
 2) Catalog, the use case for data management [Catalog](info/Catalog.md)
 3) Architecture Overview [Architecture](info/Architecture.md)
@@ -35,9 +37,8 @@
 
 9) **Planned Roadmap**:
    1) Ingestion, Fusion and Normalization [Ingestion](info/roadmap/IngestionNormalization.md)
-   2) User Experience & ML future [UX Future](info/roadmap/OpensearchGraph.md)
-   3) [Knowledge Deck](info/KnowledgeGraphDeck.md)
-   4) [Development future threads](info/roadmap/DevelopmentThreads.md)
+   2) [Knowledge Deck](info/KnowledgeGraphDeck.md)
+   3) [Development future threads](info/roadmap/DevelopmentThreads.md)
 
 ---- 
 
@@ -48,8 +49,7 @@
 ---- 
 
 ## Tutorials
-10) 
-11) **Dragons Tutorial**:
+**Dragons Tutorial**:
      1) Installation the Dragons domain [Dragons](tutorial/sample/dragons/installation.md)
      2) Creating the ontology and schema [Init Schema](tutorial/sample/dragons/create-ontology.md)
      3) UpLoading data into the graph [Data](tutorial/sample/dragons/load-data.md)
@@ -58,7 +58,7 @@
      6) Additional Queries [More Queries](tutorial/sample/dragons/queries/Queries.md)
  
 
-11) **Observability Tutorial**:
+**Observability Tutorial**:
      1) Observability work-plan [planning](info/roadmap/ObservabilityIntegration.md) 
      2) Getting started with [Observability](tutorial/sample/observability/GettingStarted.md) 
      3) Data Loading [Data](tutorial/sample/observability/DataLoading.md) 
