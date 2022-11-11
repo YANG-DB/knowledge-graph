@@ -29,9 +29,12 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import org.opensearch.graph.model.execution.plan.descriptors.QueryDescriptor;
 import org.opensearch.graph.model.query.Query;
 import org.opensearch.graph.model.transport.cursor.CreateCursorRequest;
+
+import java.util.Objects;
 
 /**
  * Created by lior.perry on 19/02/2017.
@@ -208,6 +211,19 @@ public class CreateQueryRequest implements CreateQueryRequestMetadata<Query> {
 
     //endregion
 
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        CreateQueryRequest that = (CreateQueryRequest) o;
+        return id.equals(that.id) && storageType == that.storageType && queryType == that.queryType && name.equals(that.name) && type.equals(that.type) && query.equals(that.query) && ontology.equals(that.ontology);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, storageType, queryType, name, type, query, ontology);
+    }
 
     @Override
     public String toString() {
