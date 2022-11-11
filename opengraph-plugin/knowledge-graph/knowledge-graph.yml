@@ -8,7 +8,8 @@
 opensearch.kgraph:
   general:
     operationTimeoutMs: 60000 # 60 seconds, Minimum 100ms
-    defaultItemsQueryCount: 100 # default number of items to query
+    defaultItemsQueryCount: 100 # default number of items to get query objects
+    defaultMaxFetchCount: 10000 # default max fetch number of items for query execution
     access:
       adminAccess: "AllKGraphObjects"
       # adminAccess values:

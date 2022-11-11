@@ -20,6 +20,8 @@ import org.opensearch.commons.utils.STRING_READER
 import org.opensearch.commons.utils.STRING_WRITER
 import org.opensearch.commons.utils.enumReader
 import org.opensearch.commons.utils.logger
+import org.opensearch.graph.KnowledgeGraphPlugin
+import org.opensearch.graph.index.KGraphIndex
 import org.opensearch.graph.model.ObjectType
 import org.opensearch.graph.model.RestTag.QUERY_PARAM_LIST_FIELD
 import org.opensearch.graph.model.RestTag.MAX_ITEMS_FIELD
@@ -52,14 +54,14 @@ class RunQueryRequest : ActionRequest, ToXContentObject {
         @JvmStatic
         @Throws(IOException::class)
         fun parse(parser: XContentParser): RunQueryRequest {
-            var queryId = "?"
+            lateinit var queryId: String
             var maxItems = PluginSettings.defaultMaxFetchCount
             var queryParams: Map<String, String> = mapOf()
 
             XContentParserUtils.ensureExpectedToken(
-                XContentParser.Token.START_OBJECT,
-                parser.currentToken(),
-                parser
+                    XContentParser.Token.START_OBJECT,
+                    parser.currentToken(),
+                    parser
             )
             while (parser.nextToken() != XContentParser.Token.END_OBJECT) {
                 val fieldName = parser.currentName()
@@ -74,11 +76,18 @@ class RunQueryRequest : ActionRequest, ToXContentObject {
                     }
                 }
             }
-            return RunQueryRequest(
-                queryId,
-                maxItems,
-                queryParams
-            )
+            try {
+                if (!queryId.isNullOrEmpty()) {
+                    return RunQueryRequest(
+                            queryId,
+                            maxItems,
+                            queryParams
+                    )
+                }
+            } catch (err: Throwable) {
+                throw IOException("QueryId mandatory field not set for RunQueryRequestObject")
+            }
+            throw IOException(" RunQueryRequestObject could not be parsed ")
         }
     }
 
@@ -87,10 +96,10 @@ class RunQueryRequest : ActionRequest, ToXContentObject {
      */
     override fun toXContent(builder: XContentBuilder?, params: ToXContent.Params?): XContentBuilder {
         return builder!!.startObject()
-            .field(OBJECT_ID_FIELD, queryId)
-            .field(MAX_ITEMS_FIELD, maxItems)
-            .field(QUERY_PARAM_LIST_FIELD, queryParams)
-            .endObject()
+                .field(OBJECT_ID_FIELD, queryId)
+                .field(MAX_ITEMS_FIELD, maxItems)
+                .field(QUERY_PARAM_LIST_FIELD, queryParams)
+                .endObject()
     }
 
     @Suppress("LongParameterList")

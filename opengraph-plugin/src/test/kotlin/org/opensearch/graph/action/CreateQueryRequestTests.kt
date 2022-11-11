@@ -6,6 +6,7 @@
 package org.opensearch.graph.action
 
 import com.fasterxml.jackson.core.JsonParseException
+import org.junit.BeforeClass
 import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.Assertions.assertNull
 import org.junit.jupiter.api.Test
@@ -36,8 +37,7 @@ internal class CreateQueryRequestTests {
     val sample = Query("test", org.opensearch.graph.model.transport.CreateQueryRequest("Q1", "Q1", query))
 
     private val objectRequest =
-        CreateQueryRequest("test-id", ObjectType.QUERY, sample )
-
+            CreateQueryRequest("test-id", ObjectType.QUERY, sample )
     @Test
     fun `Create object serialize and deserialize transport object should be equal`() {
         val recreatedObject = recreateObject(objectRequest) { CreateQueryRequest(it) }

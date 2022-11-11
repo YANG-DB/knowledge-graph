@@ -8,9 +8,7 @@ package org.opensearch.graph.security
 import org.opensearch.OpenSearchStatusException
 import org.opensearch.commons.authuser.User
 import org.opensearch.graph.settings.PluginSettings
-import org.opensearch.graph.settings.PluginSettings.FilterBy
 import org.opensearch.rest.RestStatus
-import java.util.stream.Collectors
 
 /**
  * Class for checking/filtering user access.
@@ -37,38 +35,33 @@ internal object UserAccessManager {
     fun validateUser(user: User?) {
         if (isUserPrivateTenant(user) && user?.name == null) {
             throw OpenSearchStatusException(
-                "User name not provided for private tenant access",
-                RestStatus.FORBIDDEN
+                    "User name not provided for private tenant access",
+                    RestStatus.FORBIDDEN
             )
         }
         when (PluginSettings.filterBy) {
-            FilterBy.NoFilter -> { // No validation
+            PluginSettings.FilterBy.NoFilter -> { // No validation
             }
-            FilterBy.User -> { // User name must be present
+            PluginSettings.FilterBy.User -> { // User name must be present
                 user?.name
-                    ?: throw OpenSearchStatusException(
-                        "Filter-by enabled with security disabled",
-                        RestStatus.FORBIDDEN
-                    )
+                        ?: throw OpenSearchStatusException(
+                                "Filter-by enabled with security disabled",
+                                RestStatus.FORBIDDEN
+                        )
             }
-            FilterBy.Roles -> { // backend roles must be present
+            PluginSettings.FilterBy.Roles -> { // backend roles must be present
                 if (user == null || user.roles.isNullOrEmpty()) {
                     throw OpenSearchStatusException(
-                        "User doesn't have roles configured. Contact administrator.",
-                        RestStatus.FORBIDDEN
-                    )
-                } else if (user.roles.stream().filter { !PluginSettings.ignoredRoles.contains(it) }.count() == 0L) {
-                    throw OpenSearchStatusException(
-                        "No distinguishing roles configured. Contact administrator.",
-                        RestStatus.FORBIDDEN
+                            "User doesn't have roles configured. Contact administrator.",
+                            RestStatus.FORBIDDEN
                     )
                 }
             }
-            FilterBy.BackendRoles -> { // backend roles must be present
+            PluginSettings.FilterBy.BackendRoles -> { // backend roles must be present
                 if (user?.backendRoles.isNullOrEmpty()) {
                     throw OpenSearchStatusException(
-                        "User doesn't have backend roles configured. Contact administrator.",
-                        RestStatus.FORBIDDEN
+                            "User doesn't have backend roles configured. Contact administrator.",
+                            RestStatus.FORBIDDEN
                     )
                 }
             }
@@ -113,15 +106,7 @@ internal object UserAccessManager {
         if (canAdminViewAllItems(user)) {
             return listOf()
         }
-        return when (PluginSettings.filterBy) {
-            FilterBy.NoFilter -> listOf()
-            FilterBy.User -> listOf("$USER_TAG${user.name}")
-            FilterBy.Roles -> user.roles.stream()
-                .filter { !PluginSettings.ignoredRoles.contains(it) }
-                .map { "$ROLE_TAG$it" }
-                .collect(Collectors.toList())
-            FilterBy.BackendRoles -> user.backendRoles.map { "$BACKEND_ROLE_TAG$it" }
-        }
+        return listOf()
     }
 
     /**
@@ -137,15 +122,7 @@ internal object UserAccessManager {
         if (canAdminViewAllItems(user)) {
             return true
         }
-        return when (PluginSettings.filterBy) {
-            FilterBy.NoFilter -> true
-            FilterBy.User -> access.contains("$USER_TAG${user.name}")
-            FilterBy.Roles -> user.roles.stream()
-                .filter { !PluginSettings.ignoredRoles.contains(it) }
-                .map { "$ROLE_TAG$it" }
-                .anyMatch { it in access }
-            FilterBy.BackendRoles -> user.backendRoles.map { "$BACKEND_ROLE_TAG$it" }.any { it in access }
-        }
+        return false
     }
 
     /**
@@ -159,7 +136,7 @@ internal object UserAccessManager {
     }
 
     private fun canAdminViewAllItems(user: User): Boolean {
-        return PluginSettings.adminAccess == PluginSettings.AdminAccess.AllObjects && isAdminUser(user)
+        return isAdminUser(user)
     }
 
     private fun isAdminUser(user: User): Boolean {

@@ -6,13 +6,18 @@
 package org.opensearch.graph.action
 
 import com.fasterxml.jackson.core.JsonParseException
+import org.junit.BeforeClass
 import org.junit.jupiter.api.Assertions.assertEquals
+import org.junit.jupiter.api.BeforeAll
 import org.junit.jupiter.api.Test
+import org.junit.jupiter.api.TestInstance
 import org.junit.jupiter.api.assertThrows
 import org.opensearch.commons.utils.recreateObject
 import org.opensearch.graph.createObjectFromJsonString
 import org.opensearch.graph.getJsonString
+import java.io.IOException
 
+@TestInstance(TestInstance.Lifecycle.PER_CLASS)
 internal class RunQueryRequestTests {
     private fun assertGetRequestEquals(
             expected: RunQueryRequest,
@@ -47,7 +52,7 @@ internal class RunQueryRequestTests {
     }
 
     @Test
-    fun `Get request with all field should deserialize json object using parser`() {
+    fun `Get request without query id should throw parse error`() {
         val objectRequest = RunQueryRequest(
                 "test-id",
                 100,
@@ -60,12 +65,9 @@ internal class RunQueryRequestTests {
         )
         val jsonString = """
         {
-            "objectIdList":["${objectRequest.queryId.first()}"],
-            "fromIndex":"10",
+            "objectId":"test-id",
             "maxItems":"100",
-            "sortField":"sortField",
-            "sortOrder":"desc",
-            "filterParamList": {
+            "queryParamList": {
                 "filterKey1":"filterValue1",
                 "filterKey2":"true",
                 "filterKey3":"filter,Value,3",
@@ -77,43 +79,12 @@ internal class RunQueryRequestTests {
         assertGetRequestEquals(objectRequest, recreatedObject)
     }
 
-    @Test
-    fun `Get request with only object_id field should deserialize json object using parser`() {
-        val objectRequest = RunQueryRequest("test-id")
-        val jsonString = """
-        {
-            "objectIdList":["${objectRequest.queryId.first()}"]
-        }
-        """.trimIndent()
-        val recreatedObject = createObjectFromJsonString(jsonString) { RunQueryRequest.parse(it) }
-        assertGetRequestEquals(objectRequest, recreatedObject)
-    }
-
-
-    @Test
-    fun `Get request with invalid sortOrder should throw exception`() {
-        val jsonString = """
-        {
-            "sortOrder":"descending"
-        }
-        """.trimIndent()
-        assertThrows<IllegalArgumentException> {
-            createObjectFromJsonString(jsonString) { RunQueryRequest.parse(it) }
-        }
-    }
 
     @Test
     fun `Get request with only filterParamList field should deserialize json object using parser`() {
-        val objectRequest = RunQueryRequest("test-id",
-                queryParams = mapOf(
-                        Pair("filterKey1", "filterValue1"),
-                        Pair("filterKey2", "true"),
-                        Pair("filterKey3", "filter,Value,3"),
-                        Pair("filterKey4", "4")
-                )
-        )
         val jsonString = """
         {
+            "maxItems":"100",
             "filterParamList": {
                 "filterKey1":"filterValue1",
                 "filterKey2":"true",
@@ -122,8 +93,9 @@ internal class RunQueryRequestTests {
             }
         }
         """.trimIndent()
-        val recreatedObject = createObjectFromJsonString(jsonString) { RunQueryRequest.parse(it) }
-        assertGetRequestEquals(objectRequest, recreatedObject)
+        assertThrows<IOException> {
+            createObjectFromJsonString(jsonString) { RunQueryRequest.parse(it) }
+        }
     }
 
 
@@ -140,10 +112,9 @@ internal class RunQueryRequestTests {
         val objectRequest = RunQueryRequest("test-id")
         val jsonString = """
         {
-            "objectIdList":["${objectRequest.queryId.first()}"],
-            "extra_field_1":["extra", "value"],
-            "extra_field_2":{"extra":"value"},
-            "extra_field_3":"extra value 3"
+            "objectId":"test-id",
+            "foo":"bar",
+            "maxItems":"10000"
         }
         """.trimIndent()
         val recreatedObject = createObjectFromJsonString(jsonString) { RunQueryRequest.parse(it) }

@@ -48,9 +48,10 @@ internal object PluginSettings {
     private const val DEFAULT_ITEMS_QUERY_COUNT_KEY = "$GENERAL_KEY_PREFIX.defaultItemsQueryCount"
 
     /**
-     * Setting to choose admin access restriction.
+     * Setting to choose default number of items to query.
      */
-    private const val ADMIN_ACCESS_KEY = "$ACCESS_KEY_PREFIX.adminAccess"
+    private const val DEFAULT_ITEMS_FETCH_COUNT_KEY = "$GENERAL_KEY_PREFIX.defaultMaxFetchCount"
+
 
     /**
      * Setting to choose filter method.
@@ -78,26 +79,25 @@ internal object PluginSettings {
     private const val DEFAULT_ITEMS_QUERY_COUNT_VALUE = 1000
 
     /**
+     * Default number of items to fetch.
+     */
+    private const val DEFAULT_ITEMS_FETCH_COUNT_VALUE = 10000
+
+    /**
      * Minimum number of items to query.
      */
     private const val MINIMUM_ITEMS_QUERY_COUNT = 10
 
     /**
-     * Default admin access method.
+     * Minimum number of items fetch per query execution.
      */
-    private const val DEFAULT_ADMIN_ACCESS_METHOD = "AllKGraphObjects"
+    private const val MINIMUM_ITEMS_FETCH_COUNT = 1000
 
     /**
      * Default filter-by method.
      */
     private const val DEFAULT_FILTER_BY_METHOD = "NoFilter"
 
-    /**
-     * Default filter-by method.
-     */
-    private val DEFAULT_IGNORED_ROLES = listOf(
-        "own_index",
-    )
 
     /**
      * Operation timeout setting in ms for I/O operations
@@ -106,35 +106,29 @@ internal object PluginSettings {
     var operationTimeoutMs: Long
 
     /**
+     * Filter-by method.
+     */
+    @Volatile
+    var filterBy: FilterBy
+
+
+    /**
      * Default number of items to query.
      */
     @Volatile
     var defaultMaxFetchCount: Int
 
     /**
-     * admin access method.
+     * Default number of items to query.
      */
     @Volatile
-    var adminAccess: AdminAccess
+    var defaultMaxQueryCount: Int
 
-    /**
-     * Filter-by method.
-     */
-    @Volatile
-    var filterBy: FilterBy
 
-    /**
-     * list of ignored roles.
-     */
-    @Volatile
-    var ignoredRoles: List<String>
+    private const val DECIMAL_RADIX: Int = 10
 
-    /**
-     * Enum for types of admin access
-     * "Standard" -> Admin user access follows standard user
-     * "AllKGraphObjects" -> Admin user with "all_access" role can see all objects of all users.
-     */
-    internal enum class AdminAccess { Standard, AllObjects }
+    private val log = LogManager.getLogger(javaClass)
+    private val defaultSettings: Map<String, String>
 
     /**
      * Enum for types of filterBy options
@@ -145,70 +139,63 @@ internal object PluginSettings {
      */
     internal enum class FilterBy { NoFilter, User, Roles, BackendRoles }
 
-    private const val DECIMAL_RADIX: Int = 10
-
-    private val log = LogManager.getLogger(javaClass)
-    private val defaultSettings: Map<String, String>
-
     init {
         var settings: Settings? = null
+        var defaultSettingYmlFile = Path.of(PLUGIN_NAME, "knowledge-graph.yml")
         val configDirName = BootstrapInfo.getSystemProperties()?.get("opensearch.path.conf")?.toString()
+
         if (configDirName != null) {
-            val defaultSettingYmlFile = Path.of(configDirName, PLUGIN_NAME, "graph.yml")
-            try {
-                settings = Settings.builder().loadFromPath(defaultSettingYmlFile).build()
-            } catch (exception: IOException) {
-                log.warn("$LOG_PREFIX:Failed to load ${defaultSettingYmlFile.toAbsolutePath()}")
-            }
+            defaultSettingYmlFile = Path.of(configDirName, PLUGIN_NAME, "knowledge-graph.yml")
         }
+        try {
+            settings = Settings.builder().loadFromPath(defaultSettingYmlFile).build()
+        } catch (exception: IOException) {
+            log.warn("$LOG_PREFIX:Failed to load ${defaultSettingYmlFile.toAbsolutePath()}")
+        }
+
         // Initialize the settings values to default values
         operationTimeoutMs = (settings?.get(OPERATION_TIMEOUT_MS_KEY)?.toLong()) ?: DEFAULT_OPERATION_TIMEOUT_MS
-        defaultMaxFetchCount = (settings?.get(DEFAULT_ITEMS_QUERY_COUNT_KEY)?.toInt())
-            ?: DEFAULT_ITEMS_QUERY_COUNT_VALUE
-        adminAccess = AdminAccess.valueOf(settings?.get(ADMIN_ACCESS_KEY) ?: DEFAULT_ADMIN_ACCESS_METHOD)
         filterBy = FilterBy.valueOf(settings?.get(FILTER_BY_KEY) ?: DEFAULT_FILTER_BY_METHOD)
-        ignoredRoles = settings?.getAsList(IGNORE_ROLE_KEY) ?: DEFAULT_IGNORED_ROLES
+        defaultMaxQueryCount = (settings?.get(DEFAULT_ITEMS_QUERY_COUNT_KEY)?.toInt())
+                ?: DEFAULT_ITEMS_QUERY_COUNT_VALUE
+        defaultMaxFetchCount = (settings?.get(DEFAULT_ITEMS_FETCH_COUNT_KEY)?.toInt())
+                ?: DEFAULT_ITEMS_FETCH_COUNT_VALUE
 
         defaultSettings = mapOf(
-            OPERATION_TIMEOUT_MS_KEY to operationTimeoutMs.toString(DECIMAL_RADIX),
-            DEFAULT_ITEMS_QUERY_COUNT_KEY to defaultMaxFetchCount.toString(DECIMAL_RADIX),
-            ADMIN_ACCESS_KEY to adminAccess.name,
-            FILTER_BY_KEY to filterBy.name
+                OPERATION_TIMEOUT_MS_KEY to operationTimeoutMs.toString(DECIMAL_RADIX),
+                DEFAULT_ITEMS_QUERY_COUNT_KEY to defaultMaxQueryCount.toString(DECIMAL_RADIX),
+                DEFAULT_ITEMS_FETCH_COUNT_KEY to defaultMaxFetchCount.toString(DECIMAL_RADIX),
+                FILTER_BY_KEY to filterBy.name
         )
     }
 
     private val OPERATION_TIMEOUT_MS: Setting<Long> = Setting.longSetting(
-        OPERATION_TIMEOUT_MS_KEY,
-        defaultSettings[OPERATION_TIMEOUT_MS_KEY]!!.toLong(),
-        MINIMUM_OPERATION_TIMEOUT_MS,
-        NodeScope, Dynamic
+            OPERATION_TIMEOUT_MS_KEY,
+            defaultSettings[OPERATION_TIMEOUT_MS_KEY]!!.toLong(),
+            MINIMUM_OPERATION_TIMEOUT_MS,
+            NodeScope, Dynamic
     )
 
 
     private val DEFAULT_ITEMS_QUERY_COUNT: Setting<Int> = Setting.intSetting(
-        DEFAULT_ITEMS_QUERY_COUNT_KEY,
-        defaultSettings[DEFAULT_ITEMS_QUERY_COUNT_KEY]!!.toInt(),
-        MINIMUM_ITEMS_QUERY_COUNT,
-        NodeScope, Dynamic
+            DEFAULT_ITEMS_QUERY_COUNT_KEY,
+            defaultSettings[DEFAULT_ITEMS_QUERY_COUNT_KEY]!!.toInt(),
+            MINIMUM_ITEMS_QUERY_COUNT,
+            NodeScope, Dynamic
     )
 
-    private val ADMIN_ACCESS: Setting<String> = Setting.simpleString(
-        ADMIN_ACCESS_KEY,
-        defaultSettings[ADMIN_ACCESS_KEY]!!,
-        NodeScope, Dynamic
+    private val DEFAULT_ITEMS_FETCH_COUNT: Setting<Int> = Setting.intSetting(
+            DEFAULT_ITEMS_FETCH_COUNT_KEY,
+            defaultSettings[DEFAULT_ITEMS_FETCH_COUNT_KEY]!!.toInt(),
+            MINIMUM_ITEMS_FETCH_COUNT,
+            NodeScope, Dynamic
     )
+
 
     private val FILTER_BY: Setting<String> = Setting.simpleString(
-        FILTER_BY_KEY,
-        defaultSettings[FILTER_BY_KEY]!!,
-        NodeScope, Dynamic
-    )
-
-    private val IGNORED_ROLES: Setting<List<String>> = Setting.listSetting(
-        IGNORE_ROLE_KEY,
-        DEFAULT_IGNORED_ROLES,
-        { it },
-        NodeScope, Dynamic
+            FILTER_BY_KEY,
+            defaultSettings[FILTER_BY_KEY]!!,
+            NodeScope, Dynamic
     )
 
     /**
@@ -218,11 +205,10 @@ internal object PluginSettings {
      */
     fun getAllSettings(): List<Setting<*>> {
         return listOf(
-            OPERATION_TIMEOUT_MS,
-            DEFAULT_ITEMS_QUERY_COUNT,
-            ADMIN_ACCESS,
-            FILTER_BY,
-            IGNORED_ROLES
+                OPERATION_TIMEOUT_MS,
+                DEFAULT_ITEMS_QUERY_COUNT,
+                DEFAULT_ITEMS_FETCH_COUNT,
+                FILTER_BY
         )
     }
 
@@ -232,10 +218,8 @@ internal object PluginSettings {
      */
     private fun updateSettingValuesFromLocal(clusterService: ClusterService) {
         operationTimeoutMs = OPERATION_TIMEOUT_MS.get(clusterService.settings)
-        defaultMaxFetchCount = DEFAULT_ITEMS_QUERY_COUNT.get(clusterService.settings)
-        adminAccess = AdminAccess.valueOf(ADMIN_ACCESS.get(clusterService.settings))
-        filterBy = FilterBy.valueOf(FILTER_BY.get(clusterService.settings))
-        ignoredRoles = IGNORED_ROLES.get(clusterService.settings)
+        defaultMaxQueryCount = DEFAULT_ITEMS_QUERY_COUNT.get(clusterService.settings)
+        defaultMaxFetchCount = DEFAULT_ITEMS_FETCH_COUNT.get(clusterService.settings)
     }
 
     /**
@@ -251,22 +235,12 @@ internal object PluginSettings {
         val clusterDefaultItemsQueryCount = clusterService.clusterSettings.get(DEFAULT_ITEMS_QUERY_COUNT)
         if (clusterDefaultItemsQueryCount != null) {
             log.debug("$LOG_PREFIX:$DEFAULT_ITEMS_QUERY_COUNT_KEY -autoUpdatedTo-> $clusterDefaultItemsQueryCount")
-            defaultMaxFetchCount = clusterDefaultItemsQueryCount
+            defaultMaxQueryCount = clusterDefaultItemsQueryCount
         }
-        val clusterAdminAccess = clusterService.clusterSettings.get(ADMIN_ACCESS)
-        if (clusterAdminAccess != null) {
-            log.debug("$LOG_PREFIX:$ADMIN_ACCESS_KEY -autoUpdatedTo-> $clusterAdminAccess")
-            adminAccess = AdminAccess.valueOf(clusterAdminAccess)
-        }
-        val clusterFilterBy = clusterService.clusterSettings.get(FILTER_BY)
-        if (clusterFilterBy != null) {
-            log.debug("$LOG_PREFIX:$FILTER_BY_KEY -autoUpdatedTo-> $clusterFilterBy")
-            filterBy = FilterBy.valueOf(clusterFilterBy)
-        }
-        val clusterIgnoredRoles = clusterService.clusterSettings.get(IGNORED_ROLES)
-        if (clusterIgnoredRoles != null) {
-            log.debug("$LOG_PREFIX:$IGNORE_ROLE_KEY -autoUpdatedTo-> $clusterIgnoredRoles")
-            ignoredRoles = clusterIgnoredRoles
+        val clusterDefaultItemsFetchCount = clusterService.clusterSettings.get(DEFAULT_ITEMS_FETCH_COUNT)
+        if (clusterDefaultItemsFetchCount != null) {
+            log.debug("$LOG_PREFIX:$DEFAULT_ITEMS_FETCH_COUNT_KEY -autoUpdatedTo-> $clusterDefaultItemsFetchCount")
+            defaultMaxFetchCount = clusterDefaultItemsFetchCount
         }
     }
 
@@ -285,20 +259,12 @@ internal object PluginSettings {
             log.info("$LOG_PREFIX:$OPERATION_TIMEOUT_MS_KEY -updatedTo-> $it")
         }
         clusterService.clusterSettings.addSettingsUpdateConsumer(DEFAULT_ITEMS_QUERY_COUNT) {
-            defaultMaxFetchCount = it
+            defaultMaxQueryCount = it
             log.info("$LOG_PREFIX:$DEFAULT_ITEMS_QUERY_COUNT_KEY -updatedTo-> $it")
         }
-        clusterService.clusterSettings.addSettingsUpdateConsumer(ADMIN_ACCESS) {
-            adminAccess = AdminAccess.valueOf(it)
-            log.info("$LOG_PREFIX:$ADMIN_ACCESS_KEY -updatedTo-> $it")
-        }
-        clusterService.clusterSettings.addSettingsUpdateConsumer(FILTER_BY) {
-            filterBy = FilterBy.valueOf(it)
-            log.info("$LOG_PREFIX:$FILTER_BY_KEY -updatedTo-> $it")
-        }
-        clusterService.clusterSettings.addSettingsUpdateConsumer(IGNORED_ROLES) {
-            ignoredRoles = it
-            log.info("$LOG_PREFIX:$IGNORE_ROLE_KEY -updatedTo-> $it")
+        clusterService.clusterSettings.addSettingsUpdateConsumer(DEFAULT_ITEMS_FETCH_COUNT) {
+            defaultMaxFetchCount = it
+            log.info("$LOG_PREFIX:$DEFAULT_ITEMS_FETCH_COUNT_KEY -updatedTo-> $it")
         }
     }
 }
