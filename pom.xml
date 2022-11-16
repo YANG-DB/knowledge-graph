@@ -35,6 +35,7 @@
         <project.inceptionYear>2016</project.inceptionYear>
         <project.organization.name>org.opensearch</project.organization.name>
         <license.licenseName>apache_v2</license.licenseName>
+
         <!-- plugins -->
         <maven-compiler-plugin.version>3.8.0</maven-compiler-plugin.version>
         <maven-source-plugin.version>3.0.1</maven-source-plugin.version>
@@ -164,7 +165,7 @@
         <hamcres-json.version>0.2</hamcres-json.version>
         <maven-pgp-plugin.version>3.0.1</maven-pgp-plugin.version>
         <test.containers.version>1.12.2</test.containers.version>
-
+        <surefire.argLine></surefire.argLine>
         <!-- jmx monitoring        -->
         <jolokia>1.6.2</jolokia>
         <!--reflection utils-->
@@ -1020,6 +1021,7 @@
                             --add-opens java.base/jdk.internal.misc=ALL-UNNAMED
                             --add-exports java.base/jdk.internal.misc=ALL-UNNAMED
                             --add-exports org.junit.platform.commons/org.junit.platform.commons.logging=ALL-UNNAMED
+                            @{surefire.argLine}
                         </argLine>
                     </configuration>
                 </plugin>
@@ -1057,7 +1059,7 @@
                             </goals>
                             <configuration>
                                 <destFile>${project.build.directory}/coverage-reports/jacoco-ut.exec</destFile>
-                                <propertyName>surefireArgLine</propertyName>
+                                <propertyName>surefire.argLine</propertyName>
                             </configuration>
                         </execution>
                         <execution>
