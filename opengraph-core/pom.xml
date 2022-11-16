@@ -38,12 +38,6 @@
             <version>${slf4j.version}</version>
         </dependency>
 
-        <!-- json-ld -->
-        <dependency>
-            <groupId>com.github.jsonld-java</groupId>
-            <artifactId>jsonld-java</artifactId>
-        </dependency>
-
         <!--sql -->
         <dependency>
             <groupId>org.jooq</groupId>
