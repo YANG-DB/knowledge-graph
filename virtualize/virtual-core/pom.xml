@@ -116,6 +116,10 @@
                 <artifactId>maven-failsafe-plugin</artifactId>
             </plugin>
             <plugin>
+                <groupId>org.jacoco</groupId>
+                <artifactId>jacoco-maven-plugin</artifactId>
+            </plugin>
+            <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-surefire-plugin</artifactId>
                 <configuration>
@@ -124,7 +128,7 @@
                     <perCoreThreadCount>false</perCoreThreadCount>
                     <rerunFailingTestsCount>0</rerunFailingTestsCount>
                     <parallel>methods</parallel>
-                    <argLine>-Xmx1536m -XX:MaxPermSize=256m -Duser.timezone=${user.timezone}</argLine>
+                    <argLine>-Xmx1536m -XX:MaxPermSize=256m -Duser.timezone=${user.timezone} @{surefire.argLine}</argLine>
                 </configuration>
             </plugin>
             <plugin>
