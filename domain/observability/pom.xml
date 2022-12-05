@@ -13,6 +13,7 @@
 
     <modules>
         <module>observability-ext</module>
+        <module>observability-datagen</module>
         <module>observability-assembly</module>
         <module>observability-test</module>
     </modules>

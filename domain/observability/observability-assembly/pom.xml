@@ -10,7 +10,7 @@
     <modelVersion>4.0.0</modelVersion>
     <packaging>pom</packaging>
 
-    <artifactId>obassembly-assembly</artifactId>
+    <artifactId>observability-assembly</artifactId>
 
     <properties>
         <checkstyle.skip>true</checkstyle.skip>

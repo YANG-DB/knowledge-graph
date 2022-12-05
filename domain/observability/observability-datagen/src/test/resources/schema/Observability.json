@@ -1,0 +1,744 @@
+{
+  "ont": "Observability",
+  "entityTypes": [
+    {
+      "eType": "Span",
+      "name": "Span",
+      "properties": [
+        "droppedAttributesCount",
+        "droppedEventsCount",
+        "droppedLinksCount",
+        "durationInNanos",
+        "endTime",
+        "events",
+        "instrumentationLibrary",
+        "kind",
+        "name",
+        "serviceName",
+        "links",
+        "spanId",
+        "parentSpanId",
+        "resources",
+        "span",
+        "startTime",
+        "status",
+        "traceGroup",
+        "traceGroupFields",
+        "traceId",
+        "traceState"
+      ]
+    },
+    {
+      "eType": "Log",
+      "name": "Log",
+      "properties": [
+        "agent",
+        "bytes",
+        "clientip",
+        "extension",
+        "host",
+        "ip",
+        "memory",
+        "index",
+        "message",
+        "referer",
+        "request",
+        "response",
+        "tags",
+        "timestamp",
+        "url",
+        "machine",
+        "geo",
+        "event"
+      ]
+    },
+    {
+      "eType": "Geo",
+      "name": "Geo",
+      "properties": [
+        "srcdest",
+        "src",
+        "dest",
+        "coordinates"
+      ]
+    },
+    {
+      "eType": "Machine",
+      "name": "Machine",
+      "properties": [
+        "ram",
+        "os"
+      ]
+    },
+    {
+      "eType": "Event",
+      "name": "Event",
+      "properties": [
+        "dataset",
+        "name",
+        "time",
+        "droppedAttributesCount",
+        "attributes"
+      ]
+    },
+    {
+      "eType": "Attributes",
+      "name": "Attributes",
+      "properties": [
+        "exception@message",
+        "exception@stacktrace",
+        "exception@type",
+        "component",
+        "db@instance",
+        "db@statement",
+        "db@statement@parameters",
+        "db@type",
+        "db@user",
+        "host@port",
+        "http@client_ip",
+        "http@flavor",
+        "http@host",
+        "http@method",
+        "http@route",
+        "http@scheme",
+        "http@server_name",
+        "http@status_code",
+        "http@status_text",
+        "http@target",
+        "http@url",
+        "http@user_agent",
+        "net@peer@ip",
+        "net@peer@name",
+        "net@peer@port",
+        "thread@id",
+        "thread@name"
+      ]
+    },
+    {
+      "eType": "InstrumentationLibrary",
+      "name": "InstrumentationLibrary",
+      "properties": [
+        "name",
+        "version"
+      ]
+    },
+    {
+      "eType": "Links",
+      "name": "Links",
+      "properties": [
+        "content"
+      ]
+    },
+    {
+      "eType": "Resources",
+      "name": "Resources",
+      "properties": [
+        "host@hostname",
+        "service@instance@id",
+        "service@name",
+        "telemetry@auto@version",
+        "telemetry@sdk@language",
+        "telemetry@sdk@name",
+        "telemetry@sdk@version"
+      ]
+    },
+    {
+      "eType": "Status",
+      "name": "Status",
+      "properties": [
+        "code",
+        "message"
+      ]
+    },
+    {
+      "eType": "SpanContent",
+      "name": "SpanContent",
+      "properties": [
+        "attributes"
+      ]
+    },
+    {
+      "eType": "TraceGroupFields",
+      "name": "TraceGroupFields",
+      "properties": [
+        "durationInNanos",
+        "endTime",
+        "statusCode"
+      ]
+    }
+  ],
+  "relationshipTypes": [
+    {
+      "rType": "hasLocation",
+      "name": "hasLocation",
+      "directional": true,
+      "ePairs": [
+        {
+          "eTypeA": "Log",
+          "eTypeB": "Geo"
+        }
+      ]
+    },
+    {
+      "rType": "hasMachine",
+      "name": "hasMachine",
+      "directional": true,
+      "ePairs": [
+        {
+          "eTypeA": "Log",
+          "eTypeB": "Machine"
+        }
+      ]
+    },
+    {
+      "rType": "hasEvent",
+      "name": "hasEvent",
+      "directional": true,
+      "ePairs": [
+        {
+          "eTypeA": "Log",
+          "eTypeB": "Event"
+        },
+        {
+          "eTypeA": "Span",
+          "eTypeB": "Event"
+        }
+      ]
+    },
+    {
+      "rType": "hasInstrumentationLibrary",
+      "name": "hasInstrumentationLibrary",
+      "directional": true,
+      "ePairs": [
+        {
+          "eTypeA": "Span",
+          "eTypeB": "InstrumentationLibrary"
+        }
+      ]
+    },
+    {
+      "rType": "hasAttributes",
+      "name": "hasAttributes",
+      "directional": true,
+      "ePairs": [
+        {
+          "eTypeA": "Event",
+          "eTypeB": "Attributes"
+        }
+      ]
+    },
+    {
+      "rType": "hasLinks",
+      "name": "hasLinks",
+      "directional": true,
+      "ePairs": [
+        {
+          "eTypeA": "Span",
+          "eTypeB": "Links"
+        }
+      ]
+    },
+    {
+      "rType": "hasResources",
+      "name": "hasResources",
+      "directional": true,
+      "ePairs": [
+        {
+          "eTypeA": "Span",
+          "eTypeB": "Resources"
+        }
+      ]
+    },
+    {
+      "rType": "hasStatus",
+      "name": "hasStatus",
+      "directional": true,
+      "ePairs": [
+        {
+          "eTypeA": "Span",
+          "eTypeB": "Status"
+        }
+      ]
+    },
+    {
+      "rType": "hasSpanContent",
+      "name": "hasSpanContent",
+      "directional": true,
+      "ePairs": [
+        {
+          "eTypeA": "Span",
+          "eTypeB": "SpanContent"
+        }
+      ]
+    },
+    {
+      "rType": "hasTraceGroupFields",
+      "name": "hasTraceGroupFields",
+      "directional": true,
+      "ePairs": [
+        {
+          "eTypeA": "Span",
+          "eTypeB": "TraceGroupFields"
+        }
+      ]
+    },
+    {
+      "rType": "hasAttributes",
+      "name": "hasAttributes",
+      "directional": true,
+      "ePairs": [
+        {
+          "eTypeA": "Span",
+          "eTypeB": "Attributes"
+        }
+      ]
+    }
+  ],
+  "properties": [
+    {
+      "pType": "droppedAttributesCount",
+      "name": "droppedAttributesCount",
+      "type": "int"
+    },
+    {
+      "pType": "droppedEventsCount",
+      "name": "droppedEventsCount",
+      "type": "int"
+    },
+    {
+      "pType": "droppedLinksCount",
+      "name": "droppedLinksCount",
+      "type": "int"
+    },
+    {
+      "pType": "durationInNanos",
+      "name": "durationInNanos",
+      "type": "long"
+    },
+    {
+      "pType": "serviceName",
+      "name": "serviceName",
+      "type": "string"
+    },
+    {
+      "pType": "name",
+      "name": "name",
+      "type": "text"
+    },
+    {
+      "pType": "parentSpanId",
+      "name": "parentSpanId",
+      "type": "string"
+    },
+    {
+      "pType": "spanId",
+      "name": "spanId",
+      "type": "string"
+    },
+    {
+      "pType": "kind",
+      "name": "kind",
+      "type": "string"
+    },
+    {
+      "pType": "agent",
+      "name": "agent",
+      "type": "text"
+    },
+    {
+      "pType": "bytes",
+      "name": "bytes",
+      "type": "long"
+    },
+    {
+      "pType": "memory",
+      "name": "memory",
+      "type": "long"
+    },
+    {
+      "pType": "clientip",
+      "name": "clientip",
+      "type": "string"
+    },
+    {
+      "pType": "extension",
+      "name": "extension",
+      "type": "text"
+    },
+    {
+      "pType": "host",
+      "name": "host",
+      "type": "text"
+    },
+    {
+      "pType": "index",
+      "name": "index",
+      "type": "text"
+    },
+    {
+      "pType": "ip",
+      "name": "ip",
+      "type": "ip"
+    },
+    {
+      "pType": "message",
+      "name": "message",
+      "type": "string"
+    },
+    {
+      "pType": "referer",
+      "name": "referer",
+      "type": "string"
+    },
+    {
+      "pType": "request",
+      "name": "request",
+      "type": "string"
+    },
+    {
+      "pType": "response",
+      "name": "response",
+      "type": "string"
+    },
+    {
+      "pType": "tags",
+      "name": "tags",
+      "type": "string"
+    },
+    {
+      "pType": "url",
+      "name": "url",
+      "type": "string"
+    },
+    {
+      "pType": "time",
+      "name": "time",
+      "type": "date"
+    },
+    {
+      "pType": "timestamp",
+      "name": "timestamp",
+      "type": "date"
+    },
+    {
+      "pType": "startTime",
+      "name": "startTime",
+      "type": "date"
+    },
+    {
+      "pType": "endTime",
+      "name": "endTime",
+      "type": "date"
+    },
+    {
+      "pType": "srcdest",
+      "name": "srcdest",
+      "type": "string"
+    },
+    {
+      "pType": "src",
+      "name": "src",
+      "type": "string"
+    },
+    {
+      "pType": "dest",
+      "name": "dest",
+      "type": "string"
+    },
+    {
+      "pType": "coordinates",
+      "name": "coordinates",
+      "type": "geo_point"
+    },
+    {
+      "pType": "ram",
+      "name": "ram",
+      "type": "long"
+    },
+    {
+      "pType": "os",
+      "name": "os",
+      "type": "text"
+    },
+    {
+      "pType": "dataset",
+      "name": "dataset",
+      "type": "string"
+    },
+    {
+      "pType": "content",
+      "name": "content",
+      "type": "string"
+    },
+    {
+      "pType": "traceGroup",
+      "name": "traceGroup",
+      "type": "string"
+    },
+    {
+      "pType": "traceId",
+      "name": "traceId",
+      "type": "string"
+    },
+    {
+      "pType": "traceState",
+      "name": "traceState",
+      "type": "text"
+    },
+    {
+      "pType": "version",
+      "name": "version",
+      "type": "text"
+    },
+    {
+      "pType": "exception@message",
+      "name": "exception@message",
+      "type": "text"
+    },
+    {
+      "pType": "exception@stacktrace",
+      "name": "exception@stacktrace",
+      "type": "text"
+    },
+    {
+      "pType": "exception@type",
+      "name": "exception@type",
+      "type": "text"
+    },
+    {
+      "pType": "host@hostname",
+      "name": "host@hostname",
+      "type": "text"
+    },
+    {
+      "pType": "service@instance@id",
+      "name": "service@instance@id",
+      "type": "text"
+    },
+    {
+      "pType": "service@name",
+      "name": "service@name",
+      "type": "text"
+    },
+    {
+      "pType": "telemetry@auto@version",
+      "name": "telemetry@auto@version",
+      "type": "text"
+    },
+    {
+      "pType": "telemetry@sdk@language",
+      "name": "telemetry@sdk@language",
+      "type": "text"
+    },
+    {
+      "pType": "telemetry@sdk@name",
+      "name": "telemetry@sdk@name",
+      "type": "text"
+    },
+    {
+      "pType": "telemetry@sdk@version",
+      "name": "telemetry@sdk@version",
+      "type": "text"
+    },
+    {
+      "pType": "code",
+      "name": "code",
+      "type": "int"
+    },
+    {
+      "pType": "statusCode",
+      "name": "statusCode",
+      "type": "int"
+    },
+    {
+      "pType": "message",
+      "name": "message",
+      "type": "text"
+    },
+    {
+      "pType": "component",
+      "name": "component",
+      "type": "text"
+    },
+    {
+      "pType": "db@instance",
+      "name": "db@instance",
+      "type": "text"
+    },
+    {
+      "pType": "db@statement",
+      "name": "db@statement",
+      "type": "text"
+    },
+    {
+      "pType": "db@statement@parameters",
+      "name": "db@statement@parameters",
+      "type": "text"
+    },
+    {
+      "pType": "db@type",
+      "name": "db@type",
+      "type": "text"
+    },
+    {
+      "pType": "db@user",
+      "name": "db@user",
+      "type": "text"
+    },
+    {
+      "pType": "host@port",
+      "name": "host@port",
+      "type": "text"
+    },
+    {
+      "pType": "http@client_ip",
+      "name": "http@client_ip",
+      "type": "text"
+    },
+    {
+      "pType": "http@flavor",
+      "name": "http@flavor",
+      "type": "text"
+    },
+    {
+      "pType": "http@host",
+      "name": "http@host",
+      "type": "text"
+    },
+    {
+      "pType": "http@method",
+      "name": "http@method",
+      "type": "text"
+    },
+    {
+      "pType": "http@route",
+      "name": "http@route",
+      "type": "text"
+    },
+    {
+      "pType": "http@scheme",
+      "name": "http@scheme",
+      "type": "text"
+    },
+    {
+      "pType": "http@server_name",
+      "name": "http@server_name",
+      "type": "text"
+    },
+    {
+      "pType": "http@status_code",
+      "name": "http@status_code",
+      "type": "text"
+    },
+    {
+      "pType": "http@status_text",
+      "name": "http@status_text",
+      "type": "text"
+    },
+    {
+      "pType": "http@target",
+      "name": "http@target",
+      "type": "text"
+    },
+    {
+      "pType": "http@url",
+      "name": "http@url",
+      "type": "text"
+    },
+    {
+      "pType": "http@user_agent",
+      "name": "http@user_agent",
+      "type": "text"
+    },
+    {
+      "pType": "net@peer@ip",
+      "name": "net@peer@ip",
+      "type": "text"
+    },
+    {
+      "pType": "net@peer@name",
+      "name": "net@peer@name",
+      "type": "text"
+    },
+    {
+      "pType": "net@peer@port",
+      "name": "net@peer@port",
+      "type": "text"
+    },
+    {
+      "pType": "thread@id",
+      "name": "thread@id",
+      "type": "text"
+    },
+    {
+      "pType": "thread@name",
+      "name": "thread@name",
+      "type": "text"
+    },
+    {
+      "pType": "id",
+      "name": "id",
+      "type": "string"
+    },
+    {
+      "pType": "type",
+      "name": "type",
+      "type": "string"
+    },
+    {
+      "pType": "machine",
+      "name": "machine",
+      "type": "Machine"
+    },
+    {
+      "pType": "geo",
+      "name": "geo",
+      "type": "Geo"
+    },
+    {
+      "pType": "event",
+      "name": "event",
+      "type": "Event"
+    },
+    {
+      "pType": "events",
+      "name": "events",
+      "type": "Event"
+    },
+    {
+      "pType": "instrumentationLibrary",
+      "name": "instrumentationLibrary",
+      "type": "InstrumentationLibrary"
+    },
+    {
+      "pType": "traceGroupFields",
+      "name": "traceGroupFields",
+      "type": "TraceGroupFields"
+    },
+    {
+      "pType": "links",
+      "name": "links",
+      "type": "Links"
+    },
+    {
+      "pType": "status",
+      "name": "status",
+      "type": "Status"
+    },
+    {
+      "pType": "resources",
+      "name": "resources",
+      "type": "Resources"
+    },
+    {
+      "pType": "span",
+      "name": "span",
+      "type": "SpanContent"
+    },
+    {
+      "pType": "attributes",
+      "name": "attributes",
+      "type": "Attributes"
+    }
+  ]
+}
