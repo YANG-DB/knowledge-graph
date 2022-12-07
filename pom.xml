@@ -84,7 +84,7 @@
         <openCypher.spark.version>0.2.3</openCypher.spark.version>
 
         <!--graph ql java-->
-        <graphql.java.version>14.0</graphql.java.version>
+        <graphql.java.version>20.0</graphql.java.version>
 
         <!-- commons -->
         <commons-io.version>2.5</commons-io.version>
