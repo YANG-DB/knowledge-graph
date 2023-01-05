@@ -39,7 +39,7 @@ public class QueryInfo<Query> {
      *
      * @param query - the actual quary
      * @param queryName - name
-     * @param queryType - the query language type ( v1,cypher,sparql,graphql)
+     * @param queryType - the query language type ( oql,cypher,sparql,graphql)
      * @param ontology - ontology name
      */
     public QueryInfo(Query query,String queryName,String queryType, String ontology) {
@@ -50,7 +50,7 @@ public class QueryInfo<Query> {
     }
 
     /**
-     *  the query language type ( v1,cypher,sparql,graphql)
+     *  the query language type ( oql,cypher,sparql,graphql)
      * @return
      */
     public String getQueryType() {

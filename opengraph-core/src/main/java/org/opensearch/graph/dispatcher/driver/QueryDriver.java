@@ -47,7 +47,7 @@ public interface QueryDriver {
     ValidationResult validateAndRewriteQuery(Query query);
 
     /**
-     * create a query (V1 type) that results in a query resource
+     * create a query (OQL type) that results in a query resource
      * @param queryRequest
      * @return
      */
@@ -77,7 +77,7 @@ public interface QueryDriver {
     Optional<QueryResourceInfo> createAndFetch(CreateQueryRequest queryRequest);
 
     /**
-     * run the given (V1) query by creating all the resources that are needed to execute and return the (first page) data
+     * run the given (OQL) query by creating all the resources that are needed to execute and return the (first page) data
      * that matches the given query
      * @param query
      * @param pageSize
@@ -154,11 +154,11 @@ public interface QueryDriver {
     Optional<QueryResourceInfo> getInfo(String queryId);
 
     /**
-     * get the V1 query according to the query Id
+     * get the OQL query according to the query Id
      * @param queryId
      * @return
      */
-    Optional<Query> getV1(String queryId);
+    Optional<Query> getOQL(String queryId);
 
     /**
      *  get the ASG query tree according to the query Id

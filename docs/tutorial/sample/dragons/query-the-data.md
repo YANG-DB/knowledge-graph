@@ -49,7 +49,7 @@ After the server completes the execution it returns the following results:
     "resourceId": "4db03973-e509-4263-8a22-c5ad43ae5a96",
     "cursorStoreUrl": "http://20.10.10.104:8888/opengraph/query/4db03973-e509-4263-8a22-c5ad43ae5a96/cursor/1/page",
     "explainPlanUrl": "http://20.10.10.104:8888/opengraph/query/4db03973-e509-4263-8a22-c5ad43ae5a96/plan",
-    "v1QueryUrl": "http://20.10.10.104:8888/opengraph/query/4db03973-e509-4263-8a22-c5ad43ae5a96/v1",
+    "ontologyQueryUrl": "http://20.10.10.104:8888/opengraph/query/4db03973-e509-4263-8a22-c5ad43ae5a96/v1",
     "asgUrl": "http://20.10.10.104:8888/opengraph/query/4db03973-e509-4263-8a22-c5ad43ae5a96/asg",
     "elasticQueryUrl": "http://20.10.10.104:8888/opengraph/query/4db03973-e509-4263-8a22-c5ad43ae5a96/elastic",
     "type": "concrete",

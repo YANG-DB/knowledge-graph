@@ -39,7 +39,7 @@ import java.util.Collections;
 import java.util.Map;
 
 import static org.opensearch.graph.services.appRegistrars.QueryControllerRegistrar.API.runCypher;
-import static org.opensearch.graph.services.appRegistrars.QueryControllerRegistrar.API.runV1;
+import static org.opensearch.graph.services.appRegistrars.QueryControllerRegistrar.API.runOQL;
 
 
 public class DragonsExtensionRegistrar extends AppControllerRegistrarBase<DragonsExtensionQueryController> {
@@ -61,8 +61,8 @@ public class DragonsExtensionRegistrar extends AppControllerRegistrarBase<Dragon
         app.post(appUrlSupplier.queryStoreUrl() + "/clause/run",( req,res) -> runClause(app,req,res,this.getController(app)));
         /** run a cypher query */
         app.get(appUrlSupplier.queryStoreUrl() + "/cypher/logical/run",( req,res) -> runCypher(app,req, res,this.getController(app)));
-        /** run a v1 query */
-        app.post(appUrlSupplier.queryStoreUrl() + "/query/v1/logical/run",( req,res)-> runV1(app,req,res, this.getController(app)));
+        /** run a OQL query */
+        app.post(appUrlSupplier.queryStoreUrl() + "/query/oql/logical/run",( req,res)-> runOQL(app,req,res, this.getController(app)));
 
     }
 

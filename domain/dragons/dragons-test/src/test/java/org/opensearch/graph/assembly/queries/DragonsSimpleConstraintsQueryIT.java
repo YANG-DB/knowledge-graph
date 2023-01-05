@@ -52,7 +52,7 @@ public class DragonsSimpleConstraintsQueryIT implements BaseITMarker {
 
     @Test
     public void testPersonKnowsPersonProjection() throws IOException, InterruptedException, URISyntaxException {
-        // Create v1 query to fetch newly created entity
+        // Create Ontology query to fetch newly created entity
         GraphResourceInfo graphResourceInfo = GraphClient.getInfo();
         Assert.assertNotNull(graphResourceInfo);
 
@@ -91,7 +91,7 @@ public class DragonsSimpleConstraintsQueryIT implements BaseITMarker {
     }
     @Test
     public void testPersonKnowsPerson() throws IOException, InterruptedException, URISyntaxException {
-        // Create v1 query to fetch newly created entity
+        // Create Ontology query to fetch newly created entity
         GraphResourceInfo graphResourceInfo = GraphClient.getInfo();
         Assert.assertNotNull(graphResourceInfo);
 
@@ -131,7 +131,7 @@ public class DragonsSimpleConstraintsQueryIT implements BaseITMarker {
 
     @Test
     public void testPersonOwnsDragonAndKnowsPerson() throws IOException, InterruptedException, URISyntaxException {
-        // Create v1 query to fetch newly created entity
+        // Create Ontology query to fetch newly created entity
         GraphResourceInfo graphResourceInfo = GraphClient.getInfo();
         Assert.assertNotNull(graphResourceInfo);
 
@@ -172,7 +172,7 @@ public class DragonsSimpleConstraintsQueryIT implements BaseITMarker {
 
     @Test
     public void testDragonOwnedByPerson() throws IOException, InterruptedException, URISyntaxException {
-        // Create v1 query to fetch newly created entity
+        // Create Ontology query to fetch newly created entity
         GraphResourceInfo graphResourceInfo = GraphClient.getInfo();
         Assert.assertNotNull(graphResourceInfo);
 
@@ -210,7 +210,7 @@ public class DragonsSimpleConstraintsQueryIT implements BaseITMarker {
 
     @Test
     public void testPersonOwnsDragon() throws IOException, InterruptedException, URISyntaxException {
-        // Create v1 query to fetch newly created entity
+        // Create Ontology query to fetch newly created entity
         GraphResourceInfo graphResourceInfo = GraphClient.getInfo();
         Assert.assertNotNull(graphResourceInfo);
 
@@ -249,7 +249,7 @@ public class DragonsSimpleConstraintsQueryIT implements BaseITMarker {
 
     @Test
     public void testPersonOwnsDragonOrKnowsPerson() throws IOException, InterruptedException, URISyntaxException {
-        // Create v1 query to fetch newly created entity
+        // Create Ontology query to fetch newly created entity
         GraphResourceInfo graphResourceInfo = GraphClient.getInfo();
         Assert.assertNotNull(graphResourceInfo);
 

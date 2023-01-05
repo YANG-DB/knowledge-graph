@@ -326,7 +326,7 @@ public class QueryCompositeIT implements BaseITMarker {
                         Map data = (Map) contentResponse.getData();
                         assertTrue(data.get("resourceUrl").toString().endsWith("/opengraph/query/call[1]"));
                         assertTrue(data.get("cursorStoreUrl").toString().contains("/opengraph/query/call[1]/cursor"));
-                        assertTrue(data.get("v1QueryUrl").toString().endsWith("/opengraph/query/call[1]/v1"));
+                        assertTrue(data.get("ontologyQueryUrl").toString().endsWith("/opengraph/query/call[1]/oql"));
                         assertTrue(((Map)(((List) data.get("cursorResourceInfos")).get(0))).containsKey("cursorRequest"));
                         assertTrue(((Map)(((List) data.get("cursorResourceInfos")).get(0))).containsKey("pageStoreUrl"));
                         assertTrue(((Map)(((List) data.get("cursorResourceInfos")).get(0))).containsKey("pageResourceInfos"));
@@ -410,7 +410,7 @@ public class QueryCompositeIT implements BaseITMarker {
                         Map data = (Map) contentResponse.getData();
                         assertTrue(data.get("resourceUrl").toString().endsWith("/opengraph/query/1"));
                         assertTrue(data.get("cursorStoreUrl").toString().endsWith("/opengraph/query/1/cursor"));
-                        assertTrue(data.get("v1QueryUrl").toString().endsWith("/opengraph/query/1/v1"));
+                        assertTrue(data.get("ontologyQueryUrl").toString().endsWith("/opengraph/query/1/oql"));
                         return contentResponse.getData() != null;
                     } catch (Exception e) {
                         e.printStackTrace();
@@ -434,7 +434,7 @@ public class QueryCompositeIT implements BaseITMarker {
                         Map data = (Map) contentResponse.getData();
                         assertTrue(data.get("resourceUrl").toString().endsWith("/opengraph/query/1"));
                         assertTrue(data.get("cursorStoreUrl").toString().endsWith("/opengraph/query/1/cursor"));
-                        assertTrue(data.get("v1QueryUrl").toString().endsWith("/opengraph/query/1/v1"));
+                        assertTrue(data.get("ontologyQueryUrl").toString().endsWith("/opengraph/query/1/oql"));
                         return contentResponse.getData() != null;
                     } catch (Exception e) {
                         e.printStackTrace();
@@ -531,7 +531,7 @@ public class QueryCompositeIT implements BaseITMarker {
                 .contentType("application/json")
                 .header(new Header("opengraph-external-id", "test"))
                 .with().port(8888)
-                .get("/opengraph/query/1/v1/print")
+                .get("/opengraph/query/1/oql/print")
                 .then()
                 .assertThat()
                 .body(new TestUtils.ContentMatcher(o -> {

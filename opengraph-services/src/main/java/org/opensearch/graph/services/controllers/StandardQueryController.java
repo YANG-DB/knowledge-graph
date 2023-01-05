@@ -87,7 +87,7 @@ public class StandardQueryController implements QueryController<QueryController,
     }
 
     @Override
-    public ContentResponse<Object> runV1Query(Query query, int pageSize, String cursorType) {
+    public ContentResponse<Object> runOntologyQuery(Query query, int pageSize, String cursorType) {
         return Builder.builder(CREATED, INTERNAL_SERVER_ERROR )
                 .data(driver().run(query,pageSize,cursorType ))
                 .successPredicate(objectContentResponse -> true)
@@ -296,9 +296,9 @@ public class StandardQueryController implements QueryController<QueryController,
     }
 
     @Override
-    public ContentResponse<Query> getV1(String queryId) {
+    public ContentResponse<Query> getOQL(String queryId) {
         return Builder.<Query>builder(OK, NOT_FOUND)
-                .data(driver().getV1(queryId))
+                .data(driver().getOQL(queryId))
                 .compose();
     }
 
