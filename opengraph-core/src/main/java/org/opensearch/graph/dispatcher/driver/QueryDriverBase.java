@@ -794,7 +794,7 @@ public abstract class QueryDriverBase implements QueryDriver {
     }
 
     @Override
-    public Optional<Query> getV1(String queryId) {
+    public Optional<Query> getOQL(String queryId) {
         Optional<QueryResource> queryResource = this.resourceStore.getQueryResource(queryId);
         if (!queryResource.isPresent()) {
             return Optional.empty();

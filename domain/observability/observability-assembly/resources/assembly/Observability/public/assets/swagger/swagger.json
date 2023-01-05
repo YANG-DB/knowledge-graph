@@ -232,7 +232,7 @@
           "catalog"
         ],
         "summary": "graphQL IDL into Ontology",
-        "description": "Transform a graphQL IDL into V1 Ontology - see https://graphql.org/learn/schema/",
+        "description": "Transform a graphQL IDL into Ontology - see https://graphql.org/learn/schema/",
         "parameters": [
           {
             "name": "id",
@@ -266,7 +266,7 @@
           "catalog"
         ],
         "summary": "OWL IDL into Ontology",
-        "description": "Transform a OWL IDL into V1 Ontology - see https://www.w3.org/TR/owl-features/",
+        "description": "Transform a OWL IDL into Ontology - see https://www.w3.org/TR/owl-features/",
         "parameters": [
           {
             "name": "id",

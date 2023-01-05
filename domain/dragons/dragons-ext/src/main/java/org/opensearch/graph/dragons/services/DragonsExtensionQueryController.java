@@ -68,8 +68,8 @@ public class DragonsExtensionQueryController implements QueryController<QueryCon
     }
 
     @Override
-    public ContentResponse<Object> runV1Query(Query query, int pageSize, String cursorType) {
-        return controller.runV1Query(query,pageSize,cursorType);
+    public ContentResponse<Object> runOntologyQuery(Query query, int pageSize, String cursorType) {
+        return controller.runOntologyQuery(query,pageSize,cursorType);
     }
 
     @Override
@@ -146,8 +146,8 @@ public class DragonsExtensionQueryController implements QueryController<QueryCon
     }
 
     @Override
-    public ContentResponse<Query> getV1(String queryId) {
-        return controller.getV1(queryId);
+    public ContentResponse<Query> getOQL(String queryId) {
+        return controller.getOQL(queryId);
     }
 
     @Override

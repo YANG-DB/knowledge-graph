@@ -108,18 +108,18 @@ public class QueryControllerRegistrar extends AppControllerRegistrarBase<QueryCo
         });
 
         /**
-         * create a v1 query resource
-         * @param  V1 Query Request
+         * create a OQL query resource
+         * @param  QOL Query Request
          * @return newly created query resource information
          **/
         app.post(appUrlSupplier.queryStoreUrl(),
-                req -> API.postV1(app, req, this.getController(app)));
+                req -> API.postOQL(app, req, this.getController(app)));
 
         /**  register graph API context **/
         graphApi(app, appUrlSupplier);
 
-        /**  register V1 API context **/
-        v1Context(app, appUrlSupplier);
+        /**  register OQL API context **/
+        oqlContext(app, appUrlSupplier);
 
         /**  register cypher API context **/
         cypherContext(app, appUrlSupplier);
@@ -164,9 +164,9 @@ public class QueryControllerRegistrar extends AppControllerRegistrarBase<QueryCo
         /** get the print of the execution plan */
         app.get(appUrlSupplier.resourceUrl(":queryId") + "/plan/print", req -> API.planPrint(app, req, this));
 
-        /** get the query v1*/
-        app.get(appUrlSupplier.resourceUrl(":queryId") + "/v1", req -> {
-            ContentResponse response = this.getController(app).getV1(req.param(QUERY_ID_KEY).value());
+        /** get the query OQL*/
+        app.get(appUrlSupplier.resourceUrl(":queryId") + "/oql", req -> {
+            ContentResponse response = this.getController(app).getOQL(req.param(QUERY_ID_KEY).value());
             return Results.with(response, response.status().getStatus());
         });
 
@@ -174,11 +174,11 @@ public class QueryControllerRegistrar extends AppControllerRegistrarBase<QueryCo
         app.get(appUrlSupplier.resourceUrl(":queryId") + "/profile",
                 req -> API.profile(app, req, this));
 
-        /** get the query v1 print*/
+        /** get the query OQL print*/
         app.get(appUrlSupplier.resourceUrl(":queryId") + "/print",
                 req -> API.printQuery(app, req, this));
 
-        /** get the query v1 print*/
+        /** get the query OQL print*/
         app.get(appUrlSupplier.resourceUrl(":queryId") + "/visualize",
                 (req, resp) -> API.queryView(app, req, resp, this));
 
@@ -264,21 +264,21 @@ public class QueryControllerRegistrar extends AppControllerRegistrarBase<QueryCo
         app.post(appUrlSupplier.queryStoreUrl() + "/graphQL/run", (req, res) -> API.runGraphQL(app, req, res, this.getController(app)));
     }
 
-    private void v1Context(Jooby app, AppUrlSupplier appUrlSupplier) {
-        /** validate a v1 query */
-        app.post(appUrlSupplier.queryStoreUrl() + "/v1/validate", req -> API.validateV1(app, req, this.getController(app)));
+    private void oqlContext(Jooby app, AppUrlSupplier appUrlSupplier) {
+        /** validate a OQL query */
+        app.post(appUrlSupplier.queryStoreUrl() + "/oql/validate", req -> API.validateOQL(app, req, this.getController(app)));
 
-        /** get the plan from v1 query */
-        app.post(appUrlSupplier.queryStoreUrl() + "/v1/plan", req -> API.plan(app, req, this.getController(app)));
+        /** get the plan from OQL query */
+        app.post(appUrlSupplier.queryStoreUrl() + "/oql/plan", req -> API.plan(app, req, this.getController(app)));
 
-        /** get the traversal from v1 query */
-        app.post(appUrlSupplier.queryStoreUrl() + "/v1/traversal", req -> API.traversal(app, req, this.getController(app)));
+        /** get the traversal from OQL query */
+        app.post(appUrlSupplier.queryStoreUrl() + "/oql/traversal", req -> API.traversal(app, req, this.getController(app)));
 
-        /** create a v1 query */
-        app.post(appUrlSupplier.queryStoreUrl() + "/v1", req -> API.postV1(app, req, this.getController(app)));
+        /** create a OQL query */
+        app.post(appUrlSupplier.queryStoreUrl() + "/oql", req -> API.postOQL(app, req, this.getController(app)));
 
-        /** create a v1 query */
-        app.post(appUrlSupplier.queryStoreUrl() + "/v1/run", (req, res) -> API.runV1(app, req, res, this.getController(app)));
+        /** create a OQL query */
+        app.post(appUrlSupplier.queryStoreUrl() + "/oql/run", (req, res) -> API.runOQL(app, req, res, this.getController(app)));
     }
 
     private void graphApi(Jooby app, AppUrlSupplier appUrlSupplier) {
@@ -312,7 +312,7 @@ public class QueryControllerRegistrar extends AppControllerRegistrarBase<QueryCo
 
         }
 
-        public static Result validateV1(Jooby app, final Request req, QueryController controller) throws Exception {
+        public static Result validateOQL(Jooby app, final Request req, QueryController controller) throws Exception {
             Route.of("validateAndRewriteQuery").write();
 
             Query query = req.body(Query.class);
@@ -391,7 +391,7 @@ public class QueryControllerRegistrar extends AppControllerRegistrarBase<QueryCo
 
         }
 
-        public static Result postV1(Jooby app, final Request req, QueryController controller) throws Exception {
+        public static Result postOQL(Jooby app, final Request req, QueryController controller) throws Exception {
             Route.of("postQuery").write();
 
             CreateQueryRequest createQueryRequest = req.body(CreateQueryRequest.class);
@@ -444,14 +444,14 @@ public class QueryControllerRegistrar extends AppControllerRegistrarBase<QueryCo
 
         }
 
-        public static Result runV1(Jooby app, final Request req, final Response resp, QueryController controller) throws Exception {
+        public static Result runOQL(Jooby app, final Request req, final Response resp, QueryController controller) throws Exception {
             Route.of("runQuery").write();
 
             Query query = req.body(Query.class);
             req.set(Query.class, query);
             req.set(ExecutionScope.class, new ExecutionScope(TIMEOUT));
 
-            ContentResponse<Object> response = controller.runV1Query(query,
+            ContentResponse<Object> response = controller.runOntologyQuery(query,
                     req.param(PAGE_SIZE_KEY).isSet() ? req.param(PAGE_SIZE_KEY).intValue() : PAGE_SIZE,
                     req.param(CURSOR_TYPE_KEY).isSet() ? req.param(CURSOR_TYPE_KEY).value() : getDefaultCursorRequestType()
             );
@@ -609,7 +609,7 @@ public class QueryControllerRegistrar extends AppControllerRegistrarBase<QueryCo
         }
 
         public static Result printQuery(Jooby app, Request req, QueryControllerRegistrar registrar) {
-            ContentResponse<Query> response = registrar.getController(app).getV1(req.param(QUERY_ID_KEY).value());
+            ContentResponse<Query> response = registrar.getController(app).getOQL(req.param(QUERY_ID_KEY).value());
             String print = QueryDescriptor.print(response.getData());
             ContentResponse<String> compose = ContentResponse.Builder.<String>builder(OK, NOT_FOUND)
                     .data(Optional.of(print))
@@ -619,7 +619,7 @@ public class QueryControllerRegistrar extends AppControllerRegistrarBase<QueryCo
         }
 
         /**
-         * print an SVG representation of the V1 query
+         * print an SVG representation of the OQL query
          *
          * @param app
          * @param req
@@ -630,7 +630,7 @@ public class QueryControllerRegistrar extends AppControllerRegistrarBase<QueryCo
          */
         public static Object queryView(Jooby app, Request req, Response resp, QueryControllerRegistrar registrar) throws Throwable {
             String queryId = req.param(QUERY_ID_KEY).value();
-            ContentResponse<Query> response = registrar.getController(app).getV1(queryId);
+            ContentResponse<Query> response = registrar.getController(app).getOQL(queryId);
             String dotGraph = QueryDescriptor.printGraph(response.getData());
             File file = SVGGraphRenderer.render(queryId, dotGraph);
             ContentResponse<File> compose = ContentResponse.Builder.<File>builder(OK, NOT_FOUND)

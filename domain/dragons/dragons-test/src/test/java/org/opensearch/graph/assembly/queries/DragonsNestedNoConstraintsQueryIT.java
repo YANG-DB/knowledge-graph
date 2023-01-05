@@ -79,7 +79,7 @@ public class DragonsNestedNoConstraintsQueryIT implements BaseITMarker {
     @Test
     @Ignore("Code under construction for supporting nested structure")
     public void testPersonWithName() throws IOException, InterruptedException, URISyntaxException {
-        // Create v1 query to fetch newly created entity
+        // Create Ontology query to fetch newly created entity
         GraphResourceInfo graphResourceInfo = GraphClient.getInfo();
         Assert.assertNotNull(graphResourceInfo);
 
@@ -108,7 +108,7 @@ public class DragonsNestedNoConstraintsQueryIT implements BaseITMarker {
 
     @Test
     public void testPersonHasProfession() throws IOException, InterruptedException, URISyntaxException {
-        // Create v1 query to fetch newly created entity
+        // Create Ontology query to fetch newly created entity
         GraphResourceInfo graphResourceInfo = GraphClient.getInfo();
         Assert.assertNotNull(graphResourceInfo);
 
@@ -136,7 +136,7 @@ public class DragonsNestedNoConstraintsQueryIT implements BaseITMarker {
 
     @Test
     public void testPersonWithNestedProfessionKnowsPerson() throws IOException, InterruptedException, URISyntaxException {
-        // Create v1 query to fetch newly created entity
+        // Create Ontology query to fetch newly created entity
         GraphResourceInfo graphResourceInfo = GraphClient.getInfo();
         Assert.assertNotNull(graphResourceInfo);
 

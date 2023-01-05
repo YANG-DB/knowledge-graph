@@ -92,7 +92,7 @@ public class DragonsGraphGenerator extends GraphGeneratorBase<DragonConfiguratio
             Graph dragonsInteractionGraph = dragonsGraphGenerator.generateGraph();
             stopwatch.stop();
             long elapsed = stopwatch.elapsed(TimeUnit.SECONDS);
-            logger.info("Dragons model V1 generation took (seconds): {}", elapsed);
+            logger.info("Dragons model Ontology generation took (seconds): {}", elapsed);
 
             GraphstreamHelper.printScaleFreeDataSummary(dragonsInteractionGraph, resultsPath);
             if (drawGraph) {
