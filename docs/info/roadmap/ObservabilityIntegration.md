@@ -22,7 +22,7 @@ The following assumptions for the first release are taken:
  - open-graph will remain a multi-module maven based project
  - open-graph dependency graph will not change drastically
  - open-graph test coverage will not increase drastically
- - open-graph only available API will be the Query-Endpoint (Cyhphe/GraphQL/V1QL)
+ - open-graph only available API will be the Query-Endpoint (Cyhphe/GraphQL/OQL)
  - 
 
 

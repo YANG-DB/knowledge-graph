@@ -37,7 +37,7 @@ import java.util.List;
  * http://domain/opengraph/query/:id
  * http://domain/opengraph/query/:id/asg
  * http://domain/opengraph/query/:id/inner
- * http://domain/opengraph/query/:id/v1
+ * http://domain/opengraph/query/:id/oql
  * http://domain/opengraph/query/:id/plan
  * http://domain/opengraph/query/:id/elastic
  * http://domain/opengraph/query/:id/cursor/:sequence
@@ -61,7 +61,7 @@ public class QueryResourceInfo extends ResourceInfoBase {
         super(resourceUrl, resourceId);
         this.type = type;
         this.cursorStoreUrl = cursorStoreUrl;
-        this.ontologyQueryUrl = resourceUrl + "/v1";
+        this.ontologyQueryUrl = resourceUrl + "/oql";
         this.asgUrl = resourceUrl + "/asg";
         this.explainPlanUrl = resourceUrl + "/plan";
         this.elasticQueryUrl = resourceUrl + "/elastic";
