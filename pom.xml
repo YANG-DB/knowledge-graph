@@ -58,7 +58,7 @@
         <!-- opengraph -->
         <opengraph.version>${project.version}</opengraph.version>
         <!-- jackson -->
-        <jackson.version>2.13.2</jackson.version>
+        <jackson.version>2.14.0</jackson.version>
         <resilience4jVersion>1.6.1</resilience4jVersion>
 
         <!-- com.github.cnsvili.snowflake.version -->
