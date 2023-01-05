@@ -117,7 +117,7 @@ public class LoggingQueryController extends LoggingControllerBase<QueryControlle
     }
 
     @Override
-    public ContentResponse<Object> runV1Query(Query query, int pageSize, String cursorType) {
+    public ContentResponse<Object> runOntologyQuery(Query query, int pageSize, String cursorType) {
         return new LoggingSyncMethodDecorator<ContentResponse<Object>>(
                 this.logger,
                 this.metricRegistry,
@@ -130,7 +130,7 @@ public class LoggingQueryController extends LoggingControllerBase<QueryControlle
                         new LogMessage.Impl(this.logger, debug, "query: {}", Sequence.incr(), LogType.of(log), createAndFetch)
                                 .with(this.queryDescriptor.describe(query)).log();
                     }
-                    return this.controller.runV1Query(query, pageSize, cursorType);
+                    return this.controller.runOntologyQuery(query, pageSize, cursorType);
                 }, this.resultHandler());
     }
 
@@ -369,15 +369,15 @@ public class LoggingQueryController extends LoggingControllerBase<QueryControlle
     }
 
     @Override
-    public ContentResponse<Query> getV1(String queryId) {
+    public ContentResponse<Query> getOQL(String queryId) {
         return new LoggingSyncMethodDecorator<ContentResponse<Query>>(
                 this.logger,
                 this.metricRegistry,
-                getV1ByQueryId,
+                getOQLByQueryId,
                 Composite.of(this.primerMdcWriter(), RequestIdByScope.of(query(queryId).get())),
                 Collections.singletonList(trace),
                 Arrays.asList(info, trace))
-                .decorate(() -> this.controller.getV1(queryId), this.resultHandler());
+                .decorate(() -> this.controller.getOQL(queryId), this.resultHandler());
     }
 
     @Override
@@ -478,7 +478,7 @@ public class LoggingQueryController extends LoggingControllerBase<QueryControlle
     private static MethodName.MDCWriter create = MethodName.of("create");
     private static MethodName.MDCWriter createAndFetch = MethodName.of("createAndFetch");
     private static MethodName.MDCWriter getInfo = MethodName.of("getInfo");
-    private static MethodName.MDCWriter getV1ByQueryId = MethodName.of("getV1ByQueryId");
+    private static MethodName.MDCWriter getOQLByQueryId = MethodName.of("getOQLByQueryId");
     private static MethodName.MDCWriter getAsgByQueryId = MethodName.of("getAsgByQueryId");
     private static MethodName.MDCWriter traversal = MethodName.of("traversal");
     private static MethodName.MDCWriter explain = MethodName.of("explain");

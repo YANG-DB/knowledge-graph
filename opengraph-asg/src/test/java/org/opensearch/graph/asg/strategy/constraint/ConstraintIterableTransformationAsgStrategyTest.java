@@ -278,8 +278,8 @@ public class ConstraintIterableTransformationAsgStrategyTest {
 
     @Test
     public void asgConstraintTransformationStrategyRelPropsArrayToListTest() throws Exception {
-        AsgQuery asgQueryWithRelProps = AsgQueryStore.Q188_V1();
-        AsgQuery asgQueryWithRelPropsOriginal = AsgQueryStore.Q188_V1();
+        AsgQuery asgQueryWithRelProps = AsgQueryStore.Q188();
+        AsgQuery asgQueryWithRelPropsOriginal = AsgQueryStore.Q188();
 
         //region Preparing the Properties for the AsgQuery
         //Setting The RelProp (enum #4) expression as a date represented by Long value
@@ -345,7 +345,7 @@ public class ConstraintIterableTransformationAsgStrategyTest {
         assertThat(((ArrayList) expr2).get(0), instanceOf(Date.class));
 
         //Checking first the Constraint Type Transformation and then the Constraint Array Transformation
-        AsgQuery asgQueryWithRelProps2 = AsgQueryStore.Q188_V1();
+        AsgQuery asgQueryWithRelProps2 = AsgQueryStore.Q188();
         RelProp rProp5 = (RelProp) AsgQueryUtil.element(asgQueryWithRelProps2, 4).get().geteBase();
         rProp5.setpType("dateSinceTheBigBang"); //this is a date field - Input is long type - epoch time
         rProp5.getCon().setExpr(100L); //Epoch time as Long

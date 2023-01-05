@@ -232,7 +232,7 @@
           "catalog"
         ],
         "summary": "graphQL IDL into Ontology",
-        "description": "Transform a graphQL IDL into V1 Ontology - see https://graphql.org/learn/schema/",
+        "description": "Transform a graphQL IDL into Ontology - see https://graphql.org/learn/schema/",
         "parameters": [
           {
             "name": "id",
@@ -266,7 +266,7 @@
           "catalog"
         ],
         "summary": "OWL IDL into Ontology",
-        "description": "Transform a OWL IDL into V1 Ontology - see https://www.w3.org/TR/owl-features/",
+        "description": "Transform a OWL IDL into Ontology - see https://www.w3.org/TR/owl-features/",
         "parameters": [
           {
             "name": "id",
@@ -300,7 +300,7 @@
           "catalog"
         ],
         "summary": "SQL DDL into Ontology",
-        "description": "Transform a SQL DDL into V1 Ontology ",
+        "description": "Transform a SQL DDL into  Ontology ",
         "parameters": [
           {
             "name": "id",
@@ -715,18 +715,18 @@
         }
       }
     },
-    "/query/v1": {
+    "/query/oql": {
       "post": {
         "tags": [
           "query"
         ],
-        "summary": "submit a (V1) query request",
+        "summary": "submit a (OQL) query request",
         "description": "submit a query to the engine",
         "parameters": [
           {
             "in": "body",
             "name": "<body>",
-            "description": "V1 Query json request",
+            "description": "OQL Query json request",
             "required": true,
             "schema": {
               "$ref": "#/definitions/QueryRequest"
@@ -743,18 +743,18 @@
         }
       }
     },
-    "/query/v1/validate": {
+    "/query/oql/validate": {
       "post": {
         "tags": [
           "query"
         ],
-        "summary": "submit & validate V1 query directly  ",
+        "summary": "submit & validate OQL query directly  ",
         "description": "submit & validate a query to the engine",
         "parameters": [
           {
             "in": "body",
             "name": "<body>",
-            "description": "V1 Query json ",
+            "description": "OQL Query json ",
             "required": true,
             "schema": {
               "$ref": "#/definitions/Query"
@@ -771,18 +771,18 @@
         }
       }
     },
-    "/query/v1/plan": {
+    "/query/oql/plan": {
       "post": {
         "tags": [
           "plan"
         ],
-        "summary": "submit V1 query and see generated plan ",
-        "description": "submit V1 query and see generated plan ",
+        "summary": "submit OQL query and see generated plan ",
+        "description": "submit OQL query and see generated plan ",
         "parameters": [
           {
             "in": "body",
             "name": "<body>",
-            "description": "V1 Query json ",
+            "description": "OQL Query json ",
             "required": true,
             "schema": {
               "$ref": "#/definitions/Query"
@@ -799,18 +799,18 @@
         }
       }
     },
-    "/query/v1/traversal": {
+    "/query/oql/traversal": {
       "post": {
         "tags": [
           "plan"
         ],
-        "summary": "submit V1 query and see generated execution traversal gremlin ",
-        "description": "submit V1 query and see generated execution traversal gremlin ",
+        "summary": "submit OQL query and see generated execution traversal gremlin ",
+        "description": "submit OQL query and see generated execution traversal gremlin ",
         "parameters": [
           {
             "in": "body",
             "name": "<body>",
-            "description": "V1 Query json ",
+            "description": "OQL Query json ",
             "required": true,
             "schema": {
               "$ref": "#/definitions/Query"
@@ -827,12 +827,12 @@
         }
       }
     },
-    "/query/v1/run": {
+    "/query/oql/run": {
       "post": {
         "tags": [
           "query"
         ],
-        "summary": "submit & run V1 query directly  ",
+        "summary": "submit & run OQL query directly  ",
         "description": "submit & run a query to the engine",
         "parameters": [
           {
@@ -856,7 +856,7 @@
           {
             "in": "body",
             "name": "<body>",
-            "description": "V1 Query json ",
+            "description": "OQL Query json ",
             "required": true,
             "schema": {
               "$ref": "#/definitions/Query"

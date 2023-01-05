@@ -61,7 +61,7 @@ public class QueryResourceInfo extends ResourceInfoBase {
         super(resourceUrl, resourceId);
         this.type = type;
         this.cursorStoreUrl = cursorStoreUrl;
-        this.v1QueryUrl = resourceUrl + "/v1";
+        this.ontologyQueryUrl = resourceUrl + "/v1";
         this.asgUrl = resourceUrl + "/asg";
         this.explainPlanUrl = resourceUrl + "/plan";
         this.elasticQueryUrl = resourceUrl + "/elastic";
@@ -80,8 +80,8 @@ public class QueryResourceInfo extends ResourceInfoBase {
         return explainPlanUrl;
     }
 
-    public String getV1QueryUrl() {
-        return v1QueryUrl;
+    public String getOntologyQueryUrl() {
+        return ontologyQueryUrl;
     }
 
     public String getAsgUrl() {
@@ -132,7 +132,7 @@ public class QueryResourceInfo extends ResourceInfoBase {
     //region Fields
     private String cursorStoreUrl;
     private String explainPlanUrl;
-    private String v1QueryUrl;
+    private String ontologyQueryUrl;
     private String asgUrl;
     private String elasticQueryUrl;
     private QueryType type;

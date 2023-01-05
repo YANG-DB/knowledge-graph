@@ -71,7 +71,7 @@ We are using a proprietary Graph traversal language called V
 This is a logical high-level (property) graph query language which has an
 emphasis on query patterns, and visual attributes.
 
-![V1QL](img/V1QL-Sample.png)
+![OQL](img/OQL-Sample.png)
 
 ### Execution Plan Building
 

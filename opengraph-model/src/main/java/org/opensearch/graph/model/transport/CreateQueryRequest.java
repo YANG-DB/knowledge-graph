@@ -33,6 +33,8 @@ import org.opensearch.graph.model.execution.plan.descriptors.QueryDescriptor;
 import org.opensearch.graph.model.query.Query;
 import org.opensearch.graph.model.transport.cursor.CreateCursorRequest;
 
+import java.util.Objects;
+
 /**
  * Created by lior.perry on 19/02/2017.
  * <p>
@@ -40,13 +42,13 @@ import org.opensearch.graph.model.transport.cursor.CreateCursorRequest;
  */
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class CreateQueryRequest implements CreateQueryRequestMetadata<Query> {
-    public static final String TYPE = "v1";
+    public static final String TYPE = "oql";
 
     //region Constructors
     public CreateQueryRequest() {
         this.planTraceOptions = new PlanTraceOptions();
         this.planTraceOptions.setLevel(PlanTraceOptions.Level.none);
-        this.type = TYPE_V1QL;
+        this.type = TYPE_OQL;
         this.ttl = 300000;
     }
 
@@ -208,6 +210,19 @@ public class CreateQueryRequest implements CreateQueryRequestMetadata<Query> {
 
     //endregion
 
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        CreateQueryRequest that = (CreateQueryRequest) o;
+        return id.equals(that.id) && storageType == that.storageType && queryType == that.queryType && name.equals(that.name) && type.equals(that.type) && query.equals(that.query) && ontology.equals(that.ontology);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, storageType, queryType, name, type, query, ontology);
+    }
 
     @Override
     public String toString() {

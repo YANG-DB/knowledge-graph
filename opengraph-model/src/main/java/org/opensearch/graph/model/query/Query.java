@@ -9,9 +9,9 @@ package org.opensearch.graph.model.query;
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- * 
+ *
  *      http://www.apache.org/licenses/LICENSE-2.0
- * 
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -21,18 +21,13 @@ package org.opensearch.graph.model.query;
  */
 
 
-
-
-
-
-
-
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonPOJOBuilder;
 import org.opensearch.graph.model.Next;
 import org.opensearch.graph.model.Tagged;
 import org.opensearch.graph.model.asgQuery.IQuery;
+import org.opensearch.graph.model.execution.plan.descriptors.QueryDescriptor;
 import org.opensearch.graph.model.query.entity.EConcrete;
 import org.opensearch.graph.model.query.entity.EEntityBase;
 import org.opensearch.graph.model.query.entity.ETyped;
@@ -50,6 +45,8 @@ import java.util.*;
 import java.util.concurrent.atomic.AtomicInteger;
 import java.util.function.Predicate;
 import java.util.stream.Collectors;
+
+import static org.opensearch.graph.model.execution.plan.descriptors.QueryDescriptor.print;
 
 /**
  * Created by lior.perry on 19-Feb-17.
@@ -91,11 +88,11 @@ public class Query implements IQuery<EBase> {
     }
 
     public List<EBase> getProjectedFields() {
-        return projectedFields!=null ? projectedFields : generatePopulateFields();
+        return projectedFields != null ? projectedFields : generatePopulateFields();
     }
 
     private List<EBase> generatePopulateFields() {
-        this.setProjectedFields(getElements().stream().filter(e->e instanceof Tagged).collect(Collectors.toList()));
+        this.setProjectedFields(getElements().stream().filter(e -> e instanceof Tagged).collect(Collectors.toList()));
         return getProjectedFields();
     }
 
@@ -219,7 +216,7 @@ public class Query implements IQuery<EBase> {
             return this;
         }
 
-        public Builder projectField(EBase ... name) {
+        public Builder projectField(EBase... name) {
             this.projectedFields.addAll(Arrays.asList(name));
             return this;
         }
@@ -291,7 +288,7 @@ public class Query implements IQuery<EBase> {
                     currentIndex = -1;
             }
 
-            if(currentIndex==-1)
+            if (currentIndex == -1)
                 return Optional.empty();
             else
                 return Optional.ofNullable(getElements().get(currentIndex).getCurrent());
@@ -324,6 +321,19 @@ public class Query implements IQuery<EBase> {
             }
             return elements;
         }
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Query query = (Query) o;
+        return Objects.equals(ont, query.ont) && Objects.equals(name, query.name) && print(this).equals(print(query));
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(ont, name, print(this));
     }
 
     private static class Wrapper<T> {
@@ -419,27 +429,28 @@ public class Query implements IQuery<EBase> {
         }
 
         public static Iterator<? extends EBase>
-        getElements(Query query,List<Integer> elementIds) {
-             return elementIds.stream()
-                    .map(id->findByEnum(query,id).get())
+        getElements(Query query, List<Integer> elementIds) {
+            return elementIds.stream()
+                    .map(id -> findByEnum(query, id).get())
                     .collect(Collectors.toList())
                     .iterator();
         }
 
         /**
          * add the elements which are in the (next) path
-         *  a->b->c->d
-         *  Stop condition stops down traversing
+         * a->b->c->d
+         * Stop condition stops down traversing
+         *
          * @param query
          * @param elementId
          * @param stopCondition
          * @return
          */
         public static List<EBase> getPath(Query query, int elementId, Predicate<EBase> stopCondition) {
-            if(!findByEnum(query,elementId).isPresent())
+            if (!findByEnum(query, elementId).isPresent())
                 return Collections.emptyList();
             //the needed path
-            List< EBase> path = new ArrayList<>();
+            List<EBase> path = new ArrayList<>();
             //element by id
             Optional<? extends EBase> byEnum = findByEnum(query, elementId);
             EBase element = byEnum.get();
@@ -448,12 +459,12 @@ public class Query implements IQuery<EBase> {
             path.add(element);
 
             //verify stop conidtion
-            if(stopCondition.test(element))
+            if (stopCondition.test(element))
                 return path;
 
             //continue to add the next elements recursively
-            if(element instanceof Next) {
-                path.addAll(getPath(query,((Next<Integer>)element).getNext(),stopCondition));
+            if (element instanceof Next) {
+                path.addAll(getPath(query, ((Next<Integer>) element).getNext(), stopCondition));
             }
 
             return path;
