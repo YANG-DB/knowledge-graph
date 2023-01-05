@@ -313,7 +313,7 @@ public class AsgPropsGroupingStrategyTest {
 
     @Test
     public void relPropsGroupingTest() throws Exception {
-        AsgQuery asgQuery = AsgQueryStore.Q188_V1();
+        AsgQuery asgQuery = AsgQueryStore.Q188();
         AsgEBase<EBase> originalRelProp1AsgEbase = AsgQueryUtil.element(asgQuery, 4).get();
         AsgEBase<EBase> originalRelProp2AsgEbase = AsgQueryUtil.element(asgQuery, 5).get();
         RelPropGroupingAsgStrategy relPropGroupingAsgStrategy = new RelPropGroupingAsgStrategy();
@@ -337,7 +337,7 @@ public class AsgPropsGroupingStrategyTest {
 
     @Test
     public void hQuantifierWithRelPropsGroupingTest() throws Exception {
-        AsgQuery asgQuery = AsgQueryStore.Q187_V1();
+        AsgQuery asgQuery = AsgQueryStore.Q187();
         AsgEBase<EBase> originalRelProp1AsgEbase = AsgQueryUtil.element(asgQuery, 5).get();
         AsgEBase<EBase> originalRelProp2AsgEbase = AsgQueryUtil.element(asgQuery, 6).get();
         HQuantPropertiesGroupingAsgStrategy HQuantPropertiesGroupingAsgStrategy = new HQuantPropertiesGroupingAsgStrategy();

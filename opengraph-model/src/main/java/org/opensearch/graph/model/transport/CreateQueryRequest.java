@@ -29,7 +29,6 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.databind.ObjectMapper;
 import org.opensearch.graph.model.execution.plan.descriptors.QueryDescriptor;
 import org.opensearch.graph.model.query.Query;
 import org.opensearch.graph.model.transport.cursor.CreateCursorRequest;
@@ -43,13 +42,13 @@ import java.util.Objects;
  */
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class CreateQueryRequest implements CreateQueryRequestMetadata<Query> {
-    public static final String TYPE = "v1";
+    public static final String TYPE = "oql";
 
     //region Constructors
     public CreateQueryRequest() {
         this.planTraceOptions = new PlanTraceOptions();
         this.planTraceOptions.setLevel(PlanTraceOptions.Level.none);
-        this.type = TYPE_V1QL;
+        this.type = TYPE_OQL;
         this.ttl = 300000;
     }
 

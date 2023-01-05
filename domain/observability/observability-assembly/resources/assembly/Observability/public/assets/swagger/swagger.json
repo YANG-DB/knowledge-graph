@@ -715,7 +715,7 @@
         }
       }
     },
-    "/query/v1": {
+    "/query/oql": {
       "post": {
         "tags": [
           "query"
@@ -743,7 +743,7 @@
         }
       }
     },
-    "/query/v1/validate": {
+    "/query/oql/validate": {
       "post": {
         "tags": [
           "query"
@@ -771,7 +771,7 @@
         }
       }
     },
-    "/query/v1/plan": {
+    "/query/oql/plan": {
       "post": {
         "tags": [
           "plan"
@@ -799,7 +799,7 @@
         }
       }
     },
-    "/query/v1/traversal": {
+    "/query/oql/traversal": {
       "post": {
         "tags": [
           "plan"
@@ -827,7 +827,7 @@
         }
       }
     },
-    "/query/v1/run": {
+    "/query/oql/run": {
       "post": {
         "tags": [
           "query"

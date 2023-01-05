@@ -214,8 +214,8 @@ public class MatchTransformationStrategyTest {
 
     @Test
     public void asgConstraintTransformationStrategyRelPropsLongToDateTest() throws Exception {
-        AsgQuery asgQueryWithRelProps = AsgQueryStore.Q188_V1();
-        AsgQuery asgQueryWithRelPropsOriginal = AsgQueryStore.Q188_V1();
+        AsgQuery asgQueryWithRelProps = AsgQueryStore.Q188();
+        AsgQuery asgQueryWithRelPropsOriginal = AsgQueryStore.Q188();
 
         //region Preparing the Properties for the AsgQuery
         //Setting The RelProp (enum #4) expression as a date represented by Long value

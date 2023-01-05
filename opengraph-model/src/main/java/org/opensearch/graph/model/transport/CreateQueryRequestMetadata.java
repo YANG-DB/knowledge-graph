@@ -28,7 +28,7 @@ import com.fasterxml.jackson.annotation.JsonInclude;
 import org.opensearch.graph.model.transport.cursor.CreateCursorRequest;
 
 public interface CreateQueryRequestMetadata<T> {
-    String TYPE_V1QL = "v1";
+    String TYPE_OQL = "oql";
     String TYPE_CYPHERQL = "cypher";
     String TYPE_GRAPHQL = "graphQL";
 //    String TYPE_SPARQL = "sparkQL";
@@ -63,7 +63,7 @@ public interface CreateQueryRequestMetadata<T> {
     PlanTraceOptions getPlanTraceOptions();
 
     enum QueryLanguage {
-        v1,cypher,sparql,graphql
+        oql,cypher,sparql,graphql
     }
 
     enum StorageType {

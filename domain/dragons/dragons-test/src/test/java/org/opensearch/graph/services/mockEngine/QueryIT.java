@@ -283,7 +283,7 @@ public class QueryIT implements BaseITMarker {
     }
 
     @Test
-    public void queryCreateAndFetchV1QueryResource() throws IOException {
+    public void queryCreateAndFetchQueryResource() throws IOException {
         BaseGraphClient GraphClient = new BaseGraphClient("http://localhost:8888/opengraph");
 
         //query request
